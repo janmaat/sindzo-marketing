@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+
+// /bedankt — landing na succesvolle of mislukte form-submit.
+// Query params:
+//   ?ref={leadId}   → succes, toon bevestiging + volgende stappen
+//   ?error={reden}  → fout, toon foutmelding + retry-pad
+// Bewust client-side JS om beide states uit één pagina te serveren —
+// alternatief (twee pagina's of SSR) levert geen meerwaarde.
+---
+<Base
+  title="Bedankt — Sindzo"
+  description="Bedankt voor uw aanvraag. Wij reageren binnen 1 werkdag."
+>
+  <section class="container-prose py-20 sm:py-28">
+    <!-- Success-state -->
+    <div id="success-state" class="hidden max-w-2xl">
+      <div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-sindzo-100">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-8 w-8 text-sindzo-700">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h1 class="mt-6 font-display text-4xl font-bold tracking-tightish text-ink-900 sm:text-5xl">
+        Bedankt — wij gaan ermee aan de slag.
+      </h1>
+      <p class="mt-5 text-lg text-ink-700">
+        We hebben uw aanvraag ontvangen. <strong>Binnen 1 werkdag</strong> (meestal sneller) krijgt u een
+        persoonlijke reactie van iemand uit ons team — geen ticket-systeem, geen call-center.
+      </p>
+      <div class="mt-3">
+        <p class="text-sm text-ink-500">
+          Referentie: <code id="ref-code" class="rounded bg-ink-100 px-2 py-0.5 text-xs font-mono"></code>
+        </p>
+      </div>
+
+      <div class="mt-10 rounded-2xl border border-ink-100 bg-ink-100/40 p-6">
+        <h2 class="font-display text-lg font-semibold text-ink-900">Terwijl u wacht</h2>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li class="flex items-start gap-2">
+            <span class="mt-1 text-sindzo-600">→</span>
+            <a href="/trust" class="text-sindzo-700 no-underline hover:underline">Bekijk ons Trust Centre</a>
+            <span class="text-ink-500">— security, privacy, compliance op tafel</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1 text-sindzo-600">→</span>
+            <a href="/procurement" class="text-sindzo-700 no-underline hover:underline">Open het Procurement Centre</a>
+            <span class="text-ink-500">— DPA, PVE-template, security-pack te downloaden</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1 text-sindzo-600">→</span>
+            <a href="/integraties" class="text-sindzo-700 no-underline hover:underline">Bekijk de integraties</a>
+            <span class="text-ink-500">— FHIR, MedMij, Wegiz, LSP, e-health</span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="mt-10 text-sm text-ink-500">
+        Heeft u meteen een vraag? Bel <a href="tel:+31385001234" class="text-sindzo-700 hover:underline">038 500 12 34</a>
+        of mail <a href="mailto:hello@sindzo.nl" class="text-sindzo-700 hover:underline">hello@sindzo.nl</a>.
+      </p>
+    </div>
+
+    <!-- Error-state -->
+    <div id="error-state" class="hidden max-w-2xl">
+      <div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-amber-100">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-8 w-8 text-amber-700">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z" />
+        </svg>
+      </div>
+      <h1 class="mt-6 font-display text-4xl font-bold tracking-tightish text-ink-900 sm:text-5xl">
+        Iets ging niet helemaal goed.
+      </h1>
+      <p class="mt-5 text-lg text-ink-700">
+        Uw aanvraag is <strong>niet</strong> opgeslagen. De reden:
+      </p>
+      <div class="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4">
+        <p id="error-message" class="text-sm font-medium text-amber-900"></p>
+      </div>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="/demo" class="btn-primary no-underline">Probeer opnieuw</a>
+        <a href="/contact" class="btn-secondary no-underline">Of: stuur ons direct een mail</a>
+      </div>
+
+      <p class="mt-10 text-sm text-ink-500">
+        Lukt het meerdere keren niet? Bel <a href="tel:+31385001234" class="text-sindzo-700 hover:underline">038 500 12 34</a> —
+        wij helpen u graag direct.
+      </p>
+    </div>
+
+    <!-- Neutral / direct-bezoek state -->
+    <div id="neutral-state" class="hidden max-w-2xl">
+      <h1 class="font-display text-4xl font-bold tracking-tightish text-ink-900 sm:text-5xl">
+        Bedankt voor uw bezoek.
+      </h1>
+      <p class="mt-5 text-lg text-ink-700">
+        U bent op deze pagina terechtgekomen zonder dat we een aanvraag van u hebben ontvangen.
+        Mocht u contact willen, kies hieronder.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="/demo" class="btn-primary no-underline">Vraag een demo aan</a>
+        <a href="/contact" class="btn-secondary no-underline">Contact</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  // Korte URL-param-router. Geen framework nodig — drie states, één pagina.
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var ref = params.get('ref');
+    var error = params.get('error');
+
+    var success = document.getElementById('success-state');
+    var errorEl = document.getElementById('error-state');
+    var neutral = document.getElementById('neutral-state');
+
+    if (ref) {
+      var refCode = document.getElementById('ref-code');
+      if (refCode) refCode.textContent = ref;
+      success.classList.remove('hidden');
+      // Push een event voor analytics (Plausible custom event).
+      if (window.plausible) window.plausible('lead-confirmed');
+    } else if (error) {
+      var msg = document.getElementById('error-message');
+      if (msg) msg.textContent = decodeURIComponent(error);
+      errorEl.classList.remove('hidden');
+    } else {
+      neutral.classList.remove('hidden');
+    }
+  })();
+</script>
