@@ -17,4 +17,17 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
+  vite: {
+    server: {
+      watch: {
+        // Atomic-write race op Windows: Vite/chokidar firet 'add' op een tmp-
+        // bestand dat al verwijderd is voor de stat → ENOENT in manifest-builder.
+        // awaitWriteFinish wacht tot het bestand stable is.
+        awaitWriteFinish: {
+          stabilityThreshold: 80,
+          pollInterval: 20,
+        },
+      },
+    },
+  },
 });
