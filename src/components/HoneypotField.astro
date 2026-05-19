@@ -1,0 +1,14 @@
+---
+// Honeypot — hidden veld in alle marketing-forms. Bots vullen 'm omdat ze
+// per veld-name invullen; mensen niet omdat het visueel én accessibility-wise
+// onbereikbaar is. Backend (Sindzo.Host MarketingLeadEndpoints) markeert
+// records met dit veld gevuld als spam.
+//
+// Veldnaam moet matchen met MarketingLeadEndpoints.HoneypotFieldNames.
+---
+<div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;">
+  <label>
+    Website (laat leeg)
+    <input type="text" name="website" tabindex="-1" autocomplete="off" />
+  </label>
+</div>

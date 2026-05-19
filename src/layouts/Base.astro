@@ -34,6 +34,14 @@ const url = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    {/*
+      Plausible Analytics — cookie-loos, EU-gehost (geen GA, geen tracker-popups).
+      Alleen in productie laden zodat dev-traffic geen statistiek vervuilt.
+    */}
+    {import.meta.env.PROD && (
+      <script defer data-domain="sindzo.nl" src="https://plausible.io/js/script.outbound-links.js"></script>
+      <script is:inline set:html={`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`} />
+    )}
   </head>
   <body class="min-h-screen flex flex-col">
     <Nav />

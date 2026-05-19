@@ -1,19 +1,15 @@
 ---
-// Placeholder-logos voor early-access partners. Vervang door echte SVG's
-// zodra MoU's getekend zijn. Bij <5 partners: behoud "Early-access" framing.
-const logos = [
-  'Partner A', 'Partner B', 'Partner C', 'Partner D', 'Partner E', 'Partner F',
-];
+// Bewust géén dummy-logo's of placeholder-namen — verzonnen klantlogo's zijn
+// een misleidende trust-claim. Pas zodra echte partners hun naam (mét toestemming)
+// gepubliceerd willen hebben, vervangen we deze sectie door een logo-rij.
 ---
-<section class="container-prose py-12">
-  <p class="text-center text-xs font-semibold uppercase tracking-wider text-ink-500">
-    Vertrouwd door early-access partners in VVT, GHZ en GGZ
-  </p>
-  <div class="mt-6 grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-3 md:grid-cols-6">
-    {logos.map((label) => (
-      <div class="flex h-12 items-center justify-center rounded-md border border-dashed border-ink-300 text-sm font-medium text-ink-500">
-        {label}
-      </div>
-    ))}
+<section class="container-prose py-10">
+  <div class="mx-auto max-w-2xl rounded-xl border border-dashed border-ink-200 bg-ink-100/40 p-6 text-center">
+    <p class="text-xs font-semibold uppercase tracking-wider text-ink-500">Early-access fase</p>
+    <p class="mt-2 text-sm text-ink-700">
+      Sindzo is in early-access — we werken met een selecte groep zorgaanbieders.
+      Zodra partners hun naam willen delen, vindt u die hier.
+      Eerlijke statusoverzicht: <a href="/trust" class="text-sindzo-700 hover:underline">/trust</a>.
+    </p>
   </div>
 </section>
