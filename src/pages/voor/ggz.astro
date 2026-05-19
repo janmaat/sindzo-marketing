@@ -1,0 +1,34 @@
+---
+import SegmentLayout from '../../layouts/SegmentLayout.astro';
+---
+<SegmentLayout
+  segmentKey="ggz"
+  segmentLabel="GGZ"
+  title="GGZ-software — geestelijke gezondheidszorg | Sindzo"
+  eyebrow="Voor de GGZ"
+  hero="Blended care, ZPM-declaratie en wachtlijstreductie in één dossier."
+  subtitle="Sindzo bundelt dossier, declaratie en e-health-koppelingen in een werkproces dat schaalbaar is voor zowel kleinschalige praktijken als gespecialiseerde ggz-instellingen. Geen aparte tools voor administratie en behandeling."
+  triggers={[
+    { title: 'Wachttijden en personeelstekort', body: 'NZa benoemt toegankelijkheid als kernuitdaging. Slimmere triage, blended care en geautomatiseerde declaratie verlagen de admin-last per behandelaar.' },
+    { title: 'ZPM-declaratie complex', body: 'Het zorgprestatiemodel vraagt nauwkeurige prestatie-registratie. Sindzo doet die registratie native, met validatie aan de bron in plaats van bij de declaratie-knop.' },
+    { title: 'Blended care wordt verwacht', body: 'Patiënten verwachten een portaal, modules van Minddistrict/Therapieland/Embloom en chat-begeleiding tussen sessies door — naast het face-to-face traject.' },
+    { title: 'Privacy onder druk', body: 'Mentale-gezondheidsgegevens zijn bijzonder gevoelig. Trust Centre, BSN-encryptie, fijnmazige autorisaties en eOverdracht-logging tonen wat collega\'s vaak pas in tender-fase delen.' },
+  ]}
+  modules={[
+    { name: 'ZPM-declaratie + prestaties', note: 'Native ZPM, niet generiek' },
+    { name: 'Triage + intake-flow', note: 'Wachtlijst en groei-monitoring' },
+    { name: 'E-Health-koppelingen', note: 'Minddistrict, Therapieland, Embloom' },
+    { name: 'Cliëntportaal + chat', note: 'Tussen-sessies-begeleiding' },
+    { name: 'Vragenlijsten (PREM/ROM)', note: 'Outcome-monitoring' },
+    { name: 'Zorgtrajecten', note: 'Multidisciplinair behandelpad' },
+    { name: 'Indicatoren', note: 'Kwaliteit + transparantie' },
+    { name: 'Open API + FHIR', note: 'Voor regionale samenwerking' },
+  ]}
+  regulatory={['Wvggz', 'Wkkgz', 'ZPM', 'AVG', 'NEN 7510', 'Wegiz']}
+  proofPoints={[
+    { value: 'Native', label: 'ZPM-prestatieregistratie' },
+    { value: '3', label: 'E-health-platforms gekoppeld' },
+    { value: 'NL', label: 'Hosting + support' },
+    { value: '0', label: 'Cliëntdata in derde landen' },
+  ]}
+/>

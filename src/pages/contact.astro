@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<Base title="Contact — Sindzo">
+  <PageHero
+    eyebrow="Contact"
+    title="Vraag, vragenlijst of gewoon overleg."
+    subtitle="Wij zijn een klein NL-team. Geen contactformulier-zwart-gat — vragen komen direct bij iemand die antwoord kan geven."
+  />
+
+  <section class="container-prose py-16">
+    <div class="grid gap-8 md:grid-cols-3">
+      <div class="rounded-xl border border-ink-100 bg-white p-6">
+        <h3 class="font-display text-lg font-semibold text-ink-900">Algemene vragen</h3>
+        <p class="mt-2 text-sm text-ink-700">Sales, partnerships, demo's.</p>
+        <p class="mt-4 text-sm">
+          <a href="mailto:hello@sindzo.nl" class="text-sindzo-700 hover:underline">hello@sindzo.nl</a><br>
+          <a href="tel:+31385001234" class="text-sindzo-700 hover:underline">038 500 12 34</a>
+        </p>
+      </div>
+      <div class="rounded-xl border border-ink-100 bg-white p-6">
+        <h3 class="font-display text-lg font-semibold text-ink-900">Trust &amp; security</h3>
+        <p class="mt-2 text-sm text-ink-700">DPA, vragenlijsten, due-diligence.</p>
+        <p class="mt-4 text-sm">
+          <a href="mailto:trust@sindzo.nl" class="text-sindzo-700 hover:underline">trust@sindzo.nl</a><br>
+          CAIQ · SIG · BSI C5 geaccepteerd
+        </p>
+      </div>
+      <div class="rounded-xl border border-ink-100 bg-white p-6">
+        <h3 class="font-display text-lg font-semibold text-ink-900">Support &amp; klanten</h3>
+        <p class="mt-2 text-sm text-ink-700">Reeds klant? Direct naar support.</p>
+        <p class="mt-4 text-sm">
+          <a href="https://help.sindzo.nl" class="text-sindzo-700 hover:underline">help.sindzo.nl</a><br>
+          <a href="https://status.sindzo.nl" class="text-sindzo-700 hover:underline">status.sindzo.nl</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-12 rounded-2xl border border-ink-100 bg-ink-100/50 p-8">
+      <h3 class="font-display text-xl font-semibold text-ink-900">Bezoekadres</h3>
+      <p class="mt-3 text-sm text-ink-700">
+        Maat Holding B.V.<br>
+        Almelo, Nederland<br>
+        KvK 12345678 · BTW NL000000000B01
+      </p>
+      <p class="mt-3 text-xs text-ink-500">Bezoek op afspraak.</p>
+    </div>
+  </section>
+</Base>

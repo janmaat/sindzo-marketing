@@ -1,0 +1,140 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import PlanCard from '../components/PlanCard.astro';
+import Cta from '../components/Cta.astro';
+
+// Prijzen zijn indicatief en bewust zichtbaar — concurrenten verbergen
+// pricing tot na demo, wat procurement-cyclus verlengt. Wij tonen ranges
+// zodat bestuurders interne business case kunnen maken vóór gesprek.
+---
+<Base
+  title="Prijzen & abonnementen | Sindzo"
+  description="Transparante plan-matrix per medewerker per maand. Vier tiers, modulair geactiveerd, geen verborgen kosten."
+>
+  <PageHero
+    eyebrow="Prijzen"
+    title="Eerlijke prijzen, op tafel."
+    subtitle="Vier abonnementsplannen, modulair geactiveerd. Geen verborgen kosten voor implementatie, hosting of basis-support. Eerlijke indicatie zodat u een interne business case kunt maken vóór er een gesprek nodig is."
+  />
+
+  <section class="container-prose py-16">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <PlanCard
+        name="Basic"
+        tagline="Voor kleine teams en startende organisaties"
+        priceFrom="€19"
+        features={[
+          'Cliëntdossier (Core) + SOEP-rapportage',
+          'Tot 25 medewerkers',
+          'Standaard cliëntportaal',
+          '1 module declaratie (Wmo óf Jw óf Wlz)',
+          'E-mail-support binnen 1 werkdag',
+          'NEN 7510 basis-controls',
+        ]}
+        cta={{ label: 'Start kennismaking', href: '/demo' }}
+      />
+      <PlanCard
+        name="Compliance Pro"
+        tagline="Voor organisaties met compliance-druk"
+        priceFrom="€34"
+        highlight={true}
+        features={[
+          'Alles uit Basic',
+          'Onbeperkt medewerkers',
+          'Wtza-wizard, Wtta, Zelfstandigenwet',
+          'NEN 7510 control-suite + audit-export',
+          'Wzd-stappenplan + IGJ-XML',
+          'Klachten (Wkkgz) + VIM-engine',
+          'DPA, subverwerkerslijst, security-pack',
+          'Phone-support 09:00–17:00',
+        ]}
+        cta={{ label: 'Start kennismaking', href: '/demo' }}
+      />
+      <PlanCard
+        name="Marketplace Plus"
+        tagline="Voor organisaties met flexibele schil"
+        priceFrom="€42"
+        features={[
+          'Alles uit Compliance Pro',
+          'Volledige Planning + Routing + CAO-engine',
+          'Marketplace-koppeling (Ponscura)',
+          'ZZP-financieel + AGB-validatie',
+          'AI-Matching (in ontwikkeling)',
+          'Featured listings & Temp-to-perm',
+        ]}
+        cta={{ label: 'Start kennismaking', href: '/demo' }}
+      />
+      <PlanCard
+        name="Enterprise"
+        tagline="Voor concerns, ketens en grote tenants"
+        features={[
+          'Alles uit Marketplace Plus',
+          'Multi-tenant met concern-rapportage',
+          'Dedicated success-manager',
+          'SLA met financiële boete-clausule',
+          'On-premises hosting optie (NL)',
+          'Custom-koppelingen bouwen wij',
+          'Architecture-review jaarlijks',
+          '24/7 incident-respons',
+        ]}
+        cta={{ label: 'Plan een verkenning', href: '/contact' }}
+      />
+    </div>
+
+    <p class="mt-8 text-center text-sm text-ink-500">
+      Alle prijzen ex. BTW, per actieve medewerker per maand, vanaf jaar-contract.
+      Indicatief — werkelijke prijs hangt af van segment, schaal en gekozen modules.
+    </p>
+  </section>
+
+  <section class="container-prose py-16 border-t border-ink-100">
+    <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Wat <em>niet</em> apart in rekening wordt gebracht</h2>
+    <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {[
+        ['Hosting in NL', 'Azure West-Europe + backup NL — geen extra kosten.'],
+        ['Standaard-implementatie', 'Onboarding-traject in alle plannen inbegrepen.'],
+        ['Training (e-learning)', 'Self-paced training voor alle gebruikers.'],
+        ['Software-updates', 'Continuous deployment — geen versie-upgrades met meerprijs.'],
+        ['Basis-support', 'E-mail binnen 1 werkdag, kennisbank en community.'],
+        ['DPA & security-pack', 'Standaard meegeleverd, geen NDA nodig.'],
+      ].map(([title, body]) => (
+        <li class="rounded-lg border border-ink-100 bg-white p-5">
+          <h3 class="font-semibold text-ink-900">{title}</h3>
+          <p class="mt-1 text-sm text-ink-700">{body}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="container-prose py-16 border-t border-ink-100">
+    <h2 class="font-display text-2xl font-bold text-ink-900">Veelgestelde vragen over prijs</h2>
+    <dl class="mt-8 space-y-6 max-w-3xl">
+      <div>
+        <dt class="font-semibold text-ink-900">Wat telt als "actieve medewerker"?</dt>
+        <dd class="mt-1 text-sm text-ink-700">Een gebruiker die in de afgelopen 30 dagen heeft ingelogd. Slapende accounts tellen niet mee — u betaalt niet voor mensen die niet werken.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-ink-900">Hoe zit het met cliëntportaal-gebruikers?</dt>
+        <dd class="mt-1 text-sm text-ink-700">Cliënten, mantelzorgers en familie tellen niet als medewerker. Het portaal is inbegrepen in alle plannen.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-ink-900">Wat kost het bij meer dan 1.000 medewerkers?</dt>
+        <dd class="mt-1 text-sm text-ink-700">Vanaf 500 medewerkers stappen we over op een staffel-tarief. Bij Enterprise contractje stelt u zelf de schaal vast — bel ons voor een indicatie.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-ink-900">Is migratie van mijn huidige ECD inbegrepen?</dt>
+        <dd class="mt-1 text-sm text-ink-700">Standaard-imports (Nedap Ons, SDB, Gerimedica Ysis, Adapcare) zijn inbegrepen vanaf Compliance Pro. Maatwerk-imports zijn een eenmalig project — wij geven een vaste prijs vooraf.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-ink-900">Kan ik tussentijds switchen tussen plannen?</dt>
+        <dd class="mt-1 text-sm text-ink-700">Upgraden kan altijd direct. Downgraden kan per kwartaal-grens, geen exit-fee. Data blijft volledig u eigendom — exit-export in JSON/CSV op verzoek.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <Cta
+    title="Niet zeker welk plan past?"
+    subtitle="Stuur uw situatie (segment, schaal, huidige systemen) en wij geven binnen 1 werkdag een eerlijk advies — ook als dat is dat een andere leverancier beter past."
+  />
+</Base>

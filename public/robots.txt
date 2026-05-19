@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sindzo.nl/sitemap-index.xml

@@ -1,0 +1,163 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ModuleCard from '../components/ModuleCard.astro';
+import Cta from '../components/Cta.astro';
+
+// Modulekaart — gegroepeerd zoals de Blazor-app ook gegroepeerd is
+// (ECD/Declaratie/Planning/Kwaliteit/...). Statussen reflecteren
+// werkelijke staat in de codebase.
+
+interface ModuleEntry {
+  icon: string;
+  title: string;
+  body: string;
+  features?: string[];
+  status?: 'live' | 'wip' | 'roadmap';
+}
+
+interface ModuleGroup {
+  group: string;
+  intro: string;
+  modules: ModuleEntry[];
+}
+
+const groups: ModuleGroup[] = [
+  {
+    group: 'ECD — cliëntdossier',
+    intro: 'Eén dossier dat met de cliënt meereist door intake, behandeling en overdracht.',
+    modules: [
+      { icon: '📋', title: 'Cliëntdossier (Core)', body: 'BSN-encrypted, multi-tenant, met archiefbeleid en field-level audit.',
+        features: ['Episode of Care', 'Anamnese + Allergieën', 'CIZ/Wmo-indicaties', 'BgZ-conform'], status: 'live' },
+      { icon: '📝', title: 'SOEP-rapportage', body: 'AI-pre-fill, spraakinvoer, automatische samenvatting en correcties-trail.',
+        features: ['Spraak-naar-tekst', 'AI-pre-fill', 'Verbeter-trail', 'Pin & redact'], status: 'live' },
+      { icon: '🎯', title: 'Omaha Zorgplan', body: 'Volledig Omaha-systeem met problemen, doelen, interventies en versie-snapshots.', status: 'live' },
+      { icon: '🧠', title: 'Vragenlijsten-engine', body: 'PREM/MIC/BEM-engine met flexibele schalen en geautomatiseerde verspreiding.', status: 'live' },
+      { icon: '👥', title: 'Groepszorg', body: 'Dagbesteding en dagbehandeling — activiteiten, aanwezigheid, foto\'s en rapportages.', status: 'live' },
+      { icon: '🤝', title: 'MDO + cliëntlogistiek', body: 'Multidisciplinair overleg, agenda-templates, actiepunten en intake-flow.', status: 'live' },
+    ],
+  },
+  {
+    group: 'Declaratie & financiering',
+    intro: 'Heel het declaratie-spectrum — Wmo, Jw, Wlz, Zvw — in één engine.',
+    modules: [
+      { icon: '🏷️', title: 'AGB-registraties', body: 'AGB-aanvraag, validatie, sync en organisatie-koppeling.', status: 'live' },
+      { icon: '✅', title: 'COV-check', body: 'Real-time controle op verzekering, batch- of single-flow.', status: 'live' },
+      { icon: '🏛️', title: 'iWmo / iJw', body: 'Gemeente-productcodes, message-flow, retourcodes, toewijzingen.', status: 'live' },
+      { icon: '🩺', title: 'iWlz + CAK', body: 'Wlz-berichten en CAK-aanleveringen met retour-mutaties.', status: 'live' },
+      { icon: '📊', title: 'Productie & Budget', body: 'Per cliënt productie, financierings-mix, budgetreserveringen + alerts.', status: 'live' },
+      { icon: '💶', title: 'Facturatie + PGB', body: 'Facturen, betalingen, sjablonen en PGB-afrekeningen.', status: 'live' },
+    ],
+  },
+  {
+    group: 'Planning & roosteren',
+    intro: 'Van shift tot route, met CAO-engine die rust- en arbeidsregels bewaakt.',
+    modules: [
+      { icon: '📅', title: 'Shifts & Visits', body: 'Diensten, pauzes, ruil-verzoeken, zelfrooster en compensatie-saldi.', status: 'live' },
+      { icon: '🗺️', title: 'Routing', body: 'Wijkroute-optimalisatie met reistijd en cliëntvoorkeuren.', status: 'live' },
+      { icon: '⚖️', title: 'CAO-engine', body: 'CAO-regels gecodeerd; verzuim-aandachtspunten en wettelijke triggers.', status: 'live' },
+      { icon: '📱', title: 'Mobile-app (offline)', body: 'Veldwerk offline-first met sync; voor extramurale teams.', status: 'wip' },
+    ],
+  },
+  {
+    group: 'Kwaliteit, HRM & portalen',
+    intro: 'Kwaliteit-loop sluitend: meting, verbetering, registratie, gesprek.',
+    modules: [
+      { icon: '⚠️', title: 'VIM + Calamiteiten', body: 'Incidenten, calamiteiten, datalekken, PRISMA-analyse, leervoorstellen.', status: 'live' },
+      { icon: '📣', title: 'Klachten (Wkkgz)', body: 'Volledige klachtenflow, geschilbehandeling, tijdlijn-events.', status: 'live' },
+      { icon: '📈', title: 'Indicatoren', body: 'Versie-beheerde indicator-definities, aanleveringen en snapshots.', status: 'live' },
+      { icon: '👤', title: 'HRM-uitbreiding', body: 'Bevoegdheden, deadlines, gesprekken, verzuim, contracten.', status: 'live' },
+      { icon: '🏠', title: 'Cliënt-/familieportaal', body: 'Berichten, documenten, machtigingen, mantelzorger-taken.', status: 'live' },
+    ],
+  },
+  {
+    group: 'Integraties & ketenzorg',
+    intro: 'Sindzo praat met het Nederlandse zorglandschap — geen lock-in.',
+    modules: [
+      { icon: '💊', title: 'Medimo', body: 'Medicatie-koppeling met toedienregistratie en allergieën.', status: 'live' },
+      { icon: '📨', title: 'ZorgMail', body: 'Veilige berichten en bijlagen via het ZorgMail-netwerk.', status: 'live' },
+      { icon: '🔗', title: 'ZorgDomein', body: 'Verwijzingen en consultaties via ZorgDomein.', status: 'live' },
+      { icon: '📦', title: 'BgZ & eOverdracht', body: 'Wegiz-conforme bundels voor ketenoverdracht.', status: 'live' },
+      { icon: '🌐', title: 'MedMij + LSP', body: 'PGO-uitwisseling via MedMij en LSP-koppeling met opt-in.', status: 'wip' },
+      { icon: '🧘', title: 'E-Health', body: 'Minddistrict, Therapieland, Embloom — blended care-flow.', status: 'wip' },
+    ],
+  },
+  {
+    group: 'AI & data',
+    intro: 'AI als versneller — transparant, EU-conform, niet als black box.',
+    modules: [
+      { icon: '🎙️', title: 'Voice-rapportage', body: 'Web Speech API + AI-samenvatting, met audit-trail van bewerkingen.', status: 'live' },
+      { icon: '🤖', title: 'AI-Matching', body: 'Cliënt ↔ professional matching met uitlegbare scoring.', status: 'wip' },
+      { icon: '📚', title: 'CAO-RAG', body: 'CAO-uitleg via retrieval-augmented generation, met bronverwijzing.', status: 'wip' },
+      { icon: '🚨', title: 'Fraud Detection', body: 'Patroon-herkenning op declaraties en planning.', status: 'wip' },
+      { icon: '🔮', title: 'Predictive', body: 'Voorspelling van uitstroom, wachttijden en zorgintensiteit.', status: 'roadmap' },
+    ],
+  },
+  {
+    group: 'Compliance & regulatoir',
+    intro: 'Niet alleen "voldoen aan" — actief begeleiden bij wet en deadlines.',
+    modules: [
+      { icon: '📜', title: 'Wtza-wizard', body: 'Toelating en jaarverantwoording (deadline 31 mei) met wizard-flow.', status: 'live' },
+      { icon: '🛂', title: 'Wtta-uitleen', body: 'Uitlenersregistratie en check, klaar voor 1-1-2027.', status: 'live' },
+      { icon: '⚖️', title: 'Zelfstandigenwet', body: '€38/u rechtsvermoeden-toetsing en modelovereenkomst-engine.', status: 'live' },
+      { icon: '🔒', title: 'NEN 7510', body: 'Control assessments, control-evidence en audit-export.', status: 'live' },
+      { icon: '🏥', title: 'Wzd/Wvggz', body: 'Gedwongen zorg-registratie en halfjaarlijkse IGJ-XML.', status: 'live' },
+    ],
+  },
+];
+---
+<Base title="Oplossing — modulaire zorgsuite | Sindzo">
+  <PageHero
+    eyebrow="Oplossing"
+    title="Eén zorgsuite, modulair geactiveerd."
+    subtitle="Sindzo is geen monoliet en geen los-zandloos best-of-breed. Het is een modulaire monolith: u activeert alleen wat u nodig hebt, het deelt één dossier en één identiteit, en u groeit mee zonder migratie."
+  >
+    <div slot="actions" class="flex flex-wrap gap-3">
+      <a href="/demo" class="btn-primary no-underline">Demo aanvragen</a>
+      <a href="/integraties" class="btn-secondary no-underline">Naar integraties</a>
+    </div>
+  </PageHero>
+
+  <section class="border-b border-ink-100 bg-ink-100/40 py-10">
+    <div class="container-prose grid grid-cols-2 gap-6 text-center sm:grid-cols-4">
+      <div>
+        <div class="font-display text-3xl font-bold text-sindzo-700">40+</div>
+        <div class="mt-1 text-xs text-ink-500">Modules</div>
+      </div>
+      <div>
+        <div class="font-display text-3xl font-bold text-sindzo-700">7</div>
+        <div class="mt-1 text-xs text-ink-500">Plan-tiers</div>
+      </div>
+      <div>
+        <div class="font-display text-3xl font-bold text-sindzo-700">FHIR R4</div>
+        <div class="mt-1 text-xs text-ink-500">Open API</div>
+      </div>
+      <div>
+        <div class="font-display text-3xl font-bold text-sindzo-700">.NET 10</div>
+        <div class="mt-1 text-xs text-ink-500">Modern, snel</div>
+      </div>
+    </div>
+  </section>
+
+  {groups.map((g) => (
+    <section class="container-prose py-16 border-b border-ink-100 last:border-0">
+      <div class="max-w-3xl">
+        <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">{g.group}</h2>
+        <p class="mt-2 text-ink-700">{g.intro}</p>
+      </div>
+      <div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {g.modules.map((m) => (
+          <ModuleCard
+            icon={m.icon}
+            title={m.title}
+            body={m.body}
+            features={m.features}
+            status={m.status}
+          />
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <Cta />
+</Base>

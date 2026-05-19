@@ -1,0 +1,28 @@
+---
+import SegmentLayout from '../../layouts/SegmentLayout.astro';
+---
+<SegmentLayout
+  segmentKey="huisartsen"
+  segmentLabel="Huisartsen"
+  title="HIS voor de huisartsenzorg | Sindzo (in voorbereiding)"
+  eyebrow="Voor de eerstelijn — in voorbereiding"
+  hero="Een HIS dat aantoonbaar voldoet aan de eisen van de huisartsensector."
+  subtitle="Sindzo Huisarts is in actieve ontwikkeling met een design-partnerschap van enkele praktijken en regionale huisartsenorganisaties. Doel: XIS-keurmerk, MedMij/PGO-conformiteit en migratiepad vanuit Medicom, Promedico of TransHIS. Aanmelden voor het early-access programma kan nu."
+  triggers={[
+    { title: 'PGO-uitwisseling verplicht', body: 'Sinds 1 juli 2024 moet de medicatieafspraak via een PGO beschikbaar zijn op verzoek. Onze MedMij-aansluiting is in afrondingsfase voor algemene PGO-uitwisseling.' },
+    { title: 'XIS-keurmerk als shortlist-eis', body: '70% van de huisartsen werkt met een XIS-Keurmerk-HIS. Wij volgen het keurmerk-traject als hard criterium voor productrelease.' },
+    { title: 'Migratie zorgvuldig', body: 'Overstappen kan geen big-bang zijn. Wij investeren in import-tools voor Medicom, Promedico en TransHIS, plus een schaduw-periode voor controle.' },
+    { title: 'Werkdruk dagelijks', body: 'Snel openen, snel vinden, snel rapporteren. Het primaire scherm voor een huisarts wordt elke dag honderden keren gebruikt — dat moet excellent zijn.' },
+  ]}
+  modules={[
+    { name: 'HIS-kerndossier', note: 'In ontwikkeling, design-partner-feedback' },
+    { name: 'MedMij/PGO', note: 'Aansluiting in afronding' },
+    { name: 'LSP-koppeling', note: 'Via VZVZ, opt-in per patiënt' },
+    { name: 'Zorgmail / ZorgDomein', note: 'Verwijzen en consulteren' },
+    { name: 'Receptregistratie', note: 'Met geneesmiddel-allergiecheck' },
+    { name: 'Praktijkagenda', note: 'Multi-praktijk en huisartsenpost' },
+    { name: 'eOverdracht', note: 'BgZ-conform, ontvangst + verzending' },
+    { name: 'Migratie-import', note: 'Medicom, Promedico, TransHIS' },
+  ]}
+  regulatory={['XIS-Keurmerk', 'MedMij', 'Wegiz', 'AVG', 'NEN 7510']}
+/>

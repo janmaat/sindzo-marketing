@@ -1,0 +1,19 @@
+---
+// Placeholder-logos voor early-access partners. Vervang door echte SVG's
+// zodra MoU's getekend zijn. Bij <5 partners: behoud "Early-access" framing.
+const logos = [
+  'Partner A', 'Partner B', 'Partner C', 'Partner D', 'Partner E', 'Partner F',
+];
+---
+<section class="container-prose py-12">
+  <p class="text-center text-xs font-semibold uppercase tracking-wider text-ink-500">
+    Vertrouwd door early-access partners in VVT, GHZ en GGZ
+  </p>
+  <div class="mt-6 grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-3 md:grid-cols-6">
+    {logos.map((label) => (
+      <div class="flex h-12 items-center justify-center rounded-md border border-dashed border-ink-300 text-sm font-medium text-ink-500">
+        {label}
+      </div>
+    ))}
+  </div>
+</section>

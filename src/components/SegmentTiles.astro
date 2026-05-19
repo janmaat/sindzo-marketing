@@ -1,0 +1,64 @@
+---
+const segments = [
+  {
+    label: 'VVT',
+    title: 'Verpleging, verzorging & thuiszorg',
+    pitch: 'Eén werkproces over intra- en extramuraal. Planning + ECD + eOverdracht, gebouwd voor arbeidskrapte.',
+    href: '/voor/vvt',
+    accent: 'from-sindzo-100 to-sindzo-50',
+  },
+  {
+    label: 'GHZ',
+    title: 'Gehandicaptenzorg',
+    pitch: 'OPP/AVB-ondersteuning, dagbestedinglogistiek, familieportaal — zonder duizend losse formulieren.',
+    href: '/voor/ghz',
+    accent: 'from-emerald-50 to-white',
+  },
+  {
+    label: 'GGZ',
+    title: 'Geestelijke gezondheidszorg',
+    pitch: 'Blended care, ZPM-declaratie, wachtlijstreductie en e-health-koppelingen in één dossier.',
+    href: '/voor/ggz',
+    accent: 'from-violet-50 to-white',
+  },
+  {
+    label: 'Huisartsen',
+    title: 'Eerstelijn',
+    pitch: 'Werkproces-fit, PGO/MedMij-aansluiting en migratiebegeleiding — XIS-keurmerk-pad.',
+    href: '/voor/huisartsen',
+    accent: 'from-amber-50 to-white',
+    badge: 'In voorbereiding',
+  },
+];
+---
+<section id="voor-wie" class="container-prose py-20">
+  <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+    <div class="max-w-2xl">
+      <h2 class="font-display text-3xl font-bold tracking-tightish text-ink-900 sm:text-4xl">Voor wie is Sindzo?</h2>
+      <p class="mt-4 text-ink-700">
+        Modulaire monolith: u activeert alleen wat u nodig hebt — en groeit mee zonder migratiepijn.
+      </p>
+    </div>
+    <a href="/oplossing" class="text-sm font-medium text-sindzo-700 no-underline hover:underline">
+      Bekijk volledige modulekaart →
+    </a>
+  </div>
+  <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {segments.map((s) => (
+      <a href={s.href} class="group relative overflow-hidden rounded-xl border border-ink-100 bg-white p-6 no-underline transition hover:border-sindzo-300 hover:shadow-md">
+        <div class={`absolute inset-x-0 top-0 h-24 -z-0 bg-gradient-to-b ${s.accent}`}></div>
+        <div class="relative">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold uppercase tracking-wider text-sindzo-700">{s.label}</span>
+            {s.badge && <span class="badge text-[10px]">{s.badge}</span>}
+          </div>
+          <h3 class="mt-3 font-display text-lg font-semibold text-ink-900">{s.title}</h3>
+          <p class="mt-2 text-sm text-ink-700 leading-relaxed">{s.pitch}</p>
+          <span class="mt-5 inline-block text-sm font-medium text-sindzo-700 transition group-hover:translate-x-0.5">
+            Naar segmentpagina →
+          </span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

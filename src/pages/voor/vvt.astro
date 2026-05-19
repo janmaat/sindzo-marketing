@@ -1,0 +1,39 @@
+---
+import SegmentLayout from '../../layouts/SegmentLayout.astro';
+---
+<SegmentLayout
+  segmentKey="vvt"
+  segmentLabel="VVT"
+  title="VVT-software — verpleging, verzorging, thuiszorg | Sindzo"
+  eyebrow="Voor VVT-organisaties"
+  hero="Eén platform voor intra- en extramurale zorg — gebouwd voor arbeidskrapte."
+  subtitle="Sindzo combineert ECD, planning, declaratie en kwaliteit in één werkproces. Geen schakelen tussen systemen, geen dubbele invoer, geen tijd verliezen aan administratie die niet bijdraagt aan zorg."
+  triggers={[
+    { title: 'Arbeidsmarktkrapte', body: 'ActiZ verwacht structurele tekorten tot 2030. Sindzo verlaagt de admin-last per dienst zodat zorgmedewerkers meer tijd aan cliënten besteden — én blijven.' },
+    { title: 'Intra- vs. extramurale versnippering', body: 'Eén dossier voor verpleeghuis én wijk. Eén identiteit per cliënt, één route, één rapportage — ongeacht waar zorg geleverd wordt.' },
+    { title: 'Regeldruk via ECD', body: 'Zorg voor Beter: 18% van de admin-last hangt samen met het ECD. Sindzo dringt dat terug met SOEP-pre-fill, spraak-rapportage en logische dossierstructuur.' },
+    { title: 'eOverdracht & Wegiz', body: 'BgZ-conforme overdracht naar ziekenhuis, huisarts of vervolgzorg — zonder PDF-printen-en-faxen, klaar voor de Wegiz-verplichting.' },
+  ]}
+  modules={[
+    { name: 'Cliëntdossier + zorgplan', note: 'Omaha + episode of care, BSN-encrypted' },
+    { name: 'SOEP-rapportage met voice', note: 'Pre-fill + spraak voor wijkverpleegkundige' },
+    { name: 'Routing & wijkroutes', note: 'Optimalisatie met cliëntvoorkeuren' },
+    { name: 'CAO-engine + zelfrooster', note: 'Wettelijke regels gecodeerd' },
+    { name: 'eOverdracht', note: 'BgZ-conform via Wegiz-bundle' },
+    { name: 'Medicatie via Medimo', note: 'Voorschrift → toedienregistratie' },
+    { name: 'iWmo + Productie + Budget', note: 'Volledige Wmo-flow + budgetbewaking' },
+    { name: 'Familieportaal', note: 'Mantelzorger-taken, foto\'s, berichten' },
+  ]}
+  regulatory={['Wkkgz', 'Wtza', 'AVG', 'NEN 7510', 'Wegiz', 'Wzd (extramurale toepassing)']}
+  proofPoints={[
+    { value: '−40%', label: 'Tijd aan SOEP-rapportage (spraak + pre-fill)' },
+    { value: '1×', label: 'Inloggen — alle modules' },
+    { value: 'NL', label: 'Hosting + support' },
+    { value: '< 1u', label: 'RPO (data-verlies-doelstelling)' },
+  ]}
+  caseQuote={{
+    quote: 'Met spraakrapportage in de wijk is de gemiddelde rapportagetijd per cliënt gehalveerd. Verpleegkundigen rapporteren nu in de auto, niet \'s avonds thuis.',
+    author: 'Manager Zorg',
+    org: 'Early-access partner, VVT 1.200 medewerkers',
+  }}
+/>

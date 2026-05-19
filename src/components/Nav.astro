@@ -1,0 +1,26 @@
+---
+const links = [
+  { label: 'Oplossing', href: '/oplossing' },
+  { label: 'Voor wie', href: '#voor-wie' },
+  { label: 'Integraties', href: '/integraties' },
+  { label: 'Trust Centre', href: '/trust' },
+  { label: 'Prijzen', href: '/prijzen' },
+];
+---
+<header class="sticky top-0 z-40 border-b border-ink-100 bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+  <div class="container-prose flex h-16 items-center justify-between">
+    <a href="/" class="flex items-center gap-2 no-underline" aria-label="Sindzo — terug naar home">
+      <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-sindzo-700 text-white font-bold">S</span>
+      <span class="font-display text-lg font-semibold tracking-tightish text-ink-900">Sindzo</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-sm text-ink-700">
+      {links.map((l) => (
+        <a href={l.href} class="no-underline hover:text-sindzo-700 transition">{l.label}</a>
+      ))}
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="https://app.sindzo.nl/login" class="hidden sm:inline text-sm text-ink-700 hover:text-sindzo-700 no-underline">Inloggen</a>
+      <a href="/demo" class="btn-primary no-underline">Demo aanvragen</a>
+    </div>
+  </div>
+</header>

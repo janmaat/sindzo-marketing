@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Cta from '../components/Cta.astro';
+
+interface Integration {
+  name: string;
+  category: string;
+  body: string;
+  status: 'live' | 'wip' | 'roadmap';
+  doc?: string;
+}
+
+const integrations: Integration[] = [
+  // Standaarden
+  { name: 'FHIR R4', category: 'Standaarden', status: 'live', doc: 'https://api.sindzo.nl/docs',
+    body: 'Patient, Encounter, Observation, MedicationRequest — publieke endpoints met OAuth2.' },
+  { name: 'MedMij', category: 'Standaarden', status: 'wip',
+    body: 'Aansluiting bij MedMij-stelsel voor PGO-uitwisseling. Afrondingsfase Q3 2026.' },
+  { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'live',
+    body: 'BgZ-conforme eOverdracht-bundel — ontvangen en verzenden.' },
+  { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'live',
+    body: 'Bevragen via Landelijk Schakelpunt, opt-in per cliënt geregistreerd.' },
+
+  // Communicatie
+  { name: 'ZorgMail', category: 'Communicatie', status: 'live',
+    body: 'Veilige berichten en bijlagen via het ZorgMail-netwerk.' },
+  { name: 'ZorgDomein', category: 'Communicatie', status: 'live',
+    body: 'Verwijzingen, consultaties en bijlagen — twee-richting.' },
+
+  // Medicatie
+  { name: 'Medimo', category: 'Medicatie', status: 'live',
+    body: 'Medicatie-overzicht, voorschriften, toedienregistratie en allergieën.' },
+
+  // Financieel
+  { name: 'AGB-register (Vektis)', category: 'Financieel', status: 'live',
+    body: 'AGB-validatie en -sync via Vektis.' },
+  { name: 'CAK', category: 'Financieel', status: 'live',
+    body: 'Aanlevering Wlz/Wmo-eigen-bijdrage met retour-mutaties.' },
+  { name: 'Gemeenten (iWmo/iJw)', category: 'Financieel', status: 'live',
+    body: 'iWmo- en iJw-berichtenverkeer, retourcodes en toewijzingen.' },
+  { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'live',
+    body: 'iWlz-berichtenverkeer met validatie en retourcodes.' },
+
+  // E-Health
+  { name: 'Minddistrict', category: 'E-Health', status: 'wip',
+    body: 'Blended care-modules synchroniseren met behandeltraject.' },
+  { name: 'Therapieland', category: 'E-Health', status: 'wip',
+    body: 'Toewijzing en voortgang van e-health-modules.' },
+  { name: 'Embloom', category: 'E-Health', status: 'wip',
+    body: 'Vragenlijsten en outcome-monitoring koppeling.' },
+
+  // Identity & overig
+  { name: 'EntraID / Azure AD', category: 'Identiteit', status: 'live',
+    body: 'SSO via OIDC, met group-claim mapping naar rollen.' },
+  { name: 'UZI-pas', category: 'Identiteit', status: 'wip',
+    body: 'UZI-server-certificaten voor wettelijke authenticatie.' },
+  { name: 'Ysis-koppeling', category: 'Klinisch', status: 'wip',
+    body: 'Behandeldossier-uitwisseling voor specialistische teams.' },
+];
+
+const categories = Array.from(new Set(integrations.map(i => i.category)));
+const dotColor = (s: string) =>
+  s === 'live' ? 'bg-green-500' : s === 'wip' ? 'bg-amber-500' : 'bg-ink-300';
+const statusLabel = (s: string) =>
+  s === 'live' ? 'Live' : s === 'wip' ? 'In ontwikkeling' : 'Op roadmap';
+---
+<Base
+  title="Integraties — FHIR, MedMij, Wegiz en meer | Sindzo"
+  description="Aantoonbaar open. Publieke FHIR-endpoints, MedMij in afronding, BgZ-conforme eOverdracht, koppelingen met Medimo, ZorgMail, ZorgDomein, LSP."
+>
+  <PageHero
+    eyebrow="Integraties & standaarden"
+    title="Aantoonbaar open — geen vendor lock-in."
+    subtitle="Sindzo praat met het Nederlandse zorglandschap via gedocumenteerde standaarden, publieke API's en concrete koppelingen. Eerlijke status per integratie — live, in ontwikkeling of op roadmap."
+  >
+    <div slot="actions" class="flex flex-wrap gap-3">
+      <a href="https://api.sindzo.nl/docs" class="btn-primary no-underline">Bekijk API-docs</a>
+      <a href="/trust" class="btn-secondary no-underline">Trust Centre</a>
+    </div>
+  </PageHero>
+
+  <section class="container-prose py-10 border-b border-ink-100 bg-ink-100/40">
+    <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+      <div>
+        <div class="font-display text-3xl font-bold text-sindzo-700">{integrations.length}</div>
+        <div class="mt-1 text-xs text-ink-500">Integraties totaal</div>
+      </div>
+      <div>
+        <div class="font-display text-3xl font-bold text-green-600">{integrations.filter(i => i.status === 'live').length}</div>
+        <div class="mt-1 text-xs text-ink-500">Live nu</div>
+      </div>
+      <div>
+        <div class="font-display text-3xl font-bold text-amber-600">{integrations.filter(i => i.status === 'wip').length}</div>
+        <div class="mt-1 text-xs text-ink-500">In afronding</div>
+      </div>
+      <div>
+        <div class="font-display text-3xl font-bold text-sindzo-700">FHIR R4</div>
+        <div class="mt-1 text-xs text-ink-500">Open API</div>
+      </div>
+    </div>
+  </section>
+
+  {categories.map((cat) => (
+    <section class="container-prose py-12 border-b border-ink-100 last:border-0">
+      <h2 class="font-display text-2xl font-bold text-ink-900">{cat}</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {integrations.filter(i => i.category === cat).map((i) => (
+          <article class="rounded-lg border border-ink-100 bg-white p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-display text-base font-semibold text-ink-900">{i.name}</h3>
+              <span class="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-ink-500">
+                <span class={`status-dot ${dotColor(i.status)}`}></span>{statusLabel(i.status)}
+              </span>
+            </div>
+            <p class="mt-2 text-sm text-ink-700 leading-relaxed">{i.body}</p>
+            {i.doc && (
+              <a href={i.doc} class="mt-3 inline-block text-xs font-medium text-sindzo-700 no-underline hover:underline">
+                Documentatie →
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <section class="container-prose py-16">
+    <div class="rounded-2xl border border-ink-100 bg-ink-100/50 p-8">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Een integratie die ontbreekt?</h2>
+      <p class="mt-3 max-w-2xl text-ink-700">
+        Wij bouwen koppelingen op klantverzoek wanneer ze passen binnen de architectuur en
+        bijdragen aan het zorgproces. Stuur uw vraag — we reageren binnen 1 werkdag met een
+        haalbaarheidsschets, niet met een offerte.
+      </p>
+      <a href="mailto:integraties@sindzo.nl" class="btn-primary mt-5 no-underline">integraties@sindzo.nl</a>
+    </div>
+  </section>
+
+  <Cta />
+</Base>

@@ -1,0 +1,34 @@
+---
+import SegmentLayout from '../../layouts/SegmentLayout.astro';
+---
+<SegmentLayout
+  segmentKey="ghz"
+  segmentLabel="GHZ"
+  title="Gehandicaptenzorg-software | Sindzo"
+  eyebrow="Voor de gehandicaptenzorg"
+  hero="OPP, dagbesteding en familieportaal — zonder duizend losse formulieren."
+  subtitle="Sindzo brengt het ondersteuningsproces, de dagbestedinglogistiek en de communicatie met naasten samen in één platform. Het GHZ-specifieke vocabulaire (OPP, AVB, ervaringsdeskundigheid) is ingebouwd — niet bijgebogen vanuit een VVT-model."
+  triggers={[
+    { title: 'Versnipperde dagbesteding', body: 'Aanwezigheid, activiteiten, rapportages en foto\'s zitten nu vaak in verschillende systemen. Sindzo brengt ze samen rond één cliëntdossier.' },
+    { title: 'Familie wil meekijken', body: 'Naasten verwachten een portaal voor berichten, foto\'s en taken. Sindzo levert dat standaard — met privacy-by-design en BSN-encryptie.' },
+    { title: 'Wzd-registratie', body: 'Onvrijwillige zorg-stappenplan, halfjaarlijkse IGJ-aanlevering en multidisciplinair toetsing — ingebouwd, niet bijgeplakt.' },
+    { title: 'OPP/AVB-ondersteuning', body: 'Het ondersteuningsplan is het hart van GHZ. Sindzo modelleert OPP-domeinen en AVB-doelen native, niet als generieke "zorgplan-light".' },
+  ]}
+  modules={[
+    { name: 'OPP/AVB-domeinen', note: 'GHZ-native, niet bijgebogen VVT-model' },
+    { name: 'Groepszorg & dagbesteding', note: 'Activiteiten, aanwezigheid, foto\'s, rapportages' },
+    { name: 'Familie-/mantelzorgerportaal', note: 'Taken, berichten, agenda' },
+    { name: 'Wzd-stappenplan', note: 'Met IGJ-XML-export' },
+    { name: 'Triage + intake', note: 'Met multidisciplinair toetsen' },
+    { name: 'iWlz + CAK', note: 'Volledige Wlz-flow' },
+    { name: 'Vragenlijsten (PREM)', note: 'Cliënt- en naastentevredenheid' },
+    { name: 'Cliëntagenda', note: 'Activiteiten, afspraken, MDO\'s' },
+  ]}
+  regulatory={['Wzd', 'Wlz', 'Wkkgz', 'Wtza', 'AVG', 'NEN 7510']}
+  proofPoints={[
+    { value: '100%', label: 'Wzd-stappen gemodelleerd' },
+    { value: '1 dossier', label: 'Voor cliënt + naasten + team' },
+    { value: 'NL', label: 'Hosting + support' },
+    { value: 'BSN', label: 'Encrypted (AES-256-GCM)' },
+  ]}
+/>

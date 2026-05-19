@@ -1,0 +1,49 @@
+---
+// Drie USP's afgeleid uit Marketing-deep-research-report.md:
+// 1. Procesfit/regeldruk-reductie (Zorg voor Beter: 18% admin-last via ECD)
+// 2. Aantoonbare openheid (FHIR/MedMij/Wegiz)
+// 3. Security & compliance (NEN 7510, Cbw-readiness)
+const usps = [
+  {
+    icon: '⚙',
+    title: 'Eén proces, minder regeldruk',
+    body: 'Dossier, planning, declaratie en kwaliteit in één werkruimte. Eén keer registreren, overal gebruikt — minder dubbele invoer, minder schakelen tussen systemen.',
+    link: { label: 'Hoe regeldruk daalt', href: '/oplossing#regeldruk' },
+  },
+  {
+    icon: '⇄',
+    title: 'Open, niet gevangen',
+    body: 'Aantoonbare interoperabiliteit via FHIR, MedMij, Wegiz en eOverdracht. Open API, dataportabiliteit en publieke koppeldocumentatie — geen vendor lock-in.',
+    link: { label: 'Bekijk integraties', href: '/integraties' },
+  },
+  {
+    icon: '🛡',
+    title: 'Vertrouwen op tafel',
+    body: 'NEN 7510-werkdocument, DPA-template, subverwerkerslijst, logging en incidentproces publiek inzichtelijk — voordat een tender start. Cbw-ready voor 1 juli 2026.',
+    link: { label: 'Open Trust Centre', href: '/trust' },
+  },
+];
+---
+<section class="container-prose py-20">
+  <div class="max-w-2xl">
+    <h2 class="font-display text-3xl font-bold tracking-tightish text-ink-900 sm:text-4xl">
+      Drie redenen waarom bestuur, CIO én FG samen kiezen voor Sindzo.
+    </h2>
+    <p class="mt-4 text-ink-700">
+      In de Nederlandse zorg sneuvelen leveranciers zelden op functionaliteit, en vaak op
+      gebrek aan helderheid over data, security en proceswinst. Wij draaien dat om.
+    </p>
+  </div>
+  <div class="mt-12 grid gap-8 md:grid-cols-3">
+    {usps.map((u) => (
+      <article class="rounded-xl border border-ink-100 bg-white p-7 transition hover:border-sindzo-200 hover:shadow-sm">
+        <div class="text-2xl text-sindzo-700">{u.icon}</div>
+        <h3 class="mt-4 font-display text-xl font-semibold text-ink-900">{u.title}</h3>
+        <p class="mt-2 text-ink-700 leading-relaxed">{u.body}</p>
+        <a href={u.link.href} class="mt-5 inline-block text-sm font-medium text-sindzo-700 no-underline hover:underline">
+          {u.link.label} →
+        </a>
+      </article>
+    ))}
+  </div>
+</section>
