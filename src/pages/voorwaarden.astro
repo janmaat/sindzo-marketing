@@ -1,0 +1,121 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const sections = [
+  { id: 'definities', title: 'Definities' },
+  { id: 'toepassing', title: 'Toepasselijkheid' },
+  { id: 'aanbieding', title: 'Aanbieding en overeenkomst' },
+  { id: 'levering', title: 'Levering van de dienst' },
+  { id: 'prijzen', title: 'Prijzen en betaling' },
+  { id: 'gebruik', title: 'Gebruiksregels' },
+  { id: 'sla', title: 'Service levels (SLA)' },
+  { id: 'aansprakelijkheid', title: 'Aansprakelijkheid' },
+  { id: 'beeindiging', title: 'Beëindiging en exit' },
+  { id: 'wijzigingen', title: 'Wijzigingen' },
+  { id: 'recht', title: 'Toepasselijk recht en geschillen' },
+];
+---
+<LegalLayout
+  title="Algemene voorwaarden"
+  description="De voorwaarden waaronder Maat Holding B.V. (Sindzo) zorgsoftware levert aan zorgaanbieders en geïnteresseerden."
+  eyebrow="Voorwaarden"
+  lastUpdated="2026-05-19"
+  sections={sections}
+>
+  <h2 id="definities">1. Definities</h2>
+  <ul>
+    <li><strong>Sindzo</strong>: Maat Holding B.V., gevestigd te Almelo (KvK 12345678).</li>
+    <li><strong>Klant</strong>: de zorgaanbieder die een abonnement of dienst van Sindzo afneemt.</li>
+    <li><strong>Dienst</strong>: de Sindzo-applicatie inclusief modules, hosting, support en updates.</li>
+    <li><strong>Overeenkomst</strong>: het samenstel van schriftelijke afspraken, deze voorwaarden, de SLA en de verwerkersovereenkomst.</li>
+  </ul>
+
+  <h2 id="toepassing">2. Toepasselijkheid</h2>
+  <p>
+    Deze voorwaarden zijn van toepassing op iedere aanbieding van Sindzo en op de Overeenkomst
+    tussen Sindzo en Klant. Afwijkende inkoopvoorwaarden van Klant worden uitdrukkelijk van de hand
+    gewezen, tenzij Sindzo deze schriftelijk heeft aanvaard.
+  </p>
+
+  <h2 id="aanbieding">3. Aanbieding en overeenkomst</h2>
+  <p>
+    Aanbiedingen van Sindzo zijn 60 dagen geldig. De Overeenkomst komt tot stand zodra Klant het
+    voorstel schriftelijk aanvaardt of via de Sindzo-applicatie expliciet akkoord geeft.
+  </p>
+
+  <h2 id="levering">4. Levering van de dienst</h2>
+  <p>
+    Sindzo levert de Dienst als Software-as-a-Service (SaaS) vanuit Nederland. Levering vindt
+    plaats binnen 90 dagen na ondertekening, tenzij anders schriftelijk overeengekomen (bijv. bij
+    complexe migraties).
+  </p>
+  <p>
+    Sindzo spant zich in om de Dienst beschikbaar te houden conform de SLA. Sindzo behoudt zich
+    het recht voor om onderhoudsvensters in te lassen — ruim van tevoren aangekondigd en buiten
+    kantooruren waar mogelijk.
+  </p>
+
+  <h2 id="prijzen">5. Prijzen en betaling</h2>
+  <p>
+    Prijzen staan in het commercieel voorstel, exclusief BTW. Indicatieve plannen op
+    <a href="/prijzen">/prijzen</a>. Facturatie maandelijks of jaarlijks vooraf, naar keuze.
+    Betalingstermijn: 30 dagen.
+  </p>
+  <p>
+    Sindzo indexeert tarieven jaarlijks per 1 januari, maximaal volgens CBS Diensten-PPI of 4%
+    (welke lager is). Wijziging buiten deze indexering wordt 60 dagen vooraf aangekondigd; Klant
+    heeft dan een opzeggingsrecht.
+  </p>
+
+  <h2 id="gebruik">6. Gebruiksregels</h2>
+  <p>Klant verbindt zich tot:</p>
+  <ul>
+    <li>het correcte gebruik van de Dienst conform de geldende wet- en regelgeving (waaronder AVG, Wkkgz, NEN 7510);</li>
+    <li>het beschermen van inloggegevens en het gebruiken van MFA;</li>
+    <li>het melden van security-incidenten of onregelmatigheden binnen 24 uur;</li>
+    <li>het zelf verantwoordelijk zijn voor de juistheid van zorggegevens die in de Dienst worden ingevoerd.</li>
+  </ul>
+
+  <h2 id="sla">7. Service levels (SLA)</h2>
+  <p>
+    De SLA staat in het apart document <a href="/documenten/sla-sindzo-2026.pdf">SLA Sindzo 2026</a>.
+    Kerncijfers: 99,9% beschikbaarheid op kantooruren, RPO 1 uur, RTO 4 uur. Voor Enterprise-
+    plannen geldt een financiële boete-clausule bij niet-naleving.
+  </p>
+
+  <h2 id="aansprakelijkheid">8. Aansprakelijkheid</h2>
+  <p>
+    Sindzo is alleen aansprakelijk voor directe schade als gevolg van een toerekenbare tekortkoming
+    in de Overeenkomst, beperkt tot het bedrag dat Klant in de afgelopen 12 maanden heeft betaald.
+    Sindzo is niet aansprakelijk voor gevolgschade, gederfde winst, gemiste besparingen of
+    immateriële schade.
+  </p>
+  <p>
+    Deze beperking geldt niet bij opzet of bewuste roekeloosheid van Sindzo, of bij datalekken
+    die direct toerekenbaar zijn aan grove nalatigheid van Sindzo.
+  </p>
+
+  <h2 id="beeindiging">9. Beëindiging en exit</h2>
+  <p>
+    Beide partijen kunnen schriftelijk opzeggen tegen het einde van de contractperiode (kwartaal-
+    of jaarcontract), met inachtneming van 1 maand opzegtermijn.
+  </p>
+  <p>
+    Bij beëindiging exporteert Sindzo de data van Klant in een gangbaar formaat (JSON/CSV/PDF) en
+    bewaart deze nog 6 maanden voor het geval een vervolg-export nodig is. Daarna wordt alle
+    data definitief gewist. Voor Enterprise-contracten kan een langere exit-window worden
+    afgesproken.
+  </p>
+
+  <h2 id="wijzigingen">10. Wijzigingen</h2>
+  <p>
+    Sindzo kan deze voorwaarden wijzigen. Wezenlijke wijzigingen worden 60 dagen vooraf
+    aangekondigd. Bij niet-akkoord heeft Klant een tussentijds opzeggingsrecht zonder boete.
+  </p>
+
+  <h2 id="recht">11. Toepasselijk recht en geschillen</h2>
+  <p>
+    Op de Overeenkomst is uitsluitend Nederlands recht van toepassing. Geschillen worden
+    voorgelegd aan de bevoegde rechter te Almelo, tenzij partijen mediation overeenkomen.
+  </p>
+</LegalLayout>

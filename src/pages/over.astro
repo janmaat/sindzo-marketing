@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Cta from '../components/Cta.astro';
+---
+<Base
+  title="Over Sindzo — wie wij zijn, waar wij vandaan komen"
+  description="Sindzo is gebouwd in Almelo door Maat Holding B.V. Software voor de Nederlandse zorgmarkt, gemaakt door iemand die snapt waarom regeldruk een verpleegkundige tegenstaat."
+>
+  <PageHero
+    eyebrow="Over Sindzo"
+    title="Gebouwd in Almelo, voor de Nederlandse zorg."
+    subtitle="Sindzo is geen Amerikaans bedrijf met een Nederlandse vertaling. Wij zijn een Twents bedrijf dat zorgsoftware bouwt omdat de bestaande pakketten regeldruk veroorzaken in plaats van weghalen."
+  />
+
+  <section class="container-prose py-16">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <article class="prose-content">
+        <h2 class="font-display text-2xl font-bold text-ink-900">Waarom Sindzo bestaat</h2>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          De Nederlandse zorg loopt vast op administratieve last. Niet omdat zorgverleners onwillig zijn,
+          maar omdat de software die zij gebruiken vaak ontworpen is voor de boekhouder, niet voor de
+          wijkverpleegkundige om 22:00 uur. Wij geloven dat software in de zorg de stille partner moet
+          zijn: er als het nodig is, weg als het niet nodig is.
+        </p>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          Daarom bouwen wij Sindzo: een modulaire monolith die <em>met</em> de zorg meegroeit in plaats
+          van die te dwingen tot ons proces. Met spraak-rapportage zodat onderweg gerapporteerd kan worden.
+          Met SOEP-pre-fill zodat dezelfde feiten niet drie keer worden ingevoerd. Met een Trust Centre
+          dat helder maakt wat wel en niet kan voor er een audit komt.
+        </p>
+      </article>
+
+      <article class="prose-content">
+        <h2 class="font-display text-2xl font-bold text-ink-900">Wie zit erachter</h2>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          Sindzo is een product van <strong>Maat Holding B.V.</strong>, opgericht in Almelo door
+          één Twentse software-ontwikkelaar met twee jaar voorbereiding op compliance, zorgstandaarden
+          en zorg-domein. Klein team, korte lijnen, geen senior management dat het roadmap-debat wint.
+        </p>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          Het andere product van Maat Holding — <a href="https://ponscura.nl" class="text-sindzo-700 hover:underline">Ponscura</a>
+          — is een marktplaats voor zorgpersoneel. Sindzo en Ponscura zijn bewust apart positioneerd:
+          klanten kunnen Sindzo zonder Ponscura gebruiken (en andersom), maar samen vormen ze een
+          coherent geheel voor zorgorganisaties met flex-personeel.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="border-y border-ink-100 bg-ink-100/40 py-16">
+    <div class="container-prose">
+      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Onze principes</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {[
+          { title: 'Trust op tafel', body: 'Compliance, security en interoperabiliteit niet pas in tender-fase delen, maar publiek op /trust. Eerlijke statusstoplichten — groen, geel, grijs.' },
+          { title: 'Procesfit boven feature-fit', body: 'Wij vragen tijdens een demo om uw werkstromen, niet om uw functionele eisen. Een product dat 100% aanvinkt maar niet past, is een mislukking.' },
+          { title: 'Klein team, geen handover', body: 'De persoon waarmee u praat in de aanloop, blijft uw aanspreekpunt na livegang. Geen "implementatie-team neemt het over".' },
+          { title: 'Modulair, niet groot', body: 'U activeert wat u nodig heeft. Geen "u krijgt het hele pakket en zoekt zelf maar uit". Schaal mee zonder migratiepijn.' },
+          { title: 'Aantoonbaar open', body: 'FHIR, MedMij, Wegiz, open API. Data is van u, exit-pad is gedocumenteerd, lock-in is een product-anti-pattern.' },
+          { title: 'Nederlands, in Nederland', body: 'Hosting in NL (Azure West-Europe), support in NL-tijd, juridische verankering naar NL-recht. Geen "EU-Standard Contractual Clauses"-verwarring.' },
+        ].map((p) => (
+          <article class="rounded-xl border border-ink-100 bg-white p-6">
+            <h3 class="font-display text-lg font-semibold text-ink-900">{p.title}</h3>
+            <p class="mt-2 text-sm text-ink-700 leading-relaxed">{p.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-prose py-16">
+    <div class="rounded-2xl border border-ink-100 bg-white p-8">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Bedrijfsgegevens</h2>
+      <dl class="mt-6 grid gap-4 sm:grid-cols-2">
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Handelsnaam</dt>
+          <dd class="mt-1 text-ink-900">Sindzo (handelsnaam van Maat Holding B.V.)</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">KvK-nummer</dt>
+          <dd class="mt-1 text-ink-900">12345678</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">BTW</dt>
+          <dd class="mt-1 text-ink-900">NL000000000B01</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Vestiging</dt>
+          <dd class="mt-1 text-ink-900">Almelo, Nederland</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Algemeen contact</dt>
+          <dd class="mt-1"><a href="mailto:hello@sindzo.nl" class="text-sindzo-700 hover:underline">hello@sindzo.nl</a></dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Trust / FG</dt>
+          <dd class="mt-1"><a href="mailto:fg@sindzo.nl" class="text-sindzo-700 hover:underline">fg@sindzo.nl</a></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <Cta />
+</Base>

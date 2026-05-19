@@ -1,0 +1,138 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const sections = [
+  { id: 'wie', title: 'Wie wij zijn' },
+  { id: 'welke-data', title: 'Welke gegevens verwerken wij' },
+  { id: 'doelen', title: 'Doelen en grondslagen' },
+  { id: 'bewaartermijnen', title: 'Bewaartermijnen' },
+  { id: 'delen', title: 'Met wie wij gegevens delen' },
+  { id: 'sub-verwerkers', title: 'Sub-verwerkers' },
+  { id: 'beveiliging', title: 'Beveiliging' },
+  { id: 'rechten', title: 'Uw rechten (AVG)' },
+  { id: 'cookies', title: 'Cookies' },
+  { id: 'fg', title: 'Functionaris voor Gegevensbescherming' },
+  { id: 'wijzigingen', title: 'Wijzigingen' },
+];
+---
+<LegalLayout
+  title="Privacyverklaring"
+  description="Hoe Sindzo persoonsgegevens verwerkt — AVG-conform, transparant, met BSN-encryptie en NL-hosting."
+  eyebrow="Privacy"
+  lastUpdated="2026-05-19"
+  sections={sections}
+>
+  <h2 id="wie">1. Wie wij zijn</h2>
+  <p>
+    Deze privacyverklaring is van <strong>Maat Holding B.V.</strong>, handelend onder de naam
+    <strong>Sindzo</strong>, gevestigd te Almelo (KvK 12345678). Sindzo is een zorgsoftware-
+    aanbieder voor de Nederlandse zorgmarkt.
+  </p>
+  <p>
+    Voor de marketing-website (sindzo.nl) zijn wij <em>verwerkingsverantwoordelijke</em>. Voor de
+    Sindzo-applicatie (app.sindzo.nl) zijn wij <em>verwerker</em> namens de zorgaanbieder die de
+    applicatie afneemt — die rol- en aansprakelijkheidsverdeling staat in onze
+    <a href="/documenten/dpa-sindzo-2026.pdf">verwerkersovereenkomst</a>.
+  </p>
+
+  <h2 id="welke-data">2. Welke gegevens verwerken wij</h2>
+  <p>Via deze website verwerken wij:</p>
+  <ul>
+    <li><strong>Contactgegevens</strong> die u zelf invult (naam, e-mail, telefoon, organisatie, rol) — bij demo-aanvraag of contactformulier.</li>
+    <li><strong>Technische gegevens</strong>: IP-adres, browser-type, bezochte pagina's, tijdstip. Voor beveiliging en geaggregeerde statistiek.</li>
+    <li><strong>Cookie-data</strong> indien u toestemming geeft (zie <a href="/cookies">cookie-pagina</a>).</li>
+  </ul>
+  <p>
+    De Sindzo-applicatie verwerkt zorggegevens (BSN, dossier-content, etc.) — daarvoor geldt de
+    verwerkersovereenkomst tussen Sindzo en de zorgaanbieder, niet deze verklaring.
+  </p>
+
+  <h2 id="doelen">3. Doelen en grondslagen</h2>
+  <table>
+    <thead>
+      <tr><th>Doel</th><th>Grondslag (art. 6 AVG)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Reactie op demo-aanvraag of vraag</td><td>Gerechtvaardigd belang / uitvoering overeenkomst</td></tr>
+      <tr><td>Beveiliging website (logging, anti-misbruik)</td><td>Gerechtvaardigd belang</td></tr>
+      <tr><td>Anonieme statistiek (paginabezoek, conversie)</td><td>Gerechtvaardigd belang (geen identificeerbare data)</td></tr>
+      <tr><td>Nieuwsbrief of marketing (indien aangemeld)</td><td>Toestemming</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="bewaartermijnen">4. Bewaartermijnen</h2>
+  <ul>
+    <li><strong>Demo-aanvragen / contactformulieren</strong>: 24 maanden, voor opvolging en mogelijke heropening van het gesprek.</li>
+    <li><strong>Sollicitaties</strong>: 4 weken na afwijzing (Sollicitatiecode NVP), tenzij u toestemming geeft voor langere bewaartermijn.</li>
+    <li><strong>Beveiligingslogs</strong>: 12 maanden.</li>
+    <li><strong>Boekhouding</strong> (klantfacturen etc.): 7 jaar (fiscale bewaarplicht).</li>
+  </ul>
+
+  <h2 id="delen">5. Met wie wij gegevens delen</h2>
+  <p>Wij delen uw gegevens niet zonder reden. Wel werken wij met de volgende partijen samen:</p>
+  <ul>
+    <li><strong>Hosting</strong>: Microsoft Azure (West-Europe) en Cloudflare (edge-caching).</li>
+    <li><strong>E-mail</strong>: Microsoft 365.</li>
+    <li><strong>Analytics</strong>: Plausible Analytics (EU-gehost, geen cookies, geen IP-opslag).</li>
+    <li><strong>Betaling</strong>: Mollie (voor abonnement-facturatie).</li>
+  </ul>
+  <p>
+    Wij verkopen of verhuren <strong>nooit</strong> persoonsgegevens. Wij sturen geen marketing
+    aan adressen die u via een contactformulier invult, tenzij u zich apart heeft aangemeld voor
+    een nieuwsbrief.
+  </p>
+
+  <h2 id="sub-verwerkers">6. Sub-verwerkers</h2>
+  <p>
+    Voor de Sindzo-applicatie geldt een actuele <a href="/documenten/subverwerkers-2026.pdf">
+    sub-verwerker-lijst</a> die wijzigingen met 30 dagen aankondiging communiceert aan klanten.
+    Voor de marketing-website zijn de sub-verwerkers de partijen uit punt 5.
+  </p>
+
+  <h2 id="beveiliging">7. Beveiliging</h2>
+  <p>Wij hanteren passende technische en organisatorische maatregelen:</p>
+  <ul>
+    <li>TLS 1.3 voor alle verbindingen.</li>
+    <li>AES-256-GCM voor data at-rest (productie-applicatie).</li>
+    <li>NEN 7510-werkdocument (audit Q4 2026).</li>
+    <li>Jaarlijkse penetratietest (NL-CERT-aangesloten partij).</li>
+    <li>Onveranderbare audit-logging.</li>
+    <li>MFA verplicht voor alle medewerker-accounts.</li>
+  </ul>
+  <p>Volledige overzicht in ons <a href="/trust">Trust Centre</a>.</p>
+
+  <h2 id="rechten">8. Uw rechten (AVG)</h2>
+  <p>U heeft het recht om:</p>
+  <ul>
+    <li>uw gegevens <strong>in te zien</strong>;</li>
+    <li>onjuiste gegevens te laten <strong>corrigeren</strong>;</li>
+    <li>uw gegevens te laten <strong>verwijderen</strong>;</li>
+    <li>de verwerking te <strong>beperken</strong>;</li>
+    <li>uw gegevens in een <strong>overdraagbaar formaat</strong> te ontvangen;</li>
+    <li><strong>bezwaar</strong> te maken tegen verwerking op basis van gerechtvaardigd belang;</li>
+    <li>een eerder gegeven <strong>toestemming in te trekken</strong>.</li>
+  </ul>
+  <p>
+    Verzoeken: mail naar <a href="mailto:privacy@sindzo.nl">privacy@sindzo.nl</a>. Wij reageren
+    binnen 30 dagen. U kunt ook een klacht indienen bij de
+    <a href="https://www.autoriteitpersoonsgegevens.nl">Autoriteit Persoonsgegevens</a>.
+  </p>
+
+  <h2 id="cookies">9. Cookies</h2>
+  <p>
+    Deze website gebruikt minimale, functionele cookies (geen tracking). Details op de
+    <a href="/cookies">cookie-pagina</a>.
+  </p>
+
+  <h2 id="fg">10. Functionaris voor Gegevensbescherming</h2>
+  <p>
+    Sindzo heeft een FG aangesteld. Contact: <a href="mailto:fg@sindzo.nl">fg@sindzo.nl</a>.
+    Officieel aangemeld bij de Autoriteit Persoonsgegevens.
+  </p>
+
+  <h2 id="wijzigingen">11. Wijzigingen</h2>
+  <p>
+    Wij kunnen deze verklaring wijzigen. Wezenlijke wijzigingen kondigen wij minimaal 30 dagen
+    vooraf aan via de Sindzo-applicatie en op deze pagina. De versiedatum staat bovenaan.
+  </p>
+</LegalLayout>

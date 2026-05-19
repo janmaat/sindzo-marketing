@@ -1,0 +1,67 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const sections = [
+  { id: 'wat-zijn-cookies', title: 'Wat zijn cookies?' },
+  { id: 'welke-cookies', title: 'Welke cookies gebruiken wij?' },
+  { id: 'derden', title: 'Cookies van derden' },
+  { id: 'beheren', title: 'Cookies beheren' },
+];
+---
+<LegalLayout
+  title="Cookies"
+  description="Welke cookies Sindzo gebruikt en hoe u ze beheert. Korte versie: alleen functionele cookies, geen tracking."
+  eyebrow="Cookies"
+  lastUpdated="2026-05-19"
+  sections={sections}
+>
+  <p>
+    <strong>Korte versie:</strong> wij gebruiken alleen functionele cookies. Geen advertentie-tracking,
+    geen Google Analytics, geen cross-site-tracking. Onze analytics-tool (Plausible) gebruikt
+    helemaal geen cookies.
+  </p>
+
+  <h2 id="wat-zijn-cookies">1. Wat zijn cookies?</h2>
+  <p>
+    Cookies zijn kleine tekstbestandjes die uw browser opslaat wanneer u een website bezoekt.
+    Sommige cookies zijn noodzakelijk om de website te laten werken; andere worden gebruikt voor
+    statistiek, voorkeuren of advertenties. Sindzo gebruikt alleen de eerste categorie.
+  </p>
+
+  <h2 id="welke-cookies">2. Welke cookies gebruiken wij?</h2>
+  <table>
+    <thead>
+      <tr><th>Naam</th><th>Doel</th><th>Bewaartermijn</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>sindzo_session</td>
+        <td>Houdt uw sessie actief tijdens het invullen van het demo-formulier (CSRF-token).</td>
+        <td>Sessie (sluit browser)</td>
+      </tr>
+      <tr>
+        <td>sindzo_consent</td>
+        <td>Onthoudt of u onze cookie-melding heeft gezien.</td>
+        <td>1 jaar</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="derden">3. Cookies van derden</h2>
+  <p>
+    Wij plaatsen <strong>geen</strong> tracking-cookies van derden. Onze analytics-leverancier
+    Plausible werkt cookieloos. Als u een YouTube-video bekijkt die ingesloten is op een Sindzo-pagina,
+    plaatst YouTube wel cookies — dat gebeurt op dit moment niet, maar als wij hier wijziging in
+    aanbrengen melden wij dat duidelijk.
+  </p>
+
+  <h2 id="beheren">4. Cookies beheren</h2>
+  <p>
+    U kunt in uw browser-instellingen cookies wissen of blokkeren. Houd er rekening mee dat het
+    blokkeren van de session-cookie kan betekenen dat het demo-formulier niet werkt. Onze cookies
+    bevatten geen identificerende informatie.
+  </p>
+  <p>
+    Vragen of klachten? Mail <a href="mailto:privacy@sindzo.nl">privacy@sindzo.nl</a>.
+  </p>
+</LegalLayout>
