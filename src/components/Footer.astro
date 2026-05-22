@@ -8,6 +8,7 @@ const columns = [
       { label: 'Integraties', href: '/integraties' },
       { label: 'Prijzen', href: '/prijzen' },
       { label: 'Implementatie', href: '/implementatie' },
+      { label: 'One-pager (PDF)', href: '/sindzo-one-pager.pdf', external: true },
     ],
   },
   {
@@ -60,7 +61,7 @@ const columns = [
           <ul class="mt-4 space-y-2 text-sm">
             {col.links.map((l) => (
               <li>
-                <a href={l.href} class="text-ink-700 no-underline hover:text-sindzo-700">{l.label}</a>
+                <a href={l.href} {...(l.external ? { target: '_blank', rel: 'noopener' } : {})} class="text-ink-700 no-underline hover:text-sindzo-700">{l.label}</a>
               </li>
             ))}
           </ul>
