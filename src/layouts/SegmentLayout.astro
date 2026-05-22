@@ -19,14 +19,15 @@ interface Props {
   regulatory: string[];     // relevante wetten
   proofPoints?: ProofPoint[];
   caseQuote?: { quote: string; author: string; org: string };
+  image?: string;         // og:image-pad voor deze segmentpagina
 }
 
 const {
   title, eyebrow, hero, subtitle,
-  triggers, modules, regulatory, proofPoints, caseQuote,
+  triggers, modules, regulatory, proofPoints, caseQuote, image,
 } = Astro.props;
 ---
-<Base title={title}>
+<Base title={title} image={image}>
   <PageHero eyebrow={eyebrow} title={hero} subtitle={subtitle}>
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href="/demo" class="btn-primary no-underline">Demo aanvragen</a>

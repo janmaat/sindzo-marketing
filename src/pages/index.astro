@@ -6,8 +6,21 @@ import UspGrid from '../components/UspGrid.astro';
 import SegmentTiles from '../components/SegmentTiles.astro';
 import TrustBadges from '../components/TrustBadges.astro';
 import Cta from '../components/Cta.astro';
+
+const softwareLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Sindzo',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Web',
+  url: Astro.site?.toString() ?? 'https://sindzo.nl',
+  description: 'Eén modulaire zorgsuite voor dossier (ECD), planning, declaratie en kwaliteit — bewust open (FHIR, MedMij, Wegiz) en gebouwd voor de Nederlandse VVT, gehandicaptenzorg en GGZ.',
+  inLanguage: 'nl-NL',
+  provider: { '@type': 'Organization', name: 'Sindzo' },
+};
 ---
 <Base title="Sindzo — Eén zorgsuite voor de Nederlandse zorgpraktijk">
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(softwareLd)} />
   <Hero />
   <LogoStrip />
   <UspGrid />
