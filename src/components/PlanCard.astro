@@ -15,11 +15,11 @@ const {
 
 const wrapper = highlight
   ? 'rounded-2xl border-2 border-sindzo-600 bg-white p-8 shadow-lg shadow-sindzo-100 ring-4 ring-sindzo-50'
-  : 'rounded-2xl border border-ink-100 bg-white p-8';
+  : 'rounded-2xl border border-ink-300 bg-white p-8';
 ---
 <article class={`flex flex-col ${wrapper}`}>
   {highlight && (
-    <span class="badge mb-2 self-start border-sindzo-300 bg-sindzo-50 text-sindzo-700">
+    <span class="badge mb-2 self-start border-sindzo-300 bg-greensoft text-sindzo-700">
       Meestgekozen
     </span>
   )}
@@ -48,10 +48,10 @@ const wrapper = highlight
   </ul>
   <a
     href={cta.href}
-    class={`mt-8 inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-semibold no-underline transition ${
+    class={`mt-8 inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-bold no-underline transition ${
       highlight
-        ? 'bg-sindzo-700 text-white hover:bg-sindzo-800'
-        : 'border border-ink-300 bg-white text-ink-900 hover:bg-ink-100'
+        ? 'bg-accent-500 text-[#06231f] hover:bg-accent-600'
+        : 'border border-ink-300 bg-white font-semibold text-sindzo-900 hover:bg-sand'
     }`}
   >
     {cta.label}

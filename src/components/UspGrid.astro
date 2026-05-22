@@ -36,8 +36,8 @@ const usps = [
   </div>
   <div class="mt-12 grid gap-8 md:grid-cols-3">
     {usps.map((u) => (
-      <article class="rounded-xl border border-ink-100 bg-white p-7 transition hover:border-sindzo-200 hover:shadow-sm">
-        <div class="text-2xl text-sindzo-700">{u.icon}</div>
+      <article class="rounded-xl border border-ink-300 bg-white p-7 transition hover:border-sindzo-300 hover:shadow-sm">
+        <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-greensoft text-2xl text-sindzo-700">{u.icon}</div>
         <h3 class="mt-4 font-display text-xl font-semibold text-ink-900">{u.title}</h3>
         <p class="mt-2 text-ink-700 leading-relaxed">{u.body}</p>
         <a href={u.link.href} class="mt-5 inline-block text-sm font-medium text-sindzo-700 no-underline hover:underline">

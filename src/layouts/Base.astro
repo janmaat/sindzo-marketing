@@ -32,8 +32,7 @@ const url = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
     <meta property="og:url" content={url} />
     <meta property="og:locale" content="nl_NL" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://rsms.me/" />
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    {/* Fonts (Fraunces + Mulish) worden self-hosted geladen via src/styles/fonts.css. */}
     {/*
       Plausible Analytics — cookie-loos, EU-gehost (geen GA, geen tracker-popups).
       Alleen in productie laden zodat dev-traffic geen statistiek vervuilt.

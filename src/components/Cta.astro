@@ -9,17 +9,17 @@ const {
 } = Astro.props;
 ---
 <section class="container-prose py-20">
-  <div class="overflow-hidden rounded-2xl bg-sindzo-900 px-8 py-14 sm:px-14">
+  <div class="overflow-hidden rounded-2xl bg-gradient-to-br from-sindzo-900 to-sindzo-950 px-8 py-14 sm:px-14">
     <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
       <div>
         <h2 class="font-display text-3xl font-bold tracking-tightish text-white sm:text-4xl">{title}</h2>
         <p class="mt-4 max-w-2xl text-sindzo-100 leading-relaxed">{subtitle}</p>
       </div>
       <div class="flex flex-wrap gap-3">
-        <a href="/demo" class="inline-flex items-center justify-center rounded-md bg-white px-6 py-3 text-sm font-semibold text-sindzo-900 no-underline transition hover:bg-sindzo-50">
+        <a href="/demo" class="inline-flex items-center justify-center rounded-full bg-accent-500 px-6 py-3 text-sm font-bold text-[#06231f] no-underline transition hover:bg-accent-600">
           Demo aanvragen
         </a>
-        <a href="/contact" class="inline-flex items-center justify-center rounded-md border border-sindzo-300/40 px-6 py-3 text-sm font-semibold text-white no-underline transition hover:bg-sindzo-800">
+        <a href="/contact" class="inline-flex items-center justify-center rounded-full border border-sindzo-300/40 px-6 py-3 text-sm font-semibold text-white no-underline transition hover:bg-sindzo-800">
           Stel een vraag
         </a>
       </div>
