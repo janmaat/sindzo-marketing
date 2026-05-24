@@ -1,0 +1,8 @@
+# Cloudflare Pages redirects. Astro's static output handelt extensionless
+# URLs (/trust → /trust/index.html) en trailing-slash al af; deze file is
+# voor optionele extra redirects bij toekomstige URL-wijzigingen.
+
+# Voorbeeld bij latere URL-wijziging:
+# /oude-pad   /nieuwe-pad   301
+
+# 404-pagina wordt automatisch via dist/404.html geserveerd zodra die bestaat.

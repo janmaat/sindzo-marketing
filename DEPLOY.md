@@ -1,104 +1,96 @@
 # Deployment — Sindzo marketingsite
 
-De marketingsite is een **puur statische Astro-build**. Geen Node-runtime nodig
-op de server; alleen `dist/` hoeft beschikbaar te zijn voor de webserver.
+De marketingsite is een **puur statische Astro-build**. Productie draait op
+**Cloudflare Pages** — auto-build bij elke push naar `main`, gratis CDN, auto-HTTPS,
+geen onderhoud op een server.
 
-Doel-omgeving: **Plesk + nginx op Linux** (aanbevolen). Alternatief: IIS op
-Windows — zie sectie onderaan.
+`app.sindzo.nl` (de Sindzo-applicatie) blijft op de eigen infrastructuur draaien —
+dit document gaat alleen over de marketingsite (`sindzo.nl`).
 
 ---
 
-## Snelpad: Plesk + Git-deploy
+## Snelpad: Cloudflare Pages (productie)
 
-### 1. Pre-requisites in Plesk
+### Eenmalige setup
 
-- **NodeJS-extensie** geïnstalleerd (Plesk → Extensies → "Node.js")
-- **Node 20+** beschikbaar via die extensie
-- Domein/subscription aangemaakt voor `sindzo.nl`
+1. **Cloudflare-account** aanmaken op <https://dash.cloudflare.com/sign-up>
+   (gratis, e-mail volstaat).
+2. **Workers & Pages → Create application → Pages → Connect to Git**.
+3. **GitHub authoriseren** voor je Cloudflare-account; selecteer
+   `janmaat/sindzo-marketing`.
+4. **Build-settings** invullen:
 
-### 2. Git-repository koppelen
+   | Veld | Waarde |
+   | --- | --- |
+   | Production branch | `main` |
+   | Framework preset | Astro |
+   | Build command | `npm run build` |
+   | Build output directory | `dist` |
+   | Root directory | _(leeg)_ |
+   | Node version | `20` (gelezen uit `.node-version` in repo) |
 
-In Plesk: **Websites & Domeinen → sindzo.nl → Git → Repository toevoegen**.
+5. **Save and Deploy**. Binnen ~2 minuten staat de site op
+   `sindzo-marketing.pages.dev`.
 
-| Veld | Waarde |
-|---|---|
-| Repository-URL | `git@github.com:<org>/sindzo-marketing.git` (of HTTPS-URL) |
-| Te volgen branch | `main` |
-| Deployment-pad | `/httpdocs/sindzo-marketing` (bijv.) |
-| Deployment-modus | Automatisch (webhook op push) |
-| Acties uitvoeren na deployment | `bash deploy/post-deploy.sh` |
+### Custom domain `sindzo.nl` koppelen
 
-Plesk genereert na koppelen een SSH-public-key en een webhook-URL —
-beide toevoegen in GitHub (deploy key + webhook).
+1. In Cloudflare Pages-project → **Custom domains → Set up a custom domain** →
+   `sindzo.nl` (en optioneel `www.sindzo.nl` met redirect).
+2. Cloudflare toont **twee nameservers** (bv. `alice.ns.cloudflare.com`,
+   `bob.ns.cloudflare.com`).
+3. Bij je registrar (Strato of waar `sindzo.nl` is geregistreerd): vervang
+   de nameservers door de twee Cloudflare-nameservers.
+4. DNS-propagatie: meestal binnen 5–30 minuten, soms tot 24 uur. Cloudflare
+   regelt automatisch een HTTPS-certificaat zodra propagatie compleet is.
+5. `app.sindzo.nl` blijft als A-record naar het server-IP wijzen (apart record
+   in Cloudflare DNS).
 
-### 3. Document-root verleggen naar dist/
+### Wat er automatisch gebeurt
 
-In Plesk: **Hosting-instellingen → Document-root** →
-`/httpdocs/sindzo-marketing/dist`
+- **Bij elke `git push origin main`**: Cloudflare detecteert via webhook,
+  bouwt `npm ci && npm run build`, deployt `dist/` naar het CDN. Doorlooptijd
+  meestal 1–2 minuten.
+- **Pull request previews**: elke PR krijgt eigen preview-URL voor review.
+- **Rollback**: één klik naar elke eerdere deploy in de Cloudflare-dashboard.
 
-(`dist/` ontstaat zodra `post-deploy.sh` voor het eerst gedraaid heeft.)
+### Cache + headers via repo
 
-### 4. nginx-snippet plakken
-
-In Plesk: **Apache & nginx-instellingen → Aanvullende nginx-instructies**.
-Kopieer de inhoud van [`deploy/nginx-plesk.conf`](deploy/nginx-plesk.conf).
-
-Dit regelt:
-- Extensionless URLs (`/trust` → `/trust/index.html`)
-- Canonical-redirect van trailing slash
-- Far-future caching voor `_astro/*` en fonts
-- No-cache voor HTML
-- gzip + brotli compressie
-- Security headers (HSTS, X-Frame-Options, etc.)
-
-### 5. HTTPS via Let's Encrypt
-
-In Plesk: **SSL/TLS-certificaten → "Let's Encrypt installeren"**.
-Aanvinken: hoofddomein + `www`. Auto-renewal staat default aan.
-
-### 6. Eerste deploy triggeren
-
-Druk in Plesk → Git op **"Deploy now"**. Watch de logs onder
-"Display deployment log" — je ziet `npm ci → astro build → dist/ OK`.
-
-### 7. Smoke-test
-
-Verwacht status 200 voor alle:
-
-```bash
-for path in / /trust /prijzen /integraties /oplossing /voor/vvt /api; do
-    code=$(curl -s -o /dev/null -w "%{http_code}" "https://sindzo.nl$path")
-    echo "$code $path"
-done
-```
-
-Daarna één deploy triggeren door een commit te pushen — Plesk neemt 'm
-op binnen ~30s.
+- [`public/_headers`](public/_headers) — security-headers (HSTS, X-Frame-Options,
+  Referrer-Policy) en cache-control per pad (`_astro/*` immutable, HTML
+  no-cache).
+- [`public/_redirects`](public/_redirects) — gereserveerd voor toekomstige
+  URL-redirects. Astro's static output handelt extensionless URLs en
+  trailing-slash al af.
+- [`.node-version`](.node-version) — pint Node 20 in Cloudflare-build.
 
 ---
 
 ## Onderhoud
 
 | Taak | Wat |
-|---|---|
-| Code-update | `git push origin main` → Plesk pakt het op |
-| Node-versie verhogen | Plesk → NodeJS-extensie → Node-versie kiezen |
-| Cache flushen na deploy | Niet nodig — HTML staat op no-cache, assets zijn fingerprinted |
-| Cert-rotatie | Automatisch via Let's Encrypt |
-| Logs bekijken | Plesk → Statistieken → Webserver-logs |
+| --- | --- |
+| Content-update | Wijziging + `git push origin main` → live binnen ~2 min |
+| Build-failure | Cloudflare-dashboard → Deployments → bekijk build-log |
+| Rollback | Eén klik op een eerdere deploy in dashboard |
+| Cache flushen na deploy | Niet nodig — HTML is no-cache, assets fingerprinted |
+| Cert-rotatie | Automatisch (Cloudflare beheert) |
+| Node-versie verhogen | Wijzig `.node-version` en push |
 
 ---
 
-## Alternatief: IIS op Windows
+## Alternatief: Plesk + Apache (fallback, niet aanbevolen)
 
-Voor IIS is dezelfde `dist/`-output bruikbaar, maar de URL Rewrite Module
-+ web.config-tuning is meer werk dan de Plesk-flow hierboven. Als het toch
-de keuze wordt, schrijf ik een `public/web.config` met:
+Tijdens een eerste opzet is geprobeerd om de site via Plesk Git-deploy op
+Strato te hosten. Dat werkte structureel niet (lege deploy-shell PATH,
+clone-state-corruptie, hangende npm-installs op shared compute). De daarvoor
+gemaakte artefacten zijn behouden als fallback voor toekomstige IIS-/Plesk-
+scenarios:
 
-- URL Rewrite voor extensionless URLs
-- MIME-mappings (`.webmanifest`, `.woff2`)
-- Cache-control per pad (immutable voor `_astro/`, no-cache voor HTML)
-- Static + dynamic compression
-- HSTS + standaard security headers
+- [`public/.htaccess`](public/.htaccess) — Apache-fallback met HTTPS-redirect,
+  extensionless URLs, cache, compressie, security headers.
+- [`deploy/nginx-plesk.conf`](deploy/nginx-plesk.conf) — nginx-snippet voor
+  Plesk's "Aanvullende nginx-instructies".
+- [`deploy/post-deploy.sh`](deploy/post-deploy.sh) — Git-deploy-script
+  (bulletproof PATH, geen externe coreutils).
 
-Vraag dan om die `web.config` los te leveren.
+Voor productie gebruiken we Cloudflare Pages.
