@@ -82,9 +82,16 @@ const orgLd = {
     )}
   </head>
   <body class="min-h-screen flex flex-col">
+    {/* Skip-link voor keyboard-users — verbergt visueel, verschijnt op focus. */}
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-sindzo-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:no-underline focus:outline focus:outline-2 focus:outline-accent-500"
+    >
+      Direct naar inhoud
+    </a>
     <EarlyAccessBanner />
     <Nav />
-    <main class="flex-1">
+    <main id="main-content" class="flex-1">
       <slot />
     </main>
     <Footer />
