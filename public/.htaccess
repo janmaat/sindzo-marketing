@@ -36,13 +36,12 @@
 
 # ----- Cache-headers -----
 <IfModule mod_headers.c>
-  # Astro fingerprint-assets in /_astro/ — far-future cache + immutable
-  <FilesMatch "^.*\.(woff2|woff|ttf|otf)$">
+  # Astro fingerprint-assets (in /_astro/) + fonts — far-future cache + immutable.
+  # NB: <Location> is server-config-only; in .htaccess-context geeft het 500.
+  # <FilesMatch> werkt wél in .htaccess en dekt alle JS/CSS/font-extensies.
+  <FilesMatch "\.(js|css|woff2|woff|ttf|otf)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
-  <Location "/_astro/">
-    Header set Cache-Control "public, max-age=31536000, immutable"
-  </Location>
 
   # HTML mag nooit langer dan een paar minuten cachen — anders zien
   # bezoekers oude versies na een deploy.
