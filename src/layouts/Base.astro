@@ -30,6 +30,25 @@ const orgLd = {
   description: 'Eén zorgsuite voor de Nederlandse zorgpraktijk — dossier, planning, declaratie en kwaliteit in één modulair platform.',
   parentOrganization: { '@type': 'Organization', name: 'Maat Holding B.V.' },
   areaServed: 'NL',
+  email: 'hello@sindzo.nl',
+  telephone: '+31611746283',
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      telephone: '+31611746283',
+      email: 'hello@sindzo.nl',
+      areaServed: 'NL',
+      availableLanguage: ['Dutch', 'English'],
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'security',
+      email: 'trust@sindzo.nl',
+      areaServed: 'NL',
+      availableLanguage: ['Dutch', 'English'],
+    },
+  ],
 };
 ---
 <!doctype html>
