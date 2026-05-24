@@ -1,5 +1,6 @@
 ---
 import Nav from '../components/Nav.astro';
+import EarlyAccessBanner from '../components/EarlyAccessBanner.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
@@ -63,6 +64,7 @@ const orgLd = {
     )}
   </head>
   <body class="min-h-screen flex flex-col">
+    <EarlyAccessBanner />
     <Nav />
     <main class="flex-1">
       <slot />

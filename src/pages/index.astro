@@ -1,10 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import ChallengeCallout from '../components/ChallengeCallout.astro';
 import LogoStrip from '../components/LogoStrip.astro';
 import UspGrid from '../components/UspGrid.astro';
 import SegmentTiles from '../components/SegmentTiles.astro';
 import TrustBadges from '../components/TrustBadges.astro';
+import DeadlineUrgency from '../components/DeadlineUrgency.astro';
 import Cta from '../components/Cta.astro';
 
 const softwareLd = {
@@ -22,9 +24,11 @@ const softwareLd = {
 <Base title="Sindzo — Eén zorgsuite voor de Nederlandse zorgpraktijk">
   <script type="application/ld+json" is:inline set:html={JSON.stringify(softwareLd)} />
   <Hero />
+  <ChallengeCallout />
   <LogoStrip />
   <UspGrid />
   <SegmentTiles />
   <TrustBadges />
+  <DeadlineUrgency />
   <Cta />
 </Base>

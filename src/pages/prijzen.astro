@@ -53,8 +53,8 @@ import Cta from '../components/Cta.astro';
         cta={{ label: 'Start kennismaking', href: '/demo' }}
       />
       <PlanCard
-        name="Marketplace Plus"
-        tagline="Voor organisaties met flexibele schil"
+        name="Totaalzorg Plus"
+        tagline="Voor organisaties met flexibele personeelsschil"
         priceFrom="€42"
         features={[
           'Alles uit Compliance Pro',
@@ -70,7 +70,7 @@ import Cta from '../components/Cta.astro';
         name="Enterprise"
         tagline="Voor concerns, ketens en grote tenants"
         features={[
-          'Alles uit Marketplace Plus',
+          'Alles uit Totaalzorg Plus',
           'Multi-tenant met concern-rapportage',
           'Dedicated success-manager',
           'SLA met financiële boete-clausule',
@@ -85,7 +85,68 @@ import Cta from '../components/Cta.astro';
 
     <p class="mt-8 text-center text-sm text-ink-500">
       Alle prijzen ex. BTW, per actieve medewerker per maand, vanaf jaar-contract.
+      Vanaf 500 medewerkers stappen we over op een staffel-tarief.
       Indicatief — werkelijke prijs hangt af van segment, schaal en gekozen modules.
+    </p>
+  </section>
+
+  <section class="container-prose py-16 border-t border-ink-100">
+    <div class="max-w-3xl">
+      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Vergelijk met per-cliënt-modellen</h2>
+      <p class="mt-3 text-ink-700">
+        De meeste VVT-marktleiders rekenen <em>per actief cliëntdossier</em>, niet per medewerker. Dat lijkt goedkoop op papier,
+        maar bij een gemiddelde caseload loopt het snel op. Hieronder een vereenvoudigde rekenoefening per medewerker per maand
+        bij ca. 8 cliënten per medewerker — uw werkelijke ratio bepalen we samen.
+      </p>
+    </div>
+    <div class="mt-8 overflow-x-auto rounded-xl border border-ink-100 bg-white">
+      <table class="w-full text-sm">
+        <thead class="bg-ink-100/50 text-left text-xs uppercase tracking-wider text-ink-500">
+          <tr>
+            <th class="px-4 py-3 font-semibold">Model</th>
+            <th class="px-4 py-3 font-semibold">Publieke prijs</th>
+            <th class="px-4 py-3 font-semibold">Per medewerker / maand (8 cliënten)</th>
+            <th class="px-4 py-3 font-semibold">Bron</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-ink-100 text-ink-700">
+          <tr class="bg-greensoft/40">
+            <td class="px-4 py-3 font-semibold text-sindzo-900">Sindzo Compliance Pro</td>
+            <td class="px-4 py-3">€34 / medewerker</td>
+            <td class="px-4 py-3 font-semibold text-sindzo-900">€34</td>
+            <td class="px-4 py-3 text-xs text-ink-500">Deze pagina</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3">Nedap Ons (via partner)</td>
+            <td class="px-4 py-3">€23 / cliëntdossier</td>
+            <td class="px-4 py-3">~€184</td>
+            <td class="px-4 py-3 text-xs text-ink-500">zzpondersteuning.nl</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3">Octaaf Thuiszorgsoftware</td>
+            <td class="px-4 py-3">€27,83 basis + €2,79 / cliënt</td>
+            <td class="px-4 py-3">~€50 (gedeeld), ~€22 (per medewerker bij 10 mw)</td>
+            <td class="px-4 py-3 text-xs text-ink-500">octaafthuiszorgsoftware.nl</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3">Karify (GGZ + eHealth)</td>
+            <td class="px-4 py-3">€29,95 / professional</td>
+            <td class="px-4 py-3">~€30</td>
+            <td class="px-4 py-3 text-xs text-ink-500">karify.nl</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3">Curasoft (GGZ)</td>
+            <td class="px-4 py-3">€26 / seat + 1% omzet, of €106 flat</td>
+            <td class="px-4 py-3">~€26 + omzetdeel, of €106</td>
+            <td class="px-4 py-3 text-xs text-ink-500">curasoft.nl</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-xs text-ink-500">
+      Cijfers afgeleid uit publieke prijslijsten (mei 2026). De vergelijking is illustratief — daadwerkelijke
+      verschillen hangen af van caseload-ratio, modulekeuze en implementatiekosten. We maken graag een offerte
+      met uw eigen aantallen.
     </p>
   </section>
 
@@ -126,6 +187,10 @@ import Cta from '../components/Cta.astro';
       <div>
         <dt class="font-semibold text-ink-900">Is migratie van mijn huidige ECD inbegrepen?</dt>
         <dd class="mt-1 text-sm text-ink-700">Standaard-imports (Nedap Ons, SDB, Gerimedica Ysis, Adapcare) zijn inbegrepen vanaf Compliance Pro. Maatwerk-imports zijn een eenmalig project — wij geven een vaste prijs vooraf.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-ink-900">Hoelang duurt een implementatie?</dt>
+        <dd class="mt-1 text-sm text-ink-700">Bij een gemiddelde VVT-organisatie (50–200 medewerkers) rekenen we op 4–8 weken voor de kern­modules (ECD, declaratie, planning). Onboarding­traject, migratie en training zijn inbegrepen in alle plannen. Grotere of complexere trajecten worden als vast project geprijsd, zodat u geen open­einde hebt.</dd>
       </div>
       <div>
         <dt class="font-semibold text-ink-900">Kan ik tussentijds switchen tussen plannen?</dt>

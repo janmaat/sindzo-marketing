@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
 
 // Trust Centre — kerncompetentie t.o.v. concurrenten die deze info pas in
 // tender-fase delen. Eerlijke status, niet marketing-spraak. Iedere claim
@@ -16,11 +17,11 @@ const pillars = [
     title: 'Informatiebeveiliging',
     intro: 'NEN 7510-werkdocument is leidend. Pen-tests jaarlijks via NL-CERT-aangesloten partij.',
     items: [
-      { label: 'NEN 7510:2024', status: 'wip', note: 'Werkdocument compleet, externe audit Q4 2026', doc: '#nen7510' },
+      { label: 'NEN 7510:2024', status: 'wip', note: 'Control-suite geïmplementeerd met baseline-assessments, externe audit Q4 2026', doc: '#nen7510' },
       { label: 'NEN 7512 (uitwisseling)', status: 'wip', note: 'Toegepast op FHIR-/LSP-koppelingen', doc: '#nen7512' },
       { label: 'NEN 7513 (logging)', status: 'live', note: 'Onveranderbare auditlog, 7 jaar bewaartermijn', doc: '#nen7513' },
       { label: 'ISO 27001', status: 'roadmap', note: 'Audit gepland 2027', doc: '#iso27001' },
-      { label: 'Pentest jaarlijks', status: 'live', note: 'Rapport beschikbaar onder NDA', doc: '#pentest' },
+      { label: 'Pentest jaarlijks', status: 'live', note: 'Grey-box, NL-CERT-aangesloten partij — managementsamenvatting publiek, volledig rapport onder NDA', doc: '#pentest' },
       { label: 'Encryptie at-rest', status: 'live', note: 'AES-256-GCM per tenant-sleutel', doc: '#encryption' },
     ],
   },
@@ -29,11 +30,11 @@ const pillars = [
     title: 'Privacy & gegevensbescherming',
     intro: 'AVG-conform met expliciete verwerkers-rolverdeling. PII (BSN, AGB) altijd encrypted.',
     items: [
-      { label: 'AVG / GDPR', status: 'live', note: 'Standaard-DPA beschikbaar in 4 talen', doc: '#dpa' },
+      { label: 'AVG / GDPR', status: 'live', note: 'Standaard-DPA volgens AP-model, NL/EN beschikbaar', doc: '#dpa' },
       { label: 'Verwerkersovereenkomst', status: 'live', note: 'PDF + Word, geen NDA nodig', doc: '/documenten/dpa-sindzo-2026.pdf' },
       { label: 'Subverwerkers-overzicht', status: 'live', note: 'Volledig overzicht beschikbaar, alle in EER', doc: '#subverwerkers' },
       { label: 'DPIA-template', status: 'live', note: 'Voor zorgaanbieder eigen DPIA', doc: '/documenten/dpia-template.pdf' },
-      { label: 'BSN-encryptie', status: 'live', note: 'AES-256-GCM, key rotation per kwartaal', doc: '#bsn' },
+      { label: 'BSN-encryptie', status: 'live', note: 'AES-256-GCM met HKDF envelope per tenant, kwartaal-rotatie van masters (operationeel proces)', doc: '#bsn' },
       { label: 'Recht op vergetelheid', status: 'live', note: 'Pseudonimisering + audit-trail', doc: '#vergetelheid' },
     ],
   },
@@ -42,11 +43,11 @@ const pillars = [
     title: 'Interoperabiliteit & openheid',
     intro: 'Open API\'s, FHIR-endpoints en publieke koppeldocumentatie. Geen vendor lock-in.',
     items: [
-      { label: 'FHIR R4', status: 'live', note: 'Patient, Encounter, Observation, MedicationRequest', doc: 'https://api.sindzo.nl/docs' },
+      { label: 'FHIR R4', status: 'live', note: 'Patient, Encounter, Observation, MedicationStatement, Condition, AllergyIntolerance, RelatedPerson — Zib-conform', doc: '/api' },
       { label: 'MedMij', status: 'wip', note: 'Aansluiting in afrondingsfase Q3 2026', doc: '#medmij' },
       { label: 'Wegiz / eOverdracht', status: 'wip', note: 'eOverdracht-bundle BgZ-conform', doc: '#wegiz' },
-      { label: 'LSP', status: 'live', note: 'Via VZVZ-gateway, opt-in per cliënt', doc: '#lsp' },
-      { label: 'Open API', status: 'live', note: 'OpenAPI 3.1, gratis sandbox', doc: 'https://api.sindzo.nl' },
+      { label: 'LSP', status: 'wip', note: 'VZVZ-aansluittraject + UZI-certificaten — gateway ingericht, ketentest in afronding', doc: '#lsp' },
+      { label: 'Open API', status: 'wip', note: 'OpenAPI 3.1-spec compleet, publieke sandbox in afronding Q3 2026 — toegang nu op aanvraag', doc: '/api' },
       { label: 'Data-export', status: 'live', note: 'Volledige export in JSON/CSV op verzoek', doc: '#export' },
     ],
   },
@@ -68,12 +69,12 @@ const pillars = [
     title: 'Wettelijke kaders & sectorregels',
     intro: 'Wkkgz, Wzd, Wtza, Wtta en de Cyberbeveiligingswet — actief gevolgd, niet afgewacht.',
     items: [
-      { label: 'Cbw (NIS2)', status: 'wip', note: 'Voorbereidingen voor 1 juli 2026', doc: '#cbw' },
+      { label: 'Cbw (NIS2)', status: 'wip', note: 'Via zustermerk Nis2Care — pure-play NIS2-oplossing voor de zorg, klaar voor 1 juli 2026', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '#cbw' },
       { label: 'Wkkgz-klachtenregeling', status: 'live', note: 'Module + workflow standaard', doc: '#wkkgz' },
       { label: 'Wzd-stappenplan', status: 'live', note: 'Halfjaarlijkse IGJ-XML', doc: '#wzd' },
       { label: 'Wtza-jaarverantwoording', status: 'live', note: 'Wizard voor deadline 31 mei', doc: '#wtza' },
-      { label: 'Wtta-uitlenersregister', status: 'wip', note: 'Klaar voor 1-1-2027', doc: '#wtta' },
-      { label: 'AI Act high-risk', status: 'roadmap', note: 'Classificatie + register tegen 2 dec 2027', doc: '#ai-act' },
+      { label: 'Wtta-uitlenersregister', status: 'wip', note: 'Module beschikbaar 1 sep 2026 — 4 maanden vóór wettelijke deadline', doc: '#wtta' },
+      { label: 'AI Act high-risk', status: 'wip', note: 'Classificatie + register beschikbaar 1 sep 2026 — ruim vóór 2 dec 2027', doc: '#ai-act' },
     ],
   },
 ];
@@ -130,9 +131,15 @@ const statusLabel = (s: string) =>
                     <span class="text-[10px] uppercase tracking-wider text-ink-500">{statusLabel(item.status)}</span>
                   </div>
                   <p class="mt-1 text-xs text-ink-500 leading-snug">{item.note}</p>
-                  <a href={item.doc} class="mt-2 inline-block text-xs font-medium text-sindzo-700 no-underline hover:underline">
-                    Onderbouwing →
-                  </a>
+                  {item.doc?.startsWith('http') ? (
+                    <a href={item.doc} target="_blank" rel="noopener" class="mt-2 inline-block text-xs font-medium text-sindzo-700 no-underline hover:underline">
+                      Onderbouwing ↗
+                    </a>
+                  ) : (
+                    <a href={item.doc} class="mt-2 inline-block text-xs font-medium text-sindzo-700 no-underline hover:underline">
+                      Onderbouwing →
+                    </a>
+                  )}
                 </div>
               </div>
             </li>
@@ -141,6 +148,25 @@ const statusLabel = (s: string) =>
       </div>
     </section>
   ))}
+
+  <section class="container-prose py-16 border-b border-ink-100">
+    <div class="rounded-2xl border border-amber-200 bg-amber-50/60 p-8 sm:p-12">
+      <div class="max-w-3xl">
+        <h2 class="font-display text-2xl font-bold text-ink-900">De vraag die inkopers stellen: "Wat als de bouwer wegvalt?"</h2>
+        <p class="mt-3 text-ink-700">
+          Sindzo is gebouwd door Maat Holding B.V. (één hoofd­architect + selecte partners). We benoemen dit actief omdat u er toch naar gaat vragen:
+        </p>
+        <ul class="mt-5 space-y-3 text-sm text-ink-700">
+          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Broncode-escrow</strong> — overeenkomst met SRK-escrow­agent in voorbereiding (Q3 2026). Activerings­drempel: drie aaneengesloten maanden geen oplevering.</span></li>
+          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Technische documentatie</strong> — volledig, actueel, in de repo. Een gekwalificeerde .NET-ontwikkelaar kan het systeem zelfstandig overnemen en uitbreiden.</span></li>
+          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Ontwikkelaarspartnerschap</strong> — afspraken met twee NL-gebaseerde .NET-zorgpartners in voorbereiding. Continuïteits­plan inclusief SLA beschikbaar na ondertekening MSA.</span></li>
+          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Data-portabiliteit</strong> — volledige export in JSON/CSV/FHIR R4 op elk moment, contractueel vastgelegd. U bent nooit afhankelijk van onze inzet om uw eigen data te krijgen.</span></li>
+          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Directe lijn als kracht</strong> — kleinere leverancier betekent ook: geen supportdesk-bureaucratie, geen tickets die kwartalen reizen. U spreekt rechtstreeks met de bouwers; fixes in dagen, niet in releases per jaar.</span></li>
+        </ul>
+        <p class="mt-5 text-sm text-ink-500">Founding partners ontvangen aanvullende garanties en zijn mede-eigenaar van de roadmap. Vraag de aanvullende continuïteitsverklaring op via <a href="mailto:trust@sindzo.nl" class="text-sindzo-700 hover:underline no-underline">trust@sindzo.nl</a>.</p>
+      </div>
+    </div>
+  </section>
 
   <section class="container-prose py-16">
     <div class="rounded-2xl border border-ink-200 bg-ink-100/50 p-8 sm:p-12">

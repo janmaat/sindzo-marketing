@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Cta from '../components/Cta.astro';
+
+// Publieke Architectural Decision Records. Bedoeld voor CIO's, IT-architecten
+// en procurement die willen begrijpen WAAROM Sindzo bouwt zoals het bouwt.
+// Geen marketing-spraak — wel "context / besluit / consequenties"-structuur
+// die in de industrie standaard is voor ADR's.
+
+const adrs = [
+  {
+    id: 'ADR-001',
+    title: 'Modulaire monolith over microservices',
+    date: '2025-09',
+    status: 'Aanvaard',
+    context: 'Voor een initieel-kleine zorgsoftware met krappe ontwikkelcapaciteit zijn microservices operationeel te duur. Tegelijkertijd moeten modules onafhankelijk geactiveerd kunnen worden per klant.',
+    decision: 'We bouwen een modulaire monolith op .NET 10 met strikt afgebakende modules (Application/Domain/Infrastructure per module), die in één deployable wordt uitgeleverd. Modules zijn intern feature-flagged per tenant.',
+    consequences: 'Eenvoudiger deployment en lagere infrastructuurkosten. Latere splitsing naar separate services is mogelijk maar niet gepland. Risico: discipline op module-grenzen vereist code-reviews en architectuurtests.',
+  },
+  {
+    id: 'ADR-002',
+    title: 'FHIR R4 als canonieke uitwisselings-format',
+    date: '2025-10',
+    status: 'Aanvaard',
+    context: 'Nederlandse zorgketen beweegt naar verplichte interoperabiliteit (Wegiz, MedMij). HL7v2 is legacy; eigen formaten betekenen lock-in en aansluiting met de keten frustreren.',
+    decision: 'FHIR R4 (niet R5) is de canonieke representatie voor cliënt, dossier, observaties en medicatie aan de API-grens. Intern blijft de relationele structuur eigen — FHIR is een grens-format, geen opslag-format.',
+    consequences: 'Publieke API en sandbox documenteren FHIR R4. Bij overgang naar R5 staat compatibiliteits-onderhoud vooraan. Nederlandse profielen (Nictiz zib-mapping) worden incrementeel toegevoegd.',
+  },
+  {
+    id: 'ADR-003',
+    title: 'NL-hosting (Azure West-Europe) — geen exceptie',
+    date: '2025-11',
+    status: 'Aanvaard',
+    context: 'Zorgaanbieders eisen aantoonbaar dat zorggegevens niet buiten de EER worden verwerkt. Cloudflare-edge-caching voor de marketing-site is acceptabel; voor de zorg-applicatie niet.',
+    decision: 'De zorg-applicatie (app.sindzo.nl) draait uitsluitend in Azure West-Europe met backup binnen NL. Geen secondary regions in andere geografieën. Sub-verwerker-lijst wordt 30 dagen vóór wijziging gecommuniceerd.',
+    consequences: 'Hogere latency voor non-EU-bezoekers (irrelevant voor NL-zorg). Failover-strategie is regionale-availability-zones, niet cross-region. Disaster-recovery is geografisch beperkt — bewust binnen NL-grenzen.',
+  },
+  {
+    id: 'ADR-004',
+    title: 'BSN-encryptie per tenant met AES-256-GCM',
+    date: '2025-12',
+    status: 'Aanvaard',
+    context: 'BSN is bijzonder persoonsgegeven onder AVG art. 9 én gespecificeerd onder Wabvpz. Versleuteling op kolom-niveau biedt verdediging-in-diepte boven volledige database-encryptie.',
+    decision: 'BSN wordt encrypted opgeslagen via AES-256-GCM, met sleutel per tenant beheerd in Azure Key Vault. Sleutel-rotatie elk kwartaal. Search via deterministisch hash-veld (separate kolom) om gelijkheids-queries mogelijk te houden zonder decryptie.',
+    consequences: 'Index-scans op BSN vereisen het hash-veld, niet de encrypted kolom. Bulk-data-export decrypteert lazy. Performance-impact gemeten <5ms per lookup. Bij sleutelverlies is herstel via Key Vault recovery-policies.',
+  },
+  {
+    id: 'ADR-005',
+    title: 'Nis2Care als zustermerk in plaats van inline-module',
+    date: '2026-02',
+    status: 'Aanvaard',
+    context: 'NIS2-compliance is een eigen specialisme met diepe verticals (Z-CERT, IGJ-meldplicht, MDR-asset-tracking) die niet noodzakelijk in Sindzo\'s EPD-scope horen. EPD-klanten willen wel de compliance-overlay.',
+    decision: 'NIS2-functionaliteit wordt uitgewerkt als separaat product (Nis2Care), gepositioneerd als complementair aan elk EPD — niet alleen Sindzo. Sindzo refereert alleen `Nis2Care.Zorg.Contracts` (publieke NuGet) voor data-uitwisseling.',
+    consequences: 'Sindzo blijft EPD-zuiver; Nis2Care krijgt eigen marketing en kan ook met Nedap/Pluriform/SDB worden gekoppeld. Twee codebases, twee release-cadansen. Klanten kopen ze samen of apart — dat is een commerciële keuze.',
+  },
+];
+---
+<Base
+  title="Architectuur-besluiten (ADR) — Sindzo"
+  description="Publieke Architectural Decision Records van Sindzo. Modulaire monolith, FHIR R4, NL-hosting, BSN-encryptie, Nis2Care-zustermerk. Voor CIO's en IT-architecten."
+>
+  <PageHero
+    eyebrow="Architectuur-besluiten"
+    title="Waarom we bouwen zoals we bouwen."
+    subtitle="Architectural Decision Records (ADR's) leggen vast waarom een keuze gemaakt is — niet alleen wat. Wij publiceren ze openbaar zodat uw architect en CIO kunnen beoordelen of onze afwegingen bij uw organisatie passen, vóór een tender."
+  />
+
+  <section class="container-prose py-10 border-b border-ink-100 bg-ink-100/40">
+    <p class="text-sm text-ink-700 max-w-3xl">
+      Iedere ADR volgt de standaard <strong class="text-ink-900">context → besluit → consequenties</strong>-structuur. Aanvaard = besluit is in productie geïmplementeerd.
+      Wijzigingen zijn versie-beheerd; vervanging gebeurt via een nieuwe ADR die de oude superseden.
+    </p>
+  </section>
+
+  {adrs.map((adr) => (
+    <section class="container-prose py-12 border-b border-ink-100 last:border-0">
+      <div class="grid gap-8 md:grid-cols-[200px_1fr]">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-wider text-accent-600">{adr.id}</div>
+          <div class="mt-1 text-xs text-ink-500">{adr.date}</div>
+          <div class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-sindzo-900">
+            <span class="status-dot bg-green-500"></span>{adr.status}
+          </div>
+        </div>
+        <article>
+          <h2 class="font-display text-2xl font-bold text-ink-900">{adr.title}</h2>
+          <div class="mt-5 space-y-4 text-sm text-ink-700 leading-relaxed">
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-ink-500">Context</h3>
+              <p class="mt-1">{adr.context}</p>
+            </div>
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-ink-500">Besluit</h3>
+              <p class="mt-1">{adr.decision}</p>
+            </div>
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-ink-500">Consequenties</h3>
+              <p class="mt-1">{adr.consequences}</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  ))}
+
+  <section class="container-prose py-16">
+    <div class="rounded-2xl border border-ink-200 bg-ink-100/50 p-8 sm:p-12">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Mist u een onderwerp?</h2>
+      <p class="mt-3 max-w-2xl text-ink-700">
+        Architectuur-vragen ontvangen we graag rechtstreeks. Bijvoorbeeld: hoe wij hot-fix-deploys structureel valideren,
+        wat onze stand op event-sourcing is, of waarom we bewust geen Kubernetes draaien. Mail
+        <a href="mailto:architectuur@sindzo.nl" class="text-sindzo-700 hover:underline">architectuur@sindzo.nl</a> — antwoord binnen 1 werkdag.
+      </p>
+    </div>
+  </section>
+
+  <Cta
+    title="Wilt u ons architectuurplaat zien?"
+    subtitle="In het procurement-pakket zit een geannoteerde architectuurplaat (PDF) met netwerk-zones, data-flow en sub-verwerkers. Geen lead-gate, geen NDA."
+  />
+</Base>

@@ -13,14 +13,14 @@ interface Integration {
 
 const integrations: Integration[] = [
   // Standaarden
-  { name: 'FHIR R4', category: 'Standaarden', status: 'live', doc: 'https://api.sindzo.nl/docs',
-    body: 'Patient, Encounter, Observation, MedicationRequest — publieke endpoints met OAuth2.' },
+  { name: 'FHIR R4', category: 'Standaarden', status: 'live', doc: '/api',
+    body: 'Patient, Encounter, Observation, MedicationStatement, Condition, AllergyIntolerance, RelatedPerson — Zib-conforme endpoints met OAuth2.' },
   { name: 'MedMij', category: 'Standaarden', status: 'wip',
     body: 'Aansluiting bij MedMij-stelsel voor PGO-uitwisseling. Afrondingsfase Q3 2026.' },
-  { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'live',
-    body: 'BgZ-conforme eOverdracht-bundel — ontvangen en verzenden.' },
-  { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'live',
-    body: 'Bevragen via Landelijk Schakelpunt, opt-in per cliënt geregistreerd.' },
+  { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'wip',
+    body: 'BgZ-conforme eOverdracht-bundel — ontvangen en verzenden. Productie-aansluiting via Nuts-knooppunt in afronding.' },
+  { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'wip',
+    body: 'Bevragen via Landelijk Schakelpunt, opt-in per cliënt. VZVZ-aansluittraject en UZI-certificering in afronding.' },
 
   // Communicatie
   { name: 'ZorgMail', category: 'Communicatie', status: 'live',
@@ -41,6 +41,14 @@ const integrations: Integration[] = [
     body: 'iWmo- en iJw-berichtenverkeer, retourcodes en toewijzingen.' },
   { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'live',
     body: 'iWlz-berichtenverkeer met validatie en retourcodes.' },
+  { name: 'Vecozo COV-check', category: 'Financieel', status: 'live',
+    body: 'Real-time verzekeringscontrole via Vecozo — single-flow én batch, met retentie van controle-bewijs.' },
+  { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'live',
+    body: 'Zvw-declaratie wijkverpleging (WMG308) richting zorgverzekeraars — productcodes, prestaties, machtigingen en retourafhandeling.' },
+
+  // Sensor & domotica
+  { name: 'Domotica-gateway', category: 'Sensor & domotica', status: 'live',
+    body: 'Webhook-intake voor sensor- en alarmmeldingen van Mextal, Ascom, Sensara en CLB; escalatie naar call-center of medewerker-app.' },
 
   // E-Health
   { name: 'Minddistrict', category: 'E-Health', status: 'wip',
@@ -54,9 +62,15 @@ const integrations: Integration[] = [
   { name: 'EntraID / Azure AD', category: 'Identiteit', status: 'live',
     body: 'SSO via OIDC, met group-claim mapping naar rollen.' },
   { name: 'UZI-pas', category: 'Identiteit', status: 'wip',
-    body: 'UZI-server-certificaten voor wettelijke authenticatie.' },
+    body: 'CA-chain authenticator gebouwd; OID-parsing, CRL/OCSP-fetch en LSP-BSN-resolver in afronding. Afhankelijk van CIBG-test­certificaat voor productie-cutover.' },
   { name: 'Ysis-koppeling', category: 'Klinisch', status: 'wip',
     body: 'Behandeldossier-uitwisseling voor specialistische teams.' },
+
+  // Backoffice
+  { name: 'DocuSign', category: 'Backoffice', status: 'live',
+    body: 'Digitaal ondertekenen van zorgovereenkomsten, machtigingen en behandelplannen via DocuSign eSignature.' },
+  { name: 'NMBRS', category: 'Backoffice', status: 'live',
+    body: 'Salaris- en HR-koppeling: roosters naar uren, mutaties naar loonrun, journaalposten retour.' },
 ];
 
 const categories = Array.from(new Set(integrations.map(i => i.category)));
@@ -76,7 +90,7 @@ const statusLabel = (s: string) =>
     subtitle="Sindzo praat met het Nederlandse zorglandschap via gedocumenteerde standaarden, publieke API's en concrete koppelingen. Eerlijke status per integratie — live, in ontwikkeling of op roadmap."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href="https://api.sindzo.nl/docs" class="btn-primary no-underline">Bekijk API-docs</a>
+      <a href="/api" class="btn-primary no-underline">Bekijk API-docs</a>
       <a href="/trust" class="btn-secondary no-underline">Trust Centre</a>
     </div>
   </PageHero>

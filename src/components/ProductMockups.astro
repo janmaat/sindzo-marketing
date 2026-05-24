@@ -1,0 +1,141 @@
+---
+// Visueel anker voor wat tekst-only sites missen: drie gestileerde voorbeelden
+// van module-weergaven. EXPLICIET als mockup gelabeld — geen claim dat dit
+// daadwerkelijke productie-screens zijn. Doel: prospects een gevoel geven van
+// dichtheid en richting zonder fabricatie.
+//
+// Geen echte cliëntdata — alle namen, getallen en codes zijn fictief.
+---
+<section class="container-prose py-16 border-b border-ink-100">
+  <div class="max-w-2xl">
+    <span class="badge mb-3">Mockup · indicatieve weergave</span>
+    <h2 class="font-display text-3xl font-bold tracking-tightish text-ink-900 sm:text-4xl">
+      Hoe een module er <em class="italic font-semibold text-accent-600">in de praktijk</em> uitziet.
+    </h2>
+    <p class="mt-3 text-ink-700">
+      Onderstaande weergaven zijn voorbeeldcomposities van Sindzo-modules — geen echte cliëntdata,
+      wel de werkelijke layout-richting. Tijdens een demo doorlopen we deze schermen op uw eigen werkproces.
+    </p>
+  </div>
+
+  <div class="mt-10 grid gap-6 lg:grid-cols-3">
+    {/* --- Mockup 1: SOEP-rapportage --- */}
+    <div class="rounded-xl border border-ink-200 bg-white p-5 shadow-sm">
+      <div class="flex items-center justify-between border-b border-ink-100 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="inline-block h-2 w-2 rounded-full bg-accent-500"></span>
+          <span class="text-xs font-bold text-ink-900">SOEP — middagvisite</span>
+        </div>
+        <span class="text-[10px] uppercase tracking-wider text-ink-500">Mw. de J. · k. 14</span>
+      </div>
+      <div class="mt-3 space-y-2.5 text-[11px] leading-snug">
+        <div>
+          <div class="text-[9px] font-bold uppercase tracking-wider text-accent-600">S — Subjectief</div>
+          <div class="mt-0.5 rounded bg-greensoft/50 p-2 text-ink-700">"Voelt zich beter dan gisteren, kortademigheid afgenomen."</div>
+        </div>
+        <div>
+          <div class="text-[9px] font-bold uppercase tracking-wider text-accent-600">O — Objectief</div>
+          <div class="mt-0.5 grid grid-cols-3 gap-1.5 text-ink-700">
+            <div class="rounded bg-sand/70 p-1.5"><div class="text-[8px] text-ink-500">SpO₂</div><div class="font-semibold">95%</div></div>
+            <div class="rounded bg-sand/70 p-1.5"><div class="text-[8px] text-ink-500">Pols</div><div class="font-semibold">78</div></div>
+            <div class="rounded bg-sand/70 p-1.5"><div class="text-[8px] text-ink-500">Temp</div><div class="font-semibold">36,8°</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="text-[9px] font-bold uppercase tracking-wider text-accent-600">E — Evaluatie</div>
+          <div class="mt-0.5 rounded bg-greensoft/50 p-2 text-ink-700">Doelstelling "stabiel ademen in rust" behaald — voortzetten medicatie.</div>
+        </div>
+        <div>
+          <div class="text-[9px] font-bold uppercase tracking-wider text-accent-600">P — Plan</div>
+          <div class="mt-0.5 rounded bg-greensoft/50 p-2 text-ink-700">Morgen herevaluatie. Mantelzorger notificeren.</div>
+        </div>
+      </div>
+      <div class="mt-4 flex items-center justify-between border-t border-ink-100 pt-3">
+        <span class="text-[10px] text-ink-500">AI-pre-fill · spraak → tekst</span>
+        <span class="rounded-full bg-accent-500 px-3 py-1 text-[10px] font-bold text-[#06231f]">Opslaan</span>
+      </div>
+    </div>
+
+    {/* --- Mockup 2: Planbord met CAO-bewaking --- */}
+    <div class="rounded-xl border border-ink-200 bg-white p-5 shadow-sm">
+      <div class="flex items-center justify-between border-b border-ink-100 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="inline-block h-2 w-2 rounded-full bg-accent-500"></span>
+          <span class="text-xs font-bold text-ink-900">Planbord — week 21</span>
+        </div>
+        <span class="text-[10px] uppercase tracking-wider text-ink-500">Wijk Noord</span>
+      </div>
+      <div class="mt-3 space-y-1.5 text-[11px]">
+        {[
+          { name: 'Anouk B.', shift: '07:00 – 15:00', status: 'ok', note: '8 cliënten · 32 km' },
+          { name: 'Faisal R.', shift: '07:00 – 15:00', status: 'warn', note: 'ATW: 5e dag op rij' },
+          { name: 'Petra S.', shift: '15:00 – 23:00', status: 'ok', note: '6 cliënten · 18 km' },
+          { name: 'Open', shift: '23:00 – 07:00', status: 'gap', note: '— vervanging gezocht' },
+          { name: 'Jamal K.', shift: '07:00 – 15:00', status: 'ok', note: '9 cliënten · 27 km' },
+        ].map((row) => (
+          <div class="flex items-center justify-between rounded border border-ink-100 px-2.5 py-1.5">
+            <div class="flex items-center gap-2">
+              <span class={`inline-block h-1.5 w-1.5 rounded-full ${row.status === 'ok' ? 'bg-green-500' : row.status === 'warn' ? 'bg-amber-500' : 'bg-rose-400'}`}></span>
+              <span class="font-semibold text-ink-900">{row.name}</span>
+            </div>
+            <div class="text-right">
+              <div class="font-medium text-ink-700">{row.shift}</div>
+              <div class="text-[9px] text-ink-500">{row.note}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-4 flex items-center justify-between border-t border-ink-100 pt-3 text-[10px]">
+        <span class="text-amber-600 font-semibold">⚠ 1 ATW-attentie</span>
+        <span class="text-ink-500">Dekking 80% · 1 gat</span>
+      </div>
+    </div>
+
+    {/* --- Mockup 3: Declaratie-dashboard --- */}
+    <div class="rounded-xl border border-ink-200 bg-white p-5 shadow-sm">
+      <div class="flex items-center justify-between border-b border-ink-100 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="inline-block h-2 w-2 rounded-full bg-accent-500"></span>
+          <span class="text-xs font-bold text-ink-900">Declaratie · mei 2026</span>
+        </div>
+        <span class="text-[10px] uppercase tracking-wider text-ink-500">iWmo · iJw · Wlz</span>
+      </div>
+      <div class="mt-3 grid grid-cols-3 gap-2 text-center">
+        <div class="rounded bg-greensoft/60 p-2.5">
+          <div class="font-display text-lg font-bold text-sindzo-900">€312k</div>
+          <div class="text-[9px] text-ink-500">Aangeleverd</div>
+        </div>
+        <div class="rounded bg-sand/60 p-2.5">
+          <div class="font-display text-lg font-bold text-sindzo-900">€287k</div>
+          <div class="text-[9px] text-ink-500">Geaccepteerd</div>
+        </div>
+        <div class="rounded bg-rose-50 p-2.5">
+          <div class="font-display text-lg font-bold text-rose-700">€25k</div>
+          <div class="text-[9px] text-ink-500">Retourcodes</div>
+        </div>
+      </div>
+      <div class="mt-3 space-y-1.5 text-[11px]">
+        <div class="flex items-center justify-between rounded border border-ink-100 px-2.5 py-1.5">
+          <span class="text-ink-700">Gemeente Almelo (iWmo)</span>
+          <span class="font-semibold text-green-700">✓ €142k</span>
+        </div>
+        <div class="flex items-center justify-between rounded border border-ink-100 px-2.5 py-1.5">
+          <span class="text-ink-700">Gemeente Hengelo (iJw)</span>
+          <span class="font-semibold text-green-700">✓ €88k</span>
+        </div>
+        <div class="flex items-center justify-between rounded border border-amber-200 bg-amber-50/40 px-2.5 py-1.5">
+          <span class="text-ink-700">Zorgkantoor (iWlz)</span>
+          <span class="font-semibold text-amber-700">⟳ 4 retours</span>
+        </div>
+        <div class="flex items-center justify-between rounded border border-ink-100 px-2.5 py-1.5">
+          <span class="text-ink-700">CAK-aanlevering</span>
+          <span class="font-semibold text-green-700">✓ klaar</span>
+        </div>
+      </div>
+      <div class="mt-4 flex items-center justify-between border-t border-ink-100 pt-3 text-[10px]">
+        <span class="text-ink-500">Volgende run: ma. 1 juni</span>
+        <span class="text-sindzo-700 font-semibold">Bekijk retourcodes →</span>
+      </div>
+    </div>
+  </div>
+</section>

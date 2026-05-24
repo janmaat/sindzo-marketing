@@ -10,10 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.5.0",
     "@astrojs/mdx": "^4.0.0",
     "@astrojs/sitemap": "^3.2.0",
     "@astrojs/tailwind": "^5.1.4",
+    "astro": "^5.5.0",
+    "pdf-merger-js": "^5.1.2",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {

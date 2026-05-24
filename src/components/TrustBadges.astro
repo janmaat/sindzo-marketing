@@ -2,14 +2,22 @@
 // Status-stoplichten zijn bewust eerlijk: groen = aantoonbaar, geel = in
 // voorbereiding, grijs = roadmap. Dit is het centrale differentiërende element
 // t.o.v. concurrenten die compliance pas in tender-fase delen.
-const badges = [
+import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
+
+const badges: Array<{ label: string; status: string; note: string; url?: string; urlLabel?: string }> = [
   { label: 'NEN 7510', status: 'wip', note: 'Werkdocument, certificering Q4 2026' },
   { label: 'AVG / GDPR', status: 'live', note: 'DPA & sub-verwerkerslijst publiek' },
   { label: 'ISO 27001', status: 'roadmap', note: 'Audit gepland 2027' },
   { label: 'FHIR R4', status: 'live', note: 'Endpoints publiek gedocumenteerd' },
   { label: 'MedMij', status: 'wip', note: 'Aansluiting in afrondingsfase' },
-  { label: 'Wegiz', status: 'wip', note: 'eOverdracht-bundle live' },
-  { label: 'Cbw-ready', status: 'wip', note: 'Voorbereidingen 1 juli 2026' },
+  { label: 'Wegiz', status: 'wip', note: 'BgZ-bundel klaar, aansluiting in afronding' },
+  {
+    label: 'Cbw (NIS2)',
+    status: 'wip',
+    note: 'Via zustermerk Nis2Care — pure-play NIS2-oplossing, klaar voor 1 juli 2026',
+    url: NIS2CARE_LIVE ? NIS2CARE_URL : undefined,
+    urlLabel: 'nis2care.nl',
+  },
   { label: 'NL-hosting', status: 'live', note: 'Azure West-Europe + backup NL' },
 ];
 
@@ -33,9 +41,14 @@ const dot = (s: string) =>
       {badges.map((b) => (
         <li class="flex items-start gap-3 rounded-lg border border-ink-100 bg-white p-4">
           <span class={`status-dot mt-1.5 ${dot(b.status)}`}></span>
-          <div>
+          <div class="flex-1">
             <div class="text-sm font-semibold text-ink-900">{b.label}</div>
             <div class="mt-0.5 text-xs text-ink-500">{b.note}</div>
+            {b.url && (
+              <a href={b.url} target="_blank" rel="noopener" class="mt-1.5 inline-block text-[11px] font-bold text-sindzo-700 no-underline hover:underline">
+                {b.urlLabel ?? b.url} ↗
+              </a>
+            )}
           </div>
         </li>
       ))}

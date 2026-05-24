@@ -1,0 +1,73 @@
+---
+// Concrete, externe deadlines als koop-urgentie. Geen sales-druk maar
+// agenda-realiteit — een bestuurder weet dat deze data hard zijn.
+import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
+
+const deadlines = [
+  {
+    date: '1 juli 2026',
+    daysAway: '~6 weken',
+    law: 'Cyberbeveiligingswet (NIS2)',
+    obligation: 'Aangewezen entiteiten moeten registreren en passende maatregelen aantonen.',
+    module: 'Nis2Care — complete NIS2-oplossing voor de zorg, gekoppeld met Sindzo (zustermerk, complementair aan het EPD).',
+    moduleUrl: NIS2CARE_LIVE ? NIS2CARE_URL : undefined,
+    moduleLinkLabel: 'nis2care.nl',
+  },
+  {
+    date: '31 mei jaarlijks',
+    daysAway: 'volgende deadline 2027',
+    law: 'Wtza-jaarverantwoording',
+    obligation: 'Toelatingsverplichte zorgaanbieders verantwoorden zich publiek via DigiMV.',
+    module: 'Wtza-wizard genereert de aanlevering — niet per spreadsheet.',
+  },
+  {
+    date: '1 januari 2027',
+    daysAway: 'module klaar 1 sep 2026',
+    law: 'Wtta-uitlenersregister',
+    obligation: 'Zorgaanbieders die uitlenen registreren in het landelijke register.',
+    module: 'Wtta-uitleen registreert en koppelt automatisch — beschikbaar 1 september 2026, ruim vóór de deadline.',
+  },
+  {
+    date: '2 december 2027',
+    daysAway: 'module klaar 1 sep 2026',
+    law: 'AI Act high-risk',
+    obligation: 'AI-systemen in gezondheidszorg vallen onder high-risk; register en assessment verplicht.',
+    module: 'Classificatie + register beschikbaar 1 september 2026 — 15 maanden voor de wettelijke deadline.',
+  },
+];
+---
+<section class="border-y border-ink-100 bg-ink-100/40 py-14">
+  <div class="container-prose">
+    <div class="max-w-3xl">
+      <span class="eyebrow">Agenda 2026–2027</span>
+      <h2 class="mt-3 font-display text-3xl font-bold tracking-tightish text-ink-900 sm:text-4xl">
+        Vier wettelijke deadlines die <em class="italic font-semibold text-accent-600">niet wachten</em> tot na uw aanbesteding.
+      </h2>
+      <p class="mt-3 text-ink-700">
+        Geen sales-druk — gewoon de agenda van uw FG en bestuurssecretaris. Onze modulekaart sluit hier 1-op-1 op aan.
+      </p>
+    </div>
+    <ul class="mt-10 grid gap-4 sm:grid-cols-2">
+      {deadlines.map((d) => (
+        <li class="rounded-xl border border-ink-100 bg-white p-5">
+          <div class="flex items-baseline justify-between gap-3">
+            <span class="font-display text-lg font-bold text-sindzo-900">{d.date}</span>
+            <span class="text-[10px] uppercase tracking-wider text-ink-500">{d.daysAway}</span>
+          </div>
+          <h3 class="mt-2 font-semibold text-ink-900 text-sm">{d.law}</h3>
+          <p class="mt-1 text-xs text-ink-700 leading-relaxed">{d.obligation}</p>
+          <p class="mt-3 text-xs font-medium text-accent-600">→ {d.module}</p>
+          {d.moduleUrl && (
+            <a href={d.moduleUrl} target="_blank" rel="noopener" class="mt-2 inline-flex items-center gap-1 text-xs font-bold text-sindzo-700 no-underline hover:underline">
+              {d.moduleLinkLabel ?? d.moduleUrl} ↗
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+    <p class="mt-6 text-xs text-ink-500">
+      Bron: rijksoverheid.nl, IGJ.nl, Autoriteit Persoonsgegevens. Sindzo volgt wijzigingen actief en houdt de
+      modulekaart bij — u hoeft de wet niet bij te houden.
+    </p>
+  </div>
+</section>
