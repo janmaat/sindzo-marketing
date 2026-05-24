@@ -1,0 +1,9 @@
+# Forceer LF line-endings voor bestanden die op een Linux/Unix-host moeten
+# kunnen draaien. Zonder dit zet Git op Windows-checkouts CRLF in scripts,
+# wat ze onbruikbaar maakt op Plesk/Linux.
+*.sh         text eol=lf
+*.htaccess   text eol=lf
+.htaccess    text eol=lf
+
+# nginx-config is een tekstreferentie maar baat ook bij stabiele line-endings.
+*.conf       text eol=lf
