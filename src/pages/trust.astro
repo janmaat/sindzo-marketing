@@ -31,9 +31,9 @@ const pillars = [
     intro: 'AVG-conform met expliciete verwerkers-rolverdeling. PII (BSN, AGB) altijd encrypted.',
     items: [
       { label: 'AVG / GDPR', status: 'live', note: 'Standaard-DPA volgens AP-model, NL/EN beschikbaar', doc: '#dpa' },
-      { label: 'Verwerkersovereenkomst', status: 'live', note: 'PDF + Word, geen NDA nodig', doc: '/documenten/dpa-sindzo-2026.pdf' },
+      { label: 'Verwerkersovereenkomst', status: 'live', note: 'Standaard-DPA op aanvraag (~1 werkdag), geen NDA nodig', doc: '/procurement' },
       { label: 'Subverwerkers-overzicht', status: 'live', note: 'Volledig overzicht beschikbaar, alle in EER', doc: '#subverwerkers' },
-      { label: 'DPIA-template', status: 'live', note: 'Voor zorgaanbieder eigen DPIA', doc: '/documenten/dpia-template.pdf' },
+      { label: 'DPIA-template', status: 'live', note: 'Voor zorgaanbieder eigen DPIA — op aanvraag', doc: '/procurement' },
       { label: 'BSN-encryptie', status: 'live', note: 'AES-256-GCM met HKDF envelope per tenant, kwartaal-rotatie van masters (operationeel proces)', doc: '#bsn' },
       { label: 'Recht op vergetelheid', status: 'live', note: 'Pseudonimisering + audit-trail', doc: '#vergetelheid' },
     ],
@@ -101,8 +101,8 @@ const statusLabel = (s: string) =>
         Elk item hieronder heeft een eerlijke status — groen, geel of grijs — met onderbouwing.
       </p>
       <div class="mt-8 flex flex-wrap items-center gap-4 text-sm">
-        <a href="/documenten/security-pack-2026.zip" class="btn-primary no-underline">Download security-pack</a>
-        <a href="/documenten/dpa-sindzo-2026.pdf" class="btn-secondary no-underline">DPA-PDF</a>
+        <a href="/procurement" class="btn-primary no-underline">Naar Procurement Centre</a>
+        <a href="mailto:trust@sindzo.nl?subject=Security-pack%20%2B%20DPA%20aanvragen" class="btn-secondary no-underline">Vraag security-pack + DPA</a>
         <a href="https://status.sindzo.nl" class="text-sindzo-700 font-medium no-underline hover:underline">Live status →</a>
       </div>
       <p class="mt-6 text-xs text-ink-500">
@@ -154,7 +154,7 @@ const statusLabel = (s: string) =>
       <div class="max-w-3xl">
         <h2 class="font-display text-2xl font-bold text-ink-900">De vraag die inkopers stellen: "Wat als de bouwer wegvalt?"</h2>
         <p class="mt-3 text-ink-700">
-          Sindzo is gebouwd door Maat Holding B.V. (één hoofd­architect + selecte partners). We benoemen dit actief omdat u er toch naar gaat vragen:
+          Sindzo wordt gebouwd door één hoofd­architect met selecte partners. We benoemen dit actief omdat u er toch naar gaat vragen:
         </p>
         <ul class="mt-5 space-y-3 text-sm text-ink-700">
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Broncode-escrow</strong> — overeenkomst met SRK-escrow­agent in voorbereiding (Q3 2026). Activerings­drempel: drie aaneengesloten maanden geen oplevering.</span></li>

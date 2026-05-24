@@ -11,6 +11,11 @@
 #
 # Document-root moet wijzen naar <deployment-dir>/dist/
 
+# Plesk's deploy-shell heeft beperkte PATH; explicit Node-locatie toevoegen
+# zodat npm/node vindbaar zijn. Pas /opt/plesk/node/24 aan op de versie die
+# je in de Plesk NodeJS-extensie hebt geselecteerd.
+export PATH=/opt/plesk/node/24/bin:/usr/local/bin:/usr/bin:/bin:$PATH
+
 set -euo pipefail
 
 cd "$(dirname "$0")/.."

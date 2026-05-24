@@ -11,95 +11,105 @@ import Cta from '../components/Cta.astro';
 interface Resource {
   title: string;
   body: string;
+  /** Pad naar publiek bestand óf 'mailto:...' voor on-demand levering. */
   file: string;
+  /** Toon-label naast titel (bv. 'PDF · 220 kB' of 'Op aanvraag · ~1 werkdag'). */
   format: string;
   category: string;
 }
+
+// Tijdens early-access leveren we elk procurement-document op-maat per aanvraag —
+// PVE, DPA, DPIA, SLA, CAIQ etc. worden gegenereerd zodra een specifieke organisatie
+// (en haar segment + schaal) bekend is. Voorkomt dat we generieke versies de wereld
+// in slingeren die later moeten worden teruggeroepen. Alleen de API-pagina is een
+// directe link (interne pagina, geen download).
+const onRequest = (subject: string) =>
+  `mailto:procurement@sindzo.nl?subject=${encodeURIComponent('Aanvraag procurement-document: ' + subject)}`;
 
 const resources: Resource[] = [
   {
     category: 'PVE & shortlisting',
     title: 'PVE-template zorgsuite',
     body: 'Word-document met 180+ eisen-categorieën die u kunt aanvinken/aanpassen. Bedoeld voor een zorgvuldige shortlisting, niet als invul-spreadsheet.',
-    file: '/documenten/pve-template-zorgsuite-2026.docx',
-    format: 'DOCX · 64 kB',
+    file: onRequest('PVE-template zorgsuite'),
+    format: 'Op aanvraag · ~1 werkdag',
   },
   {
     category: 'PVE & shortlisting',
     title: 'Vergelijkingsmatrix leveranciers',
     body: 'Excel met scoring-criteria per dimensie (functioneel, technisch, commercieel) — leverancier-onafhankelijk opgesteld.',
-    file: '/documenten/leveranciers-matrix-2026.xlsx',
-    format: 'XLSX · 38 kB',
+    file: onRequest('Vergelijkingsmatrix leveranciers'),
+    format: 'Op aanvraag · ~1 werkdag',
   },
   {
     category: 'Privacy & security',
     title: 'Verwerkersovereenkomst (DPA)',
-    body: 'Onze standaard-DPA. AP-conform model met expliciete sub-verwerkers-bijlage. Geen NDA nodig om dit te lezen.',
-    file: '/documenten/dpa-sindzo-2026.pdf',
-    format: 'PDF · 220 kB',
+    body: 'Onze standaard-DPA. AP-conform model met expliciete sub-verwerkers-bijlage. Geen NDA nodig om in te zien.',
+    file: onRequest('DPA Sindzo'),
+    format: 'Op aanvraag · binnen 1 werkdag',
   },
   {
     category: 'Privacy & security',
     title: 'DPIA-template (uw eigen)',
     body: 'Template voor uw eigen DPIA bij Sindzo-aanschaf. Met voorbeeld-risicoanalyse en mitigerende maatregelen.',
-    file: '/documenten/dpia-template-zorgaanbieder.docx',
-    format: 'DOCX · 80 kB',
+    file: onRequest('DPIA-template zorgaanbieder'),
+    format: 'Op aanvraag · ~1 werkdag',
   },
   {
     category: 'Privacy & security',
     title: 'Security-pack',
     body: 'NEN 7510-statement, controls-evidence-bundle, pentest-samenvatting, sub-verwerker-lijst.',
-    file: '/documenten/security-pack-2026.zip',
-    format: 'ZIP · 1,8 MB',
+    file: onRequest('Security-pack'),
+    format: 'Op aanvraag · binnen 1 werkdag',
   },
   {
     category: 'Privacy & security',
     title: 'Vragenlijst CAIQ / SIG',
     body: 'Ingevulde CAIQ v4.0.3 en kort SIG-formulier. Voor procurement/CISO-teams die niet opnieuw willen vragen.',
-    file: '/documenten/caiq-sindzo-2026.xlsx',
-    format: 'XLSX · 140 kB',
+    file: onRequest('CAIQ / SIG-vragenlijst'),
+    format: 'Op aanvraag · ~2 werkdagen',
   },
   {
     category: 'Architectuur & SLA',
     title: 'Architectuurplaat',
     body: 'Eén-pager met modulaire monolith, integraties, hosting, identity, datatypes, data-flow. Voor I&A/architectuur.',
-    file: '/documenten/architectuur-sindzo-2026.pdf',
-    format: 'PDF · 480 kB',
+    file: onRequest('Architectuurplaat'),
+    format: 'Op aanvraag · ~1 werkdag',
   },
   {
     category: 'Architectuur & SLA',
     title: 'SLA-overzicht',
     body: 'Service Level Agreement met uptime, RPO/RTO, support-windows, financiële boete-clausule voor Enterprise.',
-    file: '/documenten/sla-sindzo-2026.pdf',
-    format: 'PDF · 120 kB',
+    file: onRequest('SLA-overzicht'),
+    format: 'Op aanvraag · binnen 1 werkdag',
   },
   {
     category: 'Architectuur & SLA',
     title: 'API-koppeldocumentatie',
-    body: 'OpenAPI 3.1-specificatie, voorbeelden voor de meest gevraagde flows (FHIR, MedMij, eOverdracht).',
+    body: 'FHIR R4-endpoints en OpenAPI 3.1-spec. Publieke pagina met overzicht; volledige spec + sandbox-toegang op aanvraag.',
     file: '/api',
-    format: 'Web · overzicht + spec op aanvraag',
+    format: 'Web · direct',
   },
   {
     category: 'Implementatie',
     title: 'Implementatie-aanpak (deck)',
     body: '20-pagina presentatie voor projectgroep en bestuur: fasen, governance, super-users, time-to-value.',
-    file: '/documenten/implementatie-deck-2026.pdf',
-    format: 'PDF · 2,4 MB',
+    file: onRequest('Implementatie-deck'),
+    format: 'Op aanvraag · ~1 werkdag',
   },
   {
     category: 'Implementatie',
     title: 'Migratie-handleiding ECD/HIS',
-    body: 'Per herkomst-systeem (Nedap Ons, SDB, Gerimedica Ysis, Adapcare): wat wij importeren, wat handwerk is, hoe lang.',
-    file: '/documenten/migratie-handleiding-2026.pdf',
-    format: 'PDF · 540 kB',
+    body: 'Per herkomst-systeem wat wij importeren, wat handwerk is, hoe lang. Productie-imports beschikbaar voor Nedap Ons; Gerimedica Ysis in voorbereiding; SDB en Adapcare als maatwerk-import.',
+    file: onRequest('Migratie-handleiding ECD/HIS'),
+    format: 'Op aanvraag · ~2 werkdagen',
   },
   {
     category: 'Business case',
     title: 'ROI-rekenhulp',
     body: 'Spreadsheet om uw eigen TCO/ROI in te vullen. Met realistische ranges per segment en plan-tier.',
-    file: '/documenten/roi-rekenhulp-2026.xlsx',
-    format: 'XLSX · 92 kB',
+    file: onRequest('ROI-rekenhulp'),
+    format: 'Op aanvraag · ~1 werkdag',
   },
 ];
 
@@ -123,8 +133,10 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
   <section class="border-y border-amber-200 bg-amber-50 py-6">
     <div class="container-prose">
       <p class="text-sm text-amber-900">
-        <strong>Gebruik op eigen verantwoordelijkheid.</strong> Templates zijn werkdocumenten,
-        geen juridisch advies. Voor uw definitieve PVE of DPA: laat uw eigen jurist/FG meekijken.
+        <strong>Early-access: documenten op-maat per aanvraag.</strong>
+        We genereren elk document afgestemd op uw segment, schaal en specifieke vraagstukken — in plaats van generieke
+        versies die later moeten worden teruggeroepen. Reactie binnen 1 werkdag. Voor uw definitieve PVE of DPA: laat
+        uw eigen jurist/FG meekijken — onze documenten zijn werkdocumenten, geen juridisch advies.
       </p>
     </div>
   </section>
@@ -140,9 +152,15 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
               <span class="badge whitespace-nowrap">{r.format}</span>
             </div>
             <p class="mt-2 text-sm text-ink-700 leading-relaxed">{r.body}</p>
-            <a href={r.file} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-sindzo-700 no-underline hover:underline">
-              <span>↓ Download</span>
-            </a>
+            {r.file.startsWith('mailto:') ? (
+              <a href={r.file} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-sindzo-700 no-underline hover:underline">
+                <span>✉ Aanvragen via e-mail</span>
+              </a>
+            ) : (
+              <a href={r.file} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-sindzo-700 no-underline hover:underline">
+                <span>→ Bekijken</span>
+              </a>
+            )}
           </article>
         ))}
       </div>
