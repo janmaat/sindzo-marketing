@@ -21,9 +21,12 @@ export default {
           950: '#0a302c',
         },
         // Fris groen accent voor CTA-knoppen en highlights (one-pager-groen).
+        // 500 = button-bg, 600 = button-hover + large display, 700 = small-text
+        // (700 is donker genoeg voor WCAG AA op white/cream).
         accent: {
           500: '#3fa37a',
           600: '#2f8c66',
+          700: '#2a7d5b',
         },
         // Warm-neutrale inkt/lijn-schaal.
         ink: {
