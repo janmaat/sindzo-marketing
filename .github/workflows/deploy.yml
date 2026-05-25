@@ -1,0 +1,55 @@
+name: Build & publish static dist/ to deploy branch
+
+# Bouwt op GitHub's Ubuntu-runners (waar Node WEL werkt) en publiceert
+# alleen de built dist/-inhoud naar een aparte `deploy`-branch. Plesk pulled
+# vervolgens van die branch en serveert de statische files rechtstreeks —
+# geen npm/node op de Plesk-server nodig.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # zodat we 'm ook handmatig kunnen triggeren
+
+permissions:
+  contents: write # nodig om naar de deploy-branch te pushen
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build Astro site
+        run: npm run build
+
+      - name: Sanity-check build output
+        run: |
+          test -f dist/index.html || { echo "✗ dist/index.html ontbreekt"; exit 1; }
+          PAGES=$(find dist -name 'index.html' | wc -l)
+          SIZE=$(du -sh dist | cut -f1)
+          echo "✓ Build OK — $PAGES pagina's, $SIZE"
+
+      - name: Publish dist/ to deploy branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: deploy
+          force_orphan: true # houdt deploy-branch klein (één commit)
+          commit_message: 'deploy: ${{ github.event.head_commit.message }}'
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
