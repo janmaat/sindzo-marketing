@@ -1,0 +1,209 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+
+const publicatieDatum = '2026-05-30';
+const leesTijd = '~6 minuten';
+const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Waarom geen Nederlandse VVT/GHZ-leverancier meertalig is — en wat dat betekent voor uw 1e-generatie cliënten',
+  description: 'Marktscan van 9 NL-cliëntportalen toont: niemand levert meertalig portaal in VVT/GHZ. Hier waarom dat onhoudbaar is en wat zorgaanbieders aan hun cliënten verschuldigd zijn.',
+  datePublished: publicatieDatum,
+  inLanguage: 'nl-NL',
+  author: { '@type': 'Organization', name: 'Sindzo' },
+  publisher: { '@type': 'Organization', name: 'Sindzo' },
+  keywords: 'meertalig cliëntportaal, VVT-software, GHZ-software, cliëntportaal Turks, cliëntportaal Arabisch, Wcz, 1e generatie zorg, NL-zorgsoftware'
+};
+---
+<Base
+  title="Meertalig cliëntportaal in NL-zorg: waarom niemand het doet | Sindzo Kennisbank"
+  description="Marktscan van 9 NL-cliëntportalen toont: niemand levert meertalig portaal in VVT/GHZ. Hier waarom dat onhoudbaar is en wat zorgaanbieders aan hun cliënten verschuldigd zijn."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
+
+  <article class="container-prose py-16">
+    <header class="max-w-3xl">
+      <div class="flex flex-wrap items-center gap-3 text-xs text-ink-500">
+        <a href="/kennisbank" class="text-sindzo-700 hover:underline no-underline">Kennisbank</a>
+        <span>·</span>
+        <span>Regelgeving + standaarden</span>
+        <span>·</span>
+        <time datetime={publicatieDatum}>{dateNl}</time>
+        <span>·</span>
+        <span>{leesTijd}</span>
+      </div>
+      <h1 class="mt-5 font-display text-4xl font-bold leading-tight tracking-tightish text-ink-900 sm:text-5xl">
+        Waarom geen Nederlandse VVT/GHZ-leverancier <em class="italic text-accent-600">meertalig</em> is — en wat dat betekent voor uw 1e-generatie cliënten.
+      </h1>
+      <p class="mt-6 text-lg text-ink-700 leading-relaxed">
+        We scanden in mei 2026 negen Nederlandse cliëntportalen voor VVT en gehandicaptenzorg.
+        Niet één levert het portaal in een andere taal dan Nederlands. Voor de 1e-generatie Turkse en
+        Marokkaanse VVT-cliënten — een groep van honderdduizenden die nu massaal de 75+-leeftijd betreedt —
+        is dat geen kleine omissie. Het is een structurele blinde vlek.
+      </p>
+    </header>
+
+    <div class="prose-content mt-12 max-w-3xl text-ink-700 leading-relaxed">
+      <h2>De marktscan: negen portalen, één taal</h2>
+      <p>
+        We toetsten op publieke leverancier-websites of een meertalig cliëntportaal beschikbaar is
+        voor zorgaanbieders in VVT, gehandicaptenzorg of GGZ. Peildatum: 29 mei 2026.
+      </p>
+      <table class="w-full mt-6 text-sm">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Doelsegment</th>
+            <th>Cliëntportaal taal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Nedap Ons + Caren</td><td>VVT, GHZ</td><td>NL-only</td></tr>
+          <tr><td>PinkRoccade myNeva</td><td>VVT, GHZ</td><td>NL-only</td></tr>
+          <tr><td>Pluriform Zorg</td><td>VVT, GHZ</td><td>NL-only</td></tr>
+          <tr><td>Cura (PinkRoccade)</td><td>VVT</td><td>NL-only</td></tr>
+          <tr><td>Carit Care</td><td>VVT</td><td>NL-only</td></tr>
+          <tr><td>Plancare 2</td><td>VVT, GHZ</td><td>NL-only</td></tr>
+          <tr><td>Quli</td><td>VVT, GHZ</td><td>NL-only</td></tr>
+          <tr><td>Famped / Famedio</td><td>VVT</td><td>NL-only</td></tr>
+          <tr><td>ChipSoft HiX</td><td>Ziekenhuis</td><td>NL + EN (alleen ziekenhuis)</td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-ink-500 italic">Bron: leveranciers-websites, publiek beschikbaar, geverifieerd 29 mei 2026.</p>
+
+      <p>
+        ChipSoft is de enige met meer dan één taal in de portaalsoftware — maar HiX bedient ziekenhuizen,
+        niet de VVT- en GHZ-segmenten waar de demografische uitdaging ligt.
+      </p>
+
+      <h2>Wie het portaal niet begrijpt, gebruikt het niet</h2>
+      <p>
+        Volgens de bevolkingsstatistiek 2024 (CBS Statline, herkomst) telt Nederland ongeveer:
+      </p>
+      <ul>
+        <li>~430.000 inwoners van Turkse herkomst — 1e generatie spreekt vaak beperkt Nederlands</li>
+        <li>~415.000 van Marokkaanse herkomst — 1e generatie idem, plus berbers</li>
+        <li>~220.000 Polen — sterk groeiend, recente migratie</li>
+        <li>~180.000 Syrisch / overige Arabisch-sprekend — vluchtelingengezinnen</li>
+        <li>~95.000 Oekraïners — post-2022, snelgroeiend</li>
+      </ul>
+      <p>
+        De 1e-generatie Turkse en Marokkaanse Nederlanders die in de jaren '60 en '70 als arbeidsmigrant
+        kwamen, betreden nu massaal de leeftijd waarin VVT-zorg relevant wordt. Hun mantelzorgende
+        kinderen — 2e generatie, vaak NL-vaardig — willen dossier-inhoud doorgaans in de taal van hun ouder
+        met die ouder bespreken. Dat lukt niet als het portaal alleen Nederlandse termen toont.
+      </p>
+      <p>
+        Het effect is meetbaar: cliënten en mantelzorgers die het portaal niet kunnen lezen, gebruiken het
+        niet. De zorgaanbieder verliest dan een belangrijke communicatie-laag — informed consent voor
+        zorgplan-wijzigingen, agenda-inzicht, berichten over medicatie — en valt terug op telefoongesprekken
+        die meer tijd kosten dan ze opleveren.
+      </p>
+
+      <h2>Waarom doet niemand het?</h2>
+      <p>
+        Vier samenhangende redenen verklaren waarom Nederlandse leveranciers tot nu toe NL-only hebben
+        gehouden:
+      </p>
+      <ol>
+        <li>
+          <strong>Inkoop-fixatie op NL-features.</strong> Inkooptrajecten in NL-VVT vragen zelden expliciet
+          om meertaligheid in het PVE. Een leverancier die er ongevraagd in investeert ziet daar geen ROI op.
+        </li>
+        <li>
+          <strong>RTL is technisch wel een ding.</strong> Arabisch vereist right-to-left layout met
+          spiegel-CSS, niet alleen vertaalde teksten. Dat raakt elk component, elke iconografie en elke
+          formulier-flow. Wie van NL-LTR begint moet veel breken.
+        </li>
+        <li>
+          <strong>Vertaaldiscipline ontbreekt.</strong> Een feature die in NL is bedacht heeft vaak inline
+          NL-strings in code en componenten. Achteraf alles via een vertaalpipeline (Microsoft's
+          IStringLocalizer of vergelijkbaar) trekken is een grootschalig refactor — niet sexy, niet
+          factureerbaar als feature.
+        </li>
+        <li>
+          <strong>Marktleider-traagheid.</strong> Een marktleider met grote installed-base heeft meer te
+          verliezen door instabiele meertaligheid dan te winnen. Eerstvolgers in een markt veranderen
+          status quo zelden uit eigen beweging.
+        </li>
+      </ol>
+
+      <h2>Wat zegt de regelgeving?</h2>
+      <p>
+        De Wcz (Wet cliëntenrechten zorg, beoogde inwerkingtreding 2027) en de NEN 7510:2024 verlangen
+        dat <strong>cliënten effectief inzage</strong> hebben in hun zorgplan en relevante dossier-onderdelen.
+        Effectief betekent: in een vorm die de cliënt begrijpt. Voor een cliënt die geen Nederlands leest is
+        een NL-only portaal feitelijk geen inzage — het voldoet aan de letter maar niet aan de bedoeling.
+      </p>
+      <p>
+        De Autoriteit Persoonsgegevens heeft hierover (nog) geen specifieke uitspraak gedaan, maar de
+        beweging is duidelijk: cliëntenrechten worden de komende jaren feitelijker getoetst, niet alleen
+        formeel. Een leverancier die nu meertalig is, ligt voor op die curve.
+      </p>
+
+      <h2>Hoe Sindzo Naast het aanpakt</h2>
+      <p>
+        Sindzo's cliëntportaal heet "Sindzo Naast" en is in zeven talen live: Nederlands, Engels, Turks,
+        Arabisch (met RTL), Duits, Pools en Oekraïens. Niet als afterthought-vertaling van NL-strings,
+        maar als <strong>eerste-klas eigenschap</strong>: elk Razor-component gebruikt
+        <code>IStringLocalizer</code> vanaf dag 1, NL is bronwaarheid, en de RTL-styling is ingebakken
+        i.p.v. via CSS-overrides bij-gepatcht.
+      </p>
+      <p>
+        De cliënt kiest zelf de taal via een dropdown rechtsboven; familie en mantelzorgers met andere
+        taalvoorkeur kunnen onafhankelijk hun eigen taal kiezen. De zorgmedewerker blijft in het
+        backoffice-systeem in het Nederlands werken — dat is bewust: juridische en declaratie-termen zijn
+        eentalig, daar is geen ROI op vertaling.
+      </p>
+
+      <h2>Wat u als zorgaanbieder kunt overwegen</h2>
+      <p>
+        Drie vragen om aan uw huidige (of beoogde) leverancier voor te leggen:
+      </p>
+      <ol>
+        <li>
+          Welke talen levert uw cliëntportaal? Zijn dat productie-talen, of vertaal-roadmap?
+        </li>
+        <li>
+          Wat zijn de meerkosten voor extra talen — eenmalig en doorlopend? Een leverancier die "ja, dat
+          kunnen we" zegt maar er een fors maatwerk-bedrag aan hangt, biedt feitelijk geen meertaligheid.
+        </li>
+        <li>
+          Hoe lang duurt het van go-besluit tot live in een nieuwe taal? Bij een leverancier met
+          IStringLocalizer-discipline is dat een resx-toevoeging (dagen). Bij een leverancier zonder is
+          dat een release-cyclus (maanden).
+        </li>
+      </ol>
+      <p>
+        Voor wat het waard is: bij Sindzo Naast is de zevende taal (Oekraïens) toegevoegd in ongeveer
+        één werkweek. Niet omdat we slimmer zijn — omdat de fundamenten op meertaligheid waren gebouwd
+        in plaats van erna ingebogen.
+      </p>
+
+      <hr class="my-12 border-ink-200" />
+
+      <h3 class="font-display text-lg font-semibold text-ink-900">Bronnen</h3>
+      <ul class="text-sm">
+        <li>Eigen marktscan tegen publieke leverancier-websites — peildatum 29 mei 2026</li>
+        <li>CBS Statline 2024 — bevolking naar herkomst</li>
+        <li>Wcz (Wet cliëntenrechten zorg) — wetsvoorstel</li>
+        <li>NEN 7510:2024 — informatiebeveiliging in de zorg, hoofdstuk cliëntenrechten</li>
+        <li>ADR Sindzo 2026-05-29 — meertaligheid Sindzo (intern besluit)</li>
+      </ul>
+
+      <p class="text-xs text-ink-500 italic mt-8">
+        Spot een fout of mis een bron? Mail
+        <a href="mailto:kennisbank@sindzo.nl" class="text-sindzo-700 hover:underline">kennisbank@sindzo.nl</a> —
+        correcties binnen 1 werkdag, met revisie-notitie onderaan dit artikel.
+      </p>
+    </div>
+  </article>
+
+  <Cta
+    title="Wilt u meertalig cliëntportaal in actie zien?"
+    subtitle="Stuur ons drie typische werkstromen uit uw organisatie. Wij doorlopen ze in Sindzo Naast — desgewenst in Turks of Arabisch."
+  />
+</Base>
