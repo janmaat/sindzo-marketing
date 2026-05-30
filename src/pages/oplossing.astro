@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import ModuleCard from '../components/ModuleCard.astro';
 import ProductMockups from '../components/ProductMockups.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import Cta from '../components/Cta.astro';
 
 // Modulekaart — gegroepeerd zoals de Blazor-app ook gegroepeerd is
@@ -212,6 +213,25 @@ const groups: ModuleGroup[] = [
       </div>
     </section>
   ))}
+
+  <RelatedArticles
+    title="Diepgaande achtergrond bij de white-space-modules"
+    intro="De Welzijn-modulegroep en het meertalig cliëntportaal zijn onze sterkste differentiators. Hier de feitelijke onderbouwing waarop ze rusten — bronnen en marktscan inbegrepen."
+    articles={[
+      {
+        eyebrow: 'Standaarden + marktanalyse',
+        title: 'Waarom geen NL-VVT/GHZ-leverancier meertalig is',
+        body: 'Marktscan van 9 cliëntportalen. Wat de demografie eist en waarom niemand het tot nu toe deed.',
+        href: '/kennisbank/meertalig-clientportaal-nl-zorg',
+      },
+      {
+        eyebrow: 'Arbeidsmarkt + welzijn',
+        title: 'Peer-support voor zorgmedewerkers — wat het onderzoek echt zegt',
+        body: 'NHS RISE rapporteert +20% retentie. Hier waarom geen NL-werkgever het aanbiedt en hoe HR-scheiding in code werkt.',
+        href: '/kennisbank/peer-support-zorgmedewerkers',
+      },
+    ]}
+  />
 
   <Cta />
 </Base>

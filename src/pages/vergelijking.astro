@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import Cta from '../components/Cta.astro';
 
 // Productvergelijking met de top-3 NL-concurrenten in VVT/GHZ.
@@ -326,6 +327,25 @@ const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeri
       </div>
     </div>
   </section>
+
+  <RelatedArticles
+    title="Onderbouwing van de white-space-claims"
+    intro="Sceptisch over de twee dimensies waar Sindzo bewezen vooruitloopt? Hieronder de bron-artikelen — feitelijk, gesourced, met peildatum."
+    articles={[
+      {
+        eyebrow: 'Standaarden + marktanalyse',
+        title: 'Waarom geen NL-VVT/GHZ-leverancier meertalig is',
+        body: 'De marktscan-tabel uitgebreid: 9 leveranciers, demografische context (CBS), en 4 redenen waarom niemand het doet.',
+        href: '/kennisbank/meertalig-clientportaal-nl-zorg',
+      },
+      {
+        eyebrow: 'Arbeidsmarkt + welzijn',
+        title: 'Peer-support voor zorgmedewerkers — wat het onderzoek echt zegt',
+        body: 'Vijf buitenlandse studies uitgewerkt (NHS RISE, IRT, AHRQ, IEW, Incredible Health). Plus de vier ontwerp-eisen voor werkend peer-support.',
+        href: '/kennisbank/peer-support-zorgmedewerkers',
+      },
+    ]}
+  />
 
   <Cta
     title="Klaar voor een demo met deze tabel ernaast?"
