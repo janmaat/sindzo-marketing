@@ -24,7 +24,7 @@ interface Resource {
 // in slingeren die later moeten worden teruggeroepen. Alleen de API-pagina is een
 // directe link (interne pagina, geen download).
 const onRequest = (subject: string) =>
-  `mailto:procurement@sindzo.nl?subject=${encodeURIComponent('Aanvraag procurement-document: ' + subject)}`;
+  `mailto:procurement@coheza.nl?subject=${encodeURIComponent('Aanvraag procurement-document: ' + subject)}`;
 
 const resources: Resource[] = [
   {
@@ -45,13 +45,13 @@ const resources: Resource[] = [
     category: 'Privacy & security',
     title: 'Verwerkersovereenkomst (DPA)',
     body: 'Onze standaard-DPA. AP-conform model met expliciete sub-verwerkers-bijlage. Geen NDA nodig om in te zien.',
-    file: onRequest('DPA Sindzo'),
+    file: onRequest('DPA Coheza'),
     format: 'Op aanvraag · binnen 1 werkdag',
   },
   {
     category: 'Privacy & security',
     title: 'DPIA-template (uw eigen)',
-    body: 'Template voor uw eigen DPIA bij Sindzo-aanschaf. Met voorbeeld-risicoanalyse en mitigerende maatregelen.',
+    body: 'Template voor uw eigen DPIA bij Coheza-aanschaf. Met voorbeeld-risicoanalyse en mitigerende maatregelen.',
     file: onRequest('DPIA-template zorgaanbieder'),
     format: 'Op aanvraag · ~1 werkdag',
   },
@@ -116,7 +116,7 @@ const resources: Resource[] = [
 const categories = Array.from(new Set(resources.map(r => r.category)));
 ---
 <Base
-  title="Procurement Centre — beslis-versnellers | Sindzo"
+  title="Procurement Centre — beslis-versnellers | Coheza"
   description="PVE-template, DPA, security-pack, architectuurplaat, SLA, ROI-rekenhulp — alles wat uw inkoop-, FG- en I&A-team nodig heeft. Geen lead-gate."
 >
   <PageHero
@@ -175,8 +175,8 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
         Mail het ons — wij voegen het toe of leveren maatwerk binnen 1 werkdag.
       </p>
       <div class="mt-5 flex flex-wrap gap-3">
-        <a href="mailto:procurement@sindzo.nl" class="btn-primary no-underline">procurement@sindzo.nl</a>
-        <a href="mailto:trust@sindzo.nl" class="btn-secondary no-underline">trust@sindzo.nl (voor security)</a>
+        <a href="mailto:procurement@coheza.nl" class="btn-primary no-underline">procurement@coheza.nl</a>
+        <a href="mailto:trust@coheza.nl" class="btn-secondary no-underline">trust@coheza.nl (voor security)</a>
       </div>
     </div>
   </section>

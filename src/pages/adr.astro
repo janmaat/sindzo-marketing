@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 
 // Publieke Architectural Decision Records. Bedoeld voor CIO's, IT-architecten
-// en procurement die willen begrijpen WAAROM Sindzo bouwt zoals het bouwt.
+// en procurement die willen begrijpen WAAROM Coheza bouwt zoals het bouwt.
 // Geen marketing-spraak — wel "context / besluit / consequenties"-structuur
 // die in de industrie standaard is voor ADR's.
 
@@ -33,7 +33,7 @@ const adrs = [
     date: '2025-11',
     status: 'Aanvaard',
     context: 'Zorgaanbieders eisen aantoonbaar dat zorggegevens niet buiten de EER worden verwerkt. Cloudflare-edge-caching voor de marketing-site is acceptabel; voor de zorg-applicatie niet.',
-    decision: 'De zorg-applicatie (app.sindzo.nl) draait uitsluitend in Azure West-Europe met backup binnen NL. Geen secondary regions in andere geografieën. Sub-verwerker-lijst wordt 30 dagen vóór wijziging gecommuniceerd.',
+    decision: 'De zorg-applicatie (app.coheza.nl) draait uitsluitend in Azure West-Europe met backup binnen NL. Geen secondary regions in andere geografieën. Sub-verwerker-lijst wordt 30 dagen vóór wijziging gecommuniceerd.',
     consequences: 'Hogere latency voor non-EU-bezoekers (irrelevant voor NL-zorg). Failover-strategie is regionale-availability-zones, niet cross-region. Disaster-recovery is geografisch beperkt — bewust binnen NL-grenzen.',
   },
   {
@@ -50,15 +50,15 @@ const adrs = [
     title: 'Nis2Care als zustermerk in plaats van inline-module',
     date: '2026-02',
     status: 'Aanvaard',
-    context: 'NIS2-compliance is een eigen specialisme met diepe verticals (Z-CERT, IGJ-meldplicht, MDR-asset-tracking) die niet noodzakelijk in Sindzo\'s EPD-scope horen. EPD-klanten willen wel de compliance-overlay.',
-    decision: 'NIS2-functionaliteit wordt uitgewerkt als separaat product (Nis2Care), gepositioneerd als complementair aan elk EPD — niet alleen Sindzo. Sindzo refereert alleen `Nis2Care.Zorg.Contracts` (publieke NuGet) voor data-uitwisseling.',
-    consequences: 'Sindzo blijft EPD-zuiver; Nis2Care krijgt eigen marketing en kan ook met Nedap/Pluriform/SDB worden gekoppeld. Twee codebases, twee release-cadansen. Klanten kopen ze samen of apart — dat is een commerciële keuze.',
+    context: 'NIS2-compliance is een eigen specialisme met diepe verticals (Z-CERT, IGJ-meldplicht, MDR-asset-tracking) die niet noodzakelijk in Coheza\'s EPD-scope horen. EPD-klanten willen wel de compliance-overlay.',
+    decision: 'NIS2-functionaliteit wordt uitgewerkt als separaat product (Nis2Care), gepositioneerd als complementair aan elk EPD — niet alleen Coheza. Coheza refereert alleen `Nis2Care.Zorg.Contracts` (publieke NuGet) voor data-uitwisseling.',
+    consequences: 'Coheza blijft EPD-zuiver; Nis2Care krijgt eigen marketing en kan ook met Nedap/Pluriform/SDB worden gekoppeld. Twee codebases, twee release-cadansen. Klanten kopen ze samen of apart — dat is een commerciële keuze.',
   },
 ];
 ---
 <Base
-  title="Architectuur-besluiten (ADR) — Sindzo"
-  description="Publieke Architectural Decision Records van Sindzo. Modulaire monolith, FHIR R4, NL-hosting, BSN-encryptie, Nis2Care-zustermerk. Voor CIO's en IT-architecten."
+  title="Architectuur-besluiten (ADR) — Coheza"
+  description="Publieke Architectural Decision Records van Coheza. Modulaire monolith, FHIR R4, NL-hosting, BSN-encryptie, Nis2Care-zustermerk. Voor CIO's en IT-architecten."
 >
   <PageHero
     eyebrow="Architectuur-besluiten"
@@ -110,7 +110,7 @@ const adrs = [
       <p class="mt-3 max-w-2xl text-ink-700">
         Architectuur-vragen ontvangen we graag rechtstreeks. Bijvoorbeeld: hoe wij hot-fix-deploys structureel valideren,
         wat onze stand op event-sourcing is, of waarom we bewust geen Kubernetes draaien. Mail
-        <a href="mailto:architectuur@sindzo.nl" class="text-sindzo-700 hover:underline">architectuur@sindzo.nl</a> — antwoord binnen 1 werkdag.
+        <a href="mailto:architectuur@coheza.nl" class="text-sindzo-700 hover:underline">architectuur@coheza.nl</a> — antwoord binnen 1 werkdag.
       </p>
     </div>
   </section>

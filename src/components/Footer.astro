@@ -8,7 +8,7 @@ const columns = [
       { label: 'Integraties', href: '/integraties' },
       { label: 'Prijzen', href: '/prijzen' },
       { label: 'Implementatie', href: '/implementatie' },
-      { label: 'One-pager (PDF)', href: '/sindzo-one-pager.pdf', external: true },
+      { label: 'Vergelijking', href: '/vergelijking' },
     ],
   },
   {
@@ -24,7 +24,7 @@ const columns = [
     title: 'Vertrouwen',
     links: [
       { label: 'Trust Centre', href: '/trust' },
-      { label: 'Status', href: 'https://status.sindzo.nl' },
+      { label: 'Status', href: 'https://status.coheza.nl' },
       { label: 'Privacy', href: '/privacy' },
       { label: 'Architectuur-besluiten', href: '/adr' },
     ],
@@ -32,7 +32,7 @@ const columns = [
   {
     title: 'Bedrijf',
     links: [
-      { label: 'Over Sindzo', href: '/over' },
+      { label: 'Over Coheza', href: '/over' },
       { label: 'Kennisbank', href: '/kennisbank' },
       { label: 'Contact', href: '/contact' },
       { label: 'Demo aanvragen', href: '/demo' },
@@ -45,8 +45,7 @@ const columns = [
     <div class="grid grid-cols-2 gap-10 md:grid-cols-5">
       <div class="col-span-2 md:col-span-1">
         <div class="flex items-center gap-2">
-          <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-sindzo-700 to-accent-500 text-white"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/><path d="M9.5 12h1.6l1-2 1.2 3 .9-1.5h1.8"/></svg></span>
-          <span class="font-display text-lg font-semibold text-ink-900">Sindzo</span>
+          <img src="/logo/coheza-logo.svg" alt="Coheza" class="h-8 w-auto" width="120" height="32" />
         </div>
         <p class="mt-3 text-sm text-ink-500 max-w-xs">
           Eén zorgsuite voor de Nederlandse zorgpraktijk — bewust open, aantoonbaar veilig.
@@ -63,12 +62,12 @@ const columns = [
           </a>
         </p>
         <p class="mt-1.5 text-sm">
-          <a href="mailto:hello@sindzo.nl" class="inline-flex items-center gap-1.5 text-ink-700 no-underline hover:text-sindzo-700">
+          <a href="mailto:hello@coheza.nl" class="inline-flex items-center gap-1.5 text-ink-700 no-underline hover:text-sindzo-700">
             <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
             </svg>
-            <span class="font-medium">hello@sindzo.nl</span>
+            <span class="font-medium">hello@coheza.nl</span>
           </a>
         </p>
       </div>
@@ -86,7 +85,7 @@ const columns = [
       ))}
     </div>
     <div class="mt-12 flex flex-col gap-2 border-t border-ink-100 pt-6 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
-      <span>© {year} Sindzo · gevestigd in Nederland.</span>
+      <span>© {year} Coheza · gevestigd in Nederland.</span>
       <div class="flex gap-5">
         <a href="/privacy" class="no-underline hover:text-sindzo-700">Privacyverklaring</a>
         <a href="/voorwaarden" class="no-underline hover:text-sindzo-700">Voorwaarden</a>

@@ -5,4 +5,4 @@ Allow: /
 # zoekresultaten en mogelijk verwarrend als losse landing page.
 Disallow: /bedankt
 
-Sitemap: https://sindzo.nl/sitemap-index.xml
+Sitemap: https://coheza.nl/sitemap-index.xml

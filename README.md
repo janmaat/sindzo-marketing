@@ -1,7 +1,7 @@
-# Sindzo Marketing Site
+# Coheza Marketing Site
 
-Publieke marketingsite voor **Sindzo** — zorgsuite voor VVT/GHZ/GGZ in Nederland.
-Productie-URL: `https://sindzo.nl`.
+Publieke marketingsite voor **Coheza** — zorgsuite voor VVT/GHZ/GGZ in Nederland.
+Productie-URL: `https://coheza.nl`.
 
 Bewust een aparte repo, gescheiden van de Blazor-applicatie (`D:\Repos\Ponscura`):
 
@@ -13,7 +13,7 @@ Bewust een aparte repo, gescheiden van de Blazor-applicatie (`D:\Repos\Ponscura`
 ## Stack
 
 - **Astro 5** — statische output, edge-cacheable
-- **Tailwind CSS 3** — utility-first, met Sindzo-design-tokens in `tailwind.config.mjs`
+- **Tailwind CSS 3** — utility-first, met Coheza-design-tokens in `tailwind.config.mjs`
 - **MDX** — voor content-rijke pagina's (cases, blog, kennisbank)
 - **Sitemap** auto-gegenereerd
 
@@ -40,5 +40,5 @@ src/
 ## Deploy
 
 Doel: **Cloudflare Pages** of **Vercel** (static export, geen runtime).
-Demo/contact-forms POSTen naar `https://app.sindzo.nl/api/lead` zodat
+Demo/contact-forms POSTen naar `https://app.coheza.nl/api/lead` zodat
 leads direct in de CRM van de app belanden.

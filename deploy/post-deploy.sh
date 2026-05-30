@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Plesk Git deployment hook. Pad in Plesk:
-#   Websites & Domeinen → sindzo.nl → Git → "Acties uitvoeren na deployment":
+#   Websites & Domeinen → coheza.nl → Git → "Acties uitvoeren na deployment":
 #     bash deploy/post-deploy.sh
 #
 # Defensief geschreven: Plesk's deploy-shell heeft soms (vrijwel) lege PATH,

@@ -4,43 +4,43 @@ import PageHero from '../components/PageHero.astro';
 
 // Hub-pagina voor drie portalen. Vermijdt verwarring: één Inloggen-knop in
 // de Nav, gebruiker kiest hier welk portaal hij/zij nodig heeft. Bij directe
-// kennis van het portaal kan iemand ook rechtstreeks naar bv. medewerker.sindzo.nl.
+// kennis van het portaal kan iemand ook rechtstreeks naar bv. medewerker.coheza.nl.
 
 const portals = [
   {
     audience: 'Zorgmedewerkers',
     title: 'Medewerker-portaal',
     body: 'Voor zorgverleners en backoffice: dossier, planning, declaratie, kwaliteit. UZI-authenticatie waar wettelijk vereist.',
-    href: 'https://medewerker.sindzo.nl/',
-    cta: 'Open medewerker.sindzo.nl',
+    href: 'https://medewerker.coheza.nl/',
+    cta: 'Open medewerker.coheza.nl',
     icon: '👩‍⚕️',
   },
   {
     audience: 'Cliënten & mantelzorgers',
     title: 'Cliëntportaal',
     body: 'Voor cliënten, mantelzorgers en familie: berichten, documenten, machtigingen, mantelzorger-taken en eigen zorgplan inzien.',
-    href: 'https://klant.sindzo.nl/',
-    cta: 'Open klant.sindzo.nl',
+    href: 'https://klant.coheza.nl/',
+    cta: 'Open klant.coheza.nl',
     icon: '🏠',
   },
   {
     audience: 'Beheer & I&A',
     title: 'Beheer-omgeving',
     body: 'Voor I&A-beheerders en functioneel beheer: tenant-configuratie, gebruikers- en rollen-beheer, integratie-instellingen, audit-export.',
-    href: 'https://app.sindzo.nl/login',
-    cta: 'Open app.sindzo.nl',
+    href: 'https://app.coheza.nl/login',
+    cta: 'Open app.coheza.nl',
     icon: '⚙',
   },
 ];
 ---
 <Base
-  title="Inloggen — kies uw portaal | Sindzo"
-  description="Drie Sindzo-portalen: medewerker.sindzo.nl voor zorgverleners, klant.sindzo.nl voor cliënten en mantelzorgers, app.sindzo.nl voor beheer."
+  title="Inloggen — kies uw portaal | Coheza"
+  description="Drie Coheza-portalen: medewerker.coheza.nl voor zorgverleners, klant.coheza.nl voor cliënten en mantelzorgers, app.coheza.nl voor beheer."
 >
   <PageHero
     eyebrow="Inloggen"
     title="Welk portaal heeft u nodig?"
-    subtitle="Sindzo heeft drie aparte portalen voor verschillende gebruikers. Kies hieronder, of ga rechtstreeks naar de URL als u die kent."
+    subtitle="Coheza heeft drie aparte portalen voor verschillende gebruikers. Kies hieronder, of ga rechtstreeks naar de URL als u die kent."
   />
 
   <section class="container-prose py-12">
@@ -64,12 +64,12 @@ const portals = [
     <div class="mt-12 rounded-xl border border-ink-100 bg-ink-100/40 p-6 max-w-3xl">
       <h2 class="font-display text-base font-semibold text-ink-900">Weet u niet welk portaal?</h2>
       <p class="mt-2 text-sm text-ink-700">
-        Werkt u <strong>bij</strong> een zorgaanbieder die Sindzo gebruikt? Vraag uw beheerder
+        Werkt u <strong>bij</strong> een zorgaanbieder die Coheza gebruikt? Vraag uw beheerder
         om uitnodiging — dan landt u in het juiste portaal. Bent u <strong>cliënt of mantelzorger</strong>?
-        De uitnodiging komt vanuit de zorgaanbieder, niet vanuit Sindzo direct.
+        De uitnodiging komt vanuit de zorgaanbieder, niet vanuit Coheza direct.
       </p>
       <p class="mt-3 text-sm text-ink-500">
-        Vragen? Mail <a href="mailto:support@sindzo.nl" class="text-sindzo-700 hover:underline">support@sindzo.nl</a>
+        Vragen? Mail <a href="mailto:support@coheza.nl" class="text-sindzo-700 hover:underline">support@coheza.nl</a>
         of bel <a href="tel:+31611746283" class="text-sindzo-700 hover:underline">+31 6 11 74 62 83</a>.
       </p>
     </div>

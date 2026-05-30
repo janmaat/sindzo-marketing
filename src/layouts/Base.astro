@@ -13,7 +13,7 @@ interface Props {
 
 const {
   title,
-  description = 'Sindzo — één zorgsuite voor dossier, planning, declaratie en kwaliteit. Bewust open, aantoonbaar veilig, gebouwd voor de Nederlandse zorgpraktijk.',
+  description = 'Coheza — één zorgsuite voor dossier, planning, declaratie en kwaliteit. Bewust open, aantoonbaar veilig, gebouwd voor de Nederlandse zorgpraktijk.',
   canonical,
   image = '/og.png',
 } = Astro.props;
@@ -24,10 +24,10 @@ const ogImage = new URL(image, Astro.site).toString();
 const orgLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Sindzo',
-  alternateName: 'Sindzo Naast',
-  url: Astro.site?.toString() ?? 'https://sindzo.nl',
-  logo: new URL('/favicon.svg', Astro.site).toString(),
+  name: 'Coheza',
+  alternateName: 'Coheza Naast',
+  url: Astro.site?.toString() ?? 'https://coheza.nl',
+  logo: new URL('/logo/coheza-logo.svg', Astro.site).toString(),
   description: 'Eén modulair zorgplatform voor de Nederlandse VVT, gehandicaptenzorg en GGZ — dossier, planning, declaratie, kwaliteit, meertalig cliëntportaal (7 talen) en welzijn-modules voor medewerkers.',
   foundingLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Almelo', addressCountry: 'NL' }},
   areaServed: { '@type': 'Country', name: 'Nederland' },
@@ -45,21 +45,21 @@ const orgLd = {
     'AVG / DPIA',
   ],
   knowsLanguage: ['nl', 'en', 'tr', 'ar', 'de', 'pl', 'uk'],
-  email: 'hello@sindzo.nl',
+  email: 'hello@coheza.nl',
   telephone: '+31611746283',
   contactPoint: [
     {
       '@type': 'ContactPoint',
       contactType: 'sales',
       telephone: '+31611746283',
-      email: 'hello@sindzo.nl',
+      email: 'hello@coheza.nl',
       areaServed: 'NL',
       availableLanguage: ['Dutch', 'English'],
     },
     {
       '@type': 'ContactPoint',
       contactType: 'security',
-      email: 'trust@sindzo.nl',
+      email: 'trust@coheza.nl',
       areaServed: 'NL',
       availableLanguage: ['Dutch', 'English'],
     },
@@ -86,6 +86,10 @@ const orgLd = {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0E4F57" />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(orgLd)} />
     {/* Fonts (Fraunces + Mulish) worden self-hosted geladen via src/styles/fonts.css. */}
     {/*
@@ -93,7 +97,7 @@ const orgLd = {
       Alleen in productie laden zodat dev-traffic geen statistiek vervuilt.
     */}
     {import.meta.env.PROD && (
-      <script defer data-domain="sindzo.nl" src="https://plausible.io/js/script.outbound-links.js"></script>
+      <script defer data-domain="coheza.nl" src="https://plausible.io/js/script.outbound-links.js"></script>
       <script is:inline set:html={`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`} />
     )}
   </head>

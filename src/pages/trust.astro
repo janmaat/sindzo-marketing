@@ -57,8 +57,8 @@ const pillars = [
     intro: 'NL-hosting, transparante uptime, publieke status-page en herstelplan getest.',
     items: [
       { label: 'NL-hosting', status: 'live', note: 'Azure West-Europe + backup NL', doc: '#hosting' },
-      { label: 'Uptime SLA', status: 'live', note: '99,9% productie, gemeten extern', doc: 'https://status.sindzo.nl' },
-      { label: 'Statuspagina publiek', status: 'live', note: 'Incidenten + onderhoudsvensters', doc: 'https://status.sindzo.nl' },
+      { label: 'Uptime SLA', status: 'live', note: '99,9% productie, gemeten extern', doc: 'https://status.coheza.nl' },
+      { label: 'Statuspagina publiek', status: 'live', note: 'Incidenten + onderhoudsvensters', doc: 'https://status.coheza.nl' },
       { label: 'BCM-test', status: 'live', note: 'Jaarlijkse restore-oefening', doc: '#bcm' },
       { label: 'RPO / RTO', status: 'live', note: 'RPO 1 uur, RTO 4 uur', doc: '#rto' },
       { label: 'Exit-procedure', status: 'live', note: 'Contractueel vastgelegd in MSA', doc: '#exit' },
@@ -69,7 +69,7 @@ const pillars = [
     title: 'Wettelijke kaders & sectorregels',
     intro: 'Wkkgz, Wzd, Wtza, Wtta en de Cyberbeveiligingswet — actief gevolgd, niet afgewacht.',
     items: [
-      { label: 'Cbw (NIS2)', status: 'wip', note: 'NIS2-incidentmodule (24/72/720u SLA-tracking) ingebouwd in Sindzo; ook los beschikbaar als Nis2Care voor non-Sindzo-klanten. Klaar voor 1 juli 2026.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '#cbw' },
+      { label: 'Cbw (NIS2)', status: 'wip', note: 'NIS2-incidentmodule (24/72/720u SLA-tracking) ingebouwd in Coheza; ook los beschikbaar als Nis2Care voor non-Coheza-klanten. Klaar voor 1 juli 2026.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '#cbw' },
       { label: 'Wkkgz-klachtenregeling', status: 'live', note: 'Module + workflow standaard', doc: '#wkkgz' },
       { label: 'Wzd-stappenplan', status: 'live', note: 'Halfjaarlijkse IGJ-XML', doc: '#wzd' },
       { label: 'Wtza-jaarverantwoording', status: 'live', note: 'Wizard voor deadline 31 mei', doc: '#wtza' },
@@ -87,7 +87,7 @@ const statusLabel = (s: string) =>
 ---
 <Base
   image="/og/trust.png"
-  title="Trust Centre — Sindzo"
+  title="Trust Centre — Coheza"
   description="Eerlijke status van onze compliance, security, privacy en interoperabiliteit. Geen NDA nodig om dit te lezen."
 >
   <section class="border-b border-ink-300 bg-gradient-to-b from-sindzo-50 to-cream">
@@ -97,13 +97,13 @@ const statusLabel = (s: string) =>
         Compliance op tafel, niet in een PDF achter een NDA.
       </h1>
       <p class="mt-5 max-w-2xl text-lg text-ink-700">
-        Inkoop, FG, CISO en bestuur kunnen Sindzo beoordelen vóór er een gesprek nodig is.
+        Inkoop, FG, CISO en bestuur kunnen Coheza beoordelen vóór er een gesprek nodig is.
         Elk item hieronder heeft een eerlijke status — groen, geel of grijs — met onderbouwing.
       </p>
       <div class="mt-8 flex flex-wrap items-center gap-4 text-sm">
         <a href="/procurement" class="btn-primary no-underline">Naar Procurement Centre</a>
-        <a href="mailto:trust@sindzo.nl?subject=Security-pack%20%2B%20DPA%20aanvragen" class="btn-secondary no-underline">Vraag security-pack + DPA</a>
-        <a href="https://status.sindzo.nl" class="text-sindzo-700 font-medium no-underline hover:underline">Live status →</a>
+        <a href="mailto:trust@coheza.nl?subject=Security-pack%20%2B%20DPA%20aanvragen" class="btn-secondary no-underline">Vraag security-pack + DPA</a>
+        <a href="https://status.coheza.nl" class="text-sindzo-700 font-medium no-underline hover:underline">Live status →</a>
       </div>
       <p class="mt-6 text-xs text-ink-500">
         <span class="status-dot bg-green-500"></span> aantoonbaar nu
@@ -154,7 +154,7 @@ const statusLabel = (s: string) =>
       <div class="max-w-3xl">
         <h2 class="font-display text-2xl font-bold text-ink-900">De vraag die inkopers stellen: "Wat als de bouwer wegvalt?"</h2>
         <p class="mt-3 text-ink-700">
-          Sindzo wordt gebouwd door één hoofd­architect met selecte partners. We benoemen dit actief omdat u er toch naar gaat vragen:
+          Coheza wordt gebouwd door één hoofd­architect met selecte partners. We benoemen dit actief omdat u er toch naar gaat vragen:
         </p>
         <ul class="mt-5 space-y-3 text-sm text-ink-700">
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Broncode-escrow</strong> — overeenkomst met SRK-escrow­agent in voorbereiding (Q3 2026). Activerings­drempel: drie aaneengesloten maanden geen oplevering.</span></li>
@@ -163,7 +163,7 @@ const statusLabel = (s: string) =>
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Data-portabiliteit</strong> — volledige export in JSON/CSV/FHIR R4 op elk moment, contractueel vastgelegd. U bent nooit afhankelijk van onze inzet om uw eigen data te krijgen.</span></li>
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Directe lijn als kracht</strong> — kleinere leverancier betekent ook: geen supportdesk-bureaucratie, geen tickets die kwartalen reizen. U spreekt rechtstreeks met de bouwers; fixes in dagen, niet in releases per jaar.</span></li>
         </ul>
-        <p class="mt-5 text-sm text-ink-500">Founding partners ontvangen aanvullende garanties en zijn mede-eigenaar van de roadmap. Vraag de aanvullende continuïteitsverklaring op via <a href="mailto:trust@sindzo.nl" class="text-sindzo-700 hover:underline no-underline">trust@sindzo.nl</a>.</p>
+        <p class="mt-5 text-sm text-ink-500">Founding partners ontvangen aanvullende garanties en zijn mede-eigenaar van de roadmap. Vraag de aanvullende continuïteitsverklaring op via <a href="mailto:trust@coheza.nl" class="text-sindzo-700 hover:underline no-underline">trust@coheza.nl</a>.</p>
       </div>
     </div>
   </section>
@@ -176,7 +176,7 @@ const statusLabel = (s: string) =>
         Voor due-diligence-vragen accepteren we standaard vragenlijsten (CAIQ, SIG, BSI C5).
       </p>
       <div class="mt-6 flex flex-wrap gap-3">
-        <a href="mailto:trust@sindzo.nl" class="btn-primary no-underline">trust@sindzo.nl</a>
+        <a href="mailto:trust@coheza.nl" class="btn-primary no-underline">trust@coheza.nl</a>
         <a href="/contact" class="btn-secondary no-underline">Stuur vragenlijst</a>
       </div>
     </div>

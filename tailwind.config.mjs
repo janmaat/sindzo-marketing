@@ -3,48 +3,64 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}'],
   theme: {
     extend: {
-      // Sindzo-palet — afgestemd op de one-pager-vormgeving:
-      // diep petrol/groen, fris groen accent, warme crème achtergrond.
+      // Coheza-palet (mint). Petrol als basis, mint als accent. Coheza-tokens
+      // worden behouden als alias zodat bestaande klassen niet hoeven te
+      // migreren — sindzo-700 wijst nu naar coheza-petrol, accent-* naar mint.
       colors: {
-        // Merkfamilie: van lichte groene wash (50) naar diep petrol (900/950).
+        // Coheza-merkfamilie: lichte mint-wash (50) → diep petrol (900/950).
+        coheza: {
+          50:  '#F1F8F7', // surface
+          100: '#D9EDE9',
+          200: '#B0DDD5',
+          300: '#7FC6BB',
+          400: '#4AAA9D',
+          500: '#21C7A8', // mint accent
+          600: '#149F86',
+          700: '#0E4F57', // petrol — basis / tekst
+          800: '#0B4148',
+          900: '#093439',
+          950: '#06262A',
+        },
+        // Alias: sindzo-* → coheza-* om bestaande Tailwind-classes te laten
+        // werken zonder mass-rename in 30+ astro-bestanden.
         sindzo: {
-          50:  '#f0f7f4',
-          100: '#dfeee8',
-          200: '#c2ded3',
-          300: '#93c6b6',
-          400: '#5fa68f',
-          500: '#3f8f76',
-          600: '#2c6c5d',
-          700: '#1a5249',
-          800: '#11463f',
-          900: '#0e423d',
-          950: '#0a302c',
+          50:  '#F1F8F7',
+          100: '#D9EDE9',
+          200: '#B0DDD5',
+          300: '#7FC6BB',
+          400: '#4AAA9D',
+          500: '#21C7A8',
+          600: '#149F86',
+          700: '#0E4F57', // petrol
+          800: '#0B4148',
+          900: '#0E4F57', // petrol (zelfde als 700 voor consistency)
+          950: '#06262A',
         },
-        // Fris groen accent voor CTA-knoppen en highlights (one-pager-groen).
-        // 500 = button-bg, 600 = button-hover + large display, 700 = small-text
-        // (700 is donker genoeg voor WCAG AA op white/cream).
+        // Mint accent voor CTA en kleine tekst.
+        // 500 = button-bg, 600 = hover/large display, 700 = small-text (WCAG AA).
         accent: {
-          500: '#3fa37a',
-          600: '#2f8c66',
-          700: '#2a7d5b',
+          500: '#21C7A8', // mint
+          600: '#149F86',
+          700: '#0B7D6A', // mint-strong (AA op wit)
         },
-        // Warm-neutrale inkt/lijn-schaal.
+        // Neutrale inkt/lijn-schaal — petrol-toned.
         ink: {
-          900: '#19302c',
-          700: '#3a4a46',
-          500: '#5d706b',
-          300: '#dfe6e1',
-          200: '#c7d2cc',
-          100: '#f6f2e9',
+          900: '#0E4F57',
+          700: '#2C5F66',
+          500: '#5E7C82',
+          300: '#C5D9DC',
+          200: '#DAE6E8',
+          100: '#F1F8F7',
         },
-        cream:     '#fbf9f4',
-        sand:      '#f6f2e9',
-        greensoft: '#e7f1ea',
+        cream:     '#FFFFFF',     // Coheza gebruikt wit i.p.v. crème
+        sand:      '#F1F8F7',     // → coheza-surface
+        greensoft: '#D9EDE9',     // → lichte mint-wash
       },
       fontFamily: {
-        // Body: Mulish (humanist sans). Koppen: Fraunces (warme serif).
-        sans: ['Mulish', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Fraunces', 'Georgia', 'serif'],
+        // Coheza-merk: Plus Jakarta Sans voor zowel body als display.
+        // Coheza-aliases (sans/display) blijven werken via dezelfde stack.
+        sans:    ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       maxWidth: {
         prose: '68ch',

@@ -1,11 +1,11 @@
-# Deployment — Sindzo marketingsite
+# Deployment — Coheza marketingsite
 
 De marketingsite is een **puur statische Astro-build**. Productie draait op
 **Cloudflare Pages** — auto-build bij elke push naar `main`, gratis CDN, auto-HTTPS,
 geen onderhoud op een server.
 
-`app.sindzo.nl` (de Sindzo-applicatie) blijft op de eigen infrastructuur draaien —
-dit document gaat alleen over de marketingsite (`sindzo.nl`).
+`app.coheza.nl` (de Coheza-applicatie) blijft op de eigen infrastructuur draaien —
+dit document gaat alleen over de marketingsite (`coheza.nl`).
 
 ---
 
@@ -17,7 +17,7 @@ dit document gaat alleen over de marketingsite (`sindzo.nl`).
    (gratis, e-mail volstaat).
 2. **Workers & Pages → Create application → Pages → Connect to Git**.
 3. **GitHub authoriseren** voor je Cloudflare-account; selecteer
-   `janmaat/sindzo-marketing`.
+   `janmaat/coheza-marketing`.
 4. **Build-settings** invullen:
 
    | Veld | Waarde |
@@ -30,19 +30,19 @@ dit document gaat alleen over de marketingsite (`sindzo.nl`).
    | Node version | `20` (gelezen uit `.node-version` in repo) |
 
 5. **Save and Deploy**. Binnen ~2 minuten staat de site op
-   `sindzo-marketing.pages.dev`.
+   `coheza-marketing.pages.dev`.
 
-### Custom domain `sindzo.nl` koppelen
+### Custom domain `coheza.nl` koppelen
 
 1. In Cloudflare Pages-project → **Custom domains → Set up a custom domain** →
-   `sindzo.nl` (en optioneel `www.sindzo.nl` met redirect).
+   `coheza.nl` (en optioneel `www.coheza.nl` met redirect).
 2. Cloudflare toont **twee nameservers** (bv. `alice.ns.cloudflare.com`,
    `bob.ns.cloudflare.com`).
-3. Bij je registrar (Strato of waar `sindzo.nl` is geregistreerd): vervang
+3. Bij je registrar (Strato of waar `coheza.nl` is geregistreerd): vervang
    de nameservers door de twee Cloudflare-nameservers.
 4. DNS-propagatie: meestal binnen 5–30 minuten, soms tot 24 uur. Cloudflare
    regelt automatisch een HTTPS-certificaat zodra propagatie compleet is.
-5. `app.sindzo.nl` blijft als A-record naar het server-IP wijzen (apart record
+5. `app.coheza.nl` blijft als A-record naar het server-IP wijzen (apart record
    in Cloudflare DNS).
 
 ### Wat er automatisch gebeurt
