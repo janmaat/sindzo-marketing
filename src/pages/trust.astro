@@ -43,9 +43,9 @@ const pillars = [
     title: 'Interoperabiliteit & openheid',
     intro: 'Open API\'s, FHIR-endpoints en publieke koppeldocumentatie. Geen vendor lock-in.',
     items: [
-      { label: 'FHIR R4', status: 'live', note: 'Patient, Encounter, Observation, MedicationStatement, Condition, AllergyIntolerance, RelatedPerson — Zib-conform', doc: '/api' },
-      { label: 'MedMij', status: 'wip', note: 'Aansluiting in afrondingsfase Q3 2026', doc: '#medmij' },
-      { label: 'Wegiz / eOverdracht', status: 'wip', note: 'eOverdracht-bundle BgZ-conform', doc: '#wegiz' },
+      { label: 'FHIR R4', status: 'wip', note: '8 Zibs intern actief (Patient, Encounter, Observation, MedicationStatement, Condition, AllergyIntolerance, RelatedPerson, CarePlan); publieke REST API Q4 2026', doc: '/api' },
+      { label: 'MedMij', status: 'wip', note: 'Interne brug gereed; DVZA-registratie + PKIoverheid-cert in voorbereiding (Q4 2026)', doc: '#medmij' },
+      { label: 'Wegiz / eOverdracht', status: 'wip', note: 'BgZ 8/15 Zibs actief; Nuts-aansluiting Q4 2026', doc: '#wegiz' },
       { label: 'LSP', status: 'wip', note: 'VZVZ-aansluittraject + UZI-certificaten — gateway ingericht, ketentest in afronding', doc: '#lsp' },
       { label: 'Open API', status: 'wip', note: 'OpenAPI 3.1-spec compleet, publieke sandbox in afronding Q3 2026 — toegang nu op aanvraag', doc: '/api' },
       { label: 'Data-export', status: 'live', note: 'Volledige export in JSON/CSV op verzoek', doc: '#export' },
@@ -69,7 +69,7 @@ const pillars = [
     title: 'Wettelijke kaders & sectorregels',
     intro: 'Wkkgz, Wzd, Wtza, Wtta en de Cyberbeveiligingswet — actief gevolgd, niet afgewacht.',
     items: [
-      { label: 'Cbw (NIS2)', status: 'wip', note: 'Via zustermerk Nis2Care — pure-play NIS2-oplossing voor de zorg, klaar voor 1 juli 2026', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '#cbw' },
+      { label: 'Cbw (NIS2)', status: 'wip', note: 'NIS2-incidentmodule (24/72/720u SLA-tracking) ingebouwd in Sindzo; ook los beschikbaar als Nis2Care voor non-Sindzo-klanten. Klaar voor 1 juli 2026.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '#cbw' },
       { label: 'Wkkgz-klachtenregeling', status: 'live', note: 'Module + workflow standaard', doc: '#wkkgz' },
       { label: 'Wzd-stappenplan', status: 'live', note: 'Halfjaarlijkse IGJ-XML', doc: '#wzd' },
       { label: 'Wtza-jaarverantwoording', status: 'live', note: 'Wizard voor deadline 31 mei', doc: '#wtza' },

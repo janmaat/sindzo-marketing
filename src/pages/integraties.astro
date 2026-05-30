@@ -13,12 +13,12 @@ interface Integration {
 
 const integrations: Integration[] = [
   // Standaarden
-  { name: 'FHIR R4', category: 'Standaarden', status: 'live', doc: '/api',
-    body: 'Patient, Encounter, Observation, MedicationStatement, Condition, AllergyIntolerance, RelatedPerson — Zib-conforme endpoints met OAuth2.' },
+  { name: 'FHIR R4', category: 'Standaarden', status: 'wip', doc: '/api',
+    body: '8 Zibs intern actief (Patient, Encounter, Observation, MedicationStatement, Condition, AllergyIntolerance, RelatedPerson, CarePlan). BgZ-bundel functioneel; publieke REST API met OAuth2 productie Q4 2026.' },
   { name: 'MedMij', category: 'Standaarden', status: 'wip',
-    body: 'Aansluiting bij MedMij-stelsel voor PGO-uitwisseling. Afrondingsfase Q3 2026.' },
+    body: 'Interne BgZ-bundelbrug gereed. Externe aansluiting wacht op DVZA-registratie bij Stichting MedMij, PKIoverheid-certificaat en SAML/OAuth2-conformiteitstest — Q4 2026.' },
   { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'wip',
-    body: 'BgZ-conforme eOverdracht-bundel — ontvangen en verzenden. Productie-aansluiting via Nuts-knooppunt in afronding.' },
+    body: 'BgZ-bundel met 8/15 Zibs actief; eOverdracht-Bundle-structuur gereed met resource-vulling afhankelijk van BgZ-completering. Nuts-knooppunt-aansluiting Q4 2026.' },
   { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'wip',
     body: 'Bevragen via Landelijk Schakelpunt, opt-in per cliënt. VZVZ-aansluittraject en UZI-certificering in afronding.' },
 
