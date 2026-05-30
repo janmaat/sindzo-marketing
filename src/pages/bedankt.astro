@@ -33,25 +33,37 @@ import Base from '../layouts/Base.astro';
         </p>
       </div>
 
-      <div class="mt-10 rounded-2xl border border-ink-100 bg-ink-100/40 p-6">
-        <h2 class="font-display text-lg font-semibold text-ink-900">Terwijl u wacht</h2>
-        <ul class="mt-3 space-y-2 text-sm">
-          <li class="flex items-start gap-2">
-            <span class="mt-1 text-sindzo-600">→</span>
-            <a href="/trust" class="text-sindzo-700 no-underline hover:underline">Bekijk ons Trust Centre</a>
-            <span class="text-ink-500">— security, privacy, compliance op tafel</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 text-sindzo-600">→</span>
-            <a href="/procurement" class="text-sindzo-700 no-underline hover:underline">Open het Procurement Centre</a>
-            <span class="text-ink-500">— DPA, PVE-template, security-pack te downloaden</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 text-sindzo-600">→</span>
-            <a href="/integraties" class="text-sindzo-700 no-underline hover:underline">Bekijk de integraties</a>
-            <span class="text-ink-500">— FHIR, MedMij, Wegiz, LSP, e-health</span>
-          </li>
-        </ul>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-ink-100 bg-white p-5">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-accent-700">Voor uw I&amp;A-team</span>
+          <h3 class="mt-2 font-display text-base font-semibold text-ink-900">Trust Centre &amp; Procurement</h3>
+          <p class="mt-2 text-sm text-ink-700">Compliance-status, DPA, security-pack, architectuurplaat — alvast door uw FG en CISO te laten checken.</p>
+          <div class="mt-3 flex flex-wrap gap-3 text-sm">
+            <a href="/trust" class="text-sindzo-700 hover:underline font-medium">→ Trust Centre</a>
+            <a href="/procurement" class="text-sindzo-700 hover:underline font-medium">→ Procurement Centre</a>
+          </div>
+        </div>
+        <div class="rounded-xl border border-ink-100 bg-white p-5">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-accent-700">Voor uw bestuur</span>
+          <h3 class="mt-2 font-display text-base font-semibold text-ink-900">Vergelijking &amp; achtergrond</h3>
+          <p class="mt-2 text-sm text-ink-700">Feitelijke side-by-side tegen Nedap Ons, PinkRoccade en Pluriform. Plus twee kennisbank-artikelen waarop onze white-space-claims rusten.</p>
+          <div class="mt-3 flex flex-wrap gap-3 text-sm">
+            <a href="/vergelijking" class="text-sindzo-700 hover:underline font-medium">→ Vergelijking</a>
+            <a href="/kennisbank" class="text-sindzo-700 hover:underline font-medium">→ Kennisbank</a>
+          </div>
+        </div>
+        <div class="rounded-xl border border-ink-100 bg-white p-5 sm:col-span-2">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-accent-700">Voor uw team</span>
+          <h3 class="mt-2 font-display text-base font-semibold text-ink-900">Wat we live tonen tijdens de demo</h3>
+          <p class="mt-2 text-sm text-ink-700">
+            Het meertalig cliëntportaal (NL/EN/TR/AR/DE + PL/UK), het collega-netwerk met
+            buddy-/intervisie-matching en lotgenoten-support, en de modulekaart met live-statuslogica.
+            Wij doorlopen ze in uw eigen zorgproces — geen scripted demo.
+          </p>
+          <div class="mt-3 text-sm">
+            <a href="/oplossing" class="text-sindzo-700 hover:underline font-medium">→ Volledige modulekaart</a>
+          </div>
+        </div>
       </div>
 
       <p class="mt-10 text-sm text-ink-500">

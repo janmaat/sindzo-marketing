@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Transactionele pagina (na demo-formulier-submit) — geen waarde voor
+# zoekresultaten en mogelijk verwarrend als losse landing page.
+Disallow: /bedankt
+
 Sitemap: https://sindzo.nl/sitemap-index.xml

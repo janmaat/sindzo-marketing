@@ -12,7 +12,36 @@ export default defineConfig({
   integrations: [
     tailwind({ applyBaseStyles: false }),
     mdx(),
-    sitemap(),
+    sitemap({
+      // Hint aan crawlers welke pagina's prioriteit hebben. Transactionele
+      // pagina's (bedankt, demo-form-result) sluiten we uit; legal-pagina's
+      // krijgen lage prio. Productpagina's en kennisbank-artikelen tussen
+      // 0.7-1.0.
+      filter: (page) => !page.includes('/bedankt'),
+      serialize(item) {
+        const url = new URL(item.url);
+        const path = url.pathname;
+        let priority = 0.7;
+        let changefreq = 'monthly';
+        if (path === '/' || path === '') {
+          priority = 1.0;
+          changefreq = 'weekly';
+        } else if (['/oplossing', '/vergelijking', '/prijzen', '/integraties', '/trust'].includes(path)) {
+          priority = 0.9;
+          changefreq = 'weekly';
+        } else if (path.startsWith('/voor/') || path === '/voor') {
+          priority = 0.8;
+          changefreq = 'monthly';
+        } else if (path.startsWith('/kennisbank/')) {
+          priority = 0.7;
+          changefreq = 'monthly';
+        } else if (['/privacy', '/voorwaarden', '/cookies'].includes(path)) {
+          priority = 0.3;
+          changefreq = 'yearly';
+        }
+        return { ...item, priority, changefreq };
+      },
+    }),
   ],
   build: {
     inlineStylesheets: 'auto',
