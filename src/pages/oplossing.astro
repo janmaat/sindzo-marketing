@@ -32,7 +32,7 @@ const groups: ModuleGroup[] = [
         features: ['Episode of Care', 'Anamnese + Allergieën', 'CIZ/Wmo-indicaties', 'BgZ-conform'], status: 'live' },
       { icon: '📝', title: 'SOEP-rapportage', body: 'AI-pre-fill, spraakinvoer, automatische samenvatting en correcties-trail.',
         features: ['Spraak-naar-tekst', 'AI-pre-fill', 'Verbeter-trail', 'Pin & redact'], status: 'live' },
-      { icon: '🎯', title: 'Omaha Zorgplan', body: 'Volledig Omaha-systeem met problemen, doelen, interventies en versie-snapshots.', status: 'live' },
+      { icon: '🎯', title: 'Omaha Zorgplan', body: 'Volledig Omaha-systeem met problemen, doelen, interventies en versie-snapshots. Plus: cliëntformulering + mantelzorgperspectief naast professionele formulering, SMART-doelen met streefdatum, en risicoprofielen-engine (val/decubitus/ondervoeding/delier) die automatisch op metingen draait.', status: 'live' },
       { icon: '🧠', title: 'Vragenlijsten-engine', body: 'PREM/MIC/BEM-engine met flexibele schalen en geautomatiseerde verspreiding.', status: 'live' },
       { icon: '👥', title: 'Groepszorg', body: 'Dagbesteding en dagbehandeling — activiteiten, aanwezigheid, foto\'s en rapportages.', status: 'live' },
       { icon: '🤝', title: 'MDO + cliëntlogistiek', body: 'Multidisciplinair overleg, agenda-templates, actiepunten en intake-flow.', status: 'live' },
@@ -133,6 +133,15 @@ const groups: ModuleGroup[] = [
       { icon: '🤖', title: 'AI Act-register', body: 'Classificatie en risicodocumentatie van AI-systemen conform de EU AI Act — vereist voor hoog-risico toepassingen.', status: 'live' },
       { icon: '📢', title: 'Klokkenluidersregeling (Wbk)', body: 'Wet bescherming klokkenluiders-flow voor organisaties >50 medewerkers — vertrouwelijk meldkanaal, behandeltermijnen en non-retaliatie-borging. Bewust gescheiden van VIM-incidenten.', status: 'live' },
       { icon: '🗳️', title: 'Cliëntenraad (WMCZ 2018)', body: 'Ondersteuning voor wettelijk verplichte cliëntenraad bij >25 cliënten: adviesaanvragen, instemmingsrecht-procedures, jaarverslag en raadsleden-administratie.', status: 'live' },
+    ],
+  },
+  {
+    group: 'Welzijn medewerker — uniek in NL',
+    intro: 'Wat geen NL-concurrent biedt (marktscan 2026-05-29): peer-support tussen collega\'s, strikt gescheiden van HR. Buitenlands bewijs voor retentie-effect (NHS RISE: +20%).',
+    modules: [
+      { icon: '🤝', title: 'Collega-netwerk (buddy + intervisie)', body: 'Zelf-aanmelden voor onboarding-buddy, internationale-instroom-buddy, intervisie- of sparring-partner. Regelgebaseerde matching op thema, taal en beschikbaarheid. Geen welzijns-/gezondheidsdata in fase 1 — geen HR-inzage.', status: 'wip' },
+      { icon: '🌍', title: 'Internationale-instroom-buddy', body: 'Hardgecodeerde meertalige UI (NL/EN/TR/AR/PL/UK) vanaf dag 1, zodat internationaal geworven verpleegkundigen direct in eigen taal werken.', status: 'wip' },
+      { icon: '💬', title: 'Lotgenoten-support (vertrouwelijk)', body: 'Anoniem aanmelden op welzijnsthema (werkdruk, burn-out, rouw na incident, mantelzorg, re-integratie) met besloten 1-op-1-kanaal. Crisis-escalatie naar Vertrouwenspersoon — nooit HR. Vereist DPIA-afronding.', status: 'roadmap' },
     ],
   },
   {
