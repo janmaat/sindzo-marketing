@@ -1,0 +1,77 @@
+# Apache fallback voor Plesk waar nginx als reverse proxy naar Apache draait.
+# De nginx-laag pakt 99% van de requests af; deze .htaccess vangt de rest.
+# Wordt door Astro automatisch mee gekopieerd naar dist/.
+
+# ----- HTTPS afdwingen -----
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Force HTTPS — Plesk zet HTTPS-detectie via X-Forwarded-Proto bij nginx-proxy.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # Directory-requests intern serven als index.html — voorkomt 301 van
+  # /demo → /demo/ door Apache's DirectorySlash. Astro draait met
+  # trailingSlash: 'never', dus de canonical URL is zonder slash. Deze
+  # interne rewrite haalt dat doel zonder extra round-trip.
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*?)/?$ /$1/index.html [L]
+
+  # Canonical: trailing slash weg op niet-directory-paden
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+  # Extensionless URLs zonder bestaande directory: /foo → /foo/index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
+  RewriteRule ^(.+?)/?$ $1/index.html [L]
+</IfModule>
+
+# ----- Compressie -----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml font/ttf application/x-font-ttf
+</IfModule>
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/xml
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/json application/xml
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml font/ttf
+</IfModule>
+
+# ----- Cache-headers -----
+<IfModule mod_headers.c>
+  # Astro fingerprint-assets (in /_astro/) + fonts — far-future cache + immutable.
+  # NB: <Location> is server-config-only; in .htaccess-context geeft het 500.
+  # <FilesMatch> werkt wél in .htaccess en dekt alle JS/CSS/font-extensies.
+  <FilesMatch "\.(js|css|woff2|woff|ttf|otf)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # HTML mag nooit langer dan een paar minuten cachen — anders zien
+  # bezoekers oude versies na een deploy.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+
+  # Security headers
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  # X-Frame-Options voor oudere browsers; CSP frame-ancestors voor moderne
+  Header always set X-Frame-Options "DENY"
+</IfModule>
+
+# ----- MIME-types die Apache standaard mist -----
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+</IfModule>
+
+# ----- 404-pagina -----
+ErrorDocument 404 /404.html
