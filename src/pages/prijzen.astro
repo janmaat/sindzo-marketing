@@ -166,64 +166,106 @@ import Cta from '../components/Cta.astro';
     </div>
   </section>
 
+  {/* Herzien 2026-08-17. De vorige versie rekende elke leverancier om naar "per
+      medewerker per maand" bij een aangenomen 8 cliënten per medewerker. Dat gaf
+      Nedap €184 — vijf keer wat een organisatie van 50-500 medewerkers betaalt,
+      omdat die €23 een zzp-resellertarief is terwijl Nedap zelf een schaalbaar
+      pay-per-use-model publiceert zonder eenheidsprijs. En die caseload-ratio had
+      geen bron: V&VN, Movisie en het NJi zeggen alle drie dat er geen vaste ratio
+      bestaat. Een concurrent vijf keer te duur voorstellen op een pagina die
+      eerlijkheid als onderscheid verkoopt, is het slechtst mogelijke ruilmiddel —
+      onze kopers hebben Nedap-offertes op hun bureau liggen.
+
+      Nu: elke leverancier in zijn eigen eenheid, met wat hij zélf publiceert, en
+      de rekenoefening vervangen door de vraag die er werkelijk toe doet. Elke
+      regel is op 2026-08-17 bij de bron nagetrokken. */}
   <section class="container-prose py-16 border-t border-ink-100">
     <div class="max-w-3xl">
-      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Vergelijk met per-cliënt-modellen</h2>
-      <p class="mt-3 text-ink-700">
-        De meeste VVT-marktleiders rekenen <em>per actief cliëntdossier</em>, niet per medewerker. Dat lijkt goedkoop op papier,
-        maar bij een gemiddelde caseload loopt het snel op. Hieronder een vereenvoudigde rekenoefening per medewerker per maand
-        bij ca. 8 cliënten per medewerker — uw werkelijke ratio bepalen we samen.
+      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Hoe dit zich verhoudt tot andere modellen</h2>
+      <p class="mt-3 text-ink-700 leading-relaxed">
+        Wij rekenen per actieve medewerker. De meeste partijen in de langdurige zorg rekenen
+        per actief cliëntdossier, en in de GGZ komt betalen per behandelaar of per seat plus
+        een deel van de omzet ook voor. Die modellen zijn niet rechtstreeks vergelijkbaar: wat
+        voordelig uitpakt hangt af van hoeveel cliënten één medewerker gemiddeld draagt, en dat
+        verschilt sterk per organisatie.
+      </p>
+      <p class="mt-3 text-ink-700 leading-relaxed">
+        Daarom zetten wij hier geen omgerekend bedrag neer. Hieronder staat per leverancier wat
+        hij <em>zelf</em> publiceert, in zijn eigen eenheid.
       </p>
     </div>
     <div class="mt-8 overflow-x-auto rounded-xl border border-ink-100 bg-white">
       <table class="w-full text-sm">
         <thead class="bg-ink-100/50 text-left text-xs uppercase tracking-wider text-ink-500">
           <tr>
-            <th class="px-4 py-3 font-semibold">Model</th>
-            <th class="px-4 py-3 font-semibold">Publieke prijs</th>
-            <th class="px-4 py-3 font-semibold">Per medewerker / maand (8 cliënten)</th>
+            <th class="px-4 py-3 font-semibold">Leverancier</th>
+            <th class="px-4 py-3 font-semibold">U betaalt per</th>
+            <th class="px-4 py-3 font-semibold">Gepubliceerd tarief</th>
             <th class="px-4 py-3 font-semibold">Bron</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-ink-100 text-ink-700">
           <tr class="bg-greensoft/40">
             <td class="px-4 py-3 font-semibold text-curanta-900">Curanta Compliance Pro</td>
-            <td class="px-4 py-3">€34 / medewerker</td>
-            <td class="px-4 py-3 font-semibold text-curanta-900">€34</td>
+            <td class="px-4 py-3">actieve medewerker</td>
+            <td class="px-4 py-3 font-semibold text-curanta-900">€34 per maand</td>
             <td class="px-4 py-3 text-xs text-ink-500">Deze pagina</td>
           </tr>
           <tr>
-            <td class="px-4 py-3">Nedap Ons (via partner)</td>
-            <td class="px-4 py-3">€23 / cliëntdossier</td>
-            <td class="px-4 py-3">~€184</td>
-            <td class="px-4 py-3 text-xs text-ink-500">zzpondersteuning.nl</td>
+            <td class="px-4 py-3">Nedap Ons</td>
+            <td class="px-4 py-3">actief cliëntdossier</td>
+            <td class="px-4 py-3">
+              Geen eenheidsprijs openbaar. Nedap noemt het model schaalbaar en publiceert
+              alleen een minimum van €25 per maand.
+            </td>
+            <td class="px-4 py-3 text-xs text-ink-500">nedap-ons.nl</td>
           </tr>
           <tr>
             <td class="px-4 py-3">Octaaf Thuiszorgsoftware</td>
-            <td class="px-4 py-3">€27,83 basis + €2,79 / cliënt</td>
-            <td class="px-4 py-3">~€50 (gedeeld), ~€22 (per medewerker bij 10 mw)</td>
+            <td class="px-4 py-3">licentie + cliënt</td>
+            <td class="px-4 py-3">
+              €27,83 per maand + €2,79 per cliënt. Onbeperkt aantal gebruikers inbegrepen.
+            </td>
             <td class="px-4 py-3 text-xs text-ink-500">octaafthuiszorgsoftware.nl</td>
           </tr>
           <tr>
-            <td class="px-4 py-3">Karify (GGZ + eHealth)</td>
-            <td class="px-4 py-3">€29,95 / professional</td>
-            <td class="px-4 py-3">~€30</td>
-            <td class="px-4 py-3 text-xs text-ink-500">karify.nl</td>
+            <td class="px-4 py-3">Karify (GGZ, eHealth)</td>
+            <td class="px-4 py-3">professional</td>
+            <td class="px-4 py-3">
+              Vanaf €29,95 per maand. Boven 250 medewerkers op aanvraag; modules deels per
+              gebruik.
+            </td>
+            <td class="px-4 py-3 text-xs text-ink-500">karify.com</td>
           </tr>
           <tr>
             <td class="px-4 py-3">Curasoft (GGZ)</td>
-            <td class="px-4 py-3">€26 / seat + 1% omzet, of €106 flat</td>
-            <td class="px-4 py-3">~€26 + omzetdeel, of €106</td>
+            <td class="px-4 py-3">gebruiker, plus beheerder</td>
+            <td class="px-4 py-3">
+              €106 per gebruiker, of €26 per gebruiker + 1% van de maandomzet. Beheerderslicentie
+              apart: €185 respectievelijk €104.
+            </td>
             <td class="px-4 py-3 text-xs text-ink-500">curasoft.nl</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="mt-4 text-xs text-ink-500">
-      Cijfers afgeleid uit publieke prijslijsten (mei 2026). De vergelijking is illustratief — daadwerkelijke
-      verschillen hangen af van caseload-ratio, modulekeuze en implementatiekosten. We maken graag een offerte
-      met uw eigen aantallen.
+    <p class="mt-4 max-w-3xl text-xs text-ink-500">
+      Elk tarief hierboven is op 17 augustus 2026 nagetrokken bij de leverancier zelf. Wij zetten
+      hier bewust geen omrekening naar één noemer: dat vraagt een aanname over het aantal
+      cliënten per medewerker, en V&amp;VN, Movisie en het Nederlands Jeugdinstituut stellen alle
+      drie dat daar geen vaste norm voor bestaat. Een vergelijking op een aanname die wij zelf
+      kiezen, is geen vergelijking. Ziet u een fout in deze tabel, dan corrigeren wij die binnen
+      1 werkdag — <a href="mailto:hello@curanta.nl" class="text-curanta-700 hover:underline">hello@curanta.nl</a>.
     </p>
+    <div class="mt-8 rounded-2xl border border-ink-100 bg-curanta-50 p-6 max-w-3xl">
+      <h3 class="font-display text-lg font-semibold text-ink-900">Wat het voor ú betekent</h3>
+      <p class="mt-2 text-sm text-ink-700 leading-relaxed">
+        Geef ons uw aantal medewerkers en uw aantal actieve cliënten, en wij rekenen het door
+        tegen uw huidige contract. Valt dat in het voordeel van uw huidige leverancier uit, dan
+        zeggen wij dat — dat is goedkoper voor ons dan een klant die na een jaar spijt heeft.
+      </p>
+      <a href="/contact" class="mt-4 inline-block btn-primary no-underline">Laat het doorrekenen</a>
+    </div>
   </section>
 
   <section class="container-prose py-16 border-t border-ink-100">
