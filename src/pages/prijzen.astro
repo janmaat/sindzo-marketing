@@ -94,6 +94,78 @@ import Cta from '../components/Cta.astro';
     </p>
   </section>
 
+  {/* Toegevoegd 2026-08-17. Onderzocht: in elk ECD-selectieadvies staat dat
+      organisaties de implementatie onderschatten en dat de eenmalige kosten vaak
+      zwaarder wegen dan de licentie. Onze tarieven stonden er wel, maar zonder
+      referentiekader — en juist het kader maakt ze pas een argument. Bewust een
+      vergelijking met een marktbandbreedte en niet met een genoemde concurrent:
+      dat laatste vraagt om gelijksoortige, verifieerbare cijfers per leverancier,
+      en die publiceert niemand in deze markt. */}
+  <section class="border-y border-ink-100 bg-curanta-50/60 py-16">
+    <div class="container-prose">
+      <div class="max-w-3xl">
+        <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Waar deze bedragen staan in de markt</h2>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          Een licentieprijs zegt weinig zonder de rest van de rekening. In selectietrajecten
+          gaat het mis op precies twee posten: de eenmalige implementatie, en de vraag wie de
+          migratie betaalt. Daarom staan die hier naast het abonnement.
+        </p>
+      </div>
+
+      <div class="mt-8 overflow-x-auto rounded-xl border border-ink-100 bg-white">
+        <table class="w-full text-sm">
+          <thead class="bg-ink-100/50 text-left text-xs uppercase tracking-wider text-ink-500">
+            <tr>
+              <th class="px-4 py-3 font-semibold">Kostenpost</th>
+              <th class="px-4 py-3 font-semibold">Gangbaar in de markt</th>
+              <th class="px-4 py-3 font-semibold">Bij Curanta</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-ink-100 text-ink-700">
+            <tr>
+              <td class="px-4 py-3">Abonnement per gebruiker per maand</td>
+              <td class="px-4 py-3">€50 – €90</td>
+              <td class="px-4 py-3 font-semibold text-curanta-900">€19 – €42 per actieve medewerker</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3">Eenmalige implementatie en training</td>
+              <td class="px-4 py-3">€4.000 – €5.000 bij kleinere trajecten, circa €15.000 bij grotere</td>
+              <td class="px-4 py-3 font-semibold text-curanta-900">inbegrepen in elk plan</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3">Migratie vanuit uw huidige ECD</td>
+              <td class="px-4 py-3">per geval, vaak nacalculatie</td>
+              <td class="px-4 py-3 font-semibold text-curanta-900">
+                Nedap Ons inbegrepen vanaf Compliance&nbsp;Pro; overig vaste prijs vooraf
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3">Exit-export bij opzegging</td>
+              <td class="px-4 py-3">wisselend, soms tegen kosten</td>
+              <td class="px-4 py-3 font-semibold text-curanta-900">geen exit-fee, JSON of CSV</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-4 max-w-3xl text-xs text-ink-500">
+        Marktcijfers uit publieke overzichten van ECD-kosten voor Nederlandse zorgaanbieders
+        (peildatum augustus 2026). Een bandbreedte, geen tarief van een specifieke leverancier —
+        de grote partijen in deze markt publiceren hun prijzen niet, dus een cijfer per
+        concurrent zou niet te verifiëren zijn. Wat u werkelijk betaalt hangt bij ons én bij hen
+        af van schaal, segment en modulekeuze.
+      </p>
+
+      <p class="mt-6 max-w-3xl text-sm text-ink-700 leading-relaxed">
+        Dat wij onderaan die bandbreedte zitten is een keuze, geen introductieactie: er zit geen
+        salesorganisatie, geen implementatieafdeling en geen accountmanagementlaag in onze
+        kosten. Wat dat betekent voor de verwachting die u van ons mag hebben, staat op
+        <a href="/cases" class="text-curanta-700 hover:underline">/cases</a> —
+        inclusief wat wij nog níét kunnen bieden.
+      </p>
+    </div>
+  </section>
+
   <section class="container-prose py-16 border-t border-ink-100">
     <div class="max-w-3xl">
       <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Vergelijk met per-cliënt-modellen</h2>
