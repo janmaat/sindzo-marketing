@@ -3,8 +3,8 @@ const links = [
   { label: 'Oplossing', href: '/oplossing' },
   { label: 'Voor wie', href: '/voor' },
   { label: 'Integraties', href: '/integraties' },
+  { label: 'Overstappen', href: '/overstappen' },
   { label: 'Trust Centre', href: '/trust' },
-  { label: 'Vergelijking', href: '/vergelijking' },
   { label: 'Prijzen', href: '/prijzen' },
 ];
 ---
@@ -20,7 +20,9 @@ const links = [
     </nav>
     <div class="flex items-center gap-3">
       <a href="/login" class="hidden sm:inline text-sm text-ink-700 hover:text-curanta-700 no-underline">Inloggen</a>
-      <a href="/demo" class="btn-primary no-underline">Demo aanvragen</a>
+      {/* Bewust naar de open demo-omgeving en niet naar het aanvraagformulier:
+          zelf kunnen inloggen is wat ons van de concurrentie onderscheidt. */}
+      <a href="/demo-omgeving" class="btn-primary no-underline">Bekijk de demo</a>
     </div>
   </div>
 </header>

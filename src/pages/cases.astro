@@ -2,56 +2,163 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 
-// Bewust eerlijke empty-state. Wij hebben geen cases om te delen totdat
-// onze early-access partners hun verhaal willen vertellen — verzonnen of
-// algemene "een grote zorgaanbieder uit Nederland"-cases voegen niets toe.
+// Deze pagina stond eerder als eerlijke empty-state, maar beloofde twee dingen
+// die niet waar zijn: een referentie-call met "een organisatie die Curanta al
+// gebruikt", en de suggestie dat er wél klanten zijn die alleen nog niets willen
+// zeggen. Er zijn nog geen klanten. Dat expliciet zeggen is geloofwaardiger dan
+// de "toonaangevende zorgorganisaties"-vaagheid van de concurrentie — en sinds
+// er een openbare demo-omgeving staat, is er ook een echt alternatief om
+// tegenover het ontbreken van referenties te zetten.
+// Zie docs/marktonderzoek-conversie-curanta-2026-08-17.md.
+
+const controleerbaar = [
+  {
+    titel: 'De applicatie zelf',
+    href: '/demo-omgeving',
+    linkLabel: 'Log zelf in',
+    body:
+      'Geen presentatie, geen video, geen begeleide rondleiding waarin wij bepalen wat u ziet. Drie portalen, werkende inloggegevens, verzonnen cliënten. Log in als planner en kijk of onze aannames op uw proces passen.',
+  },
+  {
+    titel: 'Wat het kost',
+    href: '/prijzen',
+    linkLabel: 'Bekijk de prijzen',
+    body:
+      'Onze tarieven staan online, per plan, met wat er wel en niet in zit. Geen enkele grote leverancier in deze markt publiceert een prijs — u moet het daar vragen en afwachten.',
+  },
+  {
+    titel: 'Waar wij achterlopen',
+    href: '/trust',
+    linkLabel: 'Naar het Trust Centre',
+    body:
+      'Per compliance-kader een eerlijk stoplicht: aantoonbaar, in uitvoering, of roadmap. Inclusief de punten waar wij nog niet zijn waar wij willen zijn. Geen inlog nodig, u mag het doorsturen aan uw inkoper of FG.',
+  },
+  {
+    titel: 'Hoe wij bouwen',
+    href: '/adr',
+    linkLabel: 'Lees de besluiten',
+    body:
+      'Onze architectuurbesluiten staan openbaar, met de afweging erbij. U kunt zien waarom iets zo werkt, en dus ook beoordelen of u die afwegingen deelt.',
+  },
+  {
+    titel: 'Hoe u er weer uit komt',
+    href: '/overstappen',
+    linkLabel: 'Import en exit-pad',
+    body:
+      'Import vanuit Nedap Ons, Ysis, SDB en Adapcare, en het exit-pad op dezelfde pagina. Wat u erin stopt, kunt u er ook weer uit halen — in JSON of CSV, zonder exit-fee.',
+  },
+  {
+    titel: 'Wat wij onderbouwen',
+    href: '/vergelijking',
+    linkLabel: 'Bekijk de vergelijking',
+    body:
+      'Waar wij vooruitlopen én waar wij achterlopen op Nedap Ons, PinkRoccade myNeva en Pluriform Zorg, met peildatum en bron per claim. Vindt u een fout, dan corrigeren wij die binnen 1 werkdag.',
+  },
+];
 ---
 <Base
-  title="Klantcases — Curanta"
-  description="Cases van zorgorganisaties die met Curanta werken — gepubliceerd zodra onze early-access partners hun verhaal willen delen."
+  title="Referenties — Curanta"
+  description="Wij hebben nog geen klantreferenties. Dit is wat u in plaats daarvan zelf kunt controleren: de werkende applicatie, de prijzen, ons Trust Centre en onze architectuurbesluiten."
 >
   <PageHero
-    eyebrow="Klantcases"
-    title="Cases volgen — zodra onze early-access partners hun verhaal willen delen."
-    subtitle="Wij geloven niet in verzonnen of geanonimiseerde 'een grote zorgaanbieder uit Nederland'-cases. Geen genoeg om te delen ≠ geen klanten — het betekent dat wij onze klanten niet onder druk zetten om referent te zijn vóór ze zelf vinden dat er iets te vertellen valt."
-  />
+    eyebrow="Referenties"
+    title="Wij hebben nog geen referenties."
+    subtitle="Dat is een reëel bezwaar en wij gaan er niet omheen praten. Curanta is in early access; er is nog geen zorgorganisatie die u kan vertellen hoe het is om drie jaar met ons te werken. Wat wij in plaats daarvan bieden is niet een verhaal, maar iets dat u zelf kunt nakijken."
+  >
+    <div slot="actions">
+      <a href="/demo-omgeving" class="btn-primary no-underline">Begin met zelf inloggen</a>
+    </div>
+  </PageHero>
+
+  <section class="container-prose py-16">
+    <div class="max-w-3xl">
+      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Zes dingen die u kunt controleren</h2>
+      <p class="mt-4 text-ink-700 leading-relaxed">
+        Een logo op een website zegt dat iemand een contract heeft ondertekend. Het zegt niet of
+        het systeem werkt, wat het kost, of u er weer uit komt. Hieronder staat wat u wél kunt
+        vaststellen zonder ons op ons woord te hoeven geloven.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {controleerbaar.map((c) => (
+        <article class="flex flex-col rounded-2xl border border-ink-100 bg-white p-6">
+          <h3 class="font-display text-lg font-semibold text-ink-900">{c.titel}</h3>
+          <p class="mt-3 flex-1 text-sm text-ink-700 leading-relaxed">{c.body}</p>
+          <a href={c.href} class="mt-5 text-sm font-medium text-curanta-700 no-underline hover:underline">
+            {c.linkLabel} →
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-y border-ink-100 bg-curanta-50/60 py-16">
+    <div class="container-prose">
+      <div class="max-w-3xl">
+        <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Wat u ervoor terugkrijgt als u nu instapt</h2>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          Vroeg instappen bij een nieuwe leverancier is een risico. Het hoort dus iets op te
+          leveren, en niet alleen korting. Dit is wat een founding partner bij ons krijgt:
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl border border-ink-100 bg-white p-6">
+          <h3 class="font-display text-lg font-semibold text-ink-900">Invloed op de roadmap</h3>
+          <p class="mt-3 text-sm text-ink-700 leading-relaxed">
+            Uw werkproces bepaalt mede wat wij eerst bouwen. Niet via een ideeënportaal met
+            stemmen, maar in gesprek met de persoon die het schrijft.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-ink-100 bg-white p-6">
+          <h3 class="font-display text-lg font-semibold text-ink-900">Tariefgarantie</h3>
+          <p class="mt-3 text-sm text-ink-700 leading-relaxed">
+            Het tarief waarop u instapt blijft gelden zolang u klant bent, ook wanneer onze
+            prijzen voor nieuwe klanten stijgen.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-ink-100 bg-white p-6">
+          <h3 class="font-display text-lg font-semibold text-ink-900">Geen overdracht</h3>
+          <p class="mt-3 text-sm text-ink-700 leading-relaxed">
+            De persoon met wie u praat in de aanloop blijft uw aanspreekpunt na livegang. Geen
+            implementatieteam dat het overneemt, geen ticketsysteem ertussen.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-8 max-w-3xl">
+        <h3 class="font-display text-lg font-semibold text-ink-900">En wat wij van u vragen</h3>
+        <p class="mt-3 text-ink-700 leading-relaxed">
+          Meekijken en eerlijk zijn. Loop uw eigen processen na — een intake, een dienst, een
+          maandafsluiting — en vertel ons waar het schuurt. Wij zijn niet op zoek naar een lijst
+          ontbrekende functies maar naar de plekken waar Curanta niet past op hoe u werkt. Dat is
+          de ruil.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <section class="container-prose py-16">
     <div class="grid gap-8 md:grid-cols-2">
       <div class="rounded-2xl border border-ink-100 bg-white p-8">
-        <h2 class="font-display text-xl font-semibold text-ink-900">Wat we wél kunnen tonen</h2>
-        <p class="mt-3 text-ink-700">
-          Onze status, architectuur, integraties en compliance staan op:
+        <h2 class="font-display text-xl font-semibold text-ink-900">Wanneer wij hier wél cases neerzetten</h2>
+        <p class="mt-3 text-ink-700 leading-relaxed">
+          Zodra een partner zelf vindt dat er iets te vertellen valt. Wij maken de tekst samen,
+          u keurt elke alinea goed, en publicatie gebeurt pas als u dat prettig vindt. Wij betalen
+          geen referenten en geven geen korting voor een case — een verhaal moet uw eigen reden
+          hebben, anders is het advertentie.
         </p>
-        <ul class="mt-4 space-y-2 text-sm">
-          <li><a href="/trust" class="text-curanta-700 hover:underline">/trust</a> — eerlijke status per compliance-kader</li>
-          <li><a href="/integraties" class="text-curanta-700 hover:underline">/integraties</a> — wat live is en wat in afronding</li>
-          <li><a href="/oplossing" class="text-curanta-700 hover:underline">/oplossing</a> — modules met live/wip-stoplichten</li>
-          <li><a href="/procurement" class="text-curanta-700 hover:underline">/procurement</a> — DPA, security-pack, architectuur</li>
-        </ul>
       </div>
 
-      <div class="rounded-2xl border border-ink-100 bg-curanta-50 p-8">
-        <h2 class="font-display text-xl font-semibold text-ink-900">Wilt u zelf eerst praten met een early-access partner?</h2>
-        <p class="mt-3 text-ink-700">
-          Wij kunnen u in contact brengen met een organisatie die Curanta al gebruikt — met hun
-          uitdrukkelijke toestemming, voor een gesprek tussen u en hen direct. Geen scripted
-          ervaringen, geen scheidsrechter.
+      <div class="rounded-2xl border border-ink-100 bg-white p-8">
+        <h2 class="font-display text-xl font-semibold text-ink-900">Liever gewoon een gesprek</h2>
+        <p class="mt-3 text-ink-700 leading-relaxed">
+          Dat kan ook. Stel de vragen die u aan een referentie zou stellen, dan krijgt u ze van
+          ons — inclusief het antwoord dat een andere leverancier beter past, als dat zo is.
         </p>
-        <a href="/contact" class="mt-5 inline-block btn-primary no-underline">Vraag een referentie-call aan</a>
+        <a href="/contact" class="mt-5 inline-block btn-secondary no-underline">Stel uw vraag</a>
       </div>
-    </div>
-
-    <div class="mt-16 rounded-2xl border border-ink-100 bg-ink-100/50 p-8">
-      <h3 class="font-display text-lg font-semibold text-ink-900">Bent u zelf early-access partner en wilt u uw verhaal vertellen?</h3>
-      <p class="mt-3 text-sm text-ink-700 max-w-2xl">
-        Wij maken samen met u een case-tekst, u keurt elke alinea af, en hij wordt pas
-        gepubliceerd als u dat zelf prettig vindt. Wij betalen geen referenten en bieden geen
-        kortingen voor cases — een verhaal moet uw eigen reden hebben.
-      </p>
-      <a href="mailto:cases@curanta.nl" class="mt-4 inline-block text-sm font-medium text-curanta-700 no-underline hover:underline">
-        cases@curanta.nl →
-      </a>
     </div>
   </section>
 </Base>

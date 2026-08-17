@@ -26,7 +26,11 @@ export default defineConfig({
         if (path === '/' || path === '') {
           priority = 1.0;
           changefreq = 'weekly';
-        } else if (['/oplossing', '/vergelijking', '/prijzen', '/integraties', '/trust'].includes(path)) {
+        } else if (['/oplossing', '/vergelijking', '/prijzen', '/integraties', '/trust',
+                    // Toegevoegd 2026-08-17: de open demo-omgeving en de overstap-pagina
+                    // zijn onze twee sterkste conversiemiddelen, dus dezelfde prioriteit
+                    // als de productpagina's.
+                    '/demo-omgeving', '/overstappen', '/cases'].includes(path)) {
           priority = 0.9;
           changefreq = 'weekly';
         } else if (path.startsWith('/voor/') || path === '/voor') {
