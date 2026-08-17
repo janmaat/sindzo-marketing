@@ -6,19 +6,41 @@ interface Props {
   align?: 'left' | 'center';
 }
 const { eyebrow, title, subtitle, align = 'left' } = Astro.props;
-const alignClass = align === 'center' ? 'mx-auto text-center max-w-3xl' : 'max-w-3xl';
+
+// Kop en lopende tekst krijgen bewust een verschillende maximumbreedte.
+// Eerder hing alles aan één max-w-3xl (768px) binnen een container van 1152px:
+// dat liet niet alleen een derde van de breedte ongebruikt, het brak ook korte
+// koppen af — "Vraag, vragenlijst of gewoon overleg." eindigde met "overleg."
+// alleen op regel twee. Een display-kop van 48px mag breder lopen dan
+// broodtekst; broodtekst niet, want boven ~75 tekens per regel raakt het oog de
+// volgende regelbegin kwijt. Vandaar 4xl (896px) voor de kop en 2xl (672px)
+// voor de paragraaf — dezelfde verhouding die homepage-Hero al aanhoudt.
+//
+// Niet max-w-prose gebruiken, ook al staat die als token in tailwind.config:
+// dat is 68ch, en de ch-eenheid meet de breedte van het cijfer 0. In Plus
+// Jakarta Sans is dat 0,73em, dus 68ch komt op 896px uit — even breed als de
+// kop, en ruim 85 tekens per regel in plaats van de bedoelde 68. Gemeten, niet
+// aangenomen.
+const wrapper = align === 'center' ? 'mx-auto text-center' : '';
+const titelBreedte = align === 'center' ? 'mx-auto max-w-4xl' : 'max-w-4xl';
+const tekstBreedte = align === 'center' ? 'mx-auto max-w-2xl' : 'max-w-2xl';
 ---
 <section class="border-b border-ink-300 bg-gradient-to-b from-curanta-50 to-cream">
   <div class="container-prose py-14 sm:py-20">
-    <div class={alignClass}>
+    <div class={wrapper}>
       {eyebrow && (
         <span class="eyebrow">{eyebrow}</span>
       )}
-      <h1 class="mt-3 font-display text-4xl font-bold leading-tight tracking-tightish text-ink-900 sm:text-5xl">
+      {/* text-balance verdeelt de regels gelijkmatig in plaats van vol te lopen
+          tot de laatste past. Zonder dat strandt bij elke vaste breedte wéér een
+          andere titel met één woord op regel twee — "overleg." op /contact,
+          "blijven." op /overstappen. text-pretty doet hetzelfde voor de laatste
+          regel van de lopende tekst. */}
+      <h1 class={`mt-3 font-display text-4xl font-bold leading-tight tracking-tightish text-balance text-ink-900 sm:text-5xl ${titelBreedte}`}>
         {title}
       </h1>
       {subtitle && (
-        <p class="mt-5 text-lg leading-relaxed text-ink-700">{subtitle}</p>
+        <p class={`mt-5 text-lg leading-relaxed text-pretty text-ink-700 ${tekstBreedte}`}>{subtitle}</p>
       )}
       <div class="mt-6">
         <slot name="actions" />
