@@ -21,8 +21,16 @@
 }
 
 @layer components {
+  /* Was max-w-6xl (1152px). Gemeten op 1920px liet dat 768px marge over — 40%
+     van het scherm — terwijl de vijfkoloms-vergelijkingstabellen op exact 1086px
+     uitkwamen en dus geknepen zaten. 1400px geeft die tabellen ruim 250px extra
+     en brengt kaarten in een driekoloms-raster van 349 naar ~430px, wat genoeg
+     is voor een kop plus twee regels zonder afbreken. Breder dan dit gaat ten
+     koste van de kaartinhoud: die wordt dan sparser in plaats van beter.
+     Lopende tekst blijft apart afgetopt (zie PageHero) — dit verruimt de
+     lay-out, niet de regellengte. */
   .container-prose {
-    @apply mx-auto max-w-6xl px-6 sm:px-8;
+    @apply mx-auto max-w-site px-6 sm:px-8;
   }
   /* Primaire CTA — fris groene pill met donkere tekst (one-pager-stijl). */
   .btn-primary {

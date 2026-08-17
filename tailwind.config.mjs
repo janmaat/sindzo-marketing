@@ -51,7 +51,16 @@ export default {
         display: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       maxWidth: {
+        // Breedte van de site-container; zie de toelichting bij .container-prose
+        // in global.css voor waarom 1400 en niet breder of smaller.
+        site: '1400px',
+        // Let op: 68ch is hier géén 68 tekens. De ch-eenheid meet de breedte van
+        // het cijfer 0, en dat is 0,73em in Plus Jakarta Sans — dus 68ch komt op
+        // 16px-tekst uit rond de 100 tekens per regel. Gebruik voor lopende tekst
+        // liever max-w-2xl (672px) of read (hieronder), niet max-w-prose.
         prose: '68ch',
+        // Comfortabele leesmaat voor 16px broodtekst: ~70 tekens per regel.
+        read: '580px',
       },
       letterSpacing: {
         tightish: '-0.015em',

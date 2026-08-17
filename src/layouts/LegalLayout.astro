@@ -51,7 +51,13 @@ const dateNl = new Date(lastUpdated).toLocaleDateString('nl-NL', { day: 'numeric
           </ol>
         </nav>
       </aside>
-      <article class="prose-content max-w-prose text-ink-700 leading-relaxed">
+      {/* max-w-read (580px) en niet max-w-prose: die laatste is 68ch, en de
+          ch-eenheid meet het cijfer 0 — 0,73em in dit font — waardoor 68ch bij
+          16px-tekst rond de 100 tekens per regel uitkomt. Juist bij een
+          privacyverklaring of voorwaarden die iemand echt moet doorlezen is dat
+          te lang. De extra containerbreedte gaat hier dus naar witruimte naast
+          de kolom, niet naar langere regels. */}
+      <article class="prose-content max-w-read text-ink-700 leading-relaxed">
         <slot />
       </article>
     </div>
