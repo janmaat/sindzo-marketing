@@ -69,7 +69,7 @@ const phases = [
 const principles = [
   {
     title: 'Multidisciplinaire projectgroep',
-    body: 'Bestuur, I&A, zorginhoud, FG én eindgebruikers vanaf dag 1. Coheza wijst een NL-implementatieleider toe, geen ticketsysteem.',
+    body: 'Bestuur, I&A, zorginhoud, FG én eindgebruikers vanaf dag 1. Curanta wijst een NL-implementatieleider toe, geen ticketsysteem.',
   },
   {
     title: 'Procesfit boven feature-fit',
@@ -86,7 +86,7 @@ const principles = [
 ];
 ---
 <Base
-  title="Implementatie-aanpak | Coheza"
+  title="Implementatie-aanpak | Curanta"
   description="14-weken-uitrol met multidisciplinaire projectgroep, super-user-aanpak en gefaseerde livegang. Geen big-bang, geen ticketsysteem."
 >
   <PageHero
@@ -129,14 +129,14 @@ const principles = [
           <li class="rounded-xl border border-ink-100 bg-white p-6">
             <div class="grid gap-4 sm:grid-cols-[120px_180px_1fr] sm:items-start">
               <div>
-                <div class="font-display text-xs font-semibold uppercase tracking-wider text-sindzo-700">Fase {i + 1}</div>
+                <div class="font-display text-xs font-semibold uppercase tracking-wider text-curanta-700">Fase {i + 1}</div>
                 <div class="text-sm font-semibold text-ink-900">{p.week}</div>
               </div>
               <div class="font-display text-lg font-semibold text-ink-900">{p.title}</div>
               <ul class="space-y-1.5 text-sm text-ink-700">
                 {p.deliverables.map((d) => (
                   <li class="flex items-start gap-2">
-                    <span class="mt-1.5 inline-block h-1.5 w-1.5 rounded-full bg-sindzo-500"></span>
+                    <span class="mt-1.5 inline-block h-1.5 w-1.5 rounded-full bg-curanta-500"></span>
                     <span>{d}</span>
                   </li>
                 ))}

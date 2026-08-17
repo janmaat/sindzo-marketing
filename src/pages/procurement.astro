@@ -24,7 +24,7 @@ interface Resource {
 // in slingeren die later moeten worden teruggeroepen. Alleen de API-pagina is een
 // directe link (interne pagina, geen download).
 const onRequest = (subject: string) =>
-  `mailto:procurement@coheza.nl?subject=${encodeURIComponent('Aanvraag procurement-document: ' + subject)}`;
+  `mailto:procurement@curanta.nl?subject=${encodeURIComponent('Aanvraag procurement-document: ' + subject)}`;
 
 const resources: Resource[] = [
   {
@@ -45,13 +45,13 @@ const resources: Resource[] = [
     category: 'Privacy & security',
     title: 'Verwerkersovereenkomst (DPA)',
     body: 'Onze standaard-DPA. AP-conform model met expliciete sub-verwerkers-bijlage. Geen NDA nodig om in te zien.',
-    file: onRequest('DPA Coheza'),
+    file: onRequest('DPA Curanta'),
     format: 'Op aanvraag · binnen 1 werkdag',
   },
   {
     category: 'Privacy & security',
     title: 'DPIA-template (uw eigen)',
-    body: 'Template voor uw eigen DPIA bij Coheza-aanschaf. Met voorbeeld-risicoanalyse en mitigerende maatregelen.',
+    body: 'Template voor uw eigen DPIA bij Curanta-aanschaf. Met voorbeeld-risicoanalyse en mitigerende maatregelen.',
     file: onRequest('DPIA-template zorgaanbieder'),
     format: 'Op aanvraag · ~1 werkdag',
   },
@@ -116,7 +116,7 @@ const resources: Resource[] = [
 const categories = Array.from(new Set(resources.map(r => r.category)));
 ---
 <Base
-  title="Procurement Centre — beslis-versnellers | Coheza"
+  title="Procurement Centre — beslis-versnellers | Curanta"
   description="PVE-template, DPA, security-pack, architectuurplaat, SLA, ROI-rekenhulp — alles wat uw inkoop-, FG- en I&A-team nodig heeft. Geen lead-gate."
 >
   <PageHero
@@ -153,11 +153,11 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
             </div>
             <p class="mt-2 text-sm text-ink-700 leading-relaxed">{r.body}</p>
             {r.file.startsWith('mailto:') ? (
-              <a href={r.file} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-sindzo-700 no-underline hover:underline">
+              <a href={r.file} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-curanta-700 no-underline hover:underline">
                 <span>✉ Aanvragen via e-mail</span>
               </a>
             ) : (
-              <a href={r.file} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-sindzo-700 no-underline hover:underline">
+              <a href={r.file} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-curanta-700 no-underline hover:underline">
                 <span>→ Bekijken</span>
               </a>
             )}
@@ -175,8 +175,8 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
         Mail het ons — wij voegen het toe of leveren maatwerk binnen 1 werkdag.
       </p>
       <div class="mt-5 flex flex-wrap gap-3">
-        <a href="mailto:procurement@coheza.nl" class="btn-primary no-underline">procurement@coheza.nl</a>
-        <a href="mailto:trust@coheza.nl" class="btn-secondary no-underline">trust@coheza.nl (voor security)</a>
+        <a href="mailto:procurement@curanta.nl" class="btn-primary no-underline">procurement@curanta.nl</a>
+        <a href="mailto:trust@curanta.nl" class="btn-secondary no-underline">trust@curanta.nl (voor security)</a>
       </div>
     </div>
   </section>

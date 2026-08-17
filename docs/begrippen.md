@@ -1,6 +1,6 @@
-# Begrippenlijst — Coheza marketingsite
+# Begrippenlijst — Curanta marketingsite
 
-Verklaringen bij afkortingen, normen en jargon die op de Coheza-pagina's voorkomen.
+Verklaringen bij afkortingen, normen en jargon die op de Curanta-pagina's voorkomen.
 Bedoeld als naslag voor sales, content-schrijvers en nieuwe teamleden — niet voor
 publicatie zoals het hier staat (kan wel als basis dienen voor een publieke
 woordenlijst).
@@ -87,7 +87,7 @@ woordenlijst).
 
 | Afkorting | Voluit | Toelichting |
 |---|---|---|
-| **FHIR** | Fast Healthcare Interoperability Resources | HL7-standaard voor zorg-data-uitwisseling; Coheza gebruikt versie R4 |
+| **FHIR** | Fast Healthcare Interoperability Resources | HL7-standaard voor zorg-data-uitwisseling; Curanta gebruikt versie R4 |
 | **HL7** | Health Level Seven | Internationale standaardisatie-organisatie voor zorgcommunicatie |
 | **Zib** | Zorginformatiebouwsteen | Nederlandse FHIR-profielen, beheerd door Nictiz |
 | **BgZ** | Basisgegevensset Zorg | Minimale dataset voor overdracht tussen zorgverleners |
@@ -143,7 +143,7 @@ woordenlijst).
 | **PRISMA** | Prevention and Recovery Information System for Monitoring and Analysis | Analyse-methodiek voor incidenten in de zorg |
 | **RYB** | Rood-Geel-Bruin | Wond­classificatie­schema |
 | **EPUAP** | European Pressure Ulcer Advisory Panel | Internationale classificatie voor decubitus |
-| **BEM** | (vragenlijst-categorie) | Beleving/Ervaring-Meting (intern Coheza-label) |
+| **BEM** | (vragenlijst-categorie) | Beleving/Ervaring-Meting (intern Curanta-label) |
 | **OPP** | Ondersteuningsplan / Perspectiefplan | Plan voor cliënten in de gehandicaptenzorg |
 | **AVB** | (binnen GHZ) | Algemene Vragenlijst Beweegredenen / vergelijkbare assessment |
 
@@ -203,7 +203,7 @@ woordenlijst).
 | **CAIQ** | Consensus Assessments Initiative Questionnaire | Cloud Security Alliance-vragenlijst, ~300 controle­vragen |
 | **SIG** | Standardized Information Gathering | Shared Assessments-vragenlijst voor leverancier-risico |
 | **BSI C5** | Bundesamt für Sicherheit in der Informationstechnik — Cloud Computing Compliance Criteria Catalogue | Duitse cloud-security-baseline |
-| **NDA** | Non-Disclosure Agreement / Geheim­houdings­verklaring | Coheza levert procurement-documenten **zonder** NDA-vereiste |
+| **NDA** | Non-Disclosure Agreement / Geheim­houdings­verklaring | Curanta levert procurement-documenten **zonder** NDA-vereiste |
 | **KvK** | Kamer van Koophandel | Nederlands handelsregister |
 | **BTW** | Belasting Toegevoegde Waarde | Nederlandse omzetbelasting |
 
@@ -265,7 +265,7 @@ woordenlijst).
 |---|---|---|
 | **AI** | Artificial Intelligence / Kunstmatige Intelligentie | Generieke term |
 | **LLM** | Large Language Model | Generatieve AI-tekstmodellen (GPT-, Claude-, Gemini-familie) |
-| **RAG** | Retrieval-Augmented Generation | LLM-output gegrond op opgehaalde bronnen (in Coheza: CAO-RAG) |
+| **RAG** | Retrieval-Augmented Generation | LLM-output gegrond op opgehaalde bronnen (in Curanta: CAO-RAG) |
 | **OCR** | Optical Character Recognition | Tekst-uit-afbeelding-extractie |
 
 ---
@@ -286,10 +286,10 @@ woordenlijst).
 
 | Naam | Toelichting |
 |---|---|
-| **Coheza** | Nederlandse zorgsuite — onderwerp van deze marketingsite |
+| **Curanta** | Nederlandse zorgsuite — onderwerp van deze marketingsite |
 | **Nis2Care** | Zustermerk; pure-play NIS2-/NEN 7510-compliance-overlay voor de zorg, complementair aan elk EPD |
-| **Ponscura** | Marktplaats voor zorgpersoneel (zelfstandige flex-pool); integreert met Coheza |
-| **Nedap Ons** | EPD/ECD van Nedap, marktleider in VVT — Coheza biedt productie-import |
+| **Ponscura** | Marktplaats voor zorgpersoneel (zelfstandige flex-pool); integreert met Curanta |
+| **Nedap Ons** | EPD/ECD van Nedap, marktleider in VVT — Curanta biedt productie-import |
 | **Gerimedica Ysis** | EPD voor specialistische ouderenzorg/GRZ |
 | **Pluriform Zorg** | EPD voor VVT/GHZ |
 | **SDB Groep** | Nederlandse zorgsoftware-leverancier |

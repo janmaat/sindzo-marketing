@@ -32,7 +32,7 @@ const usps = [
 <section class="container-prose py-20">
   <div class="max-w-2xl">
     <h2 class="font-display text-3xl font-bold tracking-tightish text-ink-900 sm:text-4xl">
-      Drie redenen waarom <em class="italic font-semibold text-accent-600">bestuur, CIO én FG samen</em> kiezen voor Coheza.
+      Drie redenen waarom <em class="italic font-semibold text-accent-600">bestuur, CIO én FG samen</em> kiezen voor Curanta.
     </h2>
     <p class="mt-4 text-ink-700">
       In de Nederlandse zorg sneuvelen leveranciers zelden op functionaliteit, en vaak op
@@ -41,13 +41,13 @@ const usps = [
   </div>
   <div class="mt-12 grid gap-8 md:grid-cols-3">
     {usps.map((u) => (
-      <article class="rounded-xl border border-ink-300 bg-white p-7 transition hover:border-sindzo-300 hover:shadow-sm">
-        <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-greensoft text-sindzo-700">
+      <article class="rounded-xl border border-ink-300 bg-white p-7 transition hover:border-curanta-300 hover:shadow-sm">
+        <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-greensoft text-curanta-700">
           <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" set:html={u.iconPath} />
         </div>
         <h3 class="mt-4 font-display text-xl font-semibold text-ink-900">{u.title}</h3>
         <p class="mt-2 text-ink-700 leading-relaxed">{u.body}</p>
-        <a href={u.link.href} class="mt-5 inline-block text-sm font-medium text-sindzo-700 no-underline hover:underline">
+        <a href={u.link.href} class="mt-5 inline-block text-sm font-medium text-curanta-700 no-underline hover:underline">
           {u.link.label} →
         </a>
       </article>

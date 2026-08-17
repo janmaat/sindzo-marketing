@@ -1,7 +1,7 @@
-# Coheza Marketing Site
+# Curanta Marketing Site
 
-Publieke marketingsite voor **Coheza** — zorgsuite voor VVT/GHZ/GGZ in Nederland.
-Productie-URL: `https://coheza.nl`.
+Publieke marketingsite voor **Curanta** — zorgsuite voor VVT/GHZ/GGZ in Nederland.
+Productie-URL: `https://curanta.nl`.
 
 Bewust een aparte repo, gescheiden van de Blazor-applicatie (`D:\Repos\Ponscura`):
 
@@ -13,7 +13,7 @@ Bewust een aparte repo, gescheiden van de Blazor-applicatie (`D:\Repos\Ponscura`
 ## Stack
 
 - **Astro 5** — statische output, edge-cacheable
-- **Tailwind CSS 3** — utility-first, met Coheza-design-tokens in `tailwind.config.mjs`
+- **Tailwind CSS 3** — utility-first, met Curanta-design-tokens in `tailwind.config.mjs`
 - **MDX** — voor content-rijke pagina's (cases, blog, kennisbank)
 - **Sitemap** auto-gegenereerd
 
@@ -40,5 +40,5 @@ src/
 ## Deploy
 
 Doel: **Cloudflare Pages** of **Vercel** (static export, geen runtime).
-Demo/contact-forms POSTen naar `https://app.coheza.nl/api/lead` zodat
+Demo/contact-forms POSTen naar `https://app.curanta.nl/api/lead` zodat
 leads direct in de CRM van de app belanden.

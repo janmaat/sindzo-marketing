@@ -9,7 +9,7 @@ import PDFMerger from 'pdf-merger-js';
 const root = resolve(fileURLToPath(import.meta.url), '..', '..');
 const tmpDir = join(root, '.pdf-tmp');
 const edgeProfile = join(tmpDir, 'edge-profile');
-const outPath = join(root, 'dist', 'coheza-marketingsite.pdf');
+const outPath = join(root, 'dist', 'curanta-marketingsite.pdf');
 const edge = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 const port = 4322;
 
@@ -109,9 +109,9 @@ async function main() {
     const merger = new PDFMerger();
     for (const f of files) await merger.add(f);
     await merger.setMetadata({
-      title: 'Coheza — marketingsite (volledig)',
-      author: 'Coheza',
-      subject: 'Volledige export van de Coheza marketingsite',
+      title: 'Curanta — marketingsite (volledig)',
+      author: 'Curanta',
+      subject: 'Volledige export van de Curanta marketingsite',
       producer: 'Edge headless + pdf-merger-js',
     });
     await merger.save(outPath);

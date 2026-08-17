@@ -6,3 +6,6 @@ dist/
 .DS_Store
 .vs/
 .pdf-tmp/
+
+# Deploy-artefact: het uitpakbare pakket van dist/ (zie DEPLOY.md).
+curanta-site.zip

@@ -1,15 +1,30 @@
-# Deployment — Coheza marketingsite
+# Deployment — Curanta marketingsite
 
 De marketingsite is een **puur statische Astro-build**. Productie draait op
 **Cloudflare Pages** — auto-build bij elke push naar `main`, gratis CDN, auto-HTTPS,
 geen onderhoud op een server.
 
-`app.coheza.nl` (de Coheza-applicatie) blijft op de eigen infrastructuur draaien —
-dit document gaat alleen over de marketingsite (`coheza.nl`).
+`app.curanta.nl` (de Curanta-applicatie) blijft op de eigen infrastructuur draaien —
+dit document gaat alleen over de marketingsite (`curanta.nl`).
 
 ---
 
 ## Snelpad: Cloudflare Pages (productie)
+
+### Vóór de eenmalige setup — twee dingen die nog niet kloppen
+
+Op 2026-08-17 vastgesteld, en geen van beide kan een script voor je doen:
+
+1. **De GitHub-repo heet nog `janmaat/sindzo-marketing`.** Dit document noemt
+   hieronder `janmaat/curanta-marketing`; die bestaat nog niet. Hernoem de repo op
+   GitHub (Settings → Repository name) en werk daarna je `origin` bij met
+   `git remote set-url origin https://github.com/janmaat/curanta-marketing.git`.
+   De mapnaam op schijf (`D:\Repos\Sindzo.Marketing`) is cosmetisch, maar volgt
+   dezelfde logica.
+2. **`curanta.nl` serveert nu een Plesk-standaardpagina** en `www.curanta.nl` heeft
+   geen geldig certificaat. Het domein wijst dus al naar de eigen server. Dat maakt
+   stap 3 van "Custom domain" hieronder risicovoller dan hij klinkt — zie de
+   waarschuwing daar.
 
 ### Eenmalige setup
 
@@ -17,7 +32,7 @@ dit document gaat alleen over de marketingsite (`coheza.nl`).
    (gratis, e-mail volstaat).
 2. **Workers & Pages → Create application → Pages → Connect to Git**.
 3. **GitHub authoriseren** voor je Cloudflare-account; selecteer
-   `janmaat/coheza-marketing`.
+   `janmaat/curanta-marketing`.
 4. **Build-settings** invullen:
 
    | Veld | Waarde |
@@ -30,20 +45,32 @@ dit document gaat alleen over de marketingsite (`coheza.nl`).
    | Node version | `20` (gelezen uit `.node-version` in repo) |
 
 5. **Save and Deploy**. Binnen ~2 minuten staat de site op
-   `coheza-marketing.pages.dev`.
+   `curanta-marketing.pages.dev`.
 
-### Custom domain `coheza.nl` koppelen
+### Custom domain `curanta.nl` koppelen
 
 1. In Cloudflare Pages-project → **Custom domains → Set up a custom domain** →
-   `coheza.nl` (en optioneel `www.coheza.nl` met redirect).
+   `curanta.nl` (en optioneel `www.curanta.nl` met redirect).
 2. Cloudflare toont **twee nameservers** (bv. `alice.ns.cloudflare.com`,
    `bob.ns.cloudflare.com`).
-3. Bij je registrar (Strato of waar `coheza.nl` is geregistreerd): vervang
+3. Bij je registrar (Strato of waar `curanta.nl` is geregistreerd): vervang
    de nameservers door de twee Cloudflare-nameservers.
+
+   > **Doe eerst stap 5, dan pas stap 3.** Nameservers verplaatsen betekent dat
+   > Cloudflare de héle zone overneemt. Elk record dat op dat moment nog niet in
+   > Cloudflare staat, bestaat vanaf dat moment niet meer. Dat raakt niet alleen
+   > `app`, `klant` en `medewerker`, maar ook **MX en SPF/DKIM/DMARC** — mail naar
+   > `@curanta.nl` valt dan stil, en dat merk je pas als iemand niet antwoordt.
+   >
+   > Exporteer daarom eerst de bestaande zone bij de registrar (of noteer elk
+   > record), zet ze allemaal in Cloudflare, en verzet de nameservers daarna.
+
 4. DNS-propagatie: meestal binnen 5–30 minuten, soms tot 24 uur. Cloudflare
    regelt automatisch een HTTPS-certificaat zodra propagatie compleet is.
-5. `app.coheza.nl` blijft als A-record naar het server-IP wijzen (apart record
-   in Cloudflare DNS).
+5. Records die mee moeten naar Cloudflare DNS voordat je de nameservers verzet:
+   `app`, `klant` en `medewerker` als A-record naar het server-IP (proxy **uit** —
+   Blazor Server heeft WebSockets nodig en de hosts vertrouwen `X-Forwarded-*`
+   alleen van loopback), plus de volledige mailconfiguratie (MX, SPF, DKIM, DMARC).
 
 ### Wat er automatisch gebeurt
 

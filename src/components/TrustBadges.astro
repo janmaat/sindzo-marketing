@@ -14,7 +14,7 @@ const badges: Array<{ label: string; status: string; note: string; url?: string;
   {
     label: 'Cbw (NIS2)',
     status: 'wip',
-    note: 'NIS2-incidentmodule (24/72/720u SLA-tracking) ingebouwd in Coheza · ook los beschikbaar als Nis2Care',
+    note: 'NIS2-incidentmodule (24/72/720u SLA-tracking) ingebouwd in Curanta · ook los beschikbaar als Nis2Care',
     url: NIS2CARE_LIVE ? NIS2CARE_URL : undefined,
     urlLabel: 'nis2care.nl',
   },
@@ -33,7 +33,7 @@ const dot = (s: string) =>
           Eerlijke status per kader. Klik door naar het Trust Centre voor onderbouwing per item.
         </p>
       </div>
-      <a href="/trust" class="text-sm font-medium text-sindzo-700 no-underline hover:underline whitespace-nowrap">
+      <a href="/trust" class="text-sm font-medium text-curanta-700 no-underline hover:underline whitespace-nowrap">
         Volledig Trust Centre →
       </a>
     </div>
@@ -45,7 +45,7 @@ const dot = (s: string) =>
             <div class="text-sm font-semibold text-ink-900">{b.label}</div>
             <div class="mt-0.5 text-xs text-ink-500">{b.note}</div>
             {b.url && (
-              <a href={b.url} target="_blank" rel="noopener" class="mt-1.5 inline-block text-[11px] font-bold text-sindzo-700 no-underline hover:underline">
+              <a href={b.url} target="_blank" rel="noopener" class="mt-1.5 inline-block text-[11px] font-bold text-curanta-700 no-underline hover:underline">
                 {b.urlLabel ?? b.url} ↗
               </a>
             )}

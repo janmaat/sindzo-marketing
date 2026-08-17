@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 // Hosting-target: Cloudflare Pages / Vercel static export.
 // Geen runtime-dependency op de Blazor-monolith.
 export default defineConfig({
-  site: 'https://coheza.nl',
+  site: 'https://curanta.nl',
   trailingSlash: 'never',
   integrations: [
     tailwind({ applyBaseStyles: false }),
