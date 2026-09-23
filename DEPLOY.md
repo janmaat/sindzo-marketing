@@ -19,8 +19,11 @@ Op 2026-08-17 vastgesteld, en geen van beide kan een script voor je doen:
    hieronder `janmaat/curanta-marketing`; die bestaat nog niet. Hernoem de repo op
    GitHub (Settings → Repository name) en werk daarna je `origin` bij met
    `git remote set-url origin https://github.com/janmaat/curanta-marketing.git`.
-   De mapnaam op schijf (`D:\Repos\Sindzo.Marketing`) is cosmetisch, maar volgt
-   dezelfde logica.
+   De map op schijf heet sinds 23-09-2026 `D:\Repos\Curanta.Marketing`;
+   `D:\Repos\Sindzo.Marketing` is een junction ernaartoe, zodat oude paden blijven werken.
+   Ook de Azure DevOps-repo (remote `azure`) heet nog `Sindzo.Marketing`: hernoem hem in
+   Project settings → Repositories en werk de remote bij met
+   `git remote set-url azure https://maat-software.visualstudio.com/Maat/_git/Curanta.Marketing`.
 2. **`curanta.nl` serveert nu een Plesk-standaardpagina** en `www.curanta.nl` heeft
    geen geldig certificaat. Het domein wijst dus al naar de eigen server. Dat maakt
    stap 3 van "Custom domain" hieronder risicovoller dan hij klinkt — zie de
