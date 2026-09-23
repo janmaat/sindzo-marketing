@@ -1,33 +1,35 @@
 # Apache fallback voor Plesk waar nginx als reverse proxy naar Apache draait.
-# De nginx-laag pakt 99% van de requests af; deze .htaccess vangt de rest.
+# De nginx-laag pakt statische assets af; pagina-requests komen hier.
 # Wordt door Astro automatisch mee gekopieerd naar dist/.
+# Astro draait met trailingSlash: 'never' -> canonical URL is zonder slash.
 
-# ----- HTTPS afdwingen -----
+# ----- Geen automatische slash-redirect van mod_dir -----
+# Zonder dit stuurt Apache /pad -> 301 /pad/ voordat onze rewrite iets doet.
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # mod_rewrite negeert standaard directory-URL's zonder slash (verwacht dat
+  # mod_dir redirect). AllowNoSlash laat onze regels die URL's wel afhandelen.
+  RewriteOptions AllowNoSlash
 
-  # Force HTTPS — Plesk zet HTTPS-detectie via X-Forwarded-Proto bij nginx-proxy.
+  # ----- HTTPS afdwingen -----
+  # Plesk zet HTTPS-detectie via X-Forwarded-Proto bij nginx-proxy.
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-  # Directory-requests intern serven als index.html — voorkomt 301 van
-  # /demo → /demo/ door Apache's DirectorySlash. Astro draait met
-  # trailingSlash: 'never', dus de canonical URL is zonder slash. Deze
-  # interne rewrite haalt dat doel zonder extra round-trip.
+  # ----- Canonical: /pad/ -> 301 /pad (ook voor directories) -----
+  # Alleen op het originele request, niet na een interne rewrite.
+  RewriteCond %{ENV:REDIRECT_STATUS} ^$
+  RewriteRule ^(.+)/$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+  # ----- /pad intern serveren als /pad/index.html (geen round-trip) -----
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteCond %{REQUEST_FILENAME}/index.html -f
-  RewriteRule ^(.*?)/?$ /$1/index.html [L]
-
-  # Canonical: trailing slash weg op niet-directory-paden
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.+)/$ /$1 [R=301,L]
-
-  # Extensionless URLs zonder bestaande directory: /foo → /foo/index.html
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
-  RewriteRule ^(.+?)/?$ $1/index.html [L]
+  RewriteRule ^(.+)$ /$1/index.html [L]
 </IfModule>
 
 # ----- Compressie -----
