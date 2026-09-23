@@ -25,7 +25,7 @@ const columns = [
     title: 'Vertrouwen',
     links: [
       { label: 'Trust Centre', href: '/trust' },
-      { label: 'Status', href: 'https://status.curanta.nl' },
+      { label: 'Status', href: 'https://app.curanta.nl/status' },
       { label: 'Privacy', href: '/privacy' },
       { label: 'Architectuur-besluiten', href: '/adr' },
     ],
@@ -76,7 +76,7 @@ const columns = [
       </div>
       {columns.map((col) => (
         <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-ink-500">{col.title}</h4>
+          <h2 class="text-xs font-semibold uppercase tracking-wider text-ink-500">{col.title}</h2>
           <ul class="mt-4 space-y-2 text-sm">
             {col.links.map((l) => (
               <li>

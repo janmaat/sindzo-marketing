@@ -20,7 +20,7 @@ interface Props {
 const { title, description, eyebrow, lastUpdated, sections, draft = true } = Astro.props;
 const dateNl = new Date(lastUpdated).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
-<Base title={title} description={description}>
+<Base title={`${title} — Curanta`} description={description}>
   <section class="border-b border-ink-300 bg-gradient-to-b from-curanta-50 to-cream">
     <div class="container-prose py-14 sm:py-20">
       <span class="eyebrow">{eyebrow}</span>

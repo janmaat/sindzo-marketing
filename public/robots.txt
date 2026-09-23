@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
 
-# Transactionele pagina (na demo-formulier-submit) — geen waarde voor
-# zoekresultaten en mogelijk verwarrend als losse landing page.
-Disallow: /bedankt
+# /bedankt en /404 staan níét op Disallow: ze dragen <meta name="robots" content="noindex">,
+# en die ziet Google alleen als hij de pagina mag ophalen. Een Disallow laat een URL
+# waarnaar gelinkt wordt juist zónder inhoud in de index staan.
 
 Sitemap: https://curanta.nl/sitemap-index.xml

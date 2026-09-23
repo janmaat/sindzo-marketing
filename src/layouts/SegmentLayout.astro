@@ -11,7 +11,8 @@ interface Props {
   segmentKey: string;       // 'vvt' | 'ghz' | 'ggz' | 'huisartsen'
   segmentLabel: string;     // 'VVT'
   title: string;            // Pagina-titel (SEO)
-  eyebrow: string;          // "Voor VVT-organisaties"
+  description: string;      // Meta-description (SEO + advertentie-landingspagina); verplicht, anders erven alle segmenten die van de homepage
+  eyebrow: string;         // "Voor VVT-organisaties"
   hero: string;             // hero h1
   subtitle: string;         // hero subtitle
   triggers: Trigger[];      // 3-4 doelgroep-pijnpunten
@@ -23,11 +24,11 @@ interface Props {
 }
 
 const {
-  title, eyebrow, hero, subtitle,
+  title, description, eyebrow, hero, subtitle,
   triggers, modules, regulatory, proofPoints, caseQuote, image,
 } = Astro.props;
 ---
-<Base title={title} image={image}>
+<Base title={title} description={description} image={image}>
   <PageHero eyebrow={eyebrow} title={hero} subtitle={subtitle}>
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href="/demo" class="btn-primary no-underline">Demo aanvragen</a>

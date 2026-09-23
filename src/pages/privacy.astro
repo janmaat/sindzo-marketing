@@ -19,7 +19,7 @@ const sections = [
   title="Privacyverklaring"
   description="Hoe Curanta persoonsgegevens verwerkt — AVG-conform, transparant, met BSN-encryptie en NL-hosting."
   eyebrow="Privacy"
-  lastUpdated="2026-05-19"
+  lastUpdated="2026-09-23"
   sections={sections}
 >
   <h2 id="wie">1. Wie wij zijn</h2>
@@ -42,6 +42,12 @@ const sections = [
   <ul>
     <li><strong>Contactgegevens</strong> die u zelf invult (naam, e-mail, telefoon, organisatie, rol) — bij demo-aanvraag of contactformulier.</li>
     <li><strong>Technische gegevens</strong>: IP-adres, browser-type, bezochte pagina's, tijdstip. Voor beveiliging en geaggregeerde statistiek.</li>
+    <li><strong>Campagnebron</strong> bij een demo-aanvraag: als u via een link met campagnecodes binnenkwam
+      (bijvoorbeeld een advertentie of nieuwsbrief), bewaren wij die codes (<code>utm_source</code>,
+      <code>utm_campaign</code> e.d.) bij uw aanvraag. Zo weten wij welke campagnes werken. De codes
+      reizen mee in de adresbalk, niet in een cookie.</li>
+    <li><strong>Advertentie-klikcode</strong> (<code>gclid</code>) — alléén als u via een Google-advertentie
+      binnenkwam én in het demoformulier het aparte vakje voor advertentiemeting aanvinkt.</li>
     <li><strong>Geen cookie-data</strong> — deze website plaatst geen cookies (zie <a href="/cookies">cookie-pagina</a>).</li>
   </ul>
   <p>
@@ -58,6 +64,8 @@ const sections = [
       <tr><td>Reactie op demo-aanvraag of vraag</td><td>Gerechtvaardigd belang / uitvoering overeenkomst</td></tr>
       <tr><td>Beveiliging website (logging, anti-misbruik)</td><td>Gerechtvaardigd belang</td></tr>
       <tr><td>Anonieme statistiek (paginabezoek, conversie)</td><td>Gerechtvaardigd belang (geen identificeerbare data)</td></tr>
+      <tr><td>Weten via welke campagne een aanvraag binnenkwam (campagnecodes)</td><td>Gerechtvaardigd belang</td></tr>
+      <tr><td>Google laten weten dat een advertentieklik tot een aanvraag leidde</td><td>Toestemming (apart vakje, altijd in te trekken)</td></tr>
       <tr><td>Nieuwsbrief of marketing (indien aangemeld)</td><td>Toestemming</td></tr>
     </tbody>
   </table>
@@ -76,6 +84,11 @@ const sections = [
     <li><strong>Hosting</strong>: Microsoft Azure (West-Europe) en Cloudflare (edge-caching).</li>
     <li><strong>E-mail</strong>: Microsoft 365.</li>
     <li><strong>Analytics</strong>: Plausible Analytics (EU-gehost, geen cookies, geen IP-opslag).</li>
+    <li><strong>Advertentiemeting</strong>: Google Ireland Ltd. (Google Ads) — alleen als u daar in het
+      demoformulier toestemming voor gaf. Wij geven dan uitsluitend de klikcode van de advertentie en het
+      tijdstip van uw aanvraag door; geen naam, e-mailadres, telefoonnummer of organisatie. Google
+      koppelt die code aan de advertentieklik die het zelf al kent. Trekt u uw toestemming in voordat
+      wij de meting doorgeven, dan geven wij niets door.</li>
     <li><strong>Betaling</strong>: Mollie (voor abonnement-facturatie).</li>
   </ul>
   <p>

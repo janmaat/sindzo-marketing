@@ -57,8 +57,8 @@ const pillars = [
     intro: 'NL-hosting, transparante uptime, publieke status-page en herstelplan getest.',
     items: [
       { label: 'NL-hosting', status: 'live', note: 'Azure West-Europe + backup NL', doc: '#hosting' },
-      { label: 'Uptime SLA', status: 'live', note: '99,9% productie, gemeten extern', doc: 'https://status.curanta.nl' },
-      { label: 'Statuspagina publiek', status: 'live', note: 'Incidenten + onderhoudsvensters', doc: 'https://status.curanta.nl' },
+      { label: 'Uptime SLA', status: 'live', note: '99,9% productie, gemeten extern', doc: 'https://app.curanta.nl/status' },
+      { label: 'Statuspagina publiek', status: 'live', note: 'Incidenten + onderhoudsvensters', doc: 'https://app.curanta.nl/status' },
       { label: 'BCM-test', status: 'live', note: 'Jaarlijkse restore-oefening', doc: '#bcm' },
       { label: 'RPO / RTO', status: 'live', note: 'RPO 1 uur, RTO 4 uur', doc: '#rto' },
       { label: 'Exit-procedure', status: 'live', note: 'Contractueel vastgelegd in MSA', doc: '#exit' },
@@ -103,7 +103,7 @@ const statusLabel = (s: string) =>
       <div class="mt-8 flex flex-wrap items-center gap-4 text-sm">
         <a href="/procurement" class="btn-primary no-underline">Naar Procurement Centre</a>
         <a href="mailto:trust@curanta.nl?subject=Security-pack%20%2B%20DPA%20aanvragen" class="btn-secondary no-underline">Vraag security-pack + DPA</a>
-        <a href="https://status.curanta.nl" class="text-curanta-700 font-medium no-underline hover:underline">Live status →</a>
+        <a href="https://app.curanta.nl/status" class="text-curanta-700 font-medium no-underline hover:underline">Live status →</a>
       </div>
       <p class="mt-6 text-xs text-ink-500">
         <span class="status-dot bg-green-500"></span> aantoonbaar nu
@@ -163,7 +163,7 @@ const statusLabel = (s: string) =>
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Data-portabiliteit</strong> — volledige export in JSON/CSV/FHIR R4 op elk moment, contractueel vastgelegd. U bent nooit afhankelijk van onze inzet om uw eigen data te krijgen.</span></li>
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Directe lijn als kracht</strong> — kleinere leverancier betekent ook: geen supportdesk-bureaucratie, geen tickets die kwartalen reizen. U spreekt rechtstreeks met de bouwers; fixes in dagen, niet in releases per jaar.</span></li>
         </ul>
-        <p class="mt-5 text-sm text-ink-500">Founding partners ontvangen aanvullende garanties en zijn mede-eigenaar van de roadmap. Vraag de aanvullende continuïteitsverklaring op via <a href="mailto:trust@curanta.nl" class="text-curanta-700 hover:underline no-underline">trust@curanta.nl</a>.</p>
+        <p class="mt-5 text-sm text-ink-500">Founding partners ontvangen aanvullende garanties en zijn mede-eigenaar van de roadmap. Vraag de aanvullende continuïteitsverklaring op via <a href="mailto:trust@curanta.nl" class="text-curanta-700 hover:underline">trust@curanta.nl</a>.</p>
       </div>
     </div>
   </section>

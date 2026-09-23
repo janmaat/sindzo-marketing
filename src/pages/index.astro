@@ -21,8 +21,19 @@ const softwareLd = {
   inLanguage: 'nl-NL',
   provider: { '@type': 'Organization', name: 'Curanta' },
 };
+
+// Google haalt de sitenaam in de zoekresultaten uit WebSite-markup op de homepage;
+// zonder dit gokt hij, en bij een jonge merknaam gokt hij soms "curanta.nl".
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Curanta',
+  url: Astro.site?.toString() ?? 'https://curanta.nl/',
+  inLanguage: 'nl-NL',
+};
 ---
 <Base title="Curanta — Eén zorgsuite voor de Nederlandse zorgpraktijk">
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteLd)} />
   <script type="application/ld+json" is:inline set:html={JSON.stringify(softwareLd)} />
   <Hero />
   <ChallengeCallout />

@@ -35,7 +35,10 @@ export default {
         ink: {
           900: '#0E4F57',
           700: '#2C5F66',
-          500: '#5E7C82',
+          // Was #5E7C82: 4,49:1 op wit en 3,9:1 op de mint-wash — Lighthouse vond op
+          // elke pagina tientallen kleine teksten (text-xs, voetnoten, footer) onder
+          // WCAG AA. #4F6D73 haalt ≥4,5:1 op wit, ink-100 én curanta-100.
+          500: '#4F6D73',
           300: '#C5D9DC',
           200: '#DAE6E8',
           100: '#F1F8F7',

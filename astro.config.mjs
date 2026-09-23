@@ -4,7 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 // Marketing-site config. Doel: snel, statisch, edge-cacheable.
-// Hosting-target: Cloudflare Pages / Vercel static export.
+// Hosting: Plesk op de STRATO-server (Apache achter nginx) — zie deploy/ en public/.htaccess.
 // Geen runtime-dependency op de Blazor-monolith.
 export default defineConfig({
   site: 'https://curanta.nl',
