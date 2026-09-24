@@ -8,7 +8,7 @@ import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
 //
 // Status-conventie:
 //   live    — aantoonbaar nu, document beschikbaar
-//   wip     — in afronding met concrete tijdslijn
+//   wip     — in uitvoering: gebouwd of begonnen, nog niet aangetoond of aangesloten
 //   roadmap — gepland maar nog niet gestart
 
 const pillars = [
@@ -48,7 +48,7 @@ const pillars = [
       { label: 'Wegiz / eOverdracht', status: 'wip', note: 'BgZ intern gebouwd; eOverdracht via Nuts gebouwd, nog niet aangesloten', doc: '#wegiz' },
       { label: 'LSP', status: 'wip', note: 'Client gebouwd; VZVZ-aansluiting en UZI-certificaten zijn er nog niet', doc: '#lsp' },
       { label: 'Open API', status: 'wip', note: 'Publieke API en sandbox in ontwikkeling', doc: '/api' },
-      { label: 'Data-export', status: 'live', note: 'Volledige export in JSON/CSV op verzoek', doc: '#export' },
+      { label: 'Data-export', status: 'live', note: 'Volledige export in JSON op verzoek', doc: '#export' },
     ],
   },
   {
@@ -83,7 +83,7 @@ const dot = (s: string) =>
   s === 'live' ? 'bg-green-500' : s === 'wip' ? 'bg-amber-500' : 'bg-ink-300';
 
 const statusLabel = (s: string) =>
-  s === 'live' ? 'Aantoonbaar' : s === 'wip' ? 'In afronding' : 'Op roadmap';
+  s === 'live' ? 'Aantoonbaar' : s === 'wip' ? 'In uitvoering' : 'Op roadmap';
 ---
 <Base
   image="/og/trust.png"
@@ -107,7 +107,7 @@ const statusLabel = (s: string) =>
       </div>
       <p class="mt-6 text-xs text-ink-500">
         <span class="status-dot bg-green-500"></span> aantoonbaar nu
-        <span class="status-dot bg-amber-500 ml-4"></span> in afronding (met datum)
+        <span class="status-dot bg-amber-500 ml-4"></span> in uitvoering
         <span class="status-dot bg-ink-300 ml-4"></span> op roadmap
       </p>
     </div>
