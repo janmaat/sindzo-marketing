@@ -44,7 +44,7 @@ const groups: ModuleGroup[] = [
   },
   {
     group: 'Declaratie & financiering',
-    intro: 'Heel het declaratie-spectrum — Wmo, Jw, Wlz, Zvw — in één engine.',
+    intro: 'Wmo, Jw en Wlz in één engine; Zvw is in ontwikkeling.',
     modules: [
       { icon: '🏷️', title: 'AGB-registraties', body: 'AGB-aanvraag, validatie, sync en organisatie-koppeling.', status: 'live' },
       { icon: '✅', title: 'COV-check', body: 'Real-time controle op verzekering, batch- of single-flow.', status: 'live' },
@@ -54,7 +54,7 @@ const groups: ModuleGroup[] = [
       { icon: '💶', title: 'Facturatie + PGB', body: 'Facturen, betalingen, sjablonen en PGB-afrekeningen.', status: 'live' },
       { icon: '🧠', title: 'ZPM-declaratie (GGZ)', body: 'Native registratie van zorgprestaties volgens het Zorgprestatiemodel — validatie aan de bron, niet bij de declaratie-knop.', status: 'live' },
       { icon: '💼', title: 'Cliëntkas + Bewindvoering', body: 'Zakgeld- en kassabeheer per cliënt, uitgavenregistratie en rapportage voor bewindvoerders.', status: 'live' },
-      { icon: '🚑', title: 'Zvw-declaratie (wijkverpleging)', body: 'Volledige Zvw-declaratiestroom voor wijkverpleging — productcodes, prestaties, machtigingen en retourafhandeling per zorgverzekeraar.', status: 'live' },
+      { icon: '🚑', title: 'Zvw-declaratie (wijkverpleging)', body: 'Productcodes, prestaties en machtigingen voor wijkverpleging zijn gebouwd. Het berichtformaat dat Vecozo voorschrijft (AW319) nog niet — aanleveren kan daarom nog niet.', status: 'wip' },
       { icon: '📃', title: 'Zorginkoop & contractbeheer', body: 'Beheer van Wmo-/Jw-/Wlz-contracten met gemeenten en zorgkantoren — looptijden, productafspraken, tarieven en herziening-momenten.', status: 'live' },
     ],
   },
@@ -90,19 +90,19 @@ const groups: ModuleGroup[] = [
   },
   {
     group: 'Integraties & ketenzorg',
-    intro: 'Curanta praat met het Nederlandse zorglandschap — geen lock-in.',
+    intro: 'Curanta praat met het Nederlandse zorglandschap — geen lock-in. Beschikbaar betekent hier: de koppeling is gebouwd; de aansluiting (certificaat, contract met de berichtenpartij) regelen we per klant.',
     modules: [
       { icon: '💊', title: 'Medicatie (intern)', body: 'Native medicatie-module — voorschriften, toedienregistratie, allergieën en interacties. Werkt standalone of in combinatie met Medimo-integratie.', status: 'live' },
       { icon: '🔗', title: 'Medimo-koppeling', body: 'Externe Medimo-koppeling voor organisaties die met Medimo werken — synchronisatie van toediening en voorschriften.', status: 'live' },
       { icon: '📨', title: 'ZorgMail', body: 'Veilige berichten en bijlagen via het ZorgMail-netwerk.', status: 'live' },
       { icon: '🔗', title: 'ZorgDomein', body: 'Verwijzingen en consultaties via ZorgDomein.', status: 'live' },
-      { icon: '📦', title: 'BgZ & eOverdracht', body: 'BgZ-bundel met 8/15 Zibs actief; eOverdracht-Bundle-structuur gereed (resource-vulling volgt BgZ-completering). Nuts-aansluiting Q4 2026.', status: 'wip' },
+      { icon: '📦', title: 'BgZ & eOverdracht', body: 'BgZ-bundel intern in FHIR R4 gebouwd; nog niet alle onderdelen worden gevuld. eOverdracht via Nuts gebouwd, nog niet aangesloten.', status: 'wip' },
       { icon: '🌐', title: 'MedMij + LSP', body: 'PGO-uitwisseling via MedMij en LSP-koppeling met opt-in.', status: 'wip' },
       { icon: '🧘', title: 'E-Health', body: 'Minddistrict, Therapieland, Embloom — blended care-flow.', status: 'wip' },
       { icon: '🏠', title: 'Domotica-gateway', body: 'Sensor- en alarmmeldingen van domotica-leveranciers (valdetectie, deurcontact, beweging) rechtstreeks in het dossier.', status: 'live' },
-      { icon: '🔐', title: 'UZI-authenticatie', body: 'X.509-cert-ketenvalidatie tegen UZI-CA-bundel gereed. SAN-otherName-parsing wacht op CIBG-testcertificaat — verwacht Q3 2026, daarna productie-ready voor NEN 7510 en LSP-toegang.', status: 'wip' },
-      { icon: '💳', title: 'Digitaal ondertekenen', body: 'iDIN of DocuSign voor zorgovereenkomsten, toestemmingsformulieren en digitale handtekeningen.', status: 'live' },
-      { icon: '🏥', title: 'Ysis (Gerimedica)', body: 'Uitwisseling met Gerimedica Ysis voor gecombineerde verpleeghuis- en klinische zorg.', status: 'live' },
+      { icon: '🔐', title: 'UZI-authenticatie', body: 'X.509-ketenvalidatie tegen de UZI-CA-bundel gebouwd. De rest wacht op een CIBG-testcertificaat.', status: 'wip' },
+      { icon: '💳', title: 'Digitaal ondertekenen', body: 'DocuSign voor zorgovereenkomsten, toestemmingsformulieren en digitale handtekeningen.', status: 'live' },
+      { icon: '🏥', title: 'Ysis (Gerimedica)', body: 'Uitwisseling met Gerimedica Ysis voor gecombineerde verpleeghuis- en klinische zorg.', status: 'wip' },
       { icon: '💰', title: 'Payroll-koppeling', body: 'Interface voor salarisverwerking — uren en toeslagen rechtstreeks naar uw payrollprovider.', status: 'wip' },
     ],
   },
@@ -185,7 +185,7 @@ const groups: ModuleGroup[] = [
       </div>
       <div>
         <div class="font-display text-3xl font-bold text-curanta-700">FHIR R4</div>
-        <div class="mt-1 text-xs text-ink-500">Open API</div>
+        <div class="mt-1 text-xs text-ink-500">Intern (BgZ); open API in ontwikkeling</div>
       </div>
       <div>
         <div class="font-display text-3xl font-bold text-curanta-700">.NET 10</div>

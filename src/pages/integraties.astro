@@ -14,13 +14,13 @@ interface Integration {
 const integrations: Integration[] = [
   // Standaarden
   { name: 'FHIR R4', category: 'Standaarden', status: 'wip', doc: '/api',
-    body: '8 Zibs intern actief (Patient, Encounter, Observation, MedicationStatement, Condition, AllergyIntolerance, RelatedPerson, CarePlan). BgZ-bundel functioneel; publieke REST API met OAuth2 productie Q4 2026.' },
+    body: 'Curanta zet het dossier intern om naar een BgZ-bundel in FHIR R4 (o.a. Patient, Encounter, Observation, medicatie, allergieën, Condition, CarePlan). Een publieke FHIR-API is in ontwikkeling.' },
   { name: 'MedMij', category: 'Standaarden', status: 'wip',
-    body: 'Interne BgZ-bundelbrug gereed. Externe aansluiting wacht op DVZA-registratie bij Stichting MedMij, PKIoverheid-certificaat en SAML/OAuth2-conformiteitstest — Q4 2026.' },
+    body: 'Interne BgZ-bundelbrug gebouwd. Uitwisseling met een PGO vraagt registratie bij Stichting MedMij, een PKIoverheid-certificaat en een conformiteitstest; die zijn er nog niet.' },
   { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'wip',
-    body: 'BgZ-bundel met 8/15 Zibs actief; eOverdracht-Bundle-structuur gereed met resource-vulling afhankelijk van BgZ-completering. Nuts-knooppunt-aansluiting Q4 2026.' },
+    body: 'BgZ-bundel intern gebouwd; nog niet alle onderdelen van de BgZ worden gevuld. De eOverdracht via een Nuts-knooppunt is gebouwd maar nog niet aangesloten.' },
   { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'wip',
-    body: 'Bevragen via Landelijk Schakelpunt, opt-in per cliënt. VZVZ-aansluittraject en UZI-certificering in afronding.' },
+    body: 'Bevragen via het Landelijk Schakelpunt, opt-in per cliënt. Aansluiten vraagt een VZVZ-aansluittraject en UZI-certificaten; die zijn er nog niet.' },
 
   // Communicatie
   { name: 'ZorgMail', category: 'Communicatie', status: 'live',
@@ -43,8 +43,8 @@ const integrations: Integration[] = [
     body: 'iWlz-berichtenverkeer met validatie en retourcodes.' },
   { name: 'Vecozo COV-check', category: 'Financieel', status: 'live',
     body: 'Real-time verzekeringscontrole via Vecozo — single-flow én batch, met retentie van controle-bewijs.' },
-  { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'live',
-    body: 'Zvw-declaratie wijkverpleging (WMG308) richting zorgverzekeraars — productcodes, prestaties, machtigingen en retourafhandeling.' },
+  { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'wip',
+    body: 'Zvw-declaratie wijkverpleging: productcodes, prestaties en machtigingen zijn gebouwd. Het berichtformaat dat Vecozo voorschrijft (AW319) nog niet — aanleveren kan daarom nog niet.' },
 
   // Sensor & domotica
   { name: 'Domotica-gateway', category: 'Sensor & domotica', status: 'live',
@@ -59,18 +59,20 @@ const integrations: Integration[] = [
     body: 'Vragenlijsten en outcome-monitoring koppeling.' },
 
   // Identity & overig
-  { name: 'EntraID / Azure AD', category: 'Identiteit', status: 'live',
-    body: 'SSO via OIDC, met group-claim mapping naar rollen.' },
+  { name: 'DigiD', category: 'Identiteit', status: 'live',
+    body: 'Inloggen op het cliëntportaal met DigiD, minimaal niveau Substantieel. De aansluiting bij Logius regelen we per klant.' },
+  { name: 'EntraID / Azure AD', category: 'Identiteit', status: 'wip',
+    body: 'SSO via OIDC per organisatie, met groep-naar-rol-mapping. De instellingen zijn er; inloggen via SSO nog niet.' },
   { name: 'UZI-pas', category: 'Identiteit', status: 'wip',
-    body: 'CA-chain authenticator gebouwd; OID-parsing, CRL/OCSP-fetch en LSP-BSN-resolver in afronding. Afhankelijk van CIBG-test­certificaat voor productie-cutover.' },
+    body: 'Controle van de certificaatketen gebouwd; OID-parsing, intrekkingscontrole en de BSN-resolver voor het LSP zijn in ontwikkeling en vragen een CIBG-test­certificaat.' },
   { name: 'Ysis-koppeling', category: 'Klinisch', status: 'wip',
     body: 'Behandeldossier-uitwisseling voor specialistische teams.' },
 
   // Backoffice
   { name: 'DocuSign', category: 'Backoffice', status: 'live',
     body: 'Digitaal ondertekenen van zorgovereenkomsten, machtigingen en behandelplannen via DocuSign eSignature.' },
-  { name: 'NMBRS', category: 'Backoffice', status: 'live',
-    body: 'Salaris- en HR-koppeling: roosters naar uren, mutaties naar loonrun, journaalposten retour.' },
+  { name: 'NMBRS', category: 'Backoffice', status: 'wip',
+    body: 'Uren doorzetten naar de salarisverwerking in Nmbrs. De client is gebouwd, maar nog niet aangesloten op de tijdregistratie.' },
 ];
 
 const categories = Array.from(new Set(integrations.map(i => i.category)));
@@ -82,15 +84,15 @@ const statusLabel = (s: string) =>
 <Base
   image="/og/integraties.png"
   title="Integraties — FHIR, MedMij, Wegiz en meer | Curanta"
-  description="Aantoonbaar open. Publieke FHIR-endpoints, MedMij in afronding, BgZ-conforme eOverdracht, koppelingen met Medimo, ZorgMail, ZorgDomein, LSP."
+  description="Eerlijke status per koppeling: ZorgMail, ZorgDomein, Medimo, iWmo/iJw/iWlz en CAK via Vecozo, DigiD en domotica gebouwd; FHIR-API, MedMij, eOverdracht, LSP en Zvw in ontwikkeling."
 >
   <PageHero
     eyebrow="Integraties & standaarden"
     title="Aantoonbaar open — geen vendor lock-in."
-    subtitle="Curanta praat met het Nederlandse zorglandschap via gedocumenteerde standaarden, publieke API's en concrete koppelingen. Eerlijke status per integratie — gebouwd, in ontwikkeling of op roadmap. Gebouwd betekent: de koppeling is er; de aansluiting zelf (certificaat, contract met de berichtenpartij) regelen we per klant bij de implementatie."
+    subtitle="Curanta praat met het Nederlandse zorglandschap via standaarden en concrete koppelingen. Eerlijke status per integratie — gebouwd, in ontwikkeling of op roadmap. Gebouwd betekent: de koppeling is er; de aansluiting zelf (certificaat, contract met de berichtenpartij) regelen we per klant bij de implementatie. De gebouwde koppelingen zitten in het abonnement; wat de berichtenpartij zelf rekent, bijvoorbeeld een Vecozo-certificaat of een ZorgMail-abonnement, betaalt u rechtstreeks aan die partij."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href="/api" class="btn-primary no-underline">Bekijk API-docs</a>
+      <a href="/api" class="btn-primary no-underline">Stand van de API</a>
       <a href="/trust" class="btn-secondary no-underline">Trust Centre</a>
     </div>
   </PageHero>
@@ -107,11 +109,11 @@ const statusLabel = (s: string) =>
       </div>
       <div>
         <div class="font-display text-3xl font-bold text-amber-600">{integrations.filter(i => i.status === 'wip').length}</div>
-        <div class="mt-1 text-xs text-ink-500">In afronding</div>
+        <div class="mt-1 text-xs text-ink-500">In ontwikkeling</div>
       </div>
       <div>
         <div class="font-display text-3xl font-bold text-curanta-700">FHIR R4</div>
-        <div class="mt-1 text-xs text-ink-500">Open API</div>
+        <div class="mt-1 text-xs text-ink-500">Intern (BgZ); open API in ontwikkeling</div>
       </div>
     </div>
   </section>
