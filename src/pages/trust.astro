@@ -15,26 +15,26 @@ const pillars = [
   {
     key: 'security',
     title: 'Informatiebeveiliging',
-    intro: 'NEN 7510-werkdocument is leidend. Pen-tests jaarlijks via NL-CERT-aangesloten partij.',
+    intro: 'NEN 7510-werkdocument is leidend. Een externe pentest is nog niet uitgevoerd; dat zeggen we liever dan dat we het verzwijgen.',
     items: [
       { label: 'NEN 7510:2024', status: 'wip', note: 'Control-suite geïmplementeerd met baseline-assessments, externe audit Q4 2026', doc: '#nen7510' },
       { label: 'NEN 7512 (uitwisseling)', status: 'wip', note: 'Toegepast op FHIR-/LSP-koppelingen', doc: '#nen7512' },
-      { label: 'NEN 7513 (logging)', status: 'live', note: 'Onveranderbare auditlog, 7 jaar bewaartermijn', doc: '#nen7513' },
+      { label: 'NEN 7513 (logging)', status: 'live', note: 'Auditlog met hash-keten, zodat een wijziging achteraf aantoonbaar is; 7 jaar bewaartermijn', doc: '#nen7513' },
       { label: 'ISO 27001', status: 'roadmap', note: 'Audit gepland 2027', doc: '#iso27001' },
-      { label: 'Pentest jaarlijks', status: 'live', note: 'Grey-box, NL-CERT-aangesloten partij — managementsamenvatting publiek, volledig rapport onder NDA', doc: '#pentest' },
-      { label: 'Encryptie at-rest', status: 'live', note: 'AES-256-GCM per tenant-sleutel', doc: '#encryption' },
+      { label: 'Externe pentest', status: 'roadmap', note: 'Nog niet uitgevoerd', doc: '#pentest' },
+      { label: 'Versleuteling BSN', status: 'live', note: 'BSN op veldniveau versleuteld met AES-256-GCM', doc: '#encryption' },
     ],
   },
   {
     key: 'privacy',
     title: 'Privacy & gegevensbescherming',
-    intro: 'AVG-conform met expliciete verwerkers-rolverdeling. PII (BSN, AGB) altijd encrypted.',
+    intro: 'AVG-conform met expliciete verwerkers-rolverdeling. Het BSN staat altijd versleuteld opgeslagen.',
     items: [
       { label: 'AVG / GDPR', status: 'live', note: 'Standaard-DPA volgens AP-model, NL/EN beschikbaar', doc: '#dpa' },
       { label: 'Verwerkersovereenkomst', status: 'live', note: 'Standaard-DPA op aanvraag (~1 werkdag), geen NDA nodig', doc: '/procurement' },
-      { label: 'Subverwerkers-overzicht', status: 'live', note: 'Volledig overzicht beschikbaar, alle in EER', doc: '#subverwerkers' },
+      { label: 'Subverwerkers-overzicht', status: 'live', note: 'Op aanvraag. Hosting binnen de EER; de AI-functies gebruiken, als ze aan staan, Anthropic in de VS met gepseudonimiseerde gegevens en modelcontractbepalingen (SCC)', doc: '#subverwerkers' },
       { label: 'DPIA-template', status: 'live', note: 'Voor zorgaanbieder eigen DPIA — op aanvraag', doc: '/procurement' },
-      { label: 'BSN-encryptie', status: 'live', note: 'AES-256-GCM met HKDF envelope per tenant, kwartaal-rotatie van masters (operationeel proces)', doc: '#bsn' },
+      { label: 'BSN-encryptie', status: 'live', note: 'AES-256-GCM op veldniveau; zoeken via een aparte hash, zonder te ontsleutelen', doc: '#bsn' },
       { label: 'Recht op vergetelheid', status: 'live', note: 'Pseudonimisering + audit-trail', doc: '#vergetelheid' },
     ],
   },
@@ -54,14 +54,14 @@ const pillars = [
   {
     key: 'operations',
     title: 'Operationele continuïteit',
-    intro: 'NL-hosting, transparante uptime, publieke status-page en herstelplan getest.',
+    intro: 'Hosting in de EU en een openbare statuspagina. Wat we nog niet met een meting of test kunnen aantonen, staat hieronder ook zo.',
     items: [
-      { label: 'NL-hosting', status: 'live', note: 'Azure West-Europe + backup NL', doc: '#hosting' },
-      { label: 'Uptime SLA', status: 'live', note: '99,9% productie, gemeten extern', doc: 'https://app.curanta.nl/status' },
-      { label: 'Statuspagina publiek', status: 'live', note: 'Incidenten + onderhoudsvensters', doc: 'https://app.curanta.nl/status' },
-      { label: 'BCM-test', status: 'live', note: 'Jaarlijkse restore-oefening', doc: '#bcm' },
-      { label: 'RPO / RTO', status: 'live', note: 'RPO 1 uur, RTO 4 uur', doc: '#rto' },
-      { label: 'Exit-procedure', status: 'live', note: 'Contractueel vastgelegd in MSA', doc: '#exit' },
+      { label: 'Hosting in de EU', status: 'live', note: 'IONOS Cloud, Berlijn (Duitsland)', doc: '/privacy' },
+      { label: 'Beschikbaarheid', status: 'wip', note: 'Doel 99,9%. Nog geen gemeten historie: er draait nog geen klant in productie', doc: 'https://app.curanta.nl/status' },
+      { label: 'Statuspagina publiek', status: 'live', note: 'Actuele beschikbaarheid per onderdeel', doc: 'https://app.curanta.nl/status' },
+      { label: 'Hersteltest', status: 'roadmap', note: 'Restore-oefening nog niet uitgevoerd', doc: '#bcm' },
+      { label: 'RPO / RTO', status: 'wip', note: 'Doel in onze voorwaarden: RPO 1 uur, RTO 4 uur. Nog niet aangetoond met een hersteltest', doc: '/voorwaarden#sla' },
+      { label: 'Exit-procedure', status: 'live', note: 'Vastgelegd in onze voorwaarden (artikel 9)', doc: '/voorwaarden#beeindiging' },
     ],
   },
   {
@@ -69,12 +69,12 @@ const pillars = [
     title: 'Wettelijke kaders & sectorregels',
     intro: 'Wkkgz, Wzd, Wtza, Wtta en de Cyberbeveiligingswet — actief gevolgd, niet afgewacht.',
     items: [
-      { label: 'Cbw (NIS2)', status: 'wip', note: 'NIS2-incidentmodule (24/72/720u SLA-tracking) ingebouwd in Curanta; ook los beschikbaar als Nis2Care voor non-Curanta-klanten. Klaar voor 1 juli 2026.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '#cbw' },
+      { label: 'Cbw (NIS2)', status: 'wip', note: 'De Cyberbeveiligingswet geldt sinds 15 augustus 2026. Curanta heeft een NIS2-incidentmodule die de meldtermijnen van 24 uur, 72 uur en één maand bewaakt.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '#cbw' },
       { label: 'Wkkgz-klachtenregeling', status: 'live', note: 'Module + workflow standaard', doc: '#wkkgz' },
       { label: 'Wzd-stappenplan', status: 'live', note: 'Halfjaarlijkse IGJ-XML', doc: '#wzd' },
-      { label: 'Wtza-jaarverantwoording', status: 'live', note: 'Wizard voor deadline 31 mei', doc: '#wtza' },
-      { label: 'Wtta-uitlenersregister', status: 'wip', note: 'Module beschikbaar 1 sep 2026 — 4 maanden vóór wettelijke deadline', doc: '#wtta' },
-      { label: 'AI Act high-risk', status: 'wip', note: 'Classificatie + register beschikbaar 1 sep 2026 — ruim vóór 2 dec 2027', doc: '#ai-act' },
+      { label: 'Wtza-jaarverantwoording', status: 'live', note: 'Toelating vastleggen en de deadline van 31 mei bewaken, met herinneringen', doc: '#wtza' },
+      { label: 'Wtta-uitlenersregister', status: 'live', note: 'Registratiestatus en inleenrelaties vastleggen; de registratieplicht geldt vanaf 1 januari 2027', doc: '#wtta' },
+      { label: 'AI Act high-risk', status: 'live', note: 'Register en classificatie van de AI-systemen in Curanta, met een logboek van AI-aanroepen', doc: '#ai-act' },
     ],
   },
 ];
@@ -160,7 +160,7 @@ const statusLabel = (s: string) =>
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Broncode-escrow</strong> — overeenkomst met SRK-escrow­agent in voorbereiding (Q3 2026). Activerings­drempel: drie aaneengesloten maanden geen oplevering.</span></li>
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Technische documentatie</strong> — volledig, actueel, in de repo. Een gekwalificeerde .NET-ontwikkelaar kan het systeem zelfstandig overnemen en uitbreiden.</span></li>
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Ontwikkelaarspartnerschap</strong> — afspraken met twee NL-gebaseerde .NET-zorgpartners in voorbereiding. Continuïteits­plan inclusief SLA beschikbaar na ondertekening MSA.</span></li>
-          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Data-portabiliteit</strong> — volledige export in JSON/CSV/FHIR R4 op elk moment, contractueel vastgelegd. U bent nooit afhankelijk van onze inzet om uw eigen data te krijgen.</span></li>
+          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Data-portabiliteit</strong> — volledige export van uw gegevens in JSON, op verzoek en zonder exit-fee; de exit staat in onze voorwaarden (artikel 9).</span></li>
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Directe lijn als kracht</strong> — kleinere leverancier betekent ook: geen supportdesk-bureaucratie, geen tickets die kwartalen reizen. U spreekt rechtstreeks met de bouwers; fixes in dagen, niet in releases per jaar.</span></li>
         </ul>
         <p class="mt-5 text-sm text-ink-500">Founding partners ontvangen aanvullende garanties en zijn mede-eigenaar van de roadmap. Vraag de aanvullende continuïteitsverklaring op via <a href="mailto:trust@curanta.nl" class="text-curanta-700 hover:underline">trust@curanta.nl</a>.</p>

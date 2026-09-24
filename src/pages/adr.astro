@@ -29,36 +29,36 @@ const adrs = [
   },
   {
     id: 'ADR-003',
-    title: 'NL-hosting (Azure West-Europe) — geen exceptie',
+    title: 'Hosting binnen de EU — geen uitzondering',
     date: '2025-11',
     status: 'Aanvaard',
     context: 'Zorgaanbieders eisen aantoonbaar dat zorggegevens niet buiten de EER worden verwerkt. Cloudflare-edge-caching voor de marketing-site is acceptabel; voor de zorg-applicatie niet.',
-    decision: 'De zorg-applicatie (app.curanta.nl) draait uitsluitend in Azure West-Europe met backup binnen NL. Geen secondary regions in andere geografieën. Sub-verwerker-lijst wordt 30 dagen vóór wijziging gecommuniceerd.',
-    consequences: 'Hogere latency voor non-EU-bezoekers (irrelevant voor NL-zorg). Failover-strategie is regionale-availability-zones, niet cross-region. Disaster-recovery is geografisch beperkt — bewust binnen NL-grenzen.',
+    decision: 'De zorg-applicatie (app.curanta.nl) en de databases draaien bij IONOS Cloud in Berlijn (Duitsland). Geen hosting buiten de EER. Sub-verwerker-lijst wordt 30 dagen vóór wijziging gecommuniceerd.',
+    consequences: 'Hogere latency voor non-EU-bezoekers (irrelevant voor NL-zorg). De AI-functies zijn de uitzondering op "alles in de EER": staan ze aan, dan gaat gepseudonimiseerde tekst naar Anthropic in de VS, onder modelcontractbepalingen (SCC).',
   },
   {
     id: 'ADR-004',
-    title: 'BSN-encryptie per tenant met AES-256-GCM',
+    title: 'BSN-encryptie op veldniveau met AES-256-GCM',
     date: '2025-12',
     status: 'Aanvaard',
     context: 'BSN is bijzonder persoonsgegeven onder AVG art. 9 én gespecificeerd onder Wabvpz. Versleuteling op kolom-niveau biedt verdediging-in-diepte boven volledige database-encryptie.',
-    decision: 'BSN wordt encrypted opgeslagen via AES-256-GCM, met sleutel per tenant beheerd in Azure Key Vault. Sleutel-rotatie elk kwartaal. Search via deterministisch hash-veld (separate kolom) om gelijkheids-queries mogelijk te houden zonder decryptie.',
-    consequences: 'Index-scans op BSN vereisen het hash-veld, niet de encrypted kolom. Bulk-data-export decrypteert lazy. Performance-impact gemeten <5ms per lookup. Bij sleutelverlies is herstel via Key Vault recovery-policies.',
+    decision: 'Het BSN wordt op veldniveau versleuteld opgeslagen met AES-256-GCM. Zoeken gaat via een apart, gepeperd hash-veld, zodat een gelijkheidsvraag geen ontsleuteling nodig heeft.',
+    consequences: 'Index-scans op BSN gebruiken het hash-veld, niet de versleutelde kolom. De sleutel staat buiten de database, in de configuratie van de server; een productieserver zonder eigen sleutel start niet.',
   },
   {
     id: 'ADR-005',
-    title: 'Nis2Care als zustermerk in plaats van inline-module',
+    title: 'Nis2Care als zustermerk naast de NIS2-module in Curanta',
     date: '2026-02',
     status: 'Aanvaard',
     context: 'NIS2-compliance is een eigen specialisme met diepe verticals (Z-CERT, IGJ-meldplicht, MDR-asset-tracking) die niet noodzakelijk in Curanta\'s EPD-scope horen. EPD-klanten willen wel de compliance-overlay.',
-    decision: 'NIS2-functionaliteit wordt uitgewerkt als separaat product (Nis2Care), gepositioneerd als complementair aan elk EPD — niet alleen Curanta. Curanta refereert alleen `Nis2Care.Zorg.Contracts` (publieke NuGet) voor data-uitwisseling.',
-    consequences: 'Curanta blijft EPD-zuiver; Nis2Care krijgt eigen marketing en kan ook met Nedap/Pluriform/SDB worden gekoppeld. Twee codebases, twee release-cadansen. Klanten kopen ze samen of apart — dat is een commerciële keuze.',
+    decision: 'Curanta heeft een eigen NIS2-incidentmodule (registratie en de meldtermijnen van 24 uur, 72 uur en één maand). Een uitgebreider NIS2-product voor zorgaanbieders met een ander EPD werken wij apart uit onder de naam Nis2Care; dat is nog niet beschikbaar.',
+    consequences: 'Curanta-klanten hebben de meldplicht-registratie in hun eigen omgeving. Nis2Care krijgt, zodra het er is, eigen marketing. Klanten kopen ze samen of apart — dat is een commerciële keuze.',
   },
 ];
 ---
 <Base
   title="Architectuur-besluiten (ADR) — Curanta"
-  description="Publieke Architectural Decision Records van Curanta. Modulaire monolith, FHIR R4, NL-hosting, BSN-encryptie, Nis2Care-zustermerk. Voor CIO's en IT-architecten."
+  description="Publieke Architectural Decision Records van Curanta. Modulaire monolith, FHIR R4, hosting binnen de EU, BSN-encryptie, Nis2Care-zustermerk. Voor CIO's en IT-architecten."
 >
   <PageHero
     eyebrow="Architectuur-besluiten"
@@ -68,7 +68,7 @@ const adrs = [
 
   <section class="container-prose py-10 border-b border-ink-100 bg-ink-100/40">
     <p class="text-sm text-ink-700 max-w-3xl">
-      Iedere ADR volgt de standaard <strong class="text-ink-900">context → besluit → consequenties</strong>-structuur. Aanvaard = besluit is in productie geïmplementeerd.
+      Iedere ADR volgt de standaard <strong class="text-ink-900">context → besluit → consequenties</strong>-structuur. Aanvaard = besluit is in de code doorgevoerd.
       Wijzigingen zijn versie-beheerd; vervanging gebeurt via een nieuwe ADR die de oude superseden.
     </p>
   </section>

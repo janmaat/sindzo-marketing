@@ -58,7 +58,7 @@ const resources: Resource[] = [
   {
     category: 'Privacy & security',
     title: 'Security-pack',
-    body: 'NEN 7510-statement, controls-evidence-bundle, pentest-samenvatting, sub-verwerker-lijst.',
+    body: 'NEN 7510-statement, controls-evidence-bundle, sub-verwerker-lijst. Een externe pentest is nog niet uitgevoerd.',
     file: onRequest('Security-pack'),
     format: 'Op aanvraag · binnen 1 werkdag',
   },
@@ -171,7 +171,6 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
           <ul class="mt-3 space-y-2 text-sm text-ink-700">
             <li>Verwerkersovereenkomst en actuele sub-verwerkerslijst</li>
             <li>Controls-evidence-bundle op basis van de NEN 7510:2024-structuur</li>
-            <li>Samenvatting van de jaarlijkse pentest door een NL-CERT-aangesloten partij</li>
             <li>Ingevulde CAIQ v4.0.3 en SIG-vragenlijst</li>
             <li>Het volledige <a href="/trust" class="text-curanta-700 hover:underline">Trust Centre</a>, publiek en zonder NDA</li>
           </ul>

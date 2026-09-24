@@ -5,11 +5,11 @@ import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
 
 const deadlines = [
   {
-    date: '1 juli 2026',
-    daysAway: '~6 weken',
+    date: '15 augustus 2026',
+    daysAway: 'van kracht',
     law: 'Cyberbeveiligingswet (NIS2)',
     obligation: 'Aangewezen entiteiten moeten registreren en passende maatregelen aantonen.',
-    module: 'NIS2-incidentmodule (24/72/720u SLA-tracking) ingebouwd in Curanta; ook los beschikbaar als Nis2Care voor non-Curanta-klanten.',
+    module: 'NIS2-incidentmodule in Curanta: registratie en de meldtermijnen van 24 uur, 72 uur en één maand.',
     moduleUrl: NIS2CARE_LIVE ? NIS2CARE_URL : undefined,
     moduleLinkLabel: 'nis2care.nl',
   },
@@ -18,21 +18,21 @@ const deadlines = [
     daysAway: 'volgende deadline 2027',
     law: 'Wtza-jaarverantwoording',
     obligation: 'Toelatingsverplichte zorgaanbieders verantwoorden zich publiek via DigiMV.',
-    module: 'Wtza-wizard genereert de aanlevering — niet per spreadsheet.',
+    module: 'Curanta legt de toelating vast en bewaakt de deadline van de jaarverantwoording, met herinneringen. De aanlevering zelf doet u in DigiMV.',
   },
   {
     date: '1 januari 2027',
-    daysAway: 'module klaar 1 sep 2026',
+    daysAway: 'module beschikbaar',
     law: 'Wtta-uitlenersregister',
     obligation: 'Zorgaanbieders die uitlenen registreren in het landelijke register.',
-    module: 'Wtta-uitleen registreert en koppelt automatisch — beschikbaar 1 september 2026, ruim vóór de deadline.',
+    module: 'Curanta legt uw registratiestatus en inleenrelaties vast. De registratie zelf doet u in het landelijke register.',
   },
   {
     date: '2 december 2027',
-    daysAway: 'module klaar 1 sep 2026',
+    daysAway: 'module beschikbaar',
     law: 'AI Act high-risk',
     obligation: 'AI-systemen in gezondheidszorg vallen onder high-risk; register en assessment verplicht.',
-    module: 'Classificatie + register beschikbaar 1 september 2026 — 15 maanden voor de wettelijke deadline.',
+    module: 'Register en classificatie van de AI-systemen in Curanta, met een logboek van AI-aanroepen.',
   },
 ];
 ---
@@ -66,8 +66,8 @@ const deadlines = [
       ))}
     </ul>
     <p class="mt-6 text-xs text-ink-500">
-      Bron: rijksoverheid.nl, IGJ.nl, Autoriteit Persoonsgegevens. Curanta volgt wijzigingen actief en houdt de
-      modulekaart bij — u hoeft de wet niet bij te houden.
+      Bron: rijksoverheid.nl, IGJ.nl, Autoriteit Persoonsgegevens; Cyberbeveiligingswet: Staatsblad 2026, 187.
+      Curanta volgt wijzigingen actief en houdt de modulekaart bij.
     </p>
   </div>
 </section>
