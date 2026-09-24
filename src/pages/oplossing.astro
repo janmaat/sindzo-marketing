@@ -66,7 +66,7 @@ const groups: ModuleGroup[] = [
       { icon: '🗺️', title: 'Routing', body: 'Wijkroute-optimalisatie met reistijd en cliëntvoorkeuren.', status: 'live' },
       { icon: '⚖️', title: 'CAO-engine', body: 'CAO-regels gecodeerd; verzuim-aandachtspunten en wettelijke triggers.', status: 'live' },
       { icon: '🪜', title: 'Zelfrooster', body: 'Medewerkers kiezen eigen diensten binnen kaders — minder planner-werk, hogere tevredenheid.', status: 'live' },
-      { icon: '⏱️', title: 'Tijdregistratie', body: 'Inklokken (mobiel/desktop), uren-verantwoording, automatische doorvoer naar loonrun en facturatie.', status: 'live' },
+      { icon: '⏱️', title: 'Tijdregistratie', body: 'Inklokken (mobiel/desktop) en uren-verantwoording.', status: 'live' },
       { icon: '📱', title: 'Mobile-app (offline)', body: 'Veldwerk offline-first met sync; voor extramurale teams.', status: 'wip' },
       { icon: '🧩', title: 'Planhulp', body: 'AI-gestuurde planningsoptimalisatie en blokplanning-suggesties op basis van beschikbaarheid en cliëntvoorkeuren.', status: 'live' },
       { icon: '📐', title: 'Formatieplanning', body: 'Structurele bezettingsplanning op FTE-, team- en unit-niveau — los van shift-roostering, voor budget- en HR-cycli.', status: 'live' },
@@ -85,7 +85,7 @@ const groups: ModuleGroup[] = [
       { icon: '🤲', title: 'Vrijwilligers', body: 'Registratie van vrijwilligers, VOG-bewaking en inzet op activiteiten en dagbesteding.', status: 'live' },
       { icon: '🎓', title: 'Opleiding & competentiebeheer', body: 'BIG-herregistratie-bewaking, bijscholing, e-learning en competentie-matrix per functie — met automatische deadline-meldingen.', status: 'live' },
       { icon: '❤️', title: 'Engagement & medewerker-puls', body: 'Korte pulse-vragen, tevredenheid en signalen voor verloop-risico — voor managers en HR, niet voor toezicht.', status: 'live' },
-      { icon: '🌱', title: 'WPM-rapportage (CO₂)', body: 'Werkgebonden Personenmobiliteit — jaarlijkse CO₂-mobiliteitsrapportage voor de RVO. Verplicht voor organisaties >100 medewerkers. Registreert woon-werkafstand, transportmiddel en thuiswerkpercentage per medewerker met SKAO/MVO-factoren; RVO-CSV-export ingebouwd.', status: 'live' },
+      { icon: '🌱', title: 'WPM-rapportage (CO₂)', body: 'Werkgebonden Personenmobiliteit — jaarlijkse CO₂-mobiliteitsrapportage voor de RVO. Verplicht voor organisaties >100 medewerkers. Registreert woon-werkafstand, vervoerwijze en thuiswerkpercentage per medewerker, schat de CO₂-uitstoot per vervoerwijze, en maakt een CSV-overzicht als voorbereiding op de aanlevering bij RVO (geen RVO-formaat).', status: 'live' },
     ],
   },
   {
@@ -112,10 +112,10 @@ const groups: ModuleGroup[] = [
     modules: [
       { icon: '🎙️', title: 'Voice-rapportage', body: 'Web Speech API + AI-samenvatting, met audit-trail van bewerkingen.', status: 'live' },
       { icon: '🤖', title: 'AI-Matching', body: 'Cliënt ↔ professional matching met uitlegbare scoring.', status: 'wip' },
-      { icon: '📚', title: 'CAO-RAG', body: 'CAO-uitleg via retrieval-augmented generation, met bronverwijzing.', status: 'wip' },
+      { icon: '📚', title: 'CAO-assistent', body: 'CAO-uitleg met bronverwijzing. Draait nog zonder CAO-tekst: we laden alleen een CAO met een controleerbare herkomst.', status: 'wip' },
       { icon: '🚨', title: 'Fraud Detection', body: 'Patroon-herkenning op declaraties en planning.', status: 'wip' },
       { icon: '🔮', title: 'Predictive', body: 'Voorspelling van uitstroom, wachttijden en zorgintensiteit.', status: 'roadmap' },
-      { icon: '⚡', title: 'Planningsassistent', body: 'Bij ziekmelding voert de assistent automatisch de hele keten uit: roostermutaties, cliëntnotificaties en taak-logging.', status: 'live' },
+      { icon: '⚡', title: 'Planningsmeldingen', body: 'Bij een ziekmelding worden de geraakte diensten gemarkeerd, krijgen de planners een bericht en komt er een opvolgtaak. Geen AI en geen automatische roostermutaties: het rooster past de planner zelf aan.', status: 'live' },
       { icon: '🩺', title: 'SOEP-Coach', body: 'LLM-laag boven de SOEP-editor: syndroomdetectie, Omaha-suggesties en automatische decursus-samenvatting — Anthropic met heuristische fallback.', status: 'live' },
     ],
   },
@@ -123,8 +123,8 @@ const groups: ModuleGroup[] = [
     group: 'Compliance & regulatoir',
     intro: 'Niet alleen "voldoen aan" — actief begeleiden bij wet en deadlines.',
     modules: [
-      { icon: '📜', title: 'Wtza-wizard', body: 'Toelating en jaarverantwoording (deadline 31 mei) met wizard-flow.', status: 'live' },
-      { icon: '🛂', title: 'Wtta-uitleen', body: 'Uitlenersregistratie en automatische check — module beschikbaar 1 sep 2026, ruim vóór de wettelijke deadline 1 jan 2027.', status: 'wip' },
+      { icon: '📜', title: 'Wtza', body: 'Toelating vastleggen en de deadline van de jaarverantwoording (31 mei) bewaken, met herinneringen.', status: 'live' },
+      { icon: '🛂', title: 'Wtta-uitleen', body: 'Registratiestatus en inleenrelaties vastleggen, vóór de registratieplicht van 1 januari 2027.', status: 'live' },
       { icon: '⚖️', title: 'Zelfstandigenwet', body: '€38/u rechtsvermoeden-toetsing en modelovereenkomst-engine.', status: 'live' },
       { icon: '🔒', title: 'NEN 7510', body: 'Control assessments, control-evidence en audit-export.', status: 'live' },
       { icon: '🏥', title: 'Wzd/Wvggz', body: 'Gedwongen zorg-registratie en halfjaarlijkse IGJ-XML.', status: 'live' },
@@ -141,8 +141,8 @@ const groups: ModuleGroup[] = [
     intro: 'Wat geen NL-concurrent biedt (marktscan 2026-05-29): peer-support tussen collega\'s, strikt gescheiden van HR. Buitenlands bewijs voor retentie-effect (NHS RISE: +20%).',
     modules: [
       { icon: '🤝', title: 'Collega-netwerk (buddy + intervisie)', body: 'Zelf-aanmelden voor onboarding-buddy, internationale-instroom-buddy, intervisie- of sparring-partner. Regelgebaseerde matching op thema, taal en beschikbaarheid. Geen welzijns-/gezondheidsdata in fase 1 — geen HR-inzage.', status: 'live' },
-      { icon: '🌍', title: 'Internationale-instroom-buddy', body: 'Hardgecodeerde meertalige UI (NL/EN/TR/AR/PL/UK) vanaf dag 1, zodat internationaal geworven verpleegkundigen direct in eigen taal werken.', status: 'live' },
-      { icon: '💬', title: 'Lotgenoten-support (vertrouwelijk)', body: 'Anoniem aanmelden op welzijnsthema (werkdruk, burn-out, rouw na incident, mantelzorg, re-integratie) met besloten 1-op-1-kanaal. Crisis-escalatie naar Vertrouwenspersoon — nooit HR. DPIA afgerond.', status: 'live' },
+      { icon: '🌍', title: 'Internationale-instroom-buddy', body: 'Koppelt een internationaal geworven collega aan een buddy die dezelfde taal spreekt: de matching weegt een gedeelde taal zwaar.', status: 'live' },
+      { icon: '💬', title: 'Lotgenoten-support (vertrouwelijk)', body: 'Anoniem aanmelden op welzijnsthema (werkdruk, burn-out, rouw na incident, mantelzorg, re-integratie) met besloten 1-op-1-kanaal. Crisis-escalatie naar Vertrouwenspersoon — nooit HR. Staat uit tot de DPIA van uw organisatie is afgerond.', status: 'live' },
     ],
   },
   {
@@ -150,7 +150,7 @@ const groups: ModuleGroup[] = [
     intro: 'Bestuur, raad van toezicht en management krijgen één bron-van-waarheid — geen export-naar-Excel-rituelen meer.',
     modules: [
       { icon: '📊', title: 'BI-dashboard', body: 'Vooraf-gedefinieerde KPI-dashboards voor zorg, financiën, HR en compliance — drilldown naar bron-record, geen losse rapportage-tool nodig.', status: 'live' },
-      { icon: '📈', title: 'Sector-benchmarks', body: 'Vergelijk uw KPI\'s met geanonimiseerde sectorgemiddelden (verzuim, caseload, declaratie-doorlooptijd) — opt-in, met expliciete privacy-toestemming.', status: 'live' },
+      { icon: '📈', title: 'Sector-benchmarks', body: 'Vergelijk uw eigen cijfers (bezettingsgraad, loonkosten, verzuim, productiviteit, klanttevredenheid) met vaste VVT-sectorcijfers (ActiZ Branchemonitor 2024; nog niet tegen de publicatie gecontroleerd).', status: 'live' },
     ],
   },
 ];

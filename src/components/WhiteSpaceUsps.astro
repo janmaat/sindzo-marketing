@@ -29,7 +29,7 @@ const usps = [
     eyebrow: 'Zorgplan op niveau van marktleider',
     title: 'SMART-doelen, risicoprofielen en cliëntperspectief — native',
     body: 'Cliëntformulering en mantelzorgperspectief naast professionele formulering. Risicoprofielen-engine (val/decubitus/ondervoeding/delier) draait automatisch op metingen en vragenlijsten. SMART-doelen met status-flow en streefdatum.',
-    evidence: 'Band A-uitbreiding (2026-05-16) tilde Curanta van pariteit met oude generatie ECD\'s naar marktleider-niveau 2024-2026 (Nedap, Pluriform, PUUR, Mextra, Carenzorgt). Inclusief Wcz/NEN 7510:2024 cliëntportaal-zichtbaarheid.',
+    evidence: 'Eigen vergelijking bij de zorgplan-uitbreiding van mei 2026 met Nedap, Pluriform, PUUR, Mextra en Carenzorgt — geen externe bron. De feitelijke tabel staat op /vergelijking.',
     status: 'live',
     statusNote: 'Beschikbaar nu',
   },
@@ -38,7 +38,7 @@ const usps = [
 const statusColor = (s: string) =>
   s === 'live' ? 'bg-green-500' : s === 'wip' ? 'bg-amber-500' : 'bg-ink-300';
 const statusLabel = (s: string) =>
-  s === 'live' ? 'Live' : s === 'wip' ? 'In afronding' : 'Op roadmap';
+  s === 'live' ? 'Gebouwd' : s === 'wip' ? 'In ontwikkeling' : 'Op roadmap';
 ---
 <section class="container-prose py-20 border-t border-ink-100">
   <div class="max-w-3xl">
