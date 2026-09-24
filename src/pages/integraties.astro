@@ -77,7 +77,7 @@ const categories = Array.from(new Set(integrations.map(i => i.category)));
 const dotColor = (s: string) =>
   s === 'live' ? 'bg-green-500' : s === 'wip' ? 'bg-amber-500' : 'bg-ink-300';
 const statusLabel = (s: string) =>
-  s === 'live' ? 'Live' : s === 'wip' ? 'In ontwikkeling' : 'Op roadmap';
+  s === 'live' ? 'Gebouwd' : s === 'wip' ? 'In ontwikkeling' : 'Op roadmap';
 ---
 <Base
   image="/og/integraties.png"
@@ -87,7 +87,7 @@ const statusLabel = (s: string) =>
   <PageHero
     eyebrow="Integraties & standaarden"
     title="Aantoonbaar open — geen vendor lock-in."
-    subtitle="Curanta praat met het Nederlandse zorglandschap via gedocumenteerde standaarden, publieke API's en concrete koppelingen. Eerlijke status per integratie — live, in ontwikkeling of op roadmap."
+    subtitle="Curanta praat met het Nederlandse zorglandschap via gedocumenteerde standaarden, publieke API's en concrete koppelingen. Eerlijke status per integratie — gebouwd, in ontwikkeling of op roadmap. Gebouwd betekent: de koppeling is er; de aansluiting zelf (certificaat, contract met de berichtenpartij) regelen we per klant bij de implementatie."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href="/api" class="btn-primary no-underline">Bekijk API-docs</a>
@@ -103,7 +103,7 @@ const statusLabel = (s: string) =>
       </div>
       <div>
         <div class="font-display text-3xl font-bold text-green-600">{integrations.filter(i => i.status === 'live').length}</div>
-        <div class="mt-1 text-xs text-ink-500">Live nu</div>
+        <div class="mt-1 text-xs text-ink-500">Gebouwd</div>
       </div>
       <div>
         <div class="font-display text-3xl font-bold text-amber-600">{integrations.filter(i => i.status === 'wip').length}</div>
