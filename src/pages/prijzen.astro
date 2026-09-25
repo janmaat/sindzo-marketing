@@ -28,7 +28,7 @@ import Cta from '../components/Cta.astro';
         features={[
           'Cliëntdossier (Core) + SOEP-rapportage',
           'Tot 25 medewerkers',
-          'Standaard cliëntportaal',
+          'Cliënt- en mantelzorgerportaal gratis',
           '1 module declaratie (Wmo óf Jw óf Wlz)',
           'E-mail-support binnen 1 werkdag',
           'NEN 7510 basis-controls',
@@ -38,7 +38,7 @@ import Cta from '../components/Cta.astro';
       <PlanCard
         name="Compliance Pro"
         tagline="Voor organisaties met compliance-druk"
-        priceFrom="€34"
+        priceFrom="€29"
         highlight={true}
         features={[
           'Alles uit Basic',
@@ -57,7 +57,7 @@ import Cta from '../components/Cta.astro';
       <PlanCard
         name="Totaalzorg Plus"
         tagline="Voor organisaties met flexibele personeelsschil"
-        priceFrom="€42"
+        priceFrom="€39"
         features={[
           'Alles uit Compliance Pro',
           'Volledige Planning + Routing + CAO-engine',
@@ -74,8 +74,9 @@ import Cta from '../components/Cta.astro';
         features={[
           'Alles uit Totaalzorg Plus',
           'Multi-tenant met concern-rapportage',
-          'Persoonlijke begeleiding bij de start, ook op locatie',
-          'Responstijden en SLA op maat, in overleg',
+          'Dedicated success-manager',
+          'SLA op maat, in overleg',
+          'On-premises hosting optie (NL)',
           'Custom-koppelingen bouwen wij',
           'Architecture-review jaarlijks',
         ]}
@@ -85,6 +86,8 @@ import Cta from '../components/Cta.astro';
 
     <p class="mt-8 text-center text-sm text-ink-500">
       Alle prijzen ex. BTW, per actieve medewerker per maand, vanaf jaar-contract.
+      Zorgmedewerkers die alleen het medewerkerportaal gebruiken: €19 per maand, in elk plan.
+      Het cliënt- en mantelzorgerportaal zijn gratis.
       Vanaf 500 medewerkers stappen we over op een staffel-tarief.
       Indicatief — werkelijke prijs hangt af van segment, schaal en gekozen modules.
     </p>
@@ -121,7 +124,7 @@ import Cta from '../components/Cta.astro';
             <tr>
               <td class="px-4 py-3">Abonnement per gebruiker per maand</td>
               <td class="px-4 py-3">€50 – €90</td>
-              <td class="px-4 py-3 font-semibold text-curanta-900">€19 – €42 per actieve medewerker</td>
+              <td class="px-4 py-3 font-semibold text-curanta-900">€19 – €39 per actieve medewerker</td>
             </tr>
             <tr>
               <td class="px-4 py-3">Eenmalige implementatie en training</td>
@@ -212,7 +215,7 @@ import Cta from '../components/Cta.astro';
           <tr class="bg-greensoft/40">
             <td class="px-4 py-3 font-semibold text-curanta-900">Curanta Compliance Pro</td>
             <td class="px-4 py-3">actieve medewerker</td>
-            <td class="px-4 py-3 font-semibold text-curanta-900">€34 per maand</td>
+            <td class="px-4 py-3 font-semibold text-curanta-900">€29 per maand</td>
             <td class="px-4 py-3 text-xs text-ink-500">Deze pagina</td>
           </tr>
           <tr>
@@ -223,6 +226,15 @@ import Cta from '../components/Cta.astro';
               alleen een minimum van €25 per maand.
             </td>
             <td class="px-4 py-3 text-xs text-ink-500">nedap-ons.nl</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3">Ecare PUUR.</td>
+            <td class="px-4 py-3">niet gepubliceerd</td>
+            <td class="px-4 py-3">
+              Geen tarief of prijsmodel openbaar. Ecare verwijst voor een prijs naar een demo of
+              een gesprek.
+            </td>
+            <td class="px-4 py-3 text-xs text-ink-500">ecare.nl</td>
           </tr>
           <tr>
             <td class="px-4 py-3">Octaaf Thuiszorgsoftware</td>
@@ -254,12 +266,13 @@ import Cta from '../components/Cta.astro';
       </table>
     </div>
     <p class="mt-4 max-w-3xl text-xs text-ink-500">
-      Elk tarief hierboven is op 17 augustus 2026 nagetrokken bij de leverancier zelf. Wij zetten
+      Elk tarief hierboven is op 17 augustus 2026 nagetrokken bij de leverancier zelf, dat van
+      Ecare op 25 september 2026. Wij zetten
       hier bewust geen omrekening naar één noemer: dat vraagt een aanname over het aantal
       cliënten per medewerker, en V&amp;VN, Movisie en het Nederlands Jeugdinstituut stellen alle
       drie dat daar geen vaste norm voor bestaat. Een vergelijking op een aanname die wij zelf
       kiezen, is geen vergelijking. Ziet u een fout in deze tabel, dan corrigeren wij die binnen
-      1 werkdag — <a href="mailto:hello@curanta.nl" class="text-curanta-700 hover:underline">hello@curanta.nl</a>.
+      1 werkdag — <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>.
     </p>
     <div class="mt-8 rounded-2xl border border-ink-100 bg-curanta-50 p-6 max-w-3xl">
       <h3 class="font-display text-lg font-semibold text-ink-900">Wat het voor ú betekent</h3>
@@ -300,8 +313,16 @@ import Cta from '../components/Cta.astro';
         <dd class="mt-1 text-sm text-ink-700">Een gebruiker die in de afgelopen 30 dagen heeft ingelogd. Slapende accounts tellen niet mee — u betaalt niet voor mensen die niet werken.</dd>
       </div>
       <div>
-        <dt class="font-semibold text-ink-900">Hoe zit het met cliëntportaal-gebruikers?</dt>
-        <dd class="mt-1 text-sm text-ink-700">Cliënten, mantelzorgers en familie tellen niet als medewerker. Het portaal is inbegrepen in alle plannen.</dd>
+        <dt class="font-semibold text-ink-900">Wat kost een zorgmedewerker die alleen het medewerkerportaal gebruikt?</dt>
+        <dd class="mt-1 text-sm text-ink-700">€19 per maand, in elk plan. Dat geldt voor wie alleen het medewerkerportaal nodig heeft. Wie ook in de backoffice werkt, betaalt het bedrag van het plan — bijvoorbeeld een wijkverpleegkundige die indicaties stelt.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-ink-900">Hoe zit het met cliënten en mantelzorgers?</dt>
+        <dd class="mt-1 text-sm text-ink-700">Het cliëntportaal en het mantelzorgerportaal zijn gratis, in alle plannen. Cliënten, mantelzorgers en familie tellen niet als medewerker.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-ink-900">Hoe loggen gebruikers in?</dt>
+        <dd class="mt-1 text-sm text-ink-700">Met tweestapsverificatie, inbegrepen in elk plan. Inloggen met DigiD voor cliënten en mantelzorgers is een betaalde optie.</dd>
       </div>
       <div>
         <dt class="font-semibold text-ink-900">Wat kost het bij meer dan 1.000 medewerkers?</dt>
