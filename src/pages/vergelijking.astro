@@ -1,16 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import RelatedArticles from '../components/RelatedArticles.astro';
 import Cta from '../components/Cta.astro';
+import { DEMO_ZELF } from '../config/demo';
 
 // Productvergelijking met de top-3 NL-concurrenten in VVT/GHZ.
 // Bewust feitelijk: peildatum + bron per bestreden claim. Eerlijk
 // over waar concurrenten voorlopen — bouwt geloofwaardigheid voor
 // de win-claims.
 //
-// Onderhoud: claims minstens 1x per kwartaal hercontroleren tegen
-// publieke leverancier-sites + ervaring van early-access-partners.
+// Onderhoud (feitenblad, besluit Jan 25-09-2026): peildatum 29-05-2026, herzien bij wezenlijke
+// wijzigingen — niet "elk kwartaal". Geen klanten of partners als bron: die zijn er nog niet.
 
 const lastReviewed = '2026-05-29';
 
@@ -36,8 +36,8 @@ interface Group {
 
 const groups: Group[] = [
   {
-    title: 'Waar Curanta bewezen vooruitloopt',
-    intro: 'Marktscan 2026-05-29: geen directe NL-concurrent biedt deze functies. Eén concurrent (ChipSoft HiX) heeft NL+EN-portaal maar alleen voor ziekenhuis-segment, niet voor VVT/GHZ.',
+    title: 'Waar Curanta vooruitloopt (eigen marktscan)',
+    intro: 'Eigen marktscan, peildatum 29-05-2026: geen directe Nederlandse concurrent biedt deze functies. ChipSoft HiX heeft een portaal in NL en EN, maar alleen voor ziekenhuizen, niet voor VVT of gehandicaptenzorg.',
     tone: 'win',
     rows: [
       {
@@ -51,12 +51,12 @@ const groups: Group[] = [
       },
       {
         feature: 'Collega-netwerk medewerker',
-        detail: 'Buddy-/intervisie-matching gescheiden van HR',
+        detail: 'Een buddy of intervisiepartner, gescheiden van HR',
         curanta: { status: 'yes', note: 'Gebouwd' },
-        nedap: { status: 'no', note: 'Geen peer-functie in Ons-suite' },
+        nedap: { status: 'no', note: 'Geen functie hiervoor in Ons' },
         pinkroccade: { status: 'no' },
         pluriform: { status: 'no' },
-        source: 'Deep-research USP-prompts; NL-aanbieders + Speakap (generiek intranet)',
+        source: 'Eigen marktscan van Nederlandse aanbieders en Speakap (algemeen intranet)',
       },
       {
         feature: 'Lotgenoten-support op welzijnsthema',
@@ -65,13 +65,13 @@ const groups: Group[] = [
         nedap: { status: 'no' },
         pinkroccade: { status: 'no' },
         pluriform: { status: 'no' },
-        source: 'NHS RISE (PSNet AHRQ) buitenlands bewijs; geen NL-equivalent gevonden',
+        source: 'Eigen marktscan: geen Nederlands equivalent gevonden',
       },
     ],
   },
   {
-    title: 'Functionele pariteit met marktleider',
-    intro: 'Hier kunt u erop rekenen dat Curanta niet achterloopt op wat marktleiders bieden. Geen kwalitatieve uitspraken over wie "beter" is — claims zijn ja/nee.',
+    title: 'Functies naast elkaar',
+    intro: 'Waar Curanta gelijk oploopt, en waar het nog deels is. Geen oordeel over wie "beter" is: per punt ja, deels of nee.',
     tone: 'parity',
     rows: [
       {
@@ -82,8 +82,8 @@ const groups: Group[] = [
         pluriform: { status: 'unknown' },
       },
       {
-        feature: 'AI-pre-fill + spraakinvoer SOEP',
-        curanta: { status: 'yes', note: 'Gebouwd, met audit-trail' },
+        feature: 'Coach-voorstel en spraakinvoer bij SOEP',
+        curanta: { status: 'partial', note: 'Coach-voorstel op knopdruk; spraak alleen in de backoffice, op het apparaat' },
         nedap: { status: 'yes', note: 'Toediening + rapportage via voice' },
         pinkroccade: { status: 'partial' },
         pluriform: { status: 'partial' },
@@ -105,7 +105,7 @@ const groups: Group[] = [
       },
       {
         feature: 'SMART-doelen + risicoprofielen-engine',
-        detail: 'Cliëntformulering, streefdatum, val/decubitus/ondervoeding/delier autosignalering',
+        detail: 'Cliëntformulering, streefdatum; risico op val, decubitus, ondervoeding en delier berekend uit metingen en vragenlijsten',
         curanta: { status: 'yes', note: 'Gebouwd sinds mei 2026' },
         nedap: { status: 'partial', note: 'SMART-doelen ja, autosignalering deels' },
         pinkroccade: { status: 'partial' },
@@ -118,12 +118,12 @@ const groups: Group[] = [
         nedap: { status: 'yes', note: '~187' },
         pinkroccade: { status: 'yes' },
         pluriform: { status: 'yes', note: '~140' },
-        source: 'Pariteit-matrix 2026-05-30 — volledige Omaha-dekking; pariteit op de daadwerkelijk gebruikte interventies, geen catalog-omvang-race',
+        source: 'Eigen vergelijking 30-05-2026; volledige Omaha-dekking. Het gaat om de interventies die u gebruikt, niet om de grootste catalogus',
       },
       {
         feature: 'Modulair geprijsd (geen all-in-one)',
         curanta: { status: 'yes' },
-        nedap: { status: 'partial', note: 'Modules opt-in maar bundling-druk' },
+        nedap: { status: 'partial', note: 'Modules los af te nemen, maar met druk om te bundelen' },
         pinkroccade: { status: 'partial' },
         pluriform: { status: 'partial' },
       },
@@ -138,19 +138,19 @@ const groups: Group[] = [
   },
   {
     title: 'Waar concurrenten (terecht) voorlopen',
-    intro: 'Eerlijk: drie technische/compliance-punten waar gevestigde leveranciers op dit moment verder zijn dan Curanta. Allemaal op de roadmap met concrete deadlines.',
+    intro: 'Eerlijk: twee punten waar de gevestigde leveranciers op dit moment aantoonbaar verder zijn dan Curanta. Wat Curanta daarnaast nog niet heeft, staat onder de tabel.',
     tone: 'gap',
     rows: [
       {
         feature: 'ISO 27001-certificering',
-        curanta: { status: 'no', note: 'Op roadmap, audit gepland 2027' },
+        curanta: { status: 'no', note: 'Gepland, audit 2027' },
         nedap: { status: 'yes' },
         pinkroccade: { status: 'yes' },
         pluriform: { status: 'yes' },
       },
       {
         feature: 'NEN 7510:2024 extern geaudit',
-        curanta: { status: 'partial', note: 'Werkdocument klaar, audit Q4 2026' },
+        curanta: { status: 'partial', note: 'Werkdocument; externe audit gepland Q4 2026' },
         nedap: { status: 'yes' },
         pinkroccade: { status: 'yes' },
         pluriform: { status: 'yes' },
@@ -170,7 +170,7 @@ const cellColor = (s: string) =>
 
 const cellLabel = (s: string) =>
   s === 'yes' ? 'Ja' :
-  s === 'partial' ? 'Deels / wip' :
+  s === 'partial' ? 'Deels' :
   s === 'no' ? 'Nee' :
   'Onbekend';
 
@@ -182,16 +182,16 @@ const groupTone = (t: string) =>
 const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <Base
-  title="Curanta vs Nedap Ons, PinkRoccade en Pluriform — vergelijking"
-  description="Eerlijke vergelijking van Curanta met de top-3 NL-VVT/GHZ-concurrenten. Per claim een peildatum en bron, inclusief eerlijke vermelding waar concurrenten voorlopen."
+  title="Curanta naast Nedap Ons, PinkRoccade en Pluriform | Curanta"
+  description="Curanta naast Nedap Ons, PinkRoccade myNeva en Pluriform Zorg: per punt ja of nee, met peildatum en bron — ook waar zij verder zijn."
 >
   <PageHero
     eyebrow="Productvergelijking"
     title="Curanta naast de gevestigde marktleiders — feitelijk."
-    subtitle="Inkopers willen weten: wat hebben wij wel of niet ten opzichte van Nedap Ons, PinkRoccade myNeva en Pluriform Zorg? Hieronder de feiten, mét de plekken waar concurrenten ouder, groter en verder zijn. Géén kwalitatieve oordelen."
+    subtitle="Wat heeft Curanta wel of niet ten opzichte van Nedap Ons, PinkRoccade myNeva en Pluriform Zorg? Hieronder de feiten, ook waar de gevestigde leveranciers ouder, groter en verder zijn. Geen oordelen."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href="/demo" class="btn-primary no-underline">Vraag demo aan</a>
+      <a href={DEMO_ZELF.href} class="btn-primary no-underline">{DEMO_ZELF.label}</a>
       <a href="/trust" class="btn-secondary no-underline">Trust Centre</a>
     </div>
   </PageHero>
@@ -199,11 +199,11 @@ const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeri
   <section class="border-y border-amber-200 bg-amber-50 py-6">
     <div class="container-prose">
       <p class="text-sm text-amber-900">
-        <strong>Laatst gecheckt: {dateNl}.</strong>
-        Bronnen: eigen marktscan tegen publieke leverancier-websites, productdemonstraties, en gesprekken met inkopers.
-        Klopt er iets niet meer? Mail <a href="mailto:trust@curanta.nl?subject=Correctie%20vergelijkingspagina" class="text-curanta-700 hover:underline">trust@curanta.nl</a> —
-        we corrigeren binnen 1 werkdag en plaatsen een revisie-notitie. Vergelijking is bedoeld als informatief naslagwerk, niet als kwalitatief
-        oordeel over concurrenten.
+        <strong>Peildatum: {dateNl}.</strong> Wij herzien deze vergelijking bij wezenlijke wijzigingen.
+        Bronnen: eigen marktscan tegen publieke leverancierswebsites en productdemonstraties.
+        Klopt er iets niet meer? Mail <a href="mailto:info@curanta.nl?subject=Correctie%20vergelijkingspagina" class="text-curanta-700 hover:underline">info@curanta.nl</a> —
+        wij reageren binnen 1 werkdag en zetten een revisienotitie bij de correctie. De vergelijking is bedoeld als naslagwerk,
+        niet als oordeel over concurrenten.
       </p>
     </div>
   </section>
@@ -238,15 +238,15 @@ const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeri
                     <td class="px-4 py-3 align-top text-center">
                       <div class={`inline-flex flex-col items-center gap-1 rounded-md px-2 py-1.5 ${cellColor(c.status)}`}>
                         <span class="text-lg font-bold leading-none">{cellSymbol(c.status)}</span>
-                        <span class="text-[10px] uppercase tracking-wider font-semibold leading-none">{cellLabel(c.status)}</span>
+                        <span class="text-xs font-semibold leading-none">{cellLabel(c.status)}</span>
                       </div>
-                      {c.note && <div class="mt-1 text-[11px] text-ink-500 leading-tight max-w-[140px] mx-auto">{c.note}</div>}
+                      {c.note && <div class="mt-1 text-xs text-ink-500 leading-tight max-w-[160px] mx-auto">{c.note}</div>}
                     </td>
                   ))}
                 </tr>
                 {r.source && (
                   <tr>
-                    <td colspan="5" class="px-4 pb-3 -mt-2 text-[11px] text-ink-500 italic">
+                    <td colspan="5" class="px-4 pb-3 -mt-2 text-xs text-ink-500 italic">
                       Bron: {r.source}
                     </td>
                   </tr>
@@ -256,6 +256,18 @@ const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeri
           </tbody>
         </table>
       </div>
+      {g.tone === 'gap' && (
+        <div class="mt-6 max-w-3xl rounded-xl border border-amber-200 bg-amber-50/60 p-5 text-sm text-ink-700">
+          <p class="font-semibold text-ink-900">Wat Curanta daarnaast nog niet heeft</p>
+          <ul class="mt-2 list-disc space-y-1 pl-5">
+            <li>Zvw-declaratie wijkverpleging: aanleveren kan nog niet (het berichtformaat AW319 is nog niet gebouwd).</li>
+            <li>eOverdracht, MedMij en LSP: gebouwd of in ontwikkeling, nog niet aangesloten.</li>
+            <li>Een publieke API.</li>
+            <li>Een externe pentest.</li>
+            <li>Klantreferenties: er draait nog geen zorgorganisatie met Curanta in productie.</li>
+          </ul>
+        </div>
+      )}
     </section>
   ))}
 
@@ -267,9 +279,9 @@ const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeri
       </h2>
       <p class="mt-3 text-sm text-ink-700">
         Hetzelfde patroon dat de top-3 in beeld brengt herhaalt zich in de bredere markt.
-        Op de twee belangrijkste differentiatie-assen — meertalig cliëntportaal en peer-support voor
-        medewerkers — komt geen Nederlandse VVT/GHZ-leverancier verder dan Curanta. Onder per leverancier
-        kort de bevinding (peildatum {dateNl}).
+        Op de twee punten waarop wij ons onderscheiden — het meertalig cliëntportaal en steun tussen
+        collega's — komt volgens onze eigen marktscan geen Nederlandse VVT- of GHZ-leverancier verder dan
+        Curanta. Hieronder per leverancier kort de bevinding (peildatum {dateNl}).
       </p>
     </div>
     <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -286,11 +298,11 @@ const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeri
           <p class="text-xs text-ink-500 mt-0.5">{v.maker}</p>
           <dl class="mt-4 space-y-2 text-xs">
             <div>
-              <dt class="text-[10px] font-bold uppercase tracking-wider text-ink-500">Meertalig portaal</dt>
+              <dt class="text-xs font-bold text-ink-500">Meertalig portaal</dt>
               <dd class="mt-0.5 text-ink-700 flex items-center gap-1"><span class="text-rose-600 font-bold">✗</span> {v.portaal}</dd>
             </div>
             <div>
-              <dt class="text-[10px] font-bold uppercase tracking-wider text-ink-500">Peer-support medewerker</dt>
+              <dt class="text-xs font-bold text-ink-500">Peer-support medewerker</dt>
               <dd class="mt-0.5 text-ink-700 flex items-center gap-1"><span class="text-rose-600 font-bold">✗</span> {v.peer}</dd>
             </div>
           </dl>
@@ -298,9 +310,9 @@ const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeri
       ))}
     </ul>
     <p class="mt-6 text-xs text-ink-500 max-w-3xl">
-      Bronnen: leveranciers-websites + ADR 2026-05-29 Curanta-meertaligheid + deep-research USP-prompts.
-      Volledige feature-vergelijking met deze leveranciers op aanvraag —
-      <a href="mailto:vergelijking@curanta.nl?subject=Uitgebreide%20vergelijking" class="text-curanta-700 hover:underline">vergelijking@curanta.nl</a>.
+      Bron: eigen marktscan tegen de websites van de leveranciers.
+      Een uitgebreidere vergelijking met deze leveranciers op aanvraag —
+      <a href="mailto:info@curanta.nl?subject=Uitgebreide%20vergelijking" class="text-curanta-700 hover:underline">info@curanta.nl</a>.
     </p>
   </section>
 
@@ -309,46 +321,26 @@ const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeri
       <div class="rounded-xl border border-ink-100 bg-white p-6">
         <h3 class="font-display text-lg font-semibold text-ink-900">Hoe wij dit onderhouden</h3>
         <ul class="mt-3 space-y-2 text-sm text-ink-700">
-          <li>• Hercheck minimaal 1× per kwartaal tegen publieke productpagina's</li>
-          <li>• Feature-claims uit verkoopgesprekken bij early-access-partners</li>
-          <li>• Revisie-notities onderaan elke wijziging</li>
-          <li>• Géén anonieme bronnen — alleen wat publiek of via demo te verifiëren is</li>
+          <li>• Herzien bij wezenlijke wijzigingen, tegen publieke productpagina's</li>
+          <li>• Een revisienotitie bij elke correctie</li>
+          <li>• Alleen wat publiek of via een productdemonstratie na te gaan is</li>
         </ul>
       </div>
       <div class="rounded-xl border border-ink-100 bg-curanta-50 p-6">
         <h3 class="font-display text-lg font-semibold text-ink-900">Vergelijking aanvragen met andere leverancier?</h3>
         <p class="mt-3 text-sm text-ink-700">
           Werkt u op dit moment met Cura, Plancare 2, Carit Care, mijnCaress of een ander pakket
-          dat hier niet staat? Mail de naam en we sturen een feitelijke side-by-side toe binnen 1 werkdag.
+          dat hier niet staat? Mail ons de naam; wij reageren binnen 1 werkdag.
         </p>
-        <a href="mailto:vergelijking@curanta.nl?subject=Vergelijking%20aanvragen" class="mt-4 inline-block text-sm font-medium text-curanta-700 hover:underline">
-          vergelijking@curanta.nl →
+        <a href="mailto:info@curanta.nl?subject=Vergelijking%20aanvragen" class="mt-4 inline-block text-sm font-medium text-curanta-700 hover:underline">
+          info@curanta.nl →
         </a>
       </div>
     </div>
   </section>
 
-  <RelatedArticles
-    title="Onderbouwing van de white-space-claims"
-    intro="Sceptisch over de twee dimensies waar Curanta bewezen vooruitloopt? Hieronder de bron-artikelen — feitelijk, gesourced, met peildatum."
-    articles={[
-      {
-        eyebrow: 'Standaarden + marktanalyse',
-        title: 'Waarom geen NL-VVT/GHZ-leverancier meertalig is',
-        body: 'De marktscan-tabel uitgebreid: 9 leveranciers, demografische context (CBS), en 4 redenen waarom niemand het doet.',
-        href: '/kennisbank/meertalig-clientportaal-nl-zorg',
-      },
-      {
-        eyebrow: 'Arbeidsmarkt + welzijn',
-        title: 'Peer-support voor zorgmedewerkers — wat het onderzoek echt zegt',
-        body: 'Vijf buitenlandse studies uitgewerkt (NHS RISE, IRT, AHRQ, IEW, Incredible Health). Plus de vier ontwerp-eisen voor werkend peer-support.',
-        href: '/kennisbank/peer-support-zorgmedewerkers',
-      },
-    ]}
-  />
-
   <Cta
-    title="Klaar voor een demo met deze tabel ernaast?"
-    subtitle="Wij doorlopen de vergelijking tijdens de demo en tonen elk genoemd punt live in het systeem — of zijn eerlijk over waar het nog op de roadmap staat."
+    title="Deze tabel naast de demo leggen?"
+    subtitle="Kijk zelf rond, of laat ons elk punt uit de tabel live in het systeem zien — en eerlijk zeggen waar het nog gepland staat."
   />
 </Base>
