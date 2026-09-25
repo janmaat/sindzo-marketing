@@ -7,7 +7,7 @@ const sections = [
   { id: 'doelen', title: 'Doelen en grondslagen' },
   { id: 'bewaartermijnen', title: 'Bewaartermijnen' },
   { id: 'delen', title: 'Met wie wij gegevens delen' },
-  { id: 'sub-verwerkers', title: 'Sub-verwerkers' },
+  { id: 'sub-verwerkers', title: 'Subverwerkers' },
   { id: 'beveiliging', title: 'Beveiliging' },
   { id: 'rechten', title: 'Uw rechten (AVG)' },
   { id: 'cookies', title: 'Cookies' },
@@ -17,17 +17,15 @@ const sections = [
 ---
 <LegalLayout
   title="Privacyverklaring"
-  description="Hoe Curanta persoonsgegevens verwerkt — AVG-conform, transparant, met BSN-encryptie en hosting in de EU."
+  description="Hoe Curanta persoonsgegevens verwerkt: welke gegevens, waarvoor, hoe lang, met wie, en wat uw rechten zijn. Met een versleuteld BSN en hosting in de EU."
   eyebrow="Privacy"
-  lastUpdated="2026-09-24"
+  lastUpdated="2026-09-25"
   sections={sections}
 >
   <h2 id="wie">1. Wie wij zijn</h2>
   <p>
-    Deze privacyverklaring is van <strong>Curanta</strong>, gevestigd aan Marshallstraat 26,
-    5705 CN Helmond, Nederland.
-    KvK- en BTW-nummer op aanvraag via
-    <a href="mailto:info@curanta.nl">info@curanta.nl</a>. Curanta is een zorgsoftware-aanbieder
+    Deze privacyverklaring is van <strong>Curanta</strong>, een handelsnaam van Maat Holding B.V.,
+    gevestigd aan Marshallstraat 26, 5705 CN Helmond, Nederland. Curanta levert zorgsoftware
     voor de Nederlandse zorgmarkt.
   </p>
   <p>
@@ -46,7 +44,7 @@ const sections = [
   <h2 id="welke-data">2. Welke gegevens verwerken wij</h2>
   <p>Via deze website verwerken wij:</p>
   <ul>
-    <li><strong>Contactgegevens</strong> die u zelf invult (naam, e-mail, telefoon, organisatie, rol) — bij demo-aanvraag of contactformulier.</li>
+    <li><strong>Contactgegevens</strong> die u zelf invult (naam, e-mail, telefoon, organisatie, rol) — bij een aanvraag via het formulier op /demo.</li>
     <li><strong>Technische gegevens</strong>: IP-adres, browser-type, bezochte pagina's, tijdstip. Voor beveiliging en geaggregeerde statistiek.</li>
     <li><strong>Campagnebron</strong> bij een demo-aanvraag: als u via een link met campagnecodes binnenkwam
       (bijvoorbeeld een advertentie of nieuwsbrief), bewaren wij die codes (<code>utm_source</code>,
@@ -96,7 +94,7 @@ const sections = [
 
   <h2 id="bewaartermijnen">4. Bewaartermijnen</h2>
   <ul>
-    <li><strong>Demo-aanvragen / contactformulieren</strong>: 24 maanden, voor opvolging en mogelijke heropening van het gesprek.</li>
+    <li><strong>Demo-aanvragen</strong>: 24 maanden, voor opvolging en mogelijke heropening van het gesprek.</li>
     <li><strong>Bezoekstatistiek</strong>: 24 maanden, daarna automatisch gewist.</li>
     <li><strong>Sollicitaties</strong>: 4 weken na afwijzing (Sollicitatiecode NVP), tenzij u toestemming geeft voor langere bewaartermijn.</li>
     <li><strong>Beveiligingslogs</strong>: 12 maanden.</li>
@@ -109,26 +107,30 @@ const sections = [
     <li><strong>Hosting</strong>: Strato AG (Duitsland) voor deze website; IONOS Cloud (Berlijn,
       Duitsland) voor de Curanta-applicatie en de demo-omgeving.</li>
     <li><strong>E-mail</strong>: Strato (Duitsland), de mailserver van curanta.nl.</li>
-    <li><strong>Analytics</strong>: Plausible Analytics (EU-gehost, geen cookies, geen IP-opslag).</li>
     <li><strong>Advertentiemeting</strong>: Google Ireland Ltd. (Google Ads) — alleen als u daar in het
       demoformulier toestemming voor gaf. Wij geven dan uitsluitend de klikcode van de advertentie en het
       tijdstip van uw aanvraag door; geen naam, e-mailadres, telefoonnummer of organisatie. Google
       koppelt die code aan de advertentieklik die het zelf al kent. Trekt u uw toestemming in voordat
       wij de meting doorgeven, dan geven wij niets door.</li>
-    <li><strong>Betaling</strong>: Mollie (voor abonnement-facturatie).</li>
   </ul>
   <p>
     Wij verkopen of verhuren <strong>nooit</strong> persoonsgegevens. Wij sturen geen marketing
-    aan adressen die u via een contactformulier invult, tenzij u zich apart heeft aangemeld voor
+    aan adressen die u via een formulier invult, tenzij u zich apart heeft aangemeld voor
     een nieuwsbrief.
   </p>
 
-  <h2 id="sub-verwerkers">6. Sub-verwerkers</h2>
+  <h2 id="sub-verwerkers">6. Subverwerkers</h2>
+  <p>Voor de Curanta-applicatie zijn dit de subverwerkers:</p>
+  <ul>
+    <li><strong>IONOS Cloud</strong> (Berlijn, Duitsland): hosting van de applicatie en de databases.</li>
+    <li><strong>Strato</strong> (Duitsland): e-mail.</li>
+    <li><strong>Anthropic</strong> (Verenigde Staten): alleen als de AI-functies aan staan, met gepseudonimiseerde
+      gegevens en modelcontractbepalingen (SCC).</li>
+    <li><strong>DocuSign</strong> (Verenigde Staten): alleen bij het digitaal ondertekenen van HR-documenten.</li>
+  </ul>
   <p>
-    Voor de Curanta-applicatie geldt een actuele
-    <a href="mailto:trust@curanta.nl?subject=Subverwerker-lijst%20opvragen">sub-verwerker-lijst</a> (op aanvraag binnen 1 werkdag)
-    waarvan wijzigingen met 30 dagen aankondiging worden gecommuniceerd aan klanten.
-    Voor de marketing-website zijn de sub-verwerkers de partijen uit punt 5.
+    Een wijziging in deze lijst melden wij klanten 30 dagen van tevoren. Voor de marketingwebsite
+    zijn de subverwerkers de partijen uit punt 5.
   </p>
 
   <h2 id="beveiliging">7. Beveiliging</h2>
@@ -136,11 +138,14 @@ const sections = [
   <ul>
     <li>Versleutelde verbindingen (TLS) voor al het verkeer.</li>
     <li>Het BSN in de Curanta-applicatie versleuteld op veldniveau (AES-256-GCM).</li>
-    <li>NEN 7510-werkdocument (audit Q4 2026).</li>
-    <li>Audit-logging met een hash-keten, zodat een wijziging achteraf aantoonbaar is.</li>
-    <li>Tweestapsverificatie (MFA) in de beheeromgeving verplicht voor zorg- en beheerrollen.</li>
+    <li>NEN 7510-werkdocument (externe audit gepland Q4 2026).</li>
+    <li>Een logboek met een hash-keten, zodat een wijziging achteraf aantoonbaar is.</li>
+    <li>Tweestapsverificatie in de backoffice, verplicht voor zorg- en beheerrollen.</li>
   </ul>
-  <p>Volledige overzicht in ons <a href="/trust">Trust Centre</a>.</p>
+  <p>
+    De database als geheel is nog niet versleuteld; dat is een voorwaarde vóór de eerste klant.
+    Het volledige overzicht staat in ons <a href="/trust">Trust Centre</a>.
+  </p>
 
   <h2 id="rechten">8. Uw rechten (AVG)</h2>
   <p>U heeft het recht om:</p>
@@ -161,8 +166,8 @@ const sections = [
 
   <h2 id="cookies">9. Cookies</h2>
   <p>
-    Deze website plaatst geen cookies — ook geen functionele. Onze statistiek (Plausible en onze
-    eigen bezoekstatistiek, zie punt 2) werkt cookieloos. Details op de
+    Deze website plaatst geen cookies — ook geen functionele. Onze eigen bezoekstatistiek (zie
+    punt 2) werkt cookieloos. Details op de
     <a href="/cookies">cookie-pagina</a>.
   </p>
 
@@ -170,7 +175,7 @@ const sections = [
   <p>
     Curanta heeft nog geen functionaris voor gegevensbescherming (FG) aangesteld. Dat doen wij, met een
     externe FG, voordat de eerste zorgorganisatie Curanta met echte cliëntgegevens gebruikt; wij melden die
-    FG dan aan bij de Autoriteit Persoonsgegevens. Tot die tijd is Jan Maat uw aanspreekpunt voor privacy:
+    FG dan aan bij de Autoriteit Persoonsgegevens. Tot die tijd kunt u voor privacy terecht bij
     <a href="mailto:privacy@curanta.nl">privacy@curanta.nl</a>.
   </p>
 
