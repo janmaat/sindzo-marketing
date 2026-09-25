@@ -3,25 +3,28 @@ import Base from '../../layouts/Base.astro';
 import Cta from '../../components/Cta.astro';
 
 const publicatieDatum = '2026-05-30';
-const leesTijd = '~6 minuten';
+const bijgewerktDatum = '2026-09-25';
+const leesTijd = '~8 minuten';
 const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+const bijgewerktNl = new Date(bijgewerktDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Waarom geen Nederlandse VVT/GHZ-leverancier meertalig is — en wat dat betekent voor uw 1e-generatie cliënten',
-  description: 'Marktscan van 9 NL-cliëntportalen toont: niemand levert meertalig portaal in VVT/GHZ. Hier waarom dat onhoudbaar is en wat zorgaanbieders aan hun cliënten verschuldigd zijn.',
+  headline: 'Een cliëntportaal in de taal van de cliënt: wat de wet vraagt, en wat niet',
+  description: 'Wat de Wgbo, de Wkkgz, de AVG en de Wet aanvullende bepalingen verwerking persoonsgegevens in de zorg zeggen over begrijpelijke informatie en inzage, wat CBS-cijfers laten zien over oudere migranten, en welke vragen u uw leverancier stelt.',
   datePublished: publicatieDatum,
+  dateModified: bijgewerktDatum,
   inLanguage: 'nl-NL',
   author: { '@type': 'Organization', name: 'Curanta' },
   publisher: { '@type': 'Organization', name: 'Curanta' },
-  keywords: 'meertalig cliëntportaal, VVT-software, GHZ-software, cliëntportaal Turks, cliëntportaal Arabisch, Wcz, 1e generatie zorg, NL-zorgsoftware'
+  keywords: 'meertalig cliëntportaal, inzagerecht cliënt, Wgbo, Wkkgz, AVG inzage, elektronische inzage, migrantenouderen, taalbarrière zorg'
 };
 ---
 <Base
-  title="Meertalig cliëntportaal in de zorg: waarom niemand het doet"
+  title="Meertalig cliëntportaal: wat de wet vraagt, en wat niet"
   ogType="article"
-  description="Marktscan van 9 NL-cliëntportalen toont: niemand levert meertalig portaal in VVT/GHZ. Hier waarom dat onhoudbaar is en wat zorgaanbieders aan hun cliënten verschuldigd zijn."
+  description="Wat de Wgbo, de Wkkgz, de AVG en de Wabvpz zeggen over begrijpelijke informatie en inzage, wat CBS-cijfers laten zien over oudere migranten, en welke vragen u uw leverancier stelt."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
 
@@ -30,176 +33,238 @@ const articleLd = {
       <div class="flex flex-wrap items-center gap-3 text-xs text-ink-500">
         <a href="/kennisbank" class="text-curanta-700 hover:underline no-underline">Kennisbank</a>
         <span>·</span>
-        <span>Regelgeving + standaarden</span>
+        <span>Regelgeving + cliëntenrechten</span>
         <span>·</span>
         <time datetime={publicatieDatum}>{dateNl}</time>
+        <span>·</span>
+        <span>bijgewerkt op <time datetime={bijgewerktDatum}>{bijgewerktNl}</time></span>
         <span>·</span>
         <span>{leesTijd}</span>
       </div>
       <h1 class="mt-5 font-display text-4xl font-bold leading-tight tracking-tightish text-ink-900 sm:text-5xl">
-        Waarom geen Nederlandse VVT/GHZ-leverancier <em class="italic text-accent-600">meertalig</em> is — en wat dat betekent voor uw 1e-generatie cliënten.
+        Een cliëntportaal in de taal van de cliënt: wat de wet vraagt, en wat <em class="italic text-accent-600">niet</em>.
       </h1>
       <p class="mt-6 text-lg text-ink-700 leading-relaxed">
-        We scanden in mei 2026 negen Nederlandse cliëntportalen voor VVT en gehandicaptenzorg.
-        Niet één levert het portaal in een andere taal dan Nederlands. Voor de 1e-generatie Turkse en
-        Marokkaanse VVT-cliënten — een groep van honderdduizenden die nu massaal de 75+-leeftijd betreedt —
-        is dat geen kleine omissie. Het is een structurele blinde vlek.
+        Een deel van de ouderen in Nederland is hier niet geboren en leest weinig of geen Nederlands. Tegelijk
+        lopen zorgplan, afspraken en berichten steeds vaker via een cliëntportaal. Dit artikel zet op een rij
+        wat de wet zegt over begrijpelijke informatie en inzage, wat de cijfers laten zien, en welke vragen u
+        uw leverancier kunt stellen.
       </p>
     </header>
 
     <div class="prose-content mt-12 max-w-3xl text-ink-700 leading-relaxed">
-      <h2>De marktscan: negen portalen, één taal</h2>
+      <h2>Om wie het gaat</h2>
       <p>
-        We toetsten op publieke leverancier-websites of een meertalig cliëntportaal beschikbaar is
-        voor zorgaanbieders in VVT, gehandicaptenzorg of GGZ. Peildatum: 29 mei 2026.
+        Het CBS beschreef in 2022 de ouderen van 55 jaar en ouder die zelf in het buitenland zijn geboren, de
+        eerste generatie. Op 1 januari 2019 waren dat er ongeveer 566 duizend: 10 procent van alle
+        55-plussers. Het CBS richt zich op deze groep omdat ouderen die zelf in Nederland zijn geboren
+        „minder vaak taalproblemen hebben”.
       </p>
       <table class="w-full mt-6 text-sm">
         <thead>
           <tr>
-            <th>Product</th>
-            <th>Doelsegment</th>
-            <th>Cliëntportaal taal</th>
+            <th>Geboorteland (55 jaar en ouder, eerste generatie)</th>
+            <th>Aantal op 1-1-2019</th>
+            <th>Waarvan 75 jaar of ouder</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>Nedap Ons + Caren</td><td>VVT, GHZ</td><td>NL-only</td></tr>
-          <tr><td>PinkRoccade myNeva</td><td>VVT, GHZ</td><td>NL-only</td></tr>
-          <tr><td>Pluriform Zorg</td><td>VVT, GHZ</td><td>NL-only</td></tr>
-          <tr><td>Cura (PinkRoccade)</td><td>VVT</td><td>NL-only</td></tr>
-          <tr><td>Carit Care</td><td>VVT</td><td>NL-only</td></tr>
-          <tr><td>Plancare 2</td><td>VVT, GHZ</td><td>NL-only</td></tr>
-          <tr><td>Quli</td><td>VVT, GHZ</td><td>NL-only</td></tr>
-          <tr><td>Famped / Famedio</td><td>VVT</td><td>NL-only</td></tr>
-          <tr><td>ChipSoft HiX</td><td>Ziekenhuis</td><td>NL + EN (alleen ziekenhuis)</td></tr>
+          <tr><td>Suriname</td><td>83.509</td><td>13,3%</td></tr>
+          <tr><td>Indonesië</td><td>80.624</td><td>35,8%</td></tr>
+          <tr><td>Turkije</td><td>56.444</td><td>16,6%</td></tr>
+          <tr><td>Marokko</td><td>53.067</td><td>20,1%</td></tr>
+          <tr><td>Duitsland</td><td>39.825</td><td>31,4%</td></tr>
+          <tr><td>Polen</td><td>12.071</td><td>6,2%</td></tr>
+          <tr><td>Irak</td><td>9.175</td><td>11,2%</td></tr>
+          <tr><td>Syrië</td><td>5.593</td><td>7,6%</td></tr>
         </tbody>
       </table>
-      <p class="text-xs text-ink-500 italic">Bron: leveranciers-websites, publiek beschikbaar, geverifieerd 29 mei 2026.</p>
-
+      <p class="text-xs text-ink-500 italic">
+        Bron: CBS, Statistische Trends „Migrantenouderen in Nederland” (10 mei 2022), tabellen 2.1 en 3.1.1;
+        peildatum 1 januari 2019, nog volgens de oude herkomstindeling. Ter vergelijking: van de 55-plussers van
+        Nederlandse herkomst was 25,8% 75 jaar of ouder. Een selectie uit de twintig grootste groepen.
+      </p>
       <p>
-        ChipSoft is de enige met meer dan één taal in de portaalsoftware — maar HiX bedient ziekenhuizen,
-        niet de VVT- en GHZ-segmenten waar de demografische uitdaging ligt.
+        Twee dingen vallen op. De groepen uit Turkije en Marokko zijn met elk zo'n 55 duizend groot, en ze zijn
+        nog relatief jong: een kleiner deel is 75 jaar of ouder dan bij ouderen van Nederlandse herkomst. Het
+        kabinet schreef in november 2023 dat „naar verwachting meer mensen in de Wlz zullen komen die de
+        Nederlandse taal niet (goed) beheersen”. Vooral bij dementie en onbegrepen gedrag kan een taalbarrière
+        volgens die brief tot handelingsverlegenheid bij zorgverleners leiden.
+      </p>
+      <p>
+        Wat deze cijfers niet zeggen: hoeveel van deze ouderen Nederlands lezen, en in welke taal wel. Geboorteland
+        is geen taal. Wie wil weten welke talen zijn cliënten lezen, moet het ze vragen.
       </p>
 
-      <h2>Wie het portaal niet begrijpt, gebruikt het niet</h2>
+      <h2>Wat de wet vraagt</h2>
+
+      <h3>Wgbo: informatie die past bij wat de cliënt kan begrijpen</h3>
       <p>
-        Volgens de bevolkingsstatistiek 2024 (CBS Statline, herkomst) telt Nederland ongeveer:
+        De Wet op de geneeskundige behandelingsovereenkomst staat in het Burgerlijk Wetboek, Boek 7, afdeling 5.
+        Hij geldt voor handelingen op het gebied van de geneeskunst, en daar horen volgens artikel 7:446 lid 3
+        BW ook het verplegen en verzorgen bij die in dat kader gebeuren. Drie artikelen zijn hier van belang:
       </p>
       <ul>
-        <li>~430.000 inwoners van Turkse herkomst — 1e generatie spreekt vaak beperkt Nederlands</li>
-        <li>~415.000 van Marokkaanse herkomst — 1e generatie idem, plus berbers</li>
-        <li>~220.000 Polen — sterk groeiend, recente migratie</li>
-        <li>~180.000 Syrisch / overige Arabisch-sprekend — vluchtelingengezinnen</li>
-        <li>~95.000 Oekraïners — post-2022, snelgroeiend</li>
+        <li>
+          <strong>Art. 7:448 lid 1 BW:</strong> „De hulpverlener licht de patiënt op duidelijke wijze in, die past
+          bij zijn bevattingsvermogen.” Voor een cliënt die geen Nederlands leest, is een Nederlandse tekst niet
+          vanzelf duidelijk.
+        </li>
+        <li>
+          <strong>Art. 7:456 BW:</strong> „De hulpverlener verstrekt aan de patiënt desgevraagd inzage in en
+          afschrift van de gegevens uit het dossier.”
+        </li>
+        <li>
+          <strong>Art. 7:457 BW:</strong> aan anderen dan de patiënt worden geen inlichtingen, inzage of afschrift
+          gegeven zonder toestemming van de patiënt. Wie rechtstreeks bij de behandeling betrokken is, valt daar
+          niet onder; voor vertegenwoordigers gelden eigen regels (lid 3). Een familielid dat meeleest in het
+          portaal, heeft dus toestemming van de cliënt nodig.
+        </li>
       </ul>
+
+      <h3>Wabvpz: inzage ook elektronisch, en kosteloos</h3>
       <p>
-        De 1e-generatie Turkse en Marokkaanse Nederlanders die in de jaren '60 en '70 als arbeidsmigrant
-        kwamen, betreden nu massaal de leeftijd waarin VVT-zorg relevant wordt. Hun mantelzorgende
-        kinderen — 2e generatie, vaak NL-vaardig — willen dossier-inhoud doorgaans in de taal van hun ouder
-        met die ouder bespreken. Dat lukt niet als het portaal alleen Nederlandse termen toont.
-      </p>
-      <p>
-        Het effect is meetbaar: cliënten en mantelzorgers die het portaal niet kunnen lezen, gebruiken het
-        niet. De zorgaanbieder verliest dan een belangrijke communicatie-laag — informed consent voor
-        zorgplan-wijzigingen, agenda-inzicht, berichten over medicatie — en valt terug op telefoongesprekken
-        die meer tijd kosten dan ze opleveren.
+        De Wet aanvullende bepalingen verwerking persoonsgegevens in de zorg (Wabvpz) bepaalt in artikel 15d
+        dat de zorgaanbieder inzage in of een afschrift van het dossier op verzoek van de cliënt „met redelijke
+        tussenpozen” elektronisch verstrekt. Volgens lid 3 van dat artikel is die elektronische inzage kosteloos.
       </p>
 
-      <h2>Waarom doet niemand het?</h2>
+      <h3>AVG: inzage, in duidelijke en eenvoudige taal</h3>
       <p>
-        Vier samenhangende redenen verklaren waarom Nederlandse leveranciers tot nu toe NL-only hebben
-        gehouden:
+        Artikel 15 van de AVG geeft iedereen het recht op inzage in de persoonsgegevens die een organisatie over
+        hem verwerkt. Artikel 12 lid 1 vraagt dat de informatie over de verwerking en de antwoorden op zo'n
+        verzoek komen „in een beknopte, transparante, begrijpelijke en gemakkelijk toegankelijke vorm en in
+        duidelijke en eenvoudige taal”. Dat is een eis van begrijpelijkheid, geen plicht tot vertalen.
       </p>
+
+      <h3>Wkkgz: cliëntgerichte zorg en een laagdrempelige klachtenregeling</h3>
+      <p>
+        Volgens artikel 2 van de Wet kwaliteit, klachten en geschillen zorg (Wkkgz) is goede zorg onder meer
+        „cliëntgericht” en „afgestemd op de reële behoefte van de cliënt”, en worden de rechten van de cliënt
+        „zorgvuldig in acht genomen”. Artikel 13 vraagt een klachtenregeling voor „een effectieve en
+        laagdrempelige opvang en afhandeling” van klachten, „rekening houdende met de aard van de zorg en de
+        categorie van cliënten”.
+      </p>
+
+      <h3>En de „Wcz”?</h3>
+      <p>
+        U komt soms nog de Wet cliëntenrechten zorg (Wcz) tegen. Dat wetsvoorstel werd in juni 2010 ingediend
+        en is voortgezet als de Wkkgz, met alleen de onderdelen kwaliteit, klachten en geschillen. De onderdelen
+        over onder meer medezeggenschap en de Wgbo-bepalingen zijn eruit gehaald, om later in afzonderlijke
+        wetsvoorstellen terug te komen. De Eerste Kamer nam de Wkkgz op 6 oktober 2015 aan. Een Wcz die nog in
+        werking moet treden, bestaat niet.
+      </p>
+
+      <h2>Wat de wet niet vraagt</h2>
+      <p>
+        In geen van de wetten hierboven staat een plicht om een cliëntportaal te vertalen. Wel moet informatie
+        begrijpelijk zijn voor de cliënt, en moet inzage mogelijk zijn. Leest een cliënt geen Nederlands, dan
+        moet de zorgverlener die begrijpelijkheid op een andere manier regelen.
+      </p>
+      <p>
+        Het kabinet schreef in dezelfde brief uit 2023 dat taalbarrières in de Wlz-zorg vaak worden opgevangen
+        met informele tolken en digitale hulpmiddelen, en dat alleen op specifieke momenten, zoals bij
+        intakegesprekken, behoefte kan zijn aan een formele tolk. De landelijke subsidie voor tolken in de
+        zorg is sinds 2012 grotendeels vervallen. Een vertaald portaal vervangt dus geen tolk bij een gesprek
+        dat ertoe doet; het helpt wel bij alles wat een cliënt of mantelzorger zelf wil nalezen.
+      </p>
+
+      <h2>Wat een meertalig portaal in de praktijk vraagt</h2>
+      <ul>
+        <li>
+          <strong>Schil en inhoud zijn twee dingen.</strong> Menu's, knoppen en vaste teksten kunnen vertaald zijn,
+          terwijl rapportages en het zorgplan in het Nederlands blijven, omdat uw medewerkers ze zo schrijven.
+          Vraag precies wat er vertaald is.
+        </li>
+        <li>
+          <strong>Arabisch leest van rechts naar links.</strong> Een Arabische versie vraagt een gespiegelde
+          opmaak, niet alleen vertaalde woorden.
+        </li>
+        <li>
+          <strong>Zorgtermen zijn lastig.</strong> Laat vertalingen van zorg- en rechtstermen nakijken door
+          iemand die de taal als moedertaal spreekt.
+        </li>
+        <li>
+          <strong>Elke gebruiker zijn eigen taal.</strong> De cliënt leest misschien Turks, de dochter die
+          mantelzorger is liever Nederlands. En het meelezen van die dochter vraagt toestemming van de cliënt
+          (art. 7:457 BW).
+        </li>
+      </ul>
+
+      <h2>Vragen voor uw leverancier</h2>
       <ol>
-        <li>
-          <strong>Inkoop-fixatie op NL-features.</strong> Inkooptrajecten in NL-VVT vragen zelden expliciet
-          om meertaligheid in het PVE. Een leverancier die er ongevraagd in investeert ziet daar geen ROI op.
-        </li>
-        <li>
-          <strong>RTL is technisch wel een ding.</strong> Arabisch vereist right-to-left layout met
-          spiegel-CSS, niet alleen vertaalde teksten. Dat raakt elk component, elke iconografie en elke
-          formulier-flow. Wie van NL-LTR begint moet veel breken.
-        </li>
-        <li>
-          <strong>Vertaaldiscipline ontbreekt.</strong> Een feature die in NL is bedacht heeft vaak inline
-          NL-strings in code en componenten. Achteraf alles via een vertaalpipeline (Microsoft's
-          IStringLocalizer of vergelijkbaar) trekken is een grootschalig refactor — niet sexy, niet
-          factureerbaar als feature.
-        </li>
-        <li>
-          <strong>Marktleider-traagheid.</strong> Een marktleider met grote installed-base heeft meer te
-          verliezen door instabiele meertaligheid dan te winnen. Eerstvolgers in een markt veranderen
-          status quo zelden uit eigen beweging.
-        </li>
+        <li>Welke talen zijn nu in gebruik bij klanten, en welke staan op een planning?</li>
+        <li>Wat is vertaald: alleen de schil, of ook vaste teksten zoals toestemmingen en de klachtenregeling?</li>
+        <li>Kan elke gebruiker zelf zijn taal kiezen, los van de andere gebruikers rond dezelfde cliënt?</li>
+        <li>Hoe legt het portaal de toestemming van de cliënt vast als een naaste meeleest?</li>
+        <li>Wat kost een extra taal, eenmalig en per jaar?</li>
       </ol>
 
-      <h2>Wat zegt de regelgeving?</h2>
+      <h2>Curanta</h2>
       <p>
-        De Wcz (Wet cliëntenrechten zorg, beoogde inwerkingtreding 2027) en de NEN 7510:2024 verlangen
-        dat <strong>cliënten effectief inzage</strong> hebben in hun zorgplan en relevante dossier-onderdelen.
-        Effectief betekent: in een vorm die de cliënt begrijpt. Voor een cliënt die geen Nederlands leest is
-        een NL-only portaal feitelijk geen inzage — het voldoet aan de letter maar niet aan de bedoeling.
+        Het cliëntportaal van Curanta (klant.curanta.nl) is er in vijf talen: Nederlands, Engels, Turks, Arabisch
+        en Duits. Pools en Oekraïens zijn vertaald, maar staan nog uit. De backoffice waarin medewerkers werken,
+        is alleen in het Nederlands.
       </p>
-      <p>
-        De Autoriteit Persoonsgegevens heeft hierover (nog) geen specifieke uitspraak gedaan, maar de
-        beweging is duidelijk: cliëntenrechten worden de komende jaren feitelijker getoetst, niet alleen
-        formeel. Een leverancier die nu meertalig is, ligt voor op die curve.
-      </p>
-
-      <h2>Hoe Curanta Naast het aanpakt</h2>
-      <p>
-        Curanta's cliëntportaal heet "Curanta Naast" en werkt in vijf talen: Nederlands, Engels, Turks,
-        Arabisch (met RTL) en Duits. Pools en Oekraïens zijn vertaald maar staan nog uit. Niet als afterthought-vertaling van NL-strings,
-        maar als <strong>eerste-klas eigenschap</strong>: elk Razor-component gebruikt
-        <code>IStringLocalizer</code> vanaf dag 1, NL is bronwaarheid, en de RTL-styling is ingebakken
-        i.p.v. via CSS-overrides bij-gepatcht.
-      </p>
-      <p>
-        De cliënt kiest zelf de taal via een dropdown rechtsboven; familie en mantelzorgers met andere
-        taalvoorkeur kunnen onafhankelijk hun eigen taal kiezen. De zorgmedewerker blijft in het
-        backoffice-systeem in het Nederlands werken — dat is bewust: juridische en declaratie-termen zijn
-        eentalig, daar is geen ROI op vertaling.
-      </p>
-
-      <h2>Wat u als zorgaanbieder kunt overwegen</h2>
-      <p>
-        Drie vragen om aan uw huidige (of beoogde) leverancier voor te leggen:
-      </p>
-      <ol>
-        <li>
-          Welke talen levert uw cliëntportaal? Zijn dat productie-talen, of vertaal-roadmap?
-        </li>
-        <li>
-          Wat zijn de meerkosten voor extra talen — eenmalig en doorlopend? Een leverancier die "ja, dat
-          kunnen we" zegt maar er een fors maatwerk-bedrag aan hangt, biedt feitelijk geen meertaligheid.
-        </li>
-        <li>
-          Hoe lang duurt het van go-besluit tot live in een nieuwe taal? Bij een leverancier met
-          IStringLocalizer-discipline is dat een resx-toevoeging (dagen). Bij een leverancier zonder is
-          dat een release-cyclus (maanden).
-        </li>
-      </ol>
 
       <hr class="my-12 border-ink-200" />
 
       <h3 class="font-display text-lg font-semibold text-ink-900">Bronnen</h3>
+      <p class="text-sm">Alle bronnen geraadpleegd op 25 september 2026.</p>
       <ul class="text-sm">
-        <li>Eigen marktscan tegen publieke leverancier-websites — peildatum 29 mei 2026</li>
-        <li>CBS Statline 2024 — bevolking naar herkomst</li>
-        <li>Wcz (Wet cliëntenrechten zorg) — wetsvoorstel</li>
-        <li>NEN 7510:2024 — informatiebeveiliging in de zorg, hoofdstuk cliëntenrechten</li>
-        <li>ADR Curanta 2026-05-29 — meertaligheid Curanta (intern besluit)</li>
+        <li>
+          Burgerlijk Wetboek Boek 7, titel 7, afdeling 5 (Wgbo), art. 7:446, 7:448, 7:456 en 7:457; versie geldend
+          vanaf 1 juli 2026 —
+          <a href="https://wetten.overheid.nl/jci1.3:c:BWBR0005290&boek=7&titeldeel=7&afdeling=5" rel="noopener">wetten.overheid.nl</a>
+        </li>
+        <li>
+          Wet aanvullende bepalingen verwerking persoonsgegevens in de zorg, art. 15d; versie geldend vanaf 5 juli
+          2025 —
+          <a href="https://wetten.overheid.nl/jci1.3:c:BWBR0023864&hoofdstuk=3a&artikel=15d" rel="noopener">wetten.overheid.nl</a>
+        </li>
+        <li>
+          Wet kwaliteit, klachten en geschillen zorg, art. 2 en 13; versie geldend vanaf 1 januari 2026 —
+          <a href="https://wetten.overheid.nl/jci1.3:c:BWBR0037173&paragraaf=1&artikel=2" rel="noopener">wetten.overheid.nl</a>
+        </li>
+        <li>
+          Verordening (EU) 2016/679 (AVG), art. 12 lid 1 en art. 15 —
+          <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj/nld" rel="noopener">eur-lex.europa.eu</a>
+        </li>
+        <li>
+          Eerste Kamer, wetsvoorstel 32.402 Wet kwaliteit, klachten en geschillen zorg (voortzetting van het
+          wetsvoorstel Wcz) —
+          <a href="https://www.eerstekamer.nl/wetsvoorstel/32402_wet_kwaliteit_klachten_en" rel="noopener">eerstekamer.nl</a>
+        </li>
+        <li>
+          CBS, Statistische Trends: S. de Regt, T. Fokkema en M. Das, „Migrantenouderen in Nederland”, 10 mei
+          2022; peildatum 1 januari 2019 —
+          <a href="https://www.cbs.nl/nl-nl/longread/statistische-trends/2022/migrantenouderen-in-nederland?onepage=true" rel="noopener">cbs.nl</a>
+        </li>
+        <li>
+          Kamerbrief „Tolken in de zorg”, Kamerstuk 36 410 XVI, nr. 21, 27 november 2023 —
+          <a href="https://zoek.officielebekendmakingen.nl/kst-36410-XVI-21.html" rel="noopener">officielebekendmakingen.nl</a>
+        </li>
+        <li>Talen van het Curanta-cliëntportaal: stand 25 september 2026</li>
       </ul>
 
+      <h3 class="font-display text-lg font-semibold text-ink-900">Revisie</h3>
+      <p class="text-sm">
+        Bijgewerkt op 25 september 2026. De vorige versie noemde een „Wcz” met beoogde inwerkingtreding in 2027 en
+        een hoofdstuk cliëntenrechten in NEN 7510; beide bestaan niet. Ook bevatte ze een marktscan van
+        cliëntportalen en herkomstcijfers die wij niet opnieuw konden onderbouwen. Die zijn vervangen door de
+        wetsartikelen en CBS-cijfers hierboven.
+      </p>
+
       <p class="text-xs text-ink-500 italic mt-8">
-        Spot een fout of mis een bron? Mail
-        <a href="mailto:kennisbank@curanta.nl" class="text-curanta-700 hover:underline">kennisbank@curanta.nl</a> —
-        correcties binnen 1 werkdag, met revisie-notitie onderaan dit artikel.
+        Ziet u een fout of mist u een bron? Mail
+        <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>;
+        wij reageren binnen 1 werkdag en zetten een correctie met datum onder dit artikel.
       </p>
     </div>
   </article>
 
   <Cta
-    title="Wilt u meertalig cliëntportaal in actie zien?"
-    subtitle="Stuur ons drie typische werkstromen uit uw organisatie. Wij doorlopen ze in Curanta Naast — desgewenst in Turks of Arabisch."
+    title="Het cliëntportaal zelf bekijken?"
+    subtitle="In de demo van Curanta kijkt u rond met verzonnen gegevens, ook als cliënt of mantelzorger. U vraagt een eigen toegang aan."
   />
 </Base>
