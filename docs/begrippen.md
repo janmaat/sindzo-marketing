@@ -304,7 +304,6 @@ woordenlijst).
 | **DocuSign** | Digitaal ondertekenen van overeenkomsten |
 | **NMBRS** | Nederlandse salarisverwerking-software |
 | **Mextal / Ascom / Sensara / CLB** | Domotica-leveranciers (sensoren, alarm­meldingen) |
-| **Plausible** | Cookie-loze, EU-gehoste web-analytics |
 
 ---
 
