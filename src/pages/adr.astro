@@ -41,7 +41,7 @@ const adrs = [
     title: 'BSN-encryptie op veldniveau met AES-256-GCM',
     date: '2025-12',
     status: 'Aanvaard',
-    context: 'BSN is bijzonder persoonsgegeven onder AVG art. 9 én gespecificeerd onder Wabvpz. Versleuteling op kolom-niveau biedt verdediging-in-diepte boven volledige database-encryptie.',
+    context: 'BSN is bijzonder persoonsgegeven onder AVG art. 9 én gespecificeerd onder Wabvpz. Versleuteling op kolomniveau beschermt het BSN ook tegen wie de databasebestanden of een back-up in handen krijgt. De database als geheel is nog niet versleuteld; dat komt er vóór de eerste zorgorganisatie met echte cliëntgegevens.',
     decision: 'Het BSN wordt op veldniveau versleuteld opgeslagen met AES-256-GCM. Zoeken gaat via een apart, gepeperd hash-veld, zodat een gelijkheidsvraag geen ontsleuteling nodig heeft.',
     consequences: 'Index-scans op BSN gebruiken het hash-veld, niet de versleutelde kolom. De sleutel staat buiten de database, in de configuratie van de server; een productieserver zonder eigen sleutel start niet.',
   },
