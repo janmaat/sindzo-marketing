@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
+import { DEMO_ZELF } from '../config/demo';
 
 // Onderzocht: de reden dat zorgorganisaties niet van ECD wisselen is niet
 // tevredenheid maar dataportabiliteit — ze kunnen hun cliëntgegevens niet
@@ -13,37 +14,29 @@ import Cta from '../components/Cta.astro';
 const bronsystemen = [
   {
     naam: 'Nedap Ons',
-    status: 'maatwerk, vaste prijs',
     toelichting:
       'Cliënten, zorgplannen, rapportages en medewerkers brengen we over als migratieproject tegen een vaste prijs die vooraf vaststaat. Een kant-en-klare Nedap-import is er nog niet; de route stellen we per organisatie samen op.',
   },
   {
     naam: 'Gerimedica Ysis',
-    status: 'maatwerk, vaste prijs',
     toelichting:
       'Migratieproject tegen een vaste prijs die vooraf vaststaat. Een kant-en-klare Ysis-import is er nog niet; de planning bepalen we samen — wij zeggen liever "nog niet" dan dat we u een datum beloven die we niet halen.',
   },
   {
     naam: 'SDB',
-    status: 'maatwerk, vaste prijs',
     toelichting:
-      'Maatwerk-import tegen een vaste prijs die vooraf vaststaat. Geen open einde, geen nacalculatie.',
+      'Migratieproject tegen een vaste prijs die vooraf vaststaat. Een kant-en-klare SDB-import is er nog niet. Geen open einde, geen nacalculatie.',
   },
   {
-    naam: 'Adapcare Pluriform Zorg',
-    status: 'maatwerk, vaste prijs',
+    naam: 'Pluriform Zorg (Adapcare)',
     toelichting:
-      'Maatwerk-import tegen een vaste prijs die vooraf vaststaat. Geen open einde, geen nacalculatie.',
+      'Migratieproject tegen een vaste prijs die vooraf vaststaat. Een kant-en-klare import is er nog niet. Geen open einde, geen nacalculatie.',
   },
 ];
-
-const statusKleur = {
-  'maatwerk, vaste prijs': 'bg-curanta-500',
-};
 ---
 <Base
-  title="Overstappen van uw huidige ECD — Curanta"
-  description="Overstappen vanuit Nedap Ons, Ysis, SDB en Adapcare tegen een vaste prijs vooraf, en een exit-pad dat op papier staat. Wat u erin stopt, kunt u er ook weer uit halen."
+  title="Overstappen van uw huidige ECD | Curanta"
+  description="Overstappen vanuit Nedap Ons, Ysis, SDB of Pluriform Zorg als project tegen een vaste prijs vooraf. En zo komt u er weer uit: export, geen exit-fee."
 >
   <PageHero
     eyebrow="Overstappen"
@@ -61,20 +54,15 @@ const statusKleur = {
       <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Waar u vandaan komt</h2>
       <p class="mt-4 text-ink-700 leading-relaxed">
         Wij zetten de migratie per bronsysteem op in plaats van een generieke "stuur ons een Excel"-route.
-        Dat is meer werk voor ons en minder voor u. Hieronder staat eerlijk waar we zijn.
+        Dat is meer werk voor ons en minder voor u. Hieronder staat eerlijk waar wij zijn: voor alle
+        vier is het een migratieproject tegen een vaste prijs vooraf.
       </p>
     </div>
 
     <div class="mt-10 grid gap-6 md:grid-cols-2">
       {bronsystemen.map((b) => (
         <article class="rounded-2xl border border-ink-100 bg-white p-6">
-          <div class="flex items-start justify-between gap-4">
-            <h3 class="font-display text-lg font-semibold text-ink-900">{b.naam}</h3>
-            <span class="badge whitespace-nowrap">
-              <span class={`status-dot ${statusKleur[b.status]}`}></span>
-              {b.status}
-            </span>
-          </div>
+          <h3 class="font-display text-lg font-semibold text-ink-900">{b.naam}</h3>
           <p class="mt-3 text-sm text-ink-700 leading-relaxed">{b.toelichting}</p>
         </article>
       ))}
@@ -102,7 +90,7 @@ const statusKleur = {
         <div class="rounded-2xl border border-ink-100 bg-white p-6">
           <h3 class="font-display text-lg font-semibold text-ink-900">Wat in elk plan zit</h3>
           <p class="mt-3 text-sm text-ink-700 leading-relaxed">
-            Onboardingtraject en training zitten in het abonnement; geen aparte
+            Het implementatietraject en de training zitten in het abonnement; geen aparte
             implementatiefactuur. De migratie zelf is een project tegen een vaste prijs die
             vooraf vaststaat.
           </p>
@@ -124,7 +112,7 @@ const statusKleur = {
       </div>
 
       <p class="mt-6 text-sm text-ink-500">
-        Tarieven per plan staan op <a href="/prijzen" class="text-curanta-700 hover:underline">/prijzen</a>.
+        De tarieven per plan staan bij <a href="/prijzen" class="text-curanta-700 hover:underline">de prijzen</a>.
       </p>
     </div>
   </section>
@@ -135,9 +123,7 @@ const statusKleur = {
       <p class="mt-4 text-ink-700 leading-relaxed">
         Dit hoort op dezelfde pagina als de import, en niet in de kleine letters. Een leverancier
         die u alleen vertelt hoe u binnenkomt, heeft er belang bij dat u niet weg kunt. Wij
-        vinden lock-in een ontwerpfout, geen verdienmodel — en dat is niet alleen een mening:
-        onafhankelijk onderzoek naar administratieve druk in de zorg noemt dataportabiliteit
-        expliciet als een van de remedies.
+        vinden vastzitten aan een leverancier een ontwerpfout, geen verdienmodel.
       </p>
     </div>
 
@@ -145,10 +131,9 @@ const statusKleur = {
       <div class="rounded-2xl border border-ink-100 bg-white p-8">
         <h3 class="font-display text-lg font-semibold text-ink-900">Uw data blijft van u</h3>
         <ul class="mt-4 space-y-3 text-sm text-ink-700">
-          <li>Volledige exit-export in JSON, op verzoek en zonder exit-fee.</li>
-          <li>Bij beëindiging bewaren wij uw export nog zes maanden, voor het geval een tweede uitdraai nodig blijkt. Daarna wissen wij definitief.</li>
-          <li>Voor Enterprise-contracten spreken we desgewenst een langere exit-periode af.</li>
-          <li>Downgraden tussen plannen kan per kwartaalgrens, ook zonder exit-fee.</li>
+          <li>Een export van uw gegevens in JSON, op verzoek en zonder exit-fee. De export wordt uitgebreid tot alle modules.</li>
+          <li>Bij beëindiging krijgt u de export binnen 5 werkdagen. U heeft 30 dagen om hem op te halen; binnen die 30 dagen wissen wij al uw gegevens en krijgt u een vernietigingsverklaring.</li>
+          <li>Naar een lager plan wisselen kan per contractjaar, ook zonder exit-fee.</li>
         </ul>
       </div>
 
@@ -156,11 +141,11 @@ const statusKleur = {
         <h3 class="font-display text-lg font-semibold text-ink-900">En de standaarden eronder</h3>
         <p class="mt-3 text-sm text-ink-700 leading-relaxed">
           Openheid is meer dan een exportknop. FHIR R4 gebruiken wij intern voor de BgZ; MedMij en
-          eOverdracht zijn in ontwikkeling, en per koppeling staat de status op /integraties. Wat er
+          eOverdracht zijn in ontwikkeling, en per koppeling staat de status bij de koppelingen. Wat er
           gebouwd is en wat nog niet, houden wij eerlijk bij — inclusief de onderdelen waar wij achterlopen.
         </p>
         <div class="mt-5 flex flex-wrap gap-3">
-          <a href="/integraties" class="btn-secondary no-underline">Bekijk de integraties</a>
+          <a href="/integraties" class="btn-secondary no-underline">Bekijk de koppelingen</a>
           <a href="/trust" class="btn-secondary no-underline">Trust Centre</a>
         </div>
       </div>
@@ -171,16 +156,17 @@ const statusKleur = {
     <div class="container-prose max-w-3xl">
       <h2 class="font-display text-2xl font-bold text-ink-900">Wilt u eerst zien wat u ervoor terugkrijgt?</h2>
       <p class="mt-4 text-ink-700 leading-relaxed">
-        Logisch. Een migratie is geen besluit dat u op een brochure neemt. Er staat een
-        werkende omgeving open waar u zelf in kunt — met verzonnen cliënten, dus u kunt er niets
-        stukmaken.
+        Logisch. Een migratie is geen besluit dat u op een brochure neemt. Kijk zelf rond in een
+        werkende omgeving met verzonnen cliënten; u kunt er niets stukmaken.
       </p>
-      <a href="/demo-omgeving" class="mt-6 inline-block btn-primary no-underline">Log zelf in op de demo</a>
+      <a href={DEMO_ZELF.href} class="mt-6 inline-block btn-primary no-underline">{DEMO_ZELF.label}</a>
     </div>
   </section>
 
   <Cta
-    title="Wat kost het om bij ons binnen te komen?"
-    subtitle="Stuur uw huidige systeem, uw aantal cliënten en uw aantal medewerkers. Wij geven binnen 1 werkdag een inschatting van de migratie — ook als die is dat u beter blijft zitten."
+    title="Wat kost uw overstap?"
+    subtitle="Stuur uw huidige systeem, uw aantal cliënten en uw aantal medewerkers. Wij reageren binnen 1 werkdag en maken een afspraak voor de migratie-inschatting — ook als de uitkomst is dat u beter kunt blijven zitten."
+    primary={{ label: 'Vraag een migratie-inschatting', href: '/contact' }}
+    secondary={DEMO_ZELF}
   />
 </Base>
