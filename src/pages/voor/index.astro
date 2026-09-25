@@ -10,34 +10,34 @@ const segments = [
   {
     label: 'VVT',
     title: 'Verpleging, verzorging & thuiszorg',
-    pitch: 'Eén werkproces over intra- en extramuraal. Planning + ECD + eOverdracht, gebouwd voor arbeidskrapte.',
+    pitch: 'Eén dossier voor verpleeghuis en wijk, met planning en ECD in één systeem. eOverdracht is in ontwikkeling.',
     href: '/voor/vvt',
     accent: 'from-curanta-100 to-curanta-50',
   },
   {
     label: 'GHZ',
     title: 'Gehandicaptenzorg',
-    pitch: 'OPP/AVB-ondersteuning, dagbestedinglogistiek, familieportaal — zonder duizend losse formulieren.',
+    pitch: 'Ondersteuningsplan (OPP), dagbestedingslogistiek en contact met familie — zonder stapels losse formulieren.',
     href: '/voor/ghz',
     accent: 'from-greensoft to-cream',
   },
   {
     label: 'GGZ',
     title: 'Geestelijke gezondheidszorg',
-    pitch: 'Blended care, ZPM-declaratie, wachtlijstreductie en e-health-koppelingen in één dossier.',
+    pitch: 'ZPM-declaratie en wachtlijst in één dossier. Koppelingen met e-health zijn gepland.',
     href: '/voor/ggz',
     accent: 'from-curanta-50 to-cream',
   },
 ];
 ---
 <Base
-  title="Voor wie is Curanta? — VVT, GHZ en GGZ | Curanta"
-  description="Modulair platform voor Nederlandse zorgaanbieders in VVT, gehandicaptenzorg en GGZ. Activeer alleen wat u nodig hebt en groei mee zonder migratie."
+  title="Voor wie is Curanta? VVT, GHZ en GGZ | Curanta"
+  description="Zorgsoftware voor VVT, gehandicaptenzorg en GGZ: één systeem voor dossier, planning, declaratie en kwaliteit. U zet alleen aan wat u nodig hebt."
 >
   <PageHero
     eyebrow="Voor wie"
     title="Voor wie is Curanta gebouwd?"
-    subtitle="Curanta is één modulair platform: u activeert alleen wat u nodig hebt — en groeit mee zonder migratiepijn. Hieronder de segmenten waarvoor het platform gebouwd is."
+    subtitle="Voor zorgorganisaties in de VVT, de gehandicaptenzorg en de GGZ: één systeem voor dossier, planning, declaratie en kwaliteit. U zet alleen aan wat u nodig hebt, en later bijzetten kan zonder overstap."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href="/oplossing" class="btn-primary no-underline">Bekijk modulekaart</a>
@@ -52,7 +52,7 @@ const segments = [
           <div class={`absolute inset-x-0 top-0 h-24 -z-0 bg-gradient-to-b ${s.accent}`}></div>
           <div class="relative">
             <span class="text-xs font-semibold uppercase tracking-wider text-curanta-700">{s.label}</span>
-            <h3 class="mt-3 font-display text-lg font-semibold text-ink-900">{s.title}</h3>
+            <h2 class="mt-3 font-display text-lg font-semibold text-ink-900">{s.title}</h2>
             <p class="mt-2 text-sm text-ink-700 leading-relaxed">{s.pitch}</p>
             <span class="mt-5 inline-block text-sm font-medium text-curanta-700 transition group-hover:translate-x-0.5">
               Naar segmentpagina →
