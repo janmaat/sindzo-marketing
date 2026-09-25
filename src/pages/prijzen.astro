@@ -16,7 +16,7 @@ import Cta from '../components/Cta.astro';
   <PageHero
     eyebrow="Prijzen"
     title="Eerlijke prijzen, op tafel."
-    subtitle="Vier abonnementsplannen, modulair geactiveerd. Geen verborgen kosten voor implementatie, hosting of basis-support. Eerlijke indicatie zodat u een interne business case kunt maken vóór er een gesprek nodig is."
+    subtitle="Vier abonnementsplannen, modulair geactiveerd. Geen verborgen kosten voor implementatie, hosting of basis-support. Zorgmedewerkers die alleen het medewerkerportaal gebruiken: €19 per maand, in elk plan."
   />
 
   <section class="container-prose py-16">
@@ -82,6 +82,45 @@ import Cta from '../components/Cta.astro';
         ]}
         cta={{ label: 'Plan een verkenning', href: '/contact' }}
       />
+    </div>
+
+    {/* Wens Jan 25-09-2026: het tarief voor zorgmedewerkers die alleen het medewerkerportaal
+        gebruiken is een sterk argument en stond alleen in de kleine lettertjes en de FAQ. De
+        functies hieronder zijn routes die in Curanta.Medewerker bestaan. */}
+    <div id="medewerkerportaal" class="mt-12 rounded-2xl border-2 border-curanta-500 bg-curanta-50/60 p-8 sm:p-10">
+      <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-wider text-curanta-700">Medewerkerportaal</p>
+          <h2 class="mt-2 font-display text-3xl font-bold text-ink-900 sm:text-4xl">€19 per zorgmedewerker per maand</h2>
+          <p class="mt-4 text-ink-700 leading-relaxed">
+            Voor wie alleen het medewerkerportaal gebruikt: de wijkverpleegkundige, verzorgende of
+            begeleider die bij de cliënt werkt. Dat tarief geldt in elk plan, ook naast Compliance Pro of
+            Totaalzorg Plus. Alleen wie ook in de backoffice werkt, betaalt het bedrag van het plan.
+          </p>
+          <p class="mt-4 text-sm text-ink-700 leading-relaxed">
+            <strong>Rekenvoorbeeld:</strong> 40 zorgmedewerkers in het medewerkerportaal en 5 planners en
+            teamleiders in de backoffice op Compliance Pro: 40 × €19 + 5 × €29 = <strong>€905 per maand</strong>.
+            Het cliënt- en mantelzorgerportaal zijn gratis.
+          </p>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-ink-900">Wat de zorgmedewerker ermee doet, ook op de telefoon:</p>
+          <ul class="mt-3 grid gap-2 text-sm text-ink-700 sm:grid-cols-2">
+            {[
+              'Rooster en de diensten van vandaag',
+              'Bezoeken met taken en SOEP-rapportage',
+              'Zorgplan van de cliënt en overdracht',
+              'Uren bevestigen, ook zonder verbinding',
+              'Verlof aanvragen en beschikbaarheid doorgeven',
+              'Open diensten oppakken en diensten ruilen',
+              'Kilometers declareren',
+              'Ziek melden en incidenten melden',
+            ].map((f) => (
+              <li class="flex gap-2"><span class="text-curanta-700 font-bold" aria-hidden="true">✓</span><span>{f}</span></li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
 
     <p class="mt-8 text-center text-sm text-ink-500">
