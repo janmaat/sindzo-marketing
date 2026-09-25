@@ -4,8 +4,8 @@ import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 
 // Status per koppeling zoals in het feitenblad (gebouwd / in ontwikkeling) en op 25-09-2026
-// tegen de code gelegd (reviewrapport feiten #48–#51, #149–#151, #164). E-health staat niet
-// in het feitenblad bij "in ontwikkeling" en heet daarom "gepland".
+// tegen de code gelegd (reviewrapport feiten #48–#51, #149–#151, #164). E-health staat
+// in het feitenblad bij \"in ontwikkeling\" (besluit Jan 25-09-2026: er is code, de aansluiting ontbreekt).
 
 interface Integration {
   name: string;
@@ -55,11 +55,11 @@ const integrations: Integration[] = [
     body: 'Alarmen en sensormeldingen (o.a. Mextal, Ascom, Sensara, CLB, CarePhone) komen binnen in een eigen alarmoverzicht, met een urgente melding aan de dienstdoende zorg. Aansluiting per leverancier bij de implementatie.' },
 
   // E-health
-  { name: 'Minddistrict', category: 'E-health', status: 'roadmap',
+  { name: 'Minddistrict', category: 'E-health', status: 'wip',
     body: 'Blended care-modules gekoppeld aan het behandeltraject.' },
-  { name: 'Therapieland', category: 'E-health', status: 'roadmap',
+  { name: 'Therapieland', category: 'E-health', status: 'wip',
     body: 'Toewijzing en voortgang van e-healthmodules.' },
-  { name: 'Embloom', category: 'E-health', status: 'roadmap',
+  { name: 'Embloom', category: 'E-health', status: 'wip',
     body: 'Vragenlijsten en het volgen van behandeluitkomsten.' },
 
   // Identity & overig
