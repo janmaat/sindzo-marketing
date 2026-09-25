@@ -14,26 +14,26 @@ const adrs = [
     title: 'Modulaire monolith over microservices',
     date: '2025-09',
     status: 'Aanvaard',
-    context: 'Voor een initieel-kleine zorgsoftware met krappe ontwikkelcapaciteit zijn microservices operationeel te duur. Tegelijkertijd moeten modules onafhankelijk geactiveerd kunnen worden per klant.',
-    decision: 'We bouwen een modulaire monolith op .NET 10 met strikt afgebakende modules (Application/Domain/Infrastructure per module), die in één deployable wordt uitgeleverd. Modules zijn intern feature-flagged per tenant.',
+    context: 'Voor zorgsoftware die klein begint, met beperkte ontwikkelcapaciteit, zijn microservices in beheer te duur. Tegelijk moeten modules per klant los aan te zetten zijn.',
+    decision: 'Wij bouwen een modulaire monolith op .NET 10 met strikt afgebakende modules (Application/Domain/Infrastructure per module), die als één geheel wordt uitgeleverd. Modules zijn per organisatie aan of uit te zetten.',
     consequences: 'Eenvoudiger deployment en lagere infrastructuurkosten. Latere splitsing naar separate services is mogelijk maar niet gepland. Risico: discipline op module-grenzen vereist code-reviews en architectuurtests.',
   },
   {
     id: 'ADR-002',
-    title: 'FHIR R4 als canonieke uitwisselings-format',
+    title: 'FHIR R4 als standaard voor uitwisseling',
     date: '2025-10',
     status: 'Aanvaard',
     context: 'Nederlandse zorgketen beweegt naar verplichte interoperabiliteit (Wegiz, MedMij). HL7v2 is legacy; eigen formaten betekenen lock-in en aansluiting met de keten frustreren.',
     decision: 'FHIR R4 (niet R5) is de canonieke representatie voor cliënt, dossier, observaties en medicatie aan de API-grens. Intern blijft de relationele structuur eigen — FHIR is een grens-format, geen opslag-format.',
-    consequences: 'Publieke API en sandbox documenteren FHIR R4. Bij overgang naar R5 staat compatibiliteits-onderhoud vooraan. Nederlandse profielen (Nictiz zib-mapping) worden incrementeel toegevoegd.',
+    consequences: 'Zodra de publieke API er is, documenteert hij FHIR R4. Bij overgang naar R5 staat compatibiliteits-onderhoud vooraan. Nederlandse profielen (Nictiz zib-mapping) worden incrementeel toegevoegd.',
   },
   {
     id: 'ADR-003',
     title: 'Hosting binnen de EU — geen uitzondering',
     date: '2025-11',
     status: 'Aanvaard',
-    context: 'Zorgaanbieders eisen aantoonbaar dat zorggegevens niet buiten de EER worden verwerkt. Cloudflare-edge-caching voor de marketing-site is acceptabel; voor de zorg-applicatie niet.',
-    decision: 'De zorg-applicatie (app.curanta.nl) en de databases draaien bij IONOS Cloud in Berlijn (Duitsland). Geen hosting buiten de EER. Sub-verwerker-lijst wordt 30 dagen vóór wijziging gecommuniceerd.',
+    context: 'Zorgaanbieders eisen aantoonbaar dat zorggegevens niet buiten de EER worden verwerkt. Voor de marketingsite (curanta.nl, bij Strato in Duitsland) gelden deze eisen niet: daar staan geen zorggegevens.',
+    decision: 'De zorgapplicatie (app.curanta.nl) en de databases draaien bij IONOS Cloud in Berlijn (Duitsland). Geen hosting buiten de EER. Een wijziging in de subverwerkerslijst melden wij 30 dagen van tevoren.',
     consequences: 'Hogere latency voor non-EU-bezoekers (irrelevant voor NL-zorg). De AI-functies zijn de uitzondering op "alles in de EER": staan ze aan, dan gaat gepseudonimiseerde tekst naar Anthropic in de VS, onder modelcontractbepalingen (SCC).',
   },
   {
@@ -41,7 +41,7 @@ const adrs = [
     title: 'BSN-encryptie op veldniveau met AES-256-GCM',
     date: '2025-12',
     status: 'Aanvaard',
-    context: 'BSN is bijzonder persoonsgegeven onder AVG art. 9 én gespecificeerd onder Wabvpz. Versleuteling op kolomniveau beschermt het BSN ook tegen wie de databasebestanden of een back-up in handen krijgt. De database als geheel is nog niet versleuteld; dat komt er vóór de eerste zorgorganisatie met echte cliëntgegevens.',
+    context: 'Het BSN is een wettelijk identificatienummer (art. 87 AVG, art. 46 UAVG), in de zorg geregeld in de Wabvpz. Versleuteling op kolomniveau beschermt het BSN ook tegen wie de databasebestanden of een back-up in handen krijgt. De database als geheel is nog niet versleuteld; dat komt er vóór de eerste zorgorganisatie met echte cliëntgegevens.',
     decision: 'Het BSN wordt op veldniveau versleuteld opgeslagen met AES-256-GCM. Zoeken gaat via een apart, gepeperd hash-veld, zodat een gelijkheidsvraag geen ontsleuteling nodig heeft.',
     consequences: 'Index-scans op BSN gebruiken het hash-veld, niet de versleutelde kolom. De sleutel staat buiten de database, in de configuratie van de server; een productieserver zonder eigen sleutel start niet.',
   },
@@ -50,26 +50,26 @@ const adrs = [
     title: 'Nis2Care als zustermerk naast de NIS2-module in Curanta',
     date: '2026-02',
     status: 'Aanvaard',
-    context: 'NIS2-compliance is een eigen specialisme met diepe verticals (Z-CERT, IGJ-meldplicht, MDR-asset-tracking) die niet noodzakelijk in Curanta\'s EPD-scope horen. EPD-klanten willen wel de compliance-overlay.',
-    decision: 'Curanta heeft een eigen NIS2-incidentmodule (registratie en de meldtermijnen van 24 uur, 72 uur en één maand). Een uitgebreider NIS2-product voor zorgaanbieders met een ander EPD werken wij apart uit onder de naam Nis2Care; dat is nog niet beschikbaar.',
+    context: 'NIS2 is een eigen specialisme met specialistische onderwerpen (Z-CERT, IGJ-meldplicht, registratie van medische apparatuur) die niet vanzelf in het ECD van Curanta horen. ECD-klanten willen de meldplicht wel in hun eigen omgeving.',
+    decision: 'Curanta heeft een eigen NIS2-incidentmodule (registratie en de meldtermijnen van 24 uur, 72 uur en één maand). Een uitgebreider NIS2-product voor zorgaanbieders met een ander ECD werken wij apart uit onder de naam Nis2Care; dat is nog niet beschikbaar.',
     consequences: 'Curanta-klanten hebben de meldplicht-registratie in hun eigen omgeving. Nis2Care krijgt, zodra het er is, eigen marketing. Klanten kopen ze samen of apart — dat is een commerciële keuze.',
   },
 ];
 ---
 <Base
-  title="Architectuur-besluiten (ADR) — Curanta"
-  description="Publieke Architectural Decision Records van Curanta. Modulaire monolith, FHIR R4, hosting binnen de EU, BSN-encryptie, Nis2Care-zustermerk. Voor CIO's en IT-architecten."
+  title="Architectuurbesluiten (ADR) | Curanta"
+  description="Waarom Curanta bouwt zoals het bouwt: modulaire opbouw, FHIR R4, hosting in de EU, BSN-versleuteling. Voor I&A en architecten."
 >
   <PageHero
-    eyebrow="Architectuur-besluiten"
-    title="Waarom we bouwen zoals we bouwen."
-    subtitle="Architectural Decision Records (ADR's) leggen vast waarom een keuze gemaakt is — niet alleen wat. Wij publiceren ze openbaar zodat uw architect en CIO kunnen beoordelen of onze afwegingen bij uw organisatie passen, vóór een tender."
+    eyebrow="Architectuurbesluiten"
+    title="Waarom wij bouwen zoals wij bouwen."
+    subtitle="Voor uw I&A en architect: waarom wij een keuze maakten, niet alleen welke. Zo kunt u vóór een aanbesteding beoordelen of onze afwegingen bij uw organisatie passen."
   />
 
   <section class="container-prose py-10 border-b border-ink-100 bg-ink-100/40">
     <p class="text-sm text-ink-700 max-w-3xl">
       Iedere ADR volgt de standaard <strong class="text-ink-900">context → besluit → consequenties</strong>-structuur. Aanvaard = besluit is in de code doorgevoerd.
-      Wijzigingen zijn versie-beheerd; vervanging gebeurt via een nieuwe ADR die de oude superseden.
+      Wijzigingen worden in versies bijgehouden; een nieuwe ADR vervangt zo nodig een oude.
     </p>
   </section>
 
@@ -108,15 +108,17 @@ const adrs = [
     <div class="rounded-2xl border border-ink-200 bg-ink-100/50 p-8 sm:p-12">
       <h2 class="font-display text-2xl font-bold text-ink-900">Mist u een onderwerp?</h2>
       <p class="mt-3 max-w-2xl text-ink-700">
-        Architectuur-vragen ontvangen we graag rechtstreeks. Bijvoorbeeld: hoe wij hot-fix-deploys structureel valideren,
-        wat onze stand op event-sourcing is, of waarom we bewust geen Kubernetes draaien. Mail
-        <a href="mailto:architectuur@curanta.nl" class="text-curanta-700 hover:underline">architectuur@curanta.nl</a> — antwoord binnen 1 werkdag.
+        Vragen over de architectuur ontvangen wij graag rechtstreeks. Bijvoorbeeld: hoe wij een spoedherstel
+        controleren voordat het live gaat, of waarom wij bewust geen Kubernetes draaien. Mail
+        <a href="mailto:info@curanta.nl?subject=Architectuur" class="text-curanta-700 hover:underline">info@curanta.nl</a> — wij reageren binnen 1 werkdag.
       </p>
     </div>
   </section>
 
   <Cta
-    title="Wilt u ons architectuurplaat zien?"
-    subtitle="In het procurement-pakket zit een geannoteerde architectuurplaat (PDF) met netwerk-zones, data-flow en sub-verwerkers. Geen lead-gate, geen NDA."
+    title="Wilt u onze architectuurplaat zien?"
+    subtitle="Wij stellen op aanvraag een architectuurplaat op met netwerkzones, gegevensstromen en subverwerkers, zonder NDA."
+    primary={{ label: 'Vraag de architectuurplaat aan', href: 'mailto:trust@curanta.nl?subject=Architectuurplaat' }}
+    secondary={{ label: 'Documenten voor inkoop', href: '/procurement' }}
   />
 </Base>

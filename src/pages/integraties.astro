@@ -3,6 +3,10 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 
+// Status per koppeling zoals in het feitenblad (gebouwd / in ontwikkeling) en op 25-09-2026
+// tegen de code gelegd (reviewrapport feiten #48–#51, #149–#151, #164). E-health staat niet
+// in het feitenblad bij "in ontwikkeling" en heet daarom "gepland".
+
 interface Integration {
   name: string;
   category: string;
@@ -16,80 +20,80 @@ const integrations: Integration[] = [
   { name: 'FHIR R4', category: 'Standaarden', status: 'wip', doc: '/api',
     body: 'Curanta zet het dossier intern om naar een BgZ-bundel in FHIR R4 (o.a. Patient, Encounter, Observation, medicatie, allergieën, Condition, CarePlan). Een publieke FHIR-API is in ontwikkeling.' },
   { name: 'MedMij', category: 'Standaarden', status: 'wip',
-    body: 'Interne BgZ-bundelbrug gebouwd. Uitwisseling met een PGO vraagt registratie bij Stichting MedMij, een PKIoverheid-certificaat en een conformiteitstest; die zijn er nog niet.' },
+    body: 'Interne BgZ-bundelbrug gebouwd. Uitwisseling met een persoonlijke gezondheidsomgeving vraagt registratie bij Stichting MedMij, een PKIoverheid-certificaat en een conformiteitstest; die zijn er nog niet.' },
   { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'wip',
     body: 'BgZ-bundel intern gebouwd; nog niet alle onderdelen van de BgZ worden gevuld. De eOverdracht via een Nuts-knooppunt is gebouwd maar nog niet aangesloten.' },
   { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'wip',
-    body: 'Bevragen via het Landelijk Schakelpunt, opt-in per cliënt. Aansluiten vraagt een VZVZ-aansluittraject en UZI-certificaten; die zijn er nog niet.' },
+    body: 'Bevragen via het Landelijk Schakelpunt, met toestemming per cliënt. Aansluiten vraagt een VZVZ-aansluittraject en UZI-certificaten; die zijn er nog niet.' },
 
   // Communicatie
   { name: 'ZorgMail', category: 'Communicatie', status: 'live',
     body: 'Veilige berichten en bijlagen via het ZorgMail-netwerk.' },
   { name: 'ZorgDomein', category: 'Communicatie', status: 'live',
-    body: 'Verwijzingen, consultaties en bijlagen — twee-richting.' },
+    body: 'Inkomende verwijzingen met bijlagen via ZorgDomein. Antwoorden vanuit Curanta is in ontwikkeling.' },
 
   // Medicatie
   { name: 'Medimo', category: 'Medicatie', status: 'live',
-    body: 'Medicatie-overzicht, voorschriften, toedienregistratie en allergieën.' },
+    body: 'Medicatieoverzicht, voorschriften, toedienregistratie en allergieën.' },
 
   // Financieel
   { name: 'AGB-register (Vektis)', category: 'Financieel', status: 'live',
-    body: 'AGB-validatie en -sync via Vektis.' },
+    body: 'AGB-codes valideren en synchroniseren met het Vektis-register. De synchronisatie richten wij per klant in.' },
   { name: 'CAK', category: 'Financieel', status: 'live',
-    body: 'Aanlevering Wlz/Wmo-eigen-bijdrage met retour-mutaties.' },
+    body: 'Aanlevering voor de eigen bijdrage (Wlz/Wmo). Retourberichten leest u nu handmatig in; automatisch ophalen is in ontwikkeling.' },
   { name: 'Gemeenten (iWmo/iJw)', category: 'Financieel', status: 'live',
-    body: 'iWmo- en iJw-berichtenverkeer, retourcodes en toewijzingen.' },
+    body: 'iWmo- en iJw-berichtenverkeer en toewijzingen. Retourberichten leest u nu handmatig in; automatisch ophalen is in ontwikkeling.' },
   { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'live',
-    body: 'iWlz-berichtenverkeer met validatie en retourcodes.' },
+    body: 'iWlz-berichtenverkeer met validatie. Retourberichten leest u nu handmatig in; automatisch ophalen is in ontwikkeling.' },
   { name: 'Vecozo COV-check', category: 'Financieel', status: 'live',
-    body: 'Real-time verzekeringscontrole via Vecozo — single-flow én batch, met retentie van controle-bewijs.' },
+    body: 'Controle op verzekering via Vecozo, per cliënt of voor alle cliënten tegelijk; de uitkomst wordt vastgelegd.' },
   { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'wip',
-    body: 'Zvw-declaratie wijkverpleging: productcodes, prestaties en machtigingen zijn gebouwd. Het berichtformaat dat Vecozo voorschrijft (AW319) nog niet — aanleveren kan daarom nog niet.' },
+    body: 'Zvw-declaratie wijkverpleging: productcodes, tarieven en prestaties zijn gebouwd. Het berichtformaat dat Vecozo voorschrijft (AW319) nog niet — aanleveren kan daarom nog niet.' },
 
   // Sensor & domotica
-  { name: 'Domotica-gateway', category: 'Sensor & domotica', status: 'live',
-    body: 'Webhook-intake voor sensor- en alarmmeldingen van Mextal, Ascom, Sensara en CLB; escalatie naar call-center of medewerker-app.' },
+  { name: 'Domotica', category: 'Sensoren en domotica', status: 'live',
+    body: 'Alarmen en sensormeldingen (o.a. Mextal, Ascom, Sensara, CLB, CarePhone) komen binnen in een eigen alarmoverzicht, met een urgente melding aan de dienstdoende zorg. Aansluiting per leverancier bij de implementatie.' },
 
-  // E-Health
-  { name: 'Minddistrict', category: 'E-Health', status: 'wip',
-    body: 'Blended care-modules synchroniseren met behandeltraject.' },
-  { name: 'Therapieland', category: 'E-Health', status: 'wip',
-    body: 'Toewijzing en voortgang van e-health-modules.' },
-  { name: 'Embloom', category: 'E-Health', status: 'wip',
-    body: 'Vragenlijsten en outcome-monitoring koppeling.' },
+  // E-health
+  { name: 'Minddistrict', category: 'E-health', status: 'roadmap',
+    body: 'Blended care-modules gekoppeld aan het behandeltraject.' },
+  { name: 'Therapieland', category: 'E-health', status: 'roadmap',
+    body: 'Toewijzing en voortgang van e-healthmodules.' },
+  { name: 'Embloom', category: 'E-health', status: 'roadmap',
+    body: 'Vragenlijsten en het volgen van behandeluitkomsten.' },
 
   // Identity & overig
   { name: 'DigiD', category: 'Identiteit', status: 'live',
-    body: 'Inloggen op het cliëntportaal met DigiD, minimaal niveau Substantieel. De aansluiting bij Logius regelen we per klant.' },
-  { name: 'EntraID / Azure AD', category: 'Identiteit', status: 'wip',
-    body: 'SSO via OIDC per organisatie, met groep-naar-rol-mapping. De instellingen zijn er; inloggen via SSO nog niet.' },
+    body: 'Inloggen op het cliëntportaal met DigiD, minimaal niveau Substantieel. Een betaalde optie; de aansluiting bij Logius regelen wij per klant.' },
+  { name: 'Microsoft Entra ID (SSO)', category: 'Identiteit', status: 'wip',
+    body: 'Inloggen met het eigen account van uw organisatie (SSO via OIDC), met rollen afgeleid uit groepen. De instellingen zijn er; inloggen via SSO nog niet.' },
   { name: 'UZI-pas', category: 'Identiteit', status: 'wip',
-    body: 'Controle van de certificaatketen gebouwd; OID-parsing, intrekkingscontrole en de BSN-resolver voor het LSP zijn in ontwikkeling en vragen een CIBG-test­certificaat.' },
+    body: 'Controle van de certificaatketen gebouwd; het uitlezen van het certificaat, de intrekkingscontrole en de BSN-koppeling voor het LSP zijn in ontwikkeling en vragen een testcertificaat van het CIBG.' },
   { name: 'Ysis-koppeling', category: 'Klinisch', status: 'wip',
-    body: 'Behandeldossier-uitwisseling voor specialistische teams.' },
+    body: 'Uitwisseling van het behandeldossier voor specialistische teams.' },
 
   // Backoffice
   { name: 'DocuSign', category: 'Backoffice', status: 'live',
-    body: 'Digitaal ondertekenen van zorgovereenkomsten, machtigingen en behandelplannen via DocuSign eSignature.' },
-  { name: 'NMBRS', category: 'Backoffice', status: 'wip',
-    body: 'Uren doorzetten naar de salarisverwerking in Nmbrs. De client is gebouwd, maar nog niet aangesloten op de tijdregistratie.' },
+    body: 'Digitaal ondertekenen van HR-documenten in het personeelsdossier, via DocuSign eSignature.' },
+  { name: 'Nmbrs', category: 'Backoffice', status: 'wip',
+    body: 'Uren doorzetten naar de salarisverwerking in Nmbrs. De koppeling is gebouwd, maar nog niet aangesloten op de tijdregistratie.' },
 ];
 
 const categories = Array.from(new Set(integrations.map(i => i.category)));
 const dotColor = (s: string) =>
   s === 'live' ? 'bg-green-500' : s === 'wip' ? 'bg-amber-500' : 'bg-ink-300';
 const statusLabel = (s: string) =>
-  s === 'live' ? 'Gebouwd' : s === 'wip' ? 'In ontwikkeling' : 'Op roadmap';
+  s === 'live' ? 'Gebouwd' : s === 'wip' ? 'In ontwikkeling' : 'Gepland';
 ---
 <Base
   image="/og/integraties.png"
-  title="Integraties — FHIR, MedMij, Wegiz en meer | Curanta"
-  description="Eerlijke status per koppeling: ZorgMail, ZorgDomein, Medimo, iWmo/iJw/iWlz en CAK via Vecozo, DigiD en domotica gebouwd; FHIR-API, MedMij, eOverdracht, LSP en Zvw in ontwikkeling."
+  title="Koppelingen: Vecozo, ZorgMail, ZorgDomein, Medimo | Curanta"
+  description="Gebouwd: ZorgMail, ZorgDomein, Medimo, iWmo/iJw/iWlz en CAK via Vecozo, DigiD. In ontwikkeling: eOverdracht, MedMij, LSP, Zvw. Status per koppeling."
 >
   <PageHero
-    eyebrow="Integraties & standaarden"
-    title="Aantoonbaar open — geen vendor lock-in."
-    subtitle="Curanta praat met het Nederlandse zorglandschap via standaarden en concrete koppelingen. Eerlijke status per integratie — gebouwd, in ontwikkeling of op roadmap. Gebouwd betekent: de koppeling is er; de aansluiting zelf (certificaat, contract met de berichtenpartij) regelen we per klant bij de implementatie. De gebouwde koppelingen zitten in het abonnement; wat de berichtenpartij zelf rekent, bijvoorbeeld een Vecozo-certificaat of een ZorgMail-abonnement, betaalt u rechtstreeks aan die partij."
+    eyebrow="Koppelingen en standaarden"
+    title="Koppelingen, met een eerlijke status."
+    subtitle="Gebouwd betekent: de koppeling is er; de aansluiting (certificaat, contract met de berichtenpartij) regelen wij bij de implementatie. De gebouwde koppelingen zitten in het abonnement. Wat de berichtenpartij zelf rekent, zoals een Vecozo-certificaat of een ZorgMail-abonnement, betaalt u rechtstreeks aan die partij."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href="/api" class="btn-primary no-underline">Stand van de API</a>
@@ -101,7 +105,7 @@ const statusLabel = (s: string) =>
     <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
       <div>
         <div class="font-display text-3xl font-bold text-curanta-700">{integrations.length}</div>
-        <div class="mt-1 text-xs text-ink-500">Integraties totaal</div>
+        <div class="mt-1 text-xs text-ink-500">Koppelingen op deze pagina</div>
       </div>
       <div>
         <div class="font-display text-3xl font-bold text-green-600">{integrations.filter(i => i.status === 'live').length}</div>
@@ -112,8 +116,8 @@ const statusLabel = (s: string) =>
         <div class="mt-1 text-xs text-ink-500">In ontwikkeling</div>
       </div>
       <div>
-        <div class="font-display text-3xl font-bold text-curanta-700">FHIR R4</div>
-        <div class="mt-1 text-xs text-ink-500">Intern (BgZ); open API in ontwikkeling</div>
+        <div class="font-display text-3xl font-bold text-ink-500">{integrations.filter(i => i.status === 'roadmap').length}</div>
+        <div class="mt-1 text-xs text-ink-500">Gepland</div>
       </div>
     </div>
   </section>
@@ -124,16 +128,16 @@ const statusLabel = (s: string) =>
       <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {integrations.filter(i => i.category === cat).map((i) => (
           <article class="rounded-lg border border-ink-100 bg-white p-5">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-3">
               <h3 class="font-display text-base font-semibold text-ink-900">{i.name}</h3>
-              <span class="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-ink-500">
+              <span class="flex items-center gap-1.5 text-xs font-medium text-ink-500 whitespace-nowrap">
                 <span class={`status-dot ${dotColor(i.status)}`}></span>{statusLabel(i.status)}
               </span>
             </div>
             <p class="mt-2 text-sm text-ink-700 leading-relaxed">{i.body}</p>
             {i.doc && (
               <a href={i.doc} class="mt-3 inline-block text-xs font-medium text-curanta-700 no-underline hover:underline">
-                Documentatie →
+                Stand van de API →
               </a>
             )}
           </article>
@@ -144,13 +148,12 @@ const statusLabel = (s: string) =>
 
   <section class="container-prose py-16">
     <div class="rounded-2xl border border-ink-100 bg-ink-100/50 p-8">
-      <h2 class="font-display text-2xl font-bold text-ink-900">Een integratie die ontbreekt?</h2>
+      <h2 class="font-display text-2xl font-bold text-ink-900">Mist u een koppeling?</h2>
       <p class="mt-3 max-w-2xl text-ink-700">
-        Wij bouwen koppelingen op klantverzoek wanneer ze passen binnen de architectuur en
-        bijdragen aan het zorgproces. Stuur uw vraag — we reageren binnen 1 werkdag met een
-        haalbaarheidsschets, niet met een offerte.
+        Laat het ons weten. Wij bekijken of hij past in de opbouw van Curanta en in uw zorgproces,
+        en wij reageren binnen 1 werkdag.
       </p>
-      <a href="mailto:integraties@curanta.nl" class="btn-primary mt-5 no-underline">integraties@curanta.nl</a>
+      <a href="mailto:info@curanta.nl?subject=Koppeling" class="btn-primary mt-5 no-underline">Mail info@curanta.nl</a>
     </div>
   </section>
 

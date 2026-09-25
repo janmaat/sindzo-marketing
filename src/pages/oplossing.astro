@@ -3,12 +3,13 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import ModuleCard from '../components/ModuleCard.astro';
 import ProductMockups from '../components/ProductMockups.astro';
-import RelatedArticles from '../components/RelatedArticles.astro';
 import Cta from '../components/Cta.astro';
+import { DEMO_ZELF } from '../config/demo';
 
 // Modulekaart — gegroepeerd zoals de Blazor-app ook gegroepeerd is
-// (ECD/Declaratie/Planning/Kwaliteit/...). Statussen reflecteren
-// werkelijke staat in de codebase.
+// (ECD/Declaratie/Planning/Kwaliteit/...). Statussen en teksten zijn op 25-09-2026
+// tegen de code en het feitenblad gelegd (reviewrapport feiten #23–#36, #146–#168):
+// wat de code niet doet, staat hier niet.
 
 interface ModuleEntry {
   icon: string;
@@ -29,145 +30,144 @@ const groups: ModuleGroup[] = [
     group: 'ECD — cliëntdossier',
     intro: 'Eén dossier dat met de cliënt meereist door intake, behandeling en overdracht.',
     modules: [
-      { icon: '📋', title: 'Cliëntdossier (Core)', body: 'BSN-encrypted, multi-tenant, met archiefbeleid en field-level audit.',
-        features: ['Episode of Care', 'Anamnese + Allergieën', 'CIZ/Wmo-indicaties', 'BgZ-conform'], status: 'live' },
-      { icon: '📝', title: 'SOEP-rapportage', body: 'AI-pre-fill, spraakinvoer, automatische samenvatting en correcties-trail.',
-        features: ['Spraak-naar-tekst', 'AI-pre-fill', 'Verbeter-trail', 'Pin & redact'], status: 'live' },
-      { icon: '🎯', title: 'Omaha Zorgplan', body: 'Volledig Omaha-systeem met problemen, doelen, interventies en versie-snapshots. Plus: cliëntformulering + mantelzorgperspectief naast professionele formulering, SMART-doelen met streefdatum, en risicoprofielen-engine (val/decubitus/ondervoeding/delier) die automatisch op metingen draait.', status: 'live' },
-      { icon: '🧠', title: 'Vragenlijsten-engine', body: 'PREM/MIC/BEM-engine met flexibele schalen en geautomatiseerde verspreiding.', status: 'live' },
+      { icon: '📋', title: 'Cliëntdossier', body: 'BSN versleuteld, per organisatie gescheiden, met archiefbeleid en een logboek van elke wijziging.',
+        features: ['Zorgepisodes', 'Anamnese en allergieën', 'CIZ- en Wmo-indicaties', 'Basis voor de BgZ'], status: 'live' },
+      { icon: '📝', title: 'SOEP-rapportage', body: 'Spraakinvoer in de backoffice, verwerkt op het apparaat zelf, in browsers die dat ondersteunen. Een Coach-voorstel en een lekentaalversie op knopdruk.',
+        features: ['Spraak-naar-tekst op het apparaat', 'Coach-voorstel voor E en P', 'Correcties blijven bewaard', 'Vastpinnen en afschermen'], status: 'live' },
+      { icon: '🎯', title: 'Omaha-zorgplan', body: 'Volledig Omaha-systeem met problemen, doelen, interventies en versies. Daarnaast: de formulering van cliënt en mantelzorger naast de professionele, SMART-doelen met streefdatum, en risicoprofielen (val, decubitus, ondervoeding, delier) berekend uit metingen en vragenlijsten.', status: 'live' },
+      { icon: '🧠', title: 'Vragenlijsten', body: 'Vragenlijsten (o.a. PREM en MIC) met schalen, publieke links en automatische telling van de respons.', status: 'live' },
       { icon: '👥', title: 'Groepszorg', body: 'Dagbesteding en dagbehandeling — activiteiten, aanwezigheid, foto\'s en rapportages.', status: 'live' },
-      { icon: '🤝', title: 'MDO + cliëntlogistiek', body: 'Multidisciplinair overleg, agenda-templates, actiepunten en intake-flow.', status: 'live' },
-      { icon: '🩹', title: 'Wondregistratie', body: 'Wondclassificatie (RYB/EPUAP), metingen, fotorapportage en wondgeschiedenis per cliënt.', status: 'live' },
-      { icon: '📑', title: 'Anamnese & InterRAI', body: 'Gestructureerde intake-anamnese met CIZ-domeinen en InterRAI-assessments met CAP-rapportage.', status: 'live' },
-      { icon: '✅', title: 'Interventietaken', body: 'Plan-gedreven uitvoertaken die automatisch volgen uit actieve zorgplaninterventies.', status: 'live' },
+      { icon: '🤝', title: 'MDO en cliëntlogistiek', body: 'Multidisciplinair overleg, agendasjablonen, actiepunten, aanmelding en intake.', status: 'live' },
+      { icon: '🩹', title: 'Wondregistratie', body: 'Wondclassificatie (EPUAP, TIME), metingen, foto\'s en wondgeschiedenis per cliënt.', status: 'live' },
+      { icon: '📑', title: 'Anamnese en InterRAI', body: 'Gestructureerde anamnese per sector, en InterRAI-scores met een indicatieve CAP-signalering (niet de gevalideerde interRAI-CAP\'s).', status: 'live' },
+      { icon: '✅', title: 'Interventietaken', body: 'Uitvoertaken die automatisch volgen uit de actieve interventies in het zorgplan.', status: 'live' },
     ],
   },
   {
-    group: 'Declaratie & financiering',
-    intro: 'Wmo, Jw en Wlz in één engine; Zvw is in ontwikkeling.',
+    group: 'Declaratie en financiering',
+    intro: 'Wmo, Jeugdwet en Wlz in één systeem; Zvw is in ontwikkeling.',
     modules: [
-      { icon: '🏷️', title: 'AGB-registraties', body: 'AGB-aanvraag, validatie, sync en organisatie-koppeling.', status: 'live' },
-      { icon: '✅', title: 'COV-check', body: 'Real-time controle op verzekering, batch- of single-flow.', status: 'live' },
-      { icon: '🏛️', title: 'iWmo / iJw', body: 'Gemeente-productcodes, message-flow, retourcodes, toewijzingen.', status: 'live' },
-      { icon: '🩺', title: 'iWlz + CAK', body: 'Wlz-berichten en CAK-aanleveringen met retour-mutaties.', status: 'live' },
-      { icon: '📊', title: 'Productie & Budget', body: 'Per cliënt productie, financierings-mix, budgetreserveringen + alerts.', status: 'live' },
-      { icon: '💶', title: 'Facturatie + PGB', body: 'Facturen, betalingen, sjablonen en PGB-afrekeningen.', status: 'live' },
-      { icon: '🧠', title: 'ZPM-declaratie (GGZ)', body: 'Native registratie van zorgprestaties volgens het Zorgprestatiemodel — validatie aan de bron, niet bij de declaratie-knop.', status: 'live' },
-      { icon: '💼', title: 'Cliëntkas + Bewindvoering', body: 'Zakgeld- en kassabeheer per cliënt, uitgavenregistratie en rapportage voor bewindvoerders.', status: 'live' },
-      { icon: '🚑', title: 'Zvw-declaratie (wijkverpleging)', body: 'Productcodes, prestaties en machtigingen voor wijkverpleging zijn gebouwd. Het berichtformaat dat Vecozo voorschrijft (AW319) nog niet — aanleveren kan daarom nog niet.', status: 'wip' },
-      { icon: '📃', title: 'Zorginkoop & contractbeheer', body: 'Beheer van Wmo-/Jw-/Wlz-contracten met gemeenten en zorgkantoren — looptijden, productafspraken, tarieven en herziening-momenten.', status: 'live' },
+      { icon: '🏷️', title: 'AGB-codes', body: 'AGB-codes valideren en synchroniseren met het Vektis-register, gekoppeld aan organisatie en medewerker. De synchronisatie richten wij per klant in.', status: 'live' },
+      { icon: '✅', title: 'Controle op verzekering (COV)', body: 'Via Vecozo, per cliënt of voor alle cliënten tegelijk; de uitkomst wordt vastgelegd. Aansluiting per klant.', status: 'live' },
+      { icon: '🏛️', title: 'iWmo / iJw', body: 'Productcodes per gemeente, berichten en toewijzingen. Retourberichten leest u nu handmatig in; automatisch ophalen is in ontwikkeling.', status: 'live' },
+      { icon: '🩺', title: 'iWlz + CAK', body: 'Wlz-berichten en CAK-aanleveringen via Vecozo. Retourberichten leest u nu handmatig in; automatisch ophalen is in ontwikkeling.', status: 'live' },
+      { icon: '📊', title: 'Productie en budget', body: 'Productie per cliënt, financieringsmix, budgetreserveringen en signalen.', status: 'live' },
+      { icon: '💶', title: 'Facturatie + pgb', body: 'Facturen, betalingen, sjablonen en pgb-afrekeningen.', status: 'live' },
+      { icon: '🧠', title: 'ZPM-declaratie (GGZ)', body: 'Registratie van zorgprestaties per traject volgens het zorgprestatiemodel, met controle op tarief, duur en datum.', status: 'live' },
+      { icon: '💼', title: 'Cliëntkas en bewindvoering', body: 'Zakgeld- en kasbeheer per cliënt, uitgaven vastleggen en rapportage voor bewindvoerders.', status: 'live' },
+      { icon: '🚑', title: 'Zvw-declaratie (wijkverpleging)', body: 'Productcodes, tarieven en prestaties voor wijkverpleging zijn gebouwd. Het berichtformaat dat Vecozo voorschrijft (AW319) nog niet — aanleveren kan daarom nog niet.', status: 'wip' },
+      { icon: '📃', title: 'Zorginkoop en contracten', body: 'Beheer van Wmo- en Jeugdwet-contracten met gemeenten: looptijden, productafspraken en tarieven.', status: 'live' },
     ],
   },
   {
-    group: 'Planning & roosteren',
-    intro: 'Van shift tot route, met CAO-engine die rust- en arbeidsregels bewaakt.',
+    group: 'Planning en roosteren',
+    intro: 'Van dienst tot route, met een cao-controle die rust- en arbeidstijden bewaakt.',
     modules: [
-      { icon: '📅', title: 'Shifts & Visits', body: 'Diensten, pauzes, ruil-verzoeken, zelfrooster en compensatie-saldi.', status: 'live' },
-      { icon: '🗺️', title: 'Routing', body: 'Wijkroute-optimalisatie met reistijd en cliëntvoorkeuren.', status: 'live' },
-      { icon: '⚖️', title: 'CAO-engine', body: 'CAO-regels gecodeerd; verzuim-aandachtspunten en wettelijke triggers.', status: 'live' },
-      { icon: '🪜', title: 'Zelfrooster', body: 'Medewerkers kiezen eigen diensten binnen kaders — minder planner-werk, hogere tevredenheid.', status: 'live' },
-      { icon: '⏱️', title: 'Tijdregistratie', body: 'Inklokken (mobiel/desktop) en uren-verantwoording.', status: 'live' },
-      { icon: '📱', title: 'Mobile-app (offline)', body: 'Veldwerk offline-first met sync; voor extramurale teams.', status: 'wip' },
+      { icon: '📅', title: 'Diensten en bezoeken', body: 'Diensten, pauzes, ruilverzoeken, zelfrooster en compensatiesaldi.', status: 'live' },
+      { icon: '🗺️', title: 'Routeplanning', body: 'Wijkroutes met reistijd, en een voorkeursmedewerker per cliënt voor continuïteit.', status: 'live' },
+      { icon: '⚖️', title: 'Cao-controle', body: 'Arbeidstijdenregels (rust, pauze, maximale diensten) gecodeerd, met signalen vóór publicatie en aandachtspunten bij verzuim.', status: 'live' },
+      { icon: '🪜', title: 'Zelfrooster', body: 'Medewerkers kiezen eigen diensten binnen de kaders — minder werk voor de planner.', status: 'live' },
+      { icon: '⏱️', title: 'Tijdregistratie', body: 'Inklokken en uren verantwoorden, in de backoffice en in het medewerkerportaal.', status: 'live' },
+      { icon: '📱', title: 'Medewerkerportaal', body: 'Voor de zorgmedewerker onderweg: rooster, bezoeken met taken en SOEP-rapportage, zorgplan en overdracht, uren (ook zonder verbinding bevestigen), verlof, beschikbaarheid, open diensten, ruilen, kilometers en ziekmelden. Op de telefoon, in de browser.', status: 'live' },
       { icon: '🧩', title: 'Planhulp', body: 'Planadvies per periode op continuïteit en werkdruk, en waar de rittenplanner beschikbaar is ook op reistijd. Geen AI; de planner beslist.', status: 'live' },
-      { icon: '📐', title: 'Formatieplanning', body: 'Structurele bezettingsplanning op FTE-, team- en unit-niveau — los van shift-roostering, voor budget- en HR-cycli.', status: 'live' },
+      { icon: '📐', title: 'Formatieplanning', body: 'Structurele bezettingsplanning per fte, team en afdeling — los van het rooster, voor budget en HR.', status: 'live' },
     ],
   },
   {
-    group: 'Kwaliteit, HRM & portalen',
-    intro: 'Kwaliteit-loop sluitend: meting, verbetering, registratie, gesprek.',
+    group: 'Kwaliteit, HRM en portalen',
+    intro: 'De kwaliteitscirkel rond: meten, verbeteren, vastleggen, bespreken.',
     modules: [
-      { icon: '⚠️', title: 'VIM + Calamiteiten', body: 'Incidenten, calamiteiten, datalekken, PRISMA-analyse, leervoorstellen.', status: 'live' },
-      { icon: '📣', title: 'Klachten (Wkkgz)', body: 'Volledige klachtenflow, geschilbehandeling, tijdlijn-events.', status: 'live' },
-      { icon: '📈', title: 'Indicatoren', body: 'Versie-beheerde indicator-definities, aanleveringen en snapshots.', status: 'live' },
-      { icon: '👤', title: 'HRM-uitbreiding', body: 'Bevoegdheden, deadlines, gesprekken, verzuim, contracten.', status: 'live' },
-      { icon: '🏠', title: 'Cliënt-/familieportaal', body: 'Berichten, documenten, machtigingen, mantelzorger-taken.', status: 'live' },
-      { icon: '💬', title: 'Berichten', body: 'Veilige interne berichtenuitwisseling tussen zorgmedewerkers — gecontextualiseerd per cliënt en team.', status: 'live' },
+      { icon: '⚠️', title: 'VIM en calamiteiten', body: 'Incidenten, calamiteiten, datalekken, PRISMA-analyse en leervoorstellen.', status: 'live' },
+      { icon: '📣', title: 'Klachten (Wkkgz)', body: 'De volledige klachtenroute, geschilbehandeling en een tijdlijn per klacht.', status: 'live' },
+      { icon: '📈', title: 'Indicatoren', body: 'Indicatordefinities met versies, aanleveringen en momentopnamen.', status: 'live' },
+      { icon: '👤', title: 'HRM', body: 'Bevoegdheden, deadlines, gesprekken, verzuim en contracten.', status: 'live' },
+      { icon: '🏠', title: 'Cliëntportaal', body: 'Voor cliënten en mantelzorgers: berichten, documenten, machtigingen en taken. In 5 talen.', status: 'live' },
+      { icon: '💬', title: 'Berichten', body: 'Veilige interne berichten tussen collega\'s, per team of organisatie, met spraakberichten en bijlagen.', status: 'live' },
       { icon: '🤲', title: 'Vrijwilligers', body: 'Registratie van vrijwilligers, VOG-bewaking en inzet op activiteiten en dagbesteding.', status: 'live' },
-      { icon: '🎓', title: 'Opleiding & competentiebeheer', body: 'BIG-herregistratie-bewaking, bijscholing, e-learning en competentie-matrix per functie — met automatische deadline-meldingen.', status: 'live' },
-      { icon: '❤️', title: 'Engagement & medewerker-puls', body: 'Korte pulse-vragen, tevredenheid en signalen voor verloop-risico — voor managers en HR, niet voor toezicht.', status: 'live' },
-      { icon: '🌱', title: 'WPM-rapportage (CO₂)', body: 'Werkgebonden Personenmobiliteit — jaarlijkse CO₂-mobiliteitsrapportage voor de RVO. Verplicht voor organisaties >100 medewerkers. Registreert woon-werkafstand, vervoerwijze en thuiswerkpercentage per medewerker, schat de CO₂-uitstoot per vervoerwijze, en maakt een CSV-overzicht als voorbereiding op de aanlevering bij RVO (geen RVO-formaat).', status: 'live' },
+      { icon: '🎓', title: 'Opleiding en competenties', body: 'BIG-herregistratie, bijscholing, e-learning en een competentiematrix per functie, met een overzicht van deadlines.', status: 'live' },
+      { icon: '❤️', title: 'Onboarding, feedback en teamsignalen', body: 'Onboarding, offboarding, 360°-feedback en teamsignalen over uitstroom en verzuim — voor managers en HR, niet voor toezicht op personen.', status: 'live' },
+      { icon: '🌱', title: 'WPM-rapportage (CO₂)', body: 'Werkgebonden personenmobiliteit: de jaarlijkse CO₂-rapportage voor de RVO, verplicht voor organisaties met 100 of meer werknemers. Registreert woon-werkafstand, vervoerwijze en thuiswerken per medewerker, schat de CO₂-uitstoot en maakt een CSV-overzicht als voorbereiding op de aanlevering (geen RVO-formaat).', status: 'live' },
     ],
   },
   {
-    group: 'Integraties & ketenzorg',
-    intro: 'Curanta praat met het Nederlandse zorglandschap — geen lock-in. Beschikbaar betekent hier: de koppeling is gebouwd; de aansluiting (certificaat, contract met de berichtenpartij) regelen we per klant.',
+    group: 'Koppelingen en ketenzorg',
+    intro: 'Curanta praat met het Nederlandse zorglandschap. Gebouwd betekent hier: de koppeling is er; de aansluiting (certificaat, contract met de berichtenpartij) regelen wij per klant.',
     modules: [
-      { icon: '💊', title: 'Medicatie (intern)', body: 'Native medicatie-module — voorschriften, toedienregistratie, allergieën en interacties. Werkt standalone of in combinatie met Medimo-integratie.', status: 'live' },
-      { icon: '🔗', title: 'Medimo-koppeling', body: 'Externe Medimo-koppeling voor organisaties die met Medimo werken — synchronisatie van toediening en voorschriften.', status: 'live' },
+      { icon: '💊', title: 'Medicatie', body: 'Toedienlijst met dubbele controle, op basis van het medicatieoverzicht uit Medimo.', status: 'live' },
+      { icon: '🔗', title: 'Medimo-koppeling', body: 'Voor organisaties die met Medimo werken: voorschriften en toediening uitwisselen.', status: 'live' },
       { icon: '📨', title: 'ZorgMail', body: 'Veilige berichten en bijlagen via het ZorgMail-netwerk.', status: 'live' },
-      { icon: '🔗', title: 'ZorgDomein', body: 'Verwijzingen en consultaties via ZorgDomein.', status: 'live' },
-      { icon: '📦', title: 'BgZ & eOverdracht', body: 'BgZ-bundel intern in FHIR R4 gebouwd; nog niet alle onderdelen worden gevuld. eOverdracht via Nuts gebouwd, nog niet aangesloten.', status: 'wip' },
-      { icon: '🌐', title: 'MedMij + LSP', body: 'PGO-uitwisseling via MedMij en LSP-koppeling met opt-in.', status: 'wip' },
-      { icon: '🧘', title: 'E-Health', body: 'Minddistrict, Therapieland, Embloom — blended care-flow.', status: 'wip' },
-      { icon: '🏠', title: 'Domotica-gateway', body: 'Sensor- en alarmmeldingen van domotica-leveranciers (valdetectie, deurcontact, beweging) rechtstreeks in het dossier.', status: 'live' },
-      { icon: '🔐', title: 'UZI-authenticatie', body: 'X.509-ketenvalidatie tegen de UZI-CA-bundel gebouwd. De rest wacht op een CIBG-testcertificaat.', status: 'wip' },
-      { icon: '💳', title: 'Digitaal ondertekenen', body: 'DocuSign voor zorgovereenkomsten, toestemmingsformulieren en digitale handtekeningen.', status: 'live' },
+      { icon: '🔗', title: 'ZorgDomein', body: 'Inkomende verwijzingen met bijlagen via ZorgDomein. Antwoorden vanuit Curanta is in ontwikkeling.', status: 'live' },
+      { icon: '📦', title: 'BgZ en eOverdracht', body: 'BgZ-bundel intern in FHIR R4 gebouwd; nog niet alle onderdelen worden gevuld. eOverdracht via Nuts gebouwd, nog niet aangesloten.', status: 'wip' },
+      { icon: '🌐', title: 'MedMij + LSP', body: 'Uitwisseling met persoonlijke gezondheidsomgevingen via MedMij, en een LSP-koppeling met toestemming van de cliënt.', status: 'wip' },
+      { icon: '🧘', title: 'E-health', body: 'Minddistrict, Therapieland en Embloom, voor blended care.', status: 'roadmap' },
+      { icon: '🏠', title: 'Domotica', body: 'Alarmen en sensormeldingen (o.a. Mextal, Ascom, Sensara, CLB, CarePhone) komen binnen in een eigen alarmoverzicht, met een urgente melding aan de dienstdoende zorg. Aansluiting per leverancier.', status: 'live' },
+      { icon: '🔐', title: 'UZI-authenticatie', body: 'Controle van de certificaatketen tegen de UZI-CA-bundel is gebouwd. De rest wacht op een testcertificaat van het CIBG.', status: 'wip' },
+      { icon: '💳', title: 'Digitaal ondertekenen', body: 'DocuSign voor het ondertekenen van HR-documenten in het personeelsdossier.', status: 'live' },
       { icon: '🏥', title: 'Ysis (Gerimedica)', body: 'Uitwisseling met Gerimedica Ysis voor gecombineerde verpleeghuis- en klinische zorg.', status: 'wip' },
-      { icon: '💰', title: 'Payroll-koppeling', body: 'Interface voor salarisverwerking — uren en toeslagen rechtstreeks naar uw payrollprovider.', status: 'wip' },
+      { icon: '💰', title: 'Salarisverwerking', body: 'Uren doorzetten naar uw salarisverwerking (Nmbrs).', status: 'wip' },
     ],
   },
   {
-    group: 'AI & data',
-    intro: 'AI als versneller — transparant, EU-conform, niet als black box.',
+    group: 'AI en data',
+    intro: 'AI als hulpmiddel: uitlegbaar, en de zorgverlener beslist. De AI-functies lopen via Anthropic (VS), gepseudonimiseerd, en alleen als ze aan staan.',
     modules: [
-      { icon: '🎙️', title: 'Voice-rapportage', body: 'Web Speech API + AI-samenvatting, met audit-trail van bewerkingen.', status: 'live' },
-      { icon: '🤖', title: 'AI-Matching', body: 'Cliënt ↔ professional matching met uitlegbare scoring.', status: 'wip' },
-      { icon: '📚', title: 'CAO-assistent', body: 'CAO-uitleg met bronverwijzing. Draait nog zonder CAO-tekst: we laden alleen een CAO met een controleerbare herkomst.', status: 'wip' },
-      { icon: '🚨', title: 'Fraud Detection', body: 'Patroon-herkenning op declaraties en planning.', status: 'wip' },
-      { icon: '🔮', title: 'Predictive', body: 'Voorspelling van uitstroom, wachttijden en zorgintensiteit.', status: 'roadmap' },
+      { icon: '🎙️', title: 'Spraakinvoer', body: 'Spraak-naar-tekst op het SOEP-scherm van de backoffice, verwerkt op het apparaat zelf: er gaat geen audio naar buiten. Kan de browser dat niet, dan is er geen microfoon. In het medewerkerportaal: spraakberichten, geen spraak-naar-tekst.', status: 'live' },
+      { icon: '🩺', title: 'SOEP-coach', body: 'Hulp bij het schrijven van de SOEP-rapportage: syndroomdetectie, Omaha-suggesties, een voorstel voor E en P op knopdruk en een lekentaalversie voor het cliëntportaal. Zonder AI valt hij terug op vaste regels.', status: 'live' },
+      { icon: '🔮', title: 'Zorgvraagprognose', body: 'Verwachte zorguren per dag, berekend uit de planningshistorie met een uitlegbaar model.', status: 'live' },
+      { icon: '🚨', title: 'Fraudesignalering', body: 'Signalen op diensten: overlap, ongebruikelijk lange diensten en lange reeksen. Vaste regels, geen AI.', status: 'live' },
       { icon: '⚡', title: 'Planningsmeldingen', body: 'Bij een ziekmelding worden de geraakte diensten gemarkeerd, krijgen de planners een bericht en komt er een opvolgtaak. Geen AI en geen automatische roostermutaties: het rooster past de planner zelf aan.', status: 'live' },
-      { icon: '🩺', title: 'SOEP-Coach', body: 'LLM-laag boven de SOEP-editor: syndroomdetectie, Omaha-suggesties en automatische decursus-samenvatting — Anthropic met heuristische fallback.', status: 'live' },
+      { icon: '🤖', title: 'AI-matching voor werving', body: 'Kandidaten scoren op een vacature, met uitleg per score. Dit is geen matching van cliënten en zorgverleners.', status: 'wip' },
     ],
   },
   {
-    group: 'Compliance & regulatoir',
-    intro: 'Niet alleen "voldoen aan" — actief begeleiden bij wet en deadlines.',
+    group: 'Wet- en regelgeving',
+    intro: 'Niet alleen voldoen aan de wet, maar ook de termijnen voor u bewaken.',
     modules: [
       { icon: '📜', title: 'Wtza', body: 'Toelating vastleggen en de deadline van de jaarverantwoording (31 mei) bewaken, met herinneringen.', status: 'live' },
-      { icon: '🛂', title: 'Wtta-uitleen', body: 'Registratiestatus en inleenrelaties vastleggen, vóór de registratieplicht van 1 januari 2027.', status: 'live' },
-      { icon: '⚖️', title: 'Zelfstandigenwet', body: '€38/u rechtsvermoeden-toetsing en modelovereenkomst-engine.', status: 'live' },
-      { icon: '🔒', title: 'NEN 7510', body: 'Control assessments, control-evidence en audit-export.', status: 'live' },
-      { icon: '🏥', title: 'Wzd/Wvggz', body: 'Gedwongen zorg-registratie en halfjaarlijkse IGJ-XML.', status: 'live' },
-      { icon: '🛡️', title: 'DPIA & verwerkingsregister', body: 'AVG art. 30/35-register met DPIA-beoordeling per verwerkingsactiviteit en sub-processor-overzicht.', status: 'live' },
-      { icon: '📋', title: 'NEN 7513 audit-log', body: 'Logboek van iedere toegang tot cliëntgegevens, met een hash-keten waardoor een wijziging achteraf aantoonbaar is. 7 jaar bewaard.', status: 'live' },
-      { icon: '🔔', title: 'NIS2 incidentmeldplicht', body: 'Registratie, classificatie en melding van cyberbeveiligingsincidenten conform NIS2/Cbw.', status: 'live' },
-      { icon: '🤖', title: 'AI Act-register', body: 'Classificatie en risicodocumentatie van AI-systemen conform de EU AI Act — vereist voor hoog-risico toepassingen.', status: 'live' },
-      { icon: '📢', title: 'Klokkenluidersregeling (Wbk)', body: 'Wet bescherming klokkenluiders-flow voor organisaties >50 medewerkers — vertrouwelijk meldkanaal, behandeltermijnen en non-retaliatie-borging. Bewust gescheiden van VIM-incidenten.', status: 'live' },
-      { icon: '🗳️', title: 'Cliëntenraad (WMCZ 2018)', body: 'Ondersteuning voor wettelijk verplichte cliëntenraad bij >25 cliënten: adviesaanvragen, instemmingsrecht-procedures, jaarverslag en raadsleden-administratie.', status: 'live' },
+      { icon: '🛂', title: 'Wtta', body: 'Toelatingsstatus en inleenrelaties vastleggen, vóór de toelatingsplicht van de Wtta (1 januari 2027).', status: 'live' },
+      { icon: '⚖️', title: 'Inzet van zzp\'ers', body: 'Toets op uurtarief (rechtsvermoeden van een arbeidsovereenkomst) en op gezag.', status: 'live' },
+      { icon: '🔒', title: 'NEN 7510', body: 'Beoordeling per beheersmaatregel, bewijs en een auditexport.', status: 'live' },
+      { icon: '🏥', title: 'Wzd/Wvggz', body: 'Registratie van onvrijwillige en verplichte zorg, en een halfjaarlijkse XML-uitdraai voor de IGJ (nog niet gevalideerd tegen de specificatie van de IGJ).', status: 'live' },
+      { icon: '🛡️', title: 'DPIA en verwerkingsregister', body: 'Register volgens AVG art. 30 en 35, met een DPIA-beoordeling per verwerking en een overzicht van subverwerkers.', status: 'live' },
+      { icon: '📋', title: 'NEN 7513-logboek', body: 'Logboek van iedere toegang tot cliëntgegevens, met een hash-keten waardoor een wijziging achteraf aantoonbaar is. Een logregel over een cliënt blijft bewaard zolang het dossier bestaat; logregels zonder dossier 7 jaar.', status: 'live' },
+      { icon: '🔔', title: 'NIS2-incidentmeldplicht', body: 'Registratie, classificatie en melding van cyberbeveiligingsincidenten volgens de Cyberbeveiligingswet (NIS2).', status: 'live' },
+      { icon: '🤖', title: 'AI-register', body: 'Classificatie en risicodocumentatie van AI-systemen volgens de AI-verordening — nodig voor toepassingen met een hoog risico.', status: 'live' },
+      { icon: '📢', title: 'Klokkenluidersregeling', body: 'Volgens de Wet bescherming klokkenluiders, voor organisaties met 50 of meer medewerkers: een vertrouwelijk meldkanaal, behandeltermijnen en bescherming van de melder. Bewust gescheiden van VIM-incidenten.', status: 'live' },
+      { icon: '🗳️', title: 'Cliëntenraad (Wmcz 2018)', body: 'Voor de cliëntenraad, verplicht als meer dan tien personen zorg verlenen: adviesaanvragen, instemmingsprocedures, jaarverslag en ledenadministratie.', status: 'live' },
     ],
   },
   {
-    group: 'Welzijn medewerker — uniek in NL',
-    intro: 'Wat geen NL-concurrent biedt (marktscan 2026-05-29): peer-support tussen collega\'s, strikt gescheiden van HR. Buitenlands bewijs voor retentie-effect (NHS RISE: +20%).',
+    group: 'Welzijn van medewerkers',
+    intro: 'Steun tussen collega\'s, strikt gescheiden van HR. Volgens onze eigen marktscan (29-05-2026) biedt geen Nederlandse concurrent dit.',
     modules: [
-      { icon: '🤝', title: 'Collega-netwerk (buddy + intervisie)', body: 'Zelf-aanmelden voor onboarding-buddy, internationale-instroom-buddy, intervisie- of sparring-partner. Regelgebaseerde matching op thema, taal en beschikbaarheid. Geen welzijns-/gezondheidsdata in fase 1 — geen HR-inzage.', status: 'live' },
-      { icon: '🌍', title: 'Internationale-instroom-buddy', body: 'Koppelt een internationaal geworven collega aan een buddy die dezelfde taal spreekt: de matching weegt een gedeelde taal zwaar.', status: 'live' },
-      { icon: '💬', title: 'Lotgenoten-support (vertrouwelijk)', body: 'Anoniem aanmelden op welzijnsthema (werkdruk, burn-out, rouw na incident, mantelzorg, re-integratie) met besloten 1-op-1-kanaal. Crisis-escalatie naar Vertrouwenspersoon — nooit HR. Staat uit tot de DPIA van uw organisatie is afgerond.', status: 'live' },
+      { icon: '🤝', title: 'Collega-netwerk (buddy en intervisie)', body: 'Zelf aanmelden voor een buddy bij de start, een intervisie- of sparringpartner. Matching op thema, taal en beschikbaarheid volgens vaste regels. HR kijkt niet mee.', status: 'live' },
+      { icon: '🌍', title: 'Buddy voor internationale collega\'s', body: 'Koppelt een internationaal geworven collega aan een buddy die dezelfde taal spreekt: de matching weegt een gedeelde taal zwaar.', status: 'live' },
+      { icon: '💬', title: 'Lotgenoten (vertrouwelijk)', body: 'Aanmelden op een welzijnsthema (werkdruk, burn-out, rouw na een incident, mantelzorg, re-integratie), met een besloten 1-op-1-kanaal. De ander ziet eerst alleen een roepnaam en het thema. Een crisissignaal gaat naar de vertrouwenspersoon — nooit naar HR. Staat uit tot de DPIA van uw organisatie is afgerond.', status: 'live' },
     ],
   },
   {
-    group: 'Inzicht & rapportage',
-    intro: 'Bestuur, raad van toezicht en management krijgen één bron-van-waarheid — geen export-naar-Excel-rituelen meer.',
+    group: 'Inzicht en rapportage',
+    intro: 'Bestuur, raad van toezicht en management kijken naar dezelfde cijfers — zonder losse exports naar Excel.',
     modules: [
-      { icon: '📊', title: 'BI-dashboard', body: 'Vooraf-gedefinieerde KPI-dashboards voor zorg, financiën, HR en compliance — drilldown naar bron-record, geen losse rapportage-tool nodig.', status: 'live' },
-      { icon: '📈', title: 'Sector-benchmarks', body: 'Vergelijk uw eigen cijfers (bezettingsgraad, loonkosten, verzuim, productiviteit, klanttevredenheid) met vaste VVT-sectorcijfers (ActiZ Branchemonitor 2024; nog niet tegen de publicatie gecontroleerd).', status: 'live' },
+      { icon: '📊', title: 'BI-dashboard', body: 'Vooraf gedefinieerde KPI-dashboards voor zorg, declaratie, kwaliteit en HR.', status: 'live' },
+      { icon: '📈', title: 'Sectorcijfers', body: 'Vergelijk uw eigen cijfers (bezettingsgraad, loonkosten, verzuim, productiviteit, klanttevredenheid) met vaste VVT-sectorcijfers (ActiZ Branchemonitor 2024; nog niet tegen de publicatie gecontroleerd).', status: 'live' },
     ],
   },
 ];
 ---
 <Base
-  title="Oplossing — modulaire zorgsuite | Curanta"
-  description="Acht groepen modules: ECD, declaratie, planning, kwaliteit, integraties, AI, compliance en BI. Modulair activeerbaar, FHIR R4, hosting in de EU, eerlijke status per module."
+  title="Oplossing: alle modules met hun status | Curanta"
+  description="Negen groepen modules, van dossier en declaratie tot kwaliteit en welzijn. U zet aan wat u nodig hebt; per module een eerlijke status."
   image="/og/oplossing.png"
 >
   <PageHero
     eyebrow="Oplossing"
-    title="Eén zorgsuite, modulair geactiveerd."
-    subtitle="Curanta is geen logge monoliet en geen losse verzameling best-of-breed-tools. Het is één modulair platform: u activeert alleen wat u nodig hebt, het deelt één dossier en één identiteit, en u groeit mee zonder migratie."
+    title="Eén systeem, met alleen de onderdelen die u nodig hebt."
+    subtitle="Curanta is één systeem met losse onderdelen: u zet aan wat u nodig hebt, alles deelt één dossier, en later bijzetten kan zonder overstap. Per onderdeel ziet u of het gebouwd is, in ontwikkeling of gepland."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href="/demo" class="btn-primary no-underline">Demo aanvragen</a>
-      <a href="/integraties" class="btn-secondary no-underline">Naar integraties</a>
+      <a href={DEMO_ZELF.href} class="btn-primary no-underline">{DEMO_ZELF.label}</a>
+      <a href="/integraties" class="btn-secondary no-underline">Naar de koppelingen</a>
     </div>
   </PageHero>
 
@@ -176,20 +176,20 @@ const groups: ModuleGroup[] = [
   <section class="border-b border-ink-100 bg-ink-100/40 py-10">
     <div class="container-prose grid grid-cols-2 gap-6 text-center sm:grid-cols-4">
       <div>
-        <div class="font-display text-3xl font-bold text-curanta-700">8 groepen</div>
+        <div class="font-display text-3xl font-bold text-curanta-700">9 groepen</div>
         <div class="mt-1 text-xs text-ink-500">Modules per functiegebied</div>
       </div>
       <div>
         <div class="font-display text-3xl font-bold text-curanta-700">4 plannen</div>
-        <div class="mt-1 text-xs text-ink-500">Basic · Pro · Plus · Enterprise</div>
+        <div class="mt-1 text-xs text-ink-500">Basic · Compliance Pro · Totaalzorg Plus · Enterprise</div>
       </div>
       <div>
-        <div class="font-display text-3xl font-bold text-curanta-700">FHIR R4</div>
-        <div class="mt-1 text-xs text-ink-500">Intern (BgZ); open API in ontwikkeling</div>
+        <div class="font-display text-3xl font-bold text-curanta-700">3 portalen</div>
+        <div class="mt-1 text-xs text-ink-500">Backoffice, medewerkerportaal, cliëntportaal</div>
       </div>
       <div>
-        <div class="font-display text-3xl font-bold text-curanta-700">.NET 10</div>
-        <div class="mt-1 text-xs text-ink-500">Moderne stack, hosting in de EU</div>
+        <div class="font-display text-3xl font-bold text-curanta-700">EU</div>
+        <div class="mt-1 text-xs text-ink-500">Hosting bij IONOS in Berlijn</div>
       </div>
     </div>
   </section>
@@ -213,25 +213,6 @@ const groups: ModuleGroup[] = [
       </div>
     </section>
   ))}
-
-  <RelatedArticles
-    title="Diepgaande achtergrond bij de white-space-modules"
-    intro="De Welzijn-modulegroep en het meertalig cliëntportaal zijn onze sterkste differentiators. Hier de feitelijke onderbouwing waarop ze rusten — bronnen en marktscan inbegrepen."
-    articles={[
-      {
-        eyebrow: 'Standaarden + marktanalyse',
-        title: 'Waarom geen NL-VVT/GHZ-leverancier meertalig is',
-        body: 'Marktscan van 9 cliëntportalen. Wat de demografie eist en waarom niemand het tot nu toe deed.',
-        href: '/kennisbank/meertalig-clientportaal-nl-zorg',
-      },
-      {
-        eyebrow: 'Arbeidsmarkt + welzijn',
-        title: 'Peer-support voor zorgmedewerkers — wat het onderzoek echt zegt',
-        body: 'NHS RISE rapporteert +20% retentie. Hier waarom geen NL-werkgever het aanbiedt en hoe HR-scheiding in code werkt.',
-        href: '/kennisbank/peer-support-zorgmedewerkers',
-      },
-    ]}
-  />
 
   <Cta />
 </Base>
