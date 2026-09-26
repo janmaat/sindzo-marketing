@@ -17,7 +17,7 @@ interface Props {
 
 const {
   title,
-  description = 'Curanta — één zorgsuite voor dossier, planning, declaratie en kwaliteit. Bewust open, aantoonbaar veilig, gebouwd voor de Nederlandse zorgpraktijk.',
+  description = 'Curanta: één systeem voor dossier, planning, declaratie en kwaliteit in de VVT, gehandicaptenzorg en GGZ. Vanaf €19 per medewerker per maand.',
   canonical,
   image = '/og.png',
   noindex = false,
@@ -33,7 +33,7 @@ const orgLd = {
   name: 'Curanta',
   url: Astro.site?.toString() ?? 'https://curanta.nl',
   logo: new URL('/logo/curanta-logo.svg', Astro.site).toString(),
-  description: 'Eén modulair zorgplatform voor de Nederlandse VVT, gehandicaptenzorg en GGZ — dossier, planning, declaratie, kwaliteit, meertalig cliëntportaal (7 talen) en welzijn-modules voor medewerkers.',
+  description: 'Eén modulair zorgplatform voor de Nederlandse VVT, gehandicaptenzorg en GGZ — dossier, planning, declaratie, kwaliteit, meertalig cliëntportaal (5 talen) en welzijn-modules voor medewerkers.',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Marshallstraat 26',
@@ -57,7 +57,9 @@ const orgLd = {
     'Peer-support voor zorgmedewerkers',
     'AVG / DPIA',
   ],
-  knowsLanguage: ['nl', 'en', 'tr', 'ar', 'de', 'pl', 'uk'],
+  // De talen waarin Curanta als organisatie communiceert (gelijk aan availableLanguage hieronder),
+  // niet de vijf talen van het cliëntportaal.
+  knowsLanguage: ['nl', 'en'],
   email: 'info@curanta.nl',
   telephone: '+31852501301',
   contactPoint: [
@@ -111,15 +113,8 @@ const orgLd = {
         zodat de eerste weergave niet op de CSS hoeft te wachten om hem te ontdekken. */}
     <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     {/*
-      Plausible Analytics — cookie-loos, EU-gehost (geen GA, geen tracker-popups).
-      Alleen in productie laden zodat dev-traffic geen statistiek vervuilt.
-    */}
-    {import.meta.env.PROD && (
-      <script defer data-domain="curanta.nl" src="https://plausible.io/js/script.outbound-links.js"></script>
-      <script is:inline set:html={`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`} />
-    )}
-    {/*
-      Eigen bezoekersmeting — cookieloos; de cijfers staan in de backoffice op
+      Eigen bezoekersmeting — de enige meting op curanta.nl (geen meetdienst van derden; besluit
+      Jan 25-09-2026, zie het feitenblad). Cookieloos; de cijfers staan in de backoffice op
       app.curanta.nl/admin/bezoekers. Script en endpoint leven in Curanta.Host, dus wijzigingen
       aan de meting gaan mee met een uitrol daarvan. Alleen in productie: het endpoint neemt ook
       localhost aan, anders telt `npm run dev` mee in de echte cijfers.
@@ -144,7 +139,7 @@ const orgLd = {
     <Footer />
     {/*
       Campagnebron meenemen zonder iets op het apparaat op te slaan. Wie via een advertentie
-      binnenkomt (…?utm_source=google&gclid=…), klikt zelden meteen op "Demo aanvragen"; meestal
+      binnenkomt (…?utm_source=google&gclid=…), klikt zelden meteen op een demoknop; meestal
       eerst naar prijzen of een segmentpagina. Daarom krijgen alle interne links op de pagina
       dezelfde campagneparameters mee, tot en met het demoformulier. Geen cookie, geen
       localStorage — de belofte op /cookies blijft staan. De canonical wijst altijd naar de URL

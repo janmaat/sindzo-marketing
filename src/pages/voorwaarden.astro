@@ -19,14 +19,15 @@ const sections = [
   title="Algemene voorwaarden"
   description="De voorwaarden waaronder Curanta zorgsoftware levert aan zorgaanbieders en geïnteresseerden."
   eyebrow="Voorwaarden"
-  lastUpdated="2026-05-19"
+  lastUpdated="2026-09-25"
   sections={sections}
+  draft
 >
   <h2 id="definities">1. Definities</h2>
   <ul>
-    <li><strong>Curanta</strong>: gevestigd aan Marshallstraat 26, 5705 CN Helmond, Nederland. KvK- en BTW-nummer op aanvraag via <a href="mailto:info@curanta.nl">info@curanta.nl</a>.</li>
+    <li><strong>Curanta</strong>: een handelsnaam van Maat Holding B.V., gevestigd aan Marshallstraat 26, 5705 CN Helmond, Nederland, ingeschreven bij de Kamer van Koophandel onder nummer 09147820.</li>
     <li><strong>Klant</strong>: de zorgaanbieder die een abonnement of dienst van Curanta afneemt.</li>
-    <li><strong>Dienst</strong>: de Curanta-applicatie inclusief modules, hosting, support en updates.</li>
+    <li><strong>Dienst</strong>: de Curanta-applicatie inclusief modules, hosting, ondersteuning en updates.</li>
     <li><strong>Overeenkomst</strong>: het samenstel van schriftelijke afspraken, deze voorwaarden, de SLA en de verwerkersovereenkomst.</li>
   </ul>
 
@@ -45,9 +46,9 @@ const sections = [
 
   <h2 id="levering">4. Levering van de dienst</h2>
   <p>
-    Curanta levert de Dienst als Software-as-a-Service (SaaS) vanuit Nederland. Levering vindt
-    plaats binnen 90 dagen na ondertekening, tenzij anders schriftelijk overeengekomen (bijv. bij
-    complexe migraties).
+    Curanta levert de Dienst als online dienst (Software-as-a-Service), gehost bij IONOS Cloud in
+    Berlijn (Duitsland). Levering vindt plaats op de datum die partijen na de migratie-inschatting
+    schriftelijk vastleggen.
   </p>
   <p>
     Curanta spant zich in om de Dienst beschikbaar te houden conform de SLA. Curanta behoudt zich
@@ -57,8 +58,8 @@ const sections = [
 
   <h2 id="prijzen">5. Prijzen en betaling</h2>
   <p>
-    Prijzen staan in het commercieel voorstel, exclusief BTW. Indicatieve plannen op
-    <a href="/prijzen">/prijzen</a>. Facturatie maandelijks of jaarlijks vooraf, naar keuze.
+    Prijzen staan in het commercieel voorstel, exclusief btw. Indicatieve plannen staan bij de
+    <a href="/prijzen">prijzen</a>. Facturatie maandelijks of jaarlijks vooraf, naar keuze.
     Betalingstermijn: 30 dagen.
   </p>
   <p>
@@ -71,16 +72,16 @@ const sections = [
   <p>Klant verbindt zich tot:</p>
   <ul>
     <li>het correcte gebruik van de Dienst conform de geldende wet- en regelgeving (waaronder AVG, Wkkgz, NEN 7510);</li>
-    <li>het beschermen van inloggegevens en het gebruiken van MFA;</li>
+    <li>het beschermen van inloggegevens en het gebruiken van tweestapsverificatie;</li>
     <li>het melden van security-incidenten of onregelmatigheden binnen 24 uur;</li>
     <li>het zelf verantwoordelijk zijn voor de juistheid van zorggegevens die in de Dienst worden ingevoerd.</li>
   </ul>
 
   <h2 id="sla">7. Service levels (SLA)</h2>
   <p>
-    De SLA wordt op aanvraag verstrekt — zie het <a href="/procurement">Procurement Centre</a>.
-    Kerncijfers: 99,9% beschikbaarheid op kantooruren, RPO 1 uur, RTO 4 uur. Voor Enterprise-
-    plannen geldt een financiële boete-clausule bij niet-naleving.
+    De SLA wordt op aanvraag verstrekt — zie het <a href="/procurement">inkoopdossier</a>.
+    Doelen: 99,9% beschikbaarheid op kantooruren, RPO 1 uur, RTO 4 uur. Voor Enterprise-plannen
+    maken wij de service levels op maat, in overleg.
   </p>
 
   <h2 id="aansprakelijkheid">8. Aansprakelijkheid</h2>
@@ -97,14 +98,14 @@ const sections = [
 
   <h2 id="beeindiging">9. Beëindiging en exit</h2>
   <p>
-    Beide partijen kunnen schriftelijk opzeggen tegen het einde van de contractperiode (kwartaal-
-    of jaarcontract), met inachtneming van 1 maand opzegtermijn.
+    De Overeenkomst is een jaarcontract. Beide partijen kunnen schriftelijk opzeggen tegen het
+    einde van het contractjaar, met inachtneming van 1 maand opzegtermijn.
   </p>
   <p>
-    Bij beëindiging exporteert Curanta de data van Klant in een gangbaar formaat (JSON/CSV/PDF) en
-    bewaart deze nog 6 maanden voor het geval een vervolg-export nodig is. Daarna wordt alle
-    data definitief gewist. Voor Enterprise-contracten kan een langere exit-window worden
-    afgesproken.
+    Bij beëindiging levert Curanta binnen 5 werkdagen een export van de data van Klant in een
+    gangbaar, machineleesbaar formaat (JSON). Klant heeft daarna 30 dagen om die export op te halen.
+    Binnen die 30 dagen wist Curanta alle data van Klant definitief en levert een
+    vernietigingsverklaring.
   </p>
 
   <h2 id="wijzigingen">10. Wijzigingen</h2>

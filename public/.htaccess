@@ -27,6 +27,14 @@
   RewriteCond %{HTTP_HOST} ^www\.curanta\.nl$ [NC]
   RewriteRule ^ https://curanta.nl%{REQUEST_URI} [R=301,L]
 
+  # ----- Kennisbankartikelen tijdelijk offline (25-09-2026) -----
+  # De twee artikelen zijn van de site gehaald omdat ze feiten bevatten die niet klopten; ze
+  # worden herschreven. 302 (tijdelijk) en geen 410: wie een oude link of bladwijzer volgt, krijgt
+  # de uitleg op /kennisbank in plaats van een foutpagina, en zoekmachines houden het adres vast
+  # voor als het artikel terugkomt. /kennisbank zelf staat op noindex. Komt een artikel terug op
+  # hetzelfde adres: haal het hier uit deze regel.
+  RewriteRule ^kennisbank/(meertalig-clientportaal-nl-zorg|peer-support-zorgmedewerkers)/?$ https://%{HTTP_HOST}/kennisbank [R=302,L]
+
   # ----- /pad/index.html en /index.html -> 301 naar de schone URL -----
   # THE_REQUEST is de oorspronkelijke verzoekregel, dus de interne rewrite
   # hieronder naar /pad/index.html komt hier niet in een lus.
@@ -63,6 +71,12 @@
   # <FilesMatch> werkt wél in .htaccess en dekt alle JS/CSS/font-extensies.
   <FilesMatch "\.(js|css|woff2|woff|ttf|otf)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Logo, favicons en og-afbeeldingen: een week. Ze hebben geen hash in de naam, dus niet
+  # immutable; een week is lang genoeg voor de herhaalbezoeker en kort genoeg na een wijziging.
+  <FilesMatch "\.(svg|png|ico)$">
+    Header set Cache-Control "public, max-age=604800"
   </FilesMatch>
 
   # HTML mag nooit langer dan een paar minuten cachen — anders zien

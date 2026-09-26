@@ -12,15 +12,17 @@ interface Props {
   title: string;
   description?: string;
   eyebrow: string;
-  lastUpdated: string;  // ISO date string
+  lastUpdated: string;  // ISO date string: de datum van de laatste inhoudelijke wijziging
   sections: Section[];
+  /** De banner "Concept-versie". Feitenblad (besluit Jan 25-09-2026): alleen op de algemene
+      voorwaarden; privacyverklaring, cookies en demovoorwaarden zonder. Daarom standaard uit. */
   draft?: boolean;
 }
 
-const { title, description, eyebrow, lastUpdated, sections, draft = true } = Astro.props;
+const { title, description, eyebrow, lastUpdated, sections, draft = false } = Astro.props;
 const dateNl = new Date(lastUpdated).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
-<Base title={`${title} — Curanta`} description={description}>
+<Base title={`${title} | Curanta`} description={description}>
   <section class="border-b border-ink-300 bg-gradient-to-b from-curanta-50 to-cream">
     <div class="container-prose py-14 sm:py-20">
       <span class="eyebrow">{eyebrow}</span>
@@ -28,8 +30,8 @@ const dateNl = new Date(lastUpdated).toLocaleDateString('nl-NL', { day: 'numeric
       <p class="mt-4 text-sm text-ink-500">Laatst gewijzigd: {dateNl}</p>
       {draft && (
         <div class="mt-6 max-w-2xl rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-          <strong>Concept-versie.</strong> Deze tekst wordt herzien door onze juridisch adviseur vóór commerciële go-live.
-          Voor productie-zekerheid: laat uw eigen jurist of FG meekijken.
+          <strong>Concept-versie.</strong> Deze tekst wordt door een jurist herzien voordat wij de eerste
+          overeenkomst sluiten. Laat intussen gerust uw eigen jurist of FG meekijken.
         </div>
       )}
     </div>

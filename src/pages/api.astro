@@ -3,58 +3,60 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 
-// Tijdelijke /api landingspagina tot api.curanta.nl/docs publiek live is.
-// Vervangt diverse externe links die nu nog 404 geven. Geef hier eerlijk weer
-// wat productie-ready is, wat in afronding zit, en hoe iemand vandaag al de
-// spec / sandbox-toegang krijgt.
+// /api — eerlijke stand van de FHIR-laag. Er is (24-09-2026) geen publiek FHIR-endpoint,
+// geen sandbox en geen OAuth2-toegang voor derden: de resources hieronder bouwt de
+// BgZ-module intern (Ponscura.Integratie.BgZ, projectors). Beloof hier niets wat daar
+// niet staat.
 
 const resources = [
-  { name: 'Patient', desc: 'Cliëntdemografie, BSN, contactgegevens — Zib-profiel.', status: 'live' },
+  { name: 'Patient', desc: 'Cliëntdemografie en contactgegevens — Zib-profiel.', status: 'live' },
   { name: 'Encounter', desc: 'Zorgmoment/contact — episode of care-context.', status: 'live' },
-  { name: 'Observation', desc: 'Metingen, scores, vitale waarden.', status: 'live' },
-  { name: 'MedicationStatement', desc: 'Actuele medicatie-overzicht (Zib MedicationOverview).', status: 'live' },
+  { name: 'Observation', desc: 'Vitale functies.', status: 'live' },
+  { name: 'MedicationStatement / MedicationRequest', desc: 'Medicatie-overzicht en voorschriften.', status: 'live' },
   { name: 'Condition', desc: 'Probleem-/diagnoseregistratie.', status: 'live' },
   { name: 'AllergyIntolerance', desc: 'Allergieën en intoleranties.', status: 'live' },
   { name: 'RelatedPerson', desc: 'Mantelzorger, wettelijk vertegenwoordiger, contactpersonen.', status: 'live' },
-  { name: 'CarePlan', desc: 'Zorgplan-export — Omaha gemapped.', status: 'wip' },
-  { name: 'Practitioner / PractitionerRole', desc: 'Zorgverlener + AGB-koppeling.', status: 'wip' },
+  { name: 'CarePlan', desc: 'Zorgplan — Omaha gemapped.', status: 'live' },
+  { name: 'Practitioner / PractitionerRole', desc: 'Behandelaar en zijn rol.', status: 'live' },
 ];
 
 const dot = (s: string) =>
   s === 'live' ? 'bg-green-500' : s === 'wip' ? 'bg-amber-500' : 'bg-ink-300';
 ---
 <Base
-  title="API & FHIR-endpoints — Curanta"
-  description="Curanta API op basis van FHIR R4 met Nederlandse Zib-profielen. OAuth2, OpenAPI 3.1-spec en sandbox-toegang op aanvraag — publieke sandbox in afronding."
+  title="API en FHIR: stand van zaken | Curanta"
+  description="FHIR R4 met Nederlandse Zib-profielen: intern gebouwd voor de BgZ, een publieke API is in ontwikkeling. De eerlijke stand van zaken."
 >
   <PageHero
-    eyebrow="API & integratie"
-    title="FHIR R4 met Zib-profielen."
-    subtitle="Curanta levert een open, gedocumenteerde API rondom de Nederlandse Zib-standaarden. Endpoints draaien in productie; publieke sandbox en interactieve docs zijn in afronding. Tot dan: spec en sandbox-toegang op aanvraag binnen 1 werkdag."
+    eyebrow="API en koppelen"
+    title="FHIR R4 met Zib-profielen: de stand van zaken."
+    subtitle="Voor I&A en ketenpartners. Curanta zet dossiergegevens intern om naar FHIR R4 met Nederlandse Zib-profielen — de basis voor de BgZ en de eOverdracht. Een publieke API is in ontwikkeling: er draait nog geen publiek endpoint en er is nog geen testomgeving."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href="mailto:api@curanta.nl?subject=OpenAPI%20spec%20%2B%20sandbox-toegang" class="btn-primary no-underline">Spec + sandbox aanvragen</a>
-      <a href="/integraties" class="btn-secondary no-underline">Overzicht integraties</a>
+      <a href="mailto:info@curanta.nl?subject=API%3A%20stand%20van%20zaken" class="btn-primary no-underline">Vraag de stand van zaken</a>
+      <a href="/integraties" class="btn-secondary no-underline">Overzicht koppelingen</a>
     </div>
   </PageHero>
 
   <section class="container-prose py-12 border-b border-ink-100 bg-ink-100/40">
     <div class="rounded-xl border border-amber-200 bg-amber-50/60 p-5 max-w-3xl">
-      <div class="text-[10px] font-extrabold uppercase tracking-[0.22em] text-amber-900">Publieke sandbox in afronding</div>
+      <div class="text-xs font-extrabold uppercase tracking-[0.15em] text-amber-900">Publieke API in ontwikkeling</div>
       <p class="mt-2 text-sm text-ink-700 leading-relaxed">
-        api.curanta.nl/docs (Swagger UI) en de publieke sandbox-tenant gaan live in Q3 2026.
-        Tot dan: stuur een mail naar <a href="mailto:api@curanta.nl" class="text-curanta-700 hover:underline">api@curanta.nl</a> —
-        u krijgt de OpenAPI 3.1-spec, een test-client_id/secret en een gesegregeerde sandbox-tenant met
-        synthetische cliëntdata. Reactie binnen 1 werkdag, geen NDA nodig.
+        Er is nog geen publieke FHIR-API, geen api.curanta.nl/docs en nog geen sandbox om te testen.
+        Wilt u weten wat er wel is? Mail
+        <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a> —
+        wij reageren binnen 1 werkdag, geen NDA nodig.
       </p>
     </div>
   </section>
 
   <section class="container-prose py-14 border-b border-ink-100">
-    <h2 class="font-display text-2xl font-bold text-ink-900">FHIR R4 resources</h2>
+    <h2 class="font-display text-2xl font-bold text-ink-900">FHIR R4-resources (intern)</h2>
     <p class="mt-2 text-sm text-ink-700 max-w-2xl">
-      Resources mappen naar Nederlandse Zorginformatiebouwstenen (Zib's) waar deze gedefinieerd zijn.
-      Status reflecteert publieke endpoint-beschikbaarheid; interne implementatie kan verder zijn.
+      Deze resources bouwt Curanta intern uit het dossier voor de BgZ-bundel, gemapt op de Nederlandse
+      Zorginformatiebouwstenen (Zib's) waar die bestaan. Nog niet alle onderdelen van de BgZ worden
+      gevuld, en geen van deze resources is al via een publiek endpoint op te vragen. Groen betekent
+      hier: intern gebouwd voor de BgZ.
     </p>
     <ul class="mt-6 grid gap-3 sm:grid-cols-2">
       {resources.map((r) => (
@@ -70,27 +72,19 @@ const dot = (s: string) =>
   </section>
 
   <section class="container-prose py-14 border-b border-ink-100">
-    <h2 class="font-display text-2xl font-bold text-ink-900">Authenticatie & autorisatie</h2>
-    <ul class="mt-4 space-y-2 text-sm text-ink-700">
-      <li>• <strong class="text-ink-900">OAuth2 client-credentials</strong> voor server-to-server (back-office, ketenpartners).</li>
-      <li>• <strong class="text-ink-900">OAuth2 authorization-code + PKCE</strong> voor cliënt-gerichte apps via cliëntportaal-flow.</li>
-      <li>• <strong class="text-ink-900">SMART-on-FHIR scopes</strong> (`patient/*.read`, `user/*.read`) voor fijnmazige toegang per resource.</li>
-      <li>• <strong class="text-ink-900">UZI-mTLS</strong> beschikbaar voor zorgverlener-authenticatie (in afronding, CIBG-cert vereist).</li>
-    </ul>
-  </section>
-
-  <section class="container-prose py-14 border-b border-ink-100">
-    <h2 class="font-display text-2xl font-bold text-ink-900">Wat we niet doen</h2>
+    <h2 class="font-display text-2xl font-bold text-ink-900">Hoe wij FHIR gebruiken</h2>
     <p class="mt-2 text-sm text-ink-700 max-w-3xl leading-relaxed">
-      Geen proprietary "Curanta-formaat" parallel aan FHIR. Geen lock-in via custom payloads.
-      Geen rate-limit-tarieven voor klanten of geverifieerde ketenpartners. Geen verschil tussen wat in
-      onze UI beschikbaar is en wat via de API kan — op een paar admin-endpoints na die expliciet
-      gedocumenteerd zijn.
+      FHIR R4 is bij ons het uitwisselingsformaat aan de grens met de keten; intern blijft de opslag
+      relationeel (zie <a href="/adr" class="text-curanta-700 hover:underline">ADR-002</a>). Een export
+      van uw gegevens krijgt u los daarvan in JSON, op verzoek en zonder exit-fee; hij wordt uitgebreid
+      tot alle modules — zie <a href="/overstappen#eruit" class="text-curanta-700 hover:underline">Overstappen en exit</a>.
     </p>
   </section>
 
   <Cta
     title="Implementatiepartner of ketenleverancier?"
-    subtitle="Wij helpen integratiepartners graag op weg met spec, sandbox en architectuurklankbord. Mail rechtstreeks naar api@curanta.nl."
+    subtitle="Wij denken graag mee over uw koppeling, en laten u weten wanneer de publieke API en een testomgeving klaarstaan."
+    primary={{ label: 'Mail ons over de API', href: 'mailto:info@curanta.nl?subject=API' }}
+    secondary={{ label: 'Overzicht koppelingen', href: '/integraties' }}
   />
 </Base>

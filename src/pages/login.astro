@@ -5,37 +5,39 @@ import PageHero from '../components/PageHero.astro';
 // Hub-pagina voor drie portalen. Vermijdt verwarring: één Inloggen-knop in
 // de Nav, gebruiker kiest hier welk portaal hij/zij nodig heeft. Bij directe
 // kennis van het portaal kan iemand ook rechtstreeks naar bv. medewerker.curanta.nl.
+// Namen en doelgroepen zoals in het feitenblad: backoffice, medewerkerportaal, cliëntportaal.
+// UZI-inloggen is in ontwikkeling en staat hier dus niet.
 
 const portals = [
   {
-    audience: 'Zorgmedewerkers',
-    title: 'Medewerker-portaal',
-    body: 'Voor zorgverleners en backoffice: dossier, planning, declaratie, kwaliteit. UZI-authenticatie waar wettelijk vereist.',
+    audience: 'Planning, dossier, declaratie, beheer',
+    title: 'Backoffice',
+    body: 'Voor planners, teamleiders, zorgverleners in de backoffice, zorgadministratie, kwaliteit, beheer en management.',
+    href: 'https://app.curanta.nl/login',
+    cta: 'Open app.curanta.nl',
+    icon: '🗂️',
+  },
+  {
+    audience: 'Zorgmedewerkers onderweg',
+    title: 'Medewerkerportaal',
+    body: 'Voor de zorgmedewerker onderweg: rooster, bezoeken met SOEP-rapportage, uren, verlof en ruilen. Ook op de telefoon.',
     href: 'https://medewerker.curanta.nl/',
     cta: 'Open medewerker.curanta.nl',
     icon: '👩‍⚕️',
   },
   {
-    audience: 'Cliënten & mantelzorgers',
+    audience: 'Cliënten en mantelzorgers',
     title: 'Cliëntportaal',
-    body: 'Voor cliënten, mantelzorgers en familie: berichten, documenten, machtigingen, mantelzorger-taken en eigen zorgplan inzien.',
+    body: 'Voor cliënten, mantelzorgers en familie: berichten, documenten, machtigingen, taken en het eigen zorgplan inzien.',
     href: 'https://klant.curanta.nl/',
     cta: 'Open klant.curanta.nl',
     icon: '🏠',
-  },
-  {
-    audience: 'Beheer & I&A',
-    title: 'Beheer-omgeving',
-    body: 'Voor I&A-beheerders en functioneel beheer: tenant-configuratie, gebruikers- en rollen-beheer, integratie-instellingen, audit-export.',
-    href: 'https://app.curanta.nl/login',
-    cta: 'Open app.curanta.nl',
-    icon: '⚙',
   },
 ];
 ---
 <Base
   title="Inloggen — kies uw portaal | Curanta"
-  description="Drie Curanta-portalen: medewerker.curanta.nl voor zorgverleners, klant.curanta.nl voor cliënten en mantelzorgers, app.curanta.nl voor beheer."
+  description="Drie portalen: app.curanta.nl (backoffice), medewerker.curanta.nl voor zorgmedewerkers onderweg, klant.curanta.nl voor cliënten en mantelzorgers."
 >
   <PageHero
     eyebrow="Inloggen"
@@ -69,7 +71,7 @@ const portals = [
         De uitnodiging komt vanuit de zorgaanbieder, niet vanuit Curanta direct.
       </p>
       <p class="mt-3 text-sm text-ink-500">
-        Vragen? Mail <a href="mailto:support@curanta.nl" class="text-curanta-700 hover:underline">support@curanta.nl</a>
+        Vragen? Mail <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>
         of bel <a href="tel:+31852501301" class="text-curanta-700 hover:underline">085 250 1301</a>.
       </p>
     </div>

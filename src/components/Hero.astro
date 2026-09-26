@@ -1,4 +1,5 @@
 ---
+import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 // Hero-claim is bewust niet feature-led: het rapport leerde dat in dit segment
 // vertrouwen en procesfit zwaarder wegen dan functielijsten.
 ---
@@ -15,7 +16,7 @@
     <div class="max-w-3xl">
       <span class="badge mb-6">
         <span class="status-dot bg-accent-500"></span>
-        Built in the Netherlands · NEN 7510 in voorbereiding
+        Gebouwd in Nederland · NEN 7510 in voorbereiding
       </span>
       <h1 class="font-display text-4xl font-bold leading-tight tracking-tightish text-ink-900 sm:text-5xl md:text-6xl">
         Minder regeldruk. <span class="italic text-accent-600">Meer tijd voor zorg.</span>
@@ -23,27 +24,28 @@
       {/* De markt beweegt weg van all-in-one naar modulaire landschappen
           (M&I/Partners, vijf jaar ECD-marktonderzoek). "Eén systeem voor alles"
           leest dan als het model dat men juist verlaat, terwijl onze architectuur
-          in werkelijkheid modulair is. Daarom expliciet: één systeem, modules die
-          u aanzet, open standaarden zodat u er weer uit kunt. */}
+          in werkelijkheid modulair is. Daarom expliciet: één systeem, onderdelen die
+          u aanzet. De standaarden (FHIR, BgZ, MedMij) staan op /integraties: een
+          bestuurder leest hier eerst wat het hem oplevert. */}
       <p class="mt-6 text-lg leading-relaxed text-ink-700 max-w-2xl">
-        Eén platform voor dossier, planning, declaratie en kwaliteit — maar u activeert
-        alleen de modules die u nodig hebt, en zet later bij zonder migratie. Bewust open
-        (FHIR R4-architectuur gereed, MedMij en Wegiz in afronding), zodat uw data van u
-        blijft. Gebouwd voor de Nederlandse VVT, gehandicaptenzorg en GGZ.
+        Eén systeem voor dossier, planning, declaratie en kwaliteit, gebouwd voor de Nederlandse
+        VVT, gehandicaptenzorg en GGZ. U zet alleen aan wat u nodig hebt, en later bijzetten kan
+        zonder overstap. Bij elk onderdeel staat eerlijk wat het vandaag kan.
       </p>
       {/* Elke concurrent in deze markt zet "demo aanvragen" als primaire actie —
           een verkoopgesprek. Wij hebben een werkende omgeving waar je zelf in kunt,
           en dat is het enige dat zij niet kunnen evenaren. Die staat dus vooraan;
-          het gesprek blijft als tweede knop beschikbaar voor wie dat liever heeft. */}
+          het gesprek blijft als tweede knop beschikbaar voor wie dat liever heeft.
+          Tekst en bestemming van beide knoppen staan in src/config/demo.ts. */}
       <div class="mt-9 flex flex-wrap items-center gap-3">
-        <a href="/demo-omgeving" class="btn-primary no-underline">Log zelf in op de demo</a>
-        <a href="/demo" class="btn-secondary no-underline">Demo op uw eigen proces</a>
+        <a href={DEMO_ZELF.href} class="btn-primary no-underline">{DEMO_ZELF.label}</a>
+        <a href={DEMO_GESPREK.href} class="btn-secondary no-underline">{DEMO_GESPREK.label}</a>
         <a href="/trust" class="ml-2 text-sm font-medium text-curanta-700 no-underline hover:underline">
-          Of begin bij Trust Centre →
+          Of begin bij het Trust Centre →
         </a>
       </div>
       <p class="mt-8 text-sm text-ink-500">
-        Geen formulier · Verzonnen cliënten, u kunt niets stukmaken · Geen verkoopdruk
+        Verzonnen cliënten, u kunt niets stukmaken · Geen verkoopgesprek nodig
       </p>
     </div>
   </div>

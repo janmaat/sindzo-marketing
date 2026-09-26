@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
+import { DEMO_ZELF } from '../config/demo';
 
 interface Trigger { title: string; body: string; }
 interface Module { name: string; note: string; }
@@ -21,18 +22,27 @@ interface Props {
   proofPoints?: ProofPoint[];
   caseQuote?: { quote: string; author: string; org: string };
   image?: string;         // og:image-pad voor deze segmentpagina
+  /** Voor een sector waarvoor Curanta geen eigen product heeft (huisartsen): geen demo- en
+      vervangingstaal, alleen wat er voor de samenwerking is. */
+  alleenSamenwerking?: boolean;
 }
 
 const {
   title, description, eyebrow, hero, subtitle,
-  triggers, modules, regulatory, proofPoints, caseQuote, image,
+  triggers, modules, regulatory, proofPoints, caseQuote, image, alleenSamenwerking = false,
 } = Astro.props;
 ---
 <Base title={title} description={description} image={image}>
   <PageHero eyebrow={eyebrow} title={hero} subtitle={subtitle}>
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href="/demo" class="btn-primary no-underline">Demo aanvragen</a>
-      <a href="/oplossing" class="btn-secondary no-underline">Bekijk modules</a>
+      {alleenSamenwerking ? (
+        <a href="/contact" class="btn-primary no-underline">Neem contact op</a>
+      ) : (
+        <>
+          <a href={DEMO_ZELF.href} class="btn-primary no-underline">{DEMO_ZELF.label}</a>
+          <a href="/oplossing" class="btn-secondary no-underline">Bekijk de modules</a>
+        </>
+      )}
     </div>
   </PageHero>
 
@@ -51,10 +61,14 @@ const {
 
   <section class="container-prose py-20">
     <div class="max-w-2xl">
-      <h2 class="font-display text-3xl font-bold tracking-tightish text-ink-900">Wat zien wij in deze sector?</h2>
-      <p class="mt-3 text-ink-700">
-        De aanleiding voor vervanging is zelden één feature. Het zijn drie of vier patronen tegelijk.
-      </p>
+      <h2 class="font-display text-3xl font-bold tracking-tightish text-ink-900">
+        {alleenSamenwerking ? 'Wat er voor de samenwerking is' : 'Wat wij in deze sector vaak horen'}
+      </h2>
+      {!alleenSamenwerking && (
+        <p class="mt-3 text-ink-700">
+          Wie van systeem wil wisselen, doet dat zelden om één functie. Meestal spelen drie of vier dingen tegelijk.
+        </p>
+      )}
     </div>
     <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {triggers.map((t) => (
@@ -84,10 +98,14 @@ const {
   <section class="container-prose py-20">
     <div class="grid gap-10 lg:grid-cols-[280px_1fr]">
       <div>
-        <h2 class="font-display text-3xl font-bold tracking-tightish text-ink-900">Modules die hier het meest waarde geven</h2>
-        <p class="mt-3 text-sm text-ink-700">
-          Activeer alleen wat u nodig hebt. Schaal mee zonder migratiepijn.
-        </p>
+        <h2 class="font-display text-3xl font-bold tracking-tightish text-ink-900">
+          {alleenSamenwerking ? 'Koppelingen voor de samenwerking' : 'Modules die hier het meest opleveren'}
+        </h2>
+        {!alleenSamenwerking && (
+          <p class="mt-3 text-sm text-ink-700">
+            U zet alleen aan wat u nodig hebt; later bijzetten kan zonder overstap.
+          </p>
+        )}
         <a href="/oplossing" class="mt-5 inline-block text-sm font-medium text-curanta-700 no-underline hover:underline">
           Volledige modulekaart →
         </a>
@@ -104,10 +122,9 @@ const {
   </section>
 
   <section class="container-prose py-12 border-t border-ink-100">
-    <h3 class="font-display text-xl font-semibold text-ink-900">Relevante wettelijke kaders</h3>
+    <h2 class="font-display text-xl font-semibold text-ink-900">Relevante wetten en normen</h2>
     <p class="mt-2 text-sm text-ink-700 max-w-2xl">
-      Curanta volgt deze actief — geen "we kijken er nog naar" als de deadline al voorbij is.
-      Status per kader op het <a href="/trust" class="text-curanta-700 hover:underline">Trust Centre</a>.
+      Per wet de stand van zaken staat op het <a href="/trust" class="text-curanta-700 hover:underline">Trust Centre</a>.
     </p>
     <ul class="mt-5 flex flex-wrap gap-2">
       {regulatory.map((r) => (
@@ -116,8 +133,17 @@ const {
     </ul>
   </section>
 
-  <Cta
-    title="Wilt u een demo op uw eigen werkprocessen?"
-    subtitle="Stuur drie typische werkstromen uit uw organisatie. Wij laten zien hoe Curanta ze ondersteunt — geen scripted pitch."
-  />
+  {alleenSamenwerking ? (
+    <Cta
+      title="Een vraag over de samenwerking?"
+      subtitle="Werkt u samen met een zorgorganisatie die Curanta gebruikt, of wilt u weten wat er voor huisartsen is? Wij reageren binnen 1 werkdag."
+      primary={{ label: 'Neem contact op', href: '/contact' }}
+      secondary={{ label: 'Bekijk de koppelingen', href: '/integraties' }}
+    />
+  ) : (
+    <Cta
+      title="Liever Curanta op uw eigen werkprocessen zien?"
+      subtitle="Kijk zelf rond in een werkende omgeving met verzonnen cliënten. Of stuur ons drie typische werkstromen uit uw organisatie; dan laten wij zien hoe Curanta ze ondersteunt, zonder vast script."
+    />
+  )}
 </Base>

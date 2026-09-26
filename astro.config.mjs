@@ -17,7 +17,9 @@ export default defineConfig({
       // pagina's (bedankt, demo-form-result) sluiten we uit; legal-pagina's
       // krijgen lage prio. Productpagina's en kennisbank-artikelen tussen
       // 0.7-1.0.
-      filter: (page) => !page.includes('/bedankt') && !page.includes('/login'),
+      // /kennisbank staat op noindex zolang er geen artikelen zijn (25-09-2026); dan hoort hij
+      // ook niet in de sitemap.
+      filter: (page) => !page.includes('/bedankt') && !page.includes('/login') && !page.includes('/kennisbank'),
       serialize(item) {
         const url = new URL(item.url);
         const path = url.pathname;

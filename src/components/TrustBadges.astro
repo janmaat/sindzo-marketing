@@ -1,24 +1,24 @@
 ---
 // Status-stoplichten zijn bewust eerlijk: groen = aantoonbaar, geel = in
-// voorbereiding, grijs = roadmap. Dit is het centrale differentiërende element
+// uitvoering, grijs = gepland. Dit is het centrale differentiërende element
 // t.o.v. concurrenten die compliance pas in tender-fase delen.
 import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
 
 const badges: Array<{ label: string; status: string; note: string; url?: string; urlLabel?: string }> = [
-  { label: 'NEN 7510', status: 'wip', note: 'Werkdocument, certificering Q4 2026' },
-  { label: 'AVG / GDPR', status: 'live', note: 'DPA & sub-verwerkerslijst publiek' },
+  { label: 'NEN 7510', status: 'wip', note: 'Werkdocument, externe audit gepland Q4 2026' },
+  { label: 'AVG', status: 'wip', note: 'BSN versleuteld; een FG en versleuteling van de hele database vóór de eerste klant' },
   { label: 'ISO 27001', status: 'roadmap', note: 'Audit gepland 2027' },
-  { label: 'FHIR R4', status: 'wip', note: 'Architectuur gereed (8 Zibs intern), publieke REST API Q4 2026' },
-  { label: 'MedMij', status: 'wip', note: 'Aansluiting in afrondingsfase' },
-  { label: 'Wegiz', status: 'wip', note: 'BgZ-bundel klaar, aansluiting in afronding' },
+  { label: 'FHIR R4', status: 'wip', note: 'BgZ intern in FHIR R4; publieke API in ontwikkeling' },
+  { label: 'MedMij', status: 'wip', note: 'In ontwikkeling' },
+  { label: 'Wegiz', status: 'wip', note: 'BgZ-bundel intern gebouwd, aansluiting in ontwikkeling' },
   {
     label: 'Cbw (NIS2)',
     status: 'wip',
-    note: 'NIS2-incidentmodule (24/72/720u SLA-tracking) ingebouwd in Curanta · ook los beschikbaar als Nis2Care',
+    note: 'NIS2-incidentmodule in Curanta: meldtermijnen 24 uur, 72 uur en één maand',
     url: NIS2CARE_LIVE ? NIS2CARE_URL : undefined,
     urlLabel: 'nis2care.nl',
   },
-  { label: 'Hosting in de EU', status: 'live', note: 'IONOS-datacenter in Duitsland' },
+  { label: 'Hosting in de EU', status: 'live', note: 'IONOS Cloud, Berlijn (Duitsland)' },
 ];
 
 const dot = (s: string) =>
@@ -28,9 +28,9 @@ const dot = (s: string) =>
   <div class="container-prose">
     <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
       <div>
-        <h2 class="font-display text-2xl font-bold text-ink-900">Compliance op tafel — niet in een PDF achter een NDA.</h2>
+        <h2 class="font-display text-2xl font-bold text-ink-900">Beveiliging en privacy: de stand per onderwerp.</h2>
         <p class="mt-2 text-sm text-ink-700 max-w-2xl">
-          Eerlijke status per kader. Klik door naar het Trust Centre voor onderbouwing per item.
+          Eerlijke status per wet en norm, zonder NDA. In het Trust Centre staat de onderbouwing per onderwerp.
         </p>
       </div>
       <a href="/trust" class="text-sm font-medium text-curanta-700 no-underline hover:underline whitespace-nowrap">
@@ -55,8 +55,8 @@ const dot = (s: string) =>
     </ul>
     <p class="mt-6 text-xs text-ink-500">
       <span class="status-dot bg-green-500"></span> aantoonbaar nu  ·
-      <span class="status-dot bg-amber-500 ml-2"></span> in afronding  ·
-      <span class="status-dot bg-ink-300 ml-2"></span> op roadmap
+      <span class="status-dot bg-amber-500 ml-2"></span> in uitvoering  ·
+      <span class="status-dot bg-ink-300 ml-2"></span> gepland
     </p>
   </div>
 </section>

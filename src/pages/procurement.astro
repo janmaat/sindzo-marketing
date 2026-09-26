@@ -2,141 +2,142 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
+import { DEMO_ZELF } from '../config/demo';
 
-// Procurement-pagina — bewust geen lead-gate vóór de downloads.
-// In de Nederlandse zorg verlengt elke gate de cyclus met dagen omdat
-// inkoop, FG en architectuur ieder hun eigen review willen doen.
-// Geef materiaal weg en bouw vertrouwen, in plaats van leads te scrapen.
+// Inkoopdossier (slug /procurement blijft). Bewust zonder formulier vóór de documenten: in de
+// Nederlandse zorg verlengt elke drempel de cyclus met dagen, omdat inkoop, FG en architectuur
+// ieder hun eigen review willen doen.
+//
+// Feitenblad (besluit Jan 25-09-2026): deze documenten bestaan nog niet als kant-en-klaar
+// bestand. Dus nooit "downloaden" of "ingevuld", en geen levertermijn per document: de enige
+// termijn is "wij reageren binnen 1 werkdag". Aanvragen gaan naar trust@ (inkoop, DPA,
+// beveiliging).
 
 interface Resource {
   title: string;
   body: string;
-  /** Pad naar publiek bestand óf 'mailto:...' voor on-demand levering. */
+  /** Interne pagina, of 'mailto:...' voor een document dat wij op aanvraag opstellen. */
   file: string;
-  /** Toon-label naast titel (bv. 'PDF · 220 kB' of 'Op aanvraag · ~1 werkdag'). */
+  /** Label naast de titel. */
   format: string;
   category: string;
 }
 
-// Tijdens early-access leveren we elk procurement-document op-maat per aanvraag —
-// PVE, DPA, DPIA, SLA, CAIQ etc. worden gegenereerd zodra een specifieke organisatie
-// (en haar segment + schaal) bekend is. Voorkomt dat we generieke versies de wereld
-// in slingeren die later moeten worden teruggeroepen. Alleen de API-pagina is een
-// directe link (interne pagina, geen download).
 const onRequest = (subject: string) =>
-  `mailto:procurement@curanta.nl?subject=${encodeURIComponent('Aanvraag procurement-document: ' + subject)}`;
+  `mailto:trust@curanta.nl?subject=${encodeURIComponent('Aanvraag document: ' + subject)}`;
 
 const resources: Resource[] = [
   {
-    category: 'PVE & shortlisting',
-    title: 'PVE-template zorgsuite',
-    body: 'Word-document met 180+ eisen-categorieën die u kunt aanvinken/aanpassen. Bedoeld voor een zorgvuldige shortlisting, niet als invul-spreadsheet.',
-    file: onRequest('PVE-template zorgsuite'),
-    format: 'Op aanvraag · ~1 werkdag',
+    category: 'Programma van eisen en selectie',
+    title: 'Programma van eisen (PVE)',
+    body: 'Een Word-document met categorieën eisen die u kunt aanvinken en aanpassen. Bedoeld voor een zorgvuldige selectie, niet als invulspreadsheet.',
+    file: onRequest('Programma van eisen'),
+    format: 'Op aanvraag',
   },
   {
-    category: 'PVE & shortlisting',
+    category: 'Programma van eisen en selectie',
     title: 'Vergelijkingsmatrix leveranciers',
-    body: 'Excel met scoring-criteria per dimensie (functioneel, technisch, commercieel) — leverancier-onafhankelijk opgesteld.',
+    body: 'Een spreadsheet met criteria per onderwerp: functioneel, technisch en commercieel.',
     file: onRequest('Vergelijkingsmatrix leveranciers'),
-    format: 'Op aanvraag · ~1 werkdag',
+    format: 'Op aanvraag',
   },
   {
-    category: 'Privacy & security',
-    title: 'Verwerkersovereenkomst (DPA)',
-    body: 'Onze standaard-DPA. AP-conform model met expliciete sub-verwerkers-bijlage. Geen NDA nodig om in te zien.',
-    file: onRequest('DPA Curanta'),
-    format: 'Op aanvraag · binnen 1 werkdag',
+    category: 'Privacy en beveiliging',
+    title: 'Verwerkersovereenkomst',
+    body: 'Onze verwerkersovereenkomst, met een bijlage over de subverwerkers. In uitvoering; geen NDA nodig om hem in te zien.',
+    file: onRequest('Verwerkersovereenkomst'),
+    format: 'Op aanvraag',
   },
   {
-    category: 'Privacy & security',
-    title: 'DPIA-template (uw eigen)',
-    body: 'Template voor uw eigen DPIA bij Curanta-aanschaf. Met voorbeeld-risicoanalyse en mitigerende maatregelen.',
-    file: onRequest('DPIA-template zorgaanbieder'),
-    format: 'Op aanvraag · ~1 werkdag',
+    category: 'Privacy en beveiliging',
+    title: 'Opzet voor uw eigen DPIA',
+    body: 'Voor de DPIA die u zelf maakt bij de aanschaf van Curanta, met een voorbeeld van een risicoanalyse en de maatregelen.',
+    file: onRequest('Opzet DPIA'),
+    format: 'Op aanvraag',
   },
   {
-    category: 'Privacy & security',
-    title: 'Security-pack',
-    body: 'NEN 7510-statement, controls-evidence-bundle, pentest-samenvatting, sub-verwerker-lijst.',
-    file: onRequest('Security-pack'),
-    format: 'Op aanvraag · binnen 1 werkdag',
+    category: 'Privacy en beveiliging',
+    title: 'Beveiligingsdossier',
+    body: 'De stand van NEN 7510, bewijs per beheersmaatregel en de lijst van subverwerkers. Een externe pentest is nog niet uitgevoerd.',
+    file: onRequest('Beveiligingsdossier'),
+    format: 'Op aanvraag',
   },
   {
-    category: 'Privacy & security',
-    title: 'Vragenlijst CAIQ / SIG',
-    body: 'Ingevulde CAIQ v4.0.3 en kort SIG-formulier. Voor procurement/CISO-teams die niet opnieuw willen vragen.',
-    file: onRequest('CAIQ / SIG-vragenlijst'),
-    format: 'Op aanvraag · ~2 werkdagen',
+    category: 'Privacy en beveiliging',
+    title: 'Uw beveiligingsvragenlijst',
+    body: 'Stuurt u uw eigen vragenlijst, bijvoorbeeld CAIQ of SIG, dan vullen wij die in.',
+    file: onRequest('Beveiligingsvragenlijst'),
+    format: 'Op aanvraag',
   },
   {
-    category: 'Architectuur & SLA',
+    category: 'Architectuur en SLA',
     title: 'Architectuurplaat',
-    body: 'Eén-pager met modulaire monolith, integraties, hosting, identity, datatypes, data-flow. Voor I&A/architectuur.',
+    body: 'Eén pagina met de opbouw van het systeem: modules, koppelingen, hosting, inloggen en gegevensstromen. Voor I&A en architectuur.',
     file: onRequest('Architectuurplaat'),
-    format: 'Op aanvraag · ~1 werkdag',
+    format: 'Op aanvraag',
   },
   {
-    category: 'Architectuur & SLA',
+    category: 'Architectuur en SLA',
     title: 'SLA-overzicht',
-    body: 'Service Level Agreement met uptime, RPO/RTO, support-windows, financiële boete-clausule voor Enterprise.',
+    body: 'Beschikbaarheid, RPO/RTO en bereikbaarheid; voor Enterprise afspraken op maat, in overleg.',
     file: onRequest('SLA-overzicht'),
-    format: 'Op aanvraag · binnen 1 werkdag',
+    format: 'Op aanvraag',
   },
   {
-    category: 'Architectuur & SLA',
-    title: 'API-koppeldocumentatie',
-    body: 'FHIR R4-endpoints en OpenAPI 3.1-spec. Publieke pagina met overzicht; volledige spec + sandbox-toegang op aanvraag.',
+    category: 'Architectuur en SLA',
+    title: 'Stand van de API',
+    body: 'De stand van de FHIR R4-mapping en van de publieke API (in ontwikkeling). Een openbare pagina.',
     file: '/api',
-    format: 'Web · direct',
+    format: 'Webpagina',
   },
   {
     category: 'Implementatie',
-    title: 'Implementatie-aanpak (deck)',
-    body: '20-pagina presentatie voor projectgroep en bestuur: fasen, governance, super-users, time-to-value.',
-    file: onRequest('Implementatie-deck'),
-    format: 'Op aanvraag · ~1 werkdag',
+    title: 'Implementatieaanpak (presentatie)',
+    body: 'Voor projectgroep en bestuur: de fasen, de besturing en de rol van de sleutelgebruikers.',
+    file: onRequest('Presentatie implementatieaanpak'),
+    format: 'Op aanvraag',
   },
   {
     category: 'Implementatie',
-    title: 'Migratie-handleiding ECD/HIS',
-    body: 'Per herkomst-systeem wat wij importeren, wat handwerk is, hoe lang. Migratie vanuit Nedap Ons, Gerimedica Ysis, SDB en Adapcare als project tegen een vaste prijs vooraf; kant-en-klare imports zijn er nog niet.',
-    file: onRequest('Migratie-handleiding ECD/HIS'),
-    format: 'Op aanvraag · ~2 werkdagen',
+    title: 'Migratie per bronsysteem',
+    body: 'Per bronsysteem wat wij overzetten, wat handwerk is en wat het kost. Migratie vanuit Nedap Ons, Gerimedica Ysis, SDB en Pluriform Zorg (Adapcare) als project tegen een vaste prijs vooraf; kant-en-klare imports zijn er nog niet.',
+    file: onRequest('Migratie per bronsysteem'),
+    format: 'Op aanvraag',
   },
   {
     category: 'Business case',
-    title: 'ROI-rekenhulp',
-    body: 'Spreadsheet om uw eigen TCO/ROI in te vullen. Met realistische ranges per segment en plan-tier.',
-    file: onRequest('ROI-rekenhulp'),
-    format: 'Op aanvraag · ~1 werkdag',
+    title: 'Rekenhulp kosten en opbrengst',
+    body: 'Een spreadsheet om uw eigen totale kosten en opbrengst in te vullen, per plan.',
+    file: onRequest('Rekenhulp kosten en opbrengst'),
+    format: 'Op aanvraag',
   },
 ];
 
 const categories = Array.from(new Set(resources.map(r => r.category)));
 ---
 <Base
-  title="Procurement Centre — beslis-versnellers | Curanta"
-  description="PVE-template, DPA, security-pack, architectuurplaat, SLA, ROI-rekenhulp — alles wat uw inkoop-, FG- en I&A-team nodig heeft. Geen lead-gate."
+  title="Inkoopdossier: documenten voor inkoop, FG en I&A | Curanta"
+  description="Programma van eisen, verwerkersovereenkomst, beveiligingsdossier, architectuurplaat en SLA: wij stellen ze op aanvraag op, zonder NDA."
 >
   <PageHero
-    eyebrow="Procurement Centre"
-    title="Beslis-versnellers, voor uw hele team."
-    subtitle="In de zorgsector heeft een aankoop minimaal vier interne lezers: bestuur, inkoop, FG, I&A. Hieronder downloadt u alles wat zij nodig hebben — zonder lead-gate, zonder NDA, zonder ons om toestemming te vragen."
+    eyebrow="Inkoopdossier"
+    title="Alles wat uw inkoop, FG en I&A willen lezen."
+    subtitle="In de zorg heeft een aankoop minstens vier interne lezers: bestuur, inkoop, FG en I&A. Hieronder vraagt u elk document aan met één mail, zonder NDA en zonder verkoopgesprek."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href="/demo" class="btn-primary no-underline">Of: vraag een demo aan</a>
-      <a href="/trust" class="btn-secondary no-underline">Of: ga naar Trust Centre</a>
+      <a href={DEMO_ZELF.href} class="btn-primary no-underline">{DEMO_ZELF.label}</a>
+      <a href="/trust" class="btn-secondary no-underline">Naar het Trust Centre</a>
     </div>
   </PageHero>
 
   <section class="border-y border-amber-200 bg-amber-50 py-6">
     <div class="container-prose">
       <p class="text-sm text-amber-900">
-        <strong>Early-access: documenten op-maat per aanvraag.</strong>
-        We genereren elk document afgestemd op uw segment, schaal en specifieke vraagstukken — in plaats van generieke
-        versies die later moeten worden teruggeroepen. Reactie binnen 1 werkdag. Voor uw definitieve PVE of DPA: laat
-        uw eigen jurist/FG meekijken — onze documenten zijn werkdocumenten, geen juridisch advies.
+        <strong>Documenten op aanvraag.</strong>
+        Deze documenten liggen nog niet kant-en-klaar: wij stellen ze op aanvraag op, afgestemd
+        op uw sector, omvang en vragen. Wij reageren binnen 1 werkdag. Laat voor uw definitieve PVE
+        of verwerkersovereenkomst uw eigen jurist of FG meekijken; onze documenten zijn geen
+        juridisch advies.
       </p>
     </div>
   </section>
@@ -147,7 +148,7 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
       deel van de markt is het ontbreken van een certificaat dus een reden om ons
       niet op de shortlist te zetten. Dat hier verzwijgen kost twee keer: de deal
       die er toch niet was, én het vertrouwen bij de rest. Vandaar boven de
-      documentenlijst, waar inkoop en de CISO er als eerste naar zoeken. */}
+      documentenlijst, waar inkoop en de informatiebeveiliger er als eerste naar zoeken. */}
   <section class="container-prose py-14 border-b border-ink-100">
     <div class="rounded-2xl border border-ink-200 bg-white p-8">
       <div class="flex flex-wrap items-start justify-between gap-4">
@@ -159,21 +160,20 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
       </div>
 
       <p class="mt-4 max-w-3xl text-ink-700 leading-relaxed">
-        Wij zijn <strong>niet</strong> NEN 7510-gecertificeerd. De control-suite is
-        geïmplementeerd met baseline-assessments, en de externe audit staat gepland voor
+        Wij zijn <strong>niet</strong> NEN 7510-gecertificeerd. De maatregelen zijn ingevoerd en een
+        eerste keer beoordeeld, en de externe audit staat gepland voor
         <strong>Q4 2026</strong>. Zolang die niet is afgerond, hebben wij een werkdocument en
         geen certificaat, en dat is een wezenlijk verschil dat wij niet willen wegpoetsen.
       </p>
 
       <div class="mt-8 grid gap-8 md:grid-cols-2">
         <div>
-          <h3 class="font-display text-lg font-semibold text-ink-900">Wat wij nu wél kunnen overleggen</h3>
+          <h3 class="font-display text-lg font-semibold text-ink-900">Wat u van ons krijgt</h3>
           <ul class="mt-3 space-y-2 text-sm text-ink-700">
-            <li>Verwerkersovereenkomst en actuele sub-verwerkerslijst</li>
-            <li>Controls-evidence-bundle op basis van de NEN 7510:2024-structuur</li>
-            <li>Samenvatting van de jaarlijkse pentest door een NL-CERT-aangesloten partij</li>
-            <li>Ingevulde CAIQ v4.0.3 en SIG-vragenlijst</li>
-            <li>Het volledige <a href="/trust" class="text-curanta-700 hover:underline">Trust Centre</a>, publiek en zonder NDA</li>
+            <li>Verwerkersovereenkomst en de actuele lijst van subverwerkers (op aanvraag)</li>
+            <li>Bewijs per beheersmaatregel, volgens de opbouw van NEN 7510:2024 (op aanvraag)</li>
+            <li>Antwoorden op uw beveiligingsvragenlijst, bijvoorbeeld CAIQ of SIG (op aanvraag)</li>
+            <li>Het volledige <a href="/trust" class="text-curanta-700 hover:underline">Trust Centre</a>, openbaar en zonder NDA</li>
           </ul>
         </div>
         <div>
@@ -185,7 +185,7 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
           </p>
           <p class="mt-3 text-sm text-ink-700 leading-relaxed">
             Weegt uw organisatie aantoonbare maatregelen zwaarder dan een certificaat op dit
-            moment, dan is het bovenstaande materiaal precies bedoeld om die weging te kunnen
+            moment, dan is het materiaal hieronder precies bedoeld om die weging te kunnen
             maken.
           </p>
         </div>
@@ -199,14 +199,14 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
       <div class="mt-6 grid gap-4 md:grid-cols-2">
         {resources.filter(r => r.category === cat).map((r) => (
           <article class="rounded-xl border border-ink-100 bg-white p-6">
-            <div class="flex items-start justify-between gap-4">
-              <h3 class="font-display text-lg font-semibold text-ink-900">{r.title}</h3>
+            <div class="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+              <h3 class="min-w-0 font-display text-lg font-semibold text-ink-900">{r.title}</h3>
               <span class="badge whitespace-nowrap">{r.format}</span>
             </div>
             <p class="mt-2 text-sm text-ink-700 leading-relaxed">{r.body}</p>
             {r.file.startsWith('mailto:') ? (
               <a href={r.file} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-curanta-700 no-underline hover:underline">
-                <span>✉ Aanvragen via e-mail</span>
+                <span>✉ Aanvragen per e-mail</span>
               </a>
             ) : (
               <a href={r.file} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-curanta-700 no-underline hover:underline">
@@ -223,18 +223,18 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
     <div class="rounded-2xl border border-ink-200 bg-ink-100/50 p-8">
       <h2 class="font-display text-2xl font-bold text-ink-900">Mist u iets?</h2>
       <p class="mt-3 max-w-2xl text-ink-700">
-        Geen invul-spreadsheet die uw inkoop wil, geen specifiek security-document dat uw CISO opvraagt?
-        Mail het ons — wij voegen het toe of leveren maatwerk binnen 1 werkdag.
+        Vraagt uw inkoop of uw informatiebeveiliger een document dat hier niet staat? Mail het ons;
+        wij reageren binnen 1 werkdag.
       </p>
       <div class="mt-5 flex flex-wrap gap-3">
-        <a href="mailto:procurement@curanta.nl" class="btn-primary no-underline">procurement@curanta.nl</a>
-        <a href="mailto:trust@curanta.nl" class="btn-secondary no-underline">trust@curanta.nl (voor security)</a>
+        <a href="mailto:trust@curanta.nl" class="btn-primary no-underline">trust@curanta.nl</a>
+        <a href="mailto:info@curanta.nl" class="btn-secondary no-underline">info@curanta.nl (algemene vragen)</a>
       </div>
     </div>
   </section>
 
   <Cta
-    title="Klaar voor de demo nadat u dit allemaal heeft gelezen?"
-    subtitle="Stuur drie typische werkstromen uit uw organisatie. Wij komen niet met een sales-pitch maar met uw eigen processen op het scherm."
+    title="Na het lezen zelf kijken?"
+    subtitle="Kijk zelf rond in een werkende omgeving met verzonnen cliënten. Of stuur drie typische werkstromen uit uw organisatie; dan laten wij uw eigen processen op het scherm zien, zonder verkooppraatje."
   />
 </Base>

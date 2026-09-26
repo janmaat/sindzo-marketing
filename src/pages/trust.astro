@@ -8,73 +8,78 @@ import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
 //
 // Status-conventie:
 //   live    — aantoonbaar nu, document beschikbaar
-//   wip     — in afronding met concrete tijdslijn
+//   wip     — in uitvoering: gebouwd of begonnen, nog niet aangetoond of aangesloten
 //   roadmap — gepland maar nog niet gestart
+//
+// "Laatst herzien" is een vaste datum, geen builddatum: elke uitrol zette anders de datum van
+// vandaag, ook zonder herziening. Bijwerken bij een inhoudelijke herziening.
+const HERZIEN = '25 september 2026';
 
 const pillars = [
   {
     key: 'security',
     title: 'Informatiebeveiliging',
-    intro: 'NEN 7510-werkdocument is leidend. Pen-tests jaarlijks via NL-CERT-aangesloten partij.',
+    intro: 'Het NEN 7510-werkdocument is leidend. Een externe pentest is nog niet uitgevoerd, en de hele database is nog niet versleuteld; dat zeggen wij liever dan dat wij het verzwijgen.',
     items: [
-      { label: 'NEN 7510:2024', status: 'wip', note: 'Control-suite geïmplementeerd met baseline-assessments, externe audit Q4 2026', doc: '#nen7510' },
+      { label: 'NEN 7510:2024', status: 'wip', note: 'Maatregelen ingevoerd met een eerste beoordeling; externe audit gepland Q4 2026. Niet gecertificeerd.', doc: '/procurement' },
       { label: 'NEN 7512 (uitwisseling)', status: 'wip', note: 'Toegepast op FHIR-/LSP-koppelingen', doc: '#nen7512' },
-      { label: 'NEN 7513 (logging)', status: 'live', note: 'Onveranderbare auditlog, 7 jaar bewaartermijn', doc: '#nen7513' },
+      { label: 'NEN 7513 (logging)', status: 'live', note: 'Auditlog met hash-keten, zodat een wijziging achteraf aantoonbaar is. Een logregel over een cliënt blijft bewaard zolang het dossier bestaat; logregels zonder dossier 7 jaar.', doc: '#nen7513' },
       { label: 'ISO 27001', status: 'roadmap', note: 'Audit gepland 2027', doc: '#iso27001' },
-      { label: 'Pentest jaarlijks', status: 'live', note: 'Grey-box, NL-CERT-aangesloten partij — managementsamenvatting publiek, volledig rapport onder NDA', doc: '#pentest' },
-      { label: 'Encryptie at-rest', status: 'live', note: 'AES-256-GCM per tenant-sleutel', doc: '#encryption' },
+      { label: 'Externe pentest', status: 'roadmap', note: 'Nog niet uitgevoerd', doc: '#pentest' },
+      { label: 'Versleuteling BSN', status: 'live', note: 'BSN op veldniveau versleuteld met AES-256-GCM', doc: '#encryption' },
+      { label: 'Versleuteling hele database', status: 'wip', note: 'Nog niet. Is een voorwaarde vóór de eerste klant.', doc: '#database' },
     ],
   },
   {
     key: 'privacy',
     title: 'Privacy & gegevensbescherming',
-    intro: 'AVG-conform met expliciete verwerkers-rolverdeling. PII (BSN, AGB) altijd encrypted.',
+    intro: 'Met een duidelijke verdeling van de rollen bij de verwerking. Het BSN staat altijd versleuteld opgeslagen.',
     items: [
-      { label: 'AVG / GDPR', status: 'live', note: 'Standaard-DPA volgens AP-model, NL/EN beschikbaar', doc: '#dpa' },
-      { label: 'Verwerkersovereenkomst', status: 'live', note: 'Standaard-DPA op aanvraag (~1 werkdag), geen NDA nodig', doc: '/procurement' },
-      { label: 'Subverwerkers-overzicht', status: 'live', note: 'Volledig overzicht beschikbaar, alle in EER', doc: '#subverwerkers' },
-      { label: 'DPIA-template', status: 'live', note: 'Voor zorgaanbieder eigen DPIA — op aanvraag', doc: '/procurement' },
-      { label: 'BSN-encryptie', status: 'live', note: 'AES-256-GCM met HKDF envelope per tenant, kwartaal-rotatie van masters (operationeel proces)', doc: '#bsn' },
+      { label: 'Functionaris gegevensbescherming', status: 'wip', note: 'Nog niet aangesteld. Een externe FG volgt vóór de eerste zorgorganisatie met echte cliëntgegevens.', doc: '#fg' },
+      { label: 'Verwerkersovereenkomst', status: 'wip', note: 'In uitvoering. Wij stellen hem op aanvraag op, zonder NDA.', doc: '/procurement' },
+      { label: 'Subverwerkers', status: 'live', note: 'Hosting binnen de EER (IONOS, Berlijn); site en mail bij Strato (Duitsland). De AI-functies gebruiken, als ze aan staan, Anthropic in de VS met gepseudonimiseerde gegevens en modelcontractbepalingen (SCC). Digitaal ondertekenen van HR-documenten loopt, als u het gebruikt, via DocuSign in de VS.', doc: '/privacy' },
+      { label: 'DPIA', status: 'wip', note: 'Voor de eigen DPIA van de zorgaanbieder: wij stellen de onderbouwing op aanvraag op.', doc: '/procurement' },
+      { label: 'BSN-encryptie', status: 'live', note: 'AES-256-GCM op veldniveau; zoeken via een aparte hash, zonder te ontsleutelen', doc: '#bsn' },
       { label: 'Recht op vergetelheid', status: 'live', note: 'Pseudonimisering + audit-trail', doc: '#vergetelheid' },
     ],
   },
   {
     key: 'interop',
     title: 'Interoperabiliteit & openheid',
-    intro: 'Open API\'s, FHIR-endpoints en publieke koppeldocumentatie. Geen vendor lock-in.',
+    intro: 'Een eerlijke status per standaard en een export van uw gegevens in JSON. U zit niet vast aan één leverancier.',
     items: [
-      { label: 'FHIR R4', status: 'wip', note: '8 Zibs intern actief (Patient, Encounter, Observation, MedicationStatement, Condition, AllergyIntolerance, RelatedPerson, CarePlan); publieke REST API Q4 2026', doc: '/api' },
-      { label: 'MedMij', status: 'wip', note: 'Interne brug gereed; DVZA-registratie + PKIoverheid-cert in voorbereiding (Q4 2026)', doc: '#medmij' },
-      { label: 'Wegiz / eOverdracht', status: 'wip', note: 'BgZ 8/15 Zibs actief; Nuts-aansluiting Q4 2026', doc: '#wegiz' },
-      { label: 'LSP', status: 'wip', note: 'VZVZ-aansluittraject + UZI-certificaten — gateway ingericht, ketentest in afronding', doc: '#lsp' },
-      { label: 'Open API', status: 'wip', note: 'OpenAPI 3.1-spec compleet, publieke sandbox in afronding Q3 2026 — toegang nu op aanvraag', doc: '/api' },
-      { label: 'Data-export', status: 'live', note: 'Volledige export in JSON/CSV op verzoek', doc: '#export' },
+      { label: 'FHIR R4', status: 'wip', note: 'BgZ intern in FHIR R4 (o.a. Patient, Encounter, Observation, medicatie, allergieën, CarePlan); publieke API in ontwikkeling', doc: '/api' },
+      { label: 'MedMij', status: 'wip', note: 'Interne BgZ-brug gebouwd; MedMij-registratie en PKIoverheid-certificaat zijn er nog niet', doc: '#medmij' },
+      { label: 'Wegiz / eOverdracht', status: 'wip', note: 'BgZ intern gebouwd; eOverdracht via Nuts gebouwd, nog niet aangesloten', doc: '#wegiz' },
+      { label: 'LSP', status: 'wip', note: 'Koppeling gebouwd; VZVZ-aansluiting en UZI-certificaten zijn er nog niet', doc: '#lsp' },
+      { label: 'Publieke API', status: 'wip', note: 'In ontwikkeling; een testomgeving is er nog niet', doc: '/api' },
+      { label: 'Export van uw gegevens', status: 'wip', note: 'Export in JSON op verzoek; wordt uitgebreid tot alle modules', doc: '/overstappen#eruit' },
     ],
   },
   {
     key: 'operations',
     title: 'Operationele continuïteit',
-    intro: 'Hosting in de EU, transparante uptime, publieke status-page en herstelplan getest.',
+    intro: 'Hosting in de EU en een openbare statuspagina. Wat wij nog niet met een meting of test kunnen aantonen, staat hieronder ook zo.',
     items: [
-      { label: 'Hosting in de EU', status: 'live', note: 'IONOS-datacenter in Duitsland; de subverwerkers staan in de privacyverklaring', doc: '/privacy#delen' },
-      { label: 'Uptime SLA', status: 'live', note: '99,9% productie, gemeten extern', doc: 'https://app.curanta.nl/status' },
-      { label: 'Statuspagina publiek', status: 'live', note: 'Incidenten + onderhoudsvensters', doc: 'https://app.curanta.nl/status' },
-      { label: 'BCM-test', status: 'live', note: 'Jaarlijkse restore-oefening', doc: '#bcm' },
-      { label: 'RPO / RTO', status: 'live', note: 'RPO 1 uur, RTO 4 uur', doc: '#rto' },
-      { label: 'Exit-procedure', status: 'live', note: 'Contractueel vastgelegd in MSA', doc: '#exit' },
+      { label: 'Hosting in de EU', status: 'live', note: 'IONOS Cloud, Berlijn (Duitsland)', doc: '/privacy' },
+      { label: 'Beschikbaarheid', status: 'wip', note: 'Doel 99,9% op kantooruren. Nog geen gemeten historie: er draait nog geen klant in productie', doc: 'https://app.curanta.nl/status' },
+      { label: 'Openbare statuspagina', status: 'live', note: 'Actuele beschikbaarheid per onderdeel; geen incidenthistorie', doc: 'https://app.curanta.nl/status' },
+      { label: 'Hersteltest', status: 'roadmap', note: 'Hersteloefening nog niet uitgevoerd', doc: '#bcm' },
+      { label: 'RPO / RTO', status: 'wip', note: 'Doel in onze voorwaarden: RPO 1 uur, RTO 4 uur. Nog niet aangetoond met een hersteltest', doc: '/voorwaarden#sla' },
+      { label: 'Exit-procedure', status: 'live', note: 'Vastgelegd in onze voorwaarden (artikel 9)', doc: '/voorwaarden#beeindiging' },
     ],
   },
   {
     key: 'regulatory',
-    title: 'Wettelijke kaders & sectorregels',
-    intro: 'Wkkgz, Wzd, Wtza, Wtta en de Cyberbeveiligingswet — actief gevolgd, niet afgewacht.',
+    title: 'Wetten en sectorregels',
+    intro: 'Wkkgz, Wzd, Wtza, Wtta en de Cyberbeveiligingswet: wat de wet vraagt en wat Curanta daarbij doet.',
     items: [
-      { label: 'Cbw (NIS2)', status: 'wip', note: 'NIS2-incidentmodule (24/72/720u SLA-tracking) ingebouwd in Curanta; ook los beschikbaar als Nis2Care voor non-Curanta-klanten. Klaar voor 1 juli 2026.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '#cbw' },
-      { label: 'Wkkgz-klachtenregeling', status: 'live', note: 'Module + workflow standaard', doc: '#wkkgz' },
-      { label: 'Wzd-stappenplan', status: 'live', note: 'Halfjaarlijkse IGJ-XML', doc: '#wzd' },
-      { label: 'Wtza-jaarverantwoording', status: 'live', note: 'Wizard voor deadline 31 mei', doc: '#wtza' },
-      { label: 'Wtta-uitlenersregister', status: 'wip', note: 'Module beschikbaar 1 sep 2026 — 4 maanden vóór wettelijke deadline', doc: '#wtta' },
-      { label: 'AI Act high-risk', status: 'wip', note: 'Classificatie + register beschikbaar 1 sep 2026 — ruim vóór 2 dec 2027', doc: '#ai-act' },
+      { label: 'Cbw (NIS2)', status: 'wip', note: 'De Cyberbeveiligingswet geldt sinds 15 augustus 2026. Curanta heeft een NIS2-incidentmodule die de meldtermijnen van 24 uur, 72 uur en één maand bewaakt.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '#cbw' },
+      { label: 'Wkkgz-klachtenregeling', status: 'live', note: 'Module en werkwijze standaard aanwezig', doc: '#wkkgz' },
+      { label: 'Wzd-stappenplan', status: 'live', note: 'Met een halfjaarlijkse XML-uitdraai voor de IGJ, nog niet gevalideerd tegen de specificatie van de IGJ', doc: '#wzd' },
+      { label: 'Wtza-jaarverantwoording', status: 'live', note: 'Toelating vastleggen en de deadline van 31 mei bewaken, met herinneringen', doc: '#wtza' },
+      { label: 'Wtta (toelating uitleners)', status: 'live', note: 'Toelatingsstatus en inleenrelaties vastleggen; de toelatingsplicht geldt vanaf 1 januari 2027', doc: '#wtta' },
+      { label: 'AI-verordening', status: 'live', note: 'Register en classificatie van de AI-systemen in Curanta, met een logboek van AI-aanroepen', doc: '#ai-act' },
     ],
   },
 ];
@@ -83,32 +88,36 @@ const dot = (s: string) =>
   s === 'live' ? 'bg-green-500' : s === 'wip' ? 'bg-amber-500' : 'bg-ink-300';
 
 const statusLabel = (s: string) =>
-  s === 'live' ? 'Aantoonbaar' : s === 'wip' ? 'In afronding' : 'Op roadmap';
+  s === 'live' ? 'Aantoonbaar' : s === 'wip' ? 'In uitvoering' : 'Gepland';
+
+// Alleen een link als er echt iets achter zit: een pagina of de statuspagina. De losse
+// ankers (#nen7513, #wtta …) bestonden niet op deze pagina en gaven een lege klik.
+const heeftOnderbouwing = (doc?: string) => !!doc && !doc.startsWith('#');
 ---
 <Base
   image="/og/trust.png"
-  title="Trust Centre — Curanta"
-  description="Eerlijke status van onze compliance, security, privacy en interoperabiliteit. Geen NDA nodig om dit te lezen."
+  title="Trust Centre: beveiliging, privacy en AVG | Curanta"
+  description="De stand van beveiliging, privacy en koppelingen bij Curanta, per onderwerp met een eerlijke status. Zonder NDA te lezen."
 >
   <section class="border-b border-ink-300 bg-gradient-to-b from-curanta-50 to-cream">
     <div class="container-prose py-16 sm:py-20">
-      <span class="badge mb-5">Trust Centre · laatst herzien {new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+      <span class="badge mb-5">Trust Centre · laatst herzien {HERZIEN}</span>
       <h1 class="font-display text-4xl font-bold tracking-tightish text-ink-900 sm:text-5xl max-w-3xl">
-        Compliance op tafel, niet in een PDF achter een NDA.
+        Beveiliging en privacy op tafel, niet in een pdf achter een NDA.
       </h1>
       <p class="mt-5 max-w-2xl text-lg text-ink-700">
-        Inkoop, FG, CISO en bestuur kunnen Curanta beoordelen vóór er een gesprek nodig is.
-        Elk item hieronder heeft een eerlijke status — groen, geel of grijs — met onderbouwing.
+        Inkoop, FG, informatiebeveiliger en bestuur kunnen Curanta beoordelen vóór er een gesprek
+        nodig is. Elk onderwerp hieronder heeft een eerlijke status: groen, geel of grijs.
       </p>
       <div class="mt-8 flex flex-wrap items-center gap-4 text-sm">
-        <a href="/procurement" class="btn-primary no-underline">Naar Procurement Centre</a>
-        <a href="mailto:trust@curanta.nl?subject=Security-pack%20%2B%20DPA%20aanvragen" class="btn-secondary no-underline">Vraag security-pack + DPA</a>
-        <a href="https://app.curanta.nl/status" class="text-curanta-700 font-medium no-underline hover:underline">Live status →</a>
+        <a href="/procurement" class="btn-primary no-underline">Naar het inkoopdossier</a>
+        <a href="mailto:trust@curanta.nl?subject=Beveiligingsdossier%20en%20verwerkersovereenkomst" class="btn-secondary no-underline">Vraag beveiligingsdossier en verwerkersovereenkomst</a>
+        <a href="https://app.curanta.nl/status" class="text-curanta-700 font-medium no-underline hover:underline">Actuele status →</a>
       </div>
       <p class="mt-6 text-xs text-ink-500">
         <span class="status-dot bg-green-500"></span> aantoonbaar nu
-        <span class="status-dot bg-amber-500 ml-4"></span> in afronding (met datum)
-        <span class="status-dot bg-ink-300 ml-4"></span> op roadmap
+        <span class="status-dot bg-amber-500 ml-4"></span> in uitvoering
+        <span class="status-dot bg-ink-300 ml-4"></span> gepland
       </p>
     </div>
   </section>
@@ -128,18 +137,18 @@ const statusLabel = (s: string) =>
                 <div class="flex-1">
                   <div class="flex items-center justify-between gap-3">
                     <span class="font-semibold text-ink-900 text-sm">{item.label}</span>
-                    <span class="text-[10px] uppercase tracking-wider text-ink-500">{statusLabel(item.status)}</span>
+                    <span class="text-xs font-medium text-ink-500 whitespace-nowrap">{statusLabel(item.status)}</span>
                   </div>
-                  <p class="mt-1 text-xs text-ink-500 leading-snug">{item.note}</p>
-                  {item.doc?.startsWith('http') ? (
+                  <p class="mt-1 text-xs text-ink-700 leading-snug">{item.note}</p>
+                  {heeftOnderbouwing(item.doc) && (item.doc?.startsWith('http') ? (
                     <a href={item.doc} target="_blank" rel="noopener" class="mt-2 inline-block text-xs font-medium text-curanta-700 no-underline hover:underline">
-                      Onderbouwing ↗
+                      Meer hierover ↗
                     </a>
                   ) : (
                     <a href={item.doc} class="mt-2 inline-block text-xs font-medium text-curanta-700 no-underline hover:underline">
-                      Onderbouwing →
+                      Meer hierover →
                     </a>
-                  )}
+                  ))}
                 </div>
               </div>
             </li>
@@ -152,18 +161,20 @@ const statusLabel = (s: string) =>
   <section class="container-prose py-16 border-b border-ink-100">
     <div class="rounded-2xl border border-amber-200 bg-amber-50/60 p-8 sm:p-12">
       <div class="max-w-3xl">
-        <h2 class="font-display text-2xl font-bold text-ink-900">De vraag die inkopers stellen: "Wat als de bouwer wegvalt?"</h2>
+        <h2 class="font-display text-2xl font-bold text-ink-900">De vraag die inkopers stellen: "Wat als Curanta wegvalt?"</h2>
         <p class="mt-3 text-ink-700">
-          Curanta wordt gebouwd door één hoofd­architect met selecte partners. We benoemen dit actief omdat u er toch naar gaat vragen:
+          Curanta is een nieuwe, kleine leverancier. Wij benoemen dit zelf, omdat u er toch naar gaat vragen:
         </p>
         <ul class="mt-5 space-y-3 text-sm text-ink-700">
-          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Broncode-escrow</strong> — overeenkomst met SRK-escrow­agent in voorbereiding (Q3 2026). Activerings­drempel: drie aaneengesloten maanden geen oplevering.</span></li>
-          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Technische documentatie</strong> — volledig, actueel, in de repo. Een gekwalificeerde .NET-ontwikkelaar kan het systeem zelfstandig overnemen en uitbreiden.</span></li>
-          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Ontwikkelaarspartnerschap</strong> — afspraken met twee NL-gebaseerde .NET-zorgpartners in voorbereiding. Continuïteits­plan inclusief SLA beschikbaar na ondertekening MSA.</span></li>
-          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Data-portabiliteit</strong> — volledige export in JSON/CSV/FHIR R4 op elk moment, contractueel vastgelegd. U bent nooit afhankelijk van onze inzet om uw eigen data te krijgen.</span></li>
-          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Directe lijn als kracht</strong> — kleinere leverancier betekent ook: geen supportdesk-bureaucratie, geen tickets die kwartalen reizen. U spreekt rechtstreeks met de bouwers; fixes in dagen, niet in releases per jaar.</span></li>
+          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Broncode-escrow</strong> — in voorbereiding.</span></li>
+          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Ontwikkelaarspartnerschap</strong> — in voorbereiding.</span></li>
+          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Uw gegevens mee</strong> — een export van uw gegevens in JSON, op verzoek en zonder exit-fee; hij wordt uitgebreid tot alle modules. De exit staat in onze voorwaarden (artikel 9).</span></li>
         </ul>
-        <p class="mt-5 text-sm text-ink-500">Founding partners ontvangen aanvullende garanties en zijn mede-eigenaar van de roadmap. Vraag de aanvullende continuïteitsverklaring op via <a href="mailto:trust@curanta.nl" class="text-curanta-700 hover:underline">trust@curanta.nl</a>.</p>
+        <p class="mt-5 text-sm text-ink-700">
+          Een kleine leverancier betekent ook: geen supportdesk en geen tickets die maanden onderweg
+          zijn. U spreekt rechtstreeks met Curanta.
+        </p>
+        <p class="mt-3 text-sm text-ink-500">Founding partners krijgen 36 maanden een vaste prijs en praten mee over de roadmap. Vragen over continuïteit: <a href="mailto:trust@curanta.nl" class="text-curanta-700 hover:underline">trust@curanta.nl</a>.</p>
       </div>
     </div>
   </section>
@@ -172,12 +183,13 @@ const statusLabel = (s: string) =>
     <div class="rounded-2xl border border-ink-200 bg-ink-100/50 p-8 sm:p-12">
       <h2 class="font-display text-2xl font-bold text-ink-900">Iets niet duidelijk?</h2>
       <p class="mt-3 max-w-2xl text-ink-700">
-        Stuur een vraag rechtstreeks naar onze FG of security-lead. Reactie binnen 1 werkdag.
-        Voor due-diligence-vragen accepteren we standaard vragenlijsten (CAIQ, SIG, BSI C5).
+        Stuur een vraag rechtstreeks naar ons aanspreekpunt voor privacy en beveiliging; wij
+        reageren binnen 1 werkdag. Stuurt u uw eigen beveiligingsvragenlijst (bijvoorbeeld CAIQ,
+        SIG of BSI C5), dan vullen wij die in.
       </p>
       <div class="mt-6 flex flex-wrap gap-3">
         <a href="mailto:trust@curanta.nl" class="btn-primary no-underline">trust@curanta.nl</a>
-        <a href="/contact" class="btn-secondary no-underline">Stuur vragenlijst</a>
+        <a href="mailto:trust@curanta.nl?subject=Vragenlijst%20beveiliging" class="btn-secondary no-underline">Mail uw vragenlijst</a>
       </div>
     </div>
   </section>

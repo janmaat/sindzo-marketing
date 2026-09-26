@@ -1,11 +1,22 @@
 ---
+import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
+
+// Afsluitende oproep onderaan een pagina. Standaard de twee demo-knoppen van de site
+// (src/config/demo.ts); een pagina met een eigen vraag ("laat het doorrekenen", "vraag de
+// architectuurplaat aan") geeft een eigen primaire en tweede knop mee, zodat titel en knop
+// hetzelfde vragen.
+interface Knop { label: string; href: string; }
 interface Props {
   title?: string;
   subtitle?: string;
+  primary?: Knop;
+  secondary?: Knop;
 }
 const {
-  title = 'Demo op uw eigen zorgproces — niet op een demo-omgeving van ons.',
-  subtitle = 'Stuur ons drie typische werkstromen uit uw organisatie. Wij laten zien hoe Curanta ze ondersteunt.',
+  title = 'Zelf rondkijken, of een demo op uw eigen proces?',
+  subtitle = 'Kijk zelf rond in een werkende omgeving met verzonnen cliënten. Of stuur ons drie typische werkstromen uit uw organisatie; dan laten wij zien hoe Curanta ze ondersteunt.',
+  primary = DEMO_ZELF,
+  secondary = DEMO_GESPREK,
 } = Astro.props;
 ---
 <section class="container-prose py-20">
@@ -15,13 +26,16 @@ const {
         <h2 class="font-display text-3xl font-bold tracking-tightish text-white sm:text-4xl">{title}</h2>
         <p class="mt-4 max-w-2xl text-curanta-100 leading-relaxed">{subtitle}</p>
       </div>
-      <div class="flex flex-wrap gap-3">
-        <a href="/demo" class="inline-flex items-center justify-center rounded-full bg-accent-500 px-6 py-3 text-sm font-bold text-[#06231f] no-underline transition hover:bg-accent-600">
-          Demo aanvragen
-        </a>
-        <a href="/contact" class="inline-flex items-center justify-center rounded-full border border-curanta-300/40 px-6 py-3 text-sm font-semibold text-white no-underline transition hover:bg-curanta-800">
-          Stel een vraag
-        </a>
+      <div class="flex flex-col items-start gap-3">
+        <div class="flex flex-wrap gap-3">
+          <a href={primary.href} class="inline-flex items-center justify-center rounded-full bg-accent-500 px-6 py-3 text-sm font-bold text-[#06231f] no-underline transition hover:bg-accent-600">
+            {primary.label}
+          </a>
+          <a href={secondary.href} class="inline-flex items-center justify-center rounded-full border border-curanta-300/40 px-6 py-3 text-sm font-semibold text-white no-underline transition hover:bg-curanta-800">
+            {secondary.label}
+          </a>
+        </div>
+        <a href="/contact" class="text-sm font-medium text-curanta-100 underline-offset-2 hover:underline">Of stel ons een vraag →</a>
       </div>
     </div>
   </div>

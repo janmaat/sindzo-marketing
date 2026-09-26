@@ -2,109 +2,106 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
+import { DEMO_GESPREK } from '../config/demo';
 
+// Fasen zonder weeknummers: de doorlooptijd stellen wij per organisatie vast na de
+// migratie-inschatting (feitenblad, besluit 14c8478 en Jan 25-09-2026: "geen implementatietijdlijn
+// in weken, wel een volgorde van fasen"). Ook weg: dagelijkse standup, triage binnen 24 uur,
+// maatwerkkoppelingen en een jaarlijkse architectuurreview — beloften zonder feitenbladbasis.
 const phases = [
   {
-    week: 'Week 1–2',
     title: 'Verkenning',
     deliverables: [
-      'Workshop zorgproces (3 typische werkstromen)',
-      'ICT-landschap-scan (huidige systemen, koppelingen)',
-      'Stakeholder-map: bestuur, I&A, FG, eindgebruikers',
-      'Migratie-haalbaarheid (huidig ECD/HIS)',
+      'Workshop over uw zorgproces (drie typische werkstromen)',
+      'Overzicht van uw huidige systemen en koppelingen',
+      'Overzicht van de betrokkenen: bestuur, I&A, FG, eindgebruikers',
+      'Migratie-inschatting (huidig ECD)',
     ],
   },
   {
-    week: 'Week 3–4',
     title: 'Inrichting',
     deliverables: [
-      'Tenant-aanmaak + identiteits-koppeling (SSO)',
-      'Functierollen-mapping (Identity-module)',
-      'Modules activeren per plan',
-      'Branding + organisatieprofiel',
+      'Uw organisatie en gebruikersaccounts aanmaken',
+      'Functies koppelen aan rollen en rechten',
+      'Modules aanzetten volgens uw plan',
+      'Huisstijl en organisatieprofiel',
     ],
   },
   {
-    week: 'Week 5–8',
-    title: 'Migratie & training',
+    title: 'Migratie en training',
     deliverables: [
-      'Data-import (cliënten, contracten, openstaande zorgplannen)',
-      'Super-user-training (5–10 sleutelfiguren)',
-      'E-learning voor eindgebruikers (self-paced)',
-      'Schaduw-periode op pilot-team',
+      'Migratie van cliënten, contracten en zorgplannen, als project tegen een vaste prijs',
+      'Training van 5–10 sleutelgebruikers',
+      'Training van eindgebruikers',
+      'Proefperiode met één team naast het oude systeem',
     ],
   },
   {
-    week: 'Week 9–10',
-    title: 'Pilot live',
+    title: 'Eerste team in gebruik',
     deliverables: [
-      'Pilot-team live (1 locatie of 1 wijk)',
-      'Daily standup eerste week',
-      'Issue-triage <24u',
-      'Feedback-loop naar productteam',
+      'Eén locatie of één wijk gaat over',
+      'Korte lijnen in de eerste weken',
+      'Reactie op meldingen binnen 1 werkdag',
+      'Wat het team terugmeldt, verwerken wij in de inrichting',
     ],
   },
   {
-    week: 'Week 11–13',
-    title: 'Brede uitrol',
+    title: 'Brede ingebruikname',
     deliverables: [
-      'Fasering per locatie/team',
-      'On-site begeleiding bij elke go-live',
-      'Tweede ring super-users opgeleid',
-      'Operationeel ritme (changelog, releases)',
+      'Per locatie of team, in fasen',
+      'Begeleiding bij de ingebruikname, op locatie waar dat nodig is',
+      'Een tweede ring sleutelgebruikers opgeleid',
+      'Vast ritme voor nieuwe versies en een overzicht van wijzigingen',
     ],
   },
   {
-    week: 'Week 14+',
-    title: 'Optimalisatie',
+    title: 'Verbeteren',
     deliverables: [
-      'Eerste KPI-review (time-to-rapport, regeldruk-index)',
-      'Aanvullende modules activeren',
-      'Custom-koppelingen op verzoek',
-      'Jaarlijkse architecture-review (Enterprise)',
+      'Eerste evaluatie: rapportagetijd en ervaren regeldruk',
+      'Aanvullende modules aanzetten',
     ],
   },
 ];
 
 const principles = [
   {
-    title: 'Multidisciplinaire projectgroep',
-    body: 'Bestuur, I&A, zorginhoud, FG én eindgebruikers vanaf dag 1. Curanta wijst een NL-implementatieleider toe, geen ticketsysteem.',
+    title: 'Een projectgroep uit alle disciplines',
+    body: 'Bestuur, I&A, zorginhoud, FG én eindgebruikers vanaf dag 1. U heeft één vast aanspreekpunt bij Curanta, geen ticketsysteem.',
   },
   {
-    title: 'Procesfit boven feature-fit',
-    body: 'Wij toetsen niet of u 100% van uw eisen kunt aanvinken, maar of úw werkstromen erin werken. Aanpassingen vóór go-live, niet erna.',
+    title: 'Uw werkwijze eerst',
+    body: 'Wij toetsen niet of u al uw eisen kunt aanvinken, maar of úw werkstromen erin werken. Aanpassingen vóór de ingebruikname, niet erna.',
   },
   {
-    title: 'Super-users als versneller',
-    body: '5–10 sleutelmedewerkers krijgen verdiepende training en blijven 6 maanden eerste-lijn-vraagbaak — bewezen patroon in NL implementaties.',
+    title: 'Sleutelgebruikers als versneller',
+    body: '5–10 sleutelmedewerkers krijgen een verdiepende training en zijn daarna het eerste aanspreekpunt voor hun collega\'s — een veelgebruikt patroon bij Nederlandse implementaties.',
   },
   {
-    title: 'Gefaseerd, geen big-bang',
-    body: 'Pilot op 1 locatie, dan ring uitbreiden. Liever 3 weken later breed-live met goede adoptie dan dag-1 met chaos.',
+    title: 'In fasen, niet alles tegelijk',
+    body: 'Eerst één locatie, dan verder uitbreiden. Liever later breed in gebruik met goede adoptie dan alles op dag 1 met chaos.',
   },
 ];
 ---
 <Base
-  title="Implementatie-aanpak | Curanta"
-  description="14-weken-uitrol met multidisciplinaire projectgroep, super-user-aanpak en gefaseerde livegang. Geen big-bang, geen ticketsysteem."
+  title="Implementatie: zo gaat u over op Curanta | Curanta"
+  description="Zo verloopt een implementatie: een projectgroep met bestuur, zorg en FG, sleutelgebruikers en een start in fasen. De duur stemmen wij per organisatie af."
 >
   <PageHero
     eyebrow="Implementatie"
-    title="Onze richtinggevende aanpak — van kick-off naar productie."
-    subtitle="Vervangingstrajecten falen zelden op de software en vaak op het verandertraject. Hieronder onze beoogde implementatie-aanpak — multidisciplinaire projectgroep, super-user-versnellers, gefaseerde livegang. Werkelijke duur en fasering stemmen we per klant af voordat er getekend wordt."
+    title="Zo verloopt een implementatie."
+    subtitle="Een nieuw systeem slaagt of faalt zelden op de software, en vaak op de verandering in de organisatie. Daarom werken wij met een projectgroep uit bestuur, zorg en FG, met sleutelgebruikers en met een start in fasen. De duur stellen wij per organisatie vast, na de migratie-inschatting."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href="/demo" class="btn-primary no-underline">Demo aanvragen</a>
-      <a href="/procurement" class="btn-secondary no-underline">Procurement-pack</a>
+      <a href={DEMO_GESPREK.href} class="btn-primary no-underline">{DEMO_GESPREK.label}</a>
+      <a href="/procurement" class="btn-secondary no-underline">Documenten voor inkoop</a>
     </div>
   </PageHero>
 
   <section class="container-prose py-16">
     <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Vier principes</h2>
     <p class="mt-3 max-w-2xl text-ink-700">
-      Gebaseerd op publieke implementatie-cases en sectorbronnen (NVZ-VIPP, ActiZ). Wij
-      passen de aanpak per klant aan op uw werkelijke situatie — geen one-size-fits-all.
+      Gebaseerd op publieke implementaties en sectorbronnen (NVZ-VIPP, ActiZ). Wij passen de
+      aanpak aan op uw werkelijke situatie; er is geen standaardtraject dat voor iedereen past.
     </p>
     <div class="mt-10 grid gap-5 md:grid-cols-2">
       {principles.map((p) => (
@@ -118,20 +115,17 @@ const principles = [
 
   <section class="border-t border-ink-100 bg-ink-100/40 py-16">
     <div class="container-prose">
-      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Indicatieve tijdlijn — kick-off tot productie</h2>
+      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">De fasen, van start tot dagelijks gebruik</h2>
       <p class="mt-3 max-w-2xl text-ink-700">
-        De fases hieronder zijn ons referentie-model. Werkelijke duur hangt af van uw schaal,
-        migratiecomplexiteit en beschikbaarheid van uw projectgroep — we stellen het samen vast
-        vóór tekening.
+        Dit is de volgorde. Hoe lang elke fase duurt, hangt af van uw omvang, de migratie en de
+        beschikbaarheid van uw projectgroep. Dat stellen wij samen vast na de migratie-inschatting,
+        vóór u tekent.
       </p>
       <ol class="mt-10 space-y-4">
         {phases.map((p, i) => (
           <li class="rounded-xl border border-ink-100 bg-white p-6">
             <div class="grid gap-4 sm:grid-cols-[120px_180px_1fr] sm:items-start">
-              <div>
-                <div class="font-display text-xs font-semibold uppercase tracking-wider text-curanta-700">Fase {i + 1}</div>
-                <div class="text-sm font-semibold text-ink-900">{p.week}</div>
-              </div>
+              <div class="font-display text-sm font-semibold text-curanta-700">Fase {i + 1}</div>
               <div class="font-display text-lg font-semibold text-ink-900">{p.title}</div>
               <ul class="space-y-1.5 text-sm text-ink-700">
                 {p.deliverables.map((d) => (
@@ -151,31 +145,33 @@ const principles = [
   <section class="container-prose py-16">
     <div class="grid gap-10 lg:grid-cols-2">
       <div class="rounded-2xl border border-ink-100 bg-white p-8">
-        <h3 class="font-display text-xl font-semibold text-ink-900">Wat wij van u nodig hebben</h3>
+        <h2 class="font-display text-xl font-semibold text-ink-900">Wat wij van u nodig hebben</h2>
         <ul class="mt-4 space-y-2.5 text-sm text-ink-700">
-          <li>1 projectleider met 0,4 fte voor de duur</li>
-          <li>5–10 super-users uit zorg, planning, declaratie</li>
-          <li>Bestuurlijke besluitvaardigheid bij scope-keuzes</li>
-          <li>Toegang tot huidige ECD/HIS voor data-export</li>
-          <li>FG-akkoord op DPA en DPIA-template</li>
+          <li>1 projectleider met 0,4 fte voor de duur van het traject</li>
+          <li>5–10 sleutelgebruikers uit zorg, planning en declaratie</li>
+          <li>Een bestuur dat knopen doorhakt bij keuzes over de omvang</li>
+          <li>Toegang tot uw huidige ECD voor de export van gegevens</li>
+          <li>Akkoord van uw FG op de verwerkersovereenkomst en de DPIA</li>
         </ul>
       </div>
       <div class="rounded-2xl border border-ink-100 bg-white p-8">
-        <h3 class="font-display text-xl font-semibold text-ink-900">Wat wij leveren</h3>
+        <h2 class="font-display text-xl font-semibold text-ink-900">Wat wij leveren</h2>
         <ul class="mt-4 space-y-2.5 text-sm text-ink-700">
-          <li>NL-implementatieleider als vast aanspreekpunt</li>
-          <li>Migratie-import en validatie-rapport</li>
-          <li>Training voor super-users + e-learning eindgebruikers</li>
-          <li>On-site begeleiding bij elke go-live</li>
-          <li>Issue-triage &lt;24u eerste 3 maanden</li>
-          <li>Procurement-pack: PVE-template, DPA, SLA, architectuurplaat</li>
+          <li>Eén vast aanspreekpunt bij Curanta</li>
+          <li>Migratie als project tegen een vaste prijs, met een validatierapport</li>
+          <li>Training voor sleutelgebruikers en eindgebruikers</li>
+          <li>Begeleiding bij de ingebruikname, op locatie waar dat nodig is</li>
+          <li>Reactie op meldingen binnen 1 werkdag</li>
+          <li>Documenten voor inkoop (programma van eisen, verwerkersovereenkomst, SLA, architectuurplaat), op aanvraag opgesteld</li>
         </ul>
       </div>
     </div>
   </section>
 
   <Cta
-    title="Wilt u de implementatie-aanpak in detail bespreken?"
-    subtitle="Plan een verkenning. Wij sturen vooraf onze procurement-pack zodat uw inkoop-, FG- en I&A-team alvast kan lezen."
+    title="De aanpak in detail bespreken?"
+    subtitle="Plan een verkenning. Vooraf stellen wij op aanvraag de documenten op die uw inkoop, FG en I&A willen lezen."
+    primary={DEMO_GESPREK}
+    secondary={{ label: 'Documenten voor inkoop', href: '/procurement' }}
   />
 </Base>
