@@ -29,12 +29,12 @@ const adrs = [
   },
   {
     id: 'ADR-003',
-    title: 'NL-hosting (Azure West-Europe) — geen exceptie',
+    title: 'Hosting binnen de EU — geen exceptie',
     date: '2025-11',
     status: 'Aanvaard',
     context: 'Zorgaanbieders eisen aantoonbaar dat zorggegevens niet buiten de EER worden verwerkt. Cloudflare-edge-caching voor de marketing-site is acceptabel; voor de zorg-applicatie niet.',
-    decision: 'De zorg-applicatie (app.curanta.nl) draait uitsluitend in Azure West-Europe met backup binnen NL. Geen secondary regions in andere geografieën. Sub-verwerker-lijst wordt 30 dagen vóór wijziging gecommuniceerd.',
-    consequences: 'Hogere latency voor non-EU-bezoekers (irrelevant voor NL-zorg). Failover-strategie is regionale-availability-zones, niet cross-region. Disaster-recovery is geografisch beperkt — bewust binnen NL-grenzen.',
+    decision: 'De zorg-applicatie (app.curanta.nl) draait in een IONOS-datacenter in Duitsland, binnen de EU. Geen verwerking buiten de EER en geen Amerikaanse cloudleverancier. Sub-verwerker-lijst wordt 30 dagen vóór wijziging gecommuniceerd.',
+    consequences: 'Hogere latency voor non-EU-bezoekers (irrelevant voor NL-zorg). Geen doorgifte naar derde landen, dus geen Standard Contractual Clauses nodig. Herstel na een storing blijft binnen de EU.',
   },
   {
     id: 'ADR-004',
@@ -42,8 +42,8 @@ const adrs = [
     date: '2025-12',
     status: 'Aanvaard',
     context: 'BSN is bijzonder persoonsgegeven onder AVG art. 9 én gespecificeerd onder Wabvpz. Versleuteling op kolom-niveau biedt verdediging-in-diepte boven volledige database-encryptie.',
-    decision: 'BSN wordt encrypted opgeslagen via AES-256-GCM, met sleutel per tenant beheerd in Azure Key Vault. Sleutel-rotatie elk kwartaal. Search via deterministisch hash-veld (separate kolom) om gelijkheids-queries mogelijk te houden zonder decryptie.',
-    consequences: 'Index-scans op BSN vereisen het hash-veld, niet de encrypted kolom. Bulk-data-export decrypteert lazy. Performance-impact gemeten <5ms per lookup. Bij sleutelverlies is herstel via Key Vault recovery-policies.',
+    decision: 'BSN wordt versleuteld opgeslagen met AES-256-GCM. De sleutel staat buiten de database en buiten de code, op de server; zonder die sleutel start de applicatie in productie niet. Zoeken gaat via een apart hashveld met een geheime pepper, zodat gelijkheidsvragen werken zonder te ontsleutelen.',
+    consequences: 'Zoeken op BSN gebruikt het hashveld, niet de versleutelde kolom. Wie alleen de database heeft, ziet geen BSN. De sleutel hoort in een veilige back-up buiten de server: zonder sleutel is een BSN niet terug te halen.',
   },
   {
     id: 'ADR-005',
@@ -58,7 +58,7 @@ const adrs = [
 ---
 <Base
   title="Architectuur-besluiten (ADR) — Curanta"
-  description="Publieke Architectural Decision Records van Curanta. Modulaire monolith, FHIR R4, NL-hosting, BSN-encryptie, Nis2Care-zustermerk. Voor CIO's en IT-architecten."
+  description="Publieke Architectural Decision Records van Curanta. Modulaire monolith, FHIR R4, EU-hosting, BSN-encryptie, Nis2Care-zustermerk. Voor CIO's en IT-architecten."
 >
   <PageHero
     eyebrow="Architectuur-besluiten"
