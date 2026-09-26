@@ -25,12 +25,12 @@ const dot = (s: string) =>
 ---
 <Base
   title="API en FHIR: stand van zaken | Curanta"
-  description="FHIR R4 met Nederlandse Zib-profielen: intern gebouwd voor de BgZ, een publieke API is in ontwikkeling. De eerlijke stand van zaken."
+  description="FHIR met Nederlandse Zib-profielen: intern gebouwd voor de BgZ, een publieke API is in ontwikkeling. De eerlijke stand van zaken."
 >
   <PageHero
     eyebrow="API en koppelen"
-    title="FHIR R4 met Zib-profielen: de stand van zaken."
-    subtitle="Voor I&A en ketenpartners. Curanta zet dossiergegevens intern om naar FHIR R4 met Nederlandse Zib-profielen — de basis voor de BgZ en de eOverdracht. Een publieke API is in ontwikkeling: er draait nog geen publiek endpoint en er is nog geen testomgeving."
+    title="FHIR met Zib-profielen: de stand van zaken."
+    subtitle="Voor I&A en ketenpartners. Curanta zet dossiergegevens intern om naar FHIR met Nederlandse Zib-profielen — de basis voor de BgZ en de eOverdracht. Een publieke API is in ontwikkeling: er draait nog geen publiek endpoint en er is nog geen testomgeving."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href="mailto:info@curanta.nl?subject=API%3A%20stand%20van%20zaken" class="btn-primary no-underline">Vraag de stand van zaken</a>
@@ -51,7 +51,7 @@ const dot = (s: string) =>
   </section>
 
   <section class="container-prose py-14 border-b border-ink-100">
-    <h2 class="font-display text-2xl font-bold text-ink-900">FHIR R4-resources (intern)</h2>
+    <h2 class="font-display text-2xl font-bold text-ink-900">FHIR-resources (intern)</h2>
     <p class="mt-2 text-sm text-ink-700 max-w-2xl">
       Deze resources bouwt Curanta intern uit het dossier voor de BgZ-bundel, gemapt op de Nederlandse
       Zorginformatiebouwstenen (Zib's) waar die bestaan. Nog niet alle onderdelen van de BgZ worden
@@ -74,7 +74,7 @@ const dot = (s: string) =>
   <section class="container-prose py-14 border-b border-ink-100">
     <h2 class="font-display text-2xl font-bold text-ink-900">Hoe wij FHIR gebruiken</h2>
     <p class="mt-2 text-sm text-ink-700 max-w-3xl leading-relaxed">
-      FHIR R4 is bij ons het uitwisselingsformaat aan de grens met de keten; intern blijft de opslag
+      FHIR is bij ons het uitwisselingsformaat aan de grens met de keten; intern blijft de opslag
       relationeel (zie <a href="/adr" class="text-curanta-700 hover:underline">ADR-002</a>). Een export
       van uw gegevens krijgt u los daarvan in JSON, op verzoek en zonder exit-fee; hij wordt uitgebreid
       tot alle modules — zie <a href="/overstappen#eruit" class="text-curanta-700 hover:underline">Overstappen en exit</a>.
