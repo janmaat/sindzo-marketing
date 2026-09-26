@@ -19,8 +19,8 @@ Op 2026-08-17 vastgesteld, en geen van beide kan een script voor je doen:
    hieronder `janmaat/curanta-marketing`; die bestaat nog niet. Hernoem de repo op
    GitHub (Settings → Repository name) en werk daarna je `origin` bij met
    `git remote set-url origin https://github.com/janmaat/curanta-marketing.git`.
-   De map op schijf heet sinds 23-09-2026 `D:\Repos\Curanta.Marketing`;
-   `D:\Repos\Sindzo.Marketing` is een junction ernaartoe, zodat oude paden blijven werken.
+   De map op schijf heet sinds 23-09-2026 `D:\Repos\Curanta.Marketing`; de junction
+   `D:\Repos\Sindzo.Marketing` is op 24-09-2026 verwijderd, dus oude paden werken niet meer.
    Ook de Azure DevOps-repo (remote `azure`) heet nog `Sindzo.Marketing`: hernoem hem in
    Project settings → Repositories en werk de remote bij met
    `git remote set-url azure https://maat-software.visualstudio.com/Maat/_git/Curanta.Marketing`.
