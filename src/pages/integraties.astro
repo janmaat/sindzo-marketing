@@ -72,7 +72,7 @@ const integrations: Integration[] = [
   { name: 'DocuSign', category: 'Backoffice', status: 'live',
     body: 'Digitaal ondertekenen van HR-documenten in het personeelsdossier, via DocuSign eSignature.' },
   { name: 'Nmbrs', category: 'Backoffice', status: 'wip',
-    body: 'Uren doorzetten naar de salarisverwerking in Nmbrs. De koppeling is gebouwd, maar nog niet aangesloten op de tijdregistratie.' },
+    body: 'Rechtstreekse koppeling met Nmbrs in ontwikkeling; vraagt API-toegang per klant.' },
 ];
 
 const categories = Array.from(new Set(integrations.map(i => i.category)));
