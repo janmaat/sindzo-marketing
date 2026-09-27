@@ -53,7 +53,7 @@ const pillars = [
       { label: 'Wegiz / eOverdracht', status: 'wip', note: 'BgZ- en eOverdracht-bundel opstellen uit het dossier; verzenden via Nuts nog niet aangesloten', doc: '#wegiz' },
       { label: 'LSP', status: 'wip', note: 'Koppeling gebouwd; VZVZ-aansluiting en UZI-certificaten zijn er nog niet', doc: '#lsp' },
       { label: 'Publieke API', status: 'wip', note: 'Er is nog geen publieke API: geen endpoint voor externe partijen, geen API-sleutel en geen testomgeving. Een publieke FHIR-API is in ontwikkeling.', doc: '/api' },
-      { label: 'Export van uw gegevens', status: 'wip', note: 'Export in JSON op verzoek; wordt uitgebreid tot alle modules', doc: '/overstappen#eruit' },
+      { label: 'Export van uw gegevens', status: 'live', note: 'Volledige export van uw gegevens en bestanden in JSON', doc: '/overstappen#eruit' },
     ],
   },
   {
@@ -168,7 +168,7 @@ const heeftOnderbouwing = (doc?: string) => !!doc && !doc.startsWith('#');
         <ul class="mt-5 space-y-3 text-sm text-ink-700">
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Broncode-escrow</strong> — in voorbereiding.</span></li>
           <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Ontwikkelaarspartnerschap</strong> — in voorbereiding.</span></li>
-          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Uw gegevens mee</strong> — een export van uw gegevens in JSON, op verzoek en zonder exit-fee; hij wordt uitgebreid tot alle modules. De exit staat in onze voorwaarden (artikel 9).</span></li>
+          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Uw gegevens mee</strong> — een volledige export van uw gegevens en bestanden in JSON, zonder exit-fee. De exit staat in onze voorwaarden (artikel 9).</span></li>
         </ul>
         <p class="mt-5 text-sm text-ink-700">
           Een kleine leverancier betekent ook: geen supportdesk en geen tickets die maanden onderweg
