@@ -3,8 +3,8 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 
-// /api — eerlijke stand van de FHIR-laag. Er is (24-09-2026) geen publiek FHIR-endpoint,
-// geen sandbox en geen OAuth2-toegang voor derden: de resources hieronder bouwt de
+// /api — eerlijke stand van de FHIR-laag. Er is (28-09-2026) geen publiek endpoint, geen
+// API-sleutel, geen sandbox en geen OAuth2-toegang voor derden (feitenblad, rij API): de resources hieronder bouwt de
 // BgZ-module intern (Ponscura.Integratie.BgZ, projectors). Beloof hier niets wat daar
 // niet staat.
 
@@ -25,12 +25,12 @@ const dot = (s: string) =>
 ---
 <Base
   title="API en FHIR: stand van zaken | Curanta"
-  description="FHIR met Nederlandse Zib-profielen: intern gebouwd voor de BgZ, een publieke API is in ontwikkeling. De eerlijke stand van zaken."
+  description="Er is nog geen publieke API. FHIR met Nederlandse Zib-profielen is intern gebouwd voor de BgZ; een publieke FHIR-API is in ontwikkeling. De eerlijke stand van zaken."
 >
   <PageHero
     eyebrow="API en koppelen"
     title="FHIR met Zib-profielen: de stand van zaken."
-    subtitle="Voor I&A en ketenpartners. Curanta zet dossiergegevens intern om naar FHIR met Nederlandse Zib-profielen — de basis voor de BgZ en de eOverdracht. Een publieke API is in ontwikkeling: er draait nog geen publiek endpoint en er is nog geen testomgeving."
+    subtitle="Voor I&A en ketenpartners. Curanta zet dossiergegevens intern om naar FHIR met Nederlandse Zib-profielen — de basis voor de BgZ en de eOverdracht. Er is nog geen publieke API: geen endpoint voor externe partijen, geen API-sleutel en geen testomgeving. Een publieke FHIR-API is in ontwikkeling."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href="mailto:info@curanta.nl?subject=API%3A%20stand%20van%20zaken" class="btn-primary no-underline">Vraag de stand van zaken</a>
@@ -40,9 +40,9 @@ const dot = (s: string) =>
 
   <section class="container-prose py-12 border-b border-ink-100 bg-ink-100/40">
     <div class="rounded-xl border border-amber-200 bg-amber-50/60 p-5 max-w-3xl">
-      <div class="text-xs font-extrabold uppercase tracking-[0.15em] text-amber-900">Publieke API in ontwikkeling</div>
+      <div class="text-xs font-extrabold uppercase tracking-[0.15em] text-amber-900">Nog geen publieke API</div>
       <p class="mt-2 text-sm text-ink-700 leading-relaxed">
-        Er is nog geen publieke FHIR-API, geen api.curanta.nl/docs en nog geen sandbox om te testen.
+        Er is nog geen publieke API: geen endpoint voor externe partijen, geen API-sleutel en geen testomgeving. Een publieke FHIR-API is in ontwikkeling. De endpoints van Curanta zijn er alleen voor de eigen portalen en voor de koppelingen die wij zelf bouwen.
         Wilt u weten wat er wel is? Mail
         <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a> —
         wij reageren binnen 1 werkdag, geen NDA nodig.
@@ -83,7 +83,7 @@ const dot = (s: string) =>
 
   <Cta
     title="Implementatiepartner of ketenleverancier?"
-    subtitle="Wij denken graag mee over uw koppeling, en laten u weten wanneer de publieke API en een testomgeving klaarstaan."
+    subtitle="Wij denken graag mee over uw koppeling, en laten u weten wanneer de publieke FHIR-API en een testomgeving klaarstaan."
     primary={{ label: 'Mail ons over de API', href: 'mailto:info@curanta.nl?subject=API' }}
     secondary={{ label: 'Overzicht koppelingen', href: '/integraties' }}
   />
