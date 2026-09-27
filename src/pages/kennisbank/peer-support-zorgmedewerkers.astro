@@ -1,0 +1,301 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+
+const publicatieDatum = '2026-05-30';
+const bijgewerktDatum = '2026-09-27';
+const leesTijd = '~8 minuten';
+const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+const bijgewerktNl = new Date(bijgewerktDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Peer-support voor zorgmedewerkers: wat het onderzoek zegt, en wat niet',
+  description: 'Wat bekend is over collegiale steun voor zorgmedewerkers, wat de arbeidsmarktcijfers van AZW laten zien, en waar een werkgever op let bij privacy, de DPIA en psychosociale arbeidsbelasting.',
+  datePublished: publicatieDatum,
+  dateModified: bijgewerktDatum,
+  inLanguage: 'nl-NL',
+  author: { '@type': 'Organization', name: 'Curanta' },
+  publisher: { '@type': 'Organization', name: 'Curanta' },
+  keywords: 'peer-support zorgmedewerkers, collegiale ondersteuning, lotgenoten, second victim, arbeidsmarkt zorg, verzuim VVT, DPIA, psychosociale arbeidsbelasting'
+};
+---
+<Base
+  title="Peer-support voor zorgmedewerkers: wat het onderzoek zegt"
+  ogType="article"
+  description="Wat bekend is over collegiale steun voor zorgmedewerkers, wat de AZW-cijfers laten zien, en waar een werkgever op let bij privacy, de DPIA en psychosociale arbeidsbelasting."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
+
+  <article class="container-prose py-16">
+    <header class="max-w-3xl">
+      <div class="flex flex-wrap items-center gap-3 text-xs text-ink-500">
+        <a href="/kennisbank" class="text-curanta-700 hover:underline no-underline">Kennisbank</a>
+        <span>·</span>
+        <span>Arbeidsmarkt + welzijn</span>
+        <span>·</span>
+        <time datetime={publicatieDatum}>{dateNl}</time>
+        <span>·</span>
+        <span>bijgewerkt op <time datetime={bijgewerktDatum}>{bijgewerktNl}</time></span>
+        <span>·</span>
+        <span>{leesTijd}</span>
+      </div>
+      <h1 class="mt-5 font-display text-4xl font-bold leading-tight tracking-tightish text-ink-900 sm:text-5xl">
+        Peer-support voor zorgmedewerkers: wat het <em class="italic text-accent-600">onderzoek</em> zegt, en wat niet.
+      </h1>
+      <p class="mt-6 text-lg text-ink-700 leading-relaxed">
+        Collegiale steun, of peer-support, krijgt aandacht als manier om zorgmedewerkers te behouden. Het idee is
+        eenvoudig: een collega die hetzelfde werk doet, begrijpt wat je meemaakt. Maar wat weten we over het effect?
+        En waar moet een werkgever op letten als het gaat om het welzijn en de gezondheid van medewerkers? Dit
+        artikel zet de cijfers, het onderzoek en de regels naast elkaar.
+      </p>
+    </header>
+
+    <div class="prose-content mt-12 max-w-3xl text-ink-700 leading-relaxed">
+      <h2>De arbeidsmarkt in cijfers</h2>
+      <p>
+        Het onderzoeksprogramma Arbeidsmarkt Zorg en Welzijn (AZW) publiceerde in 2026 nieuwe prognoses van ABF
+        Research voor 2025–2035. In het Scenario Beleid, dat maatregelen uit verschillende akkoorden meeneemt:
+      </p>
+      <ul>
+        <li>
+          <strong>Tekort zorg en welzijn (breed):</strong> 89.800 in 2026, 127.100 in 2030 en 261.800 in 2035.
+        </li>
+        <li>
+          <strong>Tekort verpleging, verzorging en thuiszorg:</strong> oplopend tot 126.800 medewerkers in 2035.
+        </li>
+        <li>
+          <strong>Tekort gehandicaptenzorg:</strong> 8.700 in 2026, 20.300 in 2035.
+        </li>
+        <li>
+          <strong>Uitstroom:</strong> voor 2026 verwacht AZW in zorg en welzijn een uitstroom van 265.400 personen,
+          tegenover een instroom van 281.300.
+        </li>
+      </ul>
+      <p>
+        Het ziekteverzuim ligt in de VVT hoger dan in zorg en welzijn als geheel. In het vierde kwartaal van 2025
+        was het verzuim in verpleging en verzorging 9,5% en in de thuiszorg 9,4%, tegenover 7,9% in zorg en welzijn
+        als geheel (inclusief kinderopvang). Dat zijn voorlopige cijfers van het CBS, gepubliceerd door AZW in maart 2026.
+      </p>
+      <p>
+        Bij een tekort telt elke medewerker die blijft. Of peer-support daaraan bijdraagt, is de vraag van dit
+        artikel.
+      </p>
+
+      <h2>Wat het onderzoek laat zien</h2>
+      <ul>
+        <li>
+          <strong>RISE (Johns Hopkins Hospital, Verenigde Staten).</strong> Het programma Resilience In Stressful
+          Events bestaat sinds 2011. Getrainde collega's, vrijwilligers, vangen zorgverleners op na een schokkende
+          gebeurtenis in het werk (de zogeheten „second victim”). Een onderzoek uit 2021 onder 27 van die
+          vrijwilligers vond een jaarlijks verloop van 12% onder de vrijwilligers zelf. Alle 27 vonden het werk
+          betekenisvol; 28% meldde enige burn-out door hun RISE-taken. Dat onderzoek gaat over het behoud van de
+          vrijwilligers, niet over het behoud van personeel in het ziekenhuis.
+        </li>
+        <li>
+          <strong>Opvang na incidenten: een systematische review (2021).</strong> Busch en anderen bekeken 16
+          studies over 12 opvangprogramma's, ingevoerd tussen 2006 en 2017. Voorlopige gegevens wezen op gunstige
+          effecten, voor de getroffen medewerkers en voor de collega's die opvangen. Als obstakels bij de invoering
+          noemen de onderzoekers een aanhoudende schuldcultuur, beperkte bekendheid van het programma en gebrek aan
+          geld.
+        </li>
+        <li>
+          <strong>Startende verpleegkundigen: een systematische review (2025).</strong> Raqueno en anderen vonden
+          negen studies over peer-support tussen pas afgestudeerde verpleegkundigen. Drie thema's: steun aan elkaar
+          in online ruimtes tegen stress en isolement, samen optrekken in de praktijk, en in tweetallen
+          zelfvertrouwen opbouwen. Zij concluderen dat gestructureerde peer-support in inwerkprogramma's
+          veerkracht en behoud mogelijk verbetert.
+        </li>
+        <li>
+          <strong>Internationaal geworven verpleegkundigen in Engeland (2023).</strong> In een enquête onder 655
+          van hen gaven de deelnemers aan dat ze zich goed ondersteund voelden bij hun aanvraag en aankomst. Bij het
+          inwerken op de werkvloer wisselde de steun, met gevolgen voor hun mentale welzijn.
+        </li>
+        <li>
+          <strong>Cochrane-review (2020).</strong> Voor maatregelen die de veerkracht en mentale gezondheid van
+          zorgmedewerkers tijdens en na epidemieën moeten ondersteunen, vonden Pollock en anderen te weinig bewijs
+          om er een keuze op te baseren.
+        </li>
+      </ul>
+      <p>
+        Samengevat: peer-support wordt gewaardeerd, door wie steun krijgt en door wie steun geeft. Hard bewijs dat
+        het de uitstroom van personeel verlaagt, vonden wij niet. Wie het invoert, doet dat voor welzijn en
+        verbinding, en meet zelf wat het oplevert.
+      </p>
+
+      <h2>In Nederland</h2>
+      <ul>
+        <li>
+          <strong>Arbowet.</strong> Volgens artikel 3 lid 2 van de Arbeidsomstandighedenwet voert de werkgever „een
+          beleid gericht op voorkoming en indien dat niet mogelijk is beperking van psychosociale
+          arbeidsbelasting”. De wet rekent daar in ieder geval agressie of geweld, direct of indirect onderscheid,
+          pesten, seksuele intimidatie en werkdruk toe (artikel 1).
+        </li>
+        <li>
+          <strong>Richtlijn.</strong> In april 2025 verscheen een landelijke richtlijn voor psychosociale
+          ondersteuning in hoog-risicoberoepen, voor professionals die in hun werk vaak met ingrijpende
+          gebeurtenissen te maken krijgen. V&amp;VN Ambulancezorg werkte eraan mee.
+        </li>
+      </ul>
+
+      <h2>Privacy: waar uw FG op let</h2>
+      <ul>
+        <li>
+          <strong>Gezondheidsgegevens.</strong> Een aanmelding voor steun bij burn-out of rouw kan iets zeggen over
+          iemands gezondheid. Gegevens over gezondheid zijn bijzondere persoonsgegevens; verwerking is verboden,
+          tenzij een van de uitzonderingen van artikel 9 lid 2 AVG geldt, zoals uitdrukkelijke toestemming.
+        </li>
+        <li>
+          <strong>Toestemming in een arbeidsrelatie.</strong> Volgens overweging 43 van de AVG mag toestemming in
+          een specifiek geval geen geldige grondslag zijn als er „een duidelijke wanverhouding” is tussen
+          betrokkene en verwerkingsverantwoordelijke, en het daardoor onwaarschijnlijk is dat de toestemming vrij
+          is gegeven. Of toestemming van een medewerker aan zijn werkgever vrij is, is dus een
+          reële vraag. Dat pleit voor een opzet waarin de werkgever niet ziet wie meedoet.
+        </li>
+        <li>
+          <strong>DPIA.</strong> Bij een verwerking die waarschijnlijk een hoog risico inhoudt, voert de organisatie
+          vooraf een gegevensbeschermingseffectbeoordeling uit (artikel 35 lid 1 AVG). Heeft zij een
+          functionaris voor gegevensbescherming, dan vraagt zij daarbij diens advies (lid 2). De lijst van de Autoriteit
+          Persoonsgegevens met verwerkingen waarvoor een DPIA verplicht is, noemt onder meer grootschalige
+          verwerkingen van gegevens over gezondheid. Of uw opzet daaronder valt, beoordeelt u met uw FG.
+        </li>
+      </ul>
+
+      <h2>Wat peer-support werkbaar maakt</h2>
+      <p>
+        Uit de obstakels die het onderzoek noemt en uit de privacyregels hierboven volgen vier ontwerpkeuzes:
+      </p>
+      <ul>
+        <li>
+          <strong>Scheiding van HR, in de techniek en niet alleen in beleid.</strong> Leidinggevenden en HR kunnen
+          niet zien wie zich aanmeldt of waarover.
+        </li>
+        <li>
+          <strong>Eerst weinig prijsgeven.</strong> Een collega ziet eerst alleen een roepnaam en het thema, en pas
+          na wederzijdse instemming meer.
+        </li>
+        <li>
+          <strong>Geen hulpverlening beloven.</strong> Peer-support is geen therapie en geen crisisdienst. Wie
+          acuut hulp nodig heeft, verwijst u naar de huisarts of naar 113 Zelfmoordpreventie (gratis en anoniem
+          bellen of chatten via 113.nl), en naar de vertrouwenspersoon van de organisatie.
+        </li>
+        <li>
+          <strong>Bekendheid en gebruik apart meten.</strong> Beperkte bekendheid is een van de genoemde obstakels.
+          Meet dus hoeveel medewerkers van het aanbod weten, en hoeveel er echt gebruik van maken.
+        </li>
+      </ul>
+
+      <h2>Vragen voor uw HR-leiding en uw FG</h2>
+      <ol>
+        <li>
+          Wat doen wij nu structureel om collega's met elkaar te verbinden, naast teamuitjes en incidentele
+          intervisie? Wie betaalt het en wie meet het effect?
+        </li>
+        <li>
+          Kunnen onze systemen welzijnsgegevens verwerken zonder dat leidinggevenden of HR ze zien? Of is
+          „geen inzage voor leidinggevenden” alleen een afspraak?
+        </li>
+        <li>
+          Hoeveel medewerkers hebben het afgelopen kwartaal echt gebruikgemaakt van collegiale steun of van de
+          vertrouwenspersoon?
+        </li>
+      </ol>
+
+      <h2>Curanta</h2>
+      <p>
+        Curanta heeft een functie voor lotgenotencontact tussen medewerkers gebouwd. Die staat standaard uit en
+        gaat pas aan als de zorgorganisatie haar eigen DPIA heeft afgerond.
+      </p>
+
+      <hr class="my-12 border-ink-200" />
+
+      <h3 class="font-display text-lg font-semibold text-ink-900">Bronnen</h3>
+      <p class="text-sm">Alle bronnen geraadpleegd op 25 september 2026 en opnieuw nagelopen op 27 september 2026.</p>
+      <ul class="text-sm">
+        <li>
+          AZW / ABF Research, prognose arbeidsmarkt zorg en welzijn 2025–2035, Scenario Beleid (2026) —
+          <a href="https://www.azwinfo.nl/app/uploads/2026/02/Arbeidsmarktprognose-2025-2035-Zorg-en-Welzijn-totaal.pdf" rel="noopener">zorg en welzijn (pdf)</a>,
+          <a href="https://www.azwinfo.nl/publicatie/arbeidsmarktprognose-verpleging-verzorging-en-thuiszorg-2025-2035/" rel="noopener">verpleging, verzorging en thuiszorg</a>,
+          <a href="https://www.azwinfo.nl/publicatie/arbeidsmarktprognose-gehandicaptenzorg-2025-2035/" rel="noopener">gehandicaptenzorg</a>
+        </li>
+        <li>
+          AZW, verzuimcijfers per branche (bron CBS, AZW StatLine), maart 2026; cijfers over 2025 voorlopig —
+          <a href="https://www.azwinfo.nl/app/uploads/2026/03/Verzuimcijfers-Verpleging-en-Verzorging-infographic.pdf" rel="noopener">verpleging en verzorging</a>,
+          <a href="https://www.azwinfo.nl/app/uploads/2026/03/Verzuimcijfers-Thuiszorg-infographic.pdf" rel="noopener">thuiszorg</a>,
+          <a href="https://www.azwinfo.nl/app/uploads/2026/03/Verzuimcijfers-Zorg-en-Welzijn-infographic.pdf" rel="noopener">zorg en welzijn</a>
+        </li>
+        <li>
+          Connors e.a., „RISE: Exploring Volunteer Retention and Sustainability of a Second Victim Support
+          Program”, J Healthc Manag 2021 —
+          <a href="https://pubmed.ncbi.nlm.nih.gov/33411482/" rel="noopener">PubMed 33411482</a>
+        </li>
+        <li>
+          Busch e.a., „Promoting the Psychological Well-Being of Healthcare Providers Facing the Burden of Adverse
+          Events: A Systematic Review of Second Victim Support Resources”, Int J Environ Res Public Health 2021 —
+          <a href="https://pubmed.ncbi.nlm.nih.gov/34064913/" rel="noopener">PubMed 34064913</a>
+        </li>
+        <li>
+          Raqueno e.a., „Peer support strategies for newly qualified nurses: A systematic review”, Int J Nurs Stud
+          2025 —
+          <a href="https://pubmed.ncbi.nlm.nih.gov/40623852/" rel="noopener">PubMed 40623852</a>
+        </li>
+        <li>
+          Pressley e.a., „Internationally recruited nurses and their initial integration into the healthcare
+          workforce: A mixed methods study”, Int J Nurs Stud Adv 2023 —
+          <a href="https://pubmed.ncbi.nlm.nih.gov/38746581/" rel="noopener">PubMed 38746581</a>
+        </li>
+        <li>
+          Pollock e.a., Cochrane Database Syst Rev 2020, CD013779 —
+          <a href="https://pubmed.ncbi.nlm.nih.gov/33150970/" rel="noopener">PubMed 33150970</a>
+        </li>
+        <li>
+          Arbeidsomstandighedenwet, art. 1 en art. 3 lid 2; versie geldend vanaf 1 juli 2026 —
+          <a href="https://wetten.overheid.nl/jci1.3:c:BWBR0010346&hoofdstuk=2&afdeling=1&artikel=3" rel="noopener">wetten.overheid.nl</a>
+        </li>
+        <li>
+          V&amp;VN Ambulancezorg, „Landelijke richtlijn psychosociale ondersteuning voor hoog-risicoberoepen
+          beschikbaar”, 28 april 2025 —
+          <a href="https://www.venvn.nl/afdelingen/ambulancezorg/nieuws/landelijke-richtlijn-psychosociale-ondersteuning-voor-hoog-risicoberoepen-beschikbaar" rel="noopener">venvn.nl</a>
+        </li>
+        <li>
+          Verordening (EU) 2016/679 (AVG), art. 9, art. 35 en overweging 43 —
+          <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj/nld" rel="noopener">eur-lex.europa.eu</a>
+        </li>
+        <li>
+          Autoriteit Persoonsgegevens, Besluit inzake lijst van verwerkingen van persoonsgegevens waarvoor een DPIA
+          verplicht is, Staatscourant 2019, 64418 —
+          <a href="https://zoek.officielebekendmakingen.nl/stcrt-2019-64418.html" rel="noopener">officielebekendmakingen.nl</a>
+        </li>
+        <li>113 Zelfmoordpreventie — <a href="https://www.113.nl/" rel="noopener">113.nl</a></li>
+        <li>Lotgenotenfunctie van Curanta: stand 25 september 2026</li>
+      </ul>
+
+      <h3 class="font-display text-lg font-semibold text-ink-900">Revisie</h3>
+      <p class="text-sm">
+        Bijgewerkt op 25 september 2026. De vorige versie schreef RISE toe aan de NHS en noemde er een effect op de
+        uitstroom bij; RISE is een programma van Johns Hopkins, en dat effect vonden wij in geen enkele bron. Ook de
+        verzuim-, burn-out- en werkdrukcijfers, het tekort van 126.800 fte „in 2030” (dat getal geldt voor de VVT in
+        2035), de uitspraak dat geen enkele Nederlandse werkgever peer-support aanbiedt, en cijfers toegeschreven
+        aan NHS Employers, NHS Providers, AHRQ en Incredible Health konden wij niet onderbouwen. Die zijn vervangen
+        of weggelaten.
+      </p>
+      <p class="text-sm">
+        Bijgewerkt op 27 september 2026. Overweging 43 van de AVG staat er nu met de voorwaarde die erbij hoort
+        (dat vrije toestemming door de wanverhouding onwaarschijnlijk is), en het advies van de FG bij een DPIA
+        geldt als de organisatie een FG heeft (art. 35 lid 2 AVG).
+      </p>
+
+      <p class="text-xs text-ink-500 italic mt-8">
+        Ziet u een fout of mist u een bron? Mail
+        <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>;
+        wij reageren binnen 1 werkdag en zetten een correctie met datum onder dit artikel.
+      </p>
+    </div>
+  </article>
+
+  <Cta
+    title="Vragen over dit artikel?"
+    subtitle="Stel ze ons gerust, ook als FG of HR-leiding. Wilt u zelf rondkijken: in de demo werkt u met verzonnen gegevens."
+  />
+</Base>
