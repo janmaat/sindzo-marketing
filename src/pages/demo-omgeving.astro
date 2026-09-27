@@ -9,16 +9,20 @@ import PageHero from '../components/PageHero.astro';
 // bezoeker een eigen toegang via /demo (branch feat/proefomgeving-08-aanmelden); tot dan geven
 // wij toegang na een verzoek.
 //
+// Claimtoets 27-09-2026: tot uitrolstap 2 draait app.curanta.nl een build zonder eigen demotoegang
+// (UITROL-2-proefomgeving.md). Deze pagina belooft daarom geen termijn voor de toegang zelf, alleen
+// "wij reageren binnen 1 werkdag" (feitenblad) en "wij mailen u zodra uw toegang klaarstaat".
+//
 // Register: u-vorm, zoals de rest van de site.
 ---
 <Base
   title="Demo-omgeving van Curanta"
-  description="Kijk zelf rond in een werkende Curanta-omgeving met verzonnen cliënten. Vraag toegang aan; u krijgt een eigen inlog."
+  description="Kijk zelf rond in een werkende Curanta-omgeving met verzonnen cliënten. Iedere bezoeker krijgt een eigen toegang, zonder gedeeld wachtwoord."
 >
   <PageHero
     eyebrow="Demo-omgeving"
     title="Zelf rondkijken in een werkende omgeving."
-    subtitle="Backoffice, medewerkerportaal en cliëntportaal, met echte rollen en verzonnen cliënten. U krijgt een eigen toegang: vraag die aan, dan reageren wij binnen 1 werkdag."
+    subtitle="Backoffice, medewerkerportaal en cliëntportaal, met verzonnen cliënten. Iedere bezoeker krijgt een eigen toegang; een gedeeld wachtwoord is er niet. Vraag toegang aan via het demoformulier en noem daarin dat u zelf wilt rondkijken. Wij reageren binnen 1 werkdag en mailen u zodra uw toegang klaarstaat."
   >
     <div slot="actions" class="flex flex-wrap items-center gap-3">
       <a href="/demo" class="btn-primary no-underline">Vraag toegang aan</a>
@@ -32,11 +36,12 @@ import PageHero from '../components/PageHero.astro';
         <h2 class="font-display text-xl font-semibold text-ink-900">Wat u kunt bekijken</h2>
         <ul class="mt-3 space-y-2 text-ink-700">
           <li><strong>Backoffice</strong>: dossier, zorgplan, planning, declaratie, kwaliteit en beheer.</li>
-          <li><strong>Medewerkerportaal</strong>: rooster, tijdregistratie en rapporteren tijdens een dienst, mobiel-eerst.</li>
-          <li><strong>Cliëntportaal</strong>: wat een cliënt en zijn naasten van het dossier zien.</li>
+          <li><strong>Medewerkerportaal</strong>: voor de zorgmedewerker onderweg: rooster, bezoeken met taken en rapportage, uren en verlof.</li>
+          <li><strong>Cliëntportaal</strong>: wat een cliënt en zijn mantelzorgers van het dossier zien.</li>
         </ul>
         <p class="mt-4 text-sm text-ink-600">
-          Alle gegevens in de demo zijn verzonnen. Voer geen echte persoonsgegevens in.
+          Alle gegevens in de demo zijn verzonnen, en u deelt de omgeving met andere bezoekers. Voer
+          geen echte persoonsgegevens in.
         </p>
       </div>
 
