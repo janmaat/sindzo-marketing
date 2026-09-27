@@ -17,12 +17,12 @@ interface Integration {
 
 const integrations: Integration[] = [
   // Standaarden
-  { name: 'FHIR', category: 'Standaarden', status: 'wip', doc: '/api',
-    body: 'Curanta zet het dossier intern om naar een BgZ-bundel in FHIR (o.a. Patient, Encounter, Observation, medicatie, allergieën, Condition, CarePlan). Een publieke FHIR-API is in ontwikkeling.' },
+  { name: 'FHIR R4', category: 'Standaarden', status: 'wip', doc: '/api',
+    body: 'Curanta stelt de BgZ en de eOverdracht op in FHIR R4, gevalideerd tegen de profielen van Nictiz. Een publieke FHIR-API is in ontwikkeling.' },
   { name: 'MedMij', category: 'Standaarden', status: 'wip',
     body: 'Interne BgZ-bundelbrug gebouwd. Uitwisseling met een persoonlijke gezondheidsomgeving vraagt registratie bij Stichting MedMij, een PKIoverheid-certificaat en een conformiteitstest; die zijn er nog niet.' },
   { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'wip',
-    body: 'BgZ-bundel intern gebouwd; nog niet alle onderdelen van de BgZ worden gevuld. De eOverdracht-bundel is gebouwd; verzenden via Nuts nog niet.' },
+    body: 'BgZ- en eOverdracht-bundel worden opgesteld uit het dossier (BgZ: 6 van 28 onderdelen volledig, 11 deels; eOverdracht: 11 van de 14 onderdelen van de Minimale eOverdracht). Verzenden via Nuts is nog niet aangesloten; dat richten we in bij implementatie, samen met uw ketenpartner.' },
   { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'wip',
     body: 'Bevragen via het Landelijk Schakelpunt, met toestemming per cliënt. Aansluiten vraagt een VZVZ-aansluittraject en UZI-certificaten; die zijn er nog niet.' },
 
