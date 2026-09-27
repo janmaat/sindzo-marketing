@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import ModuleCard from '../components/ModuleCard.astro';
 import ProductMockups from '../components/ProductMockups.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import Cta from '../components/Cta.astro';
 import { DEMO_ZELF } from '../config/demo';
 
@@ -213,6 +214,24 @@ const groups: ModuleGroup[] = [
       </div>
     </section>
   ))}
+
+  <RelatedArticles
+    intro="Achtergrond bij het meertalige cliëntportaal en de modulegroep Welzijn van medewerkers: wat de wet en het onderzoek erover zeggen, met bronnen."
+    articles={[
+      {
+        eyebrow: 'Regelgeving + cliëntenrechten',
+        title: 'Een cliëntportaal in de taal van de cliënt: wat de wet vraagt, en wat niet',
+        body: 'Begrijpelijke informatie en inzage volgens Wgbo, Wkkgz, AVG en Wabvpz, en CBS-cijfers over oudere migranten.',
+        href: '/kennisbank/meertalig-clientportaal-nl-zorg',
+      },
+      {
+        eyebrow: 'Arbeidsmarkt + welzijn',
+        title: 'Peer-support voor zorgmedewerkers: wat het onderzoek zegt, en wat niet',
+        body: 'Het onderzoek, de AZW-cijfers en de privacyregels op een rij, met de vragen voor HR en FG.',
+        href: '/kennisbank/peer-support-zorgmedewerkers',
+      },
+    ]}
+  />
 
   <Cta />
 </Base>
