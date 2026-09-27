@@ -2,200 +2,56 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 
-// Dit is het enige middel dat geen concurrent in deze markt biedt: een echte,
-// werkende omgeving waar je zelf in kunt. Nedap, Adapcare en Ecare zetten alles
-// achter "demo aanvragen"; Ecare's "probeer de demo" is een click-through, geen
-// omgeving. Daarom staat deze pagina vooraan in de conversie en niet onderaan.
+// Tot 26-09-2026 stonden hier een openbaar wachtwoord en de demo-accounts, waaronder
+// admin@curanta.nl. Met dat account waren in de demo ook de aanvragen van bezoekers te zien
+// (incident 23-09-2026, deploy/HERSTEL-20260923-demo-privacylek.md in de applicatie-repo).
+// Deze pagina noemt daarom geen wachtwoord en geen account meer. Na uitrolstap 2 krijgt elke
+// bezoeker een eigen toegang via /demo (branch feat/proefomgeving-08-aanmelden); tot dan geven
+// wij toegang na een verzoek.
 //
-// De accounts staan hier bewust openbaar. Dat is het hele punt — een bezoeker
-// hoeft ons niet te vertrouwen als hij het kan nakijken. Voorwaarde is wel dat
-// de demo-data periodiek opnieuw wordt geseed; zie
-// docs/marktonderzoek-conversie-curanta-2026-08-17.md in de applicatie-repo.
+// Claimtoets 27-09-2026: tot uitrolstap 2 draait app.curanta.nl een build zonder eigen demotoegang
+// (UITROL-2-proefomgeving.md). Deze pagina belooft daarom geen termijn voor de toegang zelf, alleen
+// "wij reageren binnen 1 werkdag" (feitenblad) en "wij mailen u zodra uw toegang klaarstaat".
 //
-// Register: u-vorm, zoals de rest van de site (66× "uw" tegen 2× "jouw").
-
-const portalen = [
-  {
-    naam: 'Backoffice',
-    url: 'https://app.curanta.nl',
-    account: 'admin@curanta.nl',
-    waarvoor: 'Dossier, zorgplan, planning, declaratie, kwaliteit en beheer.',
-    tip: 'Begin bij het planbord en de CAO-controle — daar ziet u het snelst of onze aannames op uw proces passen.',
-  },
-  {
-    naam: 'Medewerkerportaal',
-    url: 'https://medewerker.curanta.nl',
-    account: 'medewerker1@curanta.nl',
-    waarvoor: 'Rooster, tijdregistratie en rapporteren tijdens een dienst.',
-    tip: 'Open dit op uw telefoon. Het is mobiel-eerst gebouwd; op een beeldscherm ziet u niet waarvoor het bedoeld is.',
-  },
-  {
-    naam: 'Cliëntportaal',
-    url: 'https://klant.curanta.nl',
-    account: 'klant1@curanta.nl',
-    waarvoor: 'Wat een cliënt en zijn naasten van het dossier zien.',
-    tip: 'Log daarna in als mantelzorger1@curanta.nl — dan ziet u ook waar de inzage van een naaste ophoudt.',
-  },
-];
-
-const rollen = [
-  ['teamleider@curanta.nl', 'Planbord, beschikbaarheid, dienstwissels en tijdregistratie van het eigen team'],
-  ['coordinator@curanta.nl', 'Routeplanning, capaciteit en vraagvoorspelling'],
-  ['planner@curanta.nl', 'Planhulp en CAO-regels, inclusief de overtredingen die het systeem zelf signaleert'],
-  ['begeleider@curanta.nl', 'Dossier, ondersteuningsplan en rapportage — de GHZ-, GGZ- en jeugdzorgrol'],
-  ['hr@curanta.nl', 'Verlof, verzuim en de exports naar Vernet, UWV en PFZW'],
-  ['directie@curanta.nl', 'Dashboard en zorgvraagprognose'],
-  ['compliance@curanta.nl', 'NEN 7510-beoordeling, risicoregister, interne audits en het datalekdossier'],
-  ['klachten@curanta.nl', 'De Wkkgz-route, met de onafhankelijke positie die de wet vraagt'],
-];
+// Register: u-vorm, zoals de rest van de site.
 ---
 <Base
-  title="Demo-omgeving — log zelf in bij Curanta"
-  description="Geen formulier, geen verkoopgesprek. Log zelf in op de backoffice, het medewerkerportaal en het cliëntportaal van Curanta, met echte rollen en verzonnen cliënten."
+  title="Demo-omgeving van Curanta"
+  description="Kijk zelf rond in een werkende Curanta-omgeving met verzonnen cliënten. Iedere bezoeker krijgt een eigen toegang, zonder gedeeld wachtwoord."
 >
   <PageHero
     eyebrow="Demo-omgeving"
-    title="U hoeft ons niet te vertrouwen. U kunt het nakijken."
-    subtitle="Hieronder staan werkende inloggegevens voor alle drie de portalen. Geen formulier, geen gesprek vooraf, geen begeleide rondleiding waarin wij bepalen wat u ziet. Klik rond, verander dingen, gooi ze weg."
+    title="Zelf rondkijken in een werkende omgeving."
+    subtitle="Backoffice, medewerkerportaal en cliëntportaal, met verzonnen cliënten. Iedere bezoeker krijgt een eigen toegang; een gedeeld wachtwoord is er niet. Vraag toegang aan via het demoformulier en noem daarin dat u zelf wilt rondkijken. Wij reageren binnen 1 werkdag en mailen u zodra uw toegang klaarstaat."
   >
     <div slot="actions" class="flex flex-wrap items-center gap-3">
-      <a href="#inloggen" class="btn-primary no-underline">Naar de inloggegevens</a>
-      <a href="/demo" class="btn-secondary no-underline">Liever een demo op uw eigen proces</a>
+      <a href="/demo" class="btn-primary no-underline">Vraag toegang aan</a>
+      <a href="/contact" class="btn-secondary no-underline">Liever eerst bellen</a>
     </div>
   </PageHero>
 
   <section class="container-prose py-16">
-    <div class="max-w-3xl">
-      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Waarom wij dit openzetten</h2>
-      <p class="mt-4 text-ink-700 leading-relaxed">
-        Wij zijn nieuw, en wij hebben nog geen rij logo's om u mee te overtuigen. Dat is een
-        reëel bezwaar. De enige eerlijke oplossing die wij zien is u niet vragen ons op ons
-        woord te geloven, maar u de sleutel geven. Wat u hieronder ziet is de echte applicatie —
-        niet een presentatie, niet een prototype, niet een video.
-      </p>
-      <p class="mt-4 text-ink-700 leading-relaxed">
-        Alle cliënten en medewerkers in deze omgeving zijn <strong>verzonnen</strong>. Er staat
-        geen enkel echt persoonsgegeven in. U kunt dus niets stukmaken wat er niet tegen kan, en
-        u hoeft niet voorzichtig te doen.
-      </p>
-      <p class="mt-4 text-ink-700 leading-relaxed">
-        Eén ding wél: u deelt deze omgeving met andere bezoekers. Wat u invult — een naam, een
-        e-mailadres, een rapportage — kunnen zij ook lezen. Vul daarom <strong>geen echte
-        persoonsgegevens</strong> in, ook niet die van uzelf. E-mail verstuurt de demo alleen naar
-        adressen op curanta.nl.
-      </p>
-    </div>
-  </section>
-
-  <section id="inloggen" class="border-y border-ink-100 bg-curanta-50/60 py-16">
-    <div class="container-prose">
-      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Inloggen</h2>
-      <p class="mt-3 max-w-2xl text-ink-700">
-        Eén wachtwoord voor alle drie de portalen:
-        <code class="rounded bg-white px-2 py-1 font-mono text-sm font-semibold text-curanta-900">Curanta2026!</code>
-      </p>
-
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        {portalen.map((p) => (
-          <article class="flex flex-col rounded-2xl border border-ink-100 bg-white p-6">
-            <h3 class="font-display text-lg font-semibold text-ink-900">{p.naam}</h3>
-            <p class="mt-2 text-sm text-ink-700">{p.waarvoor}</p>
-            <dl class="mt-5 space-y-2 text-sm">
-              <div>
-                <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Adres</dt>
-                <dd class="mt-0.5">
-                  <a href={p.url} class="font-medium text-curanta-700 no-underline hover:underline">
-                    {p.url.replace('https://', '')}
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Inloggen met</dt>
-                <dd class="mt-0.5 font-mono text-[0.8rem] text-ink-900">{p.account}</dd>
-              </div>
-            </dl>
-            <p class="mt-5 border-t border-ink-100 pt-4 text-sm text-ink-700">{p.tip}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="container-prose py-16">
-    <div class="max-w-3xl">
-      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Kijk door de ogen van één rol</h2>
-      <p class="mt-4 text-ink-700 leading-relaxed">
-        Wat iemand in Curanta mág zien hangt af van zijn rol, en dat is precies wat u wilt
-        controleren. Met <code class="font-mono text-sm">admin@curanta.nl</code> ziet u bijna alles —
-        wat een demo niet mag, zoals gebruikers uitnodigen, staat er met uitleg bij —
-        maar zo werkt het bij u niet. Deze accounts geven het realistische beeld — allemaal in de
-        backoffice, allemaal met hetzelfde wachtwoord.
-      </p>
-    </div>
-
-    <div class="mt-8 overflow-x-auto rounded-xl border border-ink-100 bg-white">
-      <table class="w-full text-sm">
-        <thead class="bg-ink-100/50 text-left text-xs uppercase tracking-wider text-ink-500">
-          <tr>
-            <th class="px-4 py-3 font-semibold">Inloggen als</th>
-            <th class="px-4 py-3 font-semibold">U ziet wat deze persoon ziet</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-ink-100 text-ink-700">
-          {rollen.map(([account, wat]) => (
-            <tr>
-              <td class="px-4 py-3 font-mono text-[0.8rem] text-ink-900 whitespace-nowrap">{account}</td>
-              <td class="px-4 py-3">{wat}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-
-    <p class="mt-4 text-sm text-ink-500">
-      De twintig medewerkeraccounts (<code class="font-mono">medewerker1</code> t/m
-      <code class="font-mono">medewerker20</code>) werken ook in de backoffice. Daar stelt een
-      verpleegkundige een zorgplan op; op haar telefoon rapporteert ze onderweg.
-    </p>
-  </section>
-
-  <section class="border-y border-ink-100 bg-ink-100/40 py-16">
-    <div class="container-prose max-w-3xl">
-      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Werkt u niet in de VVT?</h2>
-      <p class="mt-4 text-ink-700 leading-relaxed">
-        De demo staat standaard op een VVT-organisatie. Voor de gehandicaptenzorg en de GGZ zit
-        er een eigen inrichting in: log in als <code class="font-mono text-sm">admin@curanta.nl</code>,
-        ga naar <strong>Beheer → Tenant wisselen</strong> en kies <em>Demo GHZ</em> of
-        <em>Demo GGZ</em>. U krijgt dan AVB-verslagen, ondersteuningsplannen en groepszorg,
-        respectievelijk ZPM-declaratie en Wzd-maatregelen.
-      </p>
-      <p class="mt-4 text-sm text-ink-500">
-        Die omschakeling zit alleen in de backoffice. Het medewerker- en cliëntportaal blijven de
-        VVT-organisatie tonen.
-      </p>
-    </div>
-  </section>
-
-  <section class="container-prose py-16">
-    <div class="grid gap-8 md:grid-cols-2">
+    <div class="grid gap-6 md:grid-cols-2">
       <div class="rounded-2xl border border-ink-100 bg-white p-8">
-        <h2 class="font-display text-xl font-semibold text-ink-900">Wat u hier niet ziet</h2>
+        <h2 class="font-display text-xl font-semibold text-ink-900">Wat u kunt bekijken</h2>
+        <ul class="mt-3 space-y-2 text-ink-700">
+          <li><strong>Backoffice</strong>: dossier, zorgplan, planning, declaratie, kwaliteit en beheer.</li>
+          <li><strong>Medewerkerportaal</strong>: voor de zorgmedewerker onderweg: rooster, bezoeken met taken en rapportage, uren en verlof.</li>
+          <li><strong>Cliëntportaal</strong>: wat een cliënt en zijn mantelzorgers van het dossier zien.</li>
+        </ul>
+        <p class="mt-4 text-sm text-ink-600">
+          Alle gegevens in de demo zijn verzonnen, en u deelt de omgeving met andere bezoekers. Voer
+          geen echte persoonsgegevens in.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-ink-100 bg-white p-8">
+        <h2 class="font-display text-xl font-semibold text-ink-900">Liever uw eigen proces?</h2>
         <p class="mt-3 text-ink-700">
-          Een demo-omgeving is niet uw organisatie. Wat u hier niet kunt beoordelen is of uw eigen
-          werkstromen erin passen — uw intake, uw overdracht, uw maandafsluiting. Dat is precies
-          waar een gesprek wél voor deugt.
+          Stuur drie typische werkstromen uit uw organisatie — uw intake, uw overdracht, uw
+          maandafsluiting — dan laten wij die op het scherm zien.
         </p>
         <a href="/demo" class="mt-5 inline-block btn-primary no-underline">Demo op uw eigen proces</a>
-      </div>
-
-      <div class="rounded-2xl border border-ink-100 bg-white p-8">
-        <h2 class="font-display text-xl font-semibold text-ink-900">Zit er iets fout?</h2>
-        <p class="mt-3 text-ink-700">
-          Dan willen wij dat weten, ook als u geen klant wordt. Twijfelt u of iets een fout is of
-          zo bedoeld — stuur het gewoon; dat onderscheid is ons werk. Een schermafbeelding met het
-          tijdstip erbij is genoeg om het in de logs terug te vinden.
-        </p>
-        <a href="/contact" class="mt-5 inline-block btn-secondary no-underline">Meld wat u zag</a>
       </div>
     </div>
   </section>
