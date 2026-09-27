@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Cta from '../../components/Cta.astro';
 
 const publicatieDatum = '2026-05-30';
-const bijgewerktDatum = '2026-09-25';
+const bijgewerktDatum = '2026-09-27';
 const leesTijd = '~8 minuten';
 const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 const bijgewerktNl = new Date(bijgewerktDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -147,15 +147,16 @@ const articleLd = {
           tenzij een van de uitzonderingen van artikel 9 lid 2 AVG geldt, zoals uitdrukkelijke toestemming.
         </li>
         <li>
-          <strong>Toestemming in een arbeidsrelatie.</strong> Volgens overweging 43 van de AVG is toestemming geen
-          geldige grondslag als er „een duidelijke wanverhouding” is tussen betrokkene en
-          verwerkingsverantwoordelijke. Of toestemming van een medewerker aan zijn werkgever vrij is, is dus een
+          <strong>Toestemming in een arbeidsrelatie.</strong> Volgens overweging 43 van de AVG mag toestemming in
+          een specifiek geval geen geldige grondslag zijn als er „een duidelijke wanverhouding” is tussen
+          betrokkene en verwerkingsverantwoordelijke, en het daardoor onwaarschijnlijk is dat de toestemming vrij
+          is gegeven. Of toestemming van een medewerker aan zijn werkgever vrij is, is dus een
           reële vraag. Dat pleit voor een opzet waarin de werkgever niet ziet wie meedoet.
         </li>
         <li>
           <strong>DPIA.</strong> Bij een verwerking die waarschijnlijk een hoog risico inhoudt, voert de organisatie
-          vooraf een gegevensbeschermingseffectbeoordeling uit (artikel 35 lid 1 AVG) en vraagt zij daarbij het
-          advies van haar functionaris voor gegevensbescherming (lid 2). De lijst van de Autoriteit
+          vooraf een gegevensbeschermingseffectbeoordeling uit (artikel 35 lid 1 AVG). Heeft zij een
+          functionaris voor gegevensbescherming, dan vraagt zij daarbij diens advies (lid 2). De lijst van de Autoriteit
           Persoonsgegevens met verwerkingen waarvoor een DPIA verplicht is, noemt onder meer grootschalige
           verwerkingen van gegevens over gezondheid. Of uw opzet daaronder valt, beoordeelt u met uw FG.
         </li>
@@ -210,7 +211,7 @@ const articleLd = {
       <hr class="my-12 border-ink-200" />
 
       <h3 class="font-display text-lg font-semibold text-ink-900">Bronnen</h3>
-      <p class="text-sm">Alle bronnen geraadpleegd op 25 september 2026.</p>
+      <p class="text-sm">Alle bronnen geraadpleegd op 25 september 2026 en opnieuw nagelopen op 27 september 2026.</p>
       <ul class="text-sm">
         <li>
           AZW / ABF Research, prognose arbeidsmarkt zorg en welzijn 2025–2035, Scenario Beleid (2026) —
@@ -279,6 +280,11 @@ const articleLd = {
         aan NHS Employers, NHS Providers, AHRQ en Incredible Health konden wij niet onderbouwen. Die zijn vervangen
         of weggelaten.
       </p>
+      <p class="text-sm">
+        Bijgewerkt op 27 september 2026. Overweging 43 van de AVG staat er nu met de voorwaarde die erbij hoort
+        (dat vrije toestemming door de wanverhouding onwaarschijnlijk is), en het advies van de FG bij een DPIA
+        geldt als de organisatie een FG heeft (art. 35 lid 2 AVG).
+      </p>
 
       <p class="text-xs text-ink-500 italic mt-8">
         Ziet u een fout of mist u een bron? Mail
@@ -290,6 +296,6 @@ const articleLd = {
 
   <Cta
     title="Vragen over dit artikel?"
-    subtitle="Stel ze ons gerust, ook als FG of HR-leiding. Wilt u zelf rondkijken, vraag dan een eigen toegang tot de demo aan; u werkt daar met verzonnen gegevens."
+    subtitle="Stel ze ons gerust, ook als FG of HR-leiding. Wilt u zelf rondkijken: in de demo werkt u met verzonnen gegevens."
   />
 </Base>
