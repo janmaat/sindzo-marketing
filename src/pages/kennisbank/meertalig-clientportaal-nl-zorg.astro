@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Cta from '../../components/Cta.astro';
 
 const publicatieDatum = '2026-05-30';
-const bijgewerktDatum = '2026-09-25';
+const bijgewerktDatum = '2026-09-27';
 const leesTijd = '~8 minuten';
 const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 const bijgewerktNl = new Date(bijgewerktDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -57,8 +57,9 @@ const articleLd = {
       <p>
         Het CBS beschreef in 2022 de ouderen van 55 jaar en ouder die zelf in het buitenland zijn geboren, de
         eerste generatie. Op 1 januari 2019 waren dat er ongeveer 566 duizend: 10 procent van alle
-        55-plussers. Het CBS richt zich op deze groep omdat ouderen die zelf in Nederland zijn geboren
-        „minder vaak taalproblemen hebben”.
+        55-plussers. Het CBS richt zich op deze groep en niet op de tweede generatie, 55-plussers met een
+        ouder uit het buitenland die zelf in Nederland zijn geboren: van die tweede generatie verwacht het CBS
+        een sterkere integratie, omdat zij bijvoorbeeld „minder vaak taalproblemen” heeft.
       </p>
       <table class="w-full mt-6 text-sm">
         <thead>
@@ -100,15 +101,15 @@ const articleLd = {
 
       <h3>Wgbo: informatie die past bij wat de cliënt kan begrijpen</h3>
       <p>
-        De Wet op de geneeskundige behandelingsovereenkomst staat in het Burgerlijk Wetboek, Boek 7, afdeling 5.
+        De Wet op de geneeskundige behandelingsovereenkomst staat in het Burgerlijk Wetboek, Boek 7, titel 7, afdeling 5.
         Hij geldt voor handelingen op het gebied van de geneeskunst, en daar horen volgens artikel 7:446 lid 3
         BW ook het verplegen en verzorgen bij die in dat kader gebeuren. Drie artikelen zijn hier van belang:
       </p>
       <ul>
         <li>
           <strong>Art. 7:448 lid 1 BW:</strong> „De hulpverlener licht de patiënt op duidelijke wijze in, die past
-          bij zijn bevattingsvermogen.” Voor een cliënt die geen Nederlands leest, is een Nederlandse tekst niet
-          vanzelf duidelijk.
+          bij zijn bevattingsvermogen, (…)” Voor een cliënt die geen Nederlands leest, is een Nederlandse tekst
+          niet vanzelf duidelijk.
         </li>
         <li>
           <strong>Art. 7:456 BW:</strong> „De hulpverlener verstrekt aan de patiënt desgevraagd inzage in en
@@ -117,8 +118,9 @@ const articleLd = {
         <li>
           <strong>Art. 7:457 BW:</strong> aan anderen dan de patiënt worden geen inlichtingen, inzage of afschrift
           gegeven zonder toestemming van de patiënt. Wie rechtstreeks bij de behandeling betrokken is, valt daar
-          niet onder; voor vertegenwoordigers gelden eigen regels (lid 3). Een familielid dat meeleest in het
-          portaal, heeft dus toestemming van de cliënt nodig.
+          niet onder, voor zover het nodig is voor zijn werk (lid 2); voor vertegenwoordigers gelden eigen regels
+          (lid 3). Een familielid dat meeleest in het portaal en niet de vertegenwoordiger van de cliënt is,
+          heeft dus toestemming van de cliënt nodig.
         </li>
       </ul>
 
@@ -210,7 +212,7 @@ const articleLd = {
       <hr class="my-12 border-ink-200" />
 
       <h3 class="font-display text-lg font-semibold text-ink-900">Bronnen</h3>
-      <p class="text-sm">Alle bronnen geraadpleegd op 25 september 2026.</p>
+      <p class="text-sm">Alle bronnen geraadpleegd op 25 september 2026 en opnieuw nagelopen op 27 september 2026.</p>
       <ul class="text-sm">
         <li>
           Burgerlijk Wetboek Boek 7, titel 7, afdeling 5 (Wgbo), art. 7:446, 7:448, 7:456 en 7:457; versie geldend
@@ -254,6 +256,13 @@ const articleLd = {
         cliëntportalen en herkomstcijfers die wij niet opnieuw konden onderbouwen. Die zijn vervangen door de
         wetsartikelen en CBS-cijfers hierboven.
       </p>
+      <p class="text-sm">
+        Bijgewerkt op 27 september 2026. Het citaat uit art. 7:448 BW loopt in de wet door; dat staat er nu bij.
+        Bij art. 7:457 BW staat nu dat de uitzondering voor wie bij de behandeling betrokken is alleen geldt voor
+        zover het voor zijn werk nodig is, en dat een meelezend familielid dat de vertegenwoordiger van de
+        cliënt is geen aparte toestemming nodig heeft. De reden waarom het CBS zich op de eerste generatie richt,
+        staat er nu zoals het CBS hem geeft, en de vindplaats van de Wgbo noemt ook titel 7.
+      </p>
 
       <p class="text-xs text-ink-500 italic mt-8">
         Ziet u een fout of mist u een bron? Mail
@@ -265,6 +274,6 @@ const articleLd = {
 
   <Cta
     title="Het cliëntportaal zelf bekijken?"
-    subtitle="In de demo van Curanta kijkt u rond met verzonnen gegevens, ook als cliënt of mantelzorger. U vraagt een eigen toegang aan."
+    subtitle="In de demo van Curanta kijkt u rond met verzonnen gegevens, ook in het cliëntportaal."
   />
 </Base>
