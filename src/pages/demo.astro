@@ -67,6 +67,7 @@ const formAction = 'https://app.curanta.nl/api/lead';
               <option>Bestuurder / RvB</option>
               <option>Manager I&amp;A / CIO</option>
               <option>CMIO / CNIO / zorginhoudelijk leider</option>
+              <option>Manager zorg</option>
               <option>Functioneel beheer</option>
               <option>FG / CISO / privacy</option>
               <option>Finance / control</option>
@@ -119,6 +120,8 @@ const formAction = 'https://app.curanta.nl/api/lead';
           </span>
         </label>
 
+        {/* Een weigering of storing bij het versturen, zonder dat de invoer verloren gaat (script onderaan). */}
+        <p id="lead-melding" role="alert" tabindex="-1" class="hidden mt-5 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900"></p>
         <button type="submit" class="btn-primary mt-7">
           Demo aanvragen
         </button>
@@ -180,5 +183,47 @@ const formAction = 'https://app.curanta.nl/api/lead';
     // Ook bij terugkeren via 'vorige': de browser herstelt het vinkje, niet de disabled-stand.
     veld.disabled = !vinkje.checked;
     vinkje.addEventListener('change', function () { veld.disabled = !vinkje.checked; });
+  })();
+</script>
+
+<script is:inline>
+  // Versturen zonder de pagina te verlaten (28-09-2026). Met een gewone POST kwam de bezoeker bij een
+  // weigering (bijvoorbeeld een onjuist e-mailadres) op een aparte foutpagina en was alles wat hij
+  // invulde weg; bij een storing zag hij een kale foutpagina van app.curanta.nl. Nu blijft hij hier, met
+  // de reden bij het formulier. Zonder JavaScript of fetch blijft de gewone POST werken.
+  (function () {
+    var form = document.querySelector('form[action$="/api/lead"]');
+    var melding = document.getElementById('lead-melding');
+    if (!form || !melding || !window.fetch || !window.FormData) return;
+    var knop = form.querySelector('button[type="submit"]');
+    var contact = ' Lukt het niet? Bel 085 250 1301 of mail info@curanta.nl.';
+
+    function toon(tekst) {
+      melding.textContent = tekst;
+      melding.classList.remove('hidden');
+      melding.focus();
+      if (knop) { knop.disabled = false; knop.removeAttribute('aria-busy'); }
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      melding.classList.add('hidden');
+      if (knop) { knop.disabled = true; knop.setAttribute('aria-busy', 'true'); }
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+        credentials: 'omit'
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (d) {
+          if (r.ok && d && d.redirect) { window.location.href = d.redirect; return; }
+          if (r.status === 400 && d && d.error) { toon(d.error + ' Pas het aan en verstuur opnieuw.'); return; }
+          if (r.status === 429) { toon('U heeft zojuist al een aanvraag verstuurd. Probeer het over een paar minuten opnieuw.' + contact); return; }
+          toon('Het versturen is niet gelukt; uw gegevens staan nog in het formulier. Probeer het zo opnieuw.' + contact);
+        });
+      }).catch(function () {
+        toon('Het versturen is niet gelukt door een verbindingsprobleem; uw gegevens staan nog in het formulier.' + contact);
+      });
+    });
   })();
 </script>
