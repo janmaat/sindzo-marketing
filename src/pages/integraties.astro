@@ -63,7 +63,7 @@ const integrations: Integration[] = [
     body: 'Inloggen op het cliëntportaal met DigiD, minimaal niveau Substantieel. Een betaalde optie; de aansluiting bij Logius regelen wij per klant.' },
   { name: 'Microsoft Entra ID (SSO)', category: 'Identiteit', status: 'wip',
     body: 'Inloggen met het eigen account van uw organisatie (SSO via OIDC), met rollen afgeleid uit groepen. De instellingen zijn er; inloggen via SSO nog niet.' },
-  { name: 'UZI-pas', category: 'Identiteit', status: 'wip',
+  { name: 'UZI-pas', category: 'Identiteit', status: 'live',
     body: 'Inloggen met de UZI-pas is gebouwd: Curanta leest de pas uit en controleert de certificaatketen en of de pas is ingetrokken. U kunt ermee inloggen zodra wij dat op onze server hebben ingericht; dat is nog niet gebeurd. De eindtest met een echte UZI-pas doen wij bij de eerste klant.' },
   { name: 'Ysis-koppeling', category: 'Klinisch', status: 'wip',
     body: 'Uitwisseling van het behandeldossier voor specialistische teams.' },
@@ -84,7 +84,7 @@ const statusLabel = (s: string) =>
 <Base
   image="/og/integraties.png"
   title="Koppelingen: Vecozo, ZorgMail, ZorgDomein, Medimo | Curanta"
-  description="Gebouwd: ZorgMail, ZorgDomein, Medimo, iWmo/iJw/iWlz en CAK via Vecozo, DigiD. In ontwikkeling: eOverdracht, MedMij, LSP, Zvw. Status per koppeling."
+  description="Gebouwd: ZorgMail, ZorgDomein, Medimo, iWmo/iJw/iWlz en CAK via Vecozo, DigiD, UZI-pas. In ontwikkeling: eOverdracht, MedMij, LSP, Zvw. Status per koppeling."
 >
   <PageHero
     eyebrow="Koppelingen en standaarden"
