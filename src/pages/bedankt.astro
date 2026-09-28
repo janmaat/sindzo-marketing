@@ -138,7 +138,13 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
       success.classList.remove('hidden');
     } else if (error) {
       var msg = document.getElementById('error-message');
-      if (msg) msg.textContent = decodeURIComponent(error);
+      // De server stuurt een leesbare reden, of een van deze codes. URLSearchParams decodeert al;
+      // een tweede decodeURIComponent gooide een URIError bij een % in de reden.
+      var teksten = {
+        'server-error': 'Er ging aan onze kant iets mis, en uw aanvraag is niet bij ons aangekomen.',
+        'invalid-form': 'Het formulier kwam niet volledig bij ons aan.'
+      };
+      if (msg) msg.textContent = teksten[error] || error;
       neutral.classList.add('hidden');
       errorEl.classList.remove('hidden');
     }
