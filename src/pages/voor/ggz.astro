@@ -9,7 +9,7 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
   description="GGZ-software met dossier, ZPM-declaratie en wachtlijstbeheer in één systeem — voor kleine praktijken én gespecialiseerde GGZ-instellingen."
   eyebrow="Voor de GGZ"
   hero="Dossier en ZPM-declaratie voor de GGZ, in één systeem."
-  subtitle="Curanta brengt dossier, zorgprestaties en wachtlijst samen, voor kleine praktijken en gespecialiseerde GGZ-instellingen. Behandelaars registreren één keer; de declaratie volgt daaruit. Koppelingen met e-healthmodules zijn in ontwikkeling."
+  subtitle="Curanta brengt dossier, zorgprestaties en wachtlijst samen, voor kleine praktijken en gespecialiseerde GGZ-instellingen. Behandelaars registreren één keer; de declaratie volgt daaruit. Koppelingen met e-healthaanbieders zijn gepland."
   triggers={[
     { title: 'Wachttijden en personeelstekort', body: 'De NZa noemt toegankelijkheid een kernuitdaging. Triage, een wachtlijst in hetzelfde dossier en minder dubbele registratie verlagen de administratie per behandelaar.' },
     { title: 'ZPM-declaratie is ingewikkeld', body: 'Het zorgprestatiemodel vraagt een nauwkeurige registratie van prestaties. Curanta legt zorgprestaties per traject vast, met controle op tarief, duur en datum.' },
@@ -19,18 +19,18 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
   modules={[
     { name: 'ZPM-declaratie + prestaties', note: 'Zorgprestaties per traject, met controle op tarief, duur en datum' },
     { name: 'Aanmelding, triage en wachtlijst', note: 'Met een aparte module voor multidisciplinair overleg (MDO)' },
-    { name: 'E-health-koppelingen', note: 'Op de roadmap; een overeenkomst per aanbieder' },
+    { name: 'E-health-koppelingen', note: 'Gepland; vraagt een overeenkomst per aanbieder' },
     { name: 'Cliëntportaal', note: 'Berichten, documenten, machtigingen, mantelzorger-taken' },
     { name: 'Vragenlijsten (PREM/ROM)', note: 'Uitkomsten van de behandeling volgen' },
     { name: 'Zorgtrajecten', note: 'Multidisciplinair behandelpad' },
     { name: 'Indicatoren', note: 'Kwaliteit + transparantie' },
-    { name: 'FHIR', note: 'BgZ intern; publieke FHIR-API in ontwikkeling' },
+    { name: 'FHIR-API voor de BgZ', note: 'Read-only, voor vooraf geregistreerde systemen' },
   ]}
   regulatory={['Wvggz', 'Wkkgz', 'ZPM', 'AVG', 'NEN 7510', 'Wegiz']}
   proofPoints={[
     { value: 'ZPM', label: 'Prestatieregistratie ingebouwd' },
     { value: 'EU', label: 'Hosting (IONOS, Berlijn) · ondersteuning in het Nederlands' },
     { value: 'BSN', label: 'Versleuteld (AES-256-GCM)' },
-    { value: 'FHIR', label: 'Intern voor de BgZ; uitwisseling in ontwikkeling' },
+    { value: 'FHIR', label: 'Read-only API voor de BgZ; eOverdracht in ontwikkeling' },
   ]}
 />
