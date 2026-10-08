@@ -1,5 +1,11 @@
 # Controlelijst claims — herinrichting curanta.nl (8 oktober 2026)
 
+> **Harde voorwaarde vóór livegang (besluit Jan 08-10-2026):** eerst Curanta uitrollen naar
+> app.curanta.nl en een nieuwe gouden toestand van de demo maken. De openbare demo is van 30-09
+> (2bf1e6cb2); de site noemt functies van 1–7 oktober "te zien in de demo". Controleer na de uitrol
+> in de demo: signaleringsplan, verblijf en logeren, Wzd 2025, GGZ-afscherming, kraam- en
+> jeugddossier, Vandaag.
+
 Branch `feat/homepage-herinrichting`. Deze lijst staat buiten de website (de map `docs/` wordt niet
 gebouwd). Hij bevat wat nog bevestigd moet worden, wat in de code en bij officiële bronnen is
 nagelopen, en wat buiten de site hoort te veranderen. Een punt dat hier openstaat, is op de site
@@ -115,6 +121,6 @@ met de bron in de code per rij. Belangrijkste punten:
   demo"; dat klopt pas na een nieuwe uitrol en gouden toestand.
 - **Gecorrigeerd:** de maanddeclaratie onder de Wmo en de Jeugdwet (Wmo323, Jw323) heeft nog geen scherm. De
   site zei "declareren onder de Wmo" en "dient in bij gemeente"; nu staat dat als in ontwikkeling.
-- **Open:** de planregel Basic "1 declaratiemodule (Wmo, Jeugdwet óf Wlz)" op /prijzen en de homepage
-  (commercieel; niet zelf gewijzigd).
+- **Aangepast (besluit Jan 08-10):** planregel Basic op /prijzen en de homepage: "1 declaratiemodule: Wlz; Wmo of
+  Jeugdwet zodra de maanddeclaratie klaar is". Prijs en plan ongewijzigd.
 - **Gecorrigeerd:** het Wzd-overzicht wordt nu gevalideerd tegen de XSD van de IGJ (was "niet getoetst").
