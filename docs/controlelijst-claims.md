@@ -126,3 +126,12 @@ met de bron in de code per rij. Belangrijkste punten:
 - **Planregel Basic:** ongewijzigd "1 declaratiemodule (Wmo, Jeugdwet óf Wlz)"; de aanpassing van 08-10 is teruggedraaid
   omdat de aanleiding (geen Wmo-declaratiescherm) niet klopte.
 - **Gecorrigeerd:** het Wzd-overzicht wordt nu gevalideerd tegen de XSD van de IGJ (was "niet getoetst").
+
+## I. Omaha (8 oktober 2026, middag)
+
+- Omaha-teksten afgezwakt op /oplossing, /voor/vvt en /api: "opgebouwd rond de 42 problemen van het Omaha System,
+  met KBS-scores" en "geen keurmerk". Nooit "100%", "volledig" of "de enige" (vergelijkende reclame, art. 6:194a BW).
+- /vergelijking: rij "Omaha-keurmerk" met de lijst van de stichting als bron (08-10-2026).
+- Product: één tussenmeting per probleem (ZorgPlanConfigurations.cs:110) breekt het KBS-verloop; los op, ook zonder keurmerk.
+- Open, ter beslissing: Cloud Act-regel en mijnCaress op /overstappen (tekstvoorstel in het feitenbladvoorstel);
+  financiële continuïteit (controleverklaring, verzekering) wacht op gegevens van Jan.

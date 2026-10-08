@@ -52,6 +52,17 @@ bevestiging)" is in een ADR, staat er met **[ADR ter bevestiging]** bij.
 | Uitlegvideo's | Videotheek en video per scherm in alle drie de portalen, met een reeks per vakgebied; 174 video's | gebouwd, in elk plan | synthetische stem; geen e-learning | [code: 1054159e3; videocatalogus.json] |
 | Kwaliteitsregisters | Registers naast BIG met punten; signalen; "behandelt zonder inschrijving" | gebouwd, alleen voor paramedische vakgebieden (nog niet kiesbaar) | niet op de site tot paramedici beschikbaar zijn | [code: ba486e9a7, f54eeb80d] |
 
+## Aanvulling 8 oktober (middag): Omaha
+
+| Feit | Waarde | Niet zeggen | Bron |
+|---|---|---|---|
+| Omaha in het zorgplan | Het zorgplan is opgebouwd rond de 42 problemen van het Omaha System (Omgeving 4, Psychosociaal 12, Fysiologisch 18, Gezondheidsgedrag 8), met KBS-scores (kennis, gedrag, status, 1–5) en vier interventiecategorieën | "volgens het Omaha System", "volledig Omaha", "100% Omaha", "de enige"; geen officiële signalen en symptomen of actievlakken; modifiers wijken af; één tussenmeting per probleem | [code: Ponscura.ECD.Zorgplan/Domain/Catalog/OmahaCatalog.cs; AddRatingDialog; ZorgPlanConfigurations.cs:110] |
+| Omaha-keurmerk | Curanta heeft het niet en is niet aangesloten bij Stichting Omaha System Support (aansluiten €5.000 per jaar in de eerste twee jaar). Keurmerkhouders volgens de stichting (08-10-2026): Adapcare, Attenza, Ecare, Reware, SDB; Nedap: "Geen keurmerk" | — | omahasystem.nl/over-de-stichting/partners/ecd-leveranciers (08-10-2026) |
+
+**Nog niet op de site, tekstvoorstel ter beslissing:**
+- *Cloud Act* (trust of homepage, blok gegevens): "De applicatie en de databases staan bij IONOS, een Europees bedrijf, in Berlijn. Zet u de AI-functies of digitaal ondertekenen aan, dan lopen die via Amerikaanse bedrijven (Anthropic, DocuSign), met modelcontractbepalingen." Bron voor het kader: Kamervragen 2026Z16981, antwoorden minister Sterk (Computable, 07-10-2026). Niet: "geen Cloud Act-risico".
+- *mijnCaress op /overstappen*: "mijnCaress (PinkRoccade): migratieproject tegen een vaste prijs, zoals bij de andere systemen. Volgens M&I/Partners (ECD-inventarisatie 2025, 04-09-2025) trekt mijnCaress zich als ECD terug uit de markt." Niet: "PinkRoccade trekt het terug" als eigen bewering.
+
 ## Open punten voor Jan
 
 1. **Demo-uitrol** — uitgevoerd vóór de start (uitgangspunt Jan 08-10-2026).
