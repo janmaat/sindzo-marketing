@@ -3,10 +3,11 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import HoneypotField from '../components/HoneypotField.astro';
 
-// Form-action wijst naar de app-side endpoint zodat leads direct in de CRM
-// landen — geen Hubspot of separate lead-store nodig. Implementeer
-// AllowAnonymous-endpoint /api/lead in Curanta.Host.
-const formAction = 'https://app.curanta.nl/api/lead';
+// De aanvraag gaat naar de demo-backoffice (demo.curanta.nl), waar de proefomgeving draait en de
+// lead in de verkoopdatabase landt (/platform/verkoop/leads). Niet naar app.curanta.nl: dat is sinds
+// 28-09-2026 productie, en daar bestaat /api/lead niet (de module Demotoegang mapt hem alleen in
+// Development en Demo). Live gemeten 08-10-2026: daarheen gaf het formulier "verbindingsprobleem".
+const formAction = 'https://demo.curanta.nl/api/lead';
 ---
 <Base
   title="Demo aanvragen — Curanta"

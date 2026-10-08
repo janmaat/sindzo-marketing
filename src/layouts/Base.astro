@@ -114,13 +114,15 @@ const orgLd = {
     <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     {/*
       Eigen bezoekersmeting — de enige meting op curanta.nl (geen meetdienst van derden; besluit
-      Jan 25-09-2026, zie het feitenblad). Cookieloos; de cijfers staan in de backoffice op
-      app.curanta.nl/admin/bezoekers. Script en endpoint leven in Curanta.Host, dus wijzigingen
-      aan de meting gaan mee met een uitrol daarvan. Alleen in productie: het endpoint neemt ook
-      localhost aan, anders telt `npm run dev` mee in de echte cijfers.
+      Jan 25-09-2026, zie het feitenblad). Cookieloos; de cijfers staan in de verkoopdatabase van
+      de demo-backoffice (demo.curanta.nl, /admin/bezoekers). Daar draait de proefomgeving die
+      /api/bezoek aanneemt; op app.curanta.nl (productie sinds 28-09-2026) bestaat dat endpoint niet.
+      Script en endpoint leven in Curanta.Host, dus wijzigingen aan de meting gaan mee met een uitrol
+      daarvan. Alleen in productie: het endpoint neemt ook localhost aan, anders telt `npm run dev`
+      mee in de echte cijfers.
     */}
     {import.meta.env.PROD && (
-      <script src="https://app.curanta.nl/bezoekmeting.js" defer></script>
+      <script src="https://demo.curanta.nl/bezoekmeting.js" defer></script>
     )}
   </head>
   <body class="min-h-screen flex flex-col">
