@@ -1,11 +1,13 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
+import beeld from '../../assets/schermen/bo-jeugdzorg.jpg';
 // Nieuw 08-10-2026 (besluit Jan: eigen doelgroeppagina). Nagelopen in de code: jeugddossier,
 // meldcode, aandachtsfunctionaris (Ponscura 98465e4ce, 368a8b2b9, bedbbdaf9; JeugdzorgDemoSeed;
-// werkinstructie 93). Geen Verwijsindex-aansluiting (alleen een stub), geen scherm voor de
-// maanddeclaratie Jw323.
+// werkinstructie 93). Geen Verwijsindex-aansluiting (alleen een stub). De Jw323 stelt u op bij de
+// iJw-berichten (IjwBerichten.razor:42); de helptekst ijw.md zei tot 08-10 dat dat niet kon.
 ---
 <SegmentLayout
+  beeld={{ src: beeld, adres: 'app.curanta.nl', alt: 'Backoffice: het jeugddossier van een verzonnen cliënt, met tabbladen voor hulpvragen, toewijzingen, vertegenwoordigers, risico, meldcode, verwijsindex en audittrail.', bijschrift: 'Het jeugddossier, met de meldcode als eigen tabblad. Opname oktober 2026.' }}
   segmentKey="jeugdzorg"
   segmentLabel="Jeugdzorg"
   title="Jeugdzorgsoftware: jeugddossier en meldcode | Curanta"
@@ -21,13 +23,13 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
   modules={[
     { name: 'Jeugddossier', note: 'Hulpvragen, behandelstappen, vertegenwoordigers, risico' },
     { name: 'Meldcode', note: 'Vijf stappen tot een besluit, voor de aandachtsfunctionaris' },
-    { name: 'Toewijzingen (iJw)', note: 'Verbruik dat aftelt; berichten bij start en stop' },
+    { name: 'Toewijzingen en declaratie (iJw)', note: 'Verbruik dat aftelt; de Jw323 uit goedgekeurde productie' },
     { name: 'Inzageverzoek', note: 'Weglakken en een pdf, met vastlegging' },
     { name: 'MDO en planning', note: 'De algemene onderdelen van Curanta' },
     { name: 'Uitlegvideo’s', note: 'Een eigen reeks voor de jeugdzorg in de app' },
   ]}
   nogNiet={[
-    'De maanddeclaratie onder de Jeugdwet (Jw323): de berekening is er, een scherm nog niet.',
+    'Versturen van de declaratie zonder Vecozo-certificaat van uw organisatie; retourberichten haalt u zelf op.',
     'Een signaal naar de Verwijsindex: er is nog geen aansluiting.',
     'Melden bij Veilig Thuis vanuit Curanta: dat doet u zelf.',
   ]}

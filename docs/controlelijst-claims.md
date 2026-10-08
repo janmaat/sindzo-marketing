@@ -94,7 +94,7 @@ Opnieuw nagelopen in publieke bronnen; elke cel op /vergelijking heeft nu een UR
 | E1 | Het scherm Planhulp heet "Planning - AI assistentie", maar Planhulp gebruikt geen taalmodel (feitenblad: "geen AI"). | `Curanta.Host/.../Planhulp.razor:20` |
 | E2 | Het cliëntportaal laat niet zien dat een samenvatting met AI is opgesteld; de backoffice wel. Overweeg een vermelding voor de cliënt. | `Curanta.Portaal/Components/Pages/Zorgplan.razor:131-142` |
 | E3 | De retourberichtenpagina toont "Beschikbaar vanaf 01-12-2026": een datumbelofte in de app. | `IwmoBerichten.razor:80-91` |
-| E4 | De schermafbeeldingen op de site komen uit `docs/campagne/materiaal/schermen` (opgenomen in september 2026). Sindsdien is de interface op veel punten gewijzigd: demobanner, dossier, zorgplan, planbord en dienstdetail. Maak bo-zorgplan, bo-planbord, bo-productie, bo-vim, mw-soep/mw-bezoek/mw-rooster en pc-zorgplan/pc-samenzorgen opnieuw, met de skill `instructievideo` (hosts 7080/7230/7081). Vervang daarna de bestanden in `src/assets/schermen/`; de bijschriften noemen "Opname september 2026". | — |
+| E4 | ✅ Opgelost 08-10: verse opnames (zie beeldbronnen.md). Eerder: de schermafbeeldingen op de site kwamen uit `docs/campagne/materiaal/schermen` (opgenomen in september 2026). Sindsdien is de interface op veel punten gewijzigd: demobanner, dossier, zorgplan, planbord en dienstdetail. Maak bo-zorgplan, bo-planbord, bo-productie, bo-vim, mw-soep/mw-bezoek/mw-rooster en pc-zorgplan/pc-samenzorgen opnieuw, met de skill `instructievideo` (hosts 7080/7230/7081). Vervang daarna de bestanden in `src/assets/schermen/`; de bijschriften noemen "Opname september 2026". | — |
 | E5 | Het planbord toont Engelse woorden: "Shifts deze week", "Visits", "Today", "Resources". | Planbord |
 | E6 | Het feitenblad aanvullen: Wtta-overgangsjaar (D2), controledatum vergelijking (A4), open diensten zonder goedkeuring (C), WPM-voornemen (D7). | feitenblad |
 
@@ -119,8 +119,10 @@ met de bron in de code per rij. Belangrijkste punten:
 - **Vóór livegang: Curanta naar de demo uitrollen.** De openbare demo is van 30-09. Signaleringsplan, verblijf,
   logeren, Wzd 2025, GGZ-afscherming, kraam- en jeugddossier en "Vandaag" staan op de site als "te zien in de
   demo"; dat klopt pas na een nieuwe uitrol en gouden toestand.
-- **Gecorrigeerd:** de maanddeclaratie onder de Wmo en de Jeugdwet (Wmo323, Jw323) heeft nog geen scherm. De
-  site zei "declareren onder de Wmo" en "dient in bij gemeente"; nu staat dat als in ontwikkeling.
-- **Aangepast (besluit Jan 08-10):** planregel Basic op /prijzen en de homepage: "1 declaratiemodule: Wlz; Wmo of
-  Jeugdwet zodra de maanddeclaratie klaar is". Prijs en plan ongewijzigd.
+- **Teruggedraaid (08-10):** een correctie die zei dat de maanddeclaratie onder Wmo en Jeugdwet geen scherm had,
+  was onjuist: die bewering kwam uit verouderde helpteksten (iwmo.md:40, ijw.md:41). De knop **Declaratie opstellen**
+  op iWmo- en iJw-berichten stelt de Wmo323/Jw323 op uit goedgekeurde productie. De site zegt weer dat u onder
+  Wmo, Jeugdwet en Wlz declareert; versturen vraagt het Vecozo-certificaat.
+- **Planregel Basic:** ongewijzigd "1 declaratiemodule (Wmo, Jeugdwet óf Wlz)"; de aanpassing van 08-10 is teruggedraaid
+  omdat de aanleiding (geen Wmo-declaratiescherm) niet klopte.
 - **Gecorrigeerd:** het Wzd-overzicht wordt nu gevalideerd tegen de XSD van de IGJ (was "niet getoetst").

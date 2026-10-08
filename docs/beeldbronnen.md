@@ -4,25 +4,33 @@ Bijgehouden zodat bij elke afbeelding vaststaat waar hij vandaan komt en onder w
 
 ## Schermafbeeldingen (`src/assets/schermen/`)
 
-Echte schermen uit de demo-omgeving van Curanta, met verzonnen gegevens. Bron:
-`D:\Repos\Ponscura\docs\campagne\materiaal\schermen\` (frames uit de instructievideo's, september 2026).
-Bijgesneden met sharp (de appbalk van 65 px eraf bij de backoffice-schermen), verder onbewerkt.
+Echte schermen uit Curanta met de verzonnen demodata, **opgenomen op 8 oktober 2026** op een eigen lokale
+installatie: Ponscura `develop` (werkmap `D:\Repos\Ponscura-whelp`), eigen databank `Curanta_SiteOpname`,
+eigen poorten 7101 (backoffice), 7102 (medewerkerportaal) en 7103 (cliëntportaal), met de gewone demoseed.
+Geen gedeelde host of databank gebruikt. Opnamescripts: `opname.mjs` en `opname-portalen.mjs` (kladmap van de
+sessie; op verzoek naar `scripts/` te verplaatsen). Backoffice 1600 × 900, appbalk (65 px) eraf; portalen
+1280 × 800, onbewerkt.
 
-| Bestand | Bron | Bewerking |
+| Bestand | Scherm | Account |
 |---|---|---|
-| bo-zorgplan.jpg | bo-zorgplan-t75.jpg | bovenste 92 px weg |
-| bo-planbord.jpg | bo-planbord.jpg | appbalk weg |
-| bo-productie.jpg | bo-productie.jpg | appbalk weg |
-| bo-vim.jpg | bo-vim.jpg | appbalk weg |
-| mw-rapportage.jpg | mw-soep-t40.jpg | geen |
-| mw-rooster.jpg | mw-rooster.jpg | geen |
-| mw-bezoek.jpg | mw-bezoek.jpg | geen |
-| pc-zorgplan.jpg | pc-zorgplan.jpg | geen |
-| pc-start.jpg | pc-samenzorgen.jpg | geen |
+| bo-zorgplan.jpg | /ecd/zorgplan, Anna de Vries, doorgescrold naar problemen en SMART-doelen | medewerker2@ |
+| bo-planbord.jpg | /planning/planbord | planner@ |
+| bo-productie.jpg | /declaratie/productie | admin@ |
+| bo-vim.jpg | /vim | admin@ |
+| bo-signaleringsplan.jpg | /ecd/signaleringsplan, Ruben Hendriks | begeleider@ |
+| bo-verblijf.jpg | /ecd/verblijf | admin@ |
+| bo-wzd.jpg | /compliance/wzd | admin@ |
+| bo-kraamzorg.jpg | /segmenten/kraamzorg, Lotte Veenstra, tab Controles | kraamzorg@ |
+| bo-jeugdzorg.jpg | /segmenten/jeugdzorg, Demi de Vries | admin@ |
+| mw-rooster.jpg, mw-bezoek.jpg, mw-rapportage.jpg | medewerkerportaal: rooster, dienstdetail, rapportage | medewerker1@ |
+| pc-start.jpg, pc-zorgplan.jpg | cliëntportaal: start en Mijn zorgplan | klant1@ |
 
-Op de site staan ze in de component `Screenshot`, met het bijschrift "Schermafbeelding uit de demo,
-verzonnen gegevens". Een voorbeeldweergave (mockup) krijgt het bijschrift "Voorbeeldweergave, geen
-productscherm" (`soort="voorbeeld"`). Op dit moment gebruikt de site er geen.
+De openbare demo (app.curanta.nl) loopt achter op deze stand tot de volgende uitrol; zie de harde voorwaarde
+in `controlelijst-claims.md`.
+
+Op de site staan ze in de component `Screenshot`, met het bijschrift "Schermafbeelding met demogegevens,
+verzonnen cliënten". Een voorbeeldweergave (mockup) krijgt "Voorbeeldweergave, geen productscherm"
+(`soort="voorbeeld"`); de site gebruikt er nu geen.
 
 ## Foto's (`src/assets/fotos/`)
 

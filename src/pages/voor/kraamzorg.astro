@@ -1,11 +1,13 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
+import beeld from '../../assets/schermen/bo-kraamzorg.jpg';
 // Nieuw 08-10-2026 (besluit Jan: eigen doelgroeppagina). Nagelopen in de code: kraamweekregistratie
 // (Ponscura 4e1b70705, ADR 2026-10-05-kraamweekregistratie), KraamzorgDossier, SegmentenDemoSeed.
 // Kraamzorg is een dossiermodule, geen volledig vakgebied: declaratie, indicatieberekening en
 // planning van kraambezoeken ontbreken. Dat staat zichtbaar onder "Wat er nog niet is".
 ---
 <SegmentLayout
+  beeld={{ src: beeld, adres: 'app.curanta.nl', alt: 'Backoffice: het kraamdossier van een verzonnen cliënt, met indicatie-uren, de overdracht aan de JGZ en grafieken van de temperatuur van moeder en kind en het gewicht van het kind.', bijschrift: 'Het kraamdossier met de controles van de kraamweek. Opname oktober 2026.' }}
   segmentKey="kraamzorg"
   segmentLabel="Kraamzorg"
   title="Kraamzorgsoftware: het kraamdossier | Curanta"

@@ -10,9 +10,10 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 import type { Status } from '../config/status';
 
 import dossierBeeld from '../assets/schermen/bo-zorgplan.jpg';
-import productieBeeld from '../assets/schermen/bo-productie.jpg';
+import verblijfBeeld from '../assets/schermen/bo-verblijf.jpg';
 import bezoekBeeld from '../assets/schermen/mw-bezoek.jpg';
-import vimBeeld from '../assets/schermen/bo-vim.jpg';
+import wzdBeeld from '../assets/schermen/bo-wzd.jpg';
+import kraamBeeld from '../assets/schermen/bo-kraamzorg.jpg';
 import portaalBeeld from '../assets/schermen/pc-start.jpg';
 
 // Modulekaart, gegroepeerd zoals de backoffice. Herzien 08-10-2026:
@@ -50,9 +51,9 @@ const groups: ModuleGroup[] = [
     wie: 'Wijkverpleegkundigen, verzorgenden, begeleiders, behandelaars en de zorgadministratie.',
     beeld: {
       src: dossierBeeld,
-      alt: 'Backoffice: het zorgplan van een verzonnen cliënt met een voorgesteld ondervoedingsrisico en de knop Voeg toe aan plan.',
+      alt: 'Backoffice: het zorgplan van een verzonnen cliënt, met problemen, SMART-doelen en interventies.',
       adres: 'app.curanta.nl',
-      bijschrift: 'Het zorgplan, met een risico dat Curanta uit metingen afleidt. Opname september 2026.',
+      bijschrift: 'Het zorgplan: per probleem een SMART-doel en de interventies. Opname oktober 2026.',
     },
     modules: [
       { title: 'Cliëntdossier', status: 'demo', body: 'Per organisatie gescheiden, met archiefbeleid en een logboek van elke inzage en wijziging. Het BSN is op veldniveau versleuteld.',
@@ -81,7 +82,7 @@ const groups: ModuleGroup[] = [
       src: bezoekBeeld,
       alt: 'Medewerkerportaal: de details van een bezoek aan een verzonnen cliënt, met de knop Meld aankomst, een takenlijst uit het zorgplan, medicatieoverzicht en metingen.',
       adres: 'medewerker.curanta.nl',
-      bijschrift: 'Medewerkerportaal: een bezoek met de taken uit het zorgplan. Opname september 2026.',
+      bijschrift: 'Medewerkerportaal: een bezoek met de taken uit het zorgplan. Opname oktober 2026.',
     },
     modules: [
       { title: 'Diensten en bezoeken', status: 'demo', body: 'Diensten, pauzes, ruilverzoeken en compensatiesaldi, op een planbord per week.' },
@@ -100,16 +101,16 @@ const groups: ModuleGroup[] = [
   {
     id: 'declaratie',
     group: 'Declaratie, financiering en verblijf',
-    kort: 'Productie per bezoek, de Wlz-declaratie met verblijf, logeren en het volledig pakket thuis, en de aanlevering voor het CAK. De maanddeclaratie voor de Wmo en de Jeugdwet en de Zvw-declaratie voor de wijkverpleging zijn in ontwikkeling.',
+    kort: 'Wmo, Jeugdwet en Wlz in één systeem, van productie tot declaratie, met verblijf, logeren en het volledig pakket thuis. Zvw-declaratie voor de wijkverpleging is in ontwikkeling.',
     wie: 'De zorgadministratie, declaratiemedewerkers en controllers.',
     beeld: {
-      src: productieBeeld,
-      alt: 'Backoffice: de productieregistratie met per regel datum, financieringskader, product, minuten, status en bron.',
+      src: verblijfBeeld,
+      alt: 'Backoffice: het verblijfsoverzicht met een cliënt in een woonvorm en zijn zorgzwaartepakket, een logeerperiode met het aantal nachten van de 156, en de knop om de maandproductie te maken.',
       adres: 'app.curanta.nl',
-      bijschrift: 'Productieregistratie, met per regel de bron. Opname september 2026.',
+      bijschrift: 'Verblijf, logeren en de maandproductie voor de Wlz. Opname oktober 2026.',
     },
     modules: [
-      { title: 'iWmo en iJw', status: 'demo', noot: 'versturen na aansluiting op Vecozo', body: 'Productcodes per gemeente, toewijzingen en de berichten bij start en stop van de zorg. Een retourbericht leest u zelf in; Curanta zet de afkeuringen per oorzaak bij elkaar. Nog in ontwikkeling: de maanddeclaratie (Wmo323 en Jw323) en het automatisch ophalen van retourberichten.' },
+      { title: 'iWmo en iJw', status: 'demo', noot: 'versturen na aansluiting op Vecozo', body: 'Productcodes per gemeente, toewijzingen, de berichten bij start en stop van de zorg, en de maanddeclaratie (Wmo323, Jw323) opgesteld uit goedgekeurde productie. Een retourbericht leest u zelf in; Curanta zet de afkeuringen per oorzaak bij elkaar. Automatisch ophalen is in ontwikkeling.' },
       { title: 'iWlz en CAK', status: 'demo', noot: 'versturen na aansluiting op Vecozo', body: 'Wlz-berichten en de aanlevering voor de eigen bijdrage bij het CAK. Retourberichten leest u zelf in; automatisch ophalen is in ontwikkeling.' },
       { title: 'Productie en budget', status: 'demo', body: 'Productie per cliënt, met de bron van elke regel; financieringsmix, budgetreserveringen en signalen.' },
       { title: 'Facturatie en pgb', status: 'demo', body: 'Facturen, betalingen, sjablonen en pgb-afrekeningen.' },
@@ -130,9 +131,15 @@ const groups: ModuleGroup[] = [
     group: 'Kraamzorg en jeugdzorg',
     kort: 'Een eigen dossier voor de kraamzorg en voor de jeugdzorg. Declaratie en planning zijn daar nog niet compleet.',
     wie: 'Kraamverzorgenden en leidinggevenden in de kraamzorg; jeugdhulpverleners en de aandachtsfunctionaris.',
+    beeld: {
+      src: kraamBeeld,
+      alt: 'Backoffice: het kraamdossier van een verzonnen cliënt, met indicatie-uren, de overdracht aan de JGZ en grafieken van de temperatuur van moeder en kind en het gewicht van het kind.',
+      adres: 'app.curanta.nl',
+      bijschrift: 'Het kraamdossier met de controles van de kraamweek. Opname oktober 2026.',
+    },
     modules: [
       { title: 'Kraamdossier', status: 'demo', body: 'Controles van moeder en kind per controlemoment, grafieken van temperatuur en gewicht, geboortegegevens en bezoeken die aftellen van de indicatie-uren. Bij het afsluiten: toestemming en wijze van de overdracht aan de JGZ. Curanta verstuurt die overdracht niet.', features: ['Nog niet: Zvw-declaratie, indicatieberekening, kraambezoeken in de planning'] },
-      { title: 'Jeugddossier', status: 'demo', body: 'Hulpvragen met behandelstappen, toewijzingen onder de Jeugdwet met het verbruik, vertegenwoordigers en risico\'s.', features: ['Nog niet: de maanddeclaratie (Jw323) via een scherm'] },
+      { title: 'Jeugddossier', status: 'demo', body: 'Hulpvragen met behandelstappen, toewijzingen onder de Jeugdwet met het verbruik, vertegenwoordigers en risico\'s. De declaratie (Jw323) stelt u op bij de iJw-berichten.' },
       { title: 'Meldcode', status: 'demo', body: 'De vijf stappen tot een besluit, voor de aandachtsfunctionaris, die alleen de meldcode, de verwijsindex en het logboek ziet. Melden bij Veilig Thuis doet u zelf. Een aansluiting op de Verwijsindex is er nog niet.' },
     ],
   },
@@ -171,10 +178,10 @@ const groups: ModuleGroup[] = [
     kort: 'Incidenten, klachten en indicatoren, en de registraties die wetten vragen, met de termijnen erbij.',
     wie: 'Kwaliteitsfunctionarissen, de privacyfunctionaris, de vertrouwenspersoon en het bestuur.',
     beeld: {
-      src: vimBeeld,
-      alt: 'Backoffice: het overzicht van incidentmeldingen met tellers en een lijst meldingen om te beoordelen.',
+      src: wzdBeeld,
+      alt: 'Backoffice: de Wzd- en Wvggz-maatregelen, met een melding over naderende termijnen, de juridische titels van het verblijf met hun geldigheid en de knoppen voor verlof en ontslag.',
       adres: 'app.curanta.nl',
-      bijschrift: 'Incidentmeldingen die wachten op beoordeling. Opname september 2026.',
+      bijschrift: 'Wzd en Wvggz: maatregelen, termijnen en de juridische titel van het verblijf. Opname oktober 2026.',
     },
     modules: [
       { title: 'Incidenten en calamiteiten (VIM)', status: 'demo', body: 'De interne procedure voor het melden van incidenten die de Wkkgz vraagt: incidenten, calamiteiten en datalekken, met analyse en leervoorstellen.' },
@@ -204,7 +211,7 @@ const groups: ModuleGroup[] = [
       src: portaalBeeld,
       alt: 'Cliëntportaal: de startpagina voor een mantelzorger, met komende afspraken, berichten en knoppen voor een bericht aan het zorgteam of een afspraak aanvragen.',
       adres: 'klant.curanta.nl',
-      bijschrift: 'Cliëntportaal: de startpagina van een mantelzorger. Opname september 2026.',
+      bijschrift: 'Cliëntportaal: de startpagina van een mantelzorger. Opname oktober 2026.',
     },
     modules: [
       { title: 'Cliëntportaal', status: 'demo', body: 'Een cliënt of mantelzorger leest het zorgplan, ziet de afspraken, stuurt het zorgteam een bericht en vindt de documenten die de zorgverlener deelt. Wat een mantelzorger mag zien, legt de organisatie per persoon vast in een machtiging. Gratis, in elk plan.' },

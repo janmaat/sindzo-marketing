@@ -1,10 +1,12 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
+import beeld from '../../assets/schermen/bo-signaleringsplan.jpg';
 // Herzien 08-10-2026 met wat in de week van 4–7 oktober is gebouwd (signaleringsplan, akkoord op het
 // OPP in het portaal, verblijf met zzp, logeren, vpt, Wzd volgens de wet van 1-7-2025). Nagelopen in
 // de code; zie docs/feitenblad-voorstel-2026-10-08.md.
 ---
 <SegmentLayout
+  beeld={{ src: beeld, adres: 'app.curanta.nl', alt: 'Backoffice: het signaleringsplan van een verzonnen cliënt, met een melding over een incident sinds de vaststelling en per fase rust, spanning en crisis de signalen, wat de cliënt doet en wat de begeleider doet.', bijschrift: 'Het signaleringsplan, met het incident sinds de vaststelling. Opname oktober 2026.' }}
   image="/og/voor-ghz.png"
   segmentKey="ghz"
   segmentLabel="GHZ"

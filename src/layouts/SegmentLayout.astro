@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
+import Screenshot from '../components/Screenshot.astro';
 import { DEMO_ZELF } from '../config/demo';
 
 interface Trigger { title: string; body: string; }
@@ -22,6 +23,8 @@ interface Props {
   proofPoints?: ProofPoint[];
   caseQuote?: { quote: string; author: string; org: string };
   image?: string;         // og:image-pad voor deze segmentpagina
+  /** Een echt scherm uit de demo, direct onder de introductie. */
+  beeld?: { src: ImageMetadata; alt: string; adres: string; bijschrift: string };
   /** Wat er voor deze sector (nog) niet is; staat zichtbaar onder de modules. */
   nogNiet?: string[];
   /** Voor een sector waarvoor Curanta geen eigen product heeft (huisartsen): geen demo- en
@@ -31,7 +34,7 @@ interface Props {
 
 const {
   title, description, eyebrow, hero, subtitle,
-  triggers, modules, regulatory, proofPoints, caseQuote, image, alleenSamenwerking = false, nogNiet = [],
+  triggers, modules, regulatory, proofPoints, caseQuote, image, alleenSamenwerking = false, nogNiet = [], beeld,
 } = Astro.props;
 ---
 <Base title={title} description={description} image={image}>
@@ -47,6 +50,14 @@ const {
       )}
     </div>
   </PageHero>
+
+  {beeld && (
+    <section class="bg-curanta-50 pb-12 pt-10">
+      <div class="container-prose">
+        <Screenshot src={beeld.src} alt={beeld.alt} adres={beeld.adres} bijschrift={beeld.bijschrift} />
+      </div>
+    </section>
+  )}
 
   {proofPoints && (
     <section class="border-b border-ink-100 bg-ink-100/40">

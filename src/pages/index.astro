@@ -81,7 +81,7 @@ const werkdag = [
     icoon: 'euro',
     wie: 'Administratie',
     titel: 'Declareert wat er geleverd is',
-    tekst: 'Het bezoek wordt een productieregel, met de bron erbij, en de coördinator keurt hem goed. Voor de Wlz stelt Curanta daaruit de declaratie op; voor de Wmo en de Zvw is de maanddeclaratie in ontwikkeling. Een retourbericht leest de administratie zelf in; Curanta zet de afkeuringen per oorzaak bij elkaar.',
+    tekst: 'Het bezoek wordt een productieregel, met de bron erbij, en de coördinator keurt hem goed. Uit goedgekeurde productie stelt de administratie de declaratie op voor gemeente of zorgkantoor. Een retourbericht leest zij zelf in; Curanta zet de afkeuringen per oorzaak bij elkaar.',
   },
 ] as const;
 
@@ -119,15 +119,15 @@ const voorbeelden: Voorbeeld[] = [
     beelden: [
       {
         src: rapportage,
-        alt: 'Medewerkerportaal: het scherm Rapportage schrijven bij een bezoek, met velden voor subjectief, objectief en evaluatie, gekoppeld aan het probleem Pijn uit het zorgplan.',
+        alt: 'Medewerkerportaal: het scherm Rapportage schrijven bij een bezoek, met de problemen uit het zorgplan om aan te koppelen en velden voor subjectief, objectief en evaluatie.',
         adres: 'medewerker.curanta.nl',
-        bijschrift: 'Medewerkerportaal: rapportage bij een bezoek, gekoppeld aan een probleem uit het zorgplan. Opname september 2026.',
+        bijschrift: 'Medewerkerportaal: rapportage bij een bezoek, gekoppeld aan een probleem uit het zorgplan. Opname oktober 2026.',
       },
       {
         src: portaalZorgplan,
         alt: 'Cliëntportaal: het zorgplan van een cliënt, met een samenvatting in gewone taal en de zorgproblemen met wat het zorgteam doet.',
         adres: 'klant.curanta.nl',
-        bijschrift: 'Cliëntportaal: het zorgplan zoals de cliënt en de mantelzorger het zien. De samenvatting schrijft of controleert de zorgverlener. Opname september 2026.',
+        bijschrift: 'Cliëntportaal: het zorgplan zoals de cliënt en de mantelzorger het zien. De samenvatting schrijft of controleert de zorgverlener. Opname oktober 2026.',
       },
     ],
   },
@@ -151,13 +151,13 @@ const voorbeelden: Voorbeeld[] = [
         src: planbord,
         alt: 'Backoffice: het planbord van een week, met het aantal diensten, bezoeken en medewerkers, en bovenaan een lijst conflicten per medewerker.',
         adres: 'app.curanta.nl',
-        bijschrift: 'Backoffice: het planbord van de week, met bovenaan conflicten zoals een bezoek dat in een pauze valt. Opname september 2026.',
+        bijschrift: 'Backoffice: het planbord van de week, met bovenaan conflicten zoals een bezoek dat in een pauze valt. Opname oktober 2026.',
       },
       {
         src: rooster,
-        alt: 'Medewerkerportaal: het rooster van een zorgmedewerker over twee weken, met een melding dat een collega iets heeft overgedragen.',
+        alt: 'Medewerkerportaal: het rooster van een zorgmedewerker over twee weken, met de bezoeken van vandaag en een melding dat een collega iets heeft overgedragen.',
         adres: 'medewerker.curanta.nl',
-        bijschrift: 'Medewerkerportaal: het rooster van de zorgmedewerker, met een overdracht van een collega. Opname september 2026.',
+        bijschrift: 'Medewerkerportaal: het rooster van de zorgmedewerker, met een overdracht van een collega. Opname oktober 2026.',
       },
     ],
   },
@@ -165,30 +165,30 @@ const voorbeelden: Voorbeeld[] = [
     id: 'declaratie',
     kop: 'Declaratie en kwaliteit',
     wie: 'De medewerker administratie of declaratie, en de kwaliteitsfunctionaris.',
-    doet: 'Controleert de productie van de maand en verwerkt een retourbericht. Beoordeelt incidentmeldingen en klachten.',
+    doet: 'Controleert de productie van de maand, stelt de declaratie op en verwerkt een retourbericht. Beoordeelt incidentmeldingen en klachten.',
     curanta: [
       'Maakt productieregels uit afgeronde bezoeken en registraties, met de bron erbij.',
-      'Verwerkt de toewijzingen van gemeenten en zorgkantoren, en stelt de Wlz-declaratie en de aanlevering voor het CAK op.',
+      'Stelt uit goedgekeurde productie de declaraties op voor de Wmo, de Jeugdwet en de Wlz, en de aanlevering voor het CAK.',
       'Volgt een incidentmelding of klacht van melding tot afhandeling, met de termijnen uit de Wkkgz.',
     ],
     statussen: [
-      { status: 'demo', tekst: 'Productieregistratie, Wlz-declaratie opstellen, incidentmeldingen en klachten' },
+      { status: 'demo', tekst: 'Productieregistratie, declaraties opstellen, incidentmeldingen en klachten' },
       { status: 'inrichten', tekst: 'Versturen via Vecozo: na aansluiting met het Vecozo-certificaat van uw organisatie. In de demo zijn de koppelingen niet live.' },
-      { status: 'ontwikkeling', tekst: 'De maanddeclaratie voor de Wmo en de Jeugdwet, en declareren bij zorgverzekeraars (Zvw). Retourberichten automatisch ophalen; nu leest u ze zelf in.' },
+      { status: 'ontwikkeling', tekst: 'Declareren bij zorgverzekeraars (Zvw). Retourberichten automatisch ophalen; nu leest u ze zelf in.' },
     ],
     link: { label: 'Alle onderdelen van declaratie en kwaliteit', href: '/oplossing#declaratie' },
     beelden: [
       {
         src: productie,
-        alt: 'Backoffice: de productieregistratie, met per regel datum, financieringskader, product, zorgminuten, status en bron, zoals mobiele app of planning.',
+        alt: 'Backoffice: de productieregistratie, met tellers voor in te dienen, goedgekeurde en afgekeurde regels, en per regel medewerker, cliënt, datum, kader, product, minuten, status en bron.',
         adres: 'app.curanta.nl',
-        bijschrift: 'Backoffice: productieregistratie, met per regel de bron (planning of medewerkerportaal) en de status. Opname september 2026.',
+        bijschrift: 'Backoffice: productieregistratie, met per regel de bron, zoals de groepszorg, en de status. Opname oktober 2026.',
       },
       {
         src: vim,
         alt: 'Backoffice: het overzicht van incidentmeldingen met het aantal gemelde incidenten, calamiteiten en datalekken, en een lijst meldingen om te beoordelen.',
         adres: 'app.curanta.nl',
-        bijschrift: 'Backoffice: incidentmeldingen die wachten op beoordeling. Opname september 2026.',
+        bijschrift: 'Backoffice: incidentmeldingen die wachten op beoordeling. Opname oktober 2026.',
       },
     ],
   },
@@ -198,8 +198,8 @@ const doelgroepen = [
   {
     naam: 'VVT',
     kop: 'Wijkverpleging, thuiszorg en verpleeghuizen',
-    tekst: 'Routes en bezoeken, rapportage onderweg, medicatie uit Medimo of de eigen registratie, en productie per bezoek voor de Wmo, de Wlz en de Zvw.',
-    let: 'De maanddeclaratie voor de Wmo en de declaratie bij zorgverzekeraars (Zvw) zijn in ontwikkeling.',
+    tekst: 'Routes en bezoeken, rapportage onderweg, medicatie uit Medimo of de eigen registratie, en declareren onder de Wmo en de Wlz.',
+    let: 'Declareren bij zorgverzekeraars (Zvw) is in ontwikkeling.',
     href: '/voor/vvt',
     link: 'Curanta voor de VVT',
     foto: fotoVvt,
@@ -235,7 +235,7 @@ const fasen = [
 ];
 
 const plannen = [
-  { naam: 'Basic', prijs: '€19', voor: 'Tot 25 medewerkers. Dossier, rapportage en één declaratiemodule: de Wlz, of de Wmo of Jeugdwet zodra de maanddeclaratie daarvoor klaar is.' },
+  { naam: 'Basic', prijs: '€19', voor: 'Tot 25 medewerkers. Dossier, rapportage en één declaratiemodule (Wmo, Jeugdwet of Wlz).' },
   { naam: 'Compliance Pro', prijs: '€29', voor: 'Alles uit Basic, plus kwaliteit, wet- en regelgeving en het cliëntportaal in vijf talen.' },
   { naam: 'Totaalzorg Plus', prijs: '€39', voor: 'Alles uit Compliance Pro, plus volledige planning, routeplanning en cao-controle.' },
   { naam: 'Enterprise', prijs: 'Op aanvraag', voor: 'Voor concerns en ketens: concernrapportage, een vaste success manager, afspraken over service op maat.' },
@@ -286,8 +286,8 @@ const plannen = [
           src={zorgplan}
           eager
           adres="app.curanta.nl"
-          alt="Backoffice: het zorgplan van een verzonnen cliënt. Bovenaan de status, het aantal problemen en interventies en de volgende evaluatie. Daaronder een door het systeem voorgesteld ondervoedingsrisico met de knop Voeg toe aan plan, en het probleem Huidintegriteit met een SMART-doel."
-          bijschrift="Het zorgplan in de backoffice. Uit twee gewichtsmetingen leidt Curanta met een vaste rekenregel een ondervoedingsrisico af; de verpleegkundige kiest met ‘Voeg toe aan plan’ of het in het zorgplan komt. Opname september 2026."
+          alt="Backoffice: het zorgplan van een verzonnen cliënt. Bovenaan de gekozen cliënt, daaronder de status, het aantal problemen en lopende interventies en de uiterste datum van de volgende evaluatie, en het eerste probleem, Huidintegriteit."
+          bijschrift="Het zorgplan in de backoffice: status, problemen, interventies en de volgende evaluatie. De interventies staan als taken bij het bezoek in het medewerkerportaal. Opname oktober 2026."
         />
       </div>
     </div>
@@ -302,7 +302,7 @@ const plannen = [
           Eén bezoek, van rooster tot declaratie
         </h2>
         <p class="mt-4 text-lg leading-relaxed text-ink-700">
-          Een voorbeeld uit de zorg thuis. Wat de één vastlegt, ziet de volgende in hetzelfde
+          Een voorbeeld uit de wijkverpleging. Wat de één vastlegt, ziet de volgende in hetzelfde
           systeem terug.
         </p>
       </div>
@@ -331,7 +331,7 @@ const plannen = [
           Drie voorbeelden uit het werk
         </h2>
         <p class="mt-4 text-lg leading-relaxed text-ink-700">
-          Echte schermen uit de demo-omgeving, met verzonnen cliënten en medewerkers. Per voorbeeld:
+          Echte schermen van Curanta met de demogegevens: verzonnen cliënten en medewerkers. Per voorbeeld:
           wie ermee werkt, wat die persoon doet en wat Curanta daarbij doet.
         </p>
       </div>
