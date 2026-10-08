@@ -16,7 +16,7 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 >
   <PageHero
     eyebrow="Prijzen"
-    title="Eerlijke prijzen, op tafel."
+    title="Prijzen per medewerker per maand"
     subtitle="Vier abonnementsplannen; u zet alleen aan wat u nodig hebt. Geen aparte kosten voor implementatie, training, hosting of basisondersteuning. Zorgmedewerkers die alleen het medewerkerportaal gebruiken: €19 per maand, in elk plan."
   />
 
@@ -169,7 +169,7 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
             </tr>
             <tr>
               <td class="px-4 py-3">Migratie vanuit uw huidige ECD</td>
-              <td class="px-4 py-3">per geval, vaak nacalculatie</td>
+              <td class="px-4 py-3">per geval</td>
               <td class="px-4 py-3 font-semibold text-curanta-900">
                 vaste prijs vooraf, per bronsysteem
               </td>
@@ -193,10 +193,9 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 
       <p class="mt-4 max-w-3xl text-xs text-ink-500">
         Marktbandbreedte uit de Heldy-kostengids voor Nederlandse zorgaanbieders (april 2026).
-        Een bandbreedte, geen tarief van een specifieke leverancier —
-        de grote partijen in deze markt publiceren hun prijzen niet, dus een cijfer per
-        concurrent zou niet te verifiëren zijn. Wat u werkelijk betaalt hangt bij ons én bij hen
-        af van schaal, segment en modulekeuze.
+        Een bandbreedte, geen tarief van een specifieke leverancier: niet elke leverancier
+        publiceert een prijs, en wie dat doet rekent vaak in een andere eenheid (zie hieronder).
+        Wat u werkelijk betaalt hangt bij ons én bij anderen af van schaal, segment en modulekeuze.
       </p>
 
       <p class="mt-6 max-w-3xl text-sm text-ink-700 leading-relaxed">
@@ -234,7 +233,7 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
       </p>
       <p class="mt-3 text-ink-700 leading-relaxed">
         Daarom zetten wij hier geen omgerekend bedrag neer. Hieronder staat per leverancier wat
-        hij <em>zelf</em> publiceert, in zijn eigen eenheid.
+        hij zelf publiceert, in zijn eigen eenheid.
       </p>
     </div>
     <div class="mt-8 overflow-x-auto rounded-xl border border-ink-100 bg-white">
@@ -322,7 +321,7 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
   </section>
 
   <section class="container-prose py-16 border-t border-ink-100">
-    <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Wat <em>niet</em> apart in rekening wordt gebracht</h2>
+    <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Wat niet apart in rekening wordt gebracht</h2>
     <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {[
         ['Hosting', 'IONOS Cloud in Berlijn (EU) — geen extra kosten.'],
@@ -385,7 +384,7 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 
   <Cta
     title="Niet zeker welk plan past?"
-    subtitle="Stuur uw situatie (sector, omvang, huidige systemen). Wij reageren binnen 1 werkdag. Ons advies is eerlijk, ook als dat is dat een andere leverancier beter past."
+    subtitle="Stuur uw situatie (sector, omvang, huidige systemen). Wij reageren binnen 1 werkdag, ook als ons advies is dat een andere leverancier beter past."
     primary={{ label: 'Vraag een advies', href: '/contact' }}
     secondary={DEMO_ZELF}
   />

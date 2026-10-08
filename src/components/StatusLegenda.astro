@@ -1,0 +1,17 @@
+---
+// Uitleg van de vier statussen; staat op elke pagina die ze gebruikt.
+import { STATUS, STATUS_VOLGORDE } from '../config/status';
+interface Props { class?: string; }
+const { class: klasse = '' } = Astro.props;
+---
+<dl class={`grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2 ${klasse}`}>
+  {STATUS_VOLGORDE.map((k) => (
+    <div class="relative pl-5">
+      <dt class="font-semibold text-ink-900">
+        <span class={`status-dot absolute left-0 top-1.5 ${STATUS[k].dot}`} aria-hidden="true"></span>
+        {STATUS[k].label}
+      </dt>
+      <dd class="mt-0.5 text-ink-700">{STATUS[k].uitleg}</dd>
+    </div>
+  ))}
+</dl>

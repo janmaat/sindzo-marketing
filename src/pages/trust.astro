@@ -1,156 +1,197 @@
 ---
 import Base from '../layouts/Base.astro';
+import StatusLabel from '../components/StatusLabel.astro';
+import StatusLegenda from '../components/StatusLegenda.astro';
 import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
+import type { Status } from '../config/status';
 
-// Trust Centre — kerncompetentie t.o.v. concurrenten die deze info pas in
-// tender-fase delen. Eerlijke status, niet marketing-spraak. Iedere claim
-// linkt naar onderbouwing (zodra documenten publiek beschikbaar zijn).
-//
-// Status-conventie:
-//   live    — aantoonbaar nu, document beschikbaar
-//   wip     — in uitvoering: gebouwd of begonnen, nog niet aangetoond of aangesloten
-//   roadmap — gepland maar nog niet gestart
+// Trust Centre. Herzien 08-10-2026:
+// - Twee soorten onderwerpen. Een functie of koppeling (FHIR-API, NIS2-module) krijgt de gedeelde
+//   status uit src/config/status.ts, gelijk aan de homepage, /oplossing en /integraties. Een
+//   maatregel van Curanta als organisatie (certificering, pentest, FG) krijgt een eigen stand:
+//   geregeld, in uitvoering, gepland of nog niet begonnen.
+// - De wettelijke termijnen staan hier, niet meer op de homepage; nagelopen tegen officiële
+//   bronnen op 08-10-2026 (zie de bronregel onder die sectie en docs/controlelijst-claims.md).
 //
 // "Laatst herzien" is een vaste datum, geen builddatum: elke uitrol zette anders de datum van
 // vandaag, ook zonder herziening. Bijwerken bij een inhoudelijke herziening.
-const HERZIEN = '28 september 2026';
+const HERZIEN = '8 oktober 2026';
 
-const pillars = [
+type Stand = 'geregeld' | 'uitvoering' | 'gepland' | 'niet';
+const STAND: Record<Stand, { label: string; dot: string }> = {
+  geregeld: { label: 'Geregeld', dot: 'bg-accent-600' },
+  uitvoering: { label: 'In uitvoering', dot: 'bg-amber-500' },
+  gepland: { label: 'Gepland', dot: 'bg-ink-300' },
+  niet: { label: 'Nog niet', dot: 'bg-rose-400' },
+};
+
+interface Item { label: string; note: string; status?: Status; stand?: Stand; doc?: string; }
+
+const pillars: { key: string; title: string; intro: string; items: Item[] }[] = [
   {
     key: 'security',
     title: 'Informatiebeveiliging',
-    intro: 'Het NEN 7510-werkdocument is leidend. Een externe pentest is nog niet uitgevoerd, en de hele database is nog niet versleuteld; dat zeggen wij liever dan dat wij het verzwijgen.',
+    intro: 'Het NEN 7510-werkdocument is leidend. Wat nog niet is gedaan, staat er ook bij: een externe pentest en de versleuteling van de hele database.',
     items: [
-      { label: 'NEN 7510:2024', status: 'wip', note: 'Maatregelen ingevoerd met een eerste beoordeling; externe audit gepland Q4 2026. Niet gecertificeerd.', doc: '/procurement' },
-      { label: 'NEN 7512 (uitwisseling)', status: 'wip', note: 'Toegepast op FHIR-/LSP-koppelingen', doc: '#nen7512' },
-      { label: 'NEN 7513 (logging)', status: 'live', note: 'Auditlog met hash-keten, zodat een wijziging achteraf aantoonbaar is. Een logregel over een cliënt blijft bewaard zolang het dossier bestaat; logregels zonder dossier 7 jaar.', doc: '#nen7513' },
-      { label: 'ISO 27001', status: 'roadmap', note: 'Audit gepland 2027', doc: '#iso27001' },
-      { label: 'Externe pentest', status: 'roadmap', note: 'Nog niet uitgevoerd', doc: '#pentest' },
-      { label: 'Versleuteling BSN', status: 'live', note: 'BSN op veldniveau versleuteld met AES-256-GCM', doc: '#encryption' },
-      { label: 'Versleuteling hele database', status: 'wip', note: 'Nog niet. Is een voorwaarde vóór de eerste klant.', doc: '#database' },
+      { label: 'NEN 7510:2024', stand: 'uitvoering', note: 'Maatregelen ingevoerd, met een eerste beoordeling. Een externe audit is gepland. Curanta is niet gecertificeerd.', doc: '/procurement' },
+      { label: 'NEN 7513 (logging)', stand: 'geregeld', note: 'Auditlog met hash-keten, zodat een wijziging achteraf aantoonbaar is. Een logregel over een cliënt blijft bewaard zolang het dossier bestaat; logregels zonder dossier 7 jaar.' },
+      { label: 'NEN 7512 (uitwisseling)', stand: 'uitvoering', note: 'Uitgangspunt bij het bouwen van de koppelingen; nog niet extern getoetst.' },
+      { label: 'Tweestapsverificatie', stand: 'geregeld', note: 'Verplicht in de backoffice voor zorg- en beheerrollen.' },
+      { label: 'Versleuteling BSN', stand: 'geregeld', note: 'Op veldniveau versleuteld met AES-256-GCM; zoeken via een aparte hash, zonder te ontsleutelen.' },
+      { label: 'Versleuteling hele database', stand: 'niet', note: 'Nog niet. Een voorwaarde vóór de eerste klant.' },
+      { label: 'Externe pentest', stand: 'niet', note: 'Nog niet uitgevoerd.' },
+      { label: 'ISO 27001', stand: 'gepland', note: 'Audit gepland in 2027.' },
     ],
   },
   {
     key: 'privacy',
-    title: 'Privacy & gegevensbescherming',
-    intro: 'Met een duidelijke verdeling van de rollen bij de verwerking. Het BSN staat altijd versleuteld opgeslagen.',
+    title: 'Privacy en gegevensbescherming',
+    intro: 'Wie welke gegevens verwerkt, en waar.',
     items: [
-      { label: 'Functionaris gegevensbescherming', status: 'wip', note: 'Nog niet aangesteld. Een externe FG volgt vóór de eerste zorgorganisatie met echte cliëntgegevens.', doc: '#fg' },
-      { label: 'Verwerkersovereenkomst', status: 'wip', note: 'In uitvoering. Wij stellen hem op aanvraag op, zonder NDA.', doc: '/procurement' },
-      { label: 'Subverwerkers', status: 'live', note: 'Hosting binnen de EER (IONOS, Berlijn); site en mail bij Strato (Duitsland). De AI-functies gebruiken, als ze aan staan, Anthropic in de VS met gepseudonimiseerde gegevens en modelcontractbepalingen (SCC). Digitaal ondertekenen van HR-documenten loopt, als u het gebruikt, via DocuSign in de VS.', doc: '/privacy' },
-      { label: 'DPIA', status: 'wip', note: 'Voor de eigen DPIA van de zorgaanbieder: wij stellen de onderbouwing op aanvraag op.', doc: '/procurement' },
-      { label: 'BSN-encryptie', status: 'live', note: 'AES-256-GCM op veldniveau; zoeken via een aparte hash, zonder te ontsleutelen', doc: '#bsn' },
-      { label: 'Recht op vergetelheid', status: 'live', note: 'Pseudonimisering + audit-trail', doc: '#vergetelheid' },
+      { label: 'Functionaris gegevensbescherming', stand: 'niet', note: 'Nog niet aangesteld. Een externe FG volgt vóór de eerste zorgorganisatie met echte cliëntgegevens.' },
+      { label: 'Verwerkersovereenkomst', stand: 'uitvoering', note: 'Wij stellen hem op aanvraag op, zonder NDA.', doc: '/procurement' },
+      { label: 'Subverwerkers', stand: 'geregeld', note: 'Hosting bij IONOS (Berlijn); site en mail bij Strato (Duitsland). Als de AI-functies aan staan: Anthropic in de VS, gepseudonimiseerd, met modelcontractbepalingen. Als u digitaal ondertekent: DocuSign in de VS.', doc: '/privacy' },
+      { label: 'DPIA', stand: 'uitvoering', note: 'Voor de eigen DPIA van uw organisatie stellen wij de onderbouwing op aanvraag op.', doc: '/procurement' },
+      { label: 'Pseudonimiseren', stand: 'geregeld', note: 'Cliëntgegevens pseudonimiseren bij een verzoek tot verwijdering, met een vastlegging in het logboek.' },
     ],
   },
   {
     key: 'interop',
-    title: 'Interoperabiliteit & openheid',
-    intro: 'Een eerlijke status per standaard en een export van uw gegevens in JSON. U zit niet vast aan één leverancier.',
+    title: 'Koppelingen en uw gegevens',
+    intro: 'Welke standaarden er zijn, en hoe u uw gegevens meeneemt. De status per koppeling is dezelfde als op de pagina Koppelingen.',
     items: [
-      { label: 'FHIR R4', status: 'wip', note: 'BgZ en eOverdracht in FHIR R4, gevalideerd tegen de profielen van Nictiz; publieke FHIR-API in ontwikkeling', doc: '/api' },
-      { label: 'MedMij', status: 'wip', note: 'Interne BgZ-brug gebouwd; MedMij-registratie en PKIoverheid-certificaat zijn er nog niet', doc: '#medmij' },
-      { label: 'Wegiz / eOverdracht', status: 'wip', note: 'BgZ- en eOverdracht-bundel opstellen uit het dossier; verzenden via Nuts nog niet aangesloten', doc: '#wegiz' },
-      { label: 'LSP', status: 'wip', note: 'Koppeling gebouwd; VZVZ-aansluiting en UZI-certificaten zijn er nog niet', doc: '#lsp' },
-      { label: 'Publieke API', status: 'wip', note: 'Er is nog geen publieke API: geen endpoint voor externe partijen, geen API-sleutel en geen testomgeving. Een publieke FHIR-API is in ontwikkeling.', doc: '/api' },
-      { label: 'Export van uw gegevens', status: 'live', note: 'Volledige export van uw gegevens en bestanden in JSON', doc: '/overstappen#eruit' },
+      { label: 'FHIR-API voor de BgZ', status: 'inrichten', note: 'Publiek en read-only (FHIR R4), voor vooraf geregistreerde systemen. Geen testomgeving en geen algemene lees- of schrijftoegang.', doc: '/api' },
+      { label: 'Wegiz / eOverdracht', status: 'ontwikkeling', note: 'Het eOverdracht-document en het verzenden zijn nog niet gebouwd.', doc: '/integraties' },
+      { label: 'MedMij', status: 'ontwikkeling', note: 'Registratie bij MedMij en een PKIoverheid-certificaat zijn er nog niet.', doc: '/integraties' },
+      { label: 'LSP', status: 'ontwikkeling', note: 'VZVZ-aansluiting en UZI-certificaten zijn er nog niet.', doc: '/integraties' },
+      { label: 'Export van uw gegevens', stand: 'geregeld', note: 'Een volledige export van uw gegevens en bestanden in JSON. Het BSN alleen als laatste vier cijfers en hash.', doc: '/overstappen#eruit' },
     ],
   },
   {
     key: 'operations',
-    title: 'Operationele continuïteit',
-    intro: 'Hosting in de EU en een openbare statuspagina. Wat wij nog niet met een meting of test kunnen aantonen, staat hieronder ook zo.',
+    title: 'Beschikbaarheid en continuïteit',
+    intro: 'Hosting in de EU en een openbare statuspagina. Er draait nog geen klant in productie, dus gemeten cijfers zijn er nog niet.',
     items: [
-      { label: 'Hosting in de EU', status: 'live', note: 'IONOS Cloud, Berlijn (Duitsland)', doc: '/privacy' },
-      { label: 'Beschikbaarheid', status: 'wip', note: 'Doel 99,9% op kantooruren. Nog geen gemeten historie: er draait nog geen klant in productie', doc: 'https://app.curanta.nl/status' },
-      { label: 'Openbare statuspagina', status: 'live', note: 'Actuele beschikbaarheid per onderdeel; geen incidenthistorie', doc: 'https://app.curanta.nl/status' },
-      { label: 'Hersteltest', status: 'roadmap', note: 'Hersteloefening nog niet uitgevoerd', doc: '#bcm' },
-      { label: 'RPO / RTO', status: 'wip', note: 'Doel in onze voorwaarden: RPO 1 uur, RTO 4 uur. Nog niet aangetoond met een hersteltest', doc: '/voorwaarden#sla' },
-      { label: 'Exit-procedure', status: 'live', note: 'Vastgelegd in onze voorwaarden (artikel 9)', doc: '/voorwaarden#beeindiging' },
+      { label: 'Hosting in de EU', stand: 'geregeld', note: 'IONOS Cloud, Berlijn (Duitsland).', doc: '/privacy' },
+      { label: 'Openbare statuspagina', stand: 'geregeld', note: 'Actuele beschikbaarheid per onderdeel; geen incidenthistorie.', doc: 'https://app.curanta.nl/status' },
+      { label: 'Beschikbaarheid', stand: 'uitvoering', note: 'Doel 99,9% op kantooruren. Nog geen gemeten historie.', doc: 'https://app.curanta.nl/status' },
+      { label: 'RPO en RTO', stand: 'uitvoering', note: 'Doel in onze voorwaarden: RPO 1 uur, RTO 4 uur. Nog niet aangetoond met een hersteltest.', doc: '/voorwaarden#sla' },
+      { label: 'Hersteltest', stand: 'niet', note: 'Nog niet uitgevoerd.' },
+      { label: 'Exit-procedure', stand: 'geregeld', note: 'In onze voorwaarden (artikel 9): de export binnen 5 werkdagen en 30 dagen om hem op te halen; binnen die 30 dagen wissen wij uw gegevens, met een vernietigingsverklaring.', doc: '/voorwaarden#beeindiging' },
     ],
   },
   {
     key: 'regulatory',
-    title: 'Wetten en sectorregels',
-    intro: 'Wkkgz, Wzd, Wtza, Wtta en de Cyberbeveiligingswet: wat de wet vraagt en wat Curanta daarbij doet.',
+    title: 'Ondersteuning bij wetten',
+    intro: 'Curanta helpt u registreren en termijnen bewaken. Aan de wet voldoen doet uw organisatie zelf; de software is daar een hulpmiddel bij.',
     items: [
-      { label: 'Cbw (NIS2)', status: 'wip', note: 'De Cyberbeveiligingswet geldt sinds 15 augustus 2026. Curanta heeft een NIS2-incidentmodule die de meldtermijnen van 24 uur, 72 uur en één maand bewaakt.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '#cbw' },
-      { label: 'Wkkgz-klachtenregeling', status: 'live', note: 'Module en werkwijze standaard aanwezig', doc: '#wkkgz' },
-      { label: 'Wzd-stappenplan', status: 'live', note: 'Met een halfjaarlijkse XML-uitdraai voor de IGJ, nog niet gevalideerd tegen de specificatie van de IGJ', doc: '#wzd' },
-      { label: 'Wtza-jaarverantwoording', status: 'live', note: 'Toelating vastleggen en de deadline van 31 mei bewaken, met herinneringen', doc: '#wtza' },
-      { label: 'Wtta (toelating uitleners)', status: 'live', note: 'Uw eigen toelating vastleggen, en als inlener per uitlener de controle van zijn toelating (datum, uitkomst, bewijs), met een controletaak bij elke nieuwe inleenovereenkomst. De Wtta geldt vanaf 1 januari 2027; het register van de NAU is vanaf 1 juli 2027 te raadplegen', doc: '#wtta' },
-      { label: 'AI-verordening', status: 'live', note: 'Register en classificatie van de AI-systemen in Curanta, met een logboek van AI-aanroepen', doc: '#ai-act' },
+      { label: 'Cyberbeveiligingswet (NIS2)', status: 'demo', note: 'Een module om cyberincidenten te registreren en de meldtermijnen van 24 uur, 72 uur en één maand te bewaken.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '/oplossing#kwaliteit' },
+      { label: 'Wkkgz', status: 'demo', note: 'Klachtenregeling en de interne procedure voor het melden van incidenten.', doc: '/oplossing#kwaliteit' },
+      { label: 'Wzd en Wvggz', status: 'demo', note: 'Registratie, en het halfjaarlijkse overzicht voor de IGJ, gevalideerd tegen het XML-schema van de IGJ. Een echte aanlevering is er nog niet.', doc: '/oplossing#kwaliteit' },
+      { label: 'Wtza', status: 'demo', note: 'Toelating vastleggen en de jaarverantwoording bewaken (vóór 1 juni, in DigiMV).', doc: '/oplossing#kwaliteit' },
+      { label: 'Wtta', status: 'demo', note: 'Uw eigen toelating vastleggen, en als inlener per uitlener de controle van zijn toelating.', doc: '/oplossing#kwaliteit' },
+      { label: 'AI-verordening', status: 'demo', note: 'Een register en classificatie van de AI-systemen in Curanta, met een logboek van AI-aanroepen.', doc: '/oplossing#ai' },
     ],
   },
 ];
 
-const dot = (s: string) =>
-  s === 'live' ? 'bg-green-500' : s === 'wip' ? 'bg-amber-500' : 'bg-ink-300';
-
-const statusLabel = (s: string) =>
-  s === 'live' ? 'Aantoonbaar' : s === 'wip' ? 'In uitvoering' : 'Gepland';
-
-// Alleen een link als er echt iets achter zit: een pagina of de statuspagina. De losse
-// ankers (#nen7513, #wtta …) bestonden niet op deze pagina en gaven een lege klik.
-const heeftOnderbouwing = (doc?: string) => !!doc && !doc.startsWith('#');
+// Wettelijke termijnen, nagelopen op 08-10-2026 (bronnen onder de sectie).
+const termijnen = [
+  {
+    datum: 'Sinds 15 augustus 2026',
+    wet: 'Cyberbeveiligingswet (NIS2)',
+    wat: 'Zorgaanbieders met 50 of meer fte, of met een jaaromzet én balanstotaal van €10 miljoen of meer, vallen eronder. Zij registreren zich bij het NCSC en melden een significant incident binnen 24 uur (vroegtijdige waarschuwing), 72 uur (melding) en één maand (eindverslag).',
+    curanta: 'Registratie van incidenten en bewaking van de drie meldtermijnen.',
+  },
+  {
+    datum: 'Elk jaar vóór 1 juni',
+    wet: 'Openbare jaarverantwoording (Wtza)',
+    wat: 'Zorgaanbieders die zorg leveren uit de Zvw of de Wlz, of subsidie van VWS krijgen, maken hun jaarverantwoording openbaar via DigiMV. Solisten die zelf de zorg verlenen zijn uitgezonderd.',
+    curanta: 'Vastleggen van de toelating en een herinnering vóór de deadline. De aanlevering zelf doet u in DigiMV.',
+  },
+  {
+    datum: '1 januari 2027 en 1 januari 2028',
+    wet: 'Wtta (toelating uitleners)',
+    wat: 'De wet geldt vanaf 1 januari 2027; 2027 is een overgangsjaar. Vanaf 1 januari 2028 mag u alleen inlenen van een uitlener met een toelating. Het register van de NAU is te raadplegen vanaf 1 juli 2027.',
+    curanta: 'Per uitlener de controle van de toelating vastleggen, met datum, uitkomst en bewijs. Geen koppeling met het register van de NAU.',
+  },
+  {
+    datum: '2 december 2027',
+    wet: 'AI-verordening (hoog risico)',
+    wat: 'Vanaf dan gelden de extra eisen voor AI-systemen met een hoog risico uit bijlage III. Die datum is in 2026 uitgesteld (oorspronkelijk 2 augustus 2026). Niet elke AI-toepassing in de zorg valt eronder.',
+    curanta: 'Een register van de AI-systemen in Curanta. Alleen de kandidaatmatching bij werving is hoog risico; die staat standaard uit.',
+  },
+];
 ---
 <Base
   image="/og/trust.png"
   title="Trust Centre: beveiliging, privacy en AVG | Curanta"
-  description="De stand van beveiliging, privacy en koppelingen bij Curanta, per onderwerp met een eerlijke status. Zonder NDA te lezen."
+  description="De stand van beveiliging, privacy, koppelingen en wettelijke termijnen bij Curanta, per onderwerp: wat geregeld is en wat nog niet. Zonder NDA te lezen."
 >
-  <section class="border-b border-ink-300 bg-gradient-to-b from-curanta-50 to-cream">
-    <div class="container-prose py-16 sm:py-20">
-      <span class="badge mb-5">Trust Centre · laatst herzien {HERZIEN}</span>
-      <h1 class="font-display text-4xl font-bold tracking-tightish text-ink-900 sm:text-5xl max-w-3xl">
-        Beveiliging en privacy op tafel, niet in een pdf achter een NDA.
+  <section class="border-b border-ink-200 bg-curanta-50">
+    <div class="container-prose py-14 sm:py-16">
+      <p class="eyebrow">Trust Centre · laatst herzien {HERZIEN}</p>
+      <h1 class="mt-3 max-w-3xl font-display text-4xl font-bold text-curanta-900 sm:text-5xl">
+        Beveiliging, privacy en koppelingen: de stand per onderwerp
       </h1>
       <p class="mt-5 max-w-2xl text-lg text-ink-700">
-        Inkoop, FG, informatiebeveiliger en bestuur kunnen Curanta beoordelen vóór er een gesprek
-        nodig is. Elk onderwerp hieronder heeft een eerlijke status: groen, geel of grijs.
+        Voor inkoop, de functionaris gegevensbescherming, de informatiebeveiliger en het bestuur.
+        Per onderwerp ziet u wat geregeld is, wat in uitvoering is en wat nog niet is begonnen.
       </p>
-      <div class="mt-8 flex flex-wrap items-center gap-4 text-sm">
+      <div class="mt-8 flex flex-wrap items-center gap-3 text-sm">
         <a href="/procurement" class="btn-primary no-underline">Naar het inkoopdossier</a>
-        <a href="mailto:trust@curanta.nl?subject=Beveiligingsdossier%20en%20verwerkersovereenkomst" class="btn-secondary no-underline">Vraag beveiligingsdossier en verwerkersovereenkomst</a>
-        <a href="https://app.curanta.nl/status" class="text-curanta-700 font-medium no-underline hover:underline">Actuele status →</a>
+        <a href="mailto:trust@curanta.nl?subject=Beveiligingsdossier%20en%20verwerkersovereenkomst" class="btn-secondary no-underline">Vraag de verwerkersovereenkomst aan</a>
+        <a href="https://app.curanta.nl/status" class="font-semibold text-curanta-700">Actuele status</a>
       </div>
-      <p class="mt-6 text-xs text-ink-500">
-        <span class="status-dot bg-green-500"></span> aantoonbaar nu
-        <span class="status-dot bg-amber-500 ml-4"></span> in uitvoering
-        <span class="status-dot bg-ink-300 ml-4"></span> gepland
-      </p>
+      <nav class="mt-10 border-t border-ink-200 pt-6" aria-label="Onderwerpen op deze pagina">
+        <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+          {pillars.map((p) => <li><a href={`#${p.key}`} class="text-curanta-700">{p.title}</a></li>)}
+          <li><a href="#termijnen" class="text-curanta-700">Wettelijke termijnen</a></li>
+          <li><a href="#continuiteit" class="text-curanta-700">Als Curanta wegvalt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <section class="container-prose grid gap-8 border-b border-ink-200 py-10 lg:grid-cols-2">
+    <div>
+      <h2 class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Maatregelen van Curanta</h2>
+      <ul class="mt-3 grid gap-2 text-sm text-ink-700 sm:grid-cols-2">
+        {Object.values(STAND).map((s) => (
+          <li class="flex items-center gap-2"><span class={`status-dot ${s.dot}`} aria-hidden="true"></span>{s.label}</li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <h2 class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Functies en koppelingen</h2>
+      <StatusLegenda class="mt-3" />
     </div>
   </section>
 
   {pillars.map((pillar) => (
-    <section id={pillar.key} class="container-prose py-14 border-b border-ink-100 last:border-0">
+    <section id={pillar.key} class="container-prose scroll-mt-20 border-b border-ink-200 py-14" aria-labelledby={`${pillar.key}-kop`}>
       <div class="grid gap-10 md:grid-cols-[260px_1fr]">
         <div>
-          <h2 class="font-display text-2xl font-bold text-ink-900">{pillar.title}</h2>
-          <p class="mt-3 text-sm text-ink-700 leading-relaxed">{pillar.intro}</p>
+          <h2 id={`${pillar.key}-kop`} class="font-display text-2xl font-bold text-curanta-900">{pillar.title}</h2>
+          <p class="mt-3 text-sm leading-relaxed text-ink-700">{pillar.intro}</p>
         </div>
         <ul class="grid gap-3 sm:grid-cols-2">
           {pillar.items.map((item) => (
-            <li class="rounded-lg border border-ink-100 bg-white p-4">
-              <div class="flex items-start gap-3">
-                <span class={`status-dot mt-1.5 shrink-0 ${dot(item.status)}`}></span>
-                <div class="flex-1">
-                  <div class="flex items-center justify-between gap-3">
-                    <span class="font-semibold text-ink-900 text-sm">{item.label}</span>
-                    <span class="text-xs font-medium text-ink-500 whitespace-nowrap">{statusLabel(item.status)}</span>
-                  </div>
-                  <p class="mt-1 text-xs text-ink-700 leading-snug">{item.note}</p>
-                  {heeftOnderbouwing(item.doc) && (item.doc?.startsWith('http') ? (
-                    <a href={item.doc} target="_blank" rel="noopener" class="mt-2 inline-block text-xs font-medium text-curanta-700 no-underline hover:underline">
-                      Meer hierover ↗
-                    </a>
-                  ) : (
-                    <a href={item.doc} class="mt-2 inline-block text-xs font-medium text-curanta-700 no-underline hover:underline">
-                      Meer hierover →
-                    </a>
-                  ))}
-                </div>
-              </div>
+            <li class="rounded-xl bg-white p-4 ring-1 ring-ink-200">
+              <h3 class="text-sm font-bold text-curanta-900">{item.label}</h3>
+              {item.status ? (
+                <StatusLabel status={item.status} class="mt-1" />
+              ) : item.stand && (
+                <span class="mt-1 inline-flex items-center gap-1.5 text-xs font-semibold text-ink-700">
+                  <span class={`status-dot ${STAND[item.stand].dot}`} aria-hidden="true"></span>{STAND[item.stand].label}
+                </span>
+              )}
+              <p class="mt-2 text-sm leading-snug text-ink-700">{item.note}</p>
+              {item.doc && (
+                <a href={item.doc} class="mt-2 inline-block text-xs font-semibold text-curanta-700">
+                  Meer hierover<span class="sr-only">: {item.label}</span>
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -158,34 +199,58 @@ const heeftOnderbouwing = (doc?: string) => !!doc && !doc.startsWith('#');
     </section>
   ))}
 
-  <section class="container-prose py-16 border-b border-ink-100">
-    <div class="rounded-2xl border border-amber-200 bg-amber-50/60 p-8 sm:p-12">
+  <section id="termijnen" class="scroll-mt-20 border-b border-ink-200 bg-curanta-50 py-14" aria-labelledby="termijnen-kop">
+    <div class="container-prose">
       <div class="max-w-3xl">
-        <h2 class="font-display text-2xl font-bold text-ink-900">De vraag die inkopers stellen: "Wat als Curanta wegvalt?"</h2>
+        <h2 id="termijnen-kop" class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Wettelijke termijnen 2026–2028</h2>
         <p class="mt-3 text-ink-700">
-          Curanta is een nieuwe, kleine leverancier. Wij benoemen dit zelf, omdat u er toch naar gaat vragen:
+          Wat de wet vraagt, en waarbij Curanta helpt. Of een wet voor uw organisatie geldt, hangt af
+          van uw omvang en uw zorg; dat stelt u zelf vast.
         </p>
-        <ul class="mt-5 space-y-3 text-sm text-ink-700">
-          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Broncode-escrow</strong> — in voorbereiding.</span></li>
-          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Ontwikkelaarspartnerschap</strong> — in voorbereiding.</span></li>
-          <li class="flex gap-3"><span class="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-green-500"></span><span><strong>Uw gegevens mee</strong> — een volledige export van uw gegevens en bestanden in JSON, zonder exit-fee. De exit staat in onze voorwaarden (artikel 9).</span></li>
-        </ul>
-        <p class="mt-5 text-sm text-ink-700">
-          Een kleine leverancier betekent ook: geen supportdesk en geen tickets die maanden onderweg
-          zijn. U spreekt rechtstreeks met Curanta.
-        </p>
-        <p class="mt-3 text-sm text-ink-500">Founding partners krijgen 36 maanden een vaste prijs en praten mee over de roadmap. Vragen over continuïteit: <a href="mailto:trust@curanta.nl" class="text-curanta-700 hover:underline">trust@curanta.nl</a>.</p>
       </div>
+      <ul class="mt-8 grid gap-4 md:grid-cols-2">
+        {termijnen.map((t) => (
+          <li class="rounded-xl bg-white p-5 ring-1 ring-ink-200">
+            <p class="text-sm font-bold text-accent-700">{t.datum}</p>
+            <h3 class="mt-1 font-display text-lg font-bold text-curanta-900">{t.wet}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-700">{t.wat}</p>
+            <p class="mt-3 text-sm leading-relaxed text-ink-700"><span class="font-semibold text-ink-900">Curanta:</span> {t.curanta}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-6 max-w-4xl text-xs leading-relaxed text-ink-500">
+        Bronnen, geraadpleegd op 8 oktober 2026: Staatsblad 2026, 187 en 189 (Cyberbeveiligingswet en
+        -besluit) en ncsc.nl; artikel 40a Wet marktordening gezondheidszorg en jaarverantwoordingzorg.nl;
+        toelatinguitleenmarkt.nl (NAU); Verordening (EU) 2026/1744 en de AI Act Service Desk van de
+        Europese Commissie.
+      </p>
+    </div>
+  </section>
+
+  <section id="continuiteit" class="container-prose scroll-mt-20 border-b border-ink-200 py-16">
+    <div class="max-w-3xl">
+      <h2 class="font-display text-2xl font-bold text-curanta-900">De vraag die inkopers stellen: "Wat als Curanta wegvalt?"</h2>
+      <p class="mt-3 text-ink-700">Curanta is een nieuwe, kleine leverancier. Dit is de stand:</p>
+      <ul class="mt-5 space-y-3 text-sm text-ink-700">
+        <li class="flex gap-3"><span class={`status-dot mt-1.5 shrink-0 ${STAND.uitvoering.dot}`} aria-hidden="true"></span><span><strong>Broncode-escrow:</strong> in voorbereiding.</span></li>
+        <li class="flex gap-3"><span class={`status-dot mt-1.5 shrink-0 ${STAND.uitvoering.dot}`} aria-hidden="true"></span><span><strong>Ontwikkelaarspartnerschap:</strong> in voorbereiding.</span></li>
+        <li class="flex gap-3"><span class={`status-dot mt-1.5 shrink-0 ${STAND.geregeld.dot}`} aria-hidden="true"></span><span><strong>Uw gegevens mee:</strong> een volledige export van uw gegevens en bestanden in JSON, zonder exit-fee. De exit staat in onze voorwaarden (artikel 9).</span></li>
+      </ul>
+      <p class="mt-5 text-sm text-ink-700">
+        Ondersteuning: per e-mail, met een reactie binnen 1 werkdag; vanaf Compliance Pro ook
+        telefonisch van 09:00 tot 17:00. Founding partners krijgen 36 maanden een vaste prijs en
+        praten mee over de roadmap. Vragen over continuïteit:
+        <a href="mailto:trust@curanta.nl" class="text-curanta-700">trust@curanta.nl</a>.
+      </p>
     </div>
   </section>
 
   <section class="container-prose py-16">
-    <div class="rounded-2xl border border-ink-200 bg-ink-100/50 p-8 sm:p-12">
-      <h2 class="font-display text-2xl font-bold text-ink-900">Iets niet duidelijk?</h2>
+    <div class="rounded-2xl bg-curanta-50 p-8 sm:p-12">
+      <h2 class="font-display text-2xl font-bold text-curanta-900">Een vraag over beveiliging of privacy?</h2>
       <p class="mt-3 max-w-2xl text-ink-700">
-        Stuur een vraag rechtstreeks naar ons aanspreekpunt voor privacy en beveiliging; wij
-        reageren binnen 1 werkdag. Stuurt u uw eigen beveiligingsvragenlijst (bijvoorbeeld CAIQ,
-        SIG of BSI C5), dan vullen wij die in.
+        Mail ons aanspreekpunt voor privacy en beveiliging; wij reageren binnen 1 werkdag. Stuurt u
+        uw eigen beveiligingsvragenlijst, bijvoorbeeld CAIQ, SIG of BSI C5, dan vullen wij die in.
       </p>
       <div class="mt-6 flex flex-wrap gap-3">
         <a href="mailto:trust@curanta.nl" class="btn-primary no-underline">trust@curanta.nl</a>

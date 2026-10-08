@@ -1,21 +1,23 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
+import beeld from '../../assets/schermen/mw-bezoek.jpg';
 ---
 <SegmentLayout
+  beeld={{ src: beeld, adres: 'medewerker.curanta.nl', alt: 'Medewerkerportaal: een bezoek aan een verzonnen cliënt, met adres, de knop Meld aankomst, een takenlijst uit het zorgplan en het medicatieoverzicht.', bijschrift: 'Medewerkerportaal: het bezoek, met de taken uit het zorgplan. Opname oktober 2026.' }}
   image="/og/voor-vvt.png"
   segmentKey="vvt"
   segmentLabel="VVT"
   title="VVT-software — verpleging, verzorging, thuiszorg | Curanta"
   description="VVT-software voor verpleeghuis en wijkverpleging: dossier, zorgplan, planning, declaratie en medewerkerportaal in één systeem. Cliëntportaal in 5 talen."
   eyebrow="Voor VVT-organisaties"
-  hero="Eén systeem voor verpleeghuis en wijkverpleging, met minder administratie per dienst."
-  subtitle="Curanta brengt dossier, planning, declaratie en kwaliteit samen. Uw zorgmedewerkers schakelen niet tussen systemen en voeren niets dubbel in, zodat er meer tijd overblijft voor de cliënt."
+  hero="Eén systeem voor de wijkverpleging en het verpleeghuis"
+  subtitle="Dossier, planning, medewerkerportaal en declaratie in één systeem. De zorgmedewerker ziet bezoeken, taken en het zorgplan op de telefoon en rapporteert daar; planner en administratie werken met dezelfde gegevens. Declareren bij zorgverzekeraars (Zvw) is in ontwikkeling."
   triggers={[
-    { title: 'Arbeidsmarktkrapte', body: 'Het tekort aan zorgpersoneel blijft groeien (ABF/AZW: van 89.800 in 2026 naar 261.800 in 2035). Curanta verlaagt de administratie per dienst, zodat zorgmedewerkers meer tijd aan cliënten besteden.' },
+    { title: 'Arbeidsmarktkrapte', body: 'Het tekort aan zorgpersoneel blijft groeien (ABF/AZW: van 89.800 in 2026 naar 261.800 in 2035). Curanta zet het werk van de dag op de telefoon van de zorgmedewerker: bezoeken, taken, rapportage en uren.' },
     { title: 'Verpleeghuis en wijk los van elkaar', body: 'Eén dossier voor verpleeghuis én wijk. Eén cliënt, één rapportage — ongeacht waar de zorg geleverd wordt.' },
-    { title: 'Regeldruk via het ECD', body: 'Berenschot voor VWS (meting 2025): 34% van de werktijd gaat naar administratie, terwijl zorgprofessionals zelf 23% acceptabel vinden. Curanta dringt dat terug met een Coach-voorstel bij de SOEP-rapportage, spraakinvoer in de backoffice en een logische dossierstructuur.' },
-    { title: 'eOverdracht & Wegiz', body: 'Overdracht naar ziekenhuis, huisarts of vervolgzorg via de BgZ in plaats van printen en faxen. De BgZ-bundel bouwt Curanta al; de aansluiting voor de eOverdracht is in ontwikkeling.' },
-    { title: 'Cliënten die Nederlands niet als eerste taal hebben', body: 'Veel oudere cliënten en hun familie lezen formele teksten beter in hun eigen taal. Het cliëntportaal werkt in 5 talen (NL/EN/TR/AR/DE) — volgens onze eigen marktscan van mei 2026 biedt geen andere VVT-leverancier dat.' },
+    { title: 'Regeldruk via het ECD', body: 'Berenschot voor VWS (meting 2025): 34% van de werktijd gaat naar administratie, terwijl zorgprofessionals zelf 23% acceptabel vinden. Curanta helpt met taken uit het zorgplan bij elk bezoek, metingen die al in de rapportage staan en, als u dat wilt, een voorstel voor de evaluatie dat de zorgverlener naleest.' },
+    { title: 'eOverdracht & Wegiz', body: 'Overdracht naar ziekenhuis, huisarts of vervolgzorg via de BgZ in plaats van printen en faxen. Curanta vult 11 van de 14 onderdelen van de Minimale eOverdracht uit het dossier; het eOverdracht-document en het verzenden zijn in ontwikkeling.' },
+    { title: 'Cliënten die Nederlands niet als eerste taal hebben', body: 'Veel oudere cliënten en hun familie lezen formele teksten beter in hun eigen taal. De menu’s en vaste teksten van het cliëntportaal zijn er in vijf talen: Nederlands, Engels, Turks, Arabisch en Duits. Hoe andere leveranciers dat doen, staat met bronnen op de vergelijkingspagina.' },
   ]}
   modules={[
     { name: 'Medewerkerportaal', note: 'Rooster, bezoeken met SOEP-rapportage, uren en verlof op de telefoon — €19 per zorgmedewerker' },
@@ -25,17 +27,21 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
     { name: 'Tijdregistratie', note: 'Uren bevestigen in het medewerkerportaal, ook zonder verbinding' },
     { name: 'Routeplanning', note: 'Wijkroutes met reistijd en voorkeursmedewerker per cliënt' },
     { name: 'Cao-controle', note: 'Rusttijden, pauzes en maximale diensten, met signalen vóór publicatie' },
-    { name: 'eOverdracht', note: 'BgZ intern gebouwd, aansluiting in ontwikkeling' },
-    { name: 'Medicatie via Medimo', note: 'Voorschrift → toedienregistratie' },
+    { name: 'eOverdracht', note: 'In ontwikkeling: document en verzenden' },
+    { name: 'Medicatie', note: 'Toedienlijst; overzicht uit Medimo of uit de eigen registratie' },
     { name: 'iWmo, productie en budget', note: 'Van toewijzing tot declaratie en budgetbewaking' },
     { name: 'Cliëntportaal', note: 'Voor cliënten en mantelzorgers: taken, foto\'s, berichten; in 5 talen' },
     { name: 'Collega-netwerk (welzijn)', note: 'Buddy of intervisiepartner — strikt gescheiden van HR' },
+  ]}
+  nogNiet={[
+    'Declareren bij zorgverzekeraars (Zvw) voor de wijkverpleging: de berichten zijn gebouwd, de test bij Vecozo nog niet gedaan.',
+    'eOverdracht verzenden naar ziekenhuis of vervolgzorg.',
   ]}
   regulatory={['Wkkgz', 'Wtza', 'AVG', 'NEN 7510', 'Wegiz', 'Wzd (extramurale toepassing)']}
   proofPoints={[
     { value: 'EU', label: 'Hosting (IONOS, Berlijn) · ondersteuning in het Nederlands' },
     { value: '1×', label: 'Inloggen — alle modules in één werkruimte' },
-    { value: 'FHIR', label: 'Open standaard voor uitwisseling' },
+    { value: 'FHIR', label: 'Read-only API voor de BgZ, na registratie' },
     { value: 'NEN 7513', label: 'Auditlog met hash-keten, bewaard zolang het dossier bestaat' },
   ]}
 />

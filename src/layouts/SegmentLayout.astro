@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
+import Screenshot from '../components/Screenshot.astro';
 import { DEMO_ZELF } from '../config/demo';
 
 interface Trigger { title: string; body: string; }
@@ -22,6 +23,10 @@ interface Props {
   proofPoints?: ProofPoint[];
   caseQuote?: { quote: string; author: string; org: string };
   image?: string;         // og:image-pad voor deze segmentpagina
+  /** Een echt scherm uit de demo, direct onder de introductie. */
+  beeld?: { src: ImageMetadata; alt: string; adres: string; bijschrift: string };
+  /** Wat er voor deze sector (nog) niet is; staat zichtbaar onder de modules. */
+  nogNiet?: string[];
   /** Voor een sector waarvoor Curanta geen eigen product heeft (huisartsen): geen demo- en
       vervangingstaal, alleen wat er voor de samenwerking is. */
   alleenSamenwerking?: boolean;
@@ -29,7 +34,7 @@ interface Props {
 
 const {
   title, description, eyebrow, hero, subtitle,
-  triggers, modules, regulatory, proofPoints, caseQuote, image, alleenSamenwerking = false,
+  triggers, modules, regulatory, proofPoints, caseQuote, image, alleenSamenwerking = false, nogNiet = [], beeld,
 } = Astro.props;
 ---
 <Base title={title} description={description} image={image}>
@@ -45,6 +50,14 @@ const {
       )}
     </div>
   </PageHero>
+
+  {beeld && (
+    <section class="bg-curanta-50 pb-12 pt-10">
+      <div class="container-prose">
+        <Screenshot src={beeld.src} alt={beeld.alt} adres={beeld.adres} bijschrift={beeld.bijschrift} />
+      </div>
+    </section>
+  )}
 
   {proofPoints && (
     <section class="border-b border-ink-100 bg-ink-100/40">
@@ -62,13 +75,8 @@ const {
   <section class="container-prose py-20">
     <div class="max-w-2xl">
       <h2 class="font-display text-3xl font-bold tracking-tightish text-ink-900">
-        {alleenSamenwerking ? 'Wat er voor de samenwerking is' : 'Wat wij in deze sector vaak horen'}
+        {alleenSamenwerking ? 'Wat er voor de samenwerking is' : 'Wat u ermee doet'}
       </h2>
-      {!alleenSamenwerking && (
-        <p class="mt-3 text-ink-700">
-          Wie van systeem wil wisselen, doet dat zelden om één functie. Meestal spelen drie of vier dingen tegelijk.
-        </p>
-      )}
     </div>
     <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {triggers.map((t) => (
@@ -99,7 +107,7 @@ const {
     <div class="grid gap-10 lg:grid-cols-[280px_1fr]">
       <div>
         <h2 class="font-display text-3xl font-bold tracking-tightish text-ink-900">
-          {alleenSamenwerking ? 'Koppelingen voor de samenwerking' : 'Modules die hier het meest opleveren'}
+          {alleenSamenwerking ? 'Koppelingen voor de samenwerking' : 'De onderdelen voor deze sector'}
         </h2>
         {!alleenSamenwerking && (
           <p class="mt-3 text-sm text-ink-700">
@@ -120,6 +128,17 @@ const {
       </ul>
     </div>
   </section>
+
+  {nogNiet.length > 0 && (
+    <section class="container-prose pb-16">
+      <div class="rounded-2xl border border-amber-200 bg-amber-50 p-6 sm:p-8">
+        <h2 class="font-display text-xl font-bold text-curanta-900">Wat er nog niet is</h2>
+        <ul class="mt-4 list-disc space-y-1.5 pl-5 text-ink-700">
+          {nogNiet.map((n) => <li>{n}</li>)}
+        </ul>
+      </div>
+    </section>
+  )}
 
   <section class="container-prose py-12 border-t border-ink-100">
     <h2 class="font-display text-xl font-semibold text-ink-900">Relevante wetten en normen</h2>

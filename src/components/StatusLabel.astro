@@ -1,0 +1,17 @@
+---
+// Statuslabel met stip, uit de gedeelde indeling in src/config/status.ts.
+import { STATUS, type Status } from '../config/status';
+
+interface Props {
+  status: Status;
+  /** Extra toelichting achter het label, bijvoorbeeld "lotgenoten na uw DPIA". */
+  noot?: string;
+  class?: string;
+}
+const { status, noot, class: klasse = '' } = Astro.props;
+const s = STATUS[status];
+---
+<span class={`inline-flex items-center gap-1.5 text-xs font-semibold text-ink-700 ${klasse}`}>
+  <span class={`status-dot shrink-0 ${s.dot}`} aria-hidden="true"></span>
+  <span>{s.label}{noot ? ` · ${noot}` : ''}</span>
+</span>

@@ -1,37 +1,47 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
+import beeld from '../../assets/schermen/bo-signaleringsplan.jpg';
+// Herzien 08-10-2026 met wat in de week van 4–7 oktober is gebouwd (signaleringsplan, akkoord op het
+// OPP in het portaal, verblijf met zzp, logeren, vpt, Wzd volgens de wet van 1-7-2025). Nagelopen in
+// de code; zie docs/feitenblad-voorstel-2026-10-08.md.
 ---
 <SegmentLayout
+  beeld={{ src: beeld, adres: 'app.curanta.nl', alt: 'Backoffice: het signaleringsplan van een verzonnen cliënt, met een melding over een incident sinds de vaststelling en per fase rust, spanning en crisis de signalen, wat de cliënt doet en wat de begeleider doet.', bijschrift: 'Het signaleringsplan, met het incident sinds de vaststelling. Opname oktober 2026.' }}
   image="/og/voor-ghz.png"
   segmentKey="ghz"
   segmentLabel="GHZ"
   title="Gehandicaptenzorg-software | Curanta"
-  description="Software voor de gehandicaptenzorg: ondersteuningsplan (OPP), dagbesteding, cliëntportaal en declaratie in één systeem, in de taal van de sector."
+  description="Software voor de gehandicaptenzorg: ondersteuningsplan met signaleringsplan, dagbesteding, verblijf en Wlz, Wzd en een portaal voor verwanten."
   eyebrow="Voor de gehandicaptenzorg"
-  hero="Ondersteuningsplan, dagbesteding en contact met familie — in één systeem."
-  subtitle="Curanta brengt het ondersteuningsplan (OPP), de dagbestedingslogistiek en het contact met naasten samen. De begrippen van de gehandicaptenzorg (OPP, AVB-verslag) zijn ingebouwd — niet bijgebogen vanuit een VVT-model."
+  hero="Ondersteuningsplan, verblijf en de Wzd in één systeem"
+  subtitle="Voor wonen, dagbesteding en ambulante begeleiding. De begeleider werkt vanuit het ondersteuningsplan (OPP) en het signaleringsplan, de administratie declareert verblijf en dagbesteding onder de Wlz, en de Wzd-functionaris houdt het stappenplan en de termijnen bij."
   triggers={[
-    { title: 'Versnipperde dagbesteding', body: 'Aanwezigheid, activiteiten, rapportages en foto\'s zitten nu vaak in verschillende systemen. Curanta brengt ze samen rond één cliëntdossier.' },
-    { title: 'Familie wil meekijken', body: 'Naasten verwachten een portaal voor berichten, foto\'s en taken. Curanta levert dat standaard, met privacy als uitgangspunt en een versleuteld BSN.' },
-    { title: 'Wzd-registratie', body: 'Het stappenplan onvrijwillige zorg en de halfjaarlijkse uitdraai voor de IGJ zitten erin. De XML-uitdraai is nog niet gevalideerd tegen de specificatie van de IGJ.' },
-    { title: 'Het ondersteuningsplan centraal', body: 'Het ondersteuningsplan is het hart van de gehandicaptenzorg. Curanta legt het OPP vast met levensdomeinen en persoonlijke doelen, plus het AVB-verslag — niet als een uitgekleed zorgplan.' },
-    { title: 'Wettelijk vertegenwoordigers in eigen taal', body: 'Ouders en curatoren van GHZ-cliënten met niet-Nederlandse achtergrond willen het dossier in eigen taal volgen. Het cliëntportaal werkt in het Nederlands, Engels, Turks, Arabisch en Duits — volgens onze eigen marktscan van mei 2026 biedt geen Nederlandse concurrent dat.' },
+    { title: 'De begeleider werkt vanuit het OPP', body: 'De begeleider begint op Vandaag met de eigen cliënten, rapporteert op de doelen uit het OPP en tekent af, ook in de app op de telefoon. In het verslag begeleiding staat per doel hoeveel rapportages er zijn.' },
+    { title: 'Spanning op tijd zien', body: 'Het signaleringsplan beschrijft per fase (rust, spanning, crisis) de signalen en de afspraken. Incidenten sinds de vaststelling staan erbij, zodat het team ziet wanneer het plan herzien moet worden.' },
+    { title: 'Verwanten lezen mee en geven akkoord', body: 'De mentor of vertegenwoordiger leest in het cliëntportaal het vrijgegeven OPP, het signaleringsplan en de verslagen, en geeft akkoord met een handtekening. Het akkoord komt met naam en relatie terug in het OPP.' },
+    { title: 'Verblijf en logeren onder de Wlz', body: 'Opname, afwezigheid volgens de NZa en de maandproductie per etmaal, met de zorgzwaartepakketten van 2026. Logeren met de grens van 156 nachten en het volledig pakket thuis als leveringsvorm.' },
+    { title: 'De Wzd volgens de wet van 2025', body: 'De vormen van onvrijwillige zorg, het stappenplan met termijnen, een zorgverantwoordelijke per cliënt, de juridische titel van het verblijf en beslissingen over verlof en ontslag. Het halfjaarlijkse overzicht voor de IGJ wordt gevalideerd tegen het schema van de IGJ; u levert het zelf aan via Mijn IGJ. Een echte aanlevering is er nog niet.' },
   ]}
   modules={[
-    { name: 'Ondersteuningsplan (OPP) en AVB-verslag', note: 'Levensdomeinen en persoonlijke doelen' },
-    { name: 'Groepszorg & dagbesteding', note: 'Activiteiten, aanwezigheid, foto\'s, rapportages' },
-    { name: 'Cliëntportaal', note: 'Voor cliënten, familie en mantelzorgers: taken, berichten, agenda' },
-    { name: 'Wzd-stappenplan', note: 'Met halfjaarlijkse XML-uitdraai (nog niet gevalideerd tegen de IGJ-specificatie)' },
-    { name: 'Aanmelding, triage en wachtlijst', note: 'Met een aparte module voor multidisciplinair overleg (MDO)' },
-    { name: 'iWlz + CAK', note: 'Berichten versturen via Vecozo; retourberichten handmatig inlezen' },
-    { name: 'Vragenlijsten (PREM)', note: 'Cliënt- en naastentevredenheid' },
-    { name: 'Cliëntagenda', note: 'Activiteiten, afspraken, MDO\'s' },
+    { name: 'Ondersteuningsplan (OPP) en AVB-verslag', note: 'Doelen per levensdomein, methodiek, akkoord in het portaal' },
+    { name: 'Signaleringsplan', note: 'Fasen, signalen en afspraken; incidenten sinds de vaststelling' },
+    { name: 'Groepszorg en dagbesteding', note: 'Aanwezigheid wordt een conceptregel voor de Wlz' },
+    { name: 'Verblijf, zzp en logeren', note: 'Afwezigheid volgens de NZa; maandproductie per etmaal' },
+    { name: 'Wlz-declaratie', note: 'Versturen via Vecozo na aansluiting; retourberichten zelf inlezen' },
+    { name: 'CIZ-zorgprofiel', note: 'Naast de Wlz-toewijzing, met een waarschuwing bij verschil' },
+    { name: 'Wet zorg en dwang', note: 'Stappenplan, titels, verlof en ontslag, overzicht voor de IGJ' },
+    { name: 'Cliëntkas', note: 'Zakgeld en uitgaven per cliënt' },
+  ]}
+  nogNiet={[
+    'Versturen van de Wlz-declaratie zonder Vecozo-certificaat van uw organisatie; retourberichten haalt u zelf op.',
+    'Een echte aanlevering van het Wzd-overzicht bij de IGJ; u levert het zelf aan via Mijn IGJ.',
+    'Ggz-wonen, toeslagen, deeltijdverblijf en mutatiedagen bij het verblijf.',
   ]}
   regulatory={['Wzd', 'Wlz', 'Wkkgz', 'Wtza', 'AVG', 'NEN 7510']}
   proofPoints={[
-    { value: 'Wzd', label: 'Stappenplan en halfjaarlijkse uitdraai' },
-    { value: '1 dossier', label: 'Voor cliënt + naasten + team' },
-    { value: 'EU', label: 'Hosting (IONOS, Berlijn) · ondersteuning in het Nederlands' },
-    { value: 'BSN', label: 'Versleuteld (AES-256-GCM)' },
+    { value: 'OPP', label: 'Met signaleringsplan en akkoord van de vertegenwoordiger' },
+    { value: 'Wlz', label: 'Verblijf, logeren, vpt en mpt' },
+    { value: 'Wzd', label: 'Wettekst van 1 juli 2025' },
+    { value: 'EU', label: 'Hosting bij IONOS in Berlijn' },
   ]}
 />

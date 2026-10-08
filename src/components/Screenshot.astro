@@ -1,0 +1,65 @@
+---
+// Schermafbeelding in een eenvoudig browserkader, met een bijschrift dat zegt wat het is.
+//
+// Twee soorten, en het verschil staat altijd zichtbaar in het bijschrift:
+//   scherm     — een echte schermafbeelding uit de demo-omgeving, met verzonnen gegevens
+//   voorbeeld  — een voorbeeldweergave (mockup); nooit presenteren als werkend productscherm
+//
+// De schermen zijn op 08-10-2026 opgenomen op de stand die naar de demo is uitgerold (develop, met de
+// demodata); zie docs/beeldbronnen.md. Bijgesneden met sharp, verder onbewerkt.
+//
+// Op een telefoon is een volledig scherm van 1600 px breed niet te lezen. Daarom is het beeld
+// een link naar de volledige afbeelding: wie wil, opent hem en zoomt in.
+import { Picture, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  /** Adresbalk in het kader, bijvoorbeeld 'app.curanta.nl'. */
+  adres: string;
+  /** Wat er te zien is; het type (demo of voorbeeld) zet de component er zelf voor. */
+  bijschrift: string;
+  soort?: 'scherm' | 'voorbeeld';
+  sizes?: string;
+  eager?: boolean;
+  class?: string;
+}
+const {
+  src, alt, adres, bijschrift, soort = 'scherm',
+  sizes = '(min-width: 1400px) 1300px, 100vw', eager = false, class: klasse = '',
+} = Astro.props;
+
+const volledig = await getImage({ src, format: 'jpg', width: src.width });
+const label = soort === 'scherm'
+  ? 'Schermafbeelding uit de demo, verzonnen gegevens'
+  : 'Voorbeeldweergave, geen productscherm';
+---
+<figure class={klasse}>
+  <a
+    href={volledig.src}
+    class="group block overflow-hidden rounded-xl bg-white no-underline shadow-[0_8px_30px_rgba(14,79,87,0.12)] ring-1 ring-ink-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-600"
+  >
+    <span class="flex items-center gap-1.5 border-b border-ink-200 bg-curanta-50 px-3 py-2" aria-hidden="true">
+      <span class="h-2.5 w-2.5 rounded-full bg-ink-300"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-ink-300"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-ink-300"></span>
+      <span class="ml-3 truncate rounded-md bg-white px-2.5 py-0.5 text-[11px] font-medium text-ink-500">{adres}</span>
+    </span>
+    <Picture
+      src={src}
+      alt={alt}
+      formats={['avif', 'webp']}
+      widths={[640, 960, 1280, src.width]}
+      sizes={sizes}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+      class="block h-auto w-full"
+    />
+    <span class="sr-only">(open de afbeelding op ware grootte)</span>
+  </a>
+  <figcaption class="mt-3 text-xs leading-relaxed text-ink-500">
+    <span class={`mr-1.5 inline-block rounded px-1.5 py-0.5 font-semibold ${soort === 'scherm' ? 'bg-greensoft text-curanta-900' : 'bg-amber-100 text-amber-900'}`}>{label}</span>
+    {bijschrift}
+  </figcaption>
+</figure>

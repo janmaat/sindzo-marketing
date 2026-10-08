@@ -6,12 +6,16 @@
 //   - feat/proefomgeving-08-aanmelden: zelf rondkijken begint met een eigen toegang op /demo;
 //     het gespreksformulier staat op /demo#gesprek.
 // Zo klopt elke knop op beide branches, en raakt een merge alleen dit bestand.
+//
+// De tekst zegt wat er gebeurt (opdracht 08-10-2026): op beide branches vraagt de bezoeker eerst
+// toegang aan en krijgt hij die daarna. "Bekijk de demo" gebruiken we dus niet: die knop geeft
+// geen directe toegang. De tweede knop vraagt een demonstratie aan via een formulier.
 export const DEMO_ZELF = {
-  label: 'Vraag toegang tot de demo',
+  label: 'Vraag demo-toegang aan',
   href: '/demo-omgeving',
 };
 
 export const DEMO_GESPREK = {
-  label: 'Plan een demo op uw eigen proces',
+  label: 'Vraag een demonstratie aan',
   href: '/demo',
 };

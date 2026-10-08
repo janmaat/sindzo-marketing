@@ -1,194 +1,134 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import StatusLabel from '../components/StatusLabel.astro';
 import Cta from '../components/Cta.astro';
 import { DEMO_ZELF } from '../config/demo';
+import type { Status } from '../config/status';
 
-// Productvergelijking met de top-3 NL-concurrenten in VVT/GHZ.
-// Bewust feitelijk: peildatum + bron per bestreden claim. Eerlijk
-// over waar concurrenten voorlopen — bouwt geloofwaardigheid voor
-// de win-claims.
+// Vergelijking met drie gevestigde VVT-leveranciers. Herzien 08-10-2026: elke cel over een andere
+// leverancier is opnieuw nagelopen in publieke bronnen, met de URL erbij.
 //
-// Onderhoud (feitenblad, besluit Jan 25-09-2026): peildatum 29-05-2026, herzien bij wezenlijke
-// wijzigingen — niet "elk kwartaal". Geen klanten of partners als bron: die zijn er nog niet.
+// Wat daarbij veranderde ten opzichte van de marktscan van 29-05-2026:
+// - "PinkRoccade myNeva" bestaat niet: myneva is een ander bedrijf (myneva Nederland B.V.,
+//   voorheen Regas). Het VVT-dossier van PinkRoccade is mijnCaress (PinkRoccade Care).
+// - Nedap Caren heeft wel een tweede taal (Engels); spraak bij rapporteren kan bij Nedap en
+//   Pluriform via partners. Die cellen stonden op "nee".
+// - Cura en Plancare 2 zijn sinds 2020 samen Fierit (Tenzinger). Carit Care en Famped/Famedio zijn
+//   niet als zorgsoftware teruggevonden en staan er niet meer.
+// - De aantallen interventiesjablonen (~187, ~140) hadden geen publieke bron; weggehaald.
+//
+// Uitgangspunt: een functie die niet op de website van een leverancier staat, kan er toch zijn.
+// Daarom "niet gevonden", nooit "nee". Curanta zelf staat er met de gedeelde status
+// (src/config/status.ts).
 
-const lastReviewed = '2026-05-29';
+const GECONTROLEERD = '8 oktober 2026';
 
-interface Cell {
-  status: 'yes' | 'no' | 'partial' | 'unknown';
-  note?: string;
-}
-interface Row {
-  feature: string;
-  detail?: string;
-  curanta: Cell;
-  nedap: Cell;
-  pinkroccade: Cell;
-  pluriform: Cell;
-  source?: string;
-}
-interface Group {
-  title: string;
-  intro: string;
-  tone: 'win' | 'parity' | 'gap';
-  rows: Row[];
+type Oordeel = 'ja' | 'deels' | 'niet-gevonden';
+interface Cel { oordeel: Oordeel; tekst: string; bron?: string; }
+interface Rij {
+  onderwerp: string;
+  curanta: { status: Status | null; tekst: string };
+  nedap: Cel;
+  caress: Cel;
+  pluriform: Cel;
 }
 
-const groups: Group[] = [
+const rijen: Rij[] = [
   {
-    title: 'Waar Curanta vooruitloopt (eigen marktscan)',
-    intro: 'Eigen marktscan, peildatum 29-05-2026: geen directe Nederlandse concurrent biedt deze functies. ChipSoft HiX heeft een portaal in NL en EN, maar alleen voor ziekenhuizen, niet voor VVT of gehandicaptenzorg.',
-    tone: 'win',
-    rows: [
-      {
-        feature: 'Meertalig cliëntportaal',
-        detail: 'NL/EN/TR/AR/DE; PL/UK vertaald, nog niet aan',
-        curanta: { status: 'yes', note: '5 talen' },
-        nedap: { status: 'no', note: 'NL-only (Caren-portaal)' },
-        pinkroccade: { status: 'no', note: 'NL-only (myNeva-portaal)' },
-        pluriform: { status: 'no', note: 'NL-only' },
-        source: 'Eigen marktscan + leveranciers-sites — peildatum 2026-05-29',
-      },
-      {
-        feature: 'Collega-netwerk medewerker',
-        detail: 'Een buddy of intervisiepartner, gescheiden van HR',
-        curanta: { status: 'yes', note: 'Gebouwd' },
-        nedap: { status: 'no', note: 'Geen functie hiervoor in Ons' },
-        pinkroccade: { status: 'no' },
-        pluriform: { status: 'no' },
-        source: 'Eigen marktscan van Nederlandse aanbieders en Speakap (algemeen intranet)',
-      },
-      {
-        feature: 'Lotgenoten-support op welzijnsthema',
-        detail: 'Vertrouwelijke peer-support op werkdruk/burn-out/rouw',
-        curanta: { status: 'yes', note: 'Gebouwd; staat aan na uw DPIA' },
-        nedap: { status: 'no' },
-        pinkroccade: { status: 'no' },
-        pluriform: { status: 'no' },
-        source: 'Eigen marktscan: geen Nederlands equivalent gevonden',
-      },
-    ],
+    onderwerp: 'Cliëntportaal in een andere taal dan Nederlands',
+    curanta: { status: 'demo', tekst: 'Menu\'s en vaste teksten in vijf talen: NL, EN, TR, AR, DE.' },
+    nedap: { oordeel: 'ja', tekst: 'Caren: Nederlands of Engels.', bron: 'https://support.caren.nl/support/solutions/articles/75000124925-de-instellingen-in-caren' },
+    caress: { oordeel: 'niet-gevonden', tekst: 'mijncaress.nl was op de controledatum niet bereikbaar.' },
+    pluriform: { oordeel: 'niet-gevonden', tekst: 'Geen taalkeuze vermeld.', bron: 'https://www.adapcare.nl/pluriform-zorg/' },
   },
   {
-    title: 'Functies naast elkaar',
-    intro: 'Waar Curanta gelijk oploopt, en waar het nog deels is. Geen oordeel over wie "beter" is: per punt ja, deels of nee.',
-    tone: 'parity',
-    rows: [
-      {
-        feature: 'FHIR-architectuur met Zib-profielen',
-        curanta: { status: 'partial', note: 'BgZ intern in FHIR; publieke FHIR-API in ontwikkeling' },
-        nedap: { status: 'partial', note: 'Open API, FHIR-subset' },
-        pinkroccade: { status: 'partial' },
-        pluriform: { status: 'unknown' },
-      },
-      {
-        feature: 'Coach-voorstel en spraakinvoer bij SOEP',
-        curanta: { status: 'partial', note: 'Coach-voorstel op knopdruk; spraak alleen in de backoffice, op het apparaat' },
-        nedap: { status: 'yes', note: 'Toediening + rapportage via voice' },
-        pinkroccade: { status: 'partial' },
-        pluriform: { status: 'partial' },
-      },
-      {
-        feature: 'Hosting binnen de EER',
-        curanta: { status: 'yes', note: 'IONOS Cloud, Berlijn' },
-        nedap: { status: 'yes' },
-        pinkroccade: { status: 'yes' },
-        pluriform: { status: 'yes' },
-      },
-      {
-        feature: 'BSN-encryptie op veldniveau',
-        curanta: { status: 'yes', note: 'AES-256-GCM' },
-        nedap: { status: 'unknown' },
-        pinkroccade: { status: 'unknown' },
-        pluriform: { status: 'unknown' },
-        source: 'Concurrent-implementaties niet publiek gedocumenteerd',
-      },
-      {
-        feature: 'SMART-doelen + risicoprofielen-engine',
-        detail: 'Cliëntformulering, streefdatum; risico op val, decubitus, ondervoeding en delier berekend uit metingen en vragenlijsten',
-        curanta: { status: 'yes', note: 'Gebouwd sinds mei 2026' },
-        nedap: { status: 'partial', note: 'SMART-doelen ja, autosignalering deels' },
-        pinkroccade: { status: 'partial' },
-        pluriform: { status: 'partial' },
-      },
-      {
-        feature: 'Interventie-catalogus (zorgplan)',
-        detail: 'Aantal kant-en-klare interventie-templates',
-        curanta: { status: 'yes', note: '207 templates · alle Omaha-categorieën · GHZ+GGZ' },
-        nedap: { status: 'yes', note: '~187' },
-        pinkroccade: { status: 'yes' },
-        pluriform: { status: 'yes', note: '~140' },
-        source: 'Eigen vergelijking 30-05-2026; volledige Omaha-dekking. Het gaat om de interventies die u gebruikt, niet om de grootste catalogus',
-      },
-      {
-        feature: 'Modulair geprijsd (geen all-in-one)',
-        curanta: { status: 'yes' },
-        nedap: { status: 'partial', note: 'Modules los af te nemen, maar met druk om te bundelen' },
-        pinkroccade: { status: 'partial' },
-        pluriform: { status: 'partial' },
-      },
-      {
-        feature: 'eOverdracht (Wegiz-BgZ)',
-        curanta: { status: 'partial', note: 'BgZ intern gebouwd, aansluiting in ontwikkeling' },
-        nedap: { status: 'yes' },
-        pinkroccade: { status: 'yes' },
-        pluriform: { status: 'partial' },
-      },
-    ],
+    onderwerp: 'Steun tussen collega\'s (buddy, intervisie)',
+    curanta: { status: 'demo', tekst: 'Collega-netwerk, gescheiden van HR. Lotgenoten na uw DPIA.' },
+    nedap: { oordeel: 'deels', tekst: 'Medewerkerportaal met collega\'s en berichten; een buddy- of intervisiefunctie niet gevonden.', bron: 'https://nedap-ons.nl/ons-suite/meer/medewerkerportaal/' },
+    caress: { oordeel: 'niet-gevonden', tekst: '—' },
+    pluriform: { oordeel: 'deels', tekst: 'Casusoverleg over cliënten in een groep; geen steun voor medewerkers.', bron: 'https://www.adapcare.nl/cacao-samenwerkingsplatform/' },
   },
   {
-    title: 'Waar concurrenten (terecht) voorlopen',
-    intro: 'Eerlijk: twee punten waar de gevestigde leveranciers op dit moment aantoonbaar verder zijn dan Curanta. Wat Curanta daarnaast nog niet heeft, staat onder de tabel.',
-    tone: 'gap',
-    rows: [
-      {
-        feature: 'ISO 27001-certificering',
-        curanta: { status: 'no', note: 'Gepland, audit 2027' },
-        nedap: { status: 'yes' },
-        pinkroccade: { status: 'yes' },
-        pluriform: { status: 'yes' },
-      },
-      {
-        feature: 'NEN 7510:2024 extern geaudit',
-        curanta: { status: 'partial', note: 'Werkdocument; externe audit gepland Q4 2026' },
-        nedap: { status: 'yes' },
-        pinkroccade: { status: 'yes' },
-        pluriform: { status: 'yes' },
-      },
-    ],
+    onderwerp: 'FHIR-API',
+    curanta: { status: 'inrichten', tekst: 'Read-only FHIR R4-API voor de BgZ, na registratie.' },
+    nedap: { oordeel: 'ja', tekst: 'Ons API met FHIR-endpoints; zibs 2017 op FHIR STU3.', bron: 'https://support.nedap-ons.nl/support/solutions/articles/103000374164-getting-started-with-zibs-and-fhir' },
+    caress: { oordeel: 'deels', tekst: 'De koppeling met ZorgDomein gebruikt FHIR (2019); geen publieke API-documentatie gevonden.', bron: 'https://www.icthealth.nl/nieuws/koppeling-zorgdomein-mijncaress-beperkt-administratielast' },
+    pluriform: { oordeel: 'deels', tekst: '"FHIR Zibs" genoemd, zonder versie.', bron: 'https://www.adapcare.nl/integraties/' },
+  },
+  {
+    onderwerp: 'Spraak bij het rapporteren',
+    curanta: { status: 'demo', tekst: 'Spraak naar tekst op het apparaat, alleen in de backoffice.' },
+    nedap: { oordeel: 'ja', tekst: 'Via Attendi of Tell James, met een eigen contract met die leverancier.', bron: 'https://support.nedap-ons.nl/support/solutions/articles/103000337039-spraakgestuurd-rapporteren-inschakelen-binnen-ons-dossier' },
+    caress: { oordeel: 'deels', tekst: 'Tell James is een product van PinkRoccade Care; de pagina over de koppeling met mijnCaress was niet bereikbaar.', bron: 'https://telljames.nl/waarom-tell-james/' },
+    pluriform: { oordeel: 'ja', tekst: 'Via Attendi of Tell James, en inspreken in App Anne.', bron: 'https://www.adapcare.nl/integraties/' },
+  },
+  {
+    onderwerp: 'Waar de gegevens staan',
+    curanta: { status: null, tekst: 'IONOS Cloud, Berlijn (EU).' },
+    nedap: { oordeel: 'ja', tekst: 'Datacenters in Nederland; bestanden bij AWS in Frankfurt en Ierland (EU).', bron: 'https://support.nedap-ons.nl/support/solutions/articles/103000336008-leveranciers-en-subverwerkers' },
+    caress: { oordeel: 'niet-gevonden', tekst: '—' },
+    pluriform: { oordeel: 'niet-gevonden', tekst: 'AWS als partner genoemd; regio niet vermeld.', bron: 'https://www.adapcare.nl/over-ons/' },
+  },
+  {
+    onderwerp: 'SMART-doelen en risicosignalering in het zorgplan',
+    curanta: { status: 'demo', tekst: 'SMART-doelen; risico op val, decubitus, ondervoeding en delier uit metingen.' },
+    nedap: { oordeel: 'deels', tekst: 'Zorgplan volgens SMART en automatisch berekende scores van meetinstrumenten; risicosignalering niet gevonden.', bron: 'https://nedap-ons.nl/kennisbank/wat-is-een-zorgplan-en-waarvoor-is-het-bedoeld/' },
+    caress: { oordeel: 'niet-gevonden', tekst: '—' },
+    pluriform: { oordeel: 'niet-gevonden', tekst: 'Zorgplan volgens Omaha (2016); SMART en risicosignalering niet gevonden.', bron: 'https://www.pluriform.nl/nieuwsbericht/683/pluriform-zorg-gecertificeerd-voor-omaha' },
+  },
+  {
+    onderwerp: 'Prijs op de website',
+    curanta: { status: null, tekst: 'Per actieve medewerker per maand, €19 tot €39 per plan.' },
+    nedap: { oordeel: 'ja', tekst: 'Per cliënt in zorg per maand, met een minimum van €25.', bron: 'https://nedap-ons.nl/starten-met-nedap-ons/hoe-start-je-met-nedap-ons/tarieven/' },
+    caress: { oordeel: 'niet-gevonden', tekst: '—' },
+    pluriform: { oordeel: 'deels', tekst: '"Een prijs per gebruiker"; bedrag niet vermeld.', bron: 'https://www.adapcare.nl/pluriform-zorg/' },
+  },
+  {
+    onderwerp: 'eOverdracht, gekwalificeerd door Nictiz',
+    curanta: { status: 'ontwikkeling', tekst: 'Document en verzenden nog niet gebouwd.' },
+    nedap: { oordeel: 'ja', tekst: 'eOverdracht 4.0: ontvangen (24-01-2023) en versturen (07-04-2023).', bron: 'https://www.nictiz.nl/wat-we-doen/activiteiten/kwalificatie/overzicht-kwalificatie-resultaten/' },
+    caress: { oordeel: 'ja', tekst: 'Ontvangen (19-01-2023); een nieuwsbericht noemt ook versturen.', bron: 'https://www.nictiz.nl/nieuws/verkregen-kwalificaties-eoverdracht/' },
+    pluriform: { oordeel: 'deels', tekst: 'eOverdracht als standaard genoemd; niet in het kwalificatieoverzicht van Nictiz gevonden.', bron: 'https://www.adapcare.nl/integraties/' },
+  },
+  {
+    onderwerp: 'ISO 27001-certificaat',
+    curanta: { status: null, tekst: 'Nee. Audit gepland in 2027.' },
+    nedap: { oordeel: 'ja', tekst: 'Uitgegeven door Brand Compliance.', bron: 'https://support.nedap-ons.nl/support/solutions/articles/103000156794-iso-27001' },
+    caress: { oordeel: 'deels', tekst: 'PinkRoccade Healthcare hergecertificeerd in 2025; of mijnCaress in de scope valt, staat er niet.', bron: 'https://www.pinkroccadeggz.nl/nieuwsberichten/hercertificering-iso-nen/' },
+    pluriform: { oordeel: 'ja', tekst: 'Adapcare, sinds 2018; certificerende instelling niet vermeld.', bron: 'https://www.adapcare.nl/compliance/' },
+  },
+  {
+    onderwerp: 'NEN 7510-certificaat',
+    curanta: { status: null, tekst: 'Nee. Maatregelen ingevoerd, externe audit gepland.' },
+    nedap: { oordeel: 'ja', tekst: 'Uitgegeven door Brand Compliance.', bron: 'https://support.nedap-ons.nl/support/solutions/articles/103000156795-nen-7510' },
+    caress: { oordeel: 'deels', tekst: 'PinkRoccade Healthcare hergecertificeerd in 2025; scope voor mijnCaress niet vermeld.', bron: 'https://www.pinkroccadeggz.nl/nieuwsberichten/hercertificering-iso-nen/' },
+    pluriform: { oordeel: 'ja', tekst: 'Adapcare, sinds 2018; instelling niet vermeld.', bron: 'https://www.adapcare.nl/compliance/' },
   },
 ];
 
-const cellSymbol = (s: string) =>
-  s === 'yes' ? '✓' : s === 'partial' ? '◐' : s === 'no' ? '✗' : '?';
+const OORDEEL: Record<Oordeel, { label: string; klasse: string }> = {
+  'ja': { label: 'Publiek vermeld', klasse: 'bg-greensoft text-curanta-900' },
+  'deels': { label: 'Deels', klasse: 'bg-amber-100 text-amber-900' },
+  'niet-gevonden': { label: 'Niet gevonden', klasse: 'bg-ink-100 text-ink-700' },
+};
 
-const cellColor = (s: string) =>
-  s === 'yes' ? 'text-green-700 bg-green-50' :
-  s === 'partial' ? 'text-amber-700 bg-amber-50' :
-  s === 'no' ? 'text-rose-700 bg-rose-50' :
-  'text-ink-500 bg-ink-100/50';
+const leveranciers = [
+  { sleutel: 'nedap', naam: 'Nedap Ons', van: 'Nedap' },
+  { sleutel: 'caress', naam: 'mijnCaress', van: 'PinkRoccade Care' },
+  { sleutel: 'pluriform', naam: 'Pluriform Zorg', van: 'Adapcare' },
+] as const;
 
-const cellLabel = (s: string) =>
-  s === 'yes' ? 'Ja' :
-  s === 'partial' ? 'Deels' :
-  s === 'no' ? 'Nee' :
-  'Onbekend';
-
-const groupTone = (t: string) =>
-  t === 'win' ? 'border-l-4 border-accent-500' :
-  t === 'gap' ? 'border-l-4 border-amber-400' :
-  'border-l-4 border-ink-200';
-
-const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+const domein = (url: string) => new URL(url).hostname.replace(/^www\./, '');
 ---
 <Base
-  title="Curanta naast Nedap Ons, PinkRoccade en Pluriform | Curanta"
-  description="Curanta naast Nedap Ons, PinkRoccade myNeva en Pluriform Zorg: per punt ja of nee, met peildatum en bron — ook waar zij verder zijn."
+  title="Curanta naast Nedap Ons, mijnCaress en Pluriform Zorg"
+  description="Curanta naast Nedap Ons, mijnCaress en Pluriform Zorg: per onderwerp wat publiek te vinden is, met bron en controledatum, ook waar zij verder zijn."
 >
   <PageHero
-    eyebrow="Productvergelijking"
-    title="Curanta naast de gevestigde marktleiders — feitelijk."
-    subtitle="Wat heeft Curanta wel of niet ten opzichte van Nedap Ons, PinkRoccade myNeva en Pluriform Zorg? Hieronder de feiten, ook waar de gevestigde leveranciers ouder, groter en verder zijn. Geen oordelen."
+    eyebrow="Vergelijking"
+    title="Curanta naast drie gevestigde leveranciers"
+    subtitle="Per onderwerp wat Curanta heeft en wat wij over Nedap Ons, mijnCaress en Pluriform Zorg in publieke bronnen vonden. Met de bron bij elke cel, ook waar zij verder zijn dan Curanta."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href={DEMO_ZELF.href} class="btn-primary no-underline">{DEMO_ZELF.label}</a>
@@ -196,151 +136,91 @@ const dateNl = new Date(lastReviewed).toLocaleDateString('nl-NL', { day: 'numeri
     </div>
   </PageHero>
 
-  <section class="border-y border-amber-200 bg-amber-50 py-6">
-    <div class="container-prose">
-      <p class="text-sm text-amber-900">
-        <strong>Peildatum: {dateNl}.</strong> Wij herzien deze vergelijking bij wezenlijke wijzigingen.
-        Bronnen: eigen marktscan tegen publieke leverancierswebsites en productdemonstraties.
-        Klopt er iets niet meer? Mail <a href="mailto:info@curanta.nl?subject=Correctie%20vergelijkingspagina" class="text-curanta-700 hover:underline">info@curanta.nl</a> —
-        wij reageren binnen 1 werkdag en zetten een revisienotitie bij de correctie. De vergelijking is bedoeld als naslagwerk,
-        niet als oordeel over concurrenten.
-      </p>
-    </div>
-  </section>
-
-  {groups.map((g) => (
-    <section class={`container-prose py-12 border-b border-ink-100 last:border-0`}>
-      <div class={`pl-5 ${groupTone(g.tone)} mb-8`}>
-        <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">{g.title}</h2>
-        <p class="mt-2 text-sm text-ink-700 max-w-3xl">{g.intro}</p>
-      </div>
-
-      <div class="overflow-x-auto rounded-xl border border-ink-100 bg-white">
-        <table class="w-full text-sm">
-          <thead class="bg-ink-100/50 text-left text-xs uppercase tracking-wider text-ink-500">
-            <tr>
-              <th class="px-4 py-3 font-semibold min-w-[240px]">Functie</th>
-              <th class="px-4 py-3 font-semibold text-center min-w-[110px]"><span class="text-curanta-900">Curanta</span></th>
-              <th class="px-4 py-3 font-semibold text-center min-w-[110px]">Nedap Ons</th>
-              <th class="px-4 py-3 font-semibold text-center min-w-[110px]">PinkRoccade myNeva</th>
-              <th class="px-4 py-3 font-semibold text-center min-w-[110px]">Pluriform Zorg</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-ink-100">
-            {g.rows.map((r) => (
-              <>
-                <tr>
-                  <td class="px-4 py-3 align-top">
-                    <div class="font-semibold text-ink-900">{r.feature}</div>
-                    {r.detail && <div class="text-xs text-ink-500 mt-0.5 leading-snug">{r.detail}</div>}
-                  </td>
-                  {[r.curanta, r.nedap, r.pinkroccade, r.pluriform].map((c) => (
-                    <td class="px-4 py-3 align-top text-center">
-                      <div class={`inline-flex flex-col items-center gap-1 rounded-md px-2 py-1.5 ${cellColor(c.status)}`}>
-                        <span class="text-lg font-bold leading-none">{cellSymbol(c.status)}</span>
-                        <span class="text-xs font-semibold leading-none">{cellLabel(c.status)}</span>
-                      </div>
-                      {c.note && <div class="mt-1 text-xs text-ink-500 leading-tight max-w-[160px] mx-auto">{c.note}</div>}
-                    </td>
-                  ))}
-                </tr>
-                {r.source && (
-                  <tr>
-                    <td colspan="5" class="px-4 pb-3 -mt-2 text-xs text-ink-500 italic">
-                      Bron: {r.source}
-                    </td>
-                  </tr>
-                )}
-              </>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {g.tone === 'gap' && (
-        <div class="mt-6 max-w-3xl rounded-xl border border-amber-200 bg-amber-50/60 p-5 text-sm text-ink-700">
-          <p class="font-semibold text-ink-900">Wat Curanta daarnaast nog niet heeft</p>
-          <ul class="mt-2 list-disc space-y-1 pl-5">
-            <li>Zvw-declaratie wijkverpleging: aanleveren kan nog niet (het berichtformaat AW319 is nog niet gebouwd).</li>
-            <li>eOverdracht, MedMij en LSP: gebouwd of in ontwikkeling, nog niet aangesloten.</li>
-            <li>Een publieke API.</li>
-            <li>Een externe pentest.</li>
-            <li>Klantreferenties: er draait nog geen zorgorganisatie met Curanta in productie.</li>
-          </ul>
-        </div>
-      )}
-    </section>
-  ))}
-
-  <section class="container-prose py-12 border-t border-ink-100">
-    <div class="max-w-3xl mb-8">
-      <span class="eyebrow">Marktscan — bredere context</span>
-      <h2 class="mt-3 font-display text-2xl font-bold text-ink-900 sm:text-3xl">
-        En de overige NL-VVT/GHZ-leveranciers?
-      </h2>
-      <p class="mt-3 text-sm text-ink-700">
-        Hetzelfde patroon dat de top-3 in beeld brengt herhaalt zich in de bredere markt.
-        Op de twee punten waarop wij ons onderscheiden — het meertalig cliëntportaal en steun tussen
-        collega's — komt volgens onze eigen marktscan geen Nederlandse VVT- of GHZ-leverancier verder dan
-        Curanta. Hieronder per leverancier kort de bevinding (peildatum {dateNl}).
-      </p>
-    </div>
-    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {[
-        { name: 'Cura', maker: 'PinkRoccade', portaal: 'NL-only', peer: 'Geen peer-support medewerker' },
-        { name: 'Plancare 2', maker: 'Plancare', portaal: 'NL-only', peer: 'Geen peer-support medewerker' },
-        { name: 'Carit Care', maker: 'Carit', portaal: 'NL-only', peer: 'Geen peer-support medewerker' },
-        { name: 'Quli', maker: 'Quli (zelfstandig cliëntportaal)', portaal: 'NL-only', peer: 'n.v.t. — geen medewerker-app' },
-        { name: 'Famped / Famedio', maker: 'Famedio', portaal: 'NL-only', peer: 'Geen peer-support medewerker' },
-        { name: 'mijnCaress', maker: 'PinkRoccade', portaal: 'NL-only', peer: 'Geen peer-support medewerker' },
-      ].map((v) => (
-        <li class="rounded-xl border border-ink-100 bg-white p-5">
-          <h3 class="font-display text-base font-semibold text-ink-900">{v.name}</h3>
-          <p class="text-xs text-ink-500 mt-0.5">{v.maker}</p>
-          <dl class="mt-4 space-y-2 text-xs">
-            <div>
-              <dt class="text-xs font-bold text-ink-500">Meertalig portaal</dt>
-              <dd class="mt-0.5 text-ink-700 flex items-center gap-1"><span class="text-rose-600 font-bold">✗</span> {v.portaal}</dd>
-            </div>
-            <div>
-              <dt class="text-xs font-bold text-ink-500">Peer-support medewerker</dt>
-              <dd class="mt-0.5 text-ink-700 flex items-center gap-1"><span class="text-rose-600 font-bold">✗</span> {v.peer}</dd>
-            </div>
-          </dl>
-        </li>
-      ))}
-    </ul>
-    <p class="mt-6 text-xs text-ink-500 max-w-3xl">
-      Bron: eigen marktscan tegen de websites van de leveranciers.
-      Een uitgebreidere vergelijking met deze leveranciers op aanvraag —
-      <a href="mailto:info@curanta.nl?subject=Uitgebreide%20vergelijking" class="text-curanta-700 hover:underline">info@curanta.nl</a>.
-    </p>
-  </section>
-
-  <section class="container-prose py-12 border-t border-ink-100">
-    <div class="grid gap-8 md:grid-cols-2">
-      <div class="rounded-xl border border-ink-100 bg-white p-6">
-        <h3 class="font-display text-lg font-semibold text-ink-900">Hoe wij dit onderhouden</h3>
-        <ul class="mt-3 space-y-2 text-sm text-ink-700">
-          <li>• Herzien bij wezenlijke wijzigingen, tegen publieke productpagina's</li>
-          <li>• Een revisienotitie bij elke correctie</li>
-          <li>• Alleen wat publiek of via een productdemonstratie na te gaan is</li>
+  <section class="border-b border-ink-200 bg-curanta-50 py-10">
+    <div class="container-prose grid gap-8 lg:grid-cols-2">
+      <div>
+        <h2 class="font-display text-xl font-bold text-curanta-900">Hoe deze vergelijking is gemaakt</h2>
+        <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-ink-700">
+          <li>Gecontroleerd op {GECONTROLEERD}, in publieke bronnen: de websites en supportpagina's van de leveranciers, het kwalificatieoverzicht van Nictiz en vakpers.</li>
+          <li>Wij hebben de producten van de andere leveranciers niet zelf gebruikt of gedemonstreerd gekregen.</li>
+          <li>De gegevens over Curanta komen uit de software zelf en ons feitenblad.</li>
+          <li>Pluriform Zorg wordt geleverd door Adapcare; de certificaten in de tabel horen bij Adapcare.</li>
         </ul>
       </div>
-      <div class="rounded-xl border border-ink-100 bg-curanta-50 p-6">
-        <h3 class="font-display text-lg font-semibold text-ink-900">Vergelijking aanvragen met andere leverancier?</h3>
-        <p class="mt-3 text-sm text-ink-700">
-          Werkt u op dit moment met Cura, Plancare 2, Carit Care, mijnCaress of een ander pakket
-          dat hier niet staat? Mail ons de naam; wij reageren binnen 1 werkdag.
+      <div class="rounded-xl bg-white p-5 ring-1 ring-ink-200">
+        <h2 class="font-display text-lg font-bold text-curanta-900">"Niet gevonden" is geen "nee"</h2>
+        <p class="mt-2 text-sm leading-relaxed text-ink-700">
+          Staat een functie niet op de website van een leverancier, dan kan hij er toch zijn. Daarom
+          staat er dan "niet gevonden". Klopt er iets niet of is het verouderd? Mail
+          <a href="mailto:info@curanta.nl?subject=Correctie%20vergelijkingspagina" class="text-curanta-700">info@curanta.nl</a>;
+          wij passen het aan en zetten de datum erbij.
         </p>
-        <a href="mailto:info@curanta.nl?subject=Vergelijking%20aanvragen" class="mt-4 inline-block text-sm font-medium text-curanta-700 hover:underline">
-          info@curanta.nl →
-        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-prose py-12" aria-labelledby="tabel-kop">
+    <h2 id="tabel-kop" class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Per onderwerp</h2>
+    <div class="mt-6 space-y-6">
+      {rijen.map((r) => (
+        <article class="overflow-hidden rounded-xl bg-white ring-1 ring-ink-200">
+          <h3 class="border-b border-ink-200 bg-curanta-50 px-5 py-3 font-display text-base font-bold text-curanta-900">{r.onderwerp}</h3>
+          <dl class="grid divide-y divide-ink-200 md:grid-cols-4 md:divide-x md:divide-y-0">
+            <div class="p-4">
+              <dt class="text-xs font-bold uppercase tracking-[0.12em] text-ink-500">Curanta</dt>
+              <dd class="mt-2 text-sm text-ink-700">
+                {r.curanta.status && <StatusLabel status={r.curanta.status} class="mb-1.5" />}
+                <span class="block">{r.curanta.tekst}</span>
+              </dd>
+            </div>
+            {leveranciers.map((l) => {
+              const c = r[l.sleutel];
+              return (
+                <div class="p-4">
+                  <dt class="text-xs font-bold uppercase tracking-[0.12em] text-ink-500">{l.naam} <span class="font-semibold normal-case tracking-normal">({l.van})</span></dt>
+                  <dd class="mt-2 text-sm text-ink-700">
+                    <span class={`inline-block rounded px-1.5 py-0.5 text-xs font-semibold ${OORDEEL[c.oordeel].klasse}`}>{OORDEEL[c.oordeel].label}</span>
+                    <span class="mt-1.5 block">{c.tekst}</span>
+                    {c.bron && (
+                      <a href={c.bron} rel="noopener" class="mt-1.5 inline-block break-all text-xs font-semibold text-curanta-700">Bron: {domein(c.bron)}</a>
+                    )}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-prose border-t border-ink-200 py-12">
+    <div class="grid gap-8 lg:grid-cols-2">
+      <div>
+        <h2 class="font-display text-xl font-bold text-curanta-900">Wat Curanta nog niet heeft</h2>
+        <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-ink-700">
+          <li>Declareren bij zorgverzekeraars (Zvw): in ontwikkeling.</li>
+          <li>eOverdracht, MedMij en het LSP: in ontwikkeling, niet aangesloten.</li>
+          <li>Een ISO 27001- of NEN 7510-certificaat en een externe pentest.</li>
+          <li>Klantervaringen: er werkt nog geen zorgorganisatie met Curanta in productie.</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="font-display text-xl font-bold text-curanta-900">Andere leveranciers</h2>
+        <p class="mt-3 text-sm leading-relaxed text-ink-700">
+          Cura en Plancare 2 zijn sinds 2020 samen
+          <a href="https://fierit.nl/over-ons/" rel="noopener" class="text-curanta-700">Fierit</a> (Tenzinger);
+          Fierit is door Nictiz gekwalificeerd voor eOverdracht. Werkt u met een pakket dat hier niet
+          staat? Mail ons de naam via
+          <a href="mailto:info@curanta.nl?subject=Vergelijking%20aanvragen" class="text-curanta-700">info@curanta.nl</a>;
+          wij reageren binnen 1 werkdag.
+        </p>
       </div>
     </div>
   </section>
 
   <Cta
-    title="Deze tabel naast de demo leggen?"
-    subtitle="Kijk zelf rond, of laat ons elk punt uit de tabel live in het systeem zien — en eerlijk zeggen waar het nog gepland staat."
+    title="Deze vergelijking naast de demo leggen?"
+    subtitle="Kijk zelf rond met een eigen demo-toegang, of vraag een demonstratie aan waarin wij de punten uit deze vergelijking in het systeem laten zien."
   />
 </Base>

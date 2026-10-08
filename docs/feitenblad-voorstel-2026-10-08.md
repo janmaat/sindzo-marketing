@@ -1,0 +1,61 @@
+# Voorstel: aanvullingen op het feitenblad (8 oktober 2026)
+
+Voor `D:\Repos\Ponscura\docs\campagne\feitenblad-curanta.md`. Op verzoek van Jan als voorstel
+uitgeschreven, niet zelf in Ponscura gezet. Het gaat om wat Curanta in de week van 1 tot en met 7
+oktober bouwde. Alles is in de code nagelopen; de bron staat per rij. De site
+(branch `feat/homepage-herinrichting`) is al volgens deze rijen geschreven.
+
+Markering zoals in het feitenblad: **[code: …]** is aan te tonen in de code. Wat "voorgesteld (ter
+bevestiging)" is in een ADR, staat er met **[ADR ter bevestiging]** bij.
+
+## Eerst: twee bestaande rijen die niet meer kloppen
+
+| Rij | Nu in het feitenblad | Voorstel | Bron |
+|---|---|---|---|
+| Koppelingen gebouwd | "iWmo/iJw/iWlz en CAK via Vecozo" | **Klopt.** Aanvullen: de maanddeclaratie (Wmo323, Jw323) stelt de administratie op met **Declaratie opstellen** op het scherm iWmo- of iJw-berichten, uit goedgekeurde productie; verzenden vraagt het Vecozo-certificaat. ⚠ De helpteksten `iwmo.md:40` en `ijw.md:41` zeiden dat er geen scherm was; die zijn gecorrigeerd op de Ponscura-branch `docs/helpteksten-2026-10-08`. | [code: IwmoBerichten.razor:42, IjwBerichten.razor:42; IwmoDeclaratieOpstellenDialog.razor; IwmoModule.cs:36; IjwDeclaratieOpsteller.cs; tests/Ponscura.Declaratie.Iwmo.Tests/IwmoDeclaratieOpstellerTests.cs] |
+| Wzd-uitdraai | Wzd/Wvggz "XML-uitdraai, nog niet gevalideerd tegen de specificatie van de IGJ" (site) | Het halfjaarlijkse overzicht volgt de XSD van de IGJ ("Wzd 2026") en elk bestand wordt ertegen gevalideerd. Curanta verstuurt niets (aanleveren via Mijn IGJ); een echte aanlevering is er nog niet. Vestigingsnummers per klant in te richten. Niet: "door de IGJ getoetst". | [code: 1709e5dad; IgJWzdExportService.cs:144, :556; Infrastructure/Igj/Wzd-IGJ-2026.xsd; ADR 2026-10-07-igj-uitdraai-wzd] |
+| Kraamzorg | "overdracht naar JGZ — weggelaten (alleen een Omaha-interventie)" (campagne-README) | Overdracht aan de JGZ is nu een registratie in het kraamdossier (toestemming en wijze); geen digitaal transport. | [code: 4e1b70705; ADR 2026-10-05-kraamweekregistratie :89-91, :112] |
+| Wtta (wet) | "raadpleegbaar vanaf 1-7-2027" | Aanvullen: de wet geldt vanaf 1-1-2027, 2027 is een overgangsjaar; pas vanaf 1-1-2028 alleen inlenen van toegelaten uitleners. | toelatinguitleenmarkt.nl/inleners (08-10-2026) |
+| Open diensten (medewerkerportaal) | — | Aanmelden voor een open dienst geeft de dienst direct, na controle op HRM, overlap en cao; géén goedkeuring door de planner. Een ruil keurt de planner wel goed. | [code: ShiftService.cs:706-741; DienstWissel.razor:419] |
+
+## Nieuwe rijen: product
+
+| Feit | Waarde | Status | Niet zeggen | Bron |
+|---|---|---|---|---|
+| Signaleringsplan (GHZ) | Bij het OPP: fasen rust, spanning, crisis met signalen, afspraken en crisiscontact; versies; vastgesteld door gedragsdeskundige, EVV of coördinator; incidenten sinds vaststelling erbij met "overweeg herziening". Groepszorg alleen eigen groepen. | gebouwd, in de demo | geen vierde fase; incident niet aan een fase gekoppeld; geen eigen rol gedragsdeskundige | [code: 1c1fe30a3, 4f6926a5b; Signaleringsplan.cs:95; SegmentenDemoSeed.cs:338] |
+| OPP in het portaal | De vertegenwoordiger leest het vrijgegeven OPP, het signaleringsplan en de ondertekende verslagen, en geeft akkoord (handtekening of getypte naam); het akkoord komt terug in het OPP | gebouwd, in de demo | geen concepten, geen pdf, geen gekwalificeerde e-handtekening; akkoord niet intrekbaar vanuit het portaal | [code: e50c8df54; GhzServices.cs:398; Portaal Zorgplan.razor:287] |
+| OPP-methodiek wijzigen | SRV, PBS, SOVA of vrij; reden verplicht, in de audit-trail | gebouwd, in de demo | SCIL is geen methodiek | [code: c89392ecb; GhzServices.cs:699-723] |
+| CIZ-zorgprofiel (GHZ) | VG, LVG, SGLVG, LG, ZG bij de intake; naast de Wlz-toewijzing met waarschuwing bij verschil | gebouwd, in de demo | alleen een waarschuwing, declareren gaat door; ggz-profielen ontbreken | [code: 48c5c6379; IwlzToewijzingen.razor:80] |
+| Begeleider (GHZ) | Start op Vandaag met eigen cliënten; rapporteert (SOEP) op OPP-doelen, ook zonder Omaha-zorgplan; AVB met rapportages per doel; leest medicatie; legt onvrijwillige zorg vast; ook in de medewerkerapp | gebouwd, in de demo | geen toediening door de begeleider; "eigen cliënten" = zorgrelatie uit het rooster | [code: 789dc2fc5, f073c3eb2, 0be6ba910; Vandaag.razor:111] |
+| Wlz-productie GHZ (mpt) | Uur (H300) en dagdeel (H811–H816), automatisch aan de juiste toewijzing; dagbesteding uit groepszorg wordt conceptregel | gebouwd, in de demo; versturen AW319 na Vecozo | niet "volautomatisch declareren"; retouren handmatig | [code: 6936950da; IwlzDeclaratieOpsteller.cs:319-342] |
+| Verblijf met zzp | Opname, ontslag, afwezigheid volgens NZa art. 9, maandproductie per etmaal met één knop; zzp-catalogus vg, vv, lvg, sglvg, lg, zg (NZa 2026) | gebouwd, in de demo | geen ggz-wonen, toeslagen, deeltijdverblijf, mutatiedagen; maandproductie niet automatisch | [code: e9ed0a223, 0dfac0c06; Verblijfsdagen.cs:40; ZzpCatalogus.cs] |
+| Logeren | NZa-dagen, grens 156 nachten, signaal in de werkvoorraad | gebouwd, in de demo | niet naar rato; geen logeren via pgb | [code: c0395a672; Logeerperiode.cs:27, :120] |
+| Volledig pakket thuis | Als leveringsvorm, NZa-prestaties; volle logeerdagen tellen als afwezigheid | gebouwd, geen voorbeeld in de demo | geen signaal bij losse prestaties naast vpt | [code: ebfa2b625; VptCatalogus.cs] [besluit Jan 08-10 via 235fcad09] |
+| Wzd (wet 1-7-2025) | Vormen a–i, stappenplan met termijnen, zorgverantwoordelijke per cliënt, juridische titel met aanvraagvenster, verlof en ontslag (art. 47/48) met termijnen, IGJ-overzicht (zie boven) | gebouwd, in de demo (verlof/ontslag zonder voorbeeld) | Curanta stelt het afschrift niet op; geen forensische titels; kwalificatie zorgverantwoordelijke niet getoetst | [code: 404d42ef3, d73b54fba, 0778c3fa9, 9e4a829bd; WzdJuridischeTitel.cs:209-251] |
+| Wvggz | Vormen (art. 3:2) en titel met geldigheid | gebouwd, in de demo | geen aanlevering aan de IGJ; titel handmatig | [code: 3d0455bb4] |
+| Kraamdossier | Kraamweekregistratie (controles moeder en kind, weekgrafieken), bevallingsdatum corrigeren met reden, JGZ-overdracht als registratie, bezoeken tellen af van indicatie-uren | gebouwd, in de demo | geen Zvw-declaratie kraamzorg, geen LIP-berekening, kraambezoeken niet in de planning, niets in het medewerkerportaal, geen grenswaarden of signalen | [code: 4e1b70705, 9928ce9c0; KraamzorgDossier.cs; SegmentenDemoSeed.cs:1032] |
+| Jeugddossier | Hulpvragen met behandelstappen, toewijzingen met verbruik, vertegenwoordigers, risico, meldcode (5 stappen), verwijsindex, audittrail; aandachtsfunctionaris ziet alleen meldcode/verwijsindex/audit; lakken bij inzage | gebouwd, in de demo | geen Jw323-scherm; geen Verwijsindex-aansluiting (stub); melden bij Veilig Thuis doet de gebruiker | [code: 98465e4ce, 368a8b2b9, bedbbdaf9; JeugdzorgDemoSeed.cs] |
+| Vakgebieden | Kiesbaar: VVT, GHZ, GGZ-instelling, GGZ-praktijk, kraamzorg, jeugdzorg. Paramedische vakgebieden "beschikbaar vanaf 01-12-2026" in de app — niet op de site noemen | — | geen datum voor paramedici beloven | [code: VakgebiedSeedData.cs:46-102] |
+| GGZ-declaratie | GDS801 volgens Vektis v2.0 (v2.1 per 1-1-2027), getoetst aan de XSD; GDS802 inlezen; opnieuw declareren en crediteren | gebouwd, in te richten per klant (Vecozo-certificaat) | geen Vecozo-test gedaan; geen automatisch retour; niet "rechtstreeks gekoppeld" | [code: 595c749e7, bae17650f, 6dc6a85bd, a5fd3dafa; GgzModule.cs:111-114] |
+| GGZ-afscherming | Zorginhoud alleen bij een behandelrelatie (rooster, agenda, regie, ±90 dagen); noodtoegang met reden; administratie ziet het declaratiedeel; regiebehandelaar getoetst aan het Landelijk Kwaliteitsstatuut | gebouwd, in de demo | niet: traject openen geeft toegang | [code: 0c76898e8, 64c507b7c] |
+| ROM | Uitdraai per periode, zonder vrije tekst, zonder trajecten zonder toestemming, in het toegangslogboek; zelf aanleveren bij Akwa GGZ | gebouwd, in de demo | geen aanlevering aan Akwa; niet "SBG-conform"; pseudonimisering niet gebouwd | [code: 313fab0d7, efcde359d; RomService.cs:277, :356] |
+| SQ-48 en 4DKL | Scoring en licentiebeheer gebouwd; vragenlijsten pas na schriftelijke toestemming rechthebbenden | in ontwikkeling | geen normscores, geen RCI | [code: 4eadfaebe, efa18420b] [ADR ter bevestiging] |
+| Nota zonder contract (GGZ) | Nota met de gegevens uit de NZa-regeling, per e-mail als pdf; consult op één nota of één declaratie | gebouwd | geen vergoedingscheck, geen eigen-risicoberekening | [code: babf2be7d] [ADR ter bevestiging] |
+| Omzetplafonds | Per UZOVI-groep, zorgsoort en jaar; signalen 80/90/100%; prognose; aanmeldstop is alleen registratie | gebouwd, zelf in te richten | aanmeldstop blokkeert niets; geen plafond per AGB | [code: 40bfac052, acf04e6fc] |
+| Bankafschriften | CAMT.053 inlezen, koppelvoorstellen; alleen factuurnummer + exact bedrag boekt direct; verzamelbetalingen zelf verdelen | gebouwd | geen MT940, geen bankkoppeling of PSD2 | [code: 7553f33a3, 4231bb56c; Camt053Lezer.cs] [ADR ter bevestiging] |
+| Boekhoudexport | Bestanden voor Twinfield (XML), SnelStart (CSV), AFAS/Exact (journaalposten-CSV), Yuki (XML tegen Journal.xsd); kosten, kostenplaatsen, kas, afschrijvingen | gebouwd | geen koppeling; Yuki-bestand nog niet in een echte Yuki-administratie ingelezen; geen grootboek of btw-aangifte | [code: e2223f2e5, 50dc7e20c] [ADR ter bevestiging] |
+| Betalingen cliënt | Betaalwijze per betaling, afrekenen aan de balie, herinneringen (standaard uit), aanmaning 14 dagen alleen particulieren en nooit automatisch, geschil en pauze, incasso-CSV | gebouwd | briefteksten concept, nog juridisch te toetsen; geen incassobureau bij naam | [code: 782523079, 7d1ed5cba, b57e6417b] [ADR ter bevestiging] |
+| Mollie-betaallink | De cliënt betaalt op het Mollie-account van de zorgorganisatie | gebouwd, **nog niet te gebruiken**: de Connect-app van Curanta is niet bij Mollie geregistreerd | niet "online betalen beschikbaar" | [code: MollieConnectGateway.cs:29; todo/24] |
+| Afspraakherinneringen | E-mail vóór een bezoek en bij verschuiven of afzeggen; dubbele opt-in (organisatie en cliënt) | gebouwd, in te richten (standaard uit) | geen sms; niet bij alleen DigiD-login zonder e-mailadres | [code: 15beccbd8, a27ad58d6] |
+| ZorgDomein → wachtlijst | Een geaccepteerde verwijzing gaat in een praktijk meteen naar de wachtlijst | gebouwd; ZorgDomein zelf in te richten (nu stub) | geen live koppeling; afwijzen meldt niets terug | [code: 5031ceaad] |
+| Vandaag | Interventietaken van vandaag en te laat, per cliënt, met Afronden | gebouwd, in de demo | alleen VVT en GHZ | [code: 1e59c7a77, 0fa21c419] |
+| Uitlegvideo's | Videotheek en video per scherm in alle drie de portalen, met een reeks per vakgebied; 174 video's | gebouwd, in elk plan | synthetische stem; geen e-learning | [code: 1054159e3; videocatalogus.json] |
+| Kwaliteitsregisters | Registers naast BIG met punten; signalen; "behandelt zonder inschrijving" | gebouwd, alleen voor paramedische vakgebieden (nog niet kiesbaar) | niet op de site tot paramedici beschikbaar zijn | [code: ba486e9a7, f54eeb80d] |
+
+## Open punten voor Jan
+
+1. **Demo-uitrol** — uitgevoerd vóór de start (uitgangspunt Jan 08-10-2026).
+2. **Plannen.** `Subscriptions:Enabled` staat uit, dus elke klant krijgt nu alles. De meeste nieuwe functies zijn commercieel nog niet ingedeeld ("Nog niet commercieel ingedeeld" in `SubscriptionPlanCatalog.cs`). De site noemt ze daarom zonder plan; /prijzen is ongewijzigd (besluit Jan 08-10).
+3. **Basic** — geen wijziging nodig: "1 declaratiemodule (Wmo, Jeugdwet óf Wlz)" klopt. Een eerdere aanpassing op 08-10 berustte op een verouderde helptekst en is teruggedraaid.
+4. **ADR's ter bevestiging** — bevestigd vóór de start (uitgangspunt Jan 08-10-2026); de markering [ADR ter bevestiging] in de tabel vervalt daarmee.
+5. **Helpteksten in de app (gecorrigeerd op Ponscura-branch docs/helpteksten-2026-10-08, 8c9b7c74a).** Deze zijn verouderd: `ggz-zpm.md:145-146` (crediteren kan nu wel), `cak.md:28-30` ("automatisch" verwerkt klopt niet) en `kraamzorg.md:152` (iWmo-link bij kraamzorg). En `verwerkingsregister.md:2160` noemt RCI voor SQ-48 en 4DKL.
