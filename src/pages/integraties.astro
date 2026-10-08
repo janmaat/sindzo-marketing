@@ -41,7 +41,7 @@ const integrations: Integration[] = [
 
   // Financieel
   { name: 'Gemeenten (iWmo en iJw)', category: 'Financieel', status: 'inrichten',
-    body: 'Berichten en toewijzingen via Vecozo, met het Vecozo-certificaat van uw organisatie. Retourberichten leest u nu zelf in; automatisch ophalen is in ontwikkeling.' },
+    body: 'Toewijzingen en berichten via Vecozo, met het Vecozo-certificaat van uw organisatie. De maanddeclaratie (Wmo323 en Jw323) kunt u nog niet opstellen; die is in ontwikkeling. Retourberichten leest u zelf in.' },
   { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'inrichten',
     body: 'iWlz-berichten via Vecozo, met validatie. Retourberichten leest u nu zelf in; automatisch ophalen is in ontwikkeling.' },
   { name: 'CAK', category: 'Financieel', status: 'inrichten',
@@ -50,6 +50,8 @@ const integrations: Integration[] = [
     body: 'Via Vecozo, per cliënt of voor alle cliënten tegelijk; de uitkomst wordt vastgelegd. Werkt zodra er een Vecozo-certificaat is.' },
   { name: 'AGB-register (Vektis)', category: 'Financieel', status: 'inrichten',
     body: 'AGB-codes valideren en dagelijks synchroniseren met de open dataset van Vektis. De synchronisatie richten wij per klant in.' },
+  { name: 'Zorgverzekeraars (GGZ, GDS801)', category: 'Financieel', status: 'inrichten',
+    body: 'GGZ-declaraties volgens de standaard van Vektis, vóór verzending getoetst aan het schema, via de berichtenbox van Vecozo. Vraagt een Vecozo-certificaat; een test bij Vecozo is nog niet gedaan. Het retourbericht (GDS802) haalt u zelf op en leest u in.' },
   { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'ontwikkeling',
     body: 'Zvw-declaratie voor de wijkverpleging. De berichten (AW319 en AW320) worden opgesteld en verwerkt, maar de test bij Vecozo en het versturen zijn nog niet bewezen. Aanleveren kan nog niet.' },
 
@@ -76,6 +78,10 @@ const integrations: Integration[] = [
   // Backoffice
   { name: 'DocuSign', category: 'Backoffice', status: 'inrichten',
     body: 'Digitaal ondertekenen van HR-documenten in het personeelsdossier. Vraagt een DocuSign-account van uw organisatie; DocuSign verwerkt de gegevens in de VS.' },
+  { name: 'Mollie (betaallink voor cliënten)', category: 'Backoffice', status: 'inrichten',
+    body: 'Een betaallink op de factuur; de cliënt betaalt op het eigen Mollie-account van uw organisatie. Vraagt een Mollie-account van uw organisatie. Nog niet te gebruiken: de aanmelding van Curanta bij Mollie is nog niet rond.' },
+  { name: 'Boekhoudpakketten', category: 'Backoffice', status: 'demo',
+    body: 'Geen koppeling maar een bestand: verkoopboekingen, toegekende declaraties en kosten voor Twinfield, SnelStart, AFAS, Exact (journaalposten) of Yuki. U leest het zelf in. Het Yuki-bestand is nog niet in een echte Yuki-administratie ingelezen.' },
   { name: 'Nmbrs', category: 'Backoffice', status: 'inrichten',
     body: 'De goedgekeurde salarisexport rechtstreeks naar Nmbrs. Vraagt een Nmbrs-partnerapp, een sleutel en toestemming van uw organisatie; de test met Nmbrs doen wij bij de eerste klant. Zonder Nmbrs: een CSV-export voor elke salarisadministratie.' },
 ];

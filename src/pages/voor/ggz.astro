@@ -1,36 +1,45 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
+// Herzien 08-10-2026 met wat in de week van 2–7 oktober is gebouwd (GDS801/GDS802, afscherming per
+// cliënt, ROM-uitdraai, nota zonder contract, omzetplafonds, Wvggz). Nagelopen in de code; zie
+// docs/feitenblad-voorstel-2026-10-08.md. SQ-48 en 4DKL staan er bewust als "in ontwikkeling".
 ---
 <SegmentLayout
   image="/og/voor-ggz.png"
   segmentKey="ggz"
   segmentLabel="GGZ"
   title="GGZ-software — geestelijke gezondheidszorg | Curanta"
-  description="GGZ-software met dossier, ZPM-declaratie en wachtlijstbeheer in één systeem — voor kleine praktijken én gespecialiseerde GGZ-instellingen."
+  description="GGZ-software: trajecten volgens het zorgprestatiemodel, declareren volgens Vektis, afscherming per cliënt en omzetplafonds, voor praktijk en instelling."
   eyebrow="Voor de GGZ"
-  hero="Dossier en ZPM-declaratie voor de GGZ, in één systeem."
-  subtitle="Curanta brengt dossier, zorgprestaties en wachtlijst samen, voor kleine praktijken en gespecialiseerde GGZ-instellingen. Behandelaars registreren één keer; de declaratie volgt daaruit. Koppelingen met e-healthaanbieders zijn gepland."
+  hero="Trajecten, declaratie en afscherming voor de GGZ"
+  subtitle="Voor vrijgevestigde praktijken en GGZ-instellingen. De behandelaar registreert prestaties per traject, de administratie declareert volgens de standaard van Vektis of stuurt een nota, en de zorginhoud ziet alleen wie de cliënt behandelt."
   triggers={[
-    { title: 'Wachttijden en personeelstekort', body: 'De NZa noemt toegankelijkheid een kernuitdaging. Triage, een wachtlijst in hetzelfde dossier en minder dubbele registratie verlagen de administratie per behandelaar.' },
-    { title: 'ZPM-declaratie is ingewikkeld', body: 'Het zorgprestatiemodel vraagt een nauwkeurige registratie van prestaties. Curanta legt zorgprestaties per traject vast, met controle op tarief, duur en datum.' },
-    { title: 'Blended care wordt verwacht', body: 'Cliënten verwachten een portaal en berichten tussen de sessies door. Het cliëntportaal is er; koppelingen met e-healthaanbieders staan op de roadmap en vragen een overeenkomst per aanbieder.' },
-    { title: 'Privacy onder druk', body: 'Gegevens over psychische gezondheid zijn bijzonder gevoelig. Het Trust Centre, een versleuteld BSN, fijnmazige autorisaties en een NEN 7513-logboek laten zien wat andere leveranciers vaak pas in een aanbesteding delen.' },
+    { title: 'Declareren zonder overtikken', body: 'Het declaratiebericht (GDS801) volgt de standaard van Vektis en wordt vóór verzending getoetst. Een afgewezen prestatie declareert u opnieuw; een toegekende crediteert u en declareert u gecorrigeerd. Versturen gaat via Vecozo, na aansluiting met uw certificaat.' },
+    { title: 'Zorginhoud alleen voor de behandelaars', body: 'Wie geen behandelrelatie met de cliënt heeft, uit het rooster, de agenda of als regiebehandelaar, ziet de zorginhoud niet. Noodtoegang kan, met een reden in het logboek. De administratie ziet alleen wat zij voor de declaratie nodig heeft.' },
+    { title: 'Omzetplafonds in beeld', body: 'Per zorgverzekeraar en jaar ziet u hoe ver u bent, met een signaal bij 80, 90 en 100 procent en een prognose tot het jaareinde.' },
+    { title: 'Zorg zonder contract', body: 'Voor cliënten van een verzekeraar waarmee u geen contract hebt, maakt Curanta een nota met de gegevens die de NZa voorschrijft, en verstuurt die per e-mail.' },
   ]}
   modules={[
-    { name: 'ZPM-declaratie + prestaties', note: 'Zorgprestaties per traject, met controle op tarief, duur en datum' },
-    { name: 'Aanmelding, triage en wachtlijst', note: 'Met een aparte module voor multidisciplinair overleg (MDO)' },
-    { name: 'E-health-koppelingen', note: 'Gepland; vraagt een overeenkomst per aanbieder' },
-    { name: 'Cliëntportaal', note: 'Berichten, documenten, machtigingen, mantelzorger-taken' },
-    { name: 'Vragenlijsten (PREM/ROM)', note: 'Uitkomsten van de behandeling volgen' },
-    { name: 'Zorgtrajecten', note: 'Multidisciplinair behandelpad' },
-    { name: 'Indicatoren', note: 'Kwaliteit + transparantie' },
-    { name: 'FHIR-API voor de BgZ', note: 'Read-only, voor vooraf geregistreerde systemen' },
+    { name: 'Zorgprestatiemodel', note: 'Prestaties per traject, met controle op tarief, duur en datum' },
+    { name: 'GDS801 en GDS802', note: 'Declareren en retourberichten volgens Vektis; versturen via Vecozo na aansluiting' },
+    { name: 'Afscherming per cliënt', note: 'Op basis van de behandelrelatie, met noodtoegang' },
+    { name: 'Omzetplafonds', note: 'Per verzekeraar en jaar, met signalen en prognose' },
+    { name: 'ROM-uitdraai', note: 'Per periode, zonder vrije tekst; u levert zelf aan bij Akwa GGZ' },
+    { name: 'SQ-48 en 4DKL', note: 'In ontwikkeling: wacht op toestemming van de rechthebbenden' },
+    { name: 'Wet verplichte ggz', note: 'Vormen en titels met geldigheid, voor instellingen' },
+    { name: 'Aanmelding en wachtlijst', note: 'Na aansluiting op ZorgDomein komt een geaccepteerde verwijzing op de wachtlijst' },
   ]}
-  regulatory={['Wvggz', 'Wkkgz', 'ZPM', 'AVG', 'NEN 7510', 'Wegiz']}
+  nogNiet={[
+    'Een test bij Vecozo met de GGZ-declaratie; versturen vraagt uw Vecozo-certificaat.',
+    'De vragenlijsten SQ-48 en 4DKL: wachten op toestemming van de rechthebbenden.',
+    'Een rechtstreekse aanlevering van ROM-gegevens bij Akwa GGZ.',
+    'Koppelingen met e-healthaanbieders.',
+  ]}
+  regulatory={['Wvggz', 'Wkkgz', 'Zorgprestatiemodel', 'AVG', 'NEN 7510']}
   proofPoints={[
-    { value: 'ZPM', label: 'Prestatieregistratie ingebouwd' },
-    { value: 'EU', label: 'Hosting (IONOS, Berlijn) · ondersteuning in het Nederlands' },
-    { value: 'BSN', label: 'Versleuteld (AES-256-GCM)' },
-    { value: 'FHIR', label: 'Read-only API voor de BgZ; eOverdracht in ontwikkeling' },
+    { value: 'GDS801', label: 'Volgens de standaard van Vektis, getoetst aan het schema' },
+    { value: 'Per cliënt', label: 'Zorginhoud alleen voor wie behandelt' },
+    { value: 'EU', label: 'Hosting bij IONOS in Berlijn' },
+    { value: 'FHIR', label: 'Read-only API voor de BgZ, na registratie' },
   ]}
 />

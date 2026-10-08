@@ -81,7 +81,7 @@ const werkdag = [
     icoon: 'euro',
     wie: 'Administratie',
     titel: 'Declareert wat er geleverd is',
-    tekst: 'Het bezoek wordt een productieregel, met de bron erbij. De administratie controleert en dient in. Een retourbericht leest zij in; Curanta zet de afkeuringen per oorzaak bij elkaar, zodat zij ze kan afhandelen.',
+    tekst: 'Het bezoek wordt een productieregel, met de bron erbij, en de coördinator keurt hem goed. Voor de Wlz stelt Curanta daaruit de declaratie op; voor de Wmo en de Zvw is de maanddeclaratie in ontwikkeling. Een retourbericht leest de administratie zelf in; Curanta zet de afkeuringen per oorzaak bij elkaar.',
   },
 ] as const;
 
@@ -165,16 +165,16 @@ const voorbeelden: Voorbeeld[] = [
     id: 'declaratie',
     kop: 'Declaratie en kwaliteit',
     wie: 'De medewerker administratie of declaratie, en de kwaliteitsfunctionaris.',
-    doet: 'Controleert de productie van de maand, dient die in en verwerkt een retourbericht. Beoordeelt incidentmeldingen en klachten.',
+    doet: 'Controleert de productie van de maand en verwerkt een retourbericht. Beoordeelt incidentmeldingen en klachten.',
     curanta: [
       'Maakt productieregels uit afgeronde bezoeken en registraties, met de bron erbij.',
-      'Stelt de berichten op voor de Wmo, de Jeugdwet en de Wlz, en de aanlevering voor het CAK.',
+      'Verwerkt de toewijzingen van gemeenten en zorgkantoren, en stelt de Wlz-declaratie en de aanlevering voor het CAK op.',
       'Volgt een incidentmelding of klacht van melding tot afhandeling, met de termijnen uit de Wkkgz.',
     ],
     statussen: [
-      { status: 'demo', tekst: 'Productieregistratie, berichten opstellen, incidentmeldingen en klachten' },
+      { status: 'demo', tekst: 'Productieregistratie, Wlz-declaratie opstellen, incidentmeldingen en klachten' },
       { status: 'inrichten', tekst: 'Versturen via Vecozo: na aansluiting met het Vecozo-certificaat van uw organisatie. In de demo zijn de koppelingen niet live.' },
-      { status: 'ontwikkeling', tekst: 'Retourberichten automatisch ophalen; nu leest u ze zelf in. Declareren bij zorgverzekeraars (Zvw).' },
+      { status: 'ontwikkeling', tekst: 'De maanddeclaratie voor de Wmo en de Jeugdwet, en declareren bij zorgverzekeraars (Zvw). Retourberichten automatisch ophalen; nu leest u ze zelf in.' },
     ],
     link: { label: 'Alle onderdelen van declaratie en kwaliteit', href: '/oplossing#declaratie' },
     beelden: [
@@ -198,8 +198,8 @@ const doelgroepen = [
   {
     naam: 'VVT',
     kop: 'Wijkverpleging, thuiszorg en verpleeghuizen',
-    tekst: 'Routes en bezoeken, rapportage onderweg, medicatie uit Medimo of de eigen registratie, en declareren onder de Wmo en de Wlz.',
-    let: 'Declareren bij zorgverzekeraars (Zvw) is in ontwikkeling.',
+    tekst: 'Routes en bezoeken, rapportage onderweg, medicatie uit Medimo of de eigen registratie, en productie per bezoek voor de Wmo, de Wlz en de Zvw.',
+    let: 'De maanddeclaratie voor de Wmo en de declaratie bij zorgverzekeraars (Zvw) zijn in ontwikkeling.',
     href: '/voor/vvt',
     link: 'Curanta voor de VVT',
     foto: fotoVvt,
@@ -208,7 +208,7 @@ const doelgroepen = [
   {
     naam: 'Gehandicaptenzorg',
     kop: 'Wonen, dagbesteding en begeleiding',
-    tekst: 'Het ondersteuningsplan, aanwezigheid bij de dagbesteding, registratie onder de Wzd en contact met verwanten via het cliëntportaal.',
+    tekst: 'Het ondersteuningsplan met signaleringsplan, dagbesteding, verblijf en logeren onder de Wlz, de Wzd, en verwanten die het plan in het cliëntportaal lezen en akkoord geven.',
     let: 'Het halfjaarlijkse Wzd-overzicht volgt het XML-schema van de IGJ; een echte aanlevering bij de IGJ is er nog niet.',
     href: '/voor/ghz',
     link: 'Curanta voor de gehandicaptenzorg',
@@ -218,8 +218,8 @@ const doelgroepen = [
   {
     naam: 'GGZ',
     kop: 'Praktijken en instellingen',
-    tekst: 'Registratie volgens het zorgprestatiemodel, een wachtlijst met verwachte wachttijd en registratie onder de Wvggz.',
-    let: 'Koppelingen met e-healthaanbieders zijn gepland.',
+    tekst: 'Trajecten volgens het zorgprestatiemodel, declareren volgens de standaard van Vektis, zorginhoud die alleen de behandelaars zien, en omzetplafonds per verzekeraar.',
+    let: 'Versturen naar verzekeraars vraagt een Vecozo-certificaat. Koppelingen met e-healthaanbieders zijn gepland.',
     href: '/voor/ggz',
     link: 'Curanta voor de GGZ',
     foto: fotoGgz,
@@ -302,7 +302,7 @@ const plannen = [
           Eén bezoek, van rooster tot declaratie
         </h2>
         <p class="mt-4 text-lg leading-relaxed text-ink-700">
-          Een voorbeeld uit de wijkverpleging. Wat de één vastlegt, ziet de volgende in hetzelfde
+          Een voorbeeld uit de zorg thuis. Wat de één vastlegt, ziet de volgende in hetzelfde
           systeem terug.
         </p>
       </div>
@@ -420,7 +420,7 @@ const plannen = [
       <div class="max-w-2xl">
         <p class="eyebrow">Voor wie</p>
         <h2 id="doelgroepen-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
-          Voor drie soorten zorgorganisaties
+          Voor welke zorgorganisaties
         </h2>
       </div>
       <ul class="mt-10 grid gap-6 md:grid-cols-3">
@@ -448,6 +448,11 @@ const plannen = [
           </li>
         ))}
       </ul>
+      <p class="mt-6 text-ink-700">
+        Ook voor de <a href="/voor/kraamzorg" class="font-semibold text-curanta-700">kraamzorg</a> (het kraamdossier,
+        nog zonder declaratie en planning) en de <a href="/voor/jeugdzorg" class="font-semibold text-curanta-700">jeugdzorg</a>
+        (jeugddossier en meldcode).
+      </p>
       <p class="mt-5 text-xs text-ink-500">
         Foto's: Age Cymru (Unsplash), Cliff Booth (Pexels), Vitaly Gariev (Unsplash). Het zijn geen
         cliënten of medewerkers van een organisatie die met Curanta werkt.

@@ -27,9 +27,14 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
     { name: 'Cao-controle', note: 'Rusttijden, pauzes en maximale diensten, met signalen vóór publicatie' },
     { name: 'eOverdracht', note: 'In ontwikkeling: document en verzenden' },
     { name: 'Medicatie', note: 'Toedienlijst; overzicht uit Medimo of uit de eigen registratie' },
-    { name: 'iWmo, productie en budget', note: 'Van toewijzing tot declaratie en budgetbewaking' },
+    { name: 'iWmo, productie en budget', note: 'Toewijzing, productie en budget; de maanddeclaratie is in ontwikkeling' },
     { name: 'Cliëntportaal', note: 'Voor cliënten en mantelzorgers: taken, foto\'s, berichten; in 5 talen' },
     { name: 'Collega-netwerk (welzijn)', note: 'Buddy of intervisiepartner — strikt gescheiden van HR' },
+  ]}
+  nogNiet={[
+    'De maanddeclaratie voor de Wmo (Wmo323): de productie is er, het scherm voor de declaratie nog niet.',
+    'Declareren bij zorgverzekeraars (Zvw) voor de wijkverpleging: de berichten zijn gebouwd, de test bij Vecozo nog niet gedaan.',
+    'eOverdracht verzenden naar ziekenhuis of vervolgzorg.',
   ]}
   regulatory={['Wkkgz', 'Wtza', 'AVG', 'NEN 7510', 'Wegiz', 'Wzd (extramurale toepassing)']}
   proofPoints={[

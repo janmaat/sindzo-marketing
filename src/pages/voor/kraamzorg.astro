@@ -1,0 +1,38 @@
+---
+import SegmentLayout from '../../layouts/SegmentLayout.astro';
+// Nieuw 08-10-2026 (besluit Jan: eigen doelgroeppagina). Nagelopen in de code: kraamweekregistratie
+// (Ponscura 4e1b70705, ADR 2026-10-05-kraamweekregistratie), KraamzorgDossier, SegmentenDemoSeed.
+// Kraamzorg is een dossiermodule, geen volledig vakgebied: declaratie, indicatieberekening en
+// planning van kraambezoeken ontbreken. Dat staat zichtbaar onder "Wat er nog niet is".
+---
+<SegmentLayout
+  segmentKey="kraamzorg"
+  segmentLabel="Kraamzorg"
+  title="Kraamzorgsoftware: het kraamdossier | Curanta"
+  description="Het kraamdossier in Curanta: controles van moeder en kind per kraamdag, weekgrafieken en de overdracht aan de JGZ. Met wat er nog niet is."
+  eyebrow="Voor de kraamzorg"
+  hero="Het kraamdossier: controles van moeder en kind"
+  subtitle="De kraamverzorgende legt per controlemoment vast wat zij bij moeder en kind ziet, de leidinggevende houdt het dossier bij, en bij het afsluiten staat de overdracht aan de JGZ erin. Declaratie en planning van kraambezoeken zitten er nog niet in."
+  triggers={[
+    { title: 'Controles per kraamdag', body: 'Bij de moeder onder meer temperatuur, pols, stand van de baarmoeder en vloeien; bij het kind onder meer temperatuur, gewicht, geel zien en de navel. Met overleg met de verloskundige erbij, en grafieken van temperatuur en gewicht over de week.' },
+    { title: 'Uren in zicht', body: 'Bezoeken tellen af van het aantal uren uit de indicatie. Die uren vult u zelf in.' },
+    { title: 'De overdracht aan de JGZ', body: 'Bij het afsluiten legt u vast of de ouders toestemming gaven voor de overdracht aan de jeugdgezondheidszorg, en hoe die is gedaan. Curanta verstuurt zelf niets.' },
+    { title: 'Correcties met een reden', body: 'De leidinggevende kan de bevallingsdatum corrigeren. De reden is verplicht en komt in het logboek.' },
+  ]}
+  modules={[
+    { name: 'Kraamdossier', note: 'Geboortegegevens met Apgar, voeding en afsluiten' },
+    { name: 'Kraamweekregistratie', note: 'Controles van moeder en kind per controlemoment' },
+    { name: 'Weekgrafieken', note: 'Temperatuur en gewicht' },
+    { name: 'Overdracht aan de JGZ', note: 'Toestemming en wijze vastleggen; geen digitaal verzenden' },
+    { name: 'Logboek (NEN 7513)', note: 'Wie het dossier inzag of wijzigde' },
+    { name: 'Uitlegvideo’s', note: 'Een eigen reeks voor de kraamzorg in de app' },
+  ]}
+  nogNiet={[
+    'Declareren bij zorgverzekeraars (Zvw) voor de kraamzorg.',
+    'Een berekening van de indicatie volgens het Landelijk Indicatieprotocol: de uren vult u zelf in.',
+    'Kraambezoeken in de planning, en de kraamzorg in het medewerkerportaal.',
+    'Grenswaarden of signalen bij de controles: Curanta legt vast, maar bewaakt geen protocol.',
+    'De overdracht aan de JGZ digitaal versturen.',
+  ]}
+  regulatory={['Zvw', 'Wkkgz', 'AVG', 'NEN 7510']}
+/>

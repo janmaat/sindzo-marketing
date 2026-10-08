@@ -1,0 +1,35 @@
+---
+import SegmentLayout from '../../layouts/SegmentLayout.astro';
+// Nieuw 08-10-2026 (besluit Jan: eigen doelgroeppagina). Nagelopen in de code: jeugddossier,
+// meldcode, aandachtsfunctionaris (Ponscura 98465e4ce, 368a8b2b9, bedbbdaf9; JeugdzorgDemoSeed;
+// werkinstructie 93). Geen Verwijsindex-aansluiting (alleen een stub), geen scherm voor de
+// maanddeclaratie Jw323.
+---
+<SegmentLayout
+  segmentKey="jeugdzorg"
+  segmentLabel="Jeugdzorg"
+  title="Jeugdzorgsoftware: jeugddossier en meldcode | Curanta"
+  description="Het jeugddossier in Curanta: hulpvragen, toewijzingen onder de Jeugdwet, vertegenwoordigers en de meldcode. Met wat er nog niet is."
+  eyebrow="Voor de jeugdzorg"
+  hero="Het jeugddossier, met de meldcode erin"
+  subtitle="De jeugdhulpverlener werkt aan hulpvragen met behandelstappen en ziet de toewijzingen van de gemeente aftellen. De aandachtsfunctionaris doorloopt de meldcode en ziet alleen wat daarvoor nodig is."
+  triggers={[
+    { title: 'Hulpvragen en toewijzingen', body: 'Per jeugdige de hulpvragen met behandelstappen, de vertegenwoordigers en de toewijzingen onder de Jeugdwet, met het verbruik dat aftelt.' },
+    { title: 'De meldcode in vijf stappen', body: 'De aandachtsfunctionaris doorloopt de vijf stappen tot een besluit; een afgeronde stap is niet meer te wijzigen. Melden bij Veilig Thuis doet u zelf; Curanta legt het besluit vast.' },
+    { title: 'Alleen zien wat nodig is', body: 'De aandachtsfunctionaris ziet de meldcode, de verwijsindex en het logboek, niet het hele dossier. Bij een inzageverzoek kan zij gegevens weglakken en een pdf maken; de verstrekking wordt vastgelegd.' },
+  ]}
+  modules={[
+    { name: 'Jeugddossier', note: 'Hulpvragen, behandelstappen, vertegenwoordigers, risico' },
+    { name: 'Meldcode', note: 'Vijf stappen tot een besluit, voor de aandachtsfunctionaris' },
+    { name: 'Toewijzingen (iJw)', note: 'Verbruik dat aftelt; berichten bij start en stop' },
+    { name: 'Inzageverzoek', note: 'Weglakken en een pdf, met vastlegging' },
+    { name: 'MDO en planning', note: 'De algemene onderdelen van Curanta' },
+    { name: 'Uitlegvideo’s', note: 'Een eigen reeks voor de jeugdzorg in de app' },
+  ]}
+  nogNiet={[
+    'De maanddeclaratie onder de Jeugdwet (Jw323): de berekening is er, een scherm nog niet.',
+    'Een signaal naar de Verwijsindex: er is nog geen aansluiting.',
+    'Melden bij Veilig Thuis vanuit Curanta: dat doet u zelf.',
+  ]}
+  regulatory={['Jeugdwet', 'Meldcode', 'Wkkgz', 'AVG', 'NEN 7510']}
+/>

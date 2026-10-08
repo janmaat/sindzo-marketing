@@ -103,3 +103,18 @@ Opnieuw nagelopen in publieke bronnen; elke cel op /vergelijking heeft nu een UR
 De kennisbankartikelen, /procurement, /adr, /implementatie, /overstappen (alleen enkele zinnen
 aangepast), /contact, /demo, /demo-omgeving, /privacy, /voorwaarden en /cookies. Loop vooral de
 kennisbankartikelen na op wetsdata (zie D9). Gebruik daarvoor de skill `site-inhoudscontrole`.
+
+## H. Aanvulling 8 oktober 2026: functies van de week van 1–7 oktober
+
+Opgenomen op de site (homepage, /oplossing, /integraties, /voor/ghz, /voor/ggz, nieuw /voor/kraamzorg en
+/voor/jeugdzorg) en als voorstel voor het feitenblad uitgeschreven in `docs/feitenblad-voorstel-2026-10-08.md`,
+met de bron in de code per rij. Belangrijkste punten:
+
+- **Vóór livegang: Curanta naar de demo uitrollen.** De openbare demo is van 30-09. Signaleringsplan, verblijf,
+  logeren, Wzd 2025, GGZ-afscherming, kraam- en jeugddossier en "Vandaag" staan op de site als "te zien in de
+  demo"; dat klopt pas na een nieuwe uitrol en gouden toestand.
+- **Gecorrigeerd:** de maanddeclaratie onder de Wmo en de Jeugdwet (Wmo323, Jw323) heeft nog geen scherm. De
+  site zei "declareren onder de Wmo" en "dient in bij gemeente"; nu staat dat als in ontwikkeling.
+- **Open:** de planregel Basic "1 declaratiemodule (Wmo, Jeugdwet óf Wlz)" op /prijzen en de homepage
+  (commercieel; niet zelf gewijzigd).
+- **Gecorrigeerd:** het Wzd-overzicht wordt nu gevalideerd tegen de XSD van de IGJ (was "niet getoetst").
