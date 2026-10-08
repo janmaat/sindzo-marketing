@@ -1,14 +1,36 @@
 ---
+// Homepage, herzien oktober 2026. Dient als ontwerpvoorbeeld voor de andere pagina's.
+//
+// Opbouw: introductie met productscherm en twee acties → één bezoek van rooster tot declaratie →
+// drie productvoorbeelden → doelgroepen → overstappen → gegevens en beveiliging → prijzen →
+// kennismaken of partner worden.
+//
+// Vormgeving: compositie naar het voorbeeld van Canopy (Medium Rare, een Webflow-sjabloon): tekst
+// links, groot beeld, rustige afwisseling van witte en lichte vlakken, één donkere band, ronde
+// knoppen. Overgenomen zijn alleen die principes, geen code, beelden of iconen; daarvoor is geen
+// licentie nodig. Lettertype en kleuren blijven die van Curanta.
+//
+// Elk feit staat in het feitenblad (D:\Repos\Ponscura\docs\campagne\feitenblad-curanta.md) of is
+// op 08-10-2026 in de code nagelopen (zie docs/controlelijst-claims.md, "Nagelopen in de code").
+// Wat nog bevestigd moet worden, staat in diezelfde controlelijst.
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
-import ChallengeCallout from '../components/ChallengeCallout.astro';
-import LogoStrip from '../components/LogoStrip.astro';
-import UspGrid from '../components/UspGrid.astro';
-import WhiteSpaceUsps from '../components/WhiteSpaceUsps.astro';
-import SegmentTiles from '../components/SegmentTiles.astro';
-import TrustBadges from '../components/TrustBadges.astro';
-import DeadlineUrgency from '../components/DeadlineUrgency.astro';
-import Cta from '../components/Cta.astro';
+import Screenshot from '../components/Screenshot.astro';
+import StatusLabel from '../components/StatusLabel.astro';
+import Icon from '../components/Icon.astro';
+import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
+import type { Status } from '../config/status';
+
+import zorgplan from '../assets/schermen/bo-zorgplan.jpg';
+import rapportage from '../assets/schermen/mw-rapportage.jpg';
+import portaalZorgplan from '../assets/schermen/pc-zorgplan.jpg';
+import planbord from '../assets/schermen/bo-planbord.jpg';
+import rooster from '../assets/schermen/mw-rooster.jpg';
+import productie from '../assets/schermen/bo-productie.jpg';
+import vim from '../assets/schermen/bo-vim.jpg';
+import fotoVvt from '../assets/fotos/vvt-verzorgende-bewoner.jpg';
+import fotoGhz from '../assets/fotos/ghz-ontbijt.jpg';
+import fotoGgz from '../assets/fotos/ggz-gesprek.jpg';
 
 const softwareLd = {
   '@context': 'https://schema.org',
@@ -17,7 +39,7 @@ const softwareLd = {
   applicationCategory: 'HealthApplication',
   operatingSystem: 'Web',
   url: Astro.site?.toString() ?? 'https://curanta.nl',
-  description: 'Eén modulaire zorgsuite voor dossier (ECD), planning, declaratie en kwaliteit voor de Nederlandse VVT, gehandicaptenzorg en GGZ. FHIR intern voor de BgZ.',
+  description: 'Zorgsoftware voor de VVT, gehandicaptenzorg en GGZ: cliëntdossier, planning, medewerkerportaal, declaratie en kwaliteit in één systeem.',
   inLanguage: 'nl-NL',
   provider: { '@type': 'Organization', name: 'Curanta' },
 };
@@ -31,26 +53,573 @@ const websiteLd = {
   url: Astro.site?.toString() ?? 'https://curanta.nl/',
   inLanguage: 'nl-NL',
 };
+
+// Eén bezoek in de wijk. Per stap: wie, wat die persoon doet, wat Curanta daarbij doet.
+// Roostertoets: harde regels blokkeren het publiceren, alleen met een gekozen cao
+// (ShiftService.cs, Planbord.razor). Retourberichten: inlezen door de XML te plakken, daarna
+// gegroepeerd per oorzaak in de retourtriage (RetourInlezenDialog, RetourTriage.razor).
+const werkdag = [
+  {
+    icoon: 'agenda',
+    wie: 'Planner',
+    titel: 'Zet het bezoek in het rooster',
+    tekst: 'Bij publiceren toetst Curanta het rooster aan de Arbeidstijdenwet en de cao die u hebt gekozen. Een dienst met te weinig rust ervoor wordt niet gepubliceerd; de planner ziet waarom.',
+  },
+  {
+    icoon: 'telefoon',
+    wie: 'Zorgmedewerker',
+    titel: 'Opent het bezoek op de telefoon',
+    tekst: 'Met de taken uit het zorgplan en de overdracht van een collega. Zij meldt aankomst en vertrek. Zonder bereik bewaart de telefoon dat versleuteld en verstuurt het zodra er weer verbinding is.',
+  },
+  {
+    icoon: 'dossier',
+    wie: 'Zorgmedewerker',
+    titel: 'Schrijft de rapportage',
+    tekst: 'In SOEP-vorm, gekoppeld aan een probleem uit het zorgplan. Metingen uit het bezoek staan al ingevuld. De wijkverpleegkundige leest de rapportage terug in het dossier als zij het zorgplan evalueert.',
+  },
+  {
+    icoon: 'euro',
+    wie: 'Administratie',
+    titel: 'Declareert wat er geleverd is',
+    tekst: 'Het bezoek wordt een productieregel, met de bron erbij. De administratie controleert en dient in. Een retourbericht leest zij in; Curanta zet de afkeuringen per oorzaak bij elkaar, zodat zij ze kan afhandelen.',
+  },
+] as const;
+
+interface Beeld { src: ImageMetadata; alt: string; adres: string; bijschrift: string; }
+interface Voorbeeld {
+  id: string;
+  kop: string;
+  wie: string;
+  doet: string;
+  curanta: string[];
+  statussen: { status: Status; tekst: string }[];
+  ai?: string;
+  beperking?: string;
+  link: { label: string; href: string };
+  beelden: Beeld[];
+}
+
+const voorbeelden: Voorbeeld[] = [
+  {
+    id: 'dossier',
+    kop: 'Cliëntdossier en rapportage',
+    wie: 'De wijkverpleegkundige, verzorgende, begeleider of behandelaar.',
+    doet: 'Legt na elk bezoek de rapportage vast, werkt bij de evaluatie het zorgplan bij en deelt een document met de cliënt of de mantelzorger.',
+    curanta: [
+      'Zet de taken uit het zorgplan bij het bezoek, zodat de medewerker ziet wat er vandaag moet gebeuren.',
+      'Signaleert een risico uit metingen, zoals gewichtsverlies, met vaste rekenregels. De verpleegkundige beslist of het in het zorgplan komt.',
+      'Deelt een document met de cliënt en de mantelzorgers die leesrecht hebben; zij vinden het in het cliëntportaal onder Mijn documenten.',
+      'Houdt bij wie het dossier heeft ingezien of gewijzigd.',
+    ],
+    statussen: [
+      { status: 'demo', tekst: 'Dossier, zorgplan, rapportage en cliëntportaal' },
+    ],
+    ai: 'Twee plekken gebruiken op verzoek een taalmodel: de rapportage in de backoffice (een voorstel voor de evaluatie en het plan) en de samenvatting van het zorgplan in gewone taal voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en is het voor de cliënt begrijpelijk? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. Het taalmodel werkt alleen als uw organisatie de AI-functies aanzet; de gegevens gaan dan gepseudonimiseerd naar Anthropic in de VS.',
+    link: { label: 'Alle onderdelen van het dossier', href: '/oplossing#ecd' },
+    beelden: [
+      {
+        src: rapportage,
+        alt: 'Medewerkerportaal: het scherm Rapportage schrijven bij een bezoek, met velden voor subjectief, objectief en evaluatie, gekoppeld aan het probleem Pijn uit het zorgplan.',
+        adres: 'medewerker.curanta.nl',
+        bijschrift: 'Medewerkerportaal: rapportage bij een bezoek, gekoppeld aan een probleem uit het zorgplan. Opname september 2026.',
+      },
+      {
+        src: portaalZorgplan,
+        alt: 'Cliëntportaal: het zorgplan van een cliënt, met een samenvatting in gewone taal en de zorgproblemen met wat het zorgteam doet.',
+        adres: 'klant.curanta.nl',
+        bijschrift: 'Cliëntportaal: het zorgplan zoals de cliënt en de mantelzorger het zien. De samenvatting schrijft of controleert de zorgverlener. Opname september 2026.',
+      },
+    ],
+  },
+  {
+    id: 'planning',
+    kop: 'Planning en medewerkerportaal',
+    wie: 'De planner of coördinator, en de zorgmedewerker.',
+    doet: 'De planner maakt het rooster en publiceert het. De zorgmedewerker bekijkt haar diensten op de telefoon, bekijkt de open diensten, vraagt verlof aan of ruilt een dienst.',
+    curanta: [
+      'Toetst het rooster bij publiceren op rust, de maximale duur van diensten en werkweken, en pauzes, met het artikel uit de Arbeidstijdenwet of de cao erbij.',
+      'Laat open diensten zien in het medewerkerportaal. Wie zich aanmeldt, krijgt de dienst direct, na een controle op overlap en op de cao. Een ruil keurt de planner goed.',
+      'Werkt ook zonder bereik: het rooster van zeven dagen en de bezoeken van vandaag en morgen staan versleuteld op het toestel.',
+    ],
+    statussen: [
+      { status: 'demo', tekst: 'Planbord, roostertoets en medewerkerportaal' },
+    ],
+    beperking: 'De roostertoets kijkt nog niet naar de weekrust, naar gemiddelden over 4 of 16 weken en naar de rust na nachtdiensten. Zonder gekozen cao toetst hij niet.',
+    link: { label: 'Alle onderdelen van de planning', href: '/oplossing#planning' },
+    beelden: [
+      {
+        src: planbord,
+        alt: 'Backoffice: het planbord van een week, met het aantal diensten, bezoeken en medewerkers, en bovenaan een lijst conflicten per medewerker.',
+        adres: 'app.curanta.nl',
+        bijschrift: 'Backoffice: het planbord van de week, met bovenaan conflicten zoals een bezoek dat in een pauze valt. Opname september 2026.',
+      },
+      {
+        src: rooster,
+        alt: 'Medewerkerportaal: het rooster van een zorgmedewerker over twee weken, met een melding dat een collega iets heeft overgedragen.',
+        adres: 'medewerker.curanta.nl',
+        bijschrift: 'Medewerkerportaal: het rooster van de zorgmedewerker, met een overdracht van een collega. Opname september 2026.',
+      },
+    ],
+  },
+  {
+    id: 'declaratie',
+    kop: 'Declaratie en kwaliteit',
+    wie: 'De medewerker administratie of declaratie, en de kwaliteitsfunctionaris.',
+    doet: 'Controleert de productie van de maand, dient die in en verwerkt een retourbericht. Beoordeelt incidentmeldingen en klachten.',
+    curanta: [
+      'Maakt productieregels uit afgeronde bezoeken en registraties, met de bron erbij.',
+      'Stelt de berichten op voor de Wmo, de Jeugdwet en de Wlz, en de aanlevering voor het CAK.',
+      'Volgt een incidentmelding of klacht van melding tot afhandeling, met de termijnen uit de Wkkgz.',
+    ],
+    statussen: [
+      { status: 'demo', tekst: 'Productieregistratie, berichten opstellen, incidentmeldingen en klachten' },
+      { status: 'inrichten', tekst: 'Versturen via Vecozo: na aansluiting met het Vecozo-certificaat van uw organisatie. In de demo zijn de koppelingen niet live.' },
+      { status: 'ontwikkeling', tekst: 'Retourberichten automatisch ophalen; nu leest u ze zelf in. Declareren bij zorgverzekeraars (Zvw).' },
+    ],
+    link: { label: 'Alle onderdelen van declaratie en kwaliteit', href: '/oplossing#declaratie' },
+    beelden: [
+      {
+        src: productie,
+        alt: 'Backoffice: de productieregistratie, met per regel datum, financieringskader, product, zorgminuten, status en bron, zoals mobiele app of planning.',
+        adres: 'app.curanta.nl',
+        bijschrift: 'Backoffice: productieregistratie, met per regel de bron (planning of medewerkerportaal) en de status. Opname september 2026.',
+      },
+      {
+        src: vim,
+        alt: 'Backoffice: het overzicht van incidentmeldingen met het aantal gemelde incidenten, calamiteiten en datalekken, en een lijst meldingen om te beoordelen.',
+        adres: 'app.curanta.nl',
+        bijschrift: 'Backoffice: incidentmeldingen die wachten op beoordeling. Opname september 2026.',
+      },
+    ],
+  },
+];
+
+const doelgroepen = [
+  {
+    naam: 'VVT',
+    kop: 'Wijkverpleging, thuiszorg en verpleeghuizen',
+    tekst: 'Routes en bezoeken, rapportage onderweg, medicatie uit Medimo of de eigen registratie, en declareren onder de Wmo en de Wlz.',
+    let: 'Declareren bij zorgverzekeraars (Zvw) is in ontwikkeling.',
+    href: '/voor/vvt',
+    link: 'Curanta voor de VVT',
+    foto: fotoVvt,
+    alt: 'Een verzorgende in gesprek met een oudere bewoner.',
+  },
+  {
+    naam: 'Gehandicaptenzorg',
+    kop: 'Wonen, dagbesteding en begeleiding',
+    tekst: 'Het ondersteuningsplan, aanwezigheid bij de dagbesteding, registratie onder de Wzd en contact met verwanten via het cliëntportaal.',
+    let: 'De halfjaarlijkse Wzd-uitdraai voor de inspectie is nog niet getoetst aan de specificatie van de IGJ.',
+    href: '/voor/ghz',
+    link: 'Curanta voor de gehandicaptenzorg',
+    foto: fotoGhz,
+    alt: 'Twee vrouwen aan het ontbijt; een van hen heeft het syndroom van Down.',
+  },
+  {
+    naam: 'GGZ',
+    kop: 'Praktijken en instellingen',
+    tekst: 'Registratie volgens het zorgprestatiemodel, een wachtlijst met verwachte wachttijd en registratie onder de Wvggz.',
+    let: 'Koppelingen met e-healthaanbieders zijn gepland.',
+    href: '/voor/ggz',
+    link: 'Curanta voor de GGZ',
+    foto: fotoGgz,
+    alt: 'Een behandelaar, van achteren gezien, in gesprek met een cliënt op een bank.',
+  },
+];
+
+const fasen = [
+  { titel: 'Verkenning', tekst: 'Wij lopen drie werkstromen uit uw organisatie met u door en maken een migratie-inschatting: welke gegevens uit uw huidige systeem mee moeten, en hoe. Daarna weet u de prijs van de migratie.' },
+  { titel: 'Inrichting', tekst: 'Teams, rollen en rechten, en de onderdelen die u gebruikt. Koppelingen sluiten wij aan zodra uw certificaten en contracten er zijn, bijvoorbeeld bij Vecozo of ZorgMail.' },
+  { titel: 'Migratie en training', tekst: 'De migratie als project tegen de afgesproken prijs. Eerst trainen wij uw sleutelgebruikers, daarna de andere medewerkers.' },
+  { titel: 'Ingebruikname', tekst: 'Eerst één team of locatie, daarna de rest in fasen. Op een melding reageren wij binnen 1 werkdag.' },
+];
+
+const plannen = [
+  { naam: 'Basic', prijs: '€19', voor: 'Tot 25 medewerkers. Dossier, rapportage en één declaratiemodule (Wmo, Jeugdwet of Wlz).' },
+  { naam: 'Compliance Pro', prijs: '€29', voor: 'Alles uit Basic, plus kwaliteit, wet- en regelgeving en het cliëntportaal in vijf talen.' },
+  { naam: 'Totaalzorg Plus', prijs: '€39', voor: 'Alles uit Compliance Pro, plus volledige planning, routeplanning en cao-controle.' },
+  { naam: 'Enterprise', prijs: 'Op aanvraag', voor: 'Voor concerns en ketens: concernrapportage, een vaste success manager, afspraken over service op maat.' },
+];
 ---
-<Base title="Curanta — Eén zorgsuite voor de Nederlandse zorgpraktijk">
+<Base
+  title="Curanta — zorgsoftware voor VVT, gehandicaptenzorg en GGZ"
+  description="Cliëntdossier, planning, medewerkerportaal en declaratie in één systeem voor VVT, gehandicaptenzorg en GGZ. Met echte schermen uit de demo."
+>
   <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteLd)} />
   <script type="application/ld+json" is:inline set:html={JSON.stringify(softwareLd)} />
-  <Hero />
-  <ChallengeCallout />
-  <LogoStrip />
-  <UspGrid />
-  <section class="container-prose pb-4">
-    <div class="flex flex-col gap-3 rounded-xl border border-ink-200 bg-white p-6 sm:flex-row sm:items-center sm:justify-between">
-      <p class="text-ink-700">
-        <span class="font-display text-xl font-bold text-ink-900">Vanaf €19 per medewerker per maand.</span>
-        Implementatie, training en hosting zonder aparte kosten; het cliëntportaal is gratis.
-      </p>
-      <a href="/prijzen" class="btn-secondary no-underline whitespace-nowrap">Bekijk de prijzen</a>
+
+  {/* 1. Introductie */}
+  <section class="relative overflow-hidden" aria-labelledby="intro-kop">
+    <div class="container-prose pt-8 sm:pt-14 lg:pt-16">
+      <div class="grid gap-8 lg:grid-cols-12 lg:gap-12">
+        <div class="lg:col-span-7">
+          <p class="eyebrow">Zorgsoftware voor VVT, gehandicaptenzorg en GGZ</p>
+          <h1 id="intro-kop" class="mt-3 text-balance font-display text-[2.1rem] font-extrabold leading-[1.08] tracking-tight text-curanta-900 sm:mt-4 sm:text-5xl lg:text-[3.5rem]">
+            Cliëntdossier, planning en declaratie in één systeem
+          </h1>
+        </div>
+        <div class="lg:col-span-5 lg:pt-10">
+          <p class="text-pretty text-base leading-relaxed text-ink-700 sm:text-lg">
+            De zorgmedewerker ziet het bezoek en schrijft de rapportage op de telefoon. De planner
+            maakt het rooster, de administratie declareert wat er geleverd is. U zet alleen de
+            onderdelen aan die u gebruikt.
+          </p>
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <a href={DEMO_ZELF.href} class="btn-primary btn-lg no-underline">{DEMO_ZELF.label}</a>
+            <a href={DEMO_GESPREK.href} class="btn-secondary btn-lg no-underline">{DEMO_GESPREK.label}</a>
+          </div>
+          <p class="mt-5 flex gap-2 text-sm leading-relaxed text-ink-700">
+            <Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />
+            <span>
+              Curanta is nieuw: er werkt nog geen zorgorganisatie mee in productie. In de demo werkt u
+              met verzonnen cliënten. Op een aanvraag reageren wij binnen 1 werkdag.
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative mt-8 sm:mt-12">
+      <div class="absolute inset-x-0 bottom-0 top-24 bg-curanta-50" aria-hidden="true"></div>
+      <div class="container-prose relative pb-14 sm:pb-16">
+        <Screenshot
+          src={zorgplan}
+          eager
+          adres="app.curanta.nl"
+          alt="Backoffice: het zorgplan van een verzonnen cliënt. Bovenaan de status, het aantal problemen en interventies en de volgende evaluatie. Daaronder een door het systeem voorgesteld ondervoedingsrisico met de knop Voeg toe aan plan, en het probleem Huidintegriteit met een SMART-doel."
+          bijschrift="Het zorgplan in de backoffice. Uit twee gewichtsmetingen leidt Curanta met een vaste rekenregel een ondervoedingsrisico af; de verpleegkundige kiest met ‘Voeg toe aan plan’ of het in het zorgplan komt. Opname september 2026."
+        />
+      </div>
     </div>
   </section>
-  <WhiteSpaceUsps />
-  <SegmentTiles />
-  <TrustBadges />
-  <DeadlineUrgency />
-  <Cta />
+
+  {/* 2. Eén bezoek: dossier, planning en registratie komen samen */}
+  <section class="py-16 sm:py-20" aria-labelledby="werkdag-kop">
+    <div class="container-prose">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Zo werkt het</p>
+        <h2 id="werkdag-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
+          Eén bezoek, van rooster tot declaratie
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-ink-700">
+          Een voorbeeld uit de wijkverpleging. Wat de één vastlegt, ziet de volgende in hetzelfde
+          systeem terug.
+        </p>
+      </div>
+      <ol class="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        {werkdag.map((stap, i) => (
+          <li class="relative border-t-2 border-curanta-200 pt-7">
+            <span class="absolute -top-[1.05rem] left-0 flex h-8 w-8 items-center justify-center rounded-full bg-accent-500 text-sm font-bold text-[#06231f]" aria-hidden="true">{i + 1}</span>
+            <p class="flex items-center gap-2 text-sm font-semibold text-curanta-700">
+              <Icon naam={stap.icoon} class="h-4 w-4" />
+              <span><span class="sr-only">Stap {i + 1}: </span>{stap.wie}</span>
+            </p>
+            <h3 class="mt-2 font-display text-lg font-bold text-curanta-900">{stap.titel}</h3>
+            <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-700">{stap.tekst}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {/* 3. Drie productvoorbeelden */}
+  <section class="border-t border-ink-200 pt-16 sm:pt-20" aria-labelledby="voorbeelden-kop">
+    <div class="container-prose">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Het product</p>
+        <h2 id="voorbeelden-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
+          Drie voorbeelden uit het werk
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-ink-700">
+          Echte schermen uit de demo-omgeving, met verzonnen cliënten en medewerkers. Per voorbeeld:
+          wie ermee werkt, wat die persoon doet en wat Curanta daarbij doet.
+        </p>
+      </div>
+    </div>
+
+    {voorbeelden.map((v, i) => (
+      <article id={v.id} class={`py-14 sm:py-16 ${i % 2 === 1 ? 'bg-curanta-50' : ''}`} aria-labelledby={`${v.id}-kop`}>
+        <div class="container-prose grid gap-10 lg:grid-cols-12 lg:gap-14">
+          <div class={`lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+            <p class="text-sm font-semibold text-curanta-700">Voorbeeld {i + 1} van 3</p>
+            <h3 id={`${v.id}-kop`} class="mt-2 font-display text-2xl font-bold text-curanta-900 sm:text-3xl">{v.kop}</h3>
+            <dl class="mt-6 space-y-5">
+              <div>
+                <dt class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Wie werkt ermee</dt>
+                <dd class="mt-1 text-ink-900">{v.wie}</dd>
+              </div>
+              <div>
+                <dt class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Wat die persoon doet</dt>
+                <dd class="mt-1 text-ink-900">{v.doet}</dd>
+              </div>
+              <div>
+                <dt class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Wat Curanta daarbij doet</dt>
+                <dd class="mt-2">
+                  <ul class="space-y-2.5">
+                    {v.curanta.map((c) => (
+                      <li class="flex gap-2.5 text-ink-700">
+                        <Icon naam="vink" class="mt-1 h-4 w-4 shrink-0 text-accent-700" />
+                        <span>{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+            {v.ai && (
+              <div class="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-relaxed">
+                <p class="font-semibold text-ink-900">Voorstel van een taalmodel: eerst nalezen</p>
+                <p class="mt-1 text-ink-700">{v.ai}</p>
+              </div>
+            )}
+            <div class="mt-6 border-t border-ink-200 pt-5">
+              <p class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Stand van zaken</p>
+              <ul class="mt-3 space-y-3">
+                {v.statussen.map((s) => (
+                  <li class="text-sm text-ink-700">
+                    <StatusLabel status={s.status} />
+                    <span class="mt-0.5 block pl-3.5">{s.tekst}</span>
+                  </li>
+                ))}
+              </ul>
+              {v.beperking && (
+                <p class="mt-3 text-sm leading-relaxed text-ink-700"><span class="font-semibold text-ink-900">Let op:</span> {v.beperking}</p>
+              )}
+            </div>
+            <a href={v.link.href} class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-curanta-700 no-underline hover:underline">
+              {v.link.label} <Icon naam="pijl" class="h-4 w-4" />
+            </a>
+          </div>
+          <div class={`space-y-8 lg:col-span-7 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+            <Screenshot
+              src={v.beelden[0].src}
+              alt={v.beelden[0].alt}
+              adres={v.beelden[0].adres}
+              bijschrift={v.beelden[0].bijschrift}
+              sizes="(min-width: 1400px) 760px, (min-width: 1024px) 56vw, 100vw"
+            />
+            {v.beelden[1] && (
+              <Screenshot
+                class="hidden sm:ml-auto sm:block sm:w-4/5"
+                src={v.beelden[1].src}
+                alt={v.beelden[1].alt}
+                adres={v.beelden[1].adres}
+                bijschrift={v.beelden[1].bijschrift}
+                sizes="(min-width: 1400px) 610px, (min-width: 1024px) 45vw, (min-width: 640px) 80vw, 100vw"
+              />
+            )}
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  {/* 4. Doelgroepen */}
+  <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="doelgroepen-kop">
+    <div class="container-prose">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Voor wie</p>
+        <h2 id="doelgroepen-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
+          Voor drie soorten zorgorganisaties
+        </h2>
+      </div>
+      <ul class="mt-10 grid gap-6 md:grid-cols-3">
+        {doelgroepen.map((d) => (
+          <li class="flex flex-col overflow-hidden rounded-2xl bg-curanta-50">
+            <Picture
+              src={d.foto}
+              alt={d.alt}
+              formats={['avif', 'webp']}
+              widths={[480, 720, 960]}
+              sizes="(min-width: 768px) 30vw, 100vw"
+              class="aspect-[3/2] w-full object-cover"
+            />
+            <div class="flex flex-1 flex-col p-6 sm:p-7">
+              <h3 class="font-display text-xl font-bold text-curanta-900">
+                {d.naam}<span class="sr-only">:</span>
+                <span class="mt-1 block text-base font-semibold text-ink-700">{d.kop}</span>
+              </h3>
+              <p class="mt-3 leading-relaxed text-ink-700">{d.tekst}</p>
+              <p class="mt-3 text-sm leading-relaxed text-ink-500">{d.let}</p>
+              <a href={d.href} class="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-curanta-700 no-underline hover:underline">
+                {d.link} <Icon naam="pijl" class="h-4 w-4" />
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-5 text-xs text-ink-500">
+        Foto's: Age Cymru (Unsplash), Cliff Booth (Pexels), Vitaly Gariev (Unsplash). Het zijn geen
+        cliënten of medewerkers van een organisatie die met Curanta werkt.
+      </p>
+    </div>
+  </section>
+
+  {/* 5. Overstappen, inrichting en begeleiding */}
+  <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="overstap-kop">
+    <div class="container-prose grid gap-10 lg:grid-cols-12 lg:gap-14">
+      <div class="lg:col-span-5">
+        <p class="eyebrow">Overstappen</p>
+        <h2 id="overstap-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
+          Overstappen, inrichten en begeleiden
+        </h2>
+        <p class="mt-4 leading-relaxed text-ink-700">
+          Curanta heeft geen kant-en-klare import uit een ander systeem. Uw gegevens overzetten is
+          daarom een project tegen een vaste prijs, die u vooraf weet. Implementatie, training en
+          basisondersteuning kosten niets extra.
+        </p>
+        <p class="mt-4 leading-relaxed text-ink-700">
+          Hoe lang het duurt, spreken wij per organisatie af na de migratie-inschatting. Wij noemen
+          geen doorlooptijd die nog geen klant heeft gehaald.
+        </p>
+        <div class="mt-6 flex flex-col gap-2 text-sm font-semibold sm:flex-row sm:gap-6">
+          <a href="/overstappen" class="inline-flex items-center gap-1.5 text-curanta-700 no-underline hover:underline">Overstappen en de weg terug <Icon naam="pijl" class="h-4 w-4" /></a>
+          <a href="/implementatie" class="inline-flex items-center gap-1.5 text-curanta-700 no-underline hover:underline">De fasen van de implementatie <Icon naam="pijl" class="h-4 w-4" /></a>
+        </div>
+      </div>
+      <ol class="divide-y divide-ink-200 border-y border-ink-200 lg:col-span-7">
+        {fasen.map((f, i) => (
+          <li class="grid gap-2 py-5 sm:grid-cols-[3rem_1fr]">
+            <span class="font-display text-2xl font-bold text-accent-700" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 class="font-display text-lg font-bold text-curanta-900"><span class="sr-only">Fase {i + 1}: </span>{f.titel}</h3>
+              <p class="mt-1 leading-relaxed text-ink-700">{f.tekst}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {/* 6. Gegevens en beveiliging */}
+  <section class="bg-curanta-900 py-16 text-white sm:py-20" aria-labelledby="beveiliging-kop">
+    <div class="container-prose">
+      <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
+        <div class="lg:col-span-4">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-curanta-200">Gegevens en beveiliging</p>
+          <h2 id="beveiliging-kop" class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
+            Waar uw gegevens staan en hoe ze beschermd zijn
+          </h2>
+          <p class="mt-4 leading-relaxed text-curanta-100">
+            De stand per onderwerp, ook wat nog niet klaar is. De onderbouwing staat in het Trust
+            Centre; vragen beantwoorden wij via trust@curanta.nl.
+          </p>
+          <a href="/trust" class="mt-7 inline-flex items-center gap-2 rounded-full bg-accent-500 px-6 py-3 text-sm font-bold text-[#06231f] no-underline transition hover:bg-accent-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+            Naar het Trust Centre <Icon naam="pijl" class="h-4 w-4" />
+          </a>
+        </div>
+        <div class="grid gap-10 sm:grid-cols-2 lg:col-span-8">
+          <div>
+            <h3 class="flex items-center gap-2 font-display text-lg font-bold text-white">
+              <Icon naam="vink" class="h-5 w-5 text-accent-500" /> Geregeld
+            </h3>
+            <ul class="mt-4 space-y-3 text-curanta-100">
+              <li>De applicatie en de databases staan bij IONOS Cloud in Berlijn, binnen de EU.</li>
+              <li>Het BSN is op veldniveau versleuteld (AES-256-GCM).</li>
+              <li>Tweestapsverificatie is verplicht voor zorg- en beheerrollen in de backoffice.</li>
+              <li>Elke inzage in een dossier komt in een logboek (NEN 7513). Een wijziging achteraf is aantoonbaar.</li>
+              <li>U kunt al uw gegevens en bestanden exporteren in JSON.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="flex items-center gap-2 font-display text-lg font-bold text-white">
+              <Icon naam="klok" class="h-5 w-5 text-amber-300" /> Nog niet klaar
+            </h3>
+            <ul class="mt-4 space-y-3 text-curanta-100">
+              <li>NEN 7510: de maatregelen zijn ingevoerd en een externe audit is gepland. Curanta is niet gecertificeerd.</li>
+              <li>De database als geheel is nog niet versleuteld. Dat regelen wij vóór de eerste klant.</li>
+              <li>Een externe pentest is nog niet uitgevoerd.</li>
+              <li>Een functionaris gegevensbescherming stellen wij aan vóór de eerste organisatie met echte cliëntgegevens.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* 7. Prijzen */}
+  <section class="py-16 sm:py-20" aria-labelledby="prijzen-kop">
+    <div class="container-prose">
+      <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
+        <div class="lg:col-span-4">
+          <p class="eyebrow">Prijzen</p>
+          <h2 id="prijzen-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">Wat Curanta kost</h2>
+          <p class="mt-4 leading-relaxed text-ink-700">
+            Per actieve medewerker per maand, exclusief btw, bij een jaarcontract. Actief is wie in de
+            afgelopen 30 dagen heeft ingelogd. De bedragen zijn indicatief; de prijs hangt af van uw
+            schaal en de onderdelen die u kiest.
+          </p>
+          <a href="/prijzen" class="btn-secondary btn-lg mt-7 no-underline">Alle prijzen en voorwaarden</a>
+        </div>
+        <div class="lg:col-span-8">
+          <table class="w-full text-left">
+            <caption class="sr-only">Plannen en prijs per actieve medewerker per maand</caption>
+            <thead class="sr-only">
+              <tr><th scope="col">Plan</th><th scope="col">Prijs</th><th scope="col">Wat erin zit</th></tr>
+            </thead>
+            <tbody class="divide-y divide-ink-200 border-y border-ink-200">
+              {plannen.map((p) => (
+                <tr class="align-top">
+                  <th scope="row" class="py-4 pr-4 font-display text-base font-bold text-curanta-900 sm:text-lg">{p.naam}</th>
+                  <td class="whitespace-nowrap py-4 pr-4 font-display text-base font-bold text-curanta-900 sm:pr-6 sm:text-lg">{p.prijs}</td>
+                  <td class="hidden py-4 text-sm leading-relaxed text-ink-700 sm:table-cell">{p.voor}</td>
+                </tr>
+              ))}
+              <tr class="align-top bg-curanta-50">
+                <th scope="row" class="py-4 pl-3 pr-4 text-sm font-semibold text-curanta-900">Zorgmedewerker, alleen medewerkerportaal</th>
+                <td class="whitespace-nowrap py-4 pr-4 font-display text-base font-bold text-curanta-900 sm:pr-6 sm:text-lg">€19</td>
+                <td class="hidden py-4 pr-3 text-sm leading-relaxed text-ink-700 sm:table-cell">In elk plan. Wie ook in de backoffice werkt, betaalt het bedrag van het plan.</td>
+              </tr>
+              <tr class="align-top bg-curanta-50">
+                <th scope="row" class="py-4 pl-3 pr-4 text-sm font-semibold text-curanta-900">Cliënt- en mantelzorgerportaal</th>
+                <td class="whitespace-nowrap py-4 pr-4 font-display text-base font-bold text-curanta-900 sm:pr-6 sm:text-lg">Gratis</td>
+                <td class="hidden py-4 pr-3 text-sm leading-relaxed text-ink-700 sm:table-cell">Inloggen met DigiD voor cliënten is een betaalde optie.</td>
+              </tr>
+            </tbody>
+          </table>
+          <ul class="mt-6 grid gap-x-8 gap-y-2 text-sm leading-relaxed text-ink-700 sm:grid-cols-2">
+            <li class="flex gap-2"><Icon naam="vink" class="mt-0.5 h-4 w-4 shrink-0 text-accent-700" />Implementatie, training, hosting en basisondersteuning: geen aparte kosten.</li>
+            <li class="flex gap-2"><Icon naam="vink" class="mt-0.5 h-4 w-4 shrink-0 text-accent-700" />De gebouwde koppelingen zitten in het abonnement.</li>
+            <li class="flex gap-2"><Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />Migratie: een project tegen een vaste prijs, na een migratie-inschatting.</li>
+            <li class="flex gap-2"><Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />Wat een externe partij rekent, zoals een Vecozo-certificaat of ZorgMail-abonnement, betaalt u zelf.</li>
+            <li class="flex gap-2 sm:hidden"><Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />Inloggen met DigiD voor cliënten is een betaalde optie.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* 8. Kennismaken of partner worden */}
+  <section class="bg-curanta-50 py-16 sm:py-20" aria-labelledby="afsluiting-kop">
+    <div class="container-prose">
+      <h2 id="afsluiting-kop" class="sr-only">Kennismaken met Curanta</h2>
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="rounded-2xl bg-white p-8 shadow-[0_6px_18px_rgba(14,79,87,0.06)] sm:p-10">
+          <h3 class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Curanta bekijken</h3>
+          <p class="mt-4 leading-relaxed text-ink-700">
+            Vraag een eigen toegang tot de demo aan en kijk rond in de backoffice, het
+            medewerkerportaal en het cliëntportaal. Of vraag een demonstratie aan: noem drie
+            werkstromen uit uw organisatie, zoals uw intake, uw overdracht of uw maandafsluiting,
+            dan laten wij zien hoe Curanta ze ondersteunt.
+          </p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href={DEMO_ZELF.href} class="btn-primary btn-lg no-underline">{DEMO_ZELF.label}</a>
+            <a href={DEMO_GESPREK.href} class="btn-secondary btn-lg no-underline">{DEMO_GESPREK.label}</a>
+          </div>
+          <p class="mt-5 text-sm text-ink-700">
+            Liever eerst bellen? <a href="tel:+31852501301" class="font-semibold text-curanta-700">085 250 1301</a>
+          </p>
+        </div>
+        <div class="rounded-2xl bg-white p-8 shadow-[0_6px_18px_rgba(14,79,87,0.06)] sm:p-10">
+          <h3 class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Founding partner worden</h3>
+          <p class="mt-4 leading-relaxed text-ink-700">
+            Wij zoeken maximaal drie zorgorganisaties die als eerste met Curanta gaan werken. U
+            betaalt 36 maanden een vaste prijs en praat mee over wat wij eerst bouwen. Wij vragen
+            dat u uw eigen werkprocessen met ons naloopt en zegt waar Curanta niet past.
+          </p>
+          <a href="/cases#founding" class="btn-secondary btn-lg mt-7 no-underline">Over het partnerprogramma</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Base>
