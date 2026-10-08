@@ -1,10 +1,12 @@
 # Controlelijst claims — herinrichting curanta.nl (8 oktober 2026)
 
-> **Harde voorwaarde vóór livegang (besluit Jan 08-10-2026):** eerst Curanta uitrollen naar
-> app.curanta.nl en een nieuwe gouden toestand van de demo maken. De openbare demo is van 30-09
-> (2bf1e6cb2); de site noemt functies van 1–7 oktober "te zien in de demo". Controleer na de uitrol
-> in de demo: signaleringsplan, verblijf en logeren, Wzd 2025, GGZ-afscherming, kraam- en
-> jeugddossier, Vandaag.
+> **Uitgangspunt (Jan, 08-10-2026):** vóór de eerste organisatie met Curanta begint, zijn uitgevoerd: de
+> uitrol naar app.curanta.nl met een nieuwe gouden toestand van de demo, de merge van
+> `feat/homepage-herinrichting` en van de Ponscura-branch `docs/helpteksten-2026-10-08`, de bevestiging van de
+> ADR's die op "ter bevestiging" stonden, en de aanvullingen op het feitenblad
+> (`docs/feitenblad-voorstel-2026-10-08.md`). De site gaat daarvan uit en maakt er geen voorbehoud meer over.
+> Wat in de app zelf nog niet af is (Zvw, Mollie-betaallink, pentest, FG, NEN 7510-audit, versleuteling
+> van de hele database), blijft op de site staan zoals het is.
 
 Branch `feat/homepage-herinrichting`. Deze lijst staat buiten de website (de map `docs/` wordt niet
 gebouwd). Hij bevat wat nog bevestigd moet worden, wat in de code en bij officiële bronnen is
@@ -116,9 +118,7 @@ Opgenomen op de site (homepage, /oplossing, /integraties, /voor/ghz, /voor/ggz, 
 /voor/jeugdzorg) en als voorstel voor het feitenblad uitgeschreven in `docs/feitenblad-voorstel-2026-10-08.md`,
 met de bron in de code per rij. Belangrijkste punten:
 
-- **Vóór livegang: Curanta naar de demo uitrollen.** De openbare demo is van 30-09. Signaleringsplan, verblijf,
-  logeren, Wzd 2025, GGZ-afscherming, kraam- en jeugddossier en "Vandaag" staan op de site als "te zien in de
-  demo"; dat klopt pas na een nieuwe uitrol en gouden toestand.
+- **Demo:** de functies van 1–7 oktober staan als "te zien in de demo"; zie het uitgangspunt bovenaan.
 - **Teruggedraaid (08-10):** een correctie die zei dat de maanddeclaratie onder Wmo en Jeugdwet geen scherm had,
   was onjuist: die bewering kwam uit verouderde helpteksten (iwmo.md:40, ijw.md:41). De knop **Declaratie opstellen**
   op iWmo- en iJw-berichten stelt de Wmo323/Jw323 op uit goedgekeurde productie. De site zegt weer dat u onder

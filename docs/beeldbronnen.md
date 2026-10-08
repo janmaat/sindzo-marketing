@@ -25,11 +25,11 @@ sessie; op verzoek naar `scripts/` te verplaatsen). Backoffice 1600 × 900, appb
 | mw-rooster.jpg, mw-bezoek.jpg, mw-rapportage.jpg | medewerkerportaal: rooster, dienstdetail, rapportage | medewerker1@ |
 | pc-start.jpg, pc-zorgplan.jpg | cliëntportaal: start en Mijn zorgplan | klant1@ |
 
-De openbare demo (app.curanta.nl) loopt achter op deze stand tot de volgende uitrol; zie de harde voorwaarde
-in `controlelijst-claims.md`.
+Dit is de stand die naar de openbare demo (app.curanta.nl) wordt uitgerold; zie het uitgangspunt in
+`controlelijst-claims.md`.
 
-Op de site staan ze in de component `Screenshot`, met het bijschrift "Schermafbeelding met demogegevens,
-verzonnen cliënten". Een voorbeeldweergave (mockup) krijgt "Voorbeeldweergave, geen productscherm"
+Op de site staan ze in de component `Screenshot`, met het bijschrift "Schermafbeelding uit de demo,
+verzonnen gegevens". Een voorbeeldweergave (mockup) krijgt "Voorbeeldweergave, geen productscherm"
 (`soort="voorbeeld"`); de site gebruikt er nu geen.
 
 ## Foto's (`src/assets/fotos/`)

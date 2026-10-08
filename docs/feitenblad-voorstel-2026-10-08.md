@@ -54,8 +54,8 @@ bevestiging)" is in een ADR, staat er met **[ADR ter bevestiging]** bij.
 
 ## Open punten voor Jan
 
-1. **Demo-uitrol.** De laatste uitrol naar app.curanta.nl is van 30-09 (2bf1e6cb2). Alles hierboven met "in de demo" staat pas in de openbare demo na een nieuwe uitrol en een nieuwe gouden toestand. Doe die uitrol vóór deze site live gaat, of laat de statussen op de site aanpassen.
+1. **Demo-uitrol** — uitgevoerd vóór de start (uitgangspunt Jan 08-10-2026).
 2. **Plannen.** `Subscriptions:Enabled` staat uit, dus elke klant krijgt nu alles. De meeste nieuwe functies zijn commercieel nog niet ingedeeld ("Nog niet commercieel ingedeeld" in `SubscriptionPlanCatalog.cs`). De site noemt ze daarom zonder plan; /prijzen is ongewijzigd (besluit Jan 08-10).
 3. **Basic** — geen wijziging nodig: "1 declaratiemodule (Wmo, Jeugdwet óf Wlz)" klopt. Een eerdere aanpassing op 08-10 berustte op een verouderde helptekst en is teruggedraaid.
-4. **ADR's ter bevestiging.** Bank, kosten, cliëntbetalingen, vragenlijsten en de nota staan in hun ADR nog op "voorgesteld (ter bevestiging)". Bevestig ze, of laat de site die onderdelen voorzichtiger noemen.
+4. **ADR's ter bevestiging** — bevestigd vóór de start (uitgangspunt Jan 08-10-2026); de markering [ADR ter bevestiging] in de tabel vervalt daarmee.
 5. **Helpteksten in de app (gecorrigeerd op Ponscura-branch docs/helpteksten-2026-10-08, 8c9b7c74a).** Deze zijn verouderd: `ggz-zpm.md:145-146` (crediteren kan nu wel), `cak.md:28-30` ("automatisch" verwerkt klopt niet) en `kraamzorg.md:152` (iWmo-link bij kraamzorg). En `verwerkingsregister.md:2160` noemt RCI voor SQ-48 en 4DKL.

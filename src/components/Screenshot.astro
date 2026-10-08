@@ -5,8 +5,8 @@
 //   scherm     — een echte schermafbeelding uit de demo-omgeving, met verzonnen gegevens
 //   voorbeeld  — een voorbeeldweergave (mockup); nooit presenteren als werkend productscherm
 //
-// De schermen zijn op 08-10-2026 opgenomen op een eigen lokale Curanta (develop, eigen databank met
-// de demodata); zie docs/beeldbronnen.md. Bijgesneden met sharp, verder onbewerkt.
+// De schermen zijn op 08-10-2026 opgenomen op de stand die naar de demo is uitgerold (develop, met de
+// demodata); zie docs/beeldbronnen.md. Bijgesneden met sharp, verder onbewerkt.
 //
 // Op een telefoon is een volledig scherm van 1600 px breed niet te lezen. Daarom is het beeld
 // een link naar de volledige afbeelding: wie wil, opent hem en zoomt in.
@@ -32,7 +32,7 @@ const {
 
 const volledig = await getImage({ src, format: 'jpg', width: src.width });
 const label = soort === 'scherm'
-  ? 'Schermafbeelding met demogegevens, verzonnen cliënten'
+  ? 'Schermafbeelding uit de demo, verzonnen gegevens'
   : 'Voorbeeldweergave, geen productscherm';
 ---
 <figure class={klasse}>
