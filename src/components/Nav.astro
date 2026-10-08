@@ -1,28 +1,56 @@
 ---
+import { DEMO_ZELF } from '../config/demo';
+
 const links = [
-  { label: 'Oplossing', href: '/oplossing' },
+  { label: 'Product', href: '/oplossing' },
   { label: 'Voor wie', href: '/voor' },
   { label: 'Koppelingen', href: '/integraties' },
   { label: 'Overstappen', href: '/overstappen' },
   { label: 'Trust Centre', href: '/trust' },
   { label: 'Prijzen', href: '/prijzen' },
 ];
+const huidig = Astro.url.pathname.replace(/\/$/, '') || '/';
+const actief = (href: string) => huidig === href || huidig.startsWith(href + '/');
 ---
-<header class="sticky top-0 z-40 border-b border-ink-100 bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/70">
-  <div class="container-prose flex h-16 items-center justify-between">
-    <a href="/" class="flex items-center gap-2 no-underline" aria-label="Curanta — terug naar home">
+<header class="sticky top-0 z-40 border-b border-ink-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+  <div class="container-prose flex h-16 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2 no-underline rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-600" aria-label="Curanta — naar de homepage">
       <img src="/logo/curanta-logo.svg" alt="Curanta" class="h-10 w-auto" width="135" height="40" />
     </a>
-    <nav class="hidden md:flex items-center gap-7 text-sm text-ink-700">
+    <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-ink-700" aria-label="Hoofdmenu">
       {links.map((l) => (
-        <a href={l.href} class="no-underline hover:text-curanta-700 transition">{l.label}</a>
+        <a
+          href={l.href}
+          aria-current={actief(l.href) ? 'page' : undefined}
+          class={`no-underline rounded transition hover:text-curanta-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-600 ${actief(l.href) ? 'text-curanta-900 underline decoration-accent-500 decoration-2 underline-offset-8' : ''}`}
+        >{l.label}</a>
       ))}
     </nav>
     <div class="flex items-center gap-3">
-      <a href="/login" class="hidden sm:inline text-sm text-ink-700 hover:text-curanta-700 no-underline">Inloggen</a>
-      {/* Naar de demo-omgeving: die legt uit wat u kunt bekijken en hoe u toegang krijgt.
-          Openbare inloggegevens staan er sinds 26-09-2026 niet meer (incident 23-09). */}
-      <a href="/demo-omgeving" class="btn-primary no-underline">Bekijk de demo</a>
+      <a href="/login" class="hidden xl:inline text-sm font-medium text-ink-700 hover:text-curanta-900 no-underline">Inloggen</a>
+      {/* Naar de demo-omgeving: die legt uit wat u kunt bekijken en hoe u toegang aanvraagt.
+          Tekst en bestemming staan in src/config/demo.ts. */}
+      <a href={DEMO_ZELF.href} class="btn-primary no-underline hidden sm:inline-flex">{DEMO_ZELF.label}</a>
+
+      {/* Telefoon en tablet: het menu in een <details>, zonder script. Werkt met het toetsenbord
+          (Enter of spatie op "Menu") en een schermlezer leest het als uitklapbaar. */}
+      <details class="group relative lg:hidden">
+        <summary class="flex cursor-pointer list-none items-center gap-2 rounded-full border border-ink-300 bg-white px-4 py-2 text-sm font-semibold text-curanta-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-600 [&::-webkit-details-marker]:hidden">
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16" class="group-open:hidden"/><path d="M6 6l12 12M18 6 6 18" class="hidden group-open:block"/></svg>
+          Menu
+        </summary>
+        <nav class="absolute right-0 top-full mt-3 w-72 max-w-[calc(100vw-2rem)] rounded-2xl border border-ink-200 bg-white p-3 shadow-xl" aria-label="Hoofdmenu">
+          <ul class="space-y-1">
+            {links.map((l) => (
+              <li>
+                <a href={l.href} aria-current={actief(l.href) ? 'page' : undefined} class={`block rounded-lg px-3 py-2.5 text-base font-medium no-underline hover:bg-curanta-50 ${actief(l.href) ? 'bg-curanta-50 text-curanta-900' : 'text-ink-700'}`}>{l.label}</a>
+              </li>
+            ))}
+            <li><a href="/login" class="block rounded-lg px-3 py-2.5 text-base font-medium text-ink-700 no-underline hover:bg-curanta-50">Inloggen</a></li>
+          </ul>
+          <a href={DEMO_ZELF.href} class="btn-primary mt-3 w-full no-underline sm:hidden">{DEMO_ZELF.label}</a>
+        </nav>
+      </details>
     </div>
   </div>
 </header>
