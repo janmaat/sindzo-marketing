@@ -15,6 +15,11 @@
 // de vier stappen. Zie het blok "Bewegende accenten" in global.css; bij "beweging beperken" staat
 // alles stil.
 //
+// Getoetst aan Taste Skill (tasteskill.dev, MIT): één bovenkop (alleen in de introductie), geen
+// derde zigzag op rij (het derde voorbeeld staat gestapeld), geen drie gelijke kaarten (VVT groot,
+// het hoofdsegment), geen paginering als "Voorbeeld 1 van 3". De tekst van de introductie is
+// bewust niet ingekort: dat is een inhoudelijke keuze, zie de controlelijst.
+//
 // Elk feit staat in het feitenblad (D:\Repos\Ponscura\docs\campagne\feitenblad-curanta.md) of is
 // op 08-10-2026 in de code nagelopen (zie docs/controlelijst-claims.md, "Nagelopen in de code").
 // Wat nog bevestigd moet worden, staat in diezelfde controlelijst.
@@ -317,8 +322,7 @@ const plannen = [
   <section class="py-16 sm:py-20" aria-labelledby="werkdag-kop">
     <div class="container-prose">
       <div class="max-w-2xl" data-reveal>
-        <p class="eyebrow">Zo werkt het</p>
-        <h2 id="werkdag-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
+                <h2 id="werkdag-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
           Eén bezoek, van rooster tot declaratie
         </h2>
         <p class="mt-4 text-lg leading-relaxed text-ink-700">
@@ -352,8 +356,7 @@ const plannen = [
   <section class="border-t border-ink-200 pt-16 sm:pt-20" aria-labelledby="voorbeelden-kop">
     <div class="container-prose">
       <div class="max-w-2xl" data-reveal>
-        <p class="eyebrow">Het product</p>
-        <h2 id="voorbeelden-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
+                <h2 id="voorbeelden-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
           Drie voorbeelden uit het werk
         </h2>
         <p class="mt-4 text-lg leading-relaxed text-ink-700">
@@ -363,22 +366,29 @@ const plannen = [
       </div>
     </div>
 
-    {voorbeelden.map((v, i) => (
+    {/* Twee voorbeelden om en om (tekst en beeld wisselen van kant), het derde gestapeld: tekst in
+        twee kolommen, de schermen ernaast eronder. Een derde zigzag op rij leest als sjabloon. */}
+    {voorbeelden.map((v, i) => {
+      const gestapeld = i === voorbeelden.length - 1;
+      return (
       <article id={v.id} class={`py-14 sm:py-16 ${i % 2 === 1 ? 'bg-curanta-50' : ''}`} aria-labelledby={`${v.id}-kop`}>
-        <div class="container-prose grid gap-10 lg:grid-cols-12 lg:gap-14">
-          <div class={`lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`} data-reveal>
-            <p class="text-sm font-semibold text-curanta-700">Voorbeeld {i + 1} van 3</p>
-            <h3 id={`${v.id}-kop`} class="mt-2 font-display text-2xl font-bold text-curanta-900 sm:text-3xl">{v.kop}</h3>
-            <dl class="mt-6 space-y-5">
-              <div>
-                <dt class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Wie werkt ermee</dt>
-                <dd class="mt-1 text-ink-900">{v.wie}</dd>
-              </div>
-              <div>
-                <dt class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Wat die persoon doet</dt>
-                <dd class="mt-1 text-ink-900">{v.doet}</dd>
-              </div>
-              <div>
+        <div class={gestapeld ? 'container-prose' : 'container-prose grid gap-10 lg:grid-cols-12 lg:gap-14'}>
+          <div class={gestapeld ? 'grid gap-x-14 gap-y-6 lg:grid-cols-2' : `lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`} data-reveal>
+            <div>
+              <h3 id={`${v.id}-kop`} class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">{v.kop}</h3>
+              <dl class="mt-6 space-y-5">
+                <div>
+                  <dt class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Wie werkt ermee</dt>
+                  <dd class="mt-1 text-ink-900">{v.wie}</dd>
+                </div>
+                <div>
+                  <dt class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Wat die persoon doet</dt>
+                  <dd class="mt-1 text-ink-900">{v.doet}</dd>
+                </div>
+              </dl>
+            </div>
+            <div class={gestapeld ? 'lg:pt-1' : ''}>
+              <dl class={gestapeld ? '' : 'mt-5'}>
                 <dt class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Wat Curanta daarbij doet</dt>
                 <dd class="mt-2">
                   <ul class="space-y-2.5">
@@ -390,84 +400,89 @@ const plannen = [
                     ))}
                   </ul>
                 </dd>
-              </div>
-            </dl>
-            {v.ai && (
-              <div class="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-relaxed">
-                <p class="font-semibold text-ink-900">Voorstel van een taalmodel: eerst nalezen</p>
-                <p class="mt-1 text-ink-700">{v.ai}</p>
-              </div>
-            )}
-            <div class="mt-6 border-t border-ink-200 pt-5">
-              <p class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Stand van zaken</p>
-              <ul class="mt-3 space-y-3">
-                {v.statussen.map((s) => (
-                  <li class="text-sm text-ink-700">
-                    <StatusLabel status={s.status} />
-                    <span class="mt-0.5 block pl-3.5">{s.tekst}</span>
-                  </li>
-                ))}
-              </ul>
-              {v.beperking && (
-                <p class="mt-3 text-sm leading-relaxed text-ink-700"><span class="font-semibold text-ink-900">Let op:</span> {v.beperking}</p>
+              </dl>
+              {v.ai && (
+                <div class="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-relaxed">
+                  <p class="font-semibold text-ink-900">Voorstel van een taalmodel: eerst nalezen</p>
+                  <p class="mt-1 text-ink-700">{v.ai}</p>
+                </div>
               )}
+              <div class="mt-6 border-t border-ink-200 pt-5">
+                <p class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Stand van zaken</p>
+                <ul class="mt-3 space-y-3">
+                  {v.statussen.map((st) => (
+                    <li class="text-sm text-ink-700">
+                      <StatusLabel status={st.status} />
+                      <span class="mt-0.5 block pl-3.5">{st.tekst}</span>
+                    </li>
+                  ))}
+                </ul>
+                {v.beperking && (
+                  <p class="mt-3 text-sm leading-relaxed text-ink-700"><span class="font-semibold text-ink-900">Let op:</span> {v.beperking}</p>
+                )}
+              </div>
+              <a href={v.link.href} class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-curanta-700 no-underline hover:underline">
+                {v.link.label} <Icon naam="pijl" class="h-4 w-4" />
+              </a>
             </div>
-            <a href={v.link.href} class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-curanta-700 no-underline hover:underline">
-              {v.link.label} <Icon naam="pijl" class="h-4 w-4" />
-            </a>
           </div>
-          <div class={`space-y-8 lg:col-span-7 ${i % 2 === 1 ? 'lg:order-1' : ''}`} data-reveal style="--reveal-vertraging:120ms">
+          <div class={gestapeld ? 'mt-12 grid gap-8 md:grid-cols-2 md:items-start' : `space-y-8 lg:col-span-7 ${i % 2 === 1 ? 'lg:order-1' : ''}`} data-reveal style="--reveal-vertraging:120ms">
             <Screenshot
               src={v.beelden[0].src}
               alt={v.beelden[0].alt}
               adres={v.beelden[0].adres}
               bijschrift={v.beelden[0].bijschrift}
-              sizes="(min-width: 1400px) 760px, (min-width: 1024px) 56vw, 100vw"
+              sizes={gestapeld ? '(min-width: 1400px) 650px, (min-width: 768px) 48vw, 100vw' : '(min-width: 1400px) 760px, (min-width: 1024px) 56vw, 100vw'}
             />
             {v.beelden[1] && (
               <Screenshot
-                class="hidden sm:ml-auto sm:block sm:w-4/5"
+                class={gestapeld ? 'hidden md:block' : 'hidden sm:ml-auto sm:block sm:w-4/5'}
                 src={v.beelden[1].src}
                 alt={v.beelden[1].alt}
                 adres={v.beelden[1].adres}
                 bijschrift={v.beelden[1].bijschrift}
-                sizes="(min-width: 1400px) 610px, (min-width: 1024px) 45vw, (min-width: 640px) 80vw, 100vw"
+                sizes={gestapeld ? '(min-width: 1400px) 650px, 48vw' : '(min-width: 1400px) 610px, (min-width: 1024px) 45vw, (min-width: 640px) 80vw, 100vw'}
               />
             )}
           </div>
         </div>
       </article>
-    ))}
+      );
+    })}
   </section>
 
   {/* 4. Doelgroepen */}
   <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="doelgroepen-kop">
     <div class="container-prose">
       <div class="max-w-2xl" data-reveal>
-        <p class="eyebrow">Voor wie</p>
-        <h2 id="doelgroepen-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
+                <h2 id="doelgroepen-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
           Voor welke zorgorganisaties
         </h2>
       </div>
-      <ul class="mt-10 grid gap-6 md:grid-cols-3">
+      {/* Geen drie gelijke kaarten: de VVT is het hoofdsegment en krijgt een brede kaart met de
+          foto links; de gehandicaptenzorg en de GGZ staan als paar eronder. Elke foto blijft
+          liggend: een staande uitsnede liet de cliënt (GHZ), de behandelaar (GGZ) of de bewoner
+          (VVT) wegvallen, terwijl de alt-tekst hen beschrijft. */}
+      <ul class="mt-10 grid gap-6 md:grid-cols-2">
         {doelgroepen.map((d, i) => (
-          <li class="spotlight flex flex-col overflow-hidden rounded-2xl bg-curanta-50" data-reveal style={`--reveal-vertraging:${i * 100}ms`}>
+          <li class={`spotlight flex flex-col overflow-hidden rounded-2xl bg-curanta-50 ${i === 0 ? 'md:col-span-2 lg:flex-row' : ''}`} data-reveal style={`--reveal-vertraging:${i * 100}ms`}>
             <Picture
               src={d.foto}
               alt={d.alt}
               formats={['avif', 'webp']}
-              widths={[480, 720, 960]}
-              sizes="(min-width: 768px) 30vw, 100vw"
-              class="aspect-[3/2] w-full object-cover"
+              widths={i === 0 ? [640, 960, 1280] : [480, 720, 960]}
+              sizes={i === 0 ? '(min-width: 1400px) 780px, (min-width: 1024px) 58vw, 100vw' : '(min-width: 1400px) 660px, (min-width: 768px) 48vw, 100vw'}
+              pictureAttributes={{ class: i === 0 ? 'block aspect-[3/2] lg:w-7/12 lg:shrink-0' : 'block aspect-[3/2] sm:aspect-[2/1]' }}
+              class="h-full w-full object-cover"
             />
-            <div class="flex flex-1 flex-col p-6 sm:p-7">
+            <div class={`flex flex-1 flex-col p-6 sm:p-7 ${i === 0 ? 'lg:justify-center lg:p-10' : ''}`}>
               <h3 class="font-display text-xl font-bold text-curanta-900">
                 {d.naam}<span class="sr-only">:</span>
                 <span class="mt-1 block text-base font-semibold text-ink-700">{d.kop}</span>
               </h3>
               <p class="mt-3 leading-relaxed text-ink-700">{d.tekst}</p>
               <p class="mt-3 text-sm leading-relaxed text-ink-500">{d.let}</p>
-              <a href={d.href} class="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-curanta-700 no-underline hover:underline">
+              <a href={d.href} class={`${i === 0 ? 'lg:mt-0' : ''} mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-curanta-700 no-underline hover:underline`}>
                 {d.link} <Icon naam="pijl" class="h-4 w-4" />
               </a>
             </div>
@@ -490,8 +505,7 @@ const plannen = [
   <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="overstap-kop">
     <div class="container-prose grid gap-10 lg:grid-cols-12 lg:gap-14">
       <div class="lg:col-span-5" data-reveal>
-        <p class="eyebrow">Overstappen</p>
-        <h2 id="overstap-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
+                <h2 id="overstap-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
           Overstappen, inrichten en begeleiden
         </h2>
         <p class="mt-4 leading-relaxed text-ink-700">
@@ -529,8 +543,7 @@ const plannen = [
     <div class="container-prose relative">
       <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
         <div class="lg:col-span-4" data-reveal>
-          <p class="text-xs font-bold uppercase tracking-[0.18em] text-curanta-200">Gegevens en beveiliging</p>
-          <h2 id="beveiliging-kop" class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
+                    <h2 id="beveiliging-kop" class="font-display text-3xl font-bold text-white sm:text-4xl">
             Waar uw gegevens staan en hoe ze beschermd zijn
           </h2>
           <p class="mt-4 leading-relaxed text-curanta-100">
@@ -575,8 +588,7 @@ const plannen = [
     <div class="container-prose">
       <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
         <div class="lg:col-span-4" data-reveal>
-          <p class="eyebrow">Prijzen</p>
-          <h2 id="prijzen-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">Wat Curanta kost</h2>
+                    <h2 id="prijzen-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl">Wat Curanta kost</h2>
           <p class="mt-4 leading-relaxed text-ink-700">
             Per actieve medewerker per maand, exclusief btw, bij een jaarcontract. Actief is wie in de
             afgelopen 30 dagen heeft ingelogd. De bedragen zijn indicatief; de prijs hangt af van uw
@@ -594,18 +606,18 @@ const plannen = [
               {plannen.map((p) => (
                 <tr class="align-top">
                   <th scope="row" class="py-4 pr-4 font-display text-base font-bold text-curanta-900 sm:text-lg">{p.naam}</th>
-                  <td class="whitespace-nowrap py-4 pr-4 font-display text-base font-bold text-curanta-900 sm:pr-6 sm:text-lg">{p.prijs}</td>
+                  <td class="whitespace-nowrap py-4 pr-4 font-display tabular-nums text-base font-bold text-curanta-900 sm:pr-6 sm:text-lg">{p.prijs}</td>
                   <td class="hidden py-4 text-sm leading-relaxed text-ink-700 sm:table-cell">{p.voor}</td>
                 </tr>
               ))}
               <tr class="align-top bg-curanta-50">
                 <th scope="row" class="py-4 pl-3 pr-4 text-sm font-semibold text-curanta-900">Zorgmedewerker, alleen medewerkerportaal</th>
-                <td class="whitespace-nowrap py-4 pr-4 font-display text-base font-bold text-curanta-900 sm:pr-6 sm:text-lg">€19</td>
+                <td class="whitespace-nowrap py-4 pr-4 font-display tabular-nums text-base font-bold text-curanta-900 sm:pr-6 sm:text-lg">€19</td>
                 <td class="hidden py-4 pr-3 text-sm leading-relaxed text-ink-700 sm:table-cell">In elk plan. Wie ook in de backoffice werkt, betaalt het bedrag van het plan.</td>
               </tr>
               <tr class="align-top bg-curanta-50">
                 <th scope="row" class="py-4 pl-3 pr-4 text-sm font-semibold text-curanta-900">Cliënt- en mantelzorgerportaal</th>
-                <td class="whitespace-nowrap py-4 pr-4 font-display text-base font-bold text-curanta-900 sm:pr-6 sm:text-lg">Gratis</td>
+                <td class="whitespace-nowrap py-4 pr-4 font-display tabular-nums text-base font-bold text-curanta-900 sm:pr-6 sm:text-lg">Gratis</td>
                 <td class="hidden py-4 pr-3 text-sm leading-relaxed text-ink-700 sm:table-cell">Inloggen met DigiD voor cliënten is een betaalde optie.</td>
               </tr>
             </tbody>
