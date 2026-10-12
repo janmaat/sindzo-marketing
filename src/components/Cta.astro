@@ -1,5 +1,7 @@
 ---
 import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
+import DotPattern from './magic/DotPattern.astro';
+import BorderBeam from './magic/BorderBeam.astro';
 
 // Afsluitende oproep onderaan een pagina. Standaard de twee demo-knoppen van de site
 // (src/config/demo.ts); een pagina met een eigen vraag ("laat het doorrekenen", "vraag de
@@ -20,8 +22,11 @@ const {
 } = Astro.props;
 ---
 <section class="container-prose py-20">
-  <div class="overflow-hidden rounded-2xl bg-gradient-to-br from-curanta-900 to-curanta-950 px-8 py-14 sm:px-14">
-    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+  <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-curanta-900 to-curanta-950 px-8 py-14 sm:px-14" data-reveal>
+    {/* Stippenraster en lichtstreep naar Magic UI; zie global.css, "Bewegende accenten". */}
+    <DotPattern class="text-white/[0.08]" masker="rechtsboven" />
+    <BorderBeam lengte={200} duur={12} />
+    <div class="relative grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
       <div>
         <h2 class="font-display text-3xl font-bold tracking-tightish text-white sm:text-4xl">{title}</h2>
         <p class="mt-4 max-w-2xl text-curanta-100 leading-relaxed">{subtitle}</p>

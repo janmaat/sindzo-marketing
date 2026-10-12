@@ -10,6 +10,11 @@
 // knoppen. Overgenomen zijn alleen die principes, geen code, beelden of iconen; daarvoor is geen
 // licentie nodig. Lettertype en kleuren blijven die van Curanta.
 //
+// Beweging: een paar effecten van Magic UI (magicui.design, MIT), omgezet naar CSS: stippenraster
+// en lichtstreep in de introductie, inloop bij scrollen, gloed op de kaarten en een lichtstreep over
+// de vier stappen. Zie het blok "Bewegende accenten" in global.css; bij "beweging beperken" staat
+// alles stil.
+//
 // Elk feit staat in het feitenblad (D:\Repos\Ponscura\docs\campagne\feitenblad-curanta.md) of is
 // op 08-10-2026 in de code nagelopen (zie docs/controlelijst-claims.md, "Nagelopen in de code").
 // Wat nog bevestigd moet worden, staat in diezelfde controlelijst.
@@ -18,6 +23,8 @@ import Base from '../layouts/Base.astro';
 import Screenshot from '../components/Screenshot.astro';
 import StatusLabel from '../components/StatusLabel.astro';
 import Icon from '../components/Icon.astro';
+import DotPattern from '../components/magic/DotPattern.astro';
+import ShineBorder from '../components/magic/ShineBorder.astro';
 import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 import type { Status } from '../config/status';
 
@@ -250,7 +257,9 @@ const plannen = [
 
   {/* 1. Introductie */}
   <section class="relative overflow-hidden" aria-labelledby="intro-kop">
-    <div class="container-prose pt-8 sm:pt-14 lg:pt-16">
+    <DotPattern class="text-curanta-200/70" masker="rechtsboven" />
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-accent-500/10 blur-3xl" aria-hidden="true"></div>
+    <div class="container-prose relative pt-8 sm:pt-14 lg:pt-16">
       <div class="grid gap-8 lg:grid-cols-12 lg:gap-12">
         <div class="lg:col-span-7">
           <p class="eyebrow">Zorgsoftware voor ouderen- en thuiszorg, gehandicaptenzorg en ggz</p>
@@ -295,6 +304,7 @@ const plannen = [
         <Screenshot
           src={zorgplan}
           eager
+          beam
           adres="app.curanta.nl"
           alt="Backoffice: het zorgplan van een verzonnen cliënt. Bovenaan de gekozen cliënt, daaronder de status, het aantal problemen en lopende interventies en de uiterste datum van de volgende evaluatie, en het eerste probleem, Huidintegriteit."
           bijschrift="Het zorgplan in de backoffice: status, problemen, interventies en de volgende evaluatie. De interventies staan als taken bij het bezoek in het medewerkerportaal. Opname oktober 2026."
@@ -306,7 +316,7 @@ const plannen = [
   {/* 2. Eén bezoek: dossier, planning en registratie komen samen */}
   <section class="py-16 sm:py-20" aria-labelledby="werkdag-kop">
     <div class="container-prose">
-      <div class="max-w-2xl">
+      <div class="max-w-2xl" data-reveal>
         <p class="eyebrow">Zo werkt het</p>
         <h2 id="werkdag-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
           Eén bezoek, van rooster tot declaratie
@@ -316,10 +326,15 @@ const plannen = [
           systeem terug.
         </p>
       </div>
-      <ol class="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      {/* De lichtstreep loopt over de lijn van stap 1 naar 4 (AnimatedBeam). De vertraging per
+          nummer is het moment waarop de streep het passeert bij een container van 1400 px; op een
+          smaller breed scherm licht het nummer een fractie te vroeg op, wat niet opvalt. */}
+      <div class="relative mt-12">
+        <div class="stappen-beam" aria-hidden="true"></div>
+        <ol class="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
         {werkdag.map((stap, i) => (
-          <li class="relative border-t-2 border-curanta-200 pt-7">
-            <span class="absolute -top-[1.05rem] left-0 flex h-8 w-8 items-center justify-center rounded-full bg-accent-500 text-sm font-bold text-[#06231f]" aria-hidden="true">{i + 1}</span>
+          <li class="relative border-t-2 border-curanta-200 pt-7" data-reveal style={`--reveal-vertraging:${i * 90}ms`}>
+            <span class="stap-nummer absolute -top-[1.05rem] left-0 flex h-8 w-8 items-center justify-center rounded-full bg-accent-500 text-sm font-bold text-[#06231f]" style={`--puls-vertraging:${[0.4, 1.55, 2.7, 3.85][i]}s`} aria-hidden="true">{i + 1}</span>
             <p class="flex items-center gap-2 text-sm font-semibold text-curanta-700">
               <Icon naam={stap.icoon} class="h-4 w-4" />
               <span><span class="sr-only">Stap {i + 1}: </span>{stap.wie}</span>
@@ -328,14 +343,15 @@ const plannen = [
             <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-700">{stap.tekst}</p>
           </li>
         ))}
-      </ol>
+        </ol>
+      </div>
     </div>
   </section>
 
   {/* 3. Drie productvoorbeelden */}
   <section class="border-t border-ink-200 pt-16 sm:pt-20" aria-labelledby="voorbeelden-kop">
     <div class="container-prose">
-      <div class="max-w-2xl">
+      <div class="max-w-2xl" data-reveal>
         <p class="eyebrow">Het product</p>
         <h2 id="voorbeelden-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
           Drie voorbeelden uit het werk
@@ -350,7 +366,7 @@ const plannen = [
     {voorbeelden.map((v, i) => (
       <article id={v.id} class={`py-14 sm:py-16 ${i % 2 === 1 ? 'bg-curanta-50' : ''}`} aria-labelledby={`${v.id}-kop`}>
         <div class="container-prose grid gap-10 lg:grid-cols-12 lg:gap-14">
-          <div class={`lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+          <div class={`lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`} data-reveal>
             <p class="text-sm font-semibold text-curanta-700">Voorbeeld {i + 1} van 3</p>
             <h3 id={`${v.id}-kop`} class="mt-2 font-display text-2xl font-bold text-curanta-900 sm:text-3xl">{v.kop}</h3>
             <dl class="mt-6 space-y-5">
@@ -400,7 +416,7 @@ const plannen = [
               {v.link.label} <Icon naam="pijl" class="h-4 w-4" />
             </a>
           </div>
-          <div class={`space-y-8 lg:col-span-7 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+          <div class={`space-y-8 lg:col-span-7 ${i % 2 === 1 ? 'lg:order-1' : ''}`} data-reveal style="--reveal-vertraging:120ms">
             <Screenshot
               src={v.beelden[0].src}
               alt={v.beelden[0].alt}
@@ -427,15 +443,15 @@ const plannen = [
   {/* 4. Doelgroepen */}
   <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="doelgroepen-kop">
     <div class="container-prose">
-      <div class="max-w-2xl">
+      <div class="max-w-2xl" data-reveal>
         <p class="eyebrow">Voor wie</p>
         <h2 id="doelgroepen-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
           Voor welke zorgorganisaties
         </h2>
       </div>
       <ul class="mt-10 grid gap-6 md:grid-cols-3">
-        {doelgroepen.map((d) => (
-          <li class="flex flex-col overflow-hidden rounded-2xl bg-curanta-50">
+        {doelgroepen.map((d, i) => (
+          <li class="spotlight flex flex-col overflow-hidden rounded-2xl bg-curanta-50" data-reveal style={`--reveal-vertraging:${i * 100}ms`}>
             <Picture
               src={d.foto}
               alt={d.alt}
@@ -473,7 +489,7 @@ const plannen = [
   {/* 5. Overstappen, inrichting en begeleiding */}
   <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="overstap-kop">
     <div class="container-prose grid gap-10 lg:grid-cols-12 lg:gap-14">
-      <div class="lg:col-span-5">
+      <div class="lg:col-span-5" data-reveal>
         <p class="eyebrow">Overstappen</p>
         <h2 id="overstap-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
           Overstappen, inrichten en begeleiden
@@ -494,7 +510,7 @@ const plannen = [
       </div>
       <ol class="divide-y divide-ink-200 border-y border-ink-200 lg:col-span-7">
         {fasen.map((f, i) => (
-          <li class="grid gap-2 py-5 sm:grid-cols-[3rem_1fr]">
+          <li class="grid gap-2 py-5 sm:grid-cols-[3rem_1fr]" data-reveal style={`--reveal-vertraging:${i * 80}ms`}>
             <span class="font-display text-2xl font-bold text-accent-700" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <div>
               <h3 class="font-display text-lg font-bold text-curanta-900"><span class="sr-only">Fase {i + 1}: </span>{f.titel}</h3>
@@ -507,10 +523,12 @@ const plannen = [
   </section>
 
   {/* 6. Gegevens en beveiliging */}
-  <section class="bg-curanta-900 py-16 text-white sm:py-20" aria-labelledby="beveiliging-kop">
-    <div class="container-prose">
+  <section class="relative overflow-hidden bg-curanta-900 py-16 text-white sm:py-20" aria-labelledby="beveiliging-kop">
+    <DotPattern class="text-white/[0.09]" masker="linksboven" />
+    <div class="pointer-events-none absolute -left-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-accent-500/15 blur-3xl" aria-hidden="true"></div>
+    <div class="container-prose relative">
       <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
-        <div class="lg:col-span-4">
+        <div class="lg:col-span-4" data-reveal>
           <p class="text-xs font-bold uppercase tracking-[0.18em] text-curanta-200">Gegevens en beveiliging</p>
           <h2 id="beveiliging-kop" class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
             Waar uw gegevens staan en hoe ze beschermd zijn
@@ -524,7 +542,7 @@ const plannen = [
           </a>
         </div>
         <div class="grid gap-10 sm:grid-cols-2 lg:col-span-8">
-          <div>
+          <div data-reveal style="--reveal-vertraging:100ms">
             <h3 class="flex items-center gap-2 font-display text-lg font-bold text-white">
               <Icon naam="vink" class="h-5 w-5 text-accent-500" /> Geregeld
             </h3>
@@ -536,7 +554,7 @@ const plannen = [
               <li>U kunt al uw gegevens en bestanden exporteren in JSON.</li>
             </ul>
           </div>
-          <div>
+          <div data-reveal style="--reveal-vertraging:200ms">
             <h3 class="flex items-center gap-2 font-display text-lg font-bold text-white">
               <Icon naam="klok" class="h-5 w-5 text-amber-300" /> Nog niet klaar
             </h3>
@@ -556,7 +574,7 @@ const plannen = [
   <section class="py-16 sm:py-20" aria-labelledby="prijzen-kop">
     <div class="container-prose">
       <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
-        <div class="lg:col-span-4">
+        <div class="lg:col-span-4" data-reveal>
           <p class="eyebrow">Prijzen</p>
           <h2 id="prijzen-kop" class="mt-3 font-display text-3xl font-bold text-curanta-900 sm:text-4xl">Wat Curanta kost</h2>
           <p class="mt-4 leading-relaxed text-ink-700">
@@ -566,7 +584,7 @@ const plannen = [
           </p>
           <a href="/prijzen" class="btn-secondary btn-lg mt-7 no-underline">Alle prijzen en voorwaarden</a>
         </div>
-        <div class="lg:col-span-8">
+        <div class="lg:col-span-8" data-reveal style="--reveal-vertraging:100ms">
           <table class="w-full text-left">
             <caption class="sr-only">Plannen en prijs per actieve medewerker per maand</caption>
             <thead class="sr-only">
@@ -609,7 +627,7 @@ const plannen = [
     <div class="container-prose">
       <h2 id="afsluiting-kop" class="sr-only">Kennismaken met Curanta</h2>
       <div class="grid gap-6 lg:grid-cols-2">
-        <div class="rounded-2xl bg-white p-8 shadow-[0_6px_18px_rgba(14,79,87,0.06)] sm:p-10">
+        <div class="spotlight rounded-2xl bg-white p-8 shadow-[0_6px_18px_rgba(14,79,87,0.06)] sm:p-10" data-reveal>
           <h3 class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Curanta bekijken</h3>
           <p class="mt-4 leading-relaxed text-ink-700">
             Vraag een eigen toegang tot de demo aan en kijk rond in de backoffice, het
@@ -625,7 +643,8 @@ const plannen = [
             Liever eerst bellen? <a href="tel:+31852501301" class="font-semibold text-curanta-700">085 250 1301</a>
           </p>
         </div>
-        <div class="rounded-2xl bg-white p-8 shadow-[0_6px_18px_rgba(14,79,87,0.06)] sm:p-10">
+        <div class="spotlight rounded-2xl bg-white p-8 shadow-[0_6px_18px_rgba(14,79,87,0.06)] sm:p-10" data-reveal style="--reveal-vertraging:120ms">
+          <ShineBorder />
           <h3 class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Founding partner worden</h3>
           <p class="mt-4 leading-relaxed text-ink-700">
             Wij zoeken maximaal drie zorgorganisaties die als eerste met Curanta gaan werken. U

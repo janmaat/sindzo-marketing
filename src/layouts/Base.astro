@@ -112,6 +112,11 @@ const orgLd = {
     {/* Het merkfont staat zelf gehost in /fonts (zie global.css); preload van de latin-subset
         zodat de eerste weergave niet op de CSS hoeft te wachten om hem te ontdekken. */}
     <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    {/* Zet de inloopanimatie (BlurFade, zie global.css) pas aan als de browser kan zien wat in
+        beeld komt. In de head, zodat een blok niet eerst zichtbaar is en dan verdwijnt. */}
+    <script is:inline>
+      if ('IntersectionObserver' in window) document.documentElement.classList.add('reveal-aan');
+    </script>
     {/*
       Eigen bezoekersmeting — de enige meting op curanta.nl (geen meetdienst van derden; besluit
       Jan 25-09-2026, zie het feitenblad). Cookieloos; de cijfers staan in de verkoopdatabase van
@@ -159,6 +164,30 @@ const orgLd = {
           var url = new URL(href, window.location.origin);
           carry.forEach(function (k) { if (!url.searchParams.has(k)) url.searchParams.set(k, here.get(k)); });
           a.setAttribute('href', url.pathname + url.search + url.hash);
+        });
+      })();
+    </script>
+    {/* De twee effecten uit global.css die een script nodig hebben: BlurFade (blokken met
+        data-reveal komen binnen als ze in beeld scrollen, één keer) en MagicCard (de gloed op
+        .spotlight volgt de muis). Geen opslag, geen netwerk. */}
+    <script is:inline>
+      (function () {
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (items) {
+            items.forEach(function (item) {
+              if (!item.isIntersecting) return;
+              item.target.classList.add('is-zichtbaar');
+              io.unobserve(item.target);
+            });
+          }, { rootMargin: '0px 0px -60px 0px' });
+          document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+        }
+        document.querySelectorAll('.spotlight').forEach(function (el) {
+          el.addEventListener('pointermove', function (e) {
+            var r = el.getBoundingClientRect();
+            el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+            el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+          });
         });
       })();
     </script>

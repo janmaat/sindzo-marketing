@@ -1,4 +1,6 @@
 ---
+import DotPattern from './magic/DotPattern.astro';
+
 interface Props {
   eyebrow?: string;
   title: string;
@@ -25,8 +27,10 @@ const wrapper = align === 'center' ? 'mx-auto text-center' : '';
 const titelBreedte = align === 'center' ? 'mx-auto max-w-4xl' : 'max-w-4xl';
 const tekstBreedte = align === 'center' ? 'mx-auto max-w-2xl' : 'max-w-2xl';
 ---
-<section class="border-b border-ink-300 bg-gradient-to-b from-curanta-50 to-cream">
-  <div class="container-prose py-14 sm:py-20">
+<section class="relative overflow-hidden border-b border-ink-300 bg-gradient-to-b from-curanta-50 to-cream">
+  {/* Stippenraster naar Magic UI (zie DotPattern.astro); vloeit rechtsboven uit, achter de tekst. */}
+  <DotPattern class="text-curanta-200/70" masker="rechtsboven" />
+  <div class="container-prose relative py-14 sm:py-20">
     <div class={wrapper}>
       {eyebrow && (
         <span class="eyebrow">{eyebrow}</span>
