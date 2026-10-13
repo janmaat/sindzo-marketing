@@ -12,20 +12,20 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
   description="GGZ-software: trajecten volgens het zorgprestatiemodel, declareren volgens Vektis, afscherming per cliënt en omzetplafonds, voor praktijk en instelling."
   eyebrow="Voor de GGZ"
   hero="Trajecten, declaratie en afscherming voor de GGZ"
-  subtitle="Voor vrijgevestigde praktijken en GGZ-instellingen. De behandelaar registreert prestaties per traject, de administratie declareert volgens de standaard van Vektis of stuurt een nota, en de zorginhoud ziet alleen wie de cliënt behandelt."
+  subtitle="Voor vrijgevestigde praktijken en GGZ-instellingen. De behandelaar registreert prestaties per traject. De administratie declareert volgens de standaard die Vektis voor declaraties aan zorgverzekeraars beheert, of stuurt een nota. De zorginhoud ziet alleen wie de cliënt behandelt."
   triggers={[
-    { title: 'Declareren zonder overtikken', body: 'Het declaratiebericht (GDS801) volgt de standaard van Vektis en wordt vóór verzending getoetst. Een afgewezen prestatie declareert u opnieuw; een toegekende crediteert u en declareert u gecorrigeerd. Versturen gaat via Vecozo, na aansluiting met uw certificaat.' },
-    { title: 'Zorginhoud alleen voor de behandelaars', body: 'Wie geen behandelrelatie met de cliënt heeft, uit het rooster, de agenda of als regiebehandelaar, ziet de zorginhoud niet. Noodtoegang kan, met een reden in het logboek. De administratie ziet alleen wat zij voor de declaratie nodig heeft.' },
-    { title: 'Omzetplafonds in beeld', body: 'Per zorgverzekeraar en jaar ziet u hoe ver u bent, met een signaal bij 80, 90 en 100 procent en een prognose tot het jaareinde.' },
-    { title: 'Zorg zonder contract', body: 'Voor cliënten van een verzekeraar waarmee u geen contract hebt, maakt Curanta een nota met de gegevens die de NZa voorschrijft, en verstuurt die per e-mail.' },
+    { title: 'Declareren zonder overtikken', body: 'Het declaratiebericht (GDS801) volgt de standaard van Vektis. Curanta toetst het vóór verzending. Een afgewezen prestatie declareert u opnieuw; een toegekende crediteert u en declareert u gecorrigeerd. Versturen gaat via Vecozo, na aansluiting met uw certificaat.' },
+    { title: 'Zorginhoud alleen voor de behandelaars', body: 'Een behandelrelatie volgt uit het rooster, de agenda of de rol van regiebehandelaar. Wie geen behandelrelatie met de cliënt heeft, ziet de zorginhoud niet. Noodtoegang kan, met een reden in het logboek. De administratie ziet alleen wat zij voor de declaratie nodig heeft.' },
+    { title: 'Omzetplafonds in beeld', body: 'Per zorgverzekeraar en jaar ziet u hoe ver u bent. U krijgt een signaal bij 80, 90 en 100 procent, en een prognose tot het jaareinde.' },
+    { title: 'Zorg zonder contract', body: 'Hebt u geen contract met de verzekeraar van een cliënt? Dan maakt Curanta een nota met de gegevens die de Nederlandse Zorgautoriteit (NZa) voorschrijft. Curanta verstuurt die nota per e-mail.' },
   ]}
   modules={[
     { name: 'Zorgprestatiemodel', note: 'Prestaties per traject, met controle op tarief, duur en datum' },
     { name: 'GDS801 en GDS802', note: 'Declareren en retourberichten volgens Vektis; versturen via Vecozo na aansluiting' },
     { name: 'Afscherming per cliënt', note: 'Op basis van de behandelrelatie, met noodtoegang' },
     { name: 'Omzetplafonds', note: 'Per verzekeraar en jaar, met signalen en prognose' },
-    { name: 'ROM-uitdraai', note: 'Per periode, zonder vrije tekst; u levert zelf aan bij Akwa GGZ' },
-    { name: 'SQ-48 en 4DKL', note: 'In ontwikkeling: wacht op toestemming van de rechthebbenden' },
+    { name: 'ROM-uitdraai', note: 'Uitkomstmetingen van de behandeling (ROM) per periode, zonder vrije tekst; u levert zelf aan bij Akwa GGZ' },
+    { name: 'SQ-48 en 4DKL', note: 'Vragenlijsten in ontwikkeling: wachten op toestemming van de rechthebbenden' },
     { name: 'Wet verplichte ggz', note: 'Vormen en titels met geldigheid, voor instellingen' },
     { name: 'Aanmelding en wachtlijst', note: 'Na aansluiting op ZorgDomein komt een geaccepteerde verwijzing op de wachtlijst' },
   ]}
@@ -40,6 +40,6 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
     { value: 'GDS801', label: 'Volgens de standaard van Vektis, getoetst aan het schema' },
     { value: 'Per cliënt', label: 'Zorginhoud alleen voor wie behandelt' },
     { value: 'EU', label: 'Hosting bij IONOS in Berlijn' },
-    { value: 'FHIR', label: 'Read-only API voor de BgZ, na registratie' },
+    { value: 'FHIR', label: 'API voor de Basisgegevensset Zorg (BgZ), alleen lezen, na registratie' },
   ]}
 />
