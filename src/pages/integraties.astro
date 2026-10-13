@@ -21,11 +21,11 @@ interface Integration {
 const integrations: Integration[] = [
   // Standaarden
   { name: 'FHIR R4 en de BgZ', category: 'Standaarden', status: 'inrichten', doc: '/api',
-    body: 'Een publieke, read-only FHIR R4-API die de Basisgegevensset Zorg (BgZ) van een cliënt als document levert, gevalideerd tegen de profielen van Nictiz. Beschikbaar na registratie van het systeem dat de gegevens ophaalt. Geen testomgeving en geen algemene lees- of schrijftoegang.' },
+    body: 'Een publieke FHIR R4-API, alleen om te lezen. Hij levert de Basisgegevensset Zorg (BgZ) van een cliënt als document, gevalideerd tegen de profielen van Nictiz. Beschikbaar zodra wij het systeem dat de gegevens ophaalt, hebben geregistreerd. Geen testomgeving en geen algemene lees- of schrijftoegang.' },
   { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'ontwikkeling',
     body: 'Curanta vult 11 van de 14 onderdelen van de Minimale eOverdracht uit het dossier. Het volledige eOverdracht-document (STU3), de kwalificatie en het verzenden zijn nog niet gebouwd.' },
   { name: 'MedMij', category: 'Standaarden', status: 'ontwikkeling',
-    body: 'Uitwisseling met een persoonlijke gezondheidsomgeving vraagt registratie bij Stichting MedMij, een PKIoverheid-certificaat en een conformiteitstest; die zijn er nog niet.' },
+    body: 'Uitwisselen met een persoonlijke gezondheidsomgeving vraagt registratie bij Stichting MedMij, een PKIoverheid-certificaat en een conformiteitstest. Die zijn er nog niet.' },
   { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'ontwikkeling',
     body: 'Bevragen via het Landelijk Schakelpunt, met toestemming per cliënt. Aansluiten vraagt een VZVZ-aansluittraject en UZI-certificaten; die zijn er nog niet.' },
 
@@ -47,27 +47,27 @@ const integrations: Integration[] = [
   { name: 'CAK', category: 'Financieel', status: 'inrichten',
     body: 'De aanlevering voor de eigen bijdrage (Wlz en Wmo) via Vecozo. Retourberichten leest u nu zelf in.' },
   { name: 'Controle op verzekering (COV)', category: 'Financieel', status: 'inrichten',
-    body: 'Via Vecozo, per cliënt of voor alle cliënten tegelijk; de uitkomst wordt vastgelegd. Werkt zodra er een Vecozo-certificaat is.' },
+    body: 'Via Vecozo, per cliënt of voor alle cliënten tegelijk; Curanta legt de uitkomst vast. Werkt zodra er een Vecozo-certificaat is.' },
   { name: 'AGB-register (Vektis)', category: 'Financieel', status: 'inrichten',
     body: 'AGB-codes valideren en dagelijks synchroniseren met de open dataset van Vektis. De synchronisatie richten wij per klant in.' },
   { name: 'Zorgverzekeraars (GGZ, GDS801)', category: 'Financieel', status: 'inrichten',
-    body: 'GGZ-declaraties volgens de standaard van Vektis, vóór verzending getoetst aan het schema, via de berichtenbox van Vecozo. Vraagt een Vecozo-certificaat; een test bij Vecozo is nog niet gedaan. Het retourbericht (GDS802) haalt u zelf op en leest u in.' },
+    body: 'GGZ-declaraties volgens de standaard van Vektis, via de berichtenbox van Vecozo. Curanta toetst ze vóór verzending aan het schema. Vraagt een Vecozo-certificaat; een test bij Vecozo is nog niet gedaan. Het retourbericht (GDS802) haalt u zelf op en leest u in.' },
   { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'ontwikkeling',
-    body: 'Zvw-declaratie voor de wijkverpleging. De berichten (AW319 en AW320) worden opgesteld en verwerkt, maar de test bij Vecozo en het versturen zijn nog niet bewezen. Aanleveren kan nog niet.' },
+    body: 'Zvw-declaratie voor de wijkverpleging. Curanta stelt de berichten (AW319 en AW320) op en verwerkt ze. Maar de test bij Vecozo en het versturen zijn nog niet bewezen. Aanleveren kan nog niet.' },
 
   // Sensoren en domotica
   { name: 'Domotica', category: 'Sensoren en domotica', status: 'inrichten',
-    body: 'Alarmen en sensormeldingen van onder meer Mextal, Ascom, Sensara, CLB en CarePhone in een eigen overzicht, met een melding aan de dienstdoende zorg. Aansluiting per leverancier.' },
+    body: 'Alarmen en sensormeldingen van onder meer Mextal, Ascom, Sensara, CLB en CarePhone in een eigen overzicht. De dienstdoende zorg krijgt een melding. Aansluiten gaat per leverancier.' },
 
   // E-health
   { name: 'E-healthaanbieders', category: 'E-health', status: 'gepland',
-    body: 'Koppelingen voor blended zorg. Vragen een overeenkomst en API-toegang per aanbieder; die zijn er nog niet.' },
+    body: 'Koppelingen voor blended zorg: zorg die persoonlijk contact en e-health combineert. Vragen een overeenkomst en API-toegang per aanbieder; die zijn er nog niet.' },
 
   // Identiteit
   { name: 'DigiD', category: 'Identiteit', status: 'inrichten',
     body: 'Inloggen op het cliëntportaal met DigiD, minimaal niveau Substantieel. Een betaalde optie; de aansluiting bij Logius regelen wij per klant.' },
   { name: 'UZI-pas', category: 'Identiteit', status: 'inrichten',
-    body: 'Curanta leest de pas uit en controleert de certificaatketen en of de pas is ingetrokken. Beschikbaar zodra de UZI-hostnaam op onze server is ingericht; dat is nog niet gebeurd. De eindtest met een echte pas doen wij bij de eerste klant.' },
+    body: 'Curanta leest de pas uit en controleert de certificaatketen en of de pas is ingetrokken. Beschikbaar zodra wij de UZI-hostnaam op onze server hebben ingericht; dat is nog niet gebeurd. De eindtest met een echte pas doen wij bij de eerste klant.' },
   { name: 'Microsoft Entra ID (SSO)', category: 'Identiteit', status: 'ontwikkeling',
     body: 'Inloggen met het account van uw organisatie, met rollen uit groepen. De instellingen zijn er; inloggen via SSO nog niet.' },
 
@@ -83,7 +83,7 @@ const integrations: Integration[] = [
   { name: 'Boekhoudpakketten', category: 'Backoffice', status: 'demo',
     body: 'Geen koppeling maar een bestand: verkoopboekingen, toegekende declaraties en kosten voor Twinfield, SnelStart, AFAS, Exact (journaalposten) of Yuki. U leest het zelf in. Het Yuki-bestand is nog niet in een echte Yuki-administratie ingelezen.' },
   { name: 'Nmbrs', category: 'Backoffice', status: 'inrichten',
-    body: 'De goedgekeurde salarisexport rechtstreeks naar Nmbrs. Vraagt een Nmbrs-partnerapp, een sleutel en toestemming van uw organisatie; de test met Nmbrs doen wij bij de eerste klant. Zonder Nmbrs: een CSV-export voor elke salarisadministratie.' },
+    body: 'De goedgekeurde salarisexport rechtstreeks naar Nmbrs. Vraagt een Nmbrs-partnerapp, een sleutel en toestemming van uw organisatie. De test met Nmbrs doen wij bij de eerste klant. Zonder Nmbrs: een CSV-export voor elke salarisadministratie.' },
 ];
 
 const categories = Array.from(new Set(integrations.map(i => i.category)));
@@ -97,7 +97,7 @@ const telling = (s: Status) => integrations.filter(i => i.status === s).length;
   <PageHero
     eyebrow="Koppelingen en standaarden"
     title="Koppelingen: wat er is en wat u nodig hebt om aan te sluiten"
-    subtitle="Een gebouwde koppeling werkt pas als uw organisatie is aangesloten bij de andere partij, met een certificaat, contract of toegang. Dat regelen wij samen bij de implementatie. De gebouwde koppelingen zitten in het abonnement; wat de andere partij rekent, zoals een Vecozo-certificaat of ZorgMail-abonnement, betaalt u zelf."
+    subtitle="Een gebouwde koppeling werkt pas als uw organisatie bij de andere partij is aangesloten, met een certificaat, contract of toegang. Dat regelen wij samen bij de implementatie. De gebouwde koppelingen zitten in het abonnement. Wat de andere partij rekent, zoals een Vecozo-certificaat of ZorgMail-abonnement, betaalt u zelf."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href="/api" class="btn-primary no-underline">Over de FHIR-API</a>
@@ -148,8 +148,8 @@ const telling = (s: Status) => integrations.filter(i => i.status === s).length;
     <div class="rounded-2xl border border-ink-100 bg-ink-100/50 p-8">
       <h2 class="font-display text-2xl font-bold text-ink-900">Mist u een koppeling?</h2>
       <p class="mt-3 max-w-2xl text-ink-700">
-        Laat het ons weten. Wij bekijken of hij past in de opbouw van Curanta en in uw zorgproces,
-        en wij reageren binnen 1 werkdag.
+        Laat het ons weten. Wij bekijken of hij past in de opbouw van Curanta en in uw zorgproces.
+        Wij reageren binnen 1 werkdag.
       </p>
       <a href="mailto:info@curanta.nl?subject=Koppeling" class="btn-primary mt-5 no-underline">Mail info@curanta.nl</a>
     </div>

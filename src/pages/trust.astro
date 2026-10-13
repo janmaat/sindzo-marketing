@@ -31,13 +31,13 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
   {
     key: 'security',
     title: 'Informatiebeveiliging',
-    intro: 'Het NEN 7510-werkdocument is leidend. Wat nog niet is gedaan, staat er ook bij: een externe pentest en de versleuteling van de hele database.',
+    intro: 'Leidend is ons werkdocument voor NEN 7510, de norm voor informatiebeveiliging in de zorg. Ook wat nog niet gedaan is, staat erbij: een externe pentest (een gecontroleerde inbraakpoging) en de versleuteling van de hele database.',
     items: [
       { label: 'NEN 7510:2024', stand: 'uitvoering', note: 'Maatregelen ingevoerd, met een eerste beoordeling. Een externe audit is gepland. Curanta is niet gecertificeerd.', doc: '/procurement' },
       { label: 'NEN 7513 (logging)', stand: 'geregeld', note: 'Auditlog met hash-keten, zodat een wijziging achteraf aantoonbaar is. Een logregel over een cliënt blijft bewaard zolang het dossier bestaat; logregels zonder dossier 7 jaar.' },
       { label: 'NEN 7512 (uitwisseling)', stand: 'uitvoering', note: 'Uitgangspunt bij het bouwen van de koppelingen; nog niet extern getoetst.' },
       { label: 'Tweestapsverificatie', stand: 'geregeld', note: 'Verplicht in de backoffice voor zorg- en beheerrollen.' },
-      { label: 'Versleuteling BSN', stand: 'geregeld', note: 'Op veldniveau versleuteld met AES-256-GCM; zoeken via een aparte hash, zonder te ontsleutelen.' },
+      { label: 'Versleuteling BSN', stand: 'geregeld', note: 'Curanta versleutelt het BSN op veldniveau, met AES-256-GCM. Zoeken gaat via een aparte hash, zonder te ontsleutelen.' },
       { label: 'Versleuteling hele database', stand: 'niet', note: 'Nog niet. Een voorwaarde vóór de eerste klant.' },
       { label: 'Externe pentest', stand: 'niet', note: 'Nog niet uitgevoerd.' },
       { label: 'ISO 27001', stand: 'gepland', note: 'Audit gepland in 2027.' },
@@ -49,11 +49,11 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
     intro: 'Wie welke gegevens verwerkt, en waar.',
     items: [
       { label: 'Functionaris gegevensbescherming', stand: 'niet', note: 'Nog niet aangesteld. Een externe FG volgt vóór de eerste zorgorganisatie met echte cliëntgegevens.' },
-      { label: 'Verwerkersovereenkomst', stand: 'uitvoering', note: 'Wij stellen hem op aanvraag op, zonder NDA.', doc: '/procurement' },
+      { label: 'Verwerkersovereenkomst', stand: 'uitvoering', note: 'Wij stellen hem op aanvraag op, zonder geheimhoudingsverklaring (NDA).', doc: '/procurement' },
       { label: 'Subverwerkers', stand: 'geregeld', note: 'Hosting bij IONOS (Berlijn); site en mail bij Strato (Duitsland). Als de AI-functies aan staan: Anthropic in de VS, gepseudonimiseerd, met modelcontractbepalingen. Als u digitaal ondertekent: DocuSign in de VS.', doc: '/privacy' },
       { label: 'Amerikaanse wetgeving (Cloud Act)', stand: 'geregeld', note: 'De applicatie en de databases staan bij IONOS, een Europees bedrijf, in Berlijn. Alleen als u de AI-functies of digitaal ondertekenen aanzet, gaan gegevens naar Amerikaanse bedrijven (Anthropic gepseudonimiseerd, DocuSign), met modelcontractbepalingen. Het kabinet erkende op 7 oktober 2026 dat de Cloud Act kan botsen met de AVG (antwoorden op Kamervragen 2026Z16981).', doc: '/privacy' },
       { label: 'DPIA', stand: 'uitvoering', note: 'Voor de eigen DPIA van uw organisatie stellen wij de onderbouwing op aanvraag op.', doc: '/procurement' },
-      { label: 'Pseudonimiseren', stand: 'geregeld', note: 'Cliëntgegevens pseudonimiseren bij een verzoek tot verwijdering, met een vastlegging in het logboek.' },
+      { label: 'Pseudonimiseren', stand: 'geregeld', note: 'Cliëntgegevens pseudonimiseren bij een verzoek tot verwijdering; het logboek legt dat vast.' },
     ],
   },
   {
@@ -61,10 +61,10 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
     title: 'Koppelingen en uw gegevens',
     intro: 'Welke standaarden er zijn, en hoe u uw gegevens meeneemt. De status per koppeling is dezelfde als op de pagina Koppelingen.',
     items: [
-      { label: 'FHIR-API voor de BgZ', status: 'inrichten', note: 'Publiek en read-only (FHIR R4), voor vooraf geregistreerde systemen. Geen testomgeving en geen algemene lees- of schrijftoegang.', doc: '/api' },
+      { label: 'FHIR-API voor de BgZ', status: 'inrichten', note: 'Levert de Basisgegevensset Zorg (BgZ) van een cliënt. Publiek en alleen om te lezen (FHIR R4), voor systemen die wij vooraf registreren. Geen testomgeving en geen algemene lees- of schrijftoegang.', doc: '/api' },
       { label: 'Wegiz / eOverdracht', status: 'ontwikkeling', note: 'Het eOverdracht-document en het verzenden zijn nog niet gebouwd.', doc: '/integraties' },
       { label: 'MedMij', status: 'ontwikkeling', note: 'Registratie bij MedMij en een PKIoverheid-certificaat zijn er nog niet.', doc: '/integraties' },
-      { label: 'LSP', status: 'ontwikkeling', note: 'VZVZ-aansluiting en UZI-certificaten zijn er nog niet.', doc: '/integraties' },
+      { label: 'LSP', status: 'ontwikkeling', note: 'Voor het Landelijk Schakelpunt zijn de VZVZ-aansluiting en UZI-certificaten er nog niet.', doc: '/integraties' },
       { label: 'Export van uw gegevens', stand: 'geregeld', note: 'Een volledige export van uw gegevens en bestanden in JSON. Het BSN alleen als laatste vier cijfers en hash.', doc: '/overstappen#eruit' },
     ],
   },
@@ -76,9 +76,9 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
       { label: 'Hosting in de EU', stand: 'geregeld', note: 'IONOS Cloud, Berlijn (Duitsland).', doc: '/privacy' },
       { label: 'Openbare statuspagina', stand: 'geregeld', note: 'Actuele beschikbaarheid per onderdeel; geen incidenthistorie.', doc: 'https://app.curanta.nl/status' },
       { label: 'Beschikbaarheid', stand: 'uitvoering', note: 'Doel 99,9% op kantooruren. Nog geen gemeten historie.', doc: 'https://app.curanta.nl/status' },
-      { label: 'RPO en RTO', stand: 'uitvoering', note: 'Doel in onze voorwaarden: RPO 1 uur, RTO 4 uur. Nog niet aangetoond met een hersteltest.', doc: '/voorwaarden#sla' },
+      { label: 'RPO en RTO', stand: 'uitvoering', note: 'Doel in onze voorwaarden: RPO 1 uur (hoogstens 1 uur aan gegevens kwijt) en RTO 4 uur (binnen 4 uur weer in gebruik). Nog niet aangetoond met een hersteltest.', doc: '/voorwaarden#sla' },
       { label: 'Hersteltest', stand: 'niet', note: 'Nog niet uitgevoerd.' },
-      { label: 'Exit-procedure', stand: 'geregeld', note: 'In onze voorwaarden (artikel 9): de export binnen 5 werkdagen en 30 dagen om hem op te halen; binnen die 30 dagen wissen wij uw gegevens, met een vernietigingsverklaring.', doc: '/voorwaarden#beeindiging' },
+      { label: 'Exit-procedure', stand: 'geregeld', note: 'In onze voorwaarden (artikel 9): wij leveren de export binnen 5 werkdagen, en u hebt 30 dagen om hem op te halen. Binnen die 30 dagen wissen wij uw gegevens; u krijgt een vernietigingsverklaring.', doc: '/voorwaarden#beeindiging' },
     ],
   },
   {
@@ -87,10 +87,10 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
     intro: 'Curanta helpt u registreren en termijnen bewaken. Aan de wet voldoen doet uw organisatie zelf; de software is daar een hulpmiddel bij.',
     items: [
       { label: 'Cyberbeveiligingswet (NIS2)', status: 'demo', note: 'Een module om cyberincidenten te registreren en de meldtermijnen van 24 uur, 72 uur en één maand te bewaken.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '/oplossing#kwaliteit' },
-      { label: 'Wkkgz', status: 'demo', note: 'Klachtenregeling en de interne procedure voor het melden van incidenten.', doc: '/oplossing#kwaliteit' },
+      { label: 'Wkkgz', status: 'demo', note: 'Klachtenregeling, en de interne procedure om incidenten te melden.', doc: '/oplossing#kwaliteit' },
       { label: 'Wzd en Wvggz', status: 'demo', note: 'Registratie, en het halfjaarlijkse overzicht voor de IGJ, gevalideerd tegen het XML-schema van de IGJ. Een echte aanlevering is er nog niet.', doc: '/oplossing#kwaliteit' },
       { label: 'Wtza', status: 'demo', note: 'Toelating vastleggen en de jaarverantwoording bewaken (vóór 1 juni, in DigiMV).', doc: '/oplossing#kwaliteit' },
-      { label: 'Wtta', status: 'demo', note: 'Uw eigen toelating vastleggen, en als inlener per uitlener de controle van zijn toelating.', doc: '/oplossing#kwaliteit' },
+      { label: 'Wtta', status: 'demo', note: 'Uw eigen toelating vastleggen. En als inlener per uitlener vastleggen dat u zijn toelating controleerde.', doc: '/oplossing#kwaliteit' },
       { label: 'AI-verordening', status: 'demo', note: 'Een register en classificatie van de AI-systemen in Curanta, met een logboek van AI-aanroepen.', doc: '/oplossing#ai' },
     ],
   },
@@ -101,25 +101,25 @@ const termijnen = [
   {
     datum: 'Sinds 15 augustus 2026',
     wet: 'Cyberbeveiligingswet (NIS2)',
-    wat: 'Zorgaanbieders met 50 of meer fte, of met een jaaromzet én balanstotaal van €10 miljoen of meer, vallen eronder. Zij registreren zich bij het NCSC en melden een significant incident binnen 24 uur (vroegtijdige waarschuwing), 72 uur (melding) en één maand (eindverslag).',
-    curanta: 'Registratie van incidenten en bewaking van de drie meldtermijnen.',
+    wat: 'Zorgaanbieders met 50 of meer fte, of met een jaaromzet én balanstotaal van €10 miljoen of meer, vallen eronder. Zij registreren zich bij het Nationaal Cyber Security Centrum (NCSC). Een significant incident melden zij binnen 24 uur (vroegtijdige waarschuwing), 72 uur (melding) en één maand (eindverslag).',
+    curanta: 'U registreert incidenten; Curanta bewaakt de drie meldtermijnen.',
   },
   {
     datum: 'Elk jaar vóór 1 juni',
     wet: 'Openbare jaarverantwoording (Wtza)',
-    wat: 'Zorgaanbieders die zorg leveren uit de Zvw of de Wlz, of subsidie van VWS krijgen, maken hun jaarverantwoording openbaar via DigiMV. Solisten die zelf de zorg verlenen zijn uitgezonderd.',
-    curanta: 'Vastleggen van de toelating en een herinnering vóór de deadline. De aanlevering zelf doet u in DigiMV.',
+    wat: 'De plicht geldt voor zorgaanbieders die zorg leveren uit de Zvw of de Wlz, of subsidie van VWS krijgen. Zij maken hun jaarverantwoording openbaar via DigiMV. Solisten die zelf de zorg verlenen zijn uitgezonderd.',
+    curanta: 'U legt de toelating vast en krijgt een herinnering vóór de uiterste datum. Aanleveren doet u zelf, in DigiMV.',
   },
   {
     datum: '1 januari 2027 en 1 januari 2028',
     wet: 'Wtta (toelating uitleners)',
-    wat: 'De wet geldt vanaf 1 januari 2027; 2027 is een overgangsjaar. Vanaf 1 januari 2028 mag u alleen inlenen van een uitlener met een toelating. Het register van de NAU is te raadplegen vanaf 1 juli 2027.',
-    curanta: 'Per uitlener de controle van de toelating vastleggen, met datum, uitkomst en bewijs. Geen koppeling met het register van de NAU.',
+    wat: 'De wet geldt vanaf 1 januari 2027; 2027 is een overgangsjaar. Vanaf 1 januari 2028 mag u alleen inlenen van een uitlener met een toelating. Het register van de NAU kunt u raadplegen vanaf 1 juli 2027.',
+    curanta: 'U legt per uitlener vast dat u de toelating controleerde: met datum, uitkomst en bewijs. Een koppeling met het register van de NAU is er niet.',
   },
   {
     datum: '2 december 2027',
     wet: 'AI-verordening (hoog risico)',
-    wat: 'Vanaf dan gelden de extra eisen voor AI-systemen met een hoog risico uit bijlage III. Die datum is in 2026 uitgesteld (oorspronkelijk 2 augustus 2026). Niet elke AI-toepassing in de zorg valt eronder.',
+    wat: 'Vanaf dan gelden de extra eisen voor AI-systemen met een hoog risico uit bijlage III. Die datum is in 2026 uitgesteld; eerst was het 2 augustus 2026. Niet elke AI-toepassing in de zorg valt eronder.',
     curanta: 'Een register van de AI-systemen in Curanta. Alleen de kandidaatmatching bij werving is hoog risico; die staat standaard uit.',
   },
 ];
@@ -233,7 +233,7 @@ const termijnen = [
       <h2 class="font-display text-2xl font-bold text-curanta-900">De vraag die inkopers stellen: "Wat als Curanta wegvalt?"</h2>
       <p class="mt-3 text-ink-700">Curanta is een nieuwe, kleine leverancier. Dit is de stand:</p>
       <ul class="mt-5 space-y-3 text-sm text-ink-700">
-        <li class="flex gap-3"><span class={`status-dot mt-1.5 shrink-0 ${STAND.uitvoering.dot}`} aria-hidden="true"></span><span><strong>Broncode-escrow:</strong> in voorbereiding.</span></li>
+        <li class="flex gap-3"><span class={`status-dot mt-1.5 shrink-0 ${STAND.uitvoering.dot}`} aria-hidden="true"></span><span><strong>Broncode in bewaring bij een derde (escrow):</strong> in voorbereiding.</span></li>
         <li class="flex gap-3"><span class={`status-dot mt-1.5 shrink-0 ${STAND.uitvoering.dot}`} aria-hidden="true"></span><span><strong>Ontwikkelaarspartnerschap:</strong> in voorbereiding.</span></li>
         <li class="flex gap-3"><span class={`status-dot mt-1.5 shrink-0 ${STAND.geregeld.dot}`} aria-hidden="true"></span><span><strong>Uw gegevens mee:</strong> een volledige export van uw gegevens en bestanden in JSON, zonder exit-fee. De exit staat in onze voorwaarden (artikel 9).</span></li>
       </ul>

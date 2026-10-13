@@ -11,38 +11,38 @@ import Cta from '../components/Cta.astro';
 const adrs = [
   {
     id: 'ADR-001',
-    title: 'Modulaire monolith over microservices',
+    title: 'Modulaire monolith in plaats van microservices',
     date: '2025-09',
     status: 'Aanvaard',
     context: 'Voor zorgsoftware die klein begint, met beperkte ontwikkelcapaciteit, zijn microservices in beheer te duur. Tegelijk moeten modules per klant los aan te zetten zijn.',
-    decision: 'Wij bouwen een modulaire monolith op .NET 10 met strikt afgebakende modules (Application/Domain/Infrastructure per module), die als één geheel wordt uitgeleverd. Modules zijn per organisatie aan of uit te zetten.',
-    consequences: 'Eenvoudiger deployment en lagere infrastructuurkosten. Latere splitsing naar separate services is mogelijk maar niet gepland. Risico: discipline op module-grenzen vereist code-reviews en architectuurtests.',
+    decision: 'Wij bouwen een modulaire monolith op .NET 10, met strikt afgebakende modules (Application/Domain/Infrastructure per module). Wij leveren hem uit als één geheel. Modules zijn per organisatie aan of uit te zetten.',
+    consequences: 'Eenvoudiger uitrol en lagere kosten voor infrastructuur. Later splitsen in aparte services kan, maar is niet gepland. Risico: de grenzen tussen modules bewaken vraagt discipline; daarvoor zijn code-reviews en architectuurtests nodig.',
   },
   {
     id: 'ADR-002',
     title: 'FHIR R4 als standaard voor uitwisseling',
     date: '2025-10',
     status: 'Aanvaard',
-    context: 'Nederlandse zorgketen beweegt naar verplichte interoperabiliteit (Wegiz, MedMij). HL7v2 is legacy; eigen formaten betekenen lock-in en aansluiting met de keten frustreren.',
-    decision: 'FHIR R4 (niet R5) is de canonieke representatie voor cliënt, dossier, observaties en medicatie aan de API-grens. Intern blijft de relationele structuur eigen — FHIR is een grens-format, geen opslag-format.',
-    consequences: 'Zodra de publieke API er is, documenteert hij FHIR R4. Bij overgang naar R5 staat compatibiliteits-onderhoud vooraan. Nederlandse profielen (Nictiz zib-mapping) worden incrementeel toegevoegd.',
+    context: 'De Nederlandse zorgketen beweegt naar verplichte interoperabiliteit (Wegiz, MedMij). HL7v2 is verouderd. Eigen formaten betekenen lock-in en maken aansluiten op de keten lastig.',
+    decision: 'FHIR R4 (niet R5) is de canonieke representatie voor cliënt, dossier, observaties en medicatie aan de API-grens. Intern houden wij een eigen relationele structuur: FHIR is een formaat voor de grens, niet voor opslag.',
+    consequences: 'De publieke API levert FHIR R4. Bij een overstap naar R5 gaat het onderhoud van de compatibiliteit voor. Nederlandse profielen (Nictiz zib-mapping) voegen wij stap voor stap toe.',
   },
   {
     id: 'ADR-003',
-    title: 'Hosting binnen de EU — geen uitzondering',
+    title: 'Hosting binnen de EU',
     date: '2025-11',
     status: 'Aanvaard',
     context: 'Zorgaanbieders eisen aantoonbaar dat zorggegevens niet buiten de EER worden verwerkt. Voor de marketingsite (curanta.nl, bij Strato in Duitsland) gelden deze eisen niet: daar staan geen zorggegevens.',
     decision: 'De zorgapplicatie (app.curanta.nl) en de databases draaien bij IONOS Cloud in Berlijn (Duitsland). Geen hosting buiten de EER. Een wijziging in de subverwerkerslijst melden wij 30 dagen van tevoren.',
-    consequences: 'Hogere latency voor non-EU-bezoekers (irrelevant voor NL-zorg). De AI-functies zijn de uitzondering op "alles in de EER": staan ze aan, dan gaat gepseudonimiseerde tekst naar Anthropic in de VS, onder modelcontractbepalingen (SCC).',
+    consequences: 'Meer vertraging (latency) voor bezoekers buiten de EU; voor de Nederlandse zorg maakt dat niet uit. De AI-functies zijn de uitzondering op "alles in de EER". Staan ze aan, dan gaat gepseudonimiseerde tekst naar Anthropic in de VS, onder modelcontractbepalingen (SCC).',
   },
   {
     id: 'ADR-004',
-    title: 'BSN-encryptie op veldniveau met AES-256-GCM',
+    title: 'BSN-versleuteling op veldniveau met AES-256-GCM',
     date: '2025-12',
     status: 'Aanvaard',
     context: 'Het BSN is een wettelijk identificatienummer (art. 87 AVG, art. 46 UAVG), in de zorg geregeld in de Wabvpz. Versleuteling op kolomniveau beschermt het BSN ook tegen wie de databasebestanden of een back-up in handen krijgt. De database als geheel is nog niet versleuteld; dat komt er vóór de eerste zorgorganisatie met echte cliëntgegevens.',
-    decision: 'Het BSN wordt op veldniveau versleuteld opgeslagen met AES-256-GCM. Zoeken gaat via een apart, gepeperd hash-veld, zodat een gelijkheidsvraag geen ontsleuteling nodig heeft.',
+    decision: 'Curanta slaat het BSN op veldniveau versleuteld op, met AES-256-GCM. Zoeken gaat via een apart, gepeperd hash-veld, zodat een gelijkheidsvraag geen ontsleuteling nodig heeft.',
     consequences: 'Index-scans op BSN gebruiken het hash-veld, niet de versleutelde kolom. De sleutel staat buiten de database, in de configuratie van de server; een productieserver zonder eigen sleutel start niet.',
   },
   {
@@ -50,8 +50,8 @@ const adrs = [
     title: 'Nis2Care als zustermerk naast de NIS2-module in Curanta',
     date: '2026-02',
     status: 'Aanvaard',
-    context: 'NIS2 is een eigen specialisme met specialistische onderwerpen (Z-CERT, IGJ-meldplicht, registratie van medische apparatuur) die niet vanzelf in het ECD van Curanta horen. ECD-klanten willen de meldplicht wel in hun eigen omgeving.',
-    decision: 'Curanta heeft een eigen NIS2-incidentmodule (registratie en de meldtermijnen van 24 uur, 72 uur en één maand). Een uitgebreider NIS2-product voor zorgaanbieders met een ander ECD werken wij apart uit onder de naam Nis2Care; dat is nog niet beschikbaar.',
+    context: 'NIS2 is een vak apart. Onderwerpen als Z-CERT, de IGJ-meldplicht en de registratie van medische apparatuur horen niet vanzelf in het ECD van Curanta. ECD-klanten willen de meldplicht wel in hun eigen omgeving.',
+    decision: 'Curanta heeft een eigen NIS2-incidentmodule (registratie en de meldtermijnen van 24 uur, 72 uur en één maand). Een uitgebreider NIS2-product voor zorgaanbieders met een ander ECD werken wij apart uit, onder de naam Nis2Care. Dat is nog niet beschikbaar.',
     consequences: 'Curanta-klanten hebben de meldplicht-registratie in hun eigen omgeving. Nis2Care krijgt, zodra het er is, eigen marketing. Klanten kopen ze samen of apart — dat is een commerciële keuze.',
   },
 ];
@@ -68,8 +68,8 @@ const adrs = [
 
   <section class="container-prose py-10 border-b border-ink-100 bg-ink-100/40">
     <p class="text-sm text-ink-700 max-w-3xl">
-      Iedere ADR volgt de standaard <strong class="text-ink-900">context → besluit → consequenties</strong>-structuur. Aanvaard = besluit is in de code doorgevoerd.
-      Wijzigingen worden in versies bijgehouden; een nieuwe ADR vervangt zo nodig een oude.
+      Iedere ADR volgt de standaard <strong class="text-ink-900">context → besluit → consequenties</strong>-structuur. Aanvaard betekent: het besluit is in de code doorgevoerd.
+      Wij houden wijzigingen bij in versies; een nieuwe ADR vervangt zo nodig een oude.
     </p>
   </section>
 
