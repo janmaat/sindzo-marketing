@@ -1,8 +1,18 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
 // Herzien 08-10-2026 met wat in de week van 2–7 oktober is gebouwd (GDS801/GDS802, afscherming per
-// cliënt, ROM-uitdraai, nota zonder contract, omzetplafonds, Wvggz). Nagelopen in de code; zie
-// docs/feitenblad-voorstel-2026-10-08.md. SQ-48 en 4DKL staan er bewust als "in ontwikkeling".
+// cliënt, ROM-uitdraai, nota zonder contract, omzetplafonds, Wvggz).
+//
+// 14-10-2026: claimtoets tegen de code en een stemgidsronde (skill stemgids). Wat er veranderde:
+// - Versturen via VECOZO: de aanleverservice is nooit tegen VECOZO beproefd (ProductieVecoZoBerichtenboxClient
+//   stuurt kale XML zonder SOAP-envelop). Dus niet "versturen gaat via Vecozo", maar: Curanta maakt en toetst
+//   het bestand; het versturen beproeven wij bij de eerste aansluiting. Zie docs/deferred-work.md (segments.ggz).
+// - ZorgDomein: een geaccepteerde verwijzing komt niet vanzelf op de wachtlijst; de balie zet hem erop
+//   (ZorgDomeinVerwijzingDetail.AccepteerAsync).
+// - ROM: de uitdraai is geen bestand in het formaat van Akwa GGZ (RomService: "GEEN aanlevering").
+// - Wvggz: de geldigheid van een titel is optioneel en wordt niet bewaakt; alleen Wzd-titels hebben termijnen.
+// - FHIR: registratie van een systeem doet Curanta (FhirClientRegistry), niet de klant.
+// SQ-48 en 4DKL staan er bewust als "in ontwikkeling": de vraagteksten ontbreken tot de rechthebbenden toestemmen.
 ---
 <SegmentLayout
   image="/og/voor-ggz.png"
@@ -12,34 +22,36 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
   description="GGZ-software: trajecten volgens het zorgprestatiemodel, declareren volgens Vektis, afscherming per cliënt en omzetplafonds, voor praktijk en instelling."
   eyebrow="Voor de GGZ"
   hero="Trajecten, declaratie en afscherming voor de GGZ"
-  subtitle="Voor vrijgevestigde praktijken en GGZ-instellingen. De behandelaar registreert prestaties per traject. De administratie declareert volgens de standaard die Vektis voor declaraties aan zorgverzekeraars beheert, of stuurt een nota. De zorginhoud ziet alleen wie de cliënt behandelt."
+  subtitle="Voor de vrijgevestigde praktijk en de GGZ-instelling. De behandelaar legt per traject de prestaties vast, en Curanta toetst ze aan de tarieven en regels van de NZa. De administratie maakt er een declaratie van voor de zorgverzekeraar, of een nota als er geen contract is. De zorginhoud ziet alleen wie de cliënt behandelt."
   triggers={[
-    { title: 'Declareren zonder overtikken', body: 'Het declaratiebericht (GDS801) volgt de standaard van Vektis. Curanta toetst het vóór verzending. Een afgewezen prestatie declareert u opnieuw; een toegekende crediteert u en declareert u gecorrigeerd. Versturen gaat via Vecozo, na aansluiting met uw certificaat.' },
-    { title: 'Zorginhoud alleen voor de behandelaars', body: 'Een behandelrelatie volgt uit het rooster, de agenda of de rol van regiebehandelaar. Wie geen behandelrelatie met de cliënt heeft, ziet de zorginhoud niet. Noodtoegang kan, met een reden in het logboek. De administratie ziet alleen wat zij voor de declaratie nodig heeft.' },
-    { title: 'Omzetplafonds in beeld', body: 'Per zorgverzekeraar en jaar ziet u hoe ver u bent. U krijgt een signaal bij 80, 90 en 100 procent, en een prognose tot het jaareinde.' },
-    { title: 'Zorg zonder contract', body: 'Hebt u geen contract met de verzekeraar van een cliënt? Dan maakt Curanta een nota met de gegevens die de Nederlandse Zorgautoriteit (NZa) voorschrijft. Curanta verstuurt die nota per e-mail.' },
+    { title: 'Declareren zonder overtikken', body: 'Uit de prestaties van gesloten trajecten maakt Curanta per zorgverzekeraar het declaratiebericht (GDS801), volgens de standaard van Vektis en getoetst aan het schema. Wijst de verzekeraar een prestatie af, dan declareert u die opnieuw. Een toegekende prestatie die niet klopte, crediteert u en declareert u gecorrigeerd. Het versturen naar VECOZO beproeven wij bij de eerste aansluiting.' },
+    { title: 'Zorginhoud alleen voor de behandelaars', body: 'Wie de cliënt in de agenda of het rooster heeft, of regiebehandelaar is, ziet de zorginhoud. Een collega zonder behandelrelatie ziet die niet; in een noodgeval kan het wel, met een reden die in het logboek komt. De administratie ziet alleen wat zij voor de declaratie nodig heeft.' },
+    { title: 'Omzetplafonds in beeld', body: 'Per zorgverzekeraar en jaar ziet u hoeveel van het plafond u al hebt gedeclareerd, en waar u volgens de prognose op 31 december uitkomt. Bij 80, 90 en 100 procent krijgt u een signaal.' },
+    { title: 'Zorg zonder contract', body: 'Hebt u geen contract met de verzekeraar van een cliënt? Dan maakt Curanta een nota met de gegevens die de Nederlandse Zorgautoriteit (NZa) voorschrijft, en verstuurt die per e-mail.' },
   ]}
   modules={[
     { name: 'Zorgprestatiemodel', note: 'Prestaties per traject, met controle op tarief, duur en datum' },
-    { name: 'GDS801 en GDS802', note: 'Declareren en retourberichten volgens Vektis; versturen via Vecozo na aansluiting' },
+    { name: 'GDS801 en GDS802', note: 'Het declaratiebericht volgens Vektis, getoetst aan het schema; het retourbericht leest u in' },
     { name: 'Afscherming per cliënt', note: 'Op basis van de behandelrelatie, met noodtoegang' },
-    { name: 'Omzetplafonds', note: 'Per verzekeraar en jaar, met signalen en prognose' },
-    { name: 'ROM-uitdraai', note: 'Uitkomstmetingen van de behandeling (ROM) per periode, zonder vrije tekst; u levert zelf aan bij Akwa GGZ' },
+    { name: 'Omzetplafonds', note: 'Per verzekeraar en jaar, met signalen en een prognose' },
+    { name: 'ROM-uitdraai', note: 'Uitkomstmetingen van de behandeling (ROM) per periode, zonder vrije tekst. Geen bestand in het formaat van Akwa GGZ: aanleveren doet u zelf, in hun portaal' },
     { name: 'SQ-48 en 4DKL', note: 'Vragenlijsten in ontwikkeling: wachten op toestemming van de rechthebbenden' },
-    { name: 'Wet verplichte ggz', note: 'Vormen en titels met geldigheid, voor instellingen' },
-    { name: 'Aanmelding en wachtlijst', note: 'Na aansluiting op ZorgDomein komt een geaccepteerde verwijzing op de wachtlijst' },
+    { name: 'Wet verplichte ggz', note: 'Vormen en titels, met de geldigheid als die bekend is; voor instellingen' },
+    { name: 'Aanmelding en wachtlijst', note: 'Na aansluiting op ZorgDomein accepteert u een verwijzing en zet u de cliënt op de wachtlijst van de behandelagenda' },
   ]}
   nogNiet={[
-    'Een test bij Vecozo met de GGZ-declaratie; versturen vraagt uw Vecozo-certificaat.',
+    'Rechtstreeks versturen van de GGZ-declaratie via VECOZO: nog niet beproefd. Dat doen wij bij de eerste aansluiting, met het VECOZO-certificaat van uw organisatie.',
     'De vragenlijsten SQ-48 en 4DKL: wachten op toestemming van de rechthebbenden.',
     'Een rechtstreekse aanlevering van ROM-gegevens bij Akwa GGZ.',
+    'Een signaal als een Wvggz-titel afloopt.',
     'Koppelingen met e-healthaanbieders.',
   ]}
+  prijsNoot="Voor de vrijgevestigde praktijk is er het plan Praktijk: €29 per medewerker per maand, met de behandelagenda en de GGZ-declaratie."
   regulatory={['Wvggz', 'Wkkgz', 'Zorgprestatiemodel', 'AVG', 'NEN 7510']}
   proofPoints={[
     { value: 'GDS801', label: 'Volgens de standaard van Vektis, getoetst aan het schema' },
     { value: 'Per cliënt', label: 'Zorginhoud alleen voor wie behandelt' },
     { value: 'EU', label: 'Hosting bij IONOS in Berlijn' },
-    { value: 'FHIR', label: 'API voor de Basisgegevensset Zorg (BgZ), alleen lezen, na registratie' },
+    { value: 'FHIR', label: 'API voor de Basisgegevensset Zorg (BgZ), alleen lezen, na registratie door Curanta' },
   ]}
 />

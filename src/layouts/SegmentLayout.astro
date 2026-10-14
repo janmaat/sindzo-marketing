@@ -27,6 +27,8 @@ interface Props {
   beeld?: { src: ImageMetadata; alt: string; adres: string; bijschrift: string };
   /** Wat er voor deze sector (nog) niet is; staat zichtbaar onder de modules. */
   nogNiet?: string[];
+  /** Een korte regel over het plan dat bij deze sector past, met een link naar /prijzen (GGZ: Praktijk). */
+  prijsNoot?: string;
   /** Voor een sector waarvoor Curanta geen eigen product heeft (huisartsen): geen demo- en
       vervangingstaal, alleen wat er voor de samenwerking is. */
   alleenSamenwerking?: boolean;
@@ -34,7 +36,7 @@ interface Props {
 
 const {
   title, description, eyebrow, hero, subtitle,
-  triggers, modules, regulatory, proofPoints, caseQuote, image, alleenSamenwerking = false, nogNiet = [], beeld,
+  triggers, modules, regulatory, proofPoints, caseQuote, image, alleenSamenwerking = false, nogNiet = [], beeld, prijsNoot,
 } = Astro.props;
 ---
 <Base title={title} description={description} image={image}>
@@ -141,6 +143,14 @@ const {
           {nogNiet.map((n) => <li>{n}</li>)}
         </ul>
       </div>
+    </section>
+  )}
+
+  {prijsNoot && (
+    <section class="container-prose pb-12">
+      <p class="max-w-3xl text-ink-700">
+        {prijsNoot} <a href="/prijzen#praktijk" class="font-semibold text-curanta-700 hover:underline">Naar de prijzen</a>
+      </p>
     </section>
   )}
 

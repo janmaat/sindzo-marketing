@@ -40,18 +40,23 @@ const integrations: Integration[] = [
     body: 'Medicatieoverzicht, voorschriften, toedienregistratie en allergieën. Zonder Medimo legt u het medicatiegebruik in het dossier zelf vast (naam en ATC-code).' },
 
   // Financieel
-  { name: 'Gemeenten (iWmo en iJw)', category: 'Financieel', status: 'inrichten',
-    body: 'Toewijzingen, berichten en de maanddeclaratie (Wmo323, Jw323) via Vecozo, met het Vecozo-certificaat van uw organisatie. Retourberichten leest u nu zelf in; automatisch ophalen is in ontwikkeling.' },
-  { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'inrichten',
-    body: 'iWlz-berichten via Vecozo, met validatie. Retourberichten leest u nu zelf in; automatisch ophalen is in ontwikkeling.' },
-  { name: 'CAK', category: 'Financieel', status: 'inrichten',
-    body: 'De aanlevering voor de eigen bijdrage (Wlz en Wmo) via Vecozo. Retourberichten leest u nu zelf in.' },
-  { name: 'Controle op verzekering (COV)', category: 'Financieel', status: 'inrichten',
-    body: 'Via Vecozo, per cliënt of voor alle cliënten tegelijk; Curanta legt de uitkomst vast. Werkt zodra er een Vecozo-certificaat is.' },
+  // 14-10-2026, claimtoets: geen van de VECOZO-stromen is tegen VECOZO beproefd (de berichtenbox-clients sturen
+  // kale XML zonder SOAP-envelop; de COV-client heeft een placeholder-namespace). Daarom "ontwikkeling" en niet
+  // "inrichten": inrichten belooft dat het werkt zodra het certificaat er is. De berichten zelf zijn gebouwd.
+  { name: 'Gemeenten (iWmo en iJw)', category: 'Financieel', status: 'ontwikkeling',
+    body: 'Toewijzingen, berichten en de maanddeclaratie (Wmo323, Jw323): Curanta stelt ze op. Het versturen via VECOZO, met het VECOZO-certificaat van uw organisatie, is nog niet bij VECOZO beproefd; dat doen wij bij de eerste aansluiting. Retourberichten leest u nu zelf in.' },
+  { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'ontwikkeling',
+    body: 'iWlz-berichten, met validatie. Het versturen via VECOZO is nog niet bij VECOZO beproefd. Retourberichten leest u nu zelf in.' },
+  { name: 'CAK', category: 'Financieel', status: 'ontwikkeling',
+    body: 'De aanlevering voor de eigen bijdrage (Wlz en Wmo). Het versturen via VECOZO is nog niet bij VECOZO beproefd. Retourberichten leest u nu zelf in.' },
+  { name: 'Controle op verzekering (COV)', category: 'Financieel', status: 'ontwikkeling',
+    body: 'Per cliënt of voor alle cliënten tegelijk; Curanta legt de uitkomst vast. De vraag aan VECOZO is nog niet bij VECOZO beproefd: de precieze opbouw volgt pas uit de koppelspecificatie bij de eerste aansluiting.' },
   { name: 'AGB-register (Vektis)', category: 'Financieel', status: 'inrichten',
     body: 'AGB-codes valideren en dagelijks synchroniseren met de open dataset van Vektis. De synchronisatie richten wij per klant in.' },
-  { name: 'Zorgverzekeraars (GGZ, GDS801)', category: 'Financieel', status: 'inrichten',
-    body: 'GGZ-declaraties volgens de standaard van Vektis, via de berichtenbox van Vecozo. Curanta toetst ze vóór verzending aan het schema. Vraagt een Vecozo-certificaat; een test bij Vecozo is nog niet gedaan. Het retourbericht (GDS802) haalt u zelf op en leest u in.' },
+  // 14-10-2026: het versturen via de berichtenbox is nooit tegen VECOZO beproefd (geen SOAP-envelop); daarom
+  // "ontwikkeling" en niet "inrichten". Het bericht maken en toetsen is wel gebouwd. Zie /voor/ggz.
+  { name: 'Zorgverzekeraars (GGZ, GDS801)', category: 'Financieel', status: 'ontwikkeling',
+    body: 'GGZ-declaraties volgens de standaard van Vektis; Curanta maakt het bericht en toetst het aan het schema. Het versturen via de berichtenbox van VECOZO is nog niet beproefd: dat doen wij bij de eerste aansluiting, met het VECOZO-certificaat van uw organisatie. Het retourbericht (GDS802) haalt u zelf op en leest u in.' },
   { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'ontwikkeling',
     body: 'Zvw-declaratie voor de wijkverpleging. Curanta stelt de berichten (AW319 en AW320) op en verwerkt ze. Maar de test bij Vecozo en het versturen zijn nog niet bewezen. Aanleveren kan nog niet.' },
 
