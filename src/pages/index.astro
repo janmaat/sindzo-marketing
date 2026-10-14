@@ -1,9 +1,14 @@
 ---
 // Homepage, herzien oktober 2026. Dient als ontwerpvoorbeeld voor de andere pagina's.
 //
-// Opbouw: introductie met productscherm en twee acties → één bezoek van rooster tot declaratie →
-// drie productvoorbeelden → doelgroepen → overstappen → gegevens en beveiliging → prijzen →
-// kennismaken of partner worden.
+// Opbouw: introductie met productscherm en twee acties → wat u voor de prijs krijgt → één bezoek
+// van rooster tot declaratie → drie productvoorbeelden → doelgroepen → overstappen → gegevens en
+// beveiliging → prijzen → kennismaken of partner worden.
+//
+// Invalshoek (besluit Jan 14-10-2026): de introductie opent met de prijs. Geen Nederlandse
+// leverancier van zorgsoftware zet een prijs op zijn homepage; "compleet", "één platform" en
+// "ruimte voor zorg" zijn bezet. De vorige kop, "Wat er in de zorg gebeurt, legt u één keer vast",
+// leeft voort in sectie 3.
 //
 // Vormgeving: compositie naar het voorbeeld van Canopy (Medium Rare, een Webflow-sjabloon): tekst
 // links, groot beeld, rustige afwisseling van witte en lichte vlakken, één donkere band, ronde
@@ -254,10 +259,38 @@ const plannen = [
   { naam: 'Totaalzorg Plus', prijs: '€39', voor: 'Alles uit Compliance Pro, plus volledige planning, routeplanning en cao-controle.' },
   { naam: 'Enterprise', prijs: 'Op aanvraag', voor: 'Voor concerns en ketens: concernrapportage, een vaste success manager, afspraken over service op maat.' },
 ];
+
+// Wat u naast de prijs anders krijgt (sectie 2). Onderzoek 14-10-2026: Nedap, Ysis, Ecare, Adapcare,
+// Medicore en Fierit openen met "compleet" of "partner" en noemen geen prijs, geen exit en geen
+// licentie per actieve medewerker. Elk punt staat in het feitenblad: actieve medewerker, €19 voor
+// alleen het medewerkerportaal, gratis cliëntportaal, gebouwde koppelingen in het abonnement,
+// roostertoets met artikel, NIS2-incidentmodule (24 uur, 72 uur, één maand), export binnen 5 werkdagen.
+const voordelen = [
+  {
+    icoon: 'mensen',
+    kop: 'U betaalt voor wie er werkt',
+    tekst: 'Actief is wie de afgelopen 30 dagen heeft ingelogd; slapende accounts tellen niet mee. Werkt een zorgmedewerker alleen in het medewerkerportaal, dan kost dat €19 per maand.',
+  },
+  {
+    icoon: 'koppeling',
+    kop: 'Eén systeem, de koppelingen zitten erin',
+    tekst: 'De backoffice, het medewerkerportaal en het cliëntportaal werken met dezelfde gegevens. Cliënten en mantelzorgers gebruiken het cliëntportaal gratis. Alleen wat een externe partij rekent, zoals VECOZO of ZorgMail, betaalt u aan die partij.',
+  },
+  {
+    icoon: 'schild',
+    kop: 'De regels zitten in het systeem',
+    tekst: 'Voordat een rooster naar de medewerkers gaat, toetst Curanta het aan de Arbeidstijdenwet. Bij elke melding staat het artikel. Komt er een klacht of een beveiligingsincident, dan houdt Curanta de wettelijke termijnen bij.',
+  },
+  {
+    icoon: 'download',
+    kop: 'U kunt weg, met al uw gegevens',
+    tekst: 'Stopt u, dan krijgt u binnen 5 werkdagen een volledige export van uw gegevens en bestanden in JSON. Een exit-fee rekenen wij niet.',
+  },
+] as const;
 ---
 <Base
   title="Curanta — zorgsoftware voor VVT, gehandicaptenzorg en GGZ"
-  description="Cliëntdossier, planning, medewerkerportaal en declaratie in één systeem voor VVT, gehandicaptenzorg en GGZ. Met echte schermen uit de demo."
+  description="Cliëntdossier, planning, declaratie en kwaliteit in één systeem voor VVT, gehandicaptenzorg en GGZ, voor €19 tot €39 per actieve medewerker per maand."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteLd)} />
   <script type="application/ld+json" is:inline set:html={JSON.stringify(softwareLd)} />
@@ -269,15 +302,16 @@ const plannen = [
     <div class="container-prose relative pt-8 sm:pt-14 lg:pt-16">
       <div class="grid gap-8 lg:grid-cols-12 lg:gap-12">
         <div class="lg:col-span-7">
-          <p class="eyebrow">Zorgsoftware voor ouderen- en thuiszorg, gehandicaptenzorg en ggz</p>
+          <p class="eyebrow">Voor ouderen- en thuiszorg, gehandicaptenzorg en ggz</p>
           <h1 id="intro-kop" class="mt-3 text-balance font-display text-[2.1rem] font-extrabold leading-[1.08] tracking-tight text-curanta-900 sm:mt-4 sm:text-5xl lg:text-[3.5rem]">
-            Wat er in de zorg gebeurt, legt u één keer vast
+            Zorgsoftware waarvan u de prijs al weet
           </h1>
         </div>
         <div class="lg:col-span-5 lg:pt-10">
           <p class="text-pretty text-base leading-relaxed text-ink-700 sm:text-lg">
-            Cliëntdossier, planning en declaratie in één systeem. U zet alleen de onderdelen aan die u
-            gebruikt.
+            Cliëntdossier, planning, declaratie en kwaliteit in één systeem, voor
+            <strong class="font-semibold text-ink-900 tabular-nums">€19 tot €39</strong> per actieve
+            medewerker per maand. Implementatie, training en hosting zitten in de prijs.
           </p>
           <div class="mt-7 flex flex-wrap items-center gap-3">
             <a href={DEMO_ZELF.href} class="btn-primary btn-lg no-underline">{DEMO_ZELF.label}</a>
@@ -319,8 +353,57 @@ const plannen = [
     </div>
   </section>
 
-  {/* 2. Eén bezoek: dossier, planning en registratie komen samen */}
-  <section class="py-16 sm:py-20" aria-labelledby="werkdag-kop">
+  {/* 2. Wat u voor die prijs krijgt. De kop van de introductie belooft een prijs die u al weet; hier
+      staat wat dat in een totaalbedrag betekent, en wat u nog meer anders krijgt. Rekenvoorbeeld en
+      marktbandbreedte: feitenblad ("Rekenvoorbeeld brochure"), in dezelfde woorden als de brochure en
+      /prijzen. Heldy staat er zonder link: het is zelf een leverancier van zorgsoftware. */}
+  <section class="py-16 sm:py-20" aria-labelledby="prijs-kop">
+    <div class="container-prose grid gap-12 lg:grid-cols-12 lg:gap-14">
+      <div class="lg:col-span-5" data-reveal>
+        <h2 id="prijs-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
+          Wat u voor die prijs krijgt
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-ink-700">
+          Reken het na voor een organisatie met 50 medewerkers, over drie jaar.
+        </p>
+        <dl class="mt-6 divide-y divide-ink-200 border-y border-ink-200">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-4">
+            <dt class="font-semibold text-curanta-900">Curanta Compliance Pro</dt>
+            <dd class="font-display text-3xl font-extrabold tabular-nums text-curanta-900">€52.200</dd>
+          </div>
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-4">
+            <dt class="text-ink-700">Gangbaar in de markt</dt>
+            <dd class="font-display text-xl font-bold tabular-nums text-ink-500">€96.800 tot €189.200</dd>
+          </div>
+        </dl>
+        <p class="mt-4 text-xs leading-relaxed text-ink-500">
+          Markt: €50 tot €90 per gebruiker per maand, implementatie €4.000 tot €15.000, training
+          €1.000 tot €5.000 en koppelingen €50 tot €200 per maand (Heldy, "Wat kost een ECD?", april
+          2026). Curanta: €29 × 50 medewerkers × 36 maanden. Uw gegevens overzetten doen wij als apart
+          project, tegen een vaste prijs. Indicatief, exclusief btw.
+        </p>
+        <a href="/prijzen" class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-curanta-700 no-underline hover:underline">
+          Alle prijzen en wat erin zit <Icon naam="pijl" class="h-4 w-4" />
+        </a>
+      </div>
+      <ul class="divide-y divide-ink-200 border-y border-ink-200 lg:col-span-7">
+        {voordelen.map((v, i) => (
+          <li class="flex gap-4 py-6" data-reveal style={`--reveal-vertraging:${i * 80}ms`}>
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-curanta-50 text-curanta-700">
+              <Icon naam={v.icoon} class="h-5 w-5" />
+            </span>
+            <div>
+              <h3 class="font-display text-lg font-bold text-curanta-900">{v.kop}</h3>
+              <p class="mt-1 leading-relaxed text-ink-700">{v.tekst}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* 3. Eén bezoek: dossier, planning en registratie komen samen */}
+  <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="werkdag-kop">
     <div class="container-prose">
       <div class="max-w-2xl" data-reveal>
                 <h2 id="werkdag-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
@@ -353,7 +436,7 @@ const plannen = [
     </div>
   </section>
 
-  {/* 3. Drie productvoorbeelden */}
+  {/* 4. Drie productvoorbeelden */}
   <section class="border-t border-ink-200 pt-16 sm:pt-20" aria-labelledby="voorbeelden-kop">
     <div class="container-prose">
       <div class="max-w-2xl" data-reveal>
@@ -452,7 +535,7 @@ const plannen = [
     })}
   </section>
 
-  {/* 4. Doelgroepen */}
+  {/* 5. Doelgroepen */}
   <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="doelgroepen-kop">
     <div class="container-prose">
       <div class="max-w-2xl" data-reveal>
@@ -502,7 +585,7 @@ const plannen = [
     </div>
   </section>
 
-  {/* 5. Overstappen, inrichting en begeleiding */}
+  {/* 6. Overstappen, inrichting en begeleiding */}
   <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="overstap-kop">
     <div class="container-prose grid gap-10 lg:grid-cols-12 lg:gap-14">
       <div class="lg:col-span-5" data-reveal>
@@ -537,7 +620,7 @@ const plannen = [
     </div>
   </section>
 
-  {/* 6. Gegevens en beveiliging */}
+  {/* 7. Gegevens en beveiliging */}
   <section class="relative overflow-hidden bg-curanta-900 py-16 text-white sm:py-20" aria-labelledby="beveiliging-kop">
     <DotPattern class="text-white/[0.09]" masker="linksboven" />
     <div class="pointer-events-none absolute -left-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-accent-500/15 blur-3xl" aria-hidden="true"></div>
@@ -584,7 +667,7 @@ const plannen = [
     </div>
   </section>
 
-  {/* 7. Prijzen */}
+  {/* 8. Prijzen */}
   <section class="py-16 sm:py-20" aria-labelledby="prijzen-kop">
     <div class="container-prose">
       <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
@@ -635,7 +718,7 @@ const plannen = [
     </div>
   </section>
 
-  {/* 8. Kennismaken of partner worden */}
+  {/* 9. Kennismaken of partner worden */}
   <section class="bg-curanta-50 py-16 sm:py-20" aria-labelledby="afsluiting-kop">
     <div class="container-prose">
       <h2 id="afsluiting-kop" class="sr-only">Kennismaken met Curanta</h2>
