@@ -24,12 +24,12 @@ export const STATUS: Record<Status, { label: string; dot: string; uitleg: string
     label: 'Gebouwd, in te richten per klant',
     dot: 'bg-sky-600',
     uitleg:
-      'Gebouwd, maar pas bruikbaar na inrichting of een test bij uw organisatie: een certificaat, contract of toegang bij een externe partij, een eindtest met echte gegevens, of een eigen besluit zoals een DPIA.',
+      'Gebouwd, maar pas bruikbaar na inrichting of een test bij uw organisatie. Denk aan een certificaat, contract of toegang bij een externe partij, een eindtest met echte gegevens, of een eigen besluit zoals een DPIA.',
   },
   ontwikkeling: {
     label: 'In ontwikkeling',
     dot: 'bg-amber-500',
-    uitleg: 'Er wordt aan gebouwd; nog niet te gebruiken.',
+    uitleg: 'Wij bouwen eraan; u kunt het nog niet gebruiken.',
   },
   gepland: {
     label: 'Gepland',

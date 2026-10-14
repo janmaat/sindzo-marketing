@@ -67,7 +67,7 @@ const websiteLd = {
 };
 
 // Eén bezoek in de wijk. Per stap: wie, wat die persoon doet, wat Curanta daarbij doet.
-// Roostertoets: harde regels blokkeren het publiceren, alleen met een gekozen cao
+// Roostertoets: harde regels blokkeren het publiceren; zonder gekozen cao alleen de wettelijke grenzen (feitenblad, 12-10-2026)
 // (ShiftService.cs, Planbord.razor). Retourberichten: inlezen door de XML te plakken, daarna
 // gegroepeerd per oorzaak in de retourtriage (RetourInlezenDialog, RetourTriage.razor).
 const werkdag = [
@@ -156,7 +156,7 @@ const voorbeelden: Voorbeeld[] = [
     statussen: [
       { status: 'demo', tekst: 'Planbord, roostertoets en medewerkerportaal' },
     ],
-    beperking: 'De roostertoets kijkt nog niet naar de weekrust, naar gemiddelden over 4 of 16 weken en naar de rust na nachtdiensten. Zonder gekozen cao toetst hij niet.',
+    beperking: 'De roostertoets kijkt nog niet naar de weekrust, naar gemiddelden over 4 of 16 weken en naar de rust na nachtdiensten. Zonder gekozen cao toetst hij alleen de wettelijke grenzen.',
     link: { label: 'Alle onderdelen van de planning', href: '/oplossing#planning' },
     beelden: [
       {

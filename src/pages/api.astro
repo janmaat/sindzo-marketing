@@ -31,7 +31,7 @@ const dot = (s: string) =>
   <PageHero
     eyebrow="API en koppelen"
     title="De FHIR-API voor de BgZ: wat er is en wat niet"
-    subtitle="Voor I&A en ketenpartners. Curanta heeft een publieke, read-only FHIR R4-API die de Basisgegevensset Zorg (BgZ) van een cliënt als één document levert. Een systeem van een ketenpartner kan hem gebruiken nadat wij het hebben geregistreerd."
+    subtitle="Voor I&A en ketenpartners. Curanta heeft een publieke FHIR R4-API die alleen leestoegang geeft. Hij levert de Basisgegevensset Zorg (BgZ) van een cliënt als één document. Een systeem van een ketenpartner kan hem gebruiken nadat wij het hebben geregistreerd."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href="mailto:info@curanta.nl?subject=Registratie%20FHIR-API" class="btn-primary no-underline">Vraag registratie aan</a>
@@ -44,7 +44,7 @@ const dot = (s: string) =>
       <div class="rounded-xl bg-white p-5 ring-1 ring-ink-200">
         <h2 class="font-display text-lg font-bold text-curanta-900">Wat er is</h2>
         <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm text-ink-700">
-          <li>Eén documentoperatie: de BgZ van een cliënt als FHIR R4-bundel, gevalideerd tegen de profielen van Nictiz (nl-core) zonder fouten of waarschuwingen.</li>
+          <li>Eén documentoperatie: de BgZ van een cliënt als FHIR R4-bundel. De bundel valideert zonder fouten of waarschuwingen tegen de profielen van Nictiz (nl-core).</li>
           <li>Een CapabilityStatement en SMART-discovery onder <code>/fhir/r4</code>.</li>
           <li>Toegang met <code>client_credentials</code> en <code>private_key_jwt</code>; een token is vijf minuten geldig en hoort bij één organisatie.</li>
           <li>Alleen voor systemen en cliënten die vooraf zijn geregistreerd.</li>
@@ -67,7 +67,7 @@ const dot = (s: string) =>
   <section class="container-prose py-14 border-b border-ink-100">
     <h2 class="font-display text-2xl font-bold text-ink-900">Wat er in de BgZ-bundel zit</h2>
     <p class="mt-2 text-sm text-ink-700 max-w-2xl">
-      Deze FHIR-resources stelt Curanta uit het dossier samen voor de BgZ-bundel, gemapt op de Nederlandse zorginformatiebouwstenen (zibs). Van de 28 onderdelen van de BgZ vult Curanta er 6 volledig en 11 deels. Via de API zijn ze alleen als onderdeel van die bundel op te vragen, niet los.
+      Deze FHIR-resources stelt Curanta uit het dossier samen voor de BgZ-bundel, gemapt op de Nederlandse zorginformatiebouwstenen (zibs). Van de 28 onderdelen van de BgZ vult Curanta er 6 volledig en 11 deels. Via de API vraagt u ze alleen op als onderdeel van die bundel, niet los.
     </p>
     <ul class="mt-6 grid gap-3 sm:grid-cols-2">
       {resources.map((r) => (

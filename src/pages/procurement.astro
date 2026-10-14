@@ -30,7 +30,7 @@ const resources: Resource[] = [
   {
     category: 'Programma van eisen en selectie',
     title: 'Programma van eisen (PVE)',
-    body: 'Een Word-document met categorieën eisen die u kunt aanvinken en aanpassen. Bedoeld voor een zorgvuldige selectie, niet als invulspreadsheet.',
+    body: 'Een Word-document met categorieën eisen die u kunt aanvinken en aanpassen. Bedoeld om zorgvuldig te kiezen, niet als spreadsheet om in te vullen.',
     file: onRequest('Programma van eisen'),
     format: 'Op aanvraag',
   },
@@ -51,7 +51,7 @@ const resources: Resource[] = [
   {
     category: 'Privacy en beveiliging',
     title: 'Opzet voor uw eigen DPIA',
-    body: 'Voor de DPIA die u zelf maakt bij de aanschaf van Curanta, met een voorbeeld van een risicoanalyse en de maatregelen.',
+    body: 'Voor de DPIA die u zelf maakt als u Curanta aanschaft. Met een voorbeeld van een risicoanalyse en de maatregelen.',
     file: onRequest('Opzet DPIA'),
     format: 'Op aanvraag',
   },
@@ -79,14 +79,14 @@ const resources: Resource[] = [
   {
     category: 'Architectuur en SLA',
     title: 'SLA-overzicht',
-    body: 'Beschikbaarheid, RPO/RTO en bereikbaarheid; voor Enterprise afspraken op maat, in overleg.',
+    body: 'Beschikbaarheid, herstel na een storing (RPO en RTO) en bereikbaarheid. Voor Enterprise maken wij in overleg eigen afspraken.',
     file: onRequest('SLA-overzicht'),
     format: 'Op aanvraag',
   },
   {
     category: 'Architectuur en SLA',
     title: 'Stand van de API',
-    body: 'De publieke, read-only FHIR R4-API voor de BgZ: wat er is en wat niet. Een openbare pagina.',
+    body: 'De publieke FHIR R4-API voor de Basisgegevensset Zorg (BgZ), alleen om te lezen: wat er is en wat niet. Een openbare pagina.',
     file: '/api',
     format: 'Webpagina',
   },
@@ -100,12 +100,12 @@ const resources: Resource[] = [
   {
     category: 'Implementatie',
     title: 'Migratie per bronsysteem',
-    body: 'Per bronsysteem wat wij overzetten, wat handwerk is en wat het kost. Migratie vanuit Nedap Ons, Gerimedica Ysis, SDB en Pluriform Zorg (Adapcare) als project tegen een vaste prijs vooraf; kant-en-klare imports zijn er nog niet.',
+    body: 'Per bronsysteem wat wij overzetten, wat handwerk is en wat het kost. Migratie vanuit Nedap Ons, Gerimedica Ysis, SDB en Pluriform Zorg (Adapcare) is een project tegen een vaste prijs vooraf. Kant-en-klare imports zijn er nog niet.',
     file: onRequest('Migratie per bronsysteem'),
     format: 'Op aanvraag',
   },
   {
-    category: 'Business case',
+    category: 'Kosten en opbrengst',
     title: 'Rekenhulp kosten en opbrengst',
     body: 'Een spreadsheet om uw eigen totale kosten en opbrengst in te vullen, per plan.',
     file: onRequest('Rekenhulp kosten en opbrengst'),
@@ -122,7 +122,7 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
   <PageHero
     eyebrow="Inkoopdossier"
     title="Alles wat uw inkoop, FG en I&A willen lezen."
-    subtitle="In de zorg heeft een aankoop minstens vier interne lezers: bestuur, inkoop, FG en I&A. Hieronder vraagt u elk document aan met één mail, zonder NDA en zonder verkoopgesprek."
+    subtitle="In de zorg heeft een aankoop minstens vier interne lezers: bestuur, inkoop, FG en I&A. Hieronder vraagt u elk document aan met één mail, zonder geheimhoudingsverklaring (NDA) en zonder verkoopgesprek."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href={DEMO_ZELF.href} class="btn-primary no-underline">{DEMO_ZELF.label}</a>
@@ -135,9 +135,9 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
       <p class="text-sm text-amber-900">
         <strong>Documenten op aanvraag.</strong>
         Deze documenten liggen nog niet kant-en-klaar: wij stellen ze op aanvraag op, afgestemd
-        op uw sector, omvang en vragen. Wij reageren binnen 1 werkdag. Laat voor uw definitieve PVE
-        of verwerkersovereenkomst uw eigen jurist of FG meekijken; onze documenten zijn geen
-        juridisch advies.
+        op uw sector, omvang en vragen. Wij reageren binnen 1 werkdag. Laat uw eigen jurist of FG
+        meekijken bij uw definitieve programma van eisen (PVE) of verwerkersovereenkomst. Onze
+        documenten zijn geen juridisch advies.
       </p>
     </div>
   </section>
@@ -160,10 +160,11 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
       </div>
 
       <p class="mt-4 max-w-3xl text-ink-700 leading-relaxed">
-        Wij zijn <strong>niet</strong> NEN 7510-gecertificeerd. De maatregelen zijn ingevoerd en een
-        eerste keer beoordeeld, en de externe audit staat gepland voor
-        <strong>Q4 2026</strong>. Zolang die niet is afgerond, hebben wij een werkdocument en
-        geen certificaat, en dat is een wezenlijk verschil dat wij niet willen wegpoetsen.
+        Wij zijn <strong>niet</strong> NEN 7510-gecertificeerd. NEN 7510 is de norm voor
+        informatiebeveiliging in de zorg. De maatregelen zijn ingevoerd en een eerste keer beoordeeld,
+        en de externe audit staat gepland voor <strong>Q4 2026</strong>. Zolang die niet is afgerond,
+        hebben wij een werkdocument en geen certificaat. Dat is een wezenlijk verschil, en dat willen
+        wij niet wegpoetsen.
       </p>
 
       <div class="mt-8 grid gap-8 md:grid-cols-2">
@@ -184,9 +185,8 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
             met een traject dat op die eis afketst. Wij melden ons na de audit opnieuw.
           </p>
           <p class="mt-3 text-sm text-ink-700 leading-relaxed">
-            Weegt uw organisatie aantoonbare maatregelen zwaarder dan een certificaat op dit
-            moment, dan is het materiaal hieronder precies bedoeld om die weging te kunnen
-            maken.
+            Weegt uw organisatie op dit moment aantoonbare maatregelen zwaarder dan een
+            certificaat? Dan is het materiaal hieronder precies voor die afweging bedoeld.
           </p>
         </div>
       </div>

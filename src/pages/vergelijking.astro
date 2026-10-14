@@ -54,7 +54,7 @@ const rijen: Rij[] = [
   },
   {
     onderwerp: 'FHIR-API',
-    curanta: { status: 'inrichten', tekst: 'Read-only FHIR R4-API voor de BgZ, na registratie.' },
+    curanta: { status: 'inrichten', tekst: 'FHIR R4-API voor de Basisgegevensset Zorg (BgZ), alleen om te lezen, na registratie.' },
     nedap: { oordeel: 'ja', tekst: 'Ons API met FHIR-endpoints; zibs 2017 op FHIR STU3.', bron: 'https://support.nedap-ons.nl/support/solutions/articles/103000374164-getting-started-with-zibs-and-fhir' },
     caress: { oordeel: 'deels', tekst: 'De koppeling met ZorgDomein gebruikt FHIR (2019); geen publieke API-documentatie gevonden.', bron: 'https://www.icthealth.nl/nieuws/koppeling-zorgdomein-mijncaress-beperkt-administratielast' },
     pluriform: { oordeel: 'deels', tekst: '"FHIR Zibs" genoemd, zonder versie.', bron: 'https://www.adapcare.nl/integraties/' },
@@ -153,10 +153,10 @@ const domein = (url: string) => new URL(url).hostname.replace(/^www\./, '');
       <div>
         <h2 class="font-display text-xl font-bold text-curanta-900">Hoe deze vergelijking is gemaakt</h2>
         <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-ink-700">
-          <li>Gecontroleerd op {GECONTROLEERD}, in publieke bronnen: de websites en supportpagina's van de leveranciers, het kwalificatieoverzicht van Nictiz en vakpers.</li>
-          <li>Wij hebben de producten van de andere leveranciers niet zelf gebruikt of gedemonstreerd gekregen.</li>
+          <li>Gecontroleerd op {GECONTROLEERD}, in publieke bronnen: de websites en hulppagina's van de leveranciers, het kwalificatieoverzicht van Nictiz en vakpers.</li>
+          <li>Wij hebben de producten van de andere leveranciers niet zelf gebruikt, en ook geen demonstratie ervan gezien.</li>
           <li>De gegevens over Curanta komen uit de software zelf en ons feitenblad.</li>
-          <li>Pluriform Zorg wordt geleverd door Adapcare; de certificaten in de tabel horen bij Adapcare.</li>
+          <li>Adapcare levert Pluriform Zorg; de certificaten in de tabel horen bij Adapcare.</li>
         </ul>
       </div>
       <div class="rounded-xl bg-white p-5 ring-1 ring-ink-200">
@@ -236,6 +236,6 @@ const domein = (url: string) => new URL(url).hostname.replace(/^www\./, '');
 
   <Cta
     title="Deze vergelijking naast de demo leggen?"
-    subtitle="Kijk zelf rond met een eigen demo-toegang, of vraag een demonstratie aan waarin wij de punten uit deze vergelijking in het systeem laten zien."
+    subtitle="Kijk zelf rond met een eigen demo-toegang. Of vraag een demonstratie aan; daarin laten wij de punten uit deze vergelijking in het systeem zien."
   />
 </Base>
