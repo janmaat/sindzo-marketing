@@ -78,11 +78,15 @@ const {
         {alleenSamenwerking ? 'Wat er voor de samenwerking is' : 'Wat u ermee doet'}
       </h2>
     </div>
-    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {triggers.map((t) => (
-        <div class="rounded-xl border border-ink-100 bg-white p-6">
+    {/* Twee kolommen met een lijn erboven, geen kaarten (Taste Skill, 14-10-2026). De sectoren
+        hebben 3, 4 of 5 punten: in een raster van drie kaarten gaf dat lege vakken (4 en 5) of
+        het sjabloonrijtje van drie gelijke kaarten (3). Zonder kaartranden valt een oneven
+        laatste punt niet op als gat. */}
+    <div class="mt-10 grid max-w-5xl gap-x-14 gap-y-10 md:grid-cols-2">
+      {triggers.map((t, i) => (
+        <div class="border-t-2 border-curanta-200 pt-5" data-reveal style={`--reveal-vertraging:${(i % 2) * 90}ms`}>
           <h3 class="font-display text-lg font-semibold text-ink-900">{t.title}</h3>
-          <p class="mt-2 text-sm text-ink-700 leading-relaxed">{t.body}</p>
+          <p class="mt-2 text-pretty text-[0.95rem] leading-relaxed text-ink-700">{t.body}</p>
         </div>
       ))}
     </div>

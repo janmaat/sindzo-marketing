@@ -10,8 +10,8 @@ import Cta from '../components/Cta.astro';
 // "Wegiz-gekwalificeerd" of "sandbox". Beloof hier niets wat daar niet staat.
 
 const resources = [
-  { name: 'Patient', desc: 'Cliëntdemografie en contactgegevens — Zib-profiel.', status: 'live' },
-  { name: 'Encounter', desc: 'Zorgmoment/contact — episode of care-context.', status: 'live' },
+  { name: 'Patient', desc: 'Cliëntdemografie en contactgegevens: Zib-profiel.', status: 'live' },
+  { name: 'Encounter', desc: 'Zorgmoment/contact: episode of care-context.', status: 'live' },
   { name: 'Observation', desc: 'Vitale functies.', status: 'live' },
   { name: 'MedicationStatement / MedicationRequest', desc: 'Medicatie-overzicht en voorschriften.', status: 'live' },
   { name: 'Condition', desc: 'Probleem-/diagnoseregistratie.', status: 'live' },
@@ -87,7 +87,7 @@ const dot = (s: string) =>
     <p class="mt-2 text-sm text-ink-700 max-w-3xl leading-relaxed">
       FHIR is bij ons het uitwisselingsformaat aan de grens met de keten; intern blijft de opslag
       relationeel (zie <a href="/adr" class="text-curanta-700 hover:underline">ADR-002</a>). Een volledige
-      export van uw gegevens en bestanden krijgt u los daarvan in JSON, zonder exit-fee — zie <a href="/overstappen#eruit" class="text-curanta-700 hover:underline">Overstappen en exit</a>.
+      export van uw gegevens en bestanden krijgt u los daarvan in JSON, zonder exit-fee (zie <a href="/overstappen#eruit" class="text-curanta-700 hover:underline">Overstappen en exit</a>).
     </p>
   </section>
 

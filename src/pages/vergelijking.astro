@@ -49,7 +49,7 @@ const rijen: Rij[] = [
     onderwerp: 'Steun tussen collega\'s (buddy, intervisie)',
     curanta: { status: 'demo', tekst: 'Collega-netwerk, gescheiden van HR. Lotgenoten na uw DPIA.' },
     nedap: { oordeel: 'deels', tekst: 'Medewerkerportaal met collega\'s en berichten; een buddy- of intervisiefunctie niet gevonden.', bron: 'https://nedap-ons.nl/ons-suite/meer/medewerkerportaal/' },
-    caress: { oordeel: 'niet-gevonden', tekst: '—' },
+    caress: { oordeel: 'niet-gevonden', tekst: '' },
     pluriform: { oordeel: 'deels', tekst: 'Casusoverleg over cliënten in een groep; geen steun voor medewerkers.', bron: 'https://www.adapcare.nl/cacao-samenwerkingsplatform/' },
   },
   {
@@ -70,21 +70,21 @@ const rijen: Rij[] = [
     onderwerp: 'Waar de gegevens staan',
     curanta: { status: null, tekst: 'IONOS Cloud, Berlijn (EU).' },
     nedap: { oordeel: 'ja', tekst: 'Datacenters in Nederland; bestanden bij AWS in Frankfurt en Ierland (EU).', bron: 'https://support.nedap-ons.nl/support/solutions/articles/103000336008-leveranciers-en-subverwerkers' },
-    caress: { oordeel: 'niet-gevonden', tekst: '—' },
+    caress: { oordeel: 'niet-gevonden', tekst: '' },
     pluriform: { oordeel: 'niet-gevonden', tekst: 'AWS als partner genoemd; regio niet vermeld.', bron: 'https://www.adapcare.nl/over-ons/' },
   },
   {
     onderwerp: 'SMART-doelen en risicosignalering in het zorgplan',
     curanta: { status: 'demo', tekst: 'SMART-doelen; risico op val, decubitus, ondervoeding en delier uit metingen.' },
     nedap: { oordeel: 'deels', tekst: 'Zorgplan volgens SMART en automatisch berekende scores van meetinstrumenten; risicosignalering niet gevonden.', bron: 'https://nedap-ons.nl/kennisbank/wat-is-een-zorgplan-en-waarvoor-is-het-bedoeld/' },
-    caress: { oordeel: 'niet-gevonden', tekst: '—' },
+    caress: { oordeel: 'niet-gevonden', tekst: '' },
     pluriform: { oordeel: 'niet-gevonden', tekst: 'Zorgplan volgens Omaha (2016); SMART en risicosignalering niet gevonden.', bron: 'https://www.pluriform.nl/nieuwsbericht/683/pluriform-zorg-gecertificeerd-voor-omaha' },
   },
   {
     onderwerp: 'Prijs op de website',
     curanta: { status: null, tekst: 'Per actieve medewerker per maand, €19 tot €39 per plan.' },
     nedap: { oordeel: 'ja', tekst: 'Per cliënt in zorg per maand, met een minimum van €25.', bron: 'https://nedap-ons.nl/starten-met-nedap-ons/hoe-start-je-met-nedap-ons/tarieven/' },
-    caress: { oordeel: 'niet-gevonden', tekst: '—' },
+    caress: { oordeel: 'niet-gevonden', tekst: '' },
     pluriform: { oordeel: 'deels', tekst: '"Een prijs per gebruiker"; bedrag niet vermeld.', bron: 'https://www.adapcare.nl/pluriform-zorg/' },
   },
   {
@@ -192,7 +192,8 @@ const domein = (url: string) => new URL(url).hostname.replace(/^www\./, '');
                   <dt class="text-xs font-bold uppercase tracking-[0.12em] text-ink-500">{l.naam} <span class="font-semibold normal-case tracking-normal">({l.van})</span></dt>
                   <dd class="mt-2 text-sm text-ink-700">
                     <span class={`inline-block rounded px-1.5 py-0.5 text-xs font-semibold ${OORDEEL[c.oordeel].klasse}`}>{OORDEEL[c.oordeel].label}</span>
-                    <span class="mt-1.5 block">{c.tekst}</span>
+                    {/* Zonder toelichting staat alleen het oordeel er; vroeger stond er dan een "—". */}
+                    {c.tekst && <span class="mt-1.5 block">{c.tekst}</span>}
                     {c.bron && (
                       <a href={c.bron} rel="noopener" class="mt-1.5 inline-block break-all text-xs font-semibold text-curanta-700">Bron: {domein(c.bron)}</a>
                     )}

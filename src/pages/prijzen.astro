@@ -50,7 +50,7 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
           'Klachten (Wkkgz) en incidentmeldingen (VIM)',
           'Meertalig cliëntportaal (5 talen)',
           'Collega-netwerk en lotgenoten (lotgenoten na uw DPIA)',
-          'Telefonische ondersteuning 09:00–17:00',
+          'Telefonische ondersteuning 09:00-17:00',
         ]}
         cta={DEMO_GESPREK}
       />
@@ -167,12 +167,12 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
           <tbody class="divide-y divide-ink-100 text-ink-700">
             <tr>
               <td class="px-4 py-3">Abonnement per gebruiker per maand</td>
-              <td class="px-4 py-3">€50 – €90</td>
-              <td class="px-4 py-3 font-semibold text-curanta-900">€19 – €39 per actieve medewerker</td>
+              <td class="px-4 py-3">€50 tot €90</td>
+              <td class="px-4 py-3 font-semibold text-curanta-900">€19 tot €39 per actieve medewerker</td>
             </tr>
             <tr>
               <td class="px-4 py-3">Eenmalige implementatie en training</td>
-              <td class="px-4 py-3">implementatie €4.000 – €15.000, training €1.000 – €5.000</td>
+              <td class="px-4 py-3">implementatie €4.000 tot €15.000, training €1.000 tot €5.000</td>
               <td class="px-4 py-3 font-semibold text-curanta-900">inbegrepen in elk plan</td>
             </tr>
             <tr>
@@ -184,7 +184,7 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
             </tr>
             <tr>
               <td class="px-4 py-3">Koppelingen (bijv. ZorgMail, Vecozo)</td>
-              <td class="px-4 py-3">€50 – €200 per maand</td>
+              <td class="px-4 py-3">€50 tot €200 per maand</td>
               <td class="px-4 py-3 font-semibold text-curanta-900">
                 gebouwde koppelingen zitten in het abonnement; wat de externe partij rekent
                 (bijv. Vecozo-certificaat, ZorgMail-abonnement) betaalt u zelf aan die partij
@@ -330,19 +330,21 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 
   <section class="container-prose py-16 border-t border-ink-100">
     <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Wat wij niet apart in rekening brengen</h2>
-    <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {/* Twee kolommen met een lijn erboven, geen kaarten: zeven punten in een raster van drie
+        kaarten lieten een leeg vak achter (Taste Skill, 14-10-2026). */}
+    <ul class="mt-8 grid max-w-5xl gap-x-14 gap-y-8 md:grid-cols-2">
       {[
-        ['Hosting', 'IONOS Cloud in Berlijn (EU) — geen extra kosten.'],
+        ['Hosting', 'IONOS Cloud in Berlijn (EU). Geen extra kosten.'],
         ['Implementatie', 'Het implementatietraject is in alle plannen inbegrepen.'],
-        ['Gebouwde koppelingen', 'Zitten in het abonnement. Wat de externe partij zelf rekent — bijvoorbeeld een Vecozo-certificaat of een ZorgMail-abonnement — betaalt u rechtstreeks aan die partij.'],
+        ['Gebouwde koppelingen', 'Zitten in het abonnement. Wat de externe partij zelf rekent (bijvoorbeeld een Vecozo-certificaat of een ZorgMail-abonnement) betaalt u rechtstreeks aan die partij.'],
         ['Training', 'Training voor uw medewerkers bij de start.'],
         ['Nieuwe versies', 'U krijgt nieuwe versies zonder meerprijs.'],
         ['Basisondersteuning', 'Per e-mail, met een reactie binnen 1 werkdag.'],
         ['Documenten voor inkoop', 'Verwerkersovereenkomst en beveiligingsdossier stellen wij op aanvraag op, zonder geheimhoudingsverklaring (NDA).'],
       ].map(([title, body]) => (
-        <li class="rounded-lg border border-ink-100 bg-white p-5">
-          <h3 class="font-semibold text-ink-900">{title}</h3>
-          <p class="mt-1 text-sm text-ink-700">{body}</p>
+        <li class="border-t-2 border-curanta-200 pt-4">
+          <h3 class="font-display font-semibold text-ink-900">{title}</h3>
+          <p class="mt-1 text-pretty text-sm leading-relaxed text-ink-700">{body}</p>
         </li>
       ))}
     </ul>
@@ -353,11 +355,11 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
     <dl class="mt-8 space-y-6 max-w-3xl">
       <div>
         <dt class="font-semibold text-ink-900">Wat telt als "actieve medewerker"?</dt>
-        <dd class="mt-1 text-sm text-ink-700">Een gebruiker die in de afgelopen 30 dagen heeft ingelogd. Slapende accounts tellen niet mee — u betaalt niet voor mensen die niet werken.</dd>
+        <dd class="mt-1 text-sm text-ink-700">Een gebruiker die in de afgelopen 30 dagen heeft ingelogd. Slapende accounts tellen niet mee: u betaalt niet voor mensen die niet werken.</dd>
       </div>
       <div>
         <dt class="font-semibold text-ink-900">Wat kost een zorgmedewerker die alleen het medewerkerportaal gebruikt?</dt>
-        <dd class="mt-1 text-sm text-ink-700">€19 per maand, in elk plan. Dat geldt voor wie alleen het medewerkerportaal nodig heeft. Wie ook in de backoffice werkt, betaalt het bedrag van het plan — bijvoorbeeld een wijkverpleegkundige die indicaties stelt.</dd>
+        <dd class="mt-1 text-sm text-ink-700">€19 per maand, in elk plan. Dat geldt voor wie alleen het medewerkerportaal nodig heeft. Wie ook in de backoffice werkt, betaalt het bedrag van het plan (bijvoorbeeld een wijkverpleegkundige die indicaties stelt).</dd>
       </div>
       <div>
         <dt class="font-semibold text-ink-900">Hoe zit het met cliënten en mantelzorgers?</dt>
@@ -373,7 +375,7 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
       </div>
       <div>
         <dt class="font-semibold text-ink-900">Zitten koppelingen in de prijs?</dt>
-        <dd class="mt-1 text-sm text-ink-700">De koppelingen die gebouwd zijn — zie <a href="/integraties" class="text-curanta-700 hover:underline">de stand per koppeling</a> — zitten in het abonnement; daar rekenen wij niets extra voor. Wat de externe partij zelf rekent, bijvoorbeeld een Vecozo-certificaat of een ZorgMail-abonnement, betaalt u rechtstreeks aan die partij.</dd>
+        <dd class="mt-1 text-sm text-ink-700">De koppelingen die gebouwd zijn (zie <a href="/integraties" class="text-curanta-700 hover:underline">de stand per koppeling</a>) zitten in het abonnement; daar rekenen wij niets extra voor. Wat de externe partij zelf rekent, bijvoorbeeld een Vecozo-certificaat of een ZorgMail-abonnement, betaalt u rechtstreeks aan die partij.</dd>
       </div>
       <div>
         <dt class="font-semibold text-ink-900">Is migratie van mijn huidige ECD inbegrepen?</dt>
