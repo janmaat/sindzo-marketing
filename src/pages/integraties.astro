@@ -48,8 +48,11 @@ const integrations: Integration[] = [
     body: 'Toewijzingen, berichten bij start en stop en de maanddeclaratie (Wmo323, Jw323) stelt Curanta nu al op, uit goedgekeurde productie. Het bericht volgens de iStandaard en het aanleveren via VECOZO ronden wij af vóór uw eerste declaratiemaand. Retourberichten leest u zelf in.' },
   { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'ontwikkeling',
     body: 'De iWlz-berichten en de maanddeclaratie stelt Curanta nu al op, uit goedgekeurde productie. Het bericht volgens de iStandaard en het aanleveren via VECOZO ronden wij af vóór uw eerste declaratiemaand. Retourberichten leest u zelf in.' },
-  { name: 'CAK', category: 'Financieel', status: 'ontwikkeling',
-    body: 'De aanlevering voor de eigen bijdrage (Wlz en Wmo) stelt Curanta per maand op en controleert hem. Het aanleveren bij het CAK ronden wij af vóór uw eerste declaratiemaand. Retourberichten leest u zelf in.' },
+  // 14-10-2026: een zorgaanbieder levert niets rechtstreeks aan het CAK. Bij de Wlz geeft het zorgkantoor de start
+  // en wijziging van de zorg door (iWlz AW35/AW39 van de aanbieder, CA317/CA319 naar het CAK), bij de Wmo de gemeente
+  // (iEb). Bron: istandaarden.nl, iWlz 2.4.3 en iEb 4.0.
+  { name: 'Eigen bijdrage (CAK)', category: 'Financieel', status: 'ontwikkeling',
+    body: 'Het CAK stelt de eigen bijdrage van de cliënt vast uit wat het zorgkantoor en de gemeente doorgeven; u levert zelf niets aan het CAK. Curanta meldt de start en wijzigingen van de Wlz-zorg aan het zorgkantoor. Dat ronden wij af vóór uw eerste declaratiemaand.' },
   { name: 'Controle op verzekering (COV)', category: 'Financieel', status: 'inrichten',
     body: 'Curanta legt per cliënt vast bij welke verzekeraar hij verzekerd is, en waar dat vandaan komt. U neemt het over van de zorgpas of uit de COV-controle in het VECOZO-portaal. De automatische vraag aan VECOZO ronden wij af bij uw aansluiting.' },
   { name: 'AGB-register (Vektis)', category: 'Financieel', status: 'inrichten',
