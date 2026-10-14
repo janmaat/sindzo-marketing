@@ -122,13 +122,13 @@ const voorbeelden: Voorbeeld[] = [
     curanta: [
       'Zet de taken uit het zorgplan bij het bezoek, zodat de medewerker ziet wat er vandaag moet gebeuren.',
       'Signaleert een risico uit metingen, zoals gewichtsverlies, met vaste rekenregels. De verpleegkundige beslist of het in het zorgplan komt.',
-      'Deelt een document met de cliënt en de mantelzorgers die leesrecht hebben; zij vinden het in het cliëntportaal onder Mijn documenten.',
+      'Deelt een document met de cliënt en de mantelzorgers die leesrecht hebben. Zij vinden het in het cliëntportaal onder Mijn documenten.',
       'Houdt bij wie het dossier heeft ingezien of gewijzigd.',
     ],
     statussen: [
       { status: 'demo', tekst: 'Dossier, zorgplan, rapportage en cliëntportaal' },
     ],
-    ai: 'Twee plekken gebruiken op verzoek een taalmodel: de rapportage in de backoffice (een voorstel voor de evaluatie en het plan) en de samenvatting van het zorgplan in gewone taal voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en is het voor de cliënt begrijpelijk? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. Het taalmodel werkt alleen als uw organisatie de AI-functies aanzet; de gegevens gaan dan gepseudonimiseerd naar Anthropic in de VS.',
+    ai: 'Twee plekken gebruiken op verzoek een taalmodel: de rapportage in de backoffice (een voorstel voor de evaluatie en het plan) en de samenvatting van het zorgplan in gewone taal voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en begrijpt de cliënt het? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. Het taalmodel werkt alleen als uw organisatie de AI-functies aanzet. De gegevens gaan dan gepseudonimiseerd naar Anthropic in de VS.',
     link: { label: 'Alle onderdelen van het dossier', href: '/oplossing#ecd' },
     beelden: [
       {
@@ -151,7 +151,7 @@ const voorbeelden: Voorbeeld[] = [
     wie: 'De planner of coördinator, en de zorgmedewerker.',
     doet: 'De planner maakt het rooster en publiceert het. De zorgmedewerker bekijkt haar diensten op de telefoon, bekijkt de open diensten, vraagt verlof aan of ruilt een dienst.',
     curanta: [
-      'Toetst het rooster bij publiceren op rust, de maximale duur van diensten en werkweken, en pauzes, met het artikel uit de Arbeidstijdenwet of de cao erbij.',
+      'Toetst het rooster bij publiceren: is er genoeg rust, zijn diensten en werkweken niet te lang, zijn er pauzes? Bij elke melding staat het artikel uit de Arbeidstijdenwet of de cao.',
       'Laat open diensten zien in het medewerkerportaal. Wie zich aanmeldt, krijgt de dienst direct, na een controle op overlap en op de cao. Een ruil keurt de planner goed.',
       'Werkt ook zonder bereik: het rooster van zeven dagen en de bezoeken van vandaag en morgen staan versleuteld op het toestel.',
     ],
@@ -181,9 +181,9 @@ const voorbeelden: Voorbeeld[] = [
     wie: 'De medewerker administratie of declaratie, en de kwaliteitsfunctionaris.',
     doet: 'Controleert de productie van de maand, stelt de declaratie op en verwerkt een retourbericht. Beoordeelt incidentmeldingen en klachten.',
     curanta: [
-      'Maakt productieregels uit afgeronde bezoeken en registraties, met de bron erbij.',
-      'Stelt uit goedgekeurde productie de declaraties op voor de Wmo, de Jeugdwet en de Wlz, en de aanlevering voor het CAK.',
-      'Volgt een incidentmelding of klacht van melding tot afhandeling, met de termijnen uit de Wkkgz.',
+      'Maakt van afgeronde bezoeken en registraties productieregels, met de bron erbij.',
+      'Zet goedgekeurde productie om in declaraties voor de Wmo, de Jeugdwet en de Wlz. Ook de aanlevering voor het CAK maakt Curanta klaar.',
+      'Volgt een incidentmelding of klacht van de melding tot de afhandeling, en houdt de termijnen uit de Wkkgz bij.',
     ],
     statussen: [
       { status: 'demo', tekst: 'Productieregistratie, declaraties opstellen, incidentmeldingen en klachten' },
@@ -223,7 +223,7 @@ const doelgroepen = [
     naam: 'Gehandicaptenzorg',
     kop: 'Wonen, dagbesteding en begeleiding',
     tekst: 'Het ondersteuningsplan met signaleringsplan, dagbesteding, verblijf en logeren onder de Wlz, de Wzd, en verwanten die het plan in het cliëntportaal lezen en akkoord geven.',
-    let: 'Het halfjaarlijkse Wzd-overzicht volgt het XML-schema van de IGJ; een echte aanlevering bij de IGJ is er nog niet.',
+    let: 'Het halfjaarlijkse Wzd-overzicht volgt het XML-schema van de IGJ. Echt aanleveren bij de IGJ kan nog niet.',
     href: '/voor/ghz',
     link: 'Curanta voor de gehandicaptenzorg',
     foto: fotoGhz,
@@ -232,7 +232,7 @@ const doelgroepen = [
   {
     naam: 'GGZ',
     kop: 'Praktijken en instellingen',
-    tekst: 'Trajecten volgens het zorgprestatiemodel, declareren volgens de standaard van Vektis, zorginhoud die alleen de behandelaars zien, en omzetplafonds per verzekeraar.',
+    tekst: 'Trajecten volgens het zorgprestatiemodel en declareren volgens de standaard van Vektis. De zorginhoud zien alleen de behandelaars, en per verzekeraar houdt u het omzetplafond in beeld.',
     let: 'Versturen naar verzekeraars vraagt een Vecozo-certificaat. Koppelingen met e-healthaanbieders zijn gepland.',
     href: '/voor/ggz',
     link: 'Curanta voor de GGZ',
@@ -242,7 +242,7 @@ const doelgroepen = [
 ];
 
 const fasen = [
-  { titel: 'Verkenning', tekst: 'Wij lopen drie werkstromen uit uw organisatie met u door en maken een migratie-inschatting: welke gegevens uit uw huidige systeem mee moeten, en hoe. Daarna weet u de prijs van de migratie.' },
+  { titel: 'Verkenning', tekst: 'Wij lopen drie werkstromen uit uw organisatie met u door. Daarna maken wij een migratie-inschatting: welke gegevens uit uw huidige systeem gaan mee, en hoe? Dan weet u ook wat de migratie kost.' },
   { titel: 'Inrichting', tekst: 'Teams, rollen en rechten, en de onderdelen die u gebruikt. Koppelingen sluiten wij aan zodra uw certificaten en contracten er zijn, bijvoorbeeld bij Vecozo of ZorgMail.' },
   { titel: 'Migratie en training', tekst: 'De migratie als project tegen de afgesproken prijs. Eerst trainen wij uw sleutelgebruikers, daarna de andere medewerkers.' },
   { titel: 'Ingebruikname', tekst: 'Eerst één team of locatie, daarna de rest in fasen. Op een melding reageren wij binnen 1 werkdag.' },
@@ -418,7 +418,7 @@ const plannen = [
                   ))}
                 </ul>
                 {v.beperking && (
-                  <p class="mt-3 text-sm leading-relaxed text-ink-700"><span class="font-semibold text-ink-900">Let op:</span> {v.beperking}</p>
+                  <p class="mt-3 text-sm leading-relaxed text-ink-700"><span class="font-semibold text-ink-900">Let op:</span> {v.beperking.charAt(0).toLowerCase() + v.beperking.slice(1)}</p>
                 )}
               </div>
               <a href={v.link.href} class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-curanta-700 no-underline hover:underline">
@@ -562,8 +562,8 @@ const plannen = [
             <ul class="mt-4 space-y-3 text-curanta-100">
               <li>De applicatie en de databases staan bij IONOS, een Europees bedrijf, in Berlijn. Zet u de AI-functies of digitaal ondertekenen aan, dan lopen die via Amerikaanse bedrijven (Anthropic, DocuSign), met modelcontractbepalingen.</li>
               <li>Het BSN is op veldniveau versleuteld (AES-256-GCM).</li>
-              <li>Tweestapsverificatie is verplicht voor zorg- en beheerrollen in de backoffice.</li>
-              <li>Elke inzage in een dossier komt in een logboek (NEN 7513). Een wijziging achteraf is aantoonbaar.</li>
+              <li>Wie in de backoffice een zorg- of beheerrol heeft, logt in met tweestapsverificatie. Dat is verplicht.</li>
+              <li>Elke inzage in een dossier komt in een logboek (NEN 7513). Wordt dat logboek achteraf gewijzigd, dan is dat aan te tonen.</li>
               <li>U kunt al uw gegevens en bestanden exporteren in JSON.</li>
             </ul>
           </div>
@@ -643,9 +643,9 @@ const plannen = [
           <h3 class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Curanta bekijken</h3>
           <p class="mt-4 leading-relaxed text-ink-700">
             Vraag een eigen toegang tot de demo aan en kijk rond in de backoffice, het
-            medewerkerportaal en het cliëntportaal. Of vraag een demonstratie aan: noem drie
-            werkstromen of casussen uit uw organisatie, zoals uw intake, uw overdracht of uw maandafsluiting,
-            dan laten wij zien hoe Curanta ze ondersteunt.
+            medewerkerportaal en het cliëntportaal. Of vraag een demonstratie aan: noem drie werkstromen
+            of casussen uit uw organisatie, zoals uw intake, uw overdracht of uw maandafsluiting. Dan laten
+            wij zien hoe Curanta ze ondersteunt.
           </p>
           <div class="mt-7 flex flex-wrap gap-3">
             <a href={DEMO_ZELF.href} class="btn-primary btn-lg no-underline">{DEMO_ZELF.label}</a>

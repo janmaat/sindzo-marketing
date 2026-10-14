@@ -11,33 +11,25 @@ import { DEMO_ZELF } from '../config/demo';
 // pagina is het antwoord daarop; het stond eerder als één regel in de FAQ op
 // /prijzen. Zie docs/marktonderzoek-conversie-curanta-2026-08-17.md.
 
-const bronsystemen = [
+// Stemgids (14-10-2026): elke kaart zei "migratieproject tegen een vaste prijs die vooraf vaststaat" en
+// "een kant-en-klare import is er nog niet". Dat staat nu één keer in de inleiding; per systeem staat alleen
+// wat verschilt. Geen bewering is weggevallen of sterker geworden.
+const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
   {
     naam: 'Nedap Ons',
-    toelichting:
-      'Cliënten, zorgplannen, rapportages en medewerkers brengen we over als migratieproject tegen een vaste prijs die vooraf vaststaat. Een kant-en-klare Nedap-import is er nog niet; de route stellen we per organisatie samen op.',
+    toelichting: 'Cliënten, zorgplannen, rapportages en medewerkers gaan mee. De route stellen we per organisatie samen op.',
   },
   {
     naam: 'Gerimedica Ysis',
-    toelichting:
-      'Migratieproject tegen een vaste prijs die vooraf vaststaat. Een kant-en-klare Ysis-import is er nog niet. De planning bepalen we samen. Wij zeggen liever "nog niet" dan dat we u een datum beloven die we niet halen.',
+    toelichting: 'De planning bepalen we samen. Wij zeggen liever "nog niet" dan dat we u een datum beloven die we niet halen.',
   },
-  {
-    naam: 'SDB',
-    toelichting:
-      'Migratieproject tegen een vaste prijs die vooraf vaststaat. Een kant-en-klare SDB-import is er nog niet. Geen open einde, geen nacalculatie.',
-  },
+  { naam: 'SDB' },
   {
     naam: 'mijnCaress (PinkRoccade)',
-    toelichting:
-      'Migratieproject tegen een vaste prijs die vooraf vaststaat, zoals bij de andere systemen. Een kant-en-klare import is er nog niet. Volgens M&I/Partners (ECD-inventarisatie 2025) trekt mijnCaress zich als ECD terug uit de markt.',
+    toelichting: 'Volgens M&I/Partners (ECD-inventarisatie 2025) trekt mijnCaress zich als ECD terug uit de markt.',
     bron: 'https://mxi.nl/kennis/730/ecd-inventarisatie-2025-gehandicaptenzorg-en-ouderenzorg',
   },
-  {
-    naam: 'Pluriform Zorg (Adapcare)',
-    toelichting:
-      'Migratieproject tegen een vaste prijs die vooraf vaststaat. Een kant-en-klare import is er nog niet. Geen open einde, geen nacalculatie.',
-  },
+  { naam: 'Pluriform Zorg (Adapcare)' },
 ];
 ---
 <Base
@@ -47,7 +39,7 @@ const bronsystemen = [
   <PageHero
     eyebrow="Overstappen"
     title="Vastzitten is geen argument om te blijven."
-    subtitle="De meest genoemde reden om niet van ECD te wisselen is niet dat het huidige systeem goed is. Het is dat de gegevens er niet uit komen, en dat alles opnieuw invoeren voor niemand te doen is. Daar hebben wij een antwoord op, vóór u klant wordt, en ook voor als u ooit weer weg wilt."
+    subtitle="De meest genoemde reden om bij een ECD te blijven, is niet dat het zo goed is. Het is dat de gegevens er niet uit komen. Alles opnieuw invoeren is voor niemand te doen. Daar hebben wij een antwoord op: vóór u klant wordt, en ook voor als u ooit weer weg wilt."
   >
     <div slot="actions" class="flex flex-wrap items-center gap-3">
       <a href="/contact" class="btn-primary no-underline">Vraag een migratie-inschatting</a>
@@ -59,21 +51,26 @@ const bronsystemen = [
     <div class="max-w-3xl">
       <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Waar u vandaan komt</h2>
       <p class="mt-4 text-ink-700 leading-relaxed">
-        Wij zetten de migratie per bronsysteem op in plaats van een algemene "stuur ons een Excel"-route.
-        Dat is meer werk voor ons en minder voor u. Hieronder staat hoe ver wij zijn: voor elk
-        systeem is het een migratieproject tegen een vaste prijs vooraf.
+        Wij zetten de migratie per bronsysteem op. U hoeft ons dus geen Excel-bestand te sturen. Dat is
+        meer werk voor ons en minder voor u. Voor elk systeem is het een migratieproject tegen een vaste
+        prijs die u vooraf weet: geen open einde, geen nacalculatie. Een kant-en-klare import is er voor
+        geen van deze systemen nog.
       </p>
     </div>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-2">
+    {/* Systeem links, wat er speelt rechts. Was een raster van vijf kaarten (een leeg vak, en twee kaarten
+        die alleen herhaalden wat voor alle systemen geldt). */}
+    <dl class="mt-10 max-w-4xl divide-y divide-ink-200 border-y border-ink-200">
       {bronsystemen.map((b) => (
-        <article class="rounded-2xl border border-ink-100 bg-white p-6">
-          <h3 class="font-display text-lg font-semibold text-ink-900">{b.naam}</h3>
-          <p class="mt-3 text-sm text-ink-700 leading-relaxed">{b.toelichting}</p>
-          {b.bron && <a href={b.bron} rel="noopener" class="mt-2 inline-block text-xs font-semibold text-curanta-700">Bron: M&amp;I/Partners</a>}
-        </article>
+        <div class="grid gap-1 py-5 sm:grid-cols-[15rem_1fr] sm:gap-8">
+          <dt class="font-display text-lg font-semibold text-ink-900">{b.naam}</dt>
+          <dd class="text-pretty leading-relaxed text-ink-700">
+            {b.toelichting ?? 'Zoals hierboven: een migratieproject tegen een vaste prijs.'}
+            {b.bron && <a href={b.bron} rel="noopener" class="ml-1 text-sm font-semibold text-curanta-700">Bron: M&amp;I/Partners</a>}
+          </dd>
+        </div>
       ))}
-    </div>
+    </dl>
 
     <p class="mt-6 text-sm text-ink-500 max-w-3xl">
       Staat uw systeem er niet bij? Vraag het gewoon. Wij zeggen het ook als een import niet
@@ -86,8 +83,8 @@ const bronsystemen = [
       <div class="max-w-3xl">
         <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Wat het kost en hoe lang het duurt</h2>
         <p class="mt-4 text-ink-700 leading-relaxed">
-          In elk ECD-selectieadvies komt dezelfde valkuil terug: organisaties onderschatten de
-          implementatie. Ze kijken naar de software en vergeten voorbereiding, training en
+          In elk ECD-selectieadvies komt dezelfde valkuil terug: organisaties onderschatten hoeveel werk
+          de invoering is. Ze kijken naar de software en vergeten de voorbereiding, de training en de
           begeleiding. Daarom staan die hier bij de prijs, niet ernaast.
         </p>
       </div>
@@ -97,16 +94,16 @@ const bronsystemen = [
         <div class="grid gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-8" data-reveal>
           <dt class="font-display text-lg font-semibold text-ink-900">Wat in elk plan zit</dt>
           <dd class="text-pretty leading-relaxed text-ink-700">
-            Het implementatietraject en de training zitten in het abonnement; u krijgt geen aparte
-            factuur voor de implementatie. De migratie zelf is een project tegen een vaste prijs die
-            vooraf vaststaat.
+            De invoering en de training zitten in het abonnement. Daarvoor krijgt u geen aparte
+            factuur. Het overzetten van uw gegevens is een eigen project, tegen een vaste prijs die u
+            vooraf weet.
           </dd>
         </div>
         <div class="grid gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-8" data-reveal style="--reveal-vertraging:80ms">
           <dt class="font-display text-lg font-semibold text-ink-900">Doorlooptijd</dt>
           <dd class="text-pretty leading-relaxed text-ink-700">
-            Die spreken we per organisatie af, na een migratie-inschatting. Wij zijn nieuw en
-            noemen liever geen doorlooptijd die nog geen enkele klant heeft gehaald.
+            Die spreken we per organisatie af, na de migratie-inschatting. Wij zijn nieuw. Een
+            doorlooptijd die nog geen enkele klant heeft gehaald, noemen wij liever niet.
           </dd>
         </div>
         <div class="grid gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-8" data-reveal style="--reveal-vertraging:160ms">
@@ -129,7 +126,7 @@ const bronsystemen = [
     <div class="max-w-3xl">
       <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">En hoe u er weer uit komt</h2>
       <p class="mt-4 text-ink-700 leading-relaxed">
-        Dit hoort op dezelfde pagina als de import, en niet in de kleine letters. Een leverancier
+        Hoe u weggaat, hoort op dezelfde pagina als hoe u binnenkomt, en niet in de kleine letters. Een leverancier
         die u alleen vertelt hoe u binnenkomt, heeft er belang bij dat u niet weg kunt. Wij
         vinden vastzitten aan een leverancier een ontwerpfout, geen verdienmodel.
       </p>
@@ -148,10 +145,11 @@ const bronsystemen = [
       <div class="rounded-2xl border border-ink-100 bg-white p-8">
         <h3 class="font-display text-lg font-semibold text-ink-900">En de standaarden eronder</h3>
         <p class="mt-3 text-sm text-ink-700 leading-relaxed">
-          Openheid is meer dan een exportknop. Er is een FHIR-API voor de Basisgegevensset Zorg (BgZ),
-          alleen om gegevens te lezen. MedMij (uitwisseling met de persoonlijke gezondheidsomgeving
-          van de cliënt) en eOverdracht (de digitale verpleegkundige overdracht) zijn in ontwikkeling.
-          Op de pagina Koppelingen staat de status per koppeling, ook waar iets nog niet klaar is.
+          Een exportknop alleen is niet genoeg. Andere systemen kunnen de Basisgegevensset Zorg (BgZ)
+          uit Curanta lezen via een FHIR-API; schrijven kan die API niet. Twee koppelingen bouwen wij
+          nog: MedMij, voor uitwisseling met de persoonlijke gezondheidsomgeving van de cliënt, en
+          eOverdracht, de digitale verpleegkundige overdracht. Op de pagina Koppelingen staat per
+          koppeling hoe ver die is, ook als iets nog niet klaar is.
         </p>
         <div class="mt-5 flex flex-wrap gap-3">
           <a href="/integraties" class="btn-secondary no-underline">Bekijk de koppelingen</a>
