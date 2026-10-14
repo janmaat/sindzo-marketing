@@ -40,25 +40,26 @@ const integrations: Integration[] = [
     body: 'Medicatieoverzicht, voorschriften, toedienregistratie en allergieën. Zonder Medimo legt u het medicatiegebruik in het dossier zelf vast (naam en ATC-code).' },
 
   // Financieel
-  // 14-10-2026, claimtoets: geen van de VECOZO-stromen is tegen VECOZO beproefd (de berichtenbox-clients sturen
-  // kale XML zonder SOAP-envelop; de COV-client heeft een placeholder-namespace). Daarom "ontwikkeling" en niet
-  // "inrichten": inrichten belooft dat het werkt zodra het certificaat er is. De berichten zelf zijn gebouwd.
+  // 14-10-2026, claimtoets: geen van de VECOZO-stromen is tegen VECOZO beproefd, en de iStandaard-berichten
+  // (iWmo, iJw, iWlz, CAK) worden nog niet aan het officiële schema getoetst. Die staan daarom op "ontwikkeling",
+  // met de toezegging van Jan (14-10-2026): afgerond vóór de eerste declaratiemaand van de klant. GGZ en COV staan
+  // op "inrichten": daar is een handmatige weg gebouwd die vandaag werkt (feitenblad, rij VECOZO).
   { name: 'Gemeenten (iWmo en iJw)', category: 'Financieel', status: 'ontwikkeling',
-    body: 'Toewijzingen, berichten en de maanddeclaratie (Wmo323, Jw323): Curanta stelt ze op. Het versturen via VECOZO, met het VECOZO-certificaat van uw organisatie, is nog niet bij VECOZO beproefd; dat doen wij bij de eerste aansluiting. Retourberichten leest u nu zelf in.' },
+    body: 'Toewijzingen, berichten bij start en stop en de maanddeclaratie (Wmo323, Jw323) stelt Curanta nu al op, uit goedgekeurde productie. Het bericht volgens de iStandaard en het aanleveren via VECOZO ronden wij af vóór uw eerste declaratiemaand. Retourberichten leest u zelf in.' },
   { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'ontwikkeling',
-    body: 'iWlz-berichten, met validatie. Het versturen via VECOZO is nog niet bij VECOZO beproefd. Retourberichten leest u nu zelf in.' },
+    body: 'De iWlz-berichten en de maanddeclaratie stelt Curanta nu al op, uit goedgekeurde productie. Het bericht volgens de iStandaard en het aanleveren via VECOZO ronden wij af vóór uw eerste declaratiemaand. Retourberichten leest u zelf in.' },
   { name: 'CAK', category: 'Financieel', status: 'ontwikkeling',
-    body: 'De aanlevering voor de eigen bijdrage (Wlz en Wmo). Het versturen via VECOZO is nog niet bij VECOZO beproefd. Retourberichten leest u nu zelf in.' },
-  { name: 'Controle op verzekering (COV)', category: 'Financieel', status: 'ontwikkeling',
-    body: 'Per cliënt of voor alle cliënten tegelijk; Curanta legt de uitkomst vast. De vraag aan VECOZO is nog niet bij VECOZO beproefd: de precieze opbouw volgt pas uit de koppelspecificatie bij de eerste aansluiting.' },
+    body: 'De aanlevering voor de eigen bijdrage (Wlz en Wmo) stelt Curanta per maand op en controleert hem. Het aanleveren bij het CAK ronden wij af vóór uw eerste declaratiemaand. Retourberichten leest u zelf in.' },
+  { name: 'Controle op verzekering (COV)', category: 'Financieel', status: 'inrichten',
+    body: 'Curanta legt per cliënt vast bij welke verzekeraar hij verzekerd is, en waar dat vandaan komt. U neemt het over van de zorgpas of uit de COV-controle in het VECOZO-portaal. De automatische vraag aan VECOZO ronden wij af bij uw aansluiting.' },
   { name: 'AGB-register (Vektis)', category: 'Financieel', status: 'inrichten',
     body: 'AGB-codes valideren en dagelijks synchroniseren met de open dataset van Vektis. De synchronisatie richten wij per klant in.' },
-  // 14-10-2026: het versturen via de berichtenbox is nooit tegen VECOZO beproefd (geen SOAP-envelop); daarom
-  // "ontwikkeling" en niet "inrichten". Het bericht maken en toetsen is wel gebouwd. Zie /voor/ggz.
-  { name: 'Zorgverzekeraars (GGZ, GDS801)', category: 'Financieel', status: 'ontwikkeling',
-    body: 'GGZ-declaraties volgens de standaard van Vektis; Curanta maakt het bericht en toetst het aan het schema. Het versturen via de berichtenbox van VECOZO is nog niet beproefd: dat doen wij bij de eerste aansluiting, met het VECOZO-certificaat van uw organisatie. Het retourbericht (GDS802) haalt u zelf op en leest u in.' },
+  // 14-10-2026: het bericht wordt getoetst aan de officiële XSD van Vektis en de handmatige aanlevering via het
+  // VECOZO-portaal is gebouwd (Ponscura c5d17a29b). Rechtstreeks versturen vanuit Curanta is nog niet beproefd.
+  { name: 'Zorgverzekeraars (GGZ, GDS801)', category: 'Financieel', status: 'inrichten',
+    body: 'GGZ-declaraties volgens de standaard van Vektis. Curanta maakt het bericht en toetst het aan het officiële schema. U levert het aan in het VECOZO-portaal, met het VECOZO-account van uw organisatie; rechtstreeks versturen vanuit Curanta volgt. Het retourbericht (GDS802) leest u in.' },
   { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'ontwikkeling',
-    body: 'Zvw-declaratie voor de wijkverpleging. Curanta stelt de berichten (AW319 en AW320) op en verwerkt ze. Maar de test bij Vecozo en het versturen zijn nog niet bewezen. Aanleveren kan nog niet.' },
+    body: 'Zvw-declaratie voor de wijkverpleging. Productcodes, tarieven en prestaties zijn er, en Curanta stelt de berichten (AW319 en AW320) op en verwerkt ze. Het aanleveren via VECOZO ronden wij af vóór uw eerste declaratiemaand.' },
 
   // Sensoren en domotica
   { name: 'Domotica', category: 'Sensoren en domotica', status: 'inrichten',
@@ -93,6 +94,7 @@ const integrations: Integration[] = [
 
 const categories = Array.from(new Set(integrations.map(i => i.category)));
 const telling = (s: Status) => integrations.filter(i => i.status === s).length;
+const gebouwd = telling('demo') + telling('inrichten');
 ---
 <Base
   image="/og/integraties.png"
@@ -112,14 +114,22 @@ const telling = (s: Status) => integrations.filter(i => i.status === s).length;
 
   <section class="border-b border-ink-200 bg-curanta-50 py-10">
     <div class="container-prose grid gap-8 lg:grid-cols-12">
-      <ul class="grid grid-cols-3 gap-3 self-start lg:col-span-5" aria-label="Aantal koppelingen per status">
-        {STATUS_VOLGORDE.filter((k) => k !== 'demo').map((k) => (
-          <li class="rounded-xl bg-white p-4 ring-1 ring-ink-200">
-            <div class="font-display text-3xl font-bold text-curanta-900">{telling(k)}</div>
-            <div class="mt-1 text-xs text-ink-700">{STATUS[k].label}</div>
-          </li>
-        ))}
-      </ul>
+      {/* Hoofdgetal: wat er gebouwd is (in de demo of in te richten), daaronder de uitsplitsing per status
+          (besluit Jan 14-10-2026: "gebouwd" voorop). */}
+      <div class="self-start lg:col-span-5">
+        <p class="font-display text-curanta-900">
+          <span class="text-5xl font-extrabold tabular-nums">{gebouwd}</span>
+          <span class="text-xl font-bold"> van de {integrations.length} koppelingen zijn gebouwd</span>
+        </p>
+        <ul class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4" aria-label="Aantal koppelingen per status">
+          {STATUS_VOLGORDE.filter((k) => telling(k) > 0).map((k) => (
+            <li class="rounded-xl bg-white p-3 ring-1 ring-ink-200">
+              <div class="font-display text-2xl font-bold tabular-nums text-curanta-900">{telling(k)}</div>
+              <div class="mt-1 text-xs text-ink-700">{STATUS[k].label}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div class="lg:col-span-7">
         <h2 class="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Wat de status betekent</h2>
         <StatusLegenda class="mt-3" />

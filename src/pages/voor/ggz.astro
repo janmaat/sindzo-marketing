@@ -5,8 +5,8 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
 //
 // 14-10-2026: claimtoets tegen de code en een stemgidsronde (skill stemgids). Wat er veranderde:
 // - Versturen via VECOZO: de aanleverservice is nooit tegen VECOZO beproefd (ProductieVecoZoBerichtenboxClient
-//   stuurt kale XML zonder SOAP-envelop). Dus niet "versturen gaat via Vecozo", maar: Curanta maakt en toetst
-//   het bestand; het versturen beproeven wij bij de eerste aansluiting. Zie docs/deferred-work.md (segments.ggz).
+//   stuurt kale XML zonder SOAP-envelop). Dus niet "versturen gaat via Vecozo", maar: Curanta maakt het bestand
+//   en toetst het aan de XSD van Vektis, en u levert het aan in het VECOZO-portaal (Ponscura c5d17a29b).
 // - ZorgDomein: een geaccepteerde verwijzing komt niet vanzelf op de wachtlijst; de balie zet hem erop
 //   (ZorgDomeinVerwijzingDetail.AccepteerAsync).
 // - ROM: de uitdraai is geen bestand in het formaat van Akwa GGZ (RomService: "GEEN aanlevering").
@@ -24,7 +24,7 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
   hero="Trajecten, declaratie en afscherming voor de GGZ"
   subtitle="Voor de vrijgevestigde praktijk en de GGZ-instelling. De behandelaar legt per traject de prestaties vast, en Curanta toetst ze aan de tarieven en regels van de NZa. De administratie maakt er een declaratie van voor de zorgverzekeraar, of een nota als er geen contract is. De zorginhoud ziet alleen wie de cliënt behandelt."
   triggers={[
-    { title: 'Declareren zonder overtikken', body: 'Uit de prestaties van gesloten trajecten maakt Curanta per zorgverzekeraar het declaratiebericht (GDS801), volgens de standaard van Vektis en getoetst aan het schema. Wijst de verzekeraar een prestatie af, dan declareert u die opnieuw. Een toegekende prestatie die niet klopte, crediteert u en declareert u gecorrigeerd. Het versturen naar VECOZO beproeven wij bij de eerste aansluiting.' },
+    { title: 'Declareren zonder overtikken', body: 'Uit de prestaties van gesloten trajecten maakt Curanta per zorgverzekeraar het declaratiebericht (GDS801), volgens de standaard van Vektis en getoetst aan het officiële schema. U levert het aan in het VECOZO-portaal. Wijst de verzekeraar een prestatie af, dan declareert u die opnieuw. Een toegekende prestatie die niet klopte, crediteert u en declareert u gecorrigeerd.' },
     { title: 'Zorginhoud alleen voor de behandelaars', body: 'Wie de cliënt in de agenda of het rooster heeft, of regiebehandelaar is, ziet de zorginhoud. Een collega zonder behandelrelatie ziet die niet; in een noodgeval kan het wel, met een reden die in het logboek komt. De administratie ziet alleen wat zij voor de declaratie nodig heeft.' },
     { title: 'Omzetplafonds in beeld', body: 'Per zorgverzekeraar en jaar ziet u hoeveel van het plafond u al hebt gedeclareerd, en waar u volgens de prognose op 31 december uitkomt. Bij 80, 90 en 100 procent krijgt u een signaal.' },
     { title: 'Zorg zonder contract', body: 'Hebt u geen contract met de verzekeraar van een cliënt? Dan maakt Curanta een nota met de gegevens die de Nederlandse Zorgautoriteit (NZa) voorschrijft, en verstuurt die per e-mail.' },
@@ -40,7 +40,7 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
     { name: 'Aanmelding en wachtlijst', note: 'Na aansluiting op ZorgDomein accepteert u een verwijzing en zet u de cliënt op de wachtlijst van de behandelagenda' },
   ]}
   nogNiet={[
-    'Rechtstreeks versturen van de GGZ-declaratie via VECOZO: nog niet beproefd. Dat doen wij bij de eerste aansluiting, met het VECOZO-certificaat van uw organisatie.',
+    'Rechtstreeks versturen van de GGZ-declaratie vanuit Curanta. Tot dan levert u het bestand aan in het VECOZO-portaal.',
     'De vragenlijsten SQ-48 en 4DKL: wachten op toestemming van de rechthebbenden.',
     'Een rechtstreekse aanlevering van ROM-gegevens bij Akwa GGZ.',
     'Een signaal als een Wvggz-titel afloopt.',

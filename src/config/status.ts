@@ -29,7 +29,7 @@ export const STATUS: Record<Status, { label: string; dot: string; uitleg: string
   ontwikkeling: {
     label: 'In ontwikkeling',
     dot: 'bg-amber-500',
-    uitleg: 'Wij bouwen eraan; u kunt het nog niet gebruiken.',
+    uitleg: 'Wij bouwen eraan. Bij elk onderdeel staat wat er al werkt en wat nog volgt.',
   },
   gepland: {
     label: 'Gepland',
