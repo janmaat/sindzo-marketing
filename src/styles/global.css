@@ -135,68 +135,13 @@
 }
 
 /* ── Bewegende accenten, naar Magic UI ─────────────────────────────────────────────────────────
-   Vijf effecten van magicui.design (MIT-licentie): BorderBeam, ShineBorder, BlurFade, MagicCard en
-   AnimatedBeam. Magic UI levert ze als React-componenten met motion; hier zijn ze omgezet naar CSS
-   en één klein inline script in Base.astro, zodat de site statisch blijft en de bezoeker geen
-   React-bundel binnenhaalt. Alles staat onder prefers-reduced-motion: wie beweging beperkt, ziet de
-   pagina zoals hij zonder deze laag was. Geen effect verbergt inhoud als het script niet draait. */
-
-/* BorderBeam — een lichtstreep die over de rand loopt (src/components/magic/BorderBeam.astro). */
-.border-beam {
-  display: none;
-}
-@supports (offset-path: rect(0 auto auto 0 round 1px)) {
-  @media (prefers-reduced-motion: no-preference) {
-    .border-beam {
-      display: block;
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      border-radius: inherit;
-      border: var(--beam-dikte, 2px) solid transparent;
-      -webkit-mask: linear-gradient(transparent, transparent) padding-box, linear-gradient(#000, #000) border-box;
-      -webkit-mask-composite: source-in;
-      mask: linear-gradient(transparent, transparent) padding-box, linear-gradient(#000, #000) border-box;
-      mask-composite: intersect;
-    }
-    .border-beam::after {
-      content: '';
-      position: absolute;
-      aspect-ratio: 1;
-      width: var(--beam-lengte, 180px);
-      background: linear-gradient(to left, theme('colors.accent.500'), theme('colors.curanta.300'), transparent);
-      offset-path: rect(0 auto auto 0 round var(--beam-lengte, 180px));
-      animation: border-beam var(--beam-duur, 9s) linear infinite;
-      animation-delay: var(--beam-start, 0s);
-    }
-  }
-}
-@keyframes border-beam {
-  to { offset-distance: 100%; }
-}
-
-/* ShineBorder — een glans die over de rand trekt (src/components/magic/ShineBorder.astro). */
-.shine-border {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  padding: 1.5px;
-  background-image: radial-gradient(transparent, transparent, theme('colors.accent.500'), theme('colors.curanta.300'), transparent, transparent);
-  background-size: 300% 300%;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0);
-}
-@media (prefers-reduced-motion: no-preference) {
-  .shine-border { animation: shine 14s linear infinite; }
-}
-@keyframes shine {
-  0% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
-  100% { background-position: 0% 0%; }
-}
+   Effecten van magicui.design (MIT-licentie): DotPattern, BlurFade, MagicCard, AnimatedBeam en de
+   glans van ShinyButton (bij de knoppen). Magic UI levert ze als React-componenten met motion; hier
+   zijn ze omgezet naar CSS en één klein inline script in Base.astro, zodat de site statisch blijft en
+   de bezoeker geen React-bundel binnenhaalt. Alles staat onder prefers-reduced-motion: wie beweging
+   beperkt, ziet de pagina zoals hij zonder deze laag was. Geen effect verbergt inhoud als het script
+   niet draait. Eindeloze lussen alleen als ze iets vertellen (besluit Jan 14-10-2026): dat is alleen
+   de lichtstreep over de vier stappen op de homepage. BorderBeam en ShineBorder zijn daarom weg. */
 
 /* BlurFade — blokken komen vervaagd en iets lager binnen als ze in beeld scrollen. Alleen als het
    script in Base.astro de klasse `reveal-aan` op <html> heeft gezet: zonder script blijft alles

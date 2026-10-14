@@ -11,14 +11,17 @@
 // licentie nodig. Lettertype en kleuren blijven die van Curanta.
 //
 // Beweging: een paar effecten van Magic UI (magicui.design, MIT), omgezet naar CSS: stippenraster
-// en lichtstreep in de introductie, inloop bij scrollen, gloed op de kaarten en een lichtstreep over
-// de vier stappen. Zie het blok "Bewegende accenten" in global.css; bij "beweging beperken" staat
-// alles stil.
+// in de introductie, inloop bij scrollen, gloed op de kaarten en een lichtstreep over de vier stappen.
+// Dat is de enige lus: hij vertelt dat wat de één vastlegt bij de volgende aankomt. Een streep om het
+// productscherm en een glans om de founding-partnerkaart zijn op 14-10-2026 weggehaald (besluit Jan:
+// alleen beweging die iets vertelt). Zie "Bewegende accenten" in global.css; bij "beweging beperken"
+// staat alles stil.
 //
 // Getoetst aan Taste Skill (tasteskill.dev, MIT): één bovenkop (alleen in de introductie), geen
 // derde zigzag op rij (het derde voorbeeld staat gestapeld), geen drie gelijke kaarten (VVT groot,
-// het hoofdsegment), geen paginering als "Voorbeeld 1 van 3". De tekst van de introductie is
-// bewust niet ingekort: dat is een inhoudelijke keuze, zie de controlelijst.
+// het hoofdsegment), geen paginering als "Voorbeeld 1 van 3". De subtekst van de introductie is
+// op 14-10-2026 ingekort (besluit Jan); de twee toelichtingen bij de knoppen blijven bewust boven de
+// vouw, want "Curanta is nieuw" hoort niet onder het productscherm te verdwijnen.
 //
 // Elk feit staat in het feitenblad (D:\Repos\Ponscura\docs\campagne\feitenblad-curanta.md) of is
 // op 08-10-2026 in de code nagelopen (zie docs/controlelijst-claims.md, "Nagelopen in de code").
@@ -29,7 +32,6 @@ import Screenshot from '../components/Screenshot.astro';
 import StatusLabel from '../components/StatusLabel.astro';
 import Icon from '../components/Icon.astro';
 import DotPattern from '../components/magic/DotPattern.astro';
-import ShineBorder from '../components/magic/ShineBorder.astro';
 import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 import type { Status } from '../config/status';
 
@@ -274,9 +276,8 @@ const plannen = [
         </div>
         <div class="lg:col-span-5 lg:pt-10">
           <p class="text-pretty text-base leading-relaxed text-ink-700 sm:text-lg">
-            Cliëntdossier, planning en declaratie in één systeem. De planner zet het bezoek in het
-            rooster, de zorgmedewerker opent het op de telefoon en schrijft de rapportage, en de
-            administratie declareert wat er geleverd is. U zet alleen de onderdelen aan die u gebruikt.
+            Cliëntdossier, planning en declaratie in één systeem. U zet alleen de onderdelen aan die u
+            gebruikt.
           </p>
           <div class="mt-7 flex flex-wrap items-center gap-3">
             <a href={DEMO_ZELF.href} class="btn-primary btn-lg no-underline">{DEMO_ZELF.label}</a>
@@ -309,7 +310,6 @@ const plannen = [
         <Screenshot
           src={zorgplan}
           eager
-          beam
           adres="app.curanta.nl"
           alt="Backoffice: het zorgplan van een verzonnen cliënt. Bovenaan de gekozen cliënt, daaronder de status, het aantal problemen en lopende interventies en de uiterste datum van de volgende evaluatie, en het eerste probleem, Huidintegriteit."
           bijschrift="Het zorgplan in de backoffice: status, problemen, interventies en de volgende evaluatie. De interventies staan als taken bij het bezoek in het medewerkerportaal. Opname oktober 2026."
@@ -656,7 +656,6 @@ const plannen = [
           </p>
         </div>
         <div class="spotlight rounded-2xl bg-white p-8 shadow-[0_6px_18px_rgba(14,79,87,0.06)] sm:p-10" data-reveal style="--reveal-vertraging:120ms">
-          <ShineBorder />
           <h3 class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Founding partner worden</h3>
           <p class="mt-4 leading-relaxed text-ink-700">
             Wij zoeken maximaal drie zorgorganisaties die als eerste met Curanta gaan werken. U
