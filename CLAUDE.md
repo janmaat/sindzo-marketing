@@ -17,7 +17,9 @@ site met `site-inhoudscontrole` (beide in `D:\Repos\Ponscura\.claude\skills\`).
 - Geen persoonsnaam, geen "team" en geen Ponscura op de site; "Curanta is een handelsnaam van Maat
   Holding B.V." in footer, /over en /voorwaarden.
 - De twee demoknoppen staan in `src/config/demo.ts`: tekst overal gelijk, bestemming per branch.
-- Geen klantlogo's, citaten, klantaantallen of casussen: er zijn nog geen klanten in productie.
+- Geen klantlogo's, citaten, klantaantallen of casussen. De eerste implementatie loopt sinds oktober 2026,
+  bij een organisatie in de basis-ggz; in productie werkt er nog geen zorgorganisatie mee. Zo mag het er
+  staan, zonder naam, tot de klant schriftelijk toestemt (besluit Jan 14-10-2026). Nog twee founding-plekken.
 - Nederlands, u-vorm, voor bestuurders en managers van zorgorganisaties.
 - Werk op de branch die `site-inhoudscontrole` noemt; `develop` in de hoofdmap kan ongecommit werk van
   een andere sessie bevatten.
