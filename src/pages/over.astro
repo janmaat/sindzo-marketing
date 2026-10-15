@@ -85,31 +85,95 @@ const gesprek = [
     subtitle="Jan Maat heeft sinds 2001 een eigen softwarebedrijf. Hij nam het initiatief tot Curanta. Samen met Erwin van der Star, die bijna vijftien jaar Vitaphone Nederland leidde, en Janus Hoeks, die in 1989 Intemo oprichtte, bouwen wij één systeem voor de zorg: het cliëntdossier, de planning, de declaratie en de kwaliteit, met portalen voor zorgmedewerkers, cliënten en mantelzorgers."
   />
 
-  <section class="container-prose py-16">
-    <div class="max-w-3xl">
+  {/* Kop links, tekst rechts (15-10-2026): tekst in 16 px zoals de rest van de site, in twee gelijke kolommen zodat de regels rond 75 tekens blijven (besluit Jan 15-10: 18 px was te groot), zoals in PageHero bedoeld, en de
+      breedte van de pagina wordt toch gebruikt. Op een smal scherm staat de kop boven de tekst. */}
+  <section class="container-prose py-16 space-y-12">
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16">
       <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Waarom Curanta bestaat</h2>
-      <p class="mt-4 text-ink-700 leading-relaxed">
-        Zorgmedewerkers besteden 34 procent van hun werktijd aan administratie, en 79 procent van hen ervaart dat
-        als belastend (Berenschot, 2025). Intussen groeit het tekort aan personeel: van 89.800 mensen in 2026 naar
-        261.800 in 2035 (ABF Research, AZW, februari 2026). Dat komt niet doordat zorgverleners onwillig zijn. Het
-        komt doordat hun software vaak is ontworpen voor de boekhouder, niet voor de wijkverpleegkundige om 22:00 uur.
-      </p>
-      <p class="mt-4 text-ink-700 leading-relaxed">
-        Een zorgorganisatie kiest ongeveer eens in de tien jaar een nieuw ECD (M&amp;I/Partners, januari 2026). Wie nu
-        kiest, kiest dus voor de jaren waarin er minder handen zijn voor meer cliënten. Die keuze verdient software
-        die tijd teruggeeft.
-      </p>
-      <p class="mt-4 text-ink-700 leading-relaxed">
-        Curanta is nieuw. De eerste implementatie loopt, bij een organisatie in de basis-ggz, maar in productie werkt
-        er nog geen zorgorganisatie mee. Per onderdeel staat op deze site wat er al is.
-      </p>
+      <div class="space-y-4 text-ink-700 leading-relaxed">
+          <p>
+            Zorgmedewerkers besteden 34 procent van hun werktijd aan administratie, en 79 procent van hen ervaart dat
+            als belastend (Berenschot, 2025). Dat komt niet doordat zorgverleners onwillig zijn. Het komt doordat hun
+            software vaak is ontworpen voor de boekhouder, niet voor de wijkverpleegkundige om 22:00 uur. Intussen groeit
+            het tekort aan personeel: van 89.800 mensen in 2026 naar 261.800 in 2035 (ABF Research, AZW, februari 2026).
+          </p>
+          <p>
+            Een zorgorganisatie kiest ongeveer eens in de tien jaar een nieuw ECD (M&amp;I/Partners, januari 2026). Wie nu
+            kiest, kiest dus voor de jaren waarin er minder handen zijn voor meer cliënten. Die keuze verdient software
+            die tijd teruggeeft. En in die tien jaar verandert er meer dan het aantal collega's.
+          </p>
+      </div>
+    </div>
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 border-t border-ink-100 pt-10">
+      <h3 class="font-display text-lg font-semibold text-ink-900">De administratie moet omlaag, en AI mag daarbij helpen</h3>
+      <div class="space-y-4 text-ink-700 leading-relaxed">
+          <p>
+            Zorgpartijen en het kabinet hebben afgesproken dat administratie in 2030 hooguit 20 procent van de werktijd
+            kost (Aanvullend Zorg- en Welzijnsakkoord, 2025). Ze beginnen met rapporteren door in te spreken, en met het
+            plannen van personeel. Vanaf dit najaar kan een organisatie in de vvt of de ggz daar geld voor
+            aanvragen (VWS, mei 2026).
+          </p>
+          <p>
+            In Curanta doet AI een voorstel, en de zorgmedewerker beslist. Schrijft zij een SOEP-rapportage, dan stelt
+            de coach op een knopdruk de E en de P voor. Bij de dienstwissel vat Curanta de overdracht samen. Een zorgplan
+            kan Curanta in gewone taal herschrijven, voor de cliënt. Elke aanroep komt in een logboek. In de backoffice kunt u
+            ook inspreken, en de tekst ontstaat op het apparaat zelf. Onderweg, in het medewerkerportaal, kan dat nog niet.
+          </p>
+      </div>
+    </div>
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 border-t border-ink-100 pt-10">
+      <h3 class="font-display text-lg font-semibold text-ink-900">Minder leveranciers, dus meer afhankelijkheid</h3>
+      <div class="space-y-4 text-ink-700 leading-relaxed">
+          <p>
+            Per sector hebben nog ongeveer vijf leveranciers meer dan drie grote klanten. Tien jaar geleden waren dat er
+            meer dan tien (M&amp;I/Partners, januari 2026). Het ministerie van VWS schrijft over de "marktmacht van een
+            klein aantal ICT-leveranciers". Volgens de ACM kan dat zorg-ICT duurder maken (Kamerbrief, januari 2026).
+          </p>
+          <p>
+            Bij Curanta ziet u daarom vooraf wat het kost. U betaalt €19 tot €39 per actieve medewerker per maand, en dat
+            staat op de site. Training en hosting zitten erbij; de implementatie is maatwerk, met een prijs die wij vooraf afspreken. In de markt kost een gebruiker meestal €50
+            tot €90 per maand (Heldy, april 2026). En vertrekt u, dan neemt u al uw gegevens en bestanden mee.
+          </p>
+      </div>
+    </div>
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 border-t border-ink-100 pt-10">
+      <h3 class="font-display text-lg font-semibold text-ink-900">Beveiliging weegt zwaarder dan bij uw vorige keuze</h3>
+      <div class="space-y-4 text-ink-700 leading-relaxed">
+          <p>
+            Sinds 15 augustus 2026 geldt de Cyberbeveiligingswet. Elke zorgaanbieder vanaf 50 fte valt eronder. Het
+            bestuur is er zelf verantwoordelijk voor, ook voor de leveranciers die het kiest. Volgens Z-CERT zijn
+            ransomware en aanvallen via leveranciers de grootste dreigingen voor de zorg (Cybersecuritybeeld Zorg 2025).
+          </p>
+          <p>
+            Wie in de backoffice een zorg- of beheerrol heeft, logt altijd in met tweestapsverificatie. Waar de gegevens van
+            uw cliënten staan, leest u verderop. Een externe pentest en de NEN 7510-audit moeten nog plaatsvinden. Wat
+            geregeld is en wat niet, staat in het <a href="/trust" class="font-semibold text-curanta-700 hover:underline">Trust Centre</a>.
+          </p>
+      </div>
+    </div>
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16">
+      <div aria-hidden="true"></div>
+      <div class="text-ink-700 leading-relaxed">
+          <p>
+            Curanta is nieuw. De eerste implementatie loopt, bij een organisatie in de basis-ggz, maar in productie werkt
+            er nog geen zorgorganisatie mee. Per onderdeel staat op deze site wat er al is.
+          </p>
+      </div>
     </div>
   </section>
 
   <section class="border-y border-ink-100 bg-ink-100/40 py-16">
     <div class="container-prose">
-      <span class="eyebrow">Wie wij zijn</span>
-      <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">De mensen achter Curanta.</h2>
+      <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 lg:items-end">
+        <div>
+          <span class="eyebrow">Wie wij zijn</span>
+          <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">De mensen achter Curanta.</h2>
+        </div>
+        <p class="text-ink-700 leading-relaxed">
+          Erwin en Janus kennen de zorg en de techniek als ondernemers. Jan leidt het team dat de software bouwt. U
+          spreekt dus rechtstreeks met de mensen die beslissen, niet met een callcenter of een ticketsysteem.
+        </p>
+      </div>
       <div class="mt-10 grid gap-6 lg:grid-cols-3">
         {mensen.map((m) => (
           <article class="rounded-xl border border-ink-100 bg-white p-6">
@@ -130,22 +194,22 @@ const gesprek = [
           </article>
         ))}
       </div>
-      <p class="mt-8 max-w-3xl text-ink-700 leading-relaxed">
-        Erwin en Janus kennen de zorg en de techniek als ondernemers. Jan leidt het team dat de software bouwt. U
-        spreekt dus rechtstreeks met de mensen die beslissen, niet met een callcenter of een ticketsysteem.
-      </p>
     </div>
   </section>
 
   <section class="container-prose py-16">
-    <span class="eyebrow">Wat we oplossen</span>
-    <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">
-      Vier dingen waar een zorgorganisatie het eerst naar vraagt.
-    </h2>
-    <p class="mt-4 max-w-3xl text-ink-700 leading-relaxed">
-      Bij een nieuw systeem gaat de eerste vraag zelden over functies. Hij gaat over de gegevens van cliënten, de
-      overstap, de tijd van zorgmedewerkers en de regels. Dit doet Curanta daarmee.
-    </p>
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 lg:items-end">
+      <div>
+        <span class="eyebrow">Wat we oplossen</span>
+        <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">
+          Vier dingen waar een zorgorganisatie het eerst naar vraagt.
+        </h2>
+      </div>
+      <p class="text-ink-700 leading-relaxed">
+        Bij een nieuw systeem gaat de eerste vraag zelden over functies. Hij gaat over de gegevens van cliënten, de
+        overstap, de tijd van zorgmedewerkers en de regels. Dit doet Curanta daarmee.
+      </p>
+    </div>
     <div class="mt-10 grid gap-6 md:grid-cols-2">
       {themas.map((t) => (
         <article class="rounded-xl border border-ink-100 bg-white p-6">
@@ -197,10 +261,6 @@ const gesprek = [
         <div>
           <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Handelsnaam</dt>
           <dd class="mt-1 text-ink-900">Curanta</dd>
-        </div>
-        <div>
-          <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Rechtspersoon</dt>
-          <dd class="mt-1 text-ink-900">Curanta is een handelsnaam van Maat Holding B.V.</dd>
         </div>
         <div>
           <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">KvK-nummer</dt>
