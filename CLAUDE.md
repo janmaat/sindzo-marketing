@@ -17,7 +17,7 @@ site met `site-inhoudscontrole` (beide in `D:\Repos\Ponscura\.claude\skills\`).
 - Persoonsnamen alleen op /over: Jan Maat, Erwin C.A. van der Star en Janus Hoeks, met de levensloop uit het
   feitenblad (besluit Jan 15-10-2026). Elders "Curanta" of "wij". "Ons team" alleen daar, bij wie het product
   bouwde; nooit een teamgrootte of "implementatieteam". Geen Ponscura op de site;
-  "Curanta is een handelsnaam van Maat Holding B.V." in footer, /over en /voorwaarden.
+  de rechtspersoon (Maat Holding B.V.) alleen in /privacy en /voorwaarden, waar de wet hem vraagt; footer, /over en /contact noemen Curanta met adres en KvK-nummer (besluit Jan 15-10-2026).
 - De twee demoknoppen staan in `src/config/demo.ts`: tekst overal gelijk, bestemming per branch.
 - Geen klantlogo's, citaten, klantaantallen of casussen. De eerste implementatie loopt sinds oktober 2026,
   bij een organisatie in de basis-ggz; in productie werkt er nog geen zorgorganisatie mee. Zo mag het er
