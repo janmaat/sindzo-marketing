@@ -1,0 +1,209 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import HoneypotField from '../../components/HoneypotField.astro';
+import { DEMO_GESPREK } from '../../config/demo';
+
+// Een presentatie aanvragen (besluit Jan 15-10-2026, ADR 2026-10-11 "Wijziging 15-10-2026" in Ponscura).
+// De aanvraag gaat naar app.curanta.nl (POST /api/presentatie-aanvraag). Jan beoordeelt hem daar; keurt hij hem
+// goed, dan mailt app.curanta.nl de uitnodiging voor presentatie.curanta.nl. Wijst hij hem af, dan hoort de
+// aanvrager niets: daarom belooft deze pagina geen antwoord, alleen een beoordeling.
+// Geen captcha (de site laadt geen scripts van derden): honeypot, invultijd en een snelheidsrem op de server.
+const formAction = `${import.meta.env.PUBLIC_APP_URL ?? 'https://app.curanta.nl'}/api/presentatie-aanvraag`;
+const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-curanta-500 focus:ring-curanta-500';
+---
+<Base
+  title="Presentatie aanvragen | Curanta"
+  description="Vraag een persoonlijke presentatie over Curanta aan. U bekijkt hem in uw browser wanneer het u uitkomt: korte video's, de dia's en hoe het werkt in de applicatie."
+>
+  <PageHero
+    eyebrow="Presentatie"
+    title="Bekijk Curanta wanneer het u uitkomt."
+    subtitle="Vraag een persoonlijke presentatie aan. U bekijkt hem in uw browser: de presentatie in korte video's, de dia's, en hoe het werkt in de applicatie. Zonder afspraak, en zo vaak als u wilt."
+  />
+
+  <section class="container-prose py-16">
+    <div class="grid gap-12 lg:grid-cols-[1fr_320px]">
+      <form id="presentatie-aanvraag" action={formAction} method="post" class="rounded-2xl border border-ink-100 bg-white p-8" novalidate>
+        <HoneypotField />
+        {/* Ingevuld door het script: de campagnebron uit de URL, en hoe lang het invullen duurde. */}
+        <input type="hidden" name="utm_source" />
+        <input type="hidden" name="utm_medium" />
+        <input type="hidden" name="utm_campaign" />
+        <input type="hidden" name="utm_term" />
+        <input type="hidden" name="utm_content" />
+        <input type="hidden" name="invultijd" />
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <label class="block sm:col-span-2">
+            <span class="text-sm font-semibold text-ink-900">Naam</span>
+            <input required type="text" name="naam" autocomplete="name" maxlength="120" class={veld} />
+          </label>
+          <label class="block">
+            <span class="text-sm font-semibold text-ink-900">Zakelijk e-mailadres</span>
+            <input required type="email" name="email" autocomplete="email" maxlength="254" class={veld} />
+            <span class="mt-1 block text-xs text-ink-500">Hierheen sturen wij uw persoonlijke link.</span>
+          </label>
+          <label class="block">
+            <span class="text-sm font-semibold text-ink-900">Telefoon (optioneel)</span>
+            <input type="tel" name="telefoon" autocomplete="tel" maxlength="40" class={veld} />
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="text-sm font-semibold text-ink-900">Organisatie</span>
+            <input required type="text" name="organisatie" autocomplete="organization" maxlength="160" class={veld} />
+          </label>
+          <label class="block">
+            <span class="text-sm font-semibold text-ink-900">Functie (optioneel)</span>
+            <select name="functie" class={veld}>
+              <option value="">Kies een functie</option>
+              <option>Bestuurder / RvB</option>
+              <option>Manager I&amp;A / CIO</option>
+              <option>CMIO / CNIO / zorginhoudelijk leider</option>
+              <option>Manager zorg</option>
+              <option>Functioneel beheer</option>
+              <option>FG / CISO / privacy</option>
+              <option>Finance / control</option>
+              <option>Anders</option>
+            </select>
+          </label>
+          <label class="block">
+            <span class="text-sm font-semibold text-ink-900">Sector</span>
+            <select required name="sector" class={veld}>
+              <option value="">Kies een sector</option>
+              <option value="vvt">VVT (thuiszorg en verpleeghuis)</option>
+              <option value="ghz">Gehandicaptenzorg</option>
+              <option value="ggz">GGZ</option>
+              <option value="anders">Anders</option>
+            </select>
+            <span class="mt-1 block text-xs text-ink-500">De presentatie gaat over uw sector.</span>
+          </label>
+        </div>
+
+        <label class="mt-5 block">
+          <span class="text-sm font-semibold text-ink-900">Waar wilt u vooral meer over weten? (optioneel)</span>
+          <textarea name="toelichting" rows="3" maxlength="1000"
+                    placeholder="Bijvoorbeeld: rapporteren bij de cliënt, de planning, of overstappen van ons huidige ECD"
+                    class={veld}></textarea>
+        </label>
+
+        <label class="mt-5 flex items-start gap-3 text-sm text-ink-700">
+          <input required type="checkbox" name="toestemming" value="yes"
+                 class="mt-0.5 h-4 w-4 rounded border-ink-300 text-curanta-600 focus:ring-curanta-500" />
+          <span>
+            Ik ga akkoord met de verwerking van mijn gegevens volgens de
+            <a href="/privacy#welke-data" class="text-curanta-700 hover:underline">privacyverklaring</a>.
+            Geen marketinglijst, geen doorverkoop.
+          </span>
+        </label>
+
+        <p id="aanvraag-melding" role="alert" tabindex="-1" class="hidden mt-5 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900"></p>
+        <button type="submit" class="btn-primary mt-7">Presentatie aanvragen</button>
+        <p class="mt-4 text-xs text-ink-500">
+          Vragen vooraf? Bel <a href="tel:+31852501301" class="text-curanta-700 hover:underline">085 250 1301</a>
+          of mail <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>.
+        </p>
+      </form>
+
+      <aside class="space-y-6">
+        <div class="rounded-2xl border border-ink-100 bg-ink-100/50 p-6">
+          <h2 class="font-display text-lg font-semibold text-ink-900">Zo gaat het</h2>
+          <ol class="mt-4 space-y-3 text-sm text-ink-700">
+            <li class="flex gap-3">
+              <span class="font-semibold text-curanta-700">1.</span>
+              <span>U vraagt de presentatie aan met dit formulier.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="font-semibold text-curanta-700">2.</span>
+              <span>Wij bekijken uw aanvraag, meestal binnen 1 werkdag.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="font-semibold text-curanta-700">3.</span>
+              <span>Past Curanta bij uw organisatie, dan krijgt u een mail met een persoonlijke link en een toegangscode. Die zijn 30 dagen geldig en alleen voor u.</span>
+            </li>
+          </ol>
+          <p class="mt-4 text-sm text-ink-700">
+            Wil een collega ook kijken? Antwoord dan op die mail met zijn of haar naam en e-mailadres.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-ink-100 bg-white p-6">
+          <h2 class="font-display text-lg font-semibold text-ink-900">Liever een gesprek?</h2>
+          <p class="mt-2 text-sm text-ink-700">
+            Stuur ons drie werkstromen uit uw organisatie; dan laten wij zien hoe Curanta ze ondersteunt.
+          </p>
+          <a href={DEMO_GESPREK.href} class="mt-3 inline-block text-sm font-semibold text-curanta-700 no-underline hover:underline">{DEMO_GESPREK.label} →</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  // Campagnebron uit de URL, de invultijd, en versturen zonder de pagina te verlaten (zoals op /demo). Zonder
+  // JavaScript blijft de gewone POST werken: de server stuurt dan door naar /presentatie/aangevraagd, of terug
+  // hierheen met ?fout=.
+  (function () {
+    var form = document.getElementById('presentatie-aanvraag');
+    var melding = document.getElementById('aanvraag-melding');
+    if (!form || !melding) return;
+    var start = Date.now();
+    var here = new URLSearchParams(window.location.search);
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(function (k) {
+      var v = here.get(k);
+      if (v) form.elements[k].value = v.slice(0, 200);
+    });
+
+    var labels = { naam: 'uw naam', email: 'uw e-mailadres', organisatie: 'de organisatie', functie: 'de functie',
+      telefoon: 'het telefoonnummer', toelichting: 'de toelichting', toestemming: 'het vakje voor de privacyverklaring',
+      sector: 'de sector' };
+    var contact = ' Lukt het niet? Bel 085 250 1301 of mail info@curanta.nl.';
+    var knop = form.querySelector('button[type="submit"]');
+
+    function toon(tekst) {
+      melding.textContent = tekst;
+      melding.classList.remove('hidden');
+      melding.focus();
+      if (knop) { knop.disabled = false; knop.removeAttribute('aria-busy'); }
+    }
+
+    function velden(lijst) {
+      var namen = lijst.map(function (v) { return labels[v] || v; });
+      var tekst = namen.length > 1 ? namen.slice(0, -1).join(', ') + ' en ' + namen[namen.length - 1] : namen[0];
+      return 'Controleer ' + tekst + '.';
+    }
+
+    var fout = here.get('fout');
+    if (fout === 'storing') {
+      toon('Aanvragen lukt op dit moment niet.' + contact);
+    } else if (fout) {
+      toon(velden(fout.split(',')));
+    }
+
+    form.addEventListener('submit', function (e) {
+      form.elements['invultijd'].value = String(Date.now() - start);
+      if (!window.fetch || !window.FormData) return;
+      e.preventDefault();
+      var ontbreekt = ['naam', 'email', 'organisatie', 'sector'].filter(function (v) { return !form.elements[v].value.trim(); });
+      if (!form.elements['toestemming'].checked) ontbreekt.push('toestemming');
+      if (ontbreekt.length) { toon(velden(ontbreekt)); return; }
+      melding.classList.add('hidden');
+      if (knop) { knop.disabled = true; knop.setAttribute('aria-busy', 'true'); }
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+        credentials: 'omit'
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (d) {
+          if (r.ok && d && d.redirect) { window.location.href = d.redirect; return; }
+          if (r.status === 400 && d && d.velden) { toon(velden(d.velden) + ' Pas het aan en verstuur opnieuw.'); return; }
+          if (r.status === 429 || (r.status === 503 && !(d && d.fout))) {
+            toon('U heeft zojuist al een aanvraag verstuurd. Probeer het over een paar minuten opnieuw.' + contact); return;
+          }
+          toon('Het versturen is niet gelukt; uw gegevens staan nog in het formulier. Probeer het zo opnieuw.' + contact);
+        });
+      }).catch(function () {
+        toon('Het versturen is niet gelukt door een verbindingsprobleem; uw gegevens staan nog in het formulier.' + contact);
+      });
+    });
+  })();
+</script>
