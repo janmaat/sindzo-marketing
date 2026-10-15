@@ -405,6 +405,57 @@ const voordelen = [
     </div>
   </section>
 
+  {/* 1a. Twee manieren om Curanta te leren kennen (besluit Jan 15-10-2026): wij komen langs, of de klant bekijkt de
+      presentatie online in eigen tempo (presentatie.curanta.nl, aan te vragen op /presentatie). Bedoeld om de drempel te
+      verlagen. Feitenblad: rijen Demonstratie en Presentatie aanvragen. */}
+  <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="kennismaken-kop">
+    <div class="container-prose">
+      <div class="grid gap-4 lg:grid-cols-12 lg:gap-14 lg:items-end" data-reveal>
+        <h2 id="kennismaken-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl lg:col-span-5">
+          Leer Curanta kennen zoals het u uitkomt
+        </h2>
+        <p class="text-lg leading-relaxed text-ink-700 lg:col-span-7">
+          De een wil het eerst rustig zelf bekijken, de ander wil het meteen samen bespreken. Allebei kan, en u zit
+          nergens aan vast.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <article class="flex flex-col rounded-2xl border border-ink-200 bg-white p-7" data-reveal>
+          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-curanta-50 text-curanta-700">
+            <Icon naam="mensen" class="h-5 w-5" />
+          </span>
+          <p class="mt-5 text-xs font-semibold uppercase tracking-wider text-curanta-700">Persoonlijk</p>
+          <h3 class="mt-1 font-display text-2xl font-bold text-curanta-900">Wij komen bij u langs</h3>
+          <p class="mt-3 leading-relaxed text-ink-700">
+            Wij laten Curanta op locatie zien, aan de hand van uw eigen zorgproces: uw rollen, uw begrippen, uw
+            werkstromen. Uw vragen beantwoorden wij ter plekke, en uw collega's schuiven gewoon aan.
+          </p>
+          <a href={DEMO_GESPREK.href} class="btn-secondary mt-auto self-start no-underline" style="margin-top:1.75rem">
+            Vraag een presentatie op locatie aan
+          </a>
+        </article>
+        <article class="flex flex-col rounded-2xl border-2 border-accent-500 bg-curanta-50/60 p-7" data-reveal style="--reveal-vertraging:80ms">
+          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-curanta-700">
+            <Icon naam="klok" class="h-5 w-5" />
+          </span>
+          <p class="mt-5 text-xs font-semibold uppercase tracking-wider text-curanta-700">Online, in uw eigen tempo</p>
+          <h3 class="mt-1 font-display text-2xl font-bold text-curanta-900">Bekijk de presentatie wanneer het u uitkomt</h3>
+          <p class="mt-3 leading-relaxed text-ink-700">
+            U krijgt een persoonlijke link naar een presentatie in korte video's, met de dia's en hoe het werkt in de
+            applicatie. U kijkt wanneer u wilt en zo vaak als u wilt. Zonder afspraak,
+            en zonder dat wij langskomen.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-ink-500">
+            Wil een collega ook kijken? Die krijgt een eigen uitnodiging. Een vraag stelt u onderaan de presentatie.
+          </p>
+          <a href="/presentatie" class="btn-primary mt-auto self-start no-underline" style="margin-top:1.75rem">
+            Vraag de online presentatie aan
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
   {/* 1b. Waarom nu opnieuw kiezen: de markt naast de prijs (15-10-2026). Per ontwikkeling het feit met bron,
       wat Curanta doet, en wat nog niet; zonder dat laatste beloofde de band meer dan er is. */}
   <section class="py-16 sm:py-20" aria-labelledby="waarom-nu-kop">
