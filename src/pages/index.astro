@@ -265,6 +265,34 @@ const plannen = [
 // licentie per actieve medewerker. Elk punt staat in het feitenblad: actieve medewerker, €19 voor
 // alleen het medewerkerportaal, gratis cliëntportaal, gebouwde koppelingen in het abonnement,
 // roostertoets met artikel, NIS2-incidentmodule (24 uur, 72 uur, één maand), export binnen 5 werkdagen.
+// Waarom nu opnieuw kiezen (besluit Jan 15-10-2026): drie ontwikkelingen uit het marktonderzoek van die dag
+// (Ponscura docs/campagne/marktonderzoek-2026-10-15.md), elk met de bron uit het feitenblad ("Marktcijfers",
+// aanvulling 15-10), wat Curanta er nu aan doet, en wat nog niet. Geen "ECD-prijzen dalen" en geen "leveranciers
+// verdwijnen" (geen bron). Het uitgebreide verhaal staat op /over.
+const waaromNu = [
+  {
+    icoon: 'koppeling',
+    kop: 'Minder leveranciers, dus meer afhankelijkheid',
+    markt: 'Per sector hebben nog ongeveer vijf leveranciers meer dan drie klanten. Tien jaar geleden waren dat er meer dan tien (M&I/Partners, januari 2026).',
+    curanta: 'Bij Curanta staat de prijs op de site, en u kunt weg met al uw gegevens.',
+    nogNiet: null,
+  },
+  {
+    icoon: 'mensen',
+    kop: 'De administratie moet omlaag',
+    markt: 'In 2030 mag administratie hooguit 20 procent van de werktijd kosten (Aanvullend Zorg- en Welzijnsakkoord, 2025). Vanaf dit najaar kunnen organisaties in de vvt en de ggz daar geld voor aanvragen (VWS, mei 2026).',
+    curanta: 'In Curanta stelt AI bij een SOEP-rapportage de E en de P voor, en vat het de overdracht tussen diensten samen. De zorgmedewerker beslist.',
+    nogNiet: 'Onderweg inspreken in het medewerkerportaal kan nog niet.',
+  },
+  {
+    icoon: 'schild',
+    kop: 'Beveiliging weegt zwaarder',
+    markt: 'Sinds 15 augustus 2026 geldt de Cyberbeveiligingswet, voor zorgaanbieders vanaf 50 fte. Het bestuur is ook verantwoordelijk voor de leveranciers die het kiest.',
+    curanta: 'Wie in de backoffice een zorg- of beheerrol heeft, logt altijd in met tweestapsverificatie. Het BSN is op veldniveau versleuteld, en de gegevens staan bij IONOS Cloud in Berlijn.',
+    nogNiet: 'De externe pentest en de NEN 7510-audit moeten nog plaatsvinden.',
+  },
+] as const;
+
 const voordelen = [
   {
     icoon: 'mensen',
@@ -353,11 +381,43 @@ const voordelen = [
     </div>
   </section>
 
+  {/* 1b. Waarom nu opnieuw kiezen: de markt naast de prijs (15-10-2026). Per ontwikkeling het feit met bron,
+      wat Curanta doet, en wat nog niet; zonder dat laatste beloofde de band meer dan er is. */}
+  <section class="py-16 sm:py-20" aria-labelledby="waarom-nu-kop">
+    <div class="container-prose">
+      <div class="grid gap-4 lg:grid-cols-12 lg:gap-14 lg:items-end" data-reveal>
+        <h2 id="waarom-nu-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl lg:col-span-5">
+          Waarom organisaties nu opnieuw kiezen
+        </h2>
+        <p class="text-lg leading-relaxed text-ink-700 lg:col-span-7">
+          Een zorgorganisatie kiest ongeveer eens in de tien jaar een nieuw ECD (M&amp;I/Partners, januari 2026). Wie nu
+          kiest, kiest in een markt die verandert. Drie dingen wegen zwaarder dan bij uw vorige keuze.
+        </p>
+      </div>
+      <ul class="mt-12 grid gap-6 md:grid-cols-3">
+        {waaromNu.map((w, i) => (
+          <li class="flex flex-col rounded-2xl border border-ink-200 bg-white p-6" data-reveal style={`--reveal-vertraging:${i * 80}ms`}>
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-curanta-50 text-curanta-700">
+              <Icon naam={w.icoon} class="h-5 w-5" />
+            </span>
+            <h3 class="mt-4 font-display text-lg font-bold text-curanta-900">{w.kop}</h3>
+            <p class="mt-2 leading-relaxed text-ink-700">{w.markt}</p>
+            <p class="mt-3 border-t border-ink-100 pt-3 leading-relaxed text-ink-900">{w.curanta}</p>
+            {w.nogNiet && <p class="mt-2 text-sm leading-relaxed text-ink-500">{w.nogNiet}</p>}
+          </li>
+        ))}
+      </ul>
+      <a href="/over" class="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-curanta-700 no-underline hover:underline">
+        Waarom Curanta bestaat, met de bronnen <Icon naam="pijl" class="h-4 w-4" />
+      </a>
+    </div>
+  </section>
+
   {/* 2. Wat u voor die prijs krijgt. De kop van de introductie belooft een prijs die u al weet; hier
       staat wat dat in een totaalbedrag betekent, en wat u nog meer anders krijgt. Rekenvoorbeeld en
       marktbandbreedte: feitenblad ("Rekenvoorbeeld brochure"), in dezelfde woorden als de brochure en
       /prijzen. Heldy staat er zonder link: het is zelf een leverancier van zorgsoftware. */}
-  <section class="py-16 sm:py-20" aria-labelledby="prijs-kop">
+  <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="prijs-kop">
     <div class="container-prose grid gap-12 lg:grid-cols-12 lg:gap-14">
       <div class="lg:col-span-5" data-reveal>
         <h2 id="prijs-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl">
