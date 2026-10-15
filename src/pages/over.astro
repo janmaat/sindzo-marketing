@@ -85,12 +85,12 @@ const gesprek = [
     subtitle="Jan Maat heeft sinds 2001 een eigen softwarebedrijf. Hij nam het initiatief tot Curanta. Samen met Erwin van der Star, die bijna vijftien jaar Vitaphone Nederland leidde, en Janus Hoeks, die in 1989 Intemo oprichtte, bouwen wij één systeem voor de zorg: het cliëntdossier, de planning, de declaratie en de kwaliteit, met portalen voor zorgmedewerkers, cliënten en mantelzorgers."
   />
 
-  {/* Kop links, tekst rechts (15-10-2026): de regels blijven rond 75 tekens (gemeten 15-10: 754 px bij 18 px), zoals in PageHero bedoeld, en de
+  {/* Kop links, tekst rechts (15-10-2026): tekst in 16 px zoals de rest van de site, in twee gelijke kolommen zodat de regels rond 75 tekens blijven (besluit Jan 15-10: 18 px was te groot), zoals in PageHero bedoeld, en de
       breedte van de pagina wordt toch gebruikt. Op een smal scherm staat de kop boven de tekst. */}
   <section class="container-prose py-16 space-y-12">
-    <div class="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16">
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16">
       <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Waarom Curanta bestaat</h2>
-      <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
+      <div class="space-y-4 text-ink-700 leading-relaxed">
           <p>
             Zorgmedewerkers besteden 34 procent van hun werktijd aan administratie, en 79 procent van hen ervaart dat
             als belastend (Berenschot, 2025). Dat komt niet doordat zorgverleners onwillig zijn. Het komt doordat hun
@@ -104,9 +104,9 @@ const gesprek = [
           </p>
       </div>
     </div>
-    <div class="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16 border-t border-ink-100 pt-10">
-      <h3 class="font-display text-lg font-semibold text-ink-900 sm:text-xl">De administratie moet omlaag, en AI mag daarbij helpen</h3>
-      <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 border-t border-ink-100 pt-10">
+      <h3 class="font-display text-lg font-semibold text-ink-900">De administratie moet omlaag, en AI mag daarbij helpen</h3>
+      <div class="space-y-4 text-ink-700 leading-relaxed">
           <p>
             Zorgpartijen en het kabinet hebben afgesproken dat administratie in 2030 hooguit 20 procent van de werktijd
             kost (Aanvullend Zorg- en Welzijnsakkoord, 2025). Ze beginnen met rapporteren door in te spreken, en met het
@@ -121,9 +121,9 @@ const gesprek = [
           </p>
       </div>
     </div>
-    <div class="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16 border-t border-ink-100 pt-10">
-      <h3 class="font-display text-lg font-semibold text-ink-900 sm:text-xl">Minder leveranciers, dus meer afhankelijkheid</h3>
-      <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 border-t border-ink-100 pt-10">
+      <h3 class="font-display text-lg font-semibold text-ink-900">Minder leveranciers, dus meer afhankelijkheid</h3>
+      <div class="space-y-4 text-ink-700 leading-relaxed">
           <p>
             Per sector hebben nog ongeveer vijf leveranciers meer dan drie grote klanten. Tien jaar geleden waren dat er
             meer dan tien (M&amp;I/Partners, januari 2026). Het ministerie van VWS schrijft over de "marktmacht van een
@@ -136,9 +136,9 @@ const gesprek = [
           </p>
       </div>
     </div>
-    <div class="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16 border-t border-ink-100 pt-10">
-      <h3 class="font-display text-lg font-semibold text-ink-900 sm:text-xl">Beveiliging weegt zwaarder dan bij uw vorige keuze</h3>
-      <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 border-t border-ink-100 pt-10">
+      <h3 class="font-display text-lg font-semibold text-ink-900">Beveiliging weegt zwaarder dan bij uw vorige keuze</h3>
+      <div class="space-y-4 text-ink-700 leading-relaxed">
           <p>
             Sinds 15 augustus 2026 geldt de Cyberbeveiligingswet. Elke zorgaanbieder vanaf 50 fte valt eronder. Het
             bestuur is er zelf verantwoordelijk voor, ook voor de leveranciers die het kiest. Volgens Z-CERT zijn
@@ -151,9 +151,9 @@ const gesprek = [
           </p>
       </div>
     </div>
-    <div class="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16">
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16">
       <div aria-hidden="true"></div>
-      <div class="text-lg text-ink-700 leading-relaxed">
+      <div class="text-ink-700 leading-relaxed">
           <p>
             Curanta is nieuw. De eerste implementatie loopt, bij een organisatie in de basis-ggz, maar in productie werkt
             er nog geen zorgorganisatie mee. Per onderdeel staat op deze site wat er al is.
@@ -164,12 +164,12 @@ const gesprek = [
 
   <section class="border-y border-ink-100 bg-ink-100/40 py-16">
     <div class="container-prose">
-      <div class="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16 lg:items-end">
+      <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 lg:items-end">
         <div>
           <span class="eyebrow">Wie wij zijn</span>
           <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">De mensen achter Curanta.</h2>
         </div>
-        <p class="text-lg text-ink-700 leading-relaxed">
+        <p class="text-ink-700 leading-relaxed">
           Erwin en Janus kennen de zorg en de techniek als ondernemers. Jan leidt het team dat de software bouwt. U
           spreekt dus rechtstreeks met de mensen die beslissen, niet met een callcenter of een ticketsysteem.
         </p>
@@ -198,14 +198,14 @@ const gesprek = [
   </section>
 
   <section class="container-prose py-16">
-    <div class="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16 lg:items-end">
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 lg:items-end">
       <div>
         <span class="eyebrow">Wat we oplossen</span>
         <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">
           Vier dingen waar een zorgorganisatie het eerst naar vraagt.
         </h2>
       </div>
-      <p class="text-lg text-ink-700 leading-relaxed">
+      <p class="text-ink-700 leading-relaxed">
         Bij een nieuw systeem gaat de eerste vraag zelden over functies. Hij gaat over de gegevens van cliënten, de
         overstap, de tijd van zorgmedewerkers en de regels. Dit doet Curanta daarmee.
       </p>
