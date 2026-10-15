@@ -2,65 +2,161 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
+
+// De drie mensen achter Curanta. Elk feit hier staat in het feitenblad (rij "Mensen", besluit Jan 15-10-2026),
+// met dezelfde levensloop als op sigillum.nl/over, maar zonder het notariaat: Curanta gaat over de zorg.
+const mensen = [
+  {
+    rol: 'Founder en CTO',
+    naam: 'Jan Maat',
+    tekst:
+      'Jan werkt sinds 1997 in de software, en sinds 2001 heeft hij een eigen softwarebedrijf. Daarmee bouwde hij software voor organisaties in veel verschillende branches. Curanta is zijn initiatief. Als CTO leidt hij de techniek, en hij bouwt het product.',
+  },
+  {
+    rol: 'Co-founder en CEO',
+    naam: 'Erwin C.A. van der Star',
+    tekst:
+      'Erwin richtte in 1990 een softwarebedrijf op en leidde het tien jaar als directeur en grootaandeelhouder. Daarna ging hij de zorg in. Hij richtte Vitaphone Nederland op en leidde het bijna vijftien jaar. Met Massyst Group en PicoCare Europe bouwt hij bedrijven die zorginnovaties ontwikkelen en op de markt brengen. Bij Curanta komen zijn twee vakken samen, nu als CEO.',
+  },
+  {
+    rol: 'Co-founder en COO',
+    naam: 'Janus Hoeks',
+    tekst:
+      "Janus richtte in 1989 Intemo op. Het bedrijf maakt industriële computers en panel-pc's voor klanten in heel Europa, en hij is er nog altijd eigenaar van. Hij was ook directeur van Niteon en ECOserver. Sinds 2025 is hij samen met Erwin co-founder van Massyst Group en PicoCare Europe. Bij Curanta zorgt hij als COO voor de bedrijfsvoering, met zijn ervaring in het opbouwen van technologiebedrijven.",
+  },
+];
+
+// Wat we oplossen: de vier dingen waar een zorgorganisatie het eerst naar vraagt. Elke zin komt uit het
+// feitenblad (hosting, subverwerkers, BSN, migratie, export en exit, medewerkerportaal, offline, roostertoets,
+// NEN 7510, NIS2).
+const themas = [
+  {
+    eyebrow: 'Gegevens',
+    titel: 'Waar de gegevens van uw cliënten staan',
+    tekst:
+      'Het cliëntdossier staat bij IONOS Cloud in Berlijn, binnen de EU. Het BSN is op veldniveau versleuteld. Cliënten en mantelzorgers werken in een eigen cliëntportaal, los van de backoffice. Zet u de AI-functies aan, dan gaan gegevens naar Anthropic in de VS. Ze zijn dan gepseudonimiseerd, en voor de doorgifte gelden de modelcontractbepalingen (SCC). Zonder die functies gaat er niets heen.',
+  },
+  {
+    eyebrow: 'Overstappen',
+    titel: 'Overstappen zonder open einde',
+    tekst:
+      'Een kant-en-klare import uit uw huidige ECD is er niet. Wij maken eerst een migratie-inschatting, en daarna is de overstap een project tegen een vaste prijs die u vooraf weet. Uw gegevens blijven van u: bij vertrek krijgt u binnen 5 werkdagen een volledige export van uw gegevens en bestanden in JSON.',
+  },
+  {
+    eyebrow: 'Administratie',
+    titel: 'Rapporteren bij de cliënt, niet achteraf',
+    tekst:
+      'Op het medewerkerportaal ziet de zorgmedewerker haar rooster, de bezoeken met hun taken en het zorgplan. De SOEP-rapportage schrijft zij bij het bezoek zelf. Het portaal werkt ook zonder bereik: wat zij dan vastlegt, blijft versleuteld op de telefoon tot het verstuurd kan worden.',
+  },
+  {
+    eyebrow: 'Regels',
+    titel: 'De regels in het werk zelf',
+    tekst:
+      'Bij het plannen toetst Curanta het rooster aan de Arbeidstijdenwet, met het artikel bij elke melding. Voor NEN 7510:2024 is er een controlesuite; de externe audit staat gepland voor het vierde kwartaal van 2026, en gecertificeerd zijn wij nog niet. Voor de Cyberbeveiligingswet (NIS2) is er een module voor het melden van incidenten.',
+  },
+];
+
+const principes: { titel: string; tekst: string; link?: { href: string; label: string } }[] = [
+  { titel: 'Open over de stand van zaken', tekst: 'Over beveiliging, privacy en koppelingen staat in het Trust Centre wat geregeld is, wat in uitvoering is en wat nog niet. Dat is openbaar, niet pas in een aanbesteding.' },
+  { titel: 'Uw werkwijze eerst', tekst: 'Wij vragen in een demonstratie naar uw werkstromen, niet naar een lijst eisen. Een systeem dat alles aanvinkt maar niet past, schiet tekort.' },
+  { titel: 'Geen overdracht', tekst: 'Wie u spreekt in de aanloop, blijft uw aanspreekpunt na de ingebruikname. Er is geen implementatieteam dat het overneemt.' },
+  { titel: 'Modulair', tekst: 'U zet aan wat u nodig hebt, en later bijzetten kan zonder overstap. Geen pakket waarin u zelf moet uitzoeken wat u gebruikt.' },
+  { titel: 'Meertalig cliëntportaal', tekst: 'De menu’s en vaste teksten van het cliëntportaal zijn er in vijf talen: Nederlands, Engels, Turks, Arabisch en Duits. Dat is voor cliënten en familie die het portaal liever in hun eigen taal gebruiken.' },
+  { titel: 'Uw organisatie bepaalt mee', tekst: 'Maximaal drie organisaties worden founding partner. Zij bepalen mee wat er eerst komt, en houden 36 maanden een vaste prijs. Er zijn nog twee plekken.', link: { href: '/cases#founding', label: 'Wat een founding partner krijgt' } },
+];
+
+const gesprek = [
+  { titel: 'U noemt twee of drie knelpunten', tekst: 'Waar het rapporteren tijd kost, waar de overdracht tussen diensten misgaat, of waar declaraties blijven hangen.' },
+  { titel: 'Wij laten zien wat Curanta daarbij doet', tekst: 'Wij laten alleen zien wat bij die knelpunten hoort. En we zeggen erbij wat u nog moet laten aansluiten of instellen.' },
+  { titel: 'Samen bepalen we de volgende stap', tekst: 'Demo-toegang voor u en uw collega’s, een gesprek over beveiliging en privacy, of een migratie-inschatting.' },
+];
 ---
 <Base
   image="/og/over.png"
   title="Over Curanta: wie wij zijn en waarom | Curanta"
-  description="Wie Curanta is, waarom het bestaat en waar het bedrijf staat: Helmond, hosting in de EU, en de status per onderdeel van het product."
+  description="De mensen achter Curanta, waarom wij zorgsoftware bouwen, en wat u van ons kunt verwachten: hosting in de EU, een eerlijke stand per onderdeel en één aanspreekpunt."
 >
   <PageHero
     eyebrow="Over Curanta"
-    title="Gebouwd voor de Nederlandse zorg."
-    subtitle="Wij bouwen zorgsoftware voor de Nederlandse zorgpraktijk: VVT, gehandicaptenzorg en GGZ. Curanta is nieuw: de eerste implementatie loopt, maar in productie werkt er nog geen zorgorganisatie mee. Per onderdeel staat op deze site wat er al is."
+    title="Wie Curanta bouwt, en waarom."
+    subtitle="Jan Maat heeft sinds 2001 een eigen softwarebedrijf. Hij nam het initiatief tot Curanta. Samen met Erwin van der Star, die bijna vijftien jaar Vitaphone Nederland leidde, en Janus Hoeks, die in 1989 Intemo oprichtte, bouwen wij één systeem voor de zorg: het cliëntdossier, de planning, de declaratie en de kwaliteit, met portalen voor zorgmedewerkers, cliënten en mantelzorgers."
   />
 
   <section class="container-prose py-16">
-    <div class="grid gap-12 lg:grid-cols-2">
-      <article class="prose-content">
-        <h2 class="font-display text-2xl font-bold text-ink-900">Waarom Curanta bestaat</h2>
-        <p class="mt-4 text-ink-700 leading-relaxed">
-          De Nederlandse zorg loopt vast op administratieve last. Dat komt niet doordat zorgverleners
-          onwillig zijn. Het komt doordat de software die zij gebruiken vaak is ontworpen voor de
-          boekhouder, niet voor de wijkverpleegkundige om 22:00 uur. Wij geloven dat software in de zorg de stille partner moet
-          zijn: er als het nodig is, weg als het niet nodig is.
-        </p>
-        <p class="mt-4 text-ink-700 leading-relaxed">
-          Daarom bouwen wij Curanta: één modulair systeem dat met de zorg meegroeit, en haar niet
-          dwingt tot ons proces. Met een medewerkerportaal op de telefoon, zodat de zorgmedewerker bij
-          de cliënt kan rapporteren. Met één dossier, zodat niemand dezelfde feiten drie keer hoeft in
-          te voeren. Met een Trust Centre dat helder maakt wat wel en niet kan voor er een audit komt.
-        </p>
-      </article>
-
-      <article class="prose-content">
-        <h2 class="font-display text-2xl font-bold text-ink-900">Wie zit erachter</h2>
-        <p class="mt-4 text-ink-700 leading-relaxed">
-          <strong>Curanta</strong> is een Nederlands bedrijf uit Helmond. Curanta is een handelsnaam
-          van Maat Holding B.V.
-        </p>
-        <p class="mt-4 text-ink-700 leading-relaxed">
-          Wij zijn nieuw en klein. Dat betekent korte lijnen: u spreekt rechtstreeks met Curanta,
-          niet met een callcenter of een ticketsysteem.
-        </p>
-      </article>
+    <div class="max-w-3xl">
+      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Waarom Curanta bestaat</h2>
+      <p class="mt-4 text-ink-700 leading-relaxed">
+        Zorgmedewerkers besteden 34 procent van hun werktijd aan administratie, en 79 procent van hen ervaart dat
+        als belastend (Berenschot, 2025). Intussen groeit het tekort aan personeel: van 89.800 mensen in 2026 naar
+        261.800 in 2035 (ABF Research, AZW, februari 2026). Dat komt niet doordat zorgverleners onwillig zijn. Het
+        komt doordat hun software vaak is ontworpen voor de boekhouder, niet voor de wijkverpleegkundige om 22:00 uur.
+      </p>
+      <p class="mt-4 text-ink-700 leading-relaxed">
+        Een zorgorganisatie kiest ongeveer eens in de tien jaar een nieuw ECD (M&amp;I/Partners, januari 2026). Wie nu
+        kiest, kiest dus voor de jaren waarin er minder handen zijn voor meer cliënten. Die keuze verdient software
+        die tijd teruggeeft.
+      </p>
+      <p class="mt-4 text-ink-700 leading-relaxed">
+        Curanta is nieuw. De eerste implementatie loopt, bij een organisatie in de basis-ggz, maar in productie werkt
+        er nog geen zorgorganisatie mee. Per onderdeel staat op deze site wat er al is.
+      </p>
     </div>
   </section>
 
   <section class="border-y border-ink-100 bg-ink-100/40 py-16">
     <div class="container-prose">
-      <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Onze principes</h2>
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        {[
-          { title: 'Open over de stand van zaken', body: 'Over beveiliging, privacy en koppelingen staat in het Trust Centre wat geregeld is, wat in uitvoering is en wat nog niet. Dat is openbaar, niet pas in een aanbesteding.' },
-          { title: 'Uw werkwijze eerst', body: 'Wij vragen in een demo naar uw werkstromen, niet naar een lijst eisen. Een systeem dat alles aanvinkt maar niet past, schiet tekort.' },
-          { title: 'Geen overdracht', body: 'Wie u spreekt in de aanloop, blijft uw aanspreekpunt na de ingebruikname. Er is geen implementatieteam dat het overneemt.' },
-          { title: 'Modulair', body: 'U zet aan wat u nodig hebt, en later bijzetten kan zonder overstap. Geen pakket waarin u zelf moet uitzoeken wat u gebruikt.' },
-          { title: 'Nederlands bedrijf, hosting in de EU', body: 'Hosting bij IONOS Cloud in Berlijn, ondersteuning op Nederlandse werktijden, Nederlands recht. Uw gegevens zijn van u; de exit staat in de voorwaarden.' },
-          { title: 'Meertalig cliëntportaal', body: 'De menu’s en vaste teksten van het cliëntportaal zijn er in vijf talen: Nederlands, Engels, Turks, Arabisch en Duits. Dat is voor cliënten en familie die het portaal liever in hun eigen taal gebruiken.' },
-        ].map((p) => (
+      <span class="eyebrow">Wie wij zijn</span>
+      <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">De mensen achter Curanta.</h2>
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        {mensen.map((m) => (
           <article class="rounded-xl border border-ink-100 bg-white p-6">
-            <h3 class="font-display text-lg font-semibold text-ink-900">{p.title}</h3>
-            <p class="mt-2 text-sm text-ink-700 leading-relaxed">{p.body}</p>
+            <p class="text-xs font-semibold uppercase tracking-wider text-curanta-700">{m.rol}</p>
+            <h3 class="mt-2 font-display text-xl font-semibold text-ink-900">{m.naam}</h3>
+            <p class="mt-3 text-sm text-ink-700 leading-relaxed">{m.tekst}</p>
+          </article>
+        ))}
+      </div>
+      <p class="mt-8 max-w-3xl text-ink-700 leading-relaxed">
+        Erwin en Janus kennen de zorg en de techniek als ondernemers, en Jan bouwt de software. U spreekt dus
+        rechtstreeks met de mensen die beslissen, niet met een callcenter of een ticketsysteem.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-prose py-16">
+    <span class="eyebrow">Wat we oplossen</span>
+    <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">
+      Vier dingen waar een zorgorganisatie het eerst naar vraagt.
+    </h2>
+    <p class="mt-4 max-w-3xl text-ink-700 leading-relaxed">
+      Bij een nieuw systeem gaat de eerste vraag zelden over functies. Hij gaat over de gegevens van cliënten, de
+      overstap, de tijd van zorgmedewerkers en de regels. Dit doet Curanta daarmee.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {themas.map((t) => (
+        <article class="rounded-xl border border-ink-100 bg-white p-6">
+          <p class="text-xs font-semibold uppercase tracking-wider text-curanta-700">{t.eyebrow}</p>
+          <h3 class="mt-2 font-display text-lg font-semibold text-ink-900">{t.titel}</h3>
+          <p class="mt-2 text-sm text-ink-700 leading-relaxed">{t.tekst}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-y border-ink-100 bg-ink-100/40 py-16">
+    <div class="container-prose">
+      <span class="eyebrow">Wat u van ons kunt verwachten</span>
+      <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">Onze principes</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {principes.map((p) => (
+          <article class="rounded-xl border border-ink-100 bg-white p-6">
+            <h3 class="font-display text-lg font-semibold text-ink-900">{p.titel}</h3>
+            <p class="mt-2 text-sm text-ink-700 leading-relaxed">{p.tekst}</p>
+            {p.link && (
+              <a href={p.link.href} class="mt-3 inline-block text-sm font-semibold text-curanta-700 hover:underline">
+                {p.link.label} →
+              </a>
+            )}
           </article>
         ))}
       </div>
@@ -68,6 +164,19 @@ import Cta from '../components/Cta.astro';
   </section>
 
   <section class="container-prose py-16">
+    <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Zo gaat een eerste gesprek.</h2>
+    <ol class="mt-10 grid gap-6 md:grid-cols-3">
+      {gesprek.map((s, i) => (
+        <li class="rounded-xl border border-ink-100 bg-white p-6">
+          <span class="font-display text-sm font-semibold text-curanta-700">Stap {i + 1}</span>
+          <h3 class="mt-2 font-display text-lg font-semibold text-ink-900">{s.titel}</h3>
+          <p class="mt-2 text-sm text-ink-700 leading-relaxed">{s.tekst}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="container-prose pb-16">
     <div class="rounded-2xl border border-ink-100 bg-white p-8">
       <h2 class="font-display text-2xl font-bold text-ink-900">Bedrijfsgegevens</h2>
       <dl class="mt-6 grid gap-4 sm:grid-cols-2">
@@ -86,6 +195,10 @@ import Cta from '../components/Cta.astro';
         <div>
           <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Vestiging</dt>
           <dd class="mt-1 text-ink-900">Marshallstraat 26, 5705 CN Helmond, Nederland</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Telefoon</dt>
+          <dd class="mt-1"><a href="tel:+31852501301" class="text-curanta-700 hover:underline">085 250 1301</a></dd>
         </div>
         <div>
           <dt class="text-xs font-semibold uppercase tracking-wider text-ink-500">Algemeen contact</dt>
