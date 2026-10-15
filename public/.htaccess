@@ -27,6 +27,10 @@
   RewriteCond %{HTTP_HOST} ^www\.curanta\.nl$ [NC]
   RewriteRule ^ https://curanta.nl%{REQUEST_URI} [R=301,L]
 
+  # ----- Gangbare adressen voor de over-pagina -> /over -----
+  # Wie "over ons" zoekt, typt /ons of /over-ons (zoals bij sigillum.nl); de pagina heet /over.
+  RewriteRule ^(ons|over-ons)/?$ https://%{HTTP_HOST}/over [R=301,L]
+
   # ----- /pad/index.html en /index.html -> 301 naar de schone URL -----
   # THE_REQUEST is de oorspronkelijke verzoekregel, dus de interne rewrite
   # hieronder naar /pad/index.html komt hier niet in een lus.
@@ -67,7 +71,7 @@
 
   # Logo, favicons en og-afbeeldingen: een week. Ze hebben geen hash in de naam, dus niet
   # immutable; een week is lang genoeg voor de herhaalbezoeker en kort genoeg na een wijziging.
-  <FilesMatch "\.(svg|png|ico)$">
+  <FilesMatch "\.(svg|png|ico|webp)$">
     Header set Cache-Control "public, max-age=604800"
   </FilesMatch>
 

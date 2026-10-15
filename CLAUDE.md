@@ -15,7 +15,8 @@ site met `site-inhoudscontrole` (beide in `D:\Repos\Ponscura\.claude\skills\`).
 - De site plaatst geen cookies en laadt geen meetdienst van derden; alleen de eigen cookieloze
   bezoekmeting van app.curanta.nl (feitenblad, besluit Jan 25-09-2026).
 - Persoonsnamen alleen op /over: Jan Maat, Erwin C.A. van der Star en Janus Hoeks, met de levensloop uit het
-  feitenblad (besluit Jan 15-10-2026). Elders "Curanta" of "wij". Geen "team" en geen Ponscura op de site;
+  feitenblad (besluit Jan 15-10-2026). Elders "Curanta" of "wij". "Ons team" alleen daar, bij wie het product
+  bouwde; nooit een teamgrootte of "implementatieteam". Geen Ponscura op de site;
   "Curanta is een handelsnaam van Maat Holding B.V." in footer, /over en /voorwaarden.
 - De twee demoknoppen staan in `src/config/demo.ts`: tekst overal gelijk, bestemming per branch.
 - Geen klantlogo's, citaten, klantaantallen of casussen. De eerste implementatie loopt sinds oktober 2026,

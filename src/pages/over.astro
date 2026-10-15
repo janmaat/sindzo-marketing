@@ -9,18 +9,21 @@ const mensen = [
   {
     rol: 'Founder en CTO',
     naam: 'Jan Maat',
+    foto: 'jan-maat',
     tekst:
-      'Jan werkt sinds 1997 in de software, en sinds 2001 heeft hij een eigen softwarebedrijf. Daarmee bouwde hij software voor organisaties in veel verschillende branches. Curanta is zijn initiatief. Als CTO leidt hij de techniek, en hij bouwt het product.',
+      'Jan werkt sinds 1997 in de software, en sinds 2001 heeft hij een eigen softwarebedrijf. Daarmee bouwde hij software voor organisaties in veel verschillende branches. Curanta is zijn initiatief. Als CTO leidt hij de techniek, en samen met ons team bouwde hij het product.',
   },
   {
     rol: 'Co-founder en CEO',
     naam: 'Erwin C.A. van der Star',
+    foto: 'erwin-van-der-star',
     tekst:
       'Erwin richtte in 1990 een softwarebedrijf op en leidde het tien jaar als directeur en grootaandeelhouder. Daarna ging hij de zorg in. Hij richtte Vitaphone Nederland op en leidde het bijna vijftien jaar. Met Massyst Group en PicoCare Europe bouwt hij bedrijven die zorginnovaties ontwikkelen en op de markt brengen. Bij Curanta komen zijn twee vakken samen, nu als CEO.',
   },
   {
     rol: 'Co-founder en COO',
     naam: 'Janus Hoeks',
+    foto: 'janus-hoeks',
     tekst:
       "Janus richtte in 1989 Intemo op. Het bedrijf maakt industriële computers en panel-pc's voor klanten in heel Europa, en hij is er nog altijd eigenaar van. Hij was ook directeur van Niteon en ECOserver. Sinds 2025 is hij samen met Erwin co-founder van Massyst Group en PicoCare Europe. Bij Curanta zorgt hij als COO voor de bedrijfsvoering, met zijn ervaring in het opbouwen van technologiebedrijven.",
   },
@@ -110,6 +113,17 @@ const gesprek = [
       <div class="mt-10 grid gap-6 lg:grid-cols-3">
         {mensen.map((m) => (
           <article class="rounded-xl border border-ink-100 bg-white p-6">
+            {/* Dezelfde portretten als op sigillum.nl/over (public/images/over, 160 en 320 px). */}
+            <img
+              src={`/images/over/${m.foto}-160.webp`}
+              srcset={`/images/over/${m.foto}-160.webp 160w, /images/over/${m.foto}-320.webp 320w`}
+              sizes="88px"
+              width="88"
+              height="88"
+              loading="lazy"
+              alt={`Portret van ${m.naam}`}
+              class="mb-4 h-[88px] w-[88px] rounded-full object-cover ring-1 ring-ink-100"
+            />
             <p class="text-xs font-semibold uppercase tracking-wider text-curanta-700">{m.rol}</p>
             <h3 class="mt-2 font-display text-xl font-semibold text-ink-900">{m.naam}</h3>
             <p class="mt-3 text-sm text-ink-700 leading-relaxed">{m.tekst}</p>
@@ -117,8 +131,8 @@ const gesprek = [
         ))}
       </div>
       <p class="mt-8 max-w-3xl text-ink-700 leading-relaxed">
-        Erwin en Janus kennen de zorg en de techniek als ondernemers, en Jan bouwt de software. U spreekt dus
-        rechtstreeks met de mensen die beslissen, niet met een callcenter of een ticketsysteem.
+        Erwin en Janus kennen de zorg en de techniek als ondernemers. Jan leidt het team dat de software bouwt. U
+        spreekt dus rechtstreeks met de mensen die beslissen, niet met een callcenter of een ticketsysteem.
       </p>
     </div>
   </section>

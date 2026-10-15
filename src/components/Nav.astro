@@ -8,6 +8,7 @@ const links = [
   { label: 'Overstappen', href: '/overstappen' },
   { label: 'Trust Centre', href: '/trust' },
   { label: 'Prijzen', href: '/prijzen' },
+  { label: 'Over ons', href: '/over' },
 ];
 const huidig = Astro.url.pathname.replace(/\/$/, '') || '/';
 const actief = (href: string) => huidig === href || huidig.startsWith(href + '/');
@@ -17,12 +18,14 @@ const actief = (href: string) => huidig === href || huidig.startsWith(href + '/'
     <a href="/" class="flex items-center gap-2 no-underline rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-600" aria-label="Curanta, naar de homepage">
       <img src="/logo/curanta-logo.svg" alt="Curanta" class="h-10 w-auto" width="135" height="40" />
     </a>
-    <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-ink-700" aria-label="Hoofdmenu">
+    {/* Zeven links plus de demoknop passen op 1024 px alleen met een kleinere tussenruimte; zonder
+        whitespace-nowrap braken "Voor wie", "Trust Centre" en "Over ons" daar over twee regels. */}
+    <nav class="hidden lg:flex items-center gap-4 xl:gap-7 text-sm font-medium text-ink-700" aria-label="Hoofdmenu">
       {links.map((l) => (
         <a
           href={l.href}
           aria-current={actief(l.href) ? 'page' : undefined}
-          class={`no-underline rounded transition hover:text-curanta-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-600 ${actief(l.href) ? 'text-curanta-900 underline decoration-accent-500 decoration-2 underline-offset-8' : ''}`}
+          class={`whitespace-nowrap no-underline rounded transition hover:text-curanta-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-600 ${actief(l.href) ? 'text-curanta-900 underline decoration-accent-500 decoration-2 underline-offset-8' : ''}`}
         >{l.label}</a>
       ))}
     </nav>
@@ -30,7 +33,7 @@ const actief = (href: string) => huidig === href || huidig.startsWith(href + '/'
       <a href="/login" class="hidden xl:inline text-sm font-medium text-ink-700 hover:text-curanta-900 no-underline">Inloggen</a>
       {/* Naar de demo-omgeving: die legt uit wat u kunt bekijken en hoe u toegang aanvraagt.
           Tekst en bestemming staan in src/config/demo.ts. */}
-      <a href={DEMO_ZELF.href} class="btn-primary no-underline hidden sm:inline-flex">{DEMO_ZELF.label}</a>
+      <a href={DEMO_ZELF.href} class="btn-primary no-underline hidden sm:inline-flex whitespace-nowrap">{DEMO_ZELF.label}</a>
 
       {/* Telefoon en tablet: het menu in een <details>, zonder script. Werkt met het toetsenbord
           (Enter of spatie op "Menu") en een schermlezer leest het als uitklapbaar. */}
