@@ -15,6 +15,16 @@
   # mod_dir redirect). AllowNoSlash laat onze regels die URL's wel afhandelen.
   RewriteOptions AllowNoSlash
 
+  # ----- Scanpaden: 403, zonder de 404-pagina -----
+  # De site is statisch: geen PHP, geen WordPress, geen .env of .git. Wie daarnaar vraagt, is een
+  # scanner. Een 403 hier is goedkoop (de 404-pagina zou ook nog de bezoekmeting laden en elke scan als
+  # bezoek tellen), en Fail2Ban in Plesk blokkeert een adres dat er tien binnen tien minuten haalt
+  # (ADR 2026-10-16-herkomstbeveiliging in de Ponscura-repo; dezelfde lijst als op de app-hosts).
+  # De certificaatvalidatie van Let's Encrypt komt hier nooit langs: die staat in /.well-known/.
+  RewriteRule (^|/)\.(env|git|svn|hg|aws|ssh|docker|vscode|idea|ds_store|htpasswd|bash_history)(/|$|\.) - [F,L,NC]
+  RewriteRule (^|/)(wp-admin|wp-includes|wp-content|wp-login|wordpress|phpmyadmin|phpinfo|adminer|cgi-bin|xmlrpc\.php|wlwmanifest\.xml|server-status|vendor/phpunit|eval-stdin) - [F,L,NC]
+  RewriteRule \.(php|phtml|asp|aspx|cgi|jsp|sh|bak|sql|cfg|ini|old|swp|env|7z|rar)$ - [F,L,NC]
+
   # ----- HTTPS afdwingen -----
   # Plesk zet HTTPS-detectie via X-Forwarded-Proto bij nginx-proxy.
   RewriteCond %{HTTPS} !=on
@@ -88,6 +98,13 @@
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
   # X-Frame-Options voor oudere browsers; CSP frame-ancestors voor moderne
   Header always set X-Frame-Options "DENY"
+  # Content-Security-Policy (16-10-2026). Alleen eigen bestanden, plus demo.curanta.nl (bezoekmeting
+  # en demoformulier) en app.curanta.nl (presentatieformulier). 'unsafe-inline' blijft nodig voor de
+  # inline scripts van Astro; zonder dat zou elke build nieuwe hashes vragen. Wat de policy wél tegenhoudt:
+  # scripts en verbindingen naar andere domeinen, formulieren naar elders, inlijsten, <base> en plug-ins.
+  # Getoetst op alle 36 pagina's in Chromium (0 meldingen); een strengere tegenproef gaf er 296.
+  # Komt er een externe bron bij (een video, een kaart), dan moet die hier bij.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://demo.curanta.nl; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://demo.curanta.nl https://app.curanta.nl; form-action 'self' https://demo.curanta.nl https://app.curanta.nl; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
 </IfModule>
 
 # ----- MIME-types die Apache standaard mist -----
