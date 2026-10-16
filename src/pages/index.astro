@@ -133,7 +133,7 @@ const voorbeelden: Voorbeeld[] = [
     statussen: [
       { status: 'demo', tekst: 'Dossier, zorgplan, rapportage en cliëntportaal' },
     ],
-    ai: 'Twee plekken gebruiken op verzoek een taalmodel: de rapportage in de backoffice (een voorstel voor de evaluatie en het plan) en de samenvatting van het zorgplan in gewone taal voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en begrijpt de cliënt het? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. Het taalmodel werkt alleen als uw organisatie de AI-functies aanzet. De gegevens gaan dan gepseudonimiseerd naar Anthropic in de VS.',
+    ai: 'Twee plekken gebruiken op verzoek een taalmodel: de rapportage in de backoffice (een voorstel voor de evaluatie en het plan) en de samenvatting van het zorgplan in gewone taal voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en begrijpt de cliënt het? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. De gegevens gaan gepseudonimiseerd naar het taalmodel: standaard bij Mistral AI, via het EU-endpoint, en alleen als uw organisatie daar zelf voor kiest naar Anthropic in de VS.',
     link: { label: 'Alle onderdelen van het dossier', href: '/oplossing#ecd' },
     beelden: [
       {
@@ -312,8 +312,8 @@ const aiAct = [
   },
   {
     icoon: 'slot',
-    kop: 'U zet het aan, of niet',
-    tekst: 'Het taalmodel werkt alleen als uw organisatie de AI-functies aanzet. Wat er naartoe gaat, is gepseudonimiseerd.',
+    kop: 'U bepaalt waar het draait',
+    tekst: 'Standaard draait de AI bij Mistral AI, via het EU-endpoint, zonder dat Mistral de gegevens bewaart of ermee traint. Uw organisatie kan ook Anthropic (VS) kiezen, of AI in één keer uitzetten. Wat er naartoe gaat, is gepseudonimiseerd.',
   },
 ] as const;
 
@@ -783,7 +783,7 @@ const voordelen = [
               <Icon naam="vink" class="h-5 w-5 text-accent-500" /> Geregeld
             </h3>
             <ul class="mt-4 space-y-3 text-curanta-100">
-              <li>De applicatie en de databases staan bij IONOS, een Europees bedrijf, in Berlijn. Zet u de AI-functies of digitaal ondertekenen aan, dan lopen die via Amerikaanse bedrijven (Anthropic, DocuSign), met modelcontractbepalingen.</li>
+              <li>De applicatie en de databases staan bij IONOS, een Europees bedrijf, in Berlijn. De AI-functies draaien standaard bij Mistral AI, een Frans bedrijf, via het EU-endpoint; Mistral bewaart de gegevens niet en traint er niet mee. Kiest uw organisatie zelf voor Anthropic, of zet u digitaal ondertekenen aan, dan lopen die via Amerikaanse bedrijven (Anthropic, DocuSign), met modelcontractbepalingen.</li>
               <li>Het BSN is op veldniveau versleuteld (AES-256-GCM).</li>
               <li>Wie in de backoffice een zorg- of beheerrol heeft, logt in met tweestapsverificatie. Dat is verplicht.</li>
               <li>Elke inzage in een dossier komt in een logboek (NEN 7513). Wordt dat logboek achteraf gewijzigd, dan is dat aan te tonen.</li>
