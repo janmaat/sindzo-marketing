@@ -3,6 +3,8 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import { DEMO_GESPREK } from '../../config/demo';
+import { Picture } from 'astro:assets';
+import presentatieVideo from '../../assets/schermen/presentatie-video.jpg';
 
 // Een presentatie aanvragen (besluit Jan 15-10-2026, ADR 2026-10-11 "Wijziging 15-10-2026" in Ponscura).
 // De aanvraag gaat naar app.curanta.nl (POST /api/presentatie-aanvraag). Jan beoordeelt hem daar; keurt hij hem
@@ -21,6 +23,18 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
     title="Bekijk Curanta wanneer het u uitkomt."
     subtitle="Vraag een persoonlijke presentatie aan. U bekijkt hem in uw browser: de presentatie in korte video's, de dia's, en hoe het werkt in de applicatie. Zonder afspraak, en zo vaak als u wilt."
   />
+
+  <section class="container-prose pt-12">
+    <figure class="mx-auto max-w-4xl">
+      <div class="overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm">
+        <Picture src={presentatieVideo} formats={['avif', 'webp']} width={1266} sizes="(min-width: 960px) 900px, 100vw"
+                 alt="presentatie.curanta.nl: het deel 'Het werk in de wijk' van de presentatie voor de wijkverpleging, met een dia over het planbord, ondertiteling en rechts de vijf delen van de presentatie." />
+      </div>
+      <figcaption class="mt-3 text-center text-sm text-ink-500">
+        Zo ziet uw presentatie eruit: korte video's met ondertiteling, de dia's, en schermvideo's uit Curanta zelf.
+      </figcaption>
+    </figure>
+  </section>
 
   <section class="container-prose py-16">
     <div class="grid gap-12 lg:grid-cols-[1fr_320px]">

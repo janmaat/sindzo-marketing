@@ -45,6 +45,8 @@ import rapportage from '../assets/schermen/mw-rapportage.jpg';
 import portaalZorgplan from '../assets/schermen/pc-zorgplan.jpg';
 import planbord from '../assets/schermen/bo-planbord.jpg';
 import rooster from '../assets/schermen/mw-rooster.jpg';
+import presentatieVideo from '../assets/schermen/presentatie-video.jpg';
+import presentatieRubriek from '../assets/schermen/presentatie-rubriek.jpg';
 import productie from '../assets/schermen/bo-productie.jpg';
 import vim from '../assets/schermen/bo-vim.jpg';
 import fotoVvt from '../assets/fotos/vvt-verzorgende-bewoner.jpg';
@@ -452,6 +454,28 @@ const voordelen = [
             Vraag de online presentatie aan
           </a>
         </article>
+      </div>
+      {/* Een kijkje in presentatie.curanta.nl, opgenomen 16-10-2026 met een testuitnodiging ("Curanta (voorbeeld)",
+          zonder de kopbalk met de naam van de kijker). Echte schermen van de presentatieomgeving, geen demo. */}
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <figure data-reveal>
+          <div class="overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm">
+            <Picture src={presentatieVideo} formats={['avif', 'webp']} width={1266} sizes="(min-width: 768px) 560px, 100vw"
+                     alt="presentatie.curanta.nl: het deel 'Het werk in de wijk' van de presentatie voor de wijkverpleging, met een dia over het planbord, ondertiteling en rechts de vijf delen van de presentatie." loading="lazy" />
+          </div>
+          <figcaption class="mt-3 text-sm leading-relaxed text-ink-500">
+            De presentatie in korte video's, met ondertiteling. U kiest zelf welk deel u bekijkt.
+          </figcaption>
+        </figure>
+        <figure data-reveal style="--reveal-vertraging:80ms">
+          <div class="overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm">
+            <Picture src={presentatieRubriek} formats={['avif', 'webp']} width={1266} sizes="(min-width: 768px) 560px, 100vw"
+                     alt="presentatie.curanta.nl: het onderdeel 'Het cliëntdossier' met negen schermvideo's uit Curanta zelf, van het Omaha-overzicht tot het zorgplan lezen en beoordelen." loading="lazy" />
+          </div>
+          <figcaption class="mt-3 text-sm leading-relaxed text-ink-500">
+            Daarnaast schermvideo's uit Curanta zelf, per onderwerp: hier het cliëntdossier.
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
