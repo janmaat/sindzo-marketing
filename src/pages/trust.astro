@@ -50,8 +50,8 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
     items: [
       { label: 'Functionaris gegevensbescherming', stand: 'niet', note: 'Nog niet aangesteld. Een externe FG volgt vóór de eerste zorgorganisatie met echte cliëntgegevens.' },
       { label: 'Verwerkersovereenkomst', stand: 'uitvoering', note: 'Wij stellen hem op aanvraag op, zonder geheimhoudingsverklaring (NDA).', doc: '/procurement' },
-      { label: 'Subverwerkers', stand: 'geregeld', note: 'Hosting bij IONOS (Berlijn); site en mail bij Strato (Duitsland). Als de AI-functies aan staan: Anthropic in de VS, gepseudonimiseerd, met modelcontractbepalingen. Als u digitaal ondertekent: DocuSign in de VS.', doc: '/privacy' },
-      { label: 'Amerikaanse wetgeving (Cloud Act)', stand: 'geregeld', note: 'De applicatie en de databases staan bij IONOS, een Europees bedrijf, in Berlijn. Alleen als u de AI-functies of digitaal ondertekenen aanzet, gaan gegevens naar Amerikaanse bedrijven (Anthropic gepseudonimiseerd, DocuSign), met modelcontractbepalingen. Het kabinet erkende op 7 oktober 2026 dat de Cloud Act kan botsen met de AVG (antwoorden op Kamervragen 2026Z16981).', doc: '/privacy' },
+      { label: 'Subverwerkers', stand: 'geregeld', note: 'Hosting bij IONOS (Berlijn); site en mail bij Strato (Duitsland). De AI-functies: standaard Mistral AI via het EU-endpoint, gepseudonimiseerd; alleen als uw organisatie zelf kiest: Anthropic in de VS, met modelcontractbepalingen. Als u digitaal ondertekent: DocuSign in de VS.', doc: '/privacy' },
+      { label: 'Amerikaanse wetgeving (Cloud Act)', stand: 'geregeld', note: 'De applicatie en de databases staan bij IONOS, een Europees bedrijf, in Berlijn. De AI-functies draaien standaard bij Mistral AI, een Frans bedrijf, via het EU-endpoint. Alleen als uw organisatie zelf voor Anthropic kiest, of als u digitaal ondertekenen aanzet, gaan gegevens naar Amerikaanse bedrijven (Anthropic gepseudonimiseerd, DocuSign), met modelcontractbepalingen. Het kabinet erkende op 7 oktober 2026 dat de Cloud Act kan botsen met de AVG (antwoorden op Kamervragen 2026Z16981).', doc: '/privacy' },
       { label: 'DPIA', stand: 'uitvoering', note: 'Voor de eigen DPIA van uw organisatie stellen wij de onderbouwing op aanvraag op.', doc: '/procurement' },
       { label: 'Pseudonimiseren', stand: 'geregeld', note: 'Cliëntgegevens pseudonimiseren bij een verzoek tot verwijdering; het logboek legt dat vast.' },
     ],
@@ -86,7 +86,7 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
     title: 'Ondersteuning bij wetten',
     intro: 'Curanta helpt u registreren en termijnen bewaken. Aan de wet voldoen doet uw organisatie zelf; de software is daar een hulpmiddel bij.',
     items: [
-      { label: 'Cyberbeveiligingswet (NIS2)', status: 'demo', note: 'Een module om cyberincidenten te registreren en de meldtermijnen van 24 uur, 72 uur en één maand te bewaken.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '/oplossing#kwaliteit' },
+      { label: 'Cyberbeveiligingswet (NIS2)', status: 'demo', note: 'Cyberincidenten registreren en de meldtermijnen van 24 uur, 72 uur en één maand bewaken; de tien maatregelen van de zorgplicht met stand, bewijs en eigenaar; de vaststelling door het bestuur; en een leveranciersregister waarin Curanta zelf al staat.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '/oplossing#kwaliteit' },
       { label: 'Wkkgz', status: 'demo', note: 'Klachtenregeling, en de interne procedure om incidenten te melden.', doc: '/oplossing#kwaliteit' },
       { label: 'Wzd en Wvggz', status: 'demo', note: 'Registratie, en het halfjaarlijkse overzicht voor de IGJ, gevalideerd tegen het XML-schema van de IGJ. Een echte aanlevering is er nog niet.', doc: '/oplossing#kwaliteit' },
       { label: 'Wtza', status: 'demo', note: 'Toelating vastleggen en de jaarverantwoording bewaken (vóór 1 juni, in DigiMV).', doc: '/oplossing#kwaliteit' },

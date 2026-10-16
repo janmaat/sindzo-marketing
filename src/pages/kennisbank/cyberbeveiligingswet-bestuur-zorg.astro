@@ -1,0 +1,166 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+
+// Feiten: docs/campagne/feitenblad-curanta.md (rij Cyberbeveiligingswet en Marktcijfers, aanvulling 15-10-2026),
+// nagelezen in de bron op 16-10-2026: Cbw (BWBR0052872) art. 8, 12 en 24; Richtlijn (EU) 2022/2555 art. 20, 21
+// en 23; Cyberbeveiligingsregeling voor de zorg (Stcrt. 2026, 28763) art. 2.2 en 3.2. Geen "Cbw-ready".
+const publicatieDatum = '2026-10-16';
+const bijgewerktDatum = '2026-10-16';
+const leesTijd = '~7 minuten';
+const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'De Cyberbeveiligingswet: wat het bestuur van een zorgorganisatie moet vaststellen',
+  description: 'Voor wie de Cyberbeveiligingswet geldt, wat het bestuur zelf moet goedkeuren en bijhouden, wat de wet over leveranciers zegt, en wanneer u een incident meldt.',
+  datePublished: publicatieDatum,
+  dateModified: bijgewerktDatum,
+  inLanguage: 'nl-NL',
+  author: { '@type': 'Organization', name: 'Curanta' },
+  publisher: { '@type': 'Organization', name: 'Curanta' },
+  keywords: 'Cyberbeveiligingswet, NIS2, zorg, bestuur, zorgplicht, meldplicht, toeleveringsketen, IGJ, Z-CERT'
+};
+
+const onderwerpen = [
+  ['a', 'beleid voor risicoanalyse en de beveiliging van informatiesystemen'],
+  ['b', 'het behandelen van incidenten'],
+  ['c', 'bedrijfscontinuïteit, zoals back-ups en noodplannen, en crisisbeheer'],
+  ['d', 'de beveiliging van de toeleveringsketen, ook in de relatie met uw directe leveranciers'],
+  ['e', 'beveiliging bij het aanschaffen, ontwikkelen en onderhouden van systemen, ook het omgaan met kwetsbaarheden'],
+  ['f', 'nagaan of de maatregelen werken'],
+  ['g', 'basishygiëne en opleiding op het gebied van cyberbeveiliging'],
+  ['h', 'het gebruik van cryptografie en, waar dat past, versleuteling'],
+  ['i', 'beveiliging rond personeel, toegang en de middelen die u beheert'],
+  ['j', 'waar dat past: inloggen met meer dan één factor, en beveiligde communicatie'],
+];
+---
+<Base
+  title="Cyberbeveiligingswet: wat het bestuur in de zorg moet vaststellen"
+  ogType="article"
+  description="Voor wie de Cyberbeveiligingswet geldt, wat het bestuur van een zorgorganisatie zelf moet goedkeuren en bijhouden, wat de wet over leveranciers zegt, en wanneer u meldt."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
+
+  <article class="container-prose py-16">
+    <header class="max-w-3xl">
+      <div class="flex flex-wrap items-center gap-3 text-xs text-ink-500">
+        <a href="/kennisbank" class="text-curanta-700 hover:underline no-underline">Kennisbank</a>
+        <span>·</span>
+        <span>Wet- en regelgeving</span>
+        <span>·</span>
+        <time datetime={publicatieDatum}>{dateNl}</time>
+        <span>·</span>
+        <span>{leesTijd}</span>
+      </div>
+      <h1 class="mt-5 font-display text-4xl font-bold leading-tight tracking-tightish text-ink-900 sm:text-5xl">
+        De Cyberbeveiligingswet: wat het <em class="italic text-accent-600">bestuur</em> moet vaststellen.
+      </h1>
+      <p class="mt-6 text-lg text-ink-700 leading-relaxed">
+        Sinds 15 augustus 2026 geldt de Cyberbeveiligingswet, de Nederlandse uitwerking van de Europese NIS2-richtlijn.
+        Voor veel zorgorganisaties verandert vooral de rol van het bestuur: dat keurt de maatregelen zelf goed en
+        houdt toezicht op de uitvoering. Dit artikel zet op een rij wat de wet vraagt, met de vindplaats erbij.
+      </p>
+    </header>
+
+    <div class="prose-content mt-12 max-w-3xl text-ink-700 leading-relaxed">
+      <h2>Voor wie de wet geldt</h2>
+      <p>
+        Een zorgaanbieder valt eronder vanaf 50 fte, of als de jaaromzet én het balanstotaal allebei boven de 10
+        miljoen euro liggen. Dan is de organisatie een <em>belangrijke</em> entiteit. Boven de drempel voor
+        middelgrote ondernemingen is ze <em>essentieel</em>. De wet regelt de indeling in art. 8 en art. 12; de
+        organisatie stelt zelf vast waar zij onder valt.
+      </p>
+      <p>
+        Het toezicht in de zorg ligt bij de Inspectie Gezondheidszorg en Jeugd (Cyberbeveiligingsregeling voor de
+        zorg, art. 3.2). Z-CERT is sinds 1 oktober 2026 formeel het CSIRT voor de zorg. Een organisatie die onder de
+        wet valt, registreert zich bij het NCSC.
+      </p>
+
+      <h2>Wat het bestuur zelf moet doen</h2>
+      <p>
+        "De maatregelen, bedoeld in artikel 21, behoeven de goedkeuring van het bestuur" (Cbw art. 24 lid 1; NIS2
+        art. 20 lid 1). Het bestuur keurt dus niet alleen een beleidsstuk goed, het houdt ook toezicht op de
+        uitvoering. Daarnaast volgen bestuurders een opleiding, en heeft ieder lid van het bestuur een certificaat
+        waaruit de deelname blijkt (Cbw art. 24 lid 2 tot en met 5).
+      </p>
+      <p>
+        Leg daarom vast wat het bestuur heeft gezien en goedgekeurd, en wanneer. Een verwijzing naar een document
+        dat later verandert, laat achteraf niet zien wat er is besloten.
+      </p>
+
+      <h2>De tien onderwerpen van de zorgplicht</h2>
+      <p>Art. 21 lid 2 van de richtlijn noemt tien onderwerpen die de maatregelen in ieder geval omvatten:</p>
+      <ul>
+        {onderwerpen.map(([letter, tekst]) => <li><strong>{letter}.</strong> {tekst}</li>)}
+      </ul>
+      <p>
+        Wie al met NEN 7510 werkt, herkent veel van deze onderwerpen. Toch dekt een NEN 7510-certificaat de
+        goedkeuring door het bestuur en de meldplicht niet vanzelf.
+      </p>
+
+      <h2>Uw leveranciers vallen onder uw zorgplicht</h2>
+      <p>
+        Onderwerp d gaat over de toeleveringsketen. Volgens Z-CERT zijn ransomware en aanvallen via leveranciers de
+        grootste dreigingen voor de zorg (Cybersecuritybeeld Zorg 2025). Voor het bestuur betekent dat: weet welke
+        leveranciers kritiek zijn, en beoordeel ze. Vragen die u uw softwareleverancier kunt stellen:
+      </p>
+      <ul>
+        <li>Waar staan onze gegevens, en bij welke partijen (subverwerkers)?</li>
+        <li>Welke certificaten hebt u, en wanneer was de laatste externe pentest?</li>
+        <li>Hoe snel hoort u van ons, en wij van u, bij een incident?</li>
+        <li>Wat gebeurt er met onze gegevens als we vertrekken?</li>
+      </ul>
+
+      <h2>Wanneer u een incident meldt</h2>
+      <p>
+        Een incident is meldplichtig als het significant is. Voor de zorg staat in art. 2.2 van de
+        Cyberbeveiligingsregeling voor de zorg wanneer dat zo is, bijvoorbeeld als een kritisch bedrijfsproces
+        langer dan vier uur gedeeltelijk of geheel stil ligt. Ook een incident dat zulke gevolgen kán hebben, telt
+        mee. Melden gaat in drie stappen (NIS2 art. 23):
+      </p>
+      <ul>
+        <li><strong>Binnen 24 uur:</strong> een vroege waarschuwing.</li>
+        <li><strong>Binnen 72 uur:</strong> de melding van het incident.</li>
+        <li><strong>Binnen een maand:</strong> een eindrapport.</li>
+      </ul>
+
+      <h2>Wat Curanta hierin doet</h2>
+      <p>
+        Curanta helpt het bestuur de Cbw-cyclus bij te houden. Aan de wet voldoen doet uw organisatie zelf.
+      </p>
+      <ul>
+        <li>De tien onderwerpen staan op één plek, met stand, bewijs en eigenaar. Het NEN 7510-scherm leest dezelfde registratie.</li>
+        <li>Het bestuur stelt de maatregelen vast. Die vaststelling ligt daarna vast, met opdrachten met een eigenaar en een datum.</li>
+        <li>Het leveranciersregister houdt per leverancier de beoordeling bij. Curanta staat er zelf al in, ook met wat er bij ons nog niet is: een externe pentest en een NEN 7510-certificaat.</li>
+        <li>Incidenten registreert u met de drie meldtermijnen. Melden bij het CSIRT doet uw organisatie zelf.</li>
+        <li>De rapportage voor de bestuursvergadering is een pdf, zonder score.</li>
+      </ul>
+      <p>Wat er per onderdeel geregeld is, staat in het <a href="/trust">Trust Centre</a>.</p>
+
+      <h3 class="font-display text-lg font-semibold text-ink-900">Bronnen</h3>
+      <ul class="text-sm">
+        <li>Cyberbeveiligingswet, BWBR0052872, art. 8, 12 en 24, geldend vanaf 15 augustus 2026, <a href="https://wetten.overheid.nl/BWBR0052872" rel="noopener">wetten.overheid.nl</a></li>
+        <li>Richtlijn (EU) 2022/2555 (NIS2), art. 20, 21 en 23, <a href="https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:32022L2555" rel="noopener">eur-lex.europa.eu</a></li>
+        <li>Cyberbeveiligingsregeling voor de zorg, Staatscourant 2026, 28763, art. 2.2 en 3.2, <a href="https://zoek.officielebekendmakingen.nl/stcrt-2026-28763.html" rel="noopener">officielebekendmakingen.nl</a></li>
+        <li>Rijksoverheid, "Cyberbeveiligingswet en Wet weerbaarheid kritieke entiteiten vanaf vandaag van kracht", 15 augustus 2026, <a href="https://www.rijksoverheid.nl/actueel/nieuws/2026/08/15/cyberbeveiligingswet-en-wet-weerbaarheid-kritieke-entiteiten-vanaf-vandaag-van-kracht" rel="noopener">rijksoverheid.nl</a></li>
+        <li>Data voor gezondheid (VWS), "Zorgsector en de Cyberbeveiligingswet", <a href="https://www.datavoorgezondheid.nl/onderwerpen/c/cyberbeveiligingswet/zorgsector-en-de-cyberbeveilingswet" rel="noopener">datavoorgezondheid.nl</a></li>
+        <li>Data voor gezondheid, "Wijzigingsregeling Cyberbeveiligingswet gepubliceerd: Z-CERT aangewezen als CSIRT voor de zorg", 5 oktober 2026, <a href="https://www.datavoorgezondheid.nl/actueel/nieuws/2026/10/05/wijzigingsregeling-cyberbeveiligingswet-gepubliceerd-z-cert-aangewezen-als-csirt-voor-de-zorg" rel="noopener">datavoorgezondheid.nl</a></li>
+        <li>Z-CERT, Cybersecuritybeeld Zorg 2025, 3 maart 2026</li>
+        <li>NCSC, "Cyberbeveiligingswet (NIS2)", <a href="https://www.ncsc.nl/cyberbeveiligingswet-nis2" rel="noopener">ncsc.nl</a></li>
+      </ul>
+
+      <p class="text-xs text-ink-500 italic mt-8">
+        Ziet u een fout of mist u een bron? Mail
+        <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>;
+        wij reageren binnen 1 werkdag en zetten een correctie met datum onder dit artikel.
+      </p>
+    </div>
+  </article>
+
+  <Cta
+    title="Vragen over de Cbw?"
+    subtitle="Bespreek het met ons, ook als bestuurder, CISO of FG. In de demo-omgeving ziet u de schermen voor het bestuur met verzonnen gegevens."
+  />
+</Base>

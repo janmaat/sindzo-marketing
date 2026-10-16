@@ -1,0 +1,137 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+
+// Bronnen nagelezen op 16-10-2026: zorgakkoorden.nl (pagina Doorbraakmiddelen, modelplannen Spraakgestuurd
+// rapporteren en Capaciteitsplanning van 29-09-2026, Aanpassingen modelplannen 07-09-2026, Elf spelregels,
+// Q&A versie 29-09-2026), Aanwijzing VWS aan de NZa (Stcrt. 2026, 25240) en de voorhangbrief van 28-05-2026.
+// Wat Curanta doet: feitenblad, rijen AI, AI-keuze, Prognoses en Export. Geen "gecertificeerd voor
+// doorbraakmiddelen" (bestaat niet) en geen tijdsbesparing in minuten.
+const publicatieDatum = '2026-10-16';
+const bijgewerktDatum = '2026-10-16';
+const leesTijd = '~7 minuten';
+const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Doorbraakmiddelen: wat het modelplan van uw software vraagt',
+  description: 'Wie de doorbraakmiddelen voor spraakgestuurd rapporteren en capaciteitsplanning kan aanvragen, wanneer, voor hoeveel, en wat de modelplannen van uw zorgsoftware vragen.',
+  datePublished: publicatieDatum,
+  dateModified: bijgewerktDatum,
+  inLanguage: 'nl-NL',
+  author: { '@type': 'Organization', name: 'Curanta' },
+  publisher: { '@type': 'Organization', name: 'Curanta' },
+  keywords: 'doorbraakmiddelen, AZWA, modelplan, spraakgestuurd rapporteren, capaciteitsplanning, nulmeting, vvt, ggz, zorgverzekeraar'
+};
+---
+<Base
+  title="Doorbraakmiddelen: wat het modelplan van uw software vraagt"
+  ogType="article"
+  description="Wie de doorbraakmiddelen voor spraakgestuurd rapporteren en capaciteitsplanning kan aanvragen, wanneer en voor hoeveel, en wat de modelplannen van uw zorgsoftware vragen."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
+
+  <article class="container-prose py-16">
+    <header class="max-w-3xl">
+      <div class="flex flex-wrap items-center gap-3 text-xs text-ink-500">
+        <a href="/kennisbank" class="text-curanta-700 hover:underline no-underline">Kennisbank</a>
+        <span>·</span>
+        <span>Financiering + administratie</span>
+        <span>·</span>
+        <time datetime={publicatieDatum}>{dateNl}</time>
+        <span>·</span>
+        <span>{leesTijd}</span>
+      </div>
+      <h1 class="mt-5 font-display text-4xl font-bold leading-tight tracking-tightish text-ink-900 sm:text-5xl">
+        Doorbraakmiddelen: wat het modelplan van uw <em class="italic text-accent-600">software</em> vraagt.
+      </h1>
+      <p class="mt-6 text-lg text-ink-700 leading-relaxed">
+        In het Aanvullend Zorg- en Welzijnsakkoord (AZWA) is afgesproken dat administratie in 2030 hooguit 20 procent
+        van de werktijd kost. Om dat te versnellen zijn er doorbraakmiddelen, onder meer voor spraakgestuurd
+        rapporteren en capaciteitsplanning. Van 1 tot en met 31 januari 2027 dient u een plan in. Dit artikel zet op een
+        rij wie dat kan, voor hoeveel, en wat de modelplannen van uw software vragen.
+      </p>
+    </header>
+
+    <div class="prose-content mt-12 max-w-3xl text-ink-700 leading-relaxed">
+      <h2>Alleen voor Zvw-zorg</h2>
+      <p>
+        De doorbraakmiddelen lopen via de Zorgverzekeringswet. Zorg onder de Wlz, de Wmo en de Jeugdwet valt erbuiten,
+        net als de intramurale vvt en ggz. Een aanbieder die ook Wlz-zorg levert, kan aanvragen voor zijn Zvw-zorg. Het
+        budget is 800 miljoen euro voor 2027 tot en met 2029, waarvan 600 miljoen via de Zvw.
+      </p>
+
+      <h2>Spraakgestuurd rapporteren</h2>
+      <ul>
+        <li><strong>Wie:</strong> aanbieders in de vvt, de ggz, de huisartsenzorg en de medisch-specialistische zorg, voor Zvw-zorg. Er is geen omzetgrens.</li>
+        <li><strong>Omvang:</strong> de toepassing gaat naar alle relevante zorgverleners, in de vvt en de ggz minstens 100. Dat mag samen met andere aanbieders. Een pilot alleen wordt afgewezen.</li>
+        <li><strong>Wat:</strong> in de vvt mag inspreken in plaats van typen, met ambient listening (meeluisteren tijdens het gesprek) als einddoel. In de ggz is ambient listening verplicht.</li>
+        <li><strong>Bedrag:</strong> een normbedrag van 500 euro per zorgverlener, tussen 400 en 600 euro naar omvang. Het geld is voor eenmalige kosten; licenties worden niet vergoed, ook niet in het eerste jaar.</li>
+        <li><strong>Meten:</strong> een nulmeting is verplicht. Het plan noemt onder meer de kwaliteit van de rapportages, de tevredenheid van cliënten en medewerkers, en de administratietijd, gemeten met een steekproef.</li>
+      </ul>
+
+      <h2>Capaciteitsplanning</h2>
+      <ul>
+        <li><strong>Wie:</strong> aanbieders van Zvw-vvt en de medisch-specialistische zorg, samen met minstens 10 miljoen euro Zvw-omzet. De ggz staat er niet in.</li>
+        <li><strong>Bedrag:</strong> 100.000 euro bij 10 tot 30 miljoen euro omzet, 200.000 euro daarboven. Hoogstens 10 procent mag naar de data-infrastructuur.</li>
+        <li><strong>Resultaat in de vvt:</strong> het aandeel directe, cliëntgebonden tijd in de totaal gewerkte uren stijgt met 2 procentpunt. Meer cliënten per fte telt niet mee. Een nulmeting is verplicht.</li>
+        <li><strong>Eisen aan de software:</strong> die haalt de gegevens automatisch op en bewaakt de kwaliteit ervan. Ze geeft een concrete planningssuggestie; een voorspelling of een dashboard alleen is niet genoeg. Alleen slim roosteren wordt niet gefinancierd.</li>
+      </ul>
+
+      <h2>Wat de modelplannen van uw software vragen</h2>
+      <p>Naast de eisen per toepassing vraagt het plan dat u beschrijft:</p>
+      <ul>
+        <li>hoe de toepassing koppelt met uw ECD, en zo niet, wat het alternatief en het groeipad zijn;</li>
+        <li>hoe u voorkomt dat u vastzit aan één leverancier, en wat u doet als die failliet gaat;</li>
+        <li>hoe het zit met de AVG en de DPIA, NEN 7510, de medische-hulpmiddelenverordening (MDR) en de AI-verordening;</li>
+        <li>hoe u meet, met een meetperiode en een referentieperiode.</li>
+      </ul>
+      <p>
+        U kiest zelf uw leverancier: het modelplan schrijft geen leveranciers of producten voor. Een keurmerk "goedgekeurd
+        voor doorbraakmiddelen" bestaat niet.
+      </p>
+
+      <h2>Wanneer</h2>
+      <ul>
+        <li><strong>1 tot en met 31 januari 2027:</strong> indienen in een portaal van Zorgverzekeraars Nederland.</li>
+        <li><strong>Februari 2027:</strong> de zorgverzekeraars beoordelen de plannen.</li>
+        <li><strong>Maart 2027:</strong> terugkoppeling, en de toets of alles binnen het budget past. Gaat het budget erover, dan worden alle aanvragen met hoogstens 10 procent gekort.</li>
+        <li><strong>Eind april 2027:</strong> de contracten zijn rond. De NZa stelt per 1 januari 2027 aparte prestaties vast.</li>
+      </ul>
+
+      <h2>Wat Curanta hierbij doet, en wat nog niet</h2>
+      <p>Of uw plan past, beoordeelt u met uw zorgverzekeraar. Dit kan Curanta nu:</p>
+      <ul>
+        <li>Per team en per maand laten zien hoe lang het schrijven van een rapportage duurt, met en zonder het voorstel van de coach, nooit per medewerker. De coach zit in Compliance Pro en hoger. De export bevat de meetmethode, zodat u hem bij een meting kunt gebruiken.</li>
+        <li>Per team en per week de zorgvraag naast de geroosterde uren en de formatie zetten, met het aandeel cliëntgebonden tijd in de <em>geroosterde</em> uren. Het modelplan meet in de gewerkte uren; dat verschil vermeldt u in uw meetmethode. Dit zit in Totaalzorg Plus en Enterprise.</li>
+        <li>Bij een gat in het rooster doet de planhulp een voorstel, dat de planner zelf overneemt.</li>
+        <li>Een volledige export van uw gegevens en bestanden, voor het plan tegen vastzitten aan één leverancier.</li>
+      </ul>
+      <p>Dit kan Curanta nog niet:</p>
+      <ul>
+        <li>Inspreken onderweg in het medewerkerportaal, en ambient listening. In de backoffice kan inspreken wel, op het apparaat zelf.</li>
+        <li>Dienstpatronen voorstellen op basis van zorgzwaarte, functiemix en formatie.</li>
+      </ul>
+
+      <h3 class="font-display text-lg font-semibold text-ink-900">Bronnen</h3>
+      <ul class="text-sm">
+        <li>Aanvullend Zorg- en Welzijnsakkoord, onderhandelaarsakkoord 3 juli 2025</li>
+        <li>Zorgakkoorden.nl, "Doorbraakmiddelen", met de modelplannen Spraakgestuurd rapporteren en Capaciteitsplanning (29 september 2026), "Aanpassingen modelplannen" (7 september 2026), de elf spelregels en de Q&amp;A (29 september 2026), <a href="https://www.zorgakkoorden.nl/programmas/aanvullend-zorg-en-welzijnsakkoord/doorbraakmiddelen/" rel="noopener">zorgakkoorden.nl</a></li>
+        <li>Aanwijzing VWS aan de NZa, 6 juli 2026, Staatscourant 2026, 25240, <a href="https://zoek.officielebekendmakingen.nl/stcrt-2026-25240.pdf" rel="noopener">officielebekendmakingen.nl</a></li>
+        <li>Voorhangbrief VWS over de prestatie doorbraakmiddelen, 28 mei 2026, Kamerstuk 31765 nr. 981</li>
+      </ul>
+
+      <p class="text-xs text-ink-500 italic mt-8">
+        De modelplannen kunnen nog veranderen; Zorgverzekeraars Nederland werkt aan de formulieren. Ziet u een fout of
+        een nieuwe versie? Mail <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>;
+        wij reageren binnen 1 werkdag en zetten een correctie met datum onder dit artikel.
+      </p>
+    </div>
+  </article>
+
+  <Cta
+    title="Bereidt u een aanvraag voor?"
+    subtitle="Bespreek met ons wat Curanta voor uw nulmeting en uw plan kan leveren, en wat niet. In de demo-omgeving ziet u de rapportageduur en het capaciteitsbeeld met verzonnen gegevens."
+  />
+</Base>

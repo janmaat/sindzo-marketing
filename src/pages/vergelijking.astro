@@ -25,7 +25,7 @@ import type { Status } from '../config/status';
 // Daarom "niet gevonden", nooit "nee". Curanta zelf staat er met de gedeelde status
 // (src/config/status.ts).
 
-const GECONTROLEERD = '8 oktober 2026';
+const GECONTROLEERD = '8 oktober 2026 (de rij over AI: 16 oktober 2026)';
 
 type Oordeel = 'ja' | 'deels' | 'nee' | 'niet-gevonden';
 interface Cel { oordeel: Oordeel; tekst: string; bron?: string; }
@@ -72,6 +72,15 @@ const rijen: Rij[] = [
     nedap: { oordeel: 'ja', tekst: 'Datacenters in Nederland; bestanden bij AWS in Frankfurt en Ierland (EU).', bron: 'https://support.nedap-ons.nl/support/solutions/articles/103000336008-leveranciers-en-subverwerkers' },
     caress: { oordeel: 'niet-gevonden', tekst: '' },
     pluriform: { oordeel: 'niet-gevonden', tekst: 'AWS als partner genoemd; regio niet vermeld.', bron: 'https://www.adapcare.nl/over-ons/' },
+  },
+  {
+    // 16-10-2026: nagelopen in de subverwerkerslijst van Nedap, op adapcare.nl en in het trustcenter van Attendi.
+    // Nedap noemt zelf dat Azure 30 dagen bewaart tegen misbruik; dat hoort erbij voor een eerlijke weergave.
+    onderwerp: 'AI-functies: waar de gegevens heen gaan',
+    curanta: { status: null, tekst: 'Standaard Mistral AI via het EU-endpoint, zonder bewaren en zonder training. Een organisatie kan Anthropic (VS) kiezen of AI uitzetten.' },
+    nedap: { oordeel: 'ja', tekst: 'Alleen als de organisatie het aanzet: OpenAI Ireland (EER, direct na verwerking verwijderd) en Microsoft Azure (EER, 30 dagen bewaard tegen misbruik); geen training.', bron: 'https://support.nedap-ons.nl/support/solutions/articles/103000336008-leveranciers-en-subverwerkers-nedap-ons-en-caren' },
+    caress: { oordeel: 'niet-gevonden', tekst: 'Geen publieke informatie over AI in mijnCaress gevonden; mijncaress.nl was op de controledatum niet bereikbaar.' },
+    pluriform: { oordeel: 'deels', tekst: 'Adapcare noemt geen modelaanbieder of regio. AI-partner Attendi verwerkt bij Microsoft Azure in de EU en traint niet op klantgegevens.', bron: 'https://trustcenter.attendi.nl/docs/subverwerkers' },
   },
   {
     onderwerp: 'SMART-doelen en risicosignalering in het zorgplan',

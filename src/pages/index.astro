@@ -45,6 +45,8 @@ import rapportage from '../assets/schermen/mw-rapportage.jpg';
 import portaalZorgplan from '../assets/schermen/pc-zorgplan.jpg';
 import planbord from '../assets/schermen/bo-planbord.jpg';
 import rooster from '../assets/schermen/mw-rooster.jpg';
+import presentatieVideo from '../assets/schermen/presentatie-video.jpg';
+import presentatieRubriek from '../assets/schermen/presentatie-rubriek.jpg';
 import productie from '../assets/schermen/bo-productie.jpg';
 import vim from '../assets/schermen/bo-vim.jpg';
 import fotoVvt from '../assets/fotos/vvt-verzorgende-bewoner.jpg';
@@ -133,7 +135,7 @@ const voorbeelden: Voorbeeld[] = [
     statussen: [
       { status: 'demo', tekst: 'Dossier, zorgplan, rapportage en cliëntportaal' },
     ],
-    ai: 'Twee plekken gebruiken op verzoek een taalmodel: de rapportage in de backoffice (een voorstel voor de evaluatie en het plan) en de samenvatting van het zorgplan in gewone taal voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en begrijpt de cliënt het? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. Het taalmodel werkt alleen als uw organisatie de AI-functies aanzet. De gegevens gaan dan gepseudonimiseerd naar Anthropic in de VS.',
+    ai: 'Twee plekken gebruiken op verzoek een taalmodel: de rapportage in de backoffice (een voorstel voor de evaluatie en het plan) en de samenvatting van het zorgplan in gewone taal voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en begrijpt de cliënt het? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. De gegevens gaan gepseudonimiseerd naar het taalmodel: standaard bij Mistral AI, via het EU-endpoint, en alleen als uw organisatie daar zelf voor kiest naar Anthropic in de VS.',
     link: { label: 'Alle onderdelen van het dossier', href: '/oplossing#ecd' },
     beelden: [
       {
@@ -280,15 +282,15 @@ const waaromNu = [
   {
     icoon: 'mensen',
     kop: 'De administratie moet omlaag',
-    markt: 'In 2030 mag administratie hooguit 20 procent van de werktijd kosten (Aanvullend Zorg- en Welzijnsakkoord, 2025). Vanaf dit najaar kunnen organisaties in de vvt en de ggz daar geld voor aanvragen (VWS, mei 2026).',
-    curanta: 'In Curanta stelt AI bij een SOEP-rapportage de E en de P voor, en vat het de overdracht tussen diensten samen. De zorgmedewerker beslist.',
+    markt: 'In 2030 mag administratie hooguit 20 procent van de werktijd kosten (Aanvullend Zorg- en Welzijnsakkoord, 2025). Van 1 tot en met 31 januari 2027 kunnen vvt en ggz voor hun Zvw-zorg geld aanvragen voor spraakgestuurd rapporteren, en de vvt ook voor capaciteitsplanning (modelplannen, september 2026). Een nulmeting hoort erbij.',
+    curanta: 'In Curanta stelt AI bij een SOEP-rapportage de E en de P voor, en vat het de overdracht tussen diensten samen. Per team ziet u hoe lang rapporteren duurt, en welk deel van de geroosterde uren naar cliënten gaat.',
     nogNiet: 'Onderweg inspreken in het medewerkerportaal kan nog niet.',
   },
   {
     icoon: 'schild',
     kop: 'Beveiliging weegt zwaarder',
     markt: 'Sinds 15 augustus 2026 geldt de Cyberbeveiligingswet, voor zorgaanbieders vanaf 50 fte. Het bestuur is ook verantwoordelijk voor de leveranciers die het kiest.',
-    curanta: 'Wie in de backoffice een zorg- of beheerrol heeft, logt altijd in met tweestapsverificatie. Het BSN is op veldniveau versleuteld, en de gegevens staan bij IONOS Cloud in Berlijn.',
+    curanta: 'In Curanta stelt het bestuur de maatregelen vast en houdt het een leveranciersregister bij, met Curanta zelf erin. Het BSN is op veldniveau versleuteld, en de gegevens staan bij IONOS Cloud in Berlijn.',
     nogNiet: 'De externe pentest en de NEN 7510-audit moeten nog plaatsvinden.',
   },
 ] as const;
@@ -312,8 +314,8 @@ const aiAct = [
   },
   {
     icoon: 'slot',
-    kop: 'U zet het aan, of niet',
-    tekst: 'Het taalmodel werkt alleen als uw organisatie de AI-functies aanzet. Wat er naartoe gaat, is gepseudonimiseerd.',
+    kop: 'U bepaalt waar het draait',
+    tekst: 'Standaard draait de AI bij Mistral AI, via het EU-endpoint, zonder dat Mistral de gegevens bewaart of ermee traint. Uw organisatie kan ook Anthropic (VS) kiezen, of AI in één keer uitzetten. Wat er naartoe gaat, is gepseudonimiseerd.',
   },
 ] as const;
 
@@ -401,6 +403,79 @@ const voordelen = [
           alt="Backoffice: het zorgplan van een verzonnen cliënt. Bovenaan de gekozen cliënt, daaronder de status, het aantal problemen en lopende interventies en de uiterste datum van de volgende evaluatie, en het eerste probleem, Huidintegriteit."
           bijschrift="Het zorgplan in de backoffice: status, problemen, interventies en de volgende evaluatie. De interventies staan als taken bij het bezoek in het medewerkerportaal. Opname oktober 2026."
         />
+      </div>
+    </div>
+  </section>
+
+  {/* 1a. Twee manieren om Curanta te leren kennen (besluit Jan 15-10-2026): wij komen langs, of de klant bekijkt de
+      presentatie online in eigen tempo (presentatie.curanta.nl, aan te vragen op /presentatie). Bedoeld om de drempel te
+      verlagen. Feitenblad: rijen Demonstratie en Presentatie aanvragen. */}
+  <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="kennismaken-kop">
+    <div class="container-prose">
+      <div class="grid gap-4 lg:grid-cols-12 lg:gap-14 lg:items-end" data-reveal>
+        <h2 id="kennismaken-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl lg:col-span-5">
+          Leer Curanta kennen zoals het u uitkomt
+        </h2>
+        <p class="text-lg leading-relaxed text-ink-700 lg:col-span-7">
+          De een wil het eerst rustig zelf bekijken, de ander wil het meteen samen bespreken. Allebei kan, en u zit
+          nergens aan vast.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <article class="flex flex-col rounded-2xl border border-ink-200 bg-white p-7" data-reveal>
+          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-curanta-50 text-curanta-700">
+            <Icon naam="mensen" class="h-5 w-5" />
+          </span>
+          <p class="mt-5 text-xs font-semibold uppercase tracking-wider text-curanta-700">Persoonlijk</p>
+          <h3 class="mt-1 font-display text-2xl font-bold text-curanta-900">Wij komen bij u langs</h3>
+          <p class="mt-3 leading-relaxed text-ink-700">
+            Wij laten Curanta op locatie zien, aan de hand van uw eigen zorgproces: uw rollen, uw begrippen, uw
+            werkstromen. Uw vragen beantwoorden wij ter plekke, en uw collega's schuiven gewoon aan.
+          </p>
+          <a href={DEMO_GESPREK.href} class="btn-secondary mt-auto self-start no-underline" style="margin-top:1.75rem">
+            Vraag een presentatie op locatie aan
+          </a>
+        </article>
+        <article class="flex flex-col rounded-2xl border-2 border-accent-500 bg-curanta-50/60 p-7" data-reveal style="--reveal-vertraging:80ms">
+          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-curanta-700">
+            <Icon naam="klok" class="h-5 w-5" />
+          </span>
+          <p class="mt-5 text-xs font-semibold uppercase tracking-wider text-curanta-700">Online, in uw eigen tempo</p>
+          <h3 class="mt-1 font-display text-2xl font-bold text-curanta-900">Bekijk de presentatie wanneer het u uitkomt</h3>
+          <p class="mt-3 leading-relaxed text-ink-700">
+            U krijgt een persoonlijke link naar een presentatie in korte video's, met de dia's en hoe het werkt in de
+            applicatie. U kijkt wanneer u wilt en zo vaak als u wilt. Zonder afspraak,
+            en zonder dat wij langskomen.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-ink-500">
+            Wil een collega ook kijken? Die krijgt een eigen uitnodiging. Een vraag stelt u onderaan de presentatie.
+          </p>
+          <a href="/presentatie" class="btn-primary mt-auto self-start no-underline" style="margin-top:1.75rem">
+            Vraag de online presentatie aan
+          </a>
+        </article>
+      </div>
+      {/* Een kijkje in presentatie.curanta.nl, opgenomen 16-10-2026 met een testuitnodiging ("Curanta (voorbeeld)",
+          zonder de kopbalk met de naam van de kijker). Echte schermen van de presentatieomgeving, geen demo. */}
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <figure data-reveal>
+          <div class="overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm">
+            <Picture src={presentatieVideo} formats={['avif', 'webp']} width={1266} sizes="(min-width: 768px) 560px, 100vw"
+                     alt="presentatie.curanta.nl: het deel 'Het werk in de wijk' van de presentatie voor de wijkverpleging, met een dia over het planbord, ondertiteling en rechts de vijf delen van de presentatie." loading="lazy" />
+          </div>
+          <figcaption class="mt-3 text-sm leading-relaxed text-ink-500">
+            De presentatie in korte video's, met ondertiteling. U kiest zelf welk deel u bekijkt.
+          </figcaption>
+        </figure>
+        <figure data-reveal style="--reveal-vertraging:80ms">
+          <div class="overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm">
+            <Picture src={presentatieRubriek} formats={['avif', 'webp']} width={1266} sizes="(min-width: 768px) 560px, 100vw"
+                     alt="presentatie.curanta.nl: het onderdeel 'Het cliëntdossier' met negen schermvideo's uit Curanta zelf, van het Omaha-overzicht tot het zorgplan lezen en beoordelen." loading="lazy" />
+          </div>
+          <figcaption class="mt-3 text-sm leading-relaxed text-ink-500">
+            Daarnaast schermvideo's uit Curanta zelf, per onderwerp: hier het cliëntdossier.
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -732,7 +807,7 @@ const voordelen = [
               <Icon naam="vink" class="h-5 w-5 text-accent-500" /> Geregeld
             </h3>
             <ul class="mt-4 space-y-3 text-curanta-100">
-              <li>De applicatie en de databases staan bij IONOS, een Europees bedrijf, in Berlijn. Zet u de AI-functies of digitaal ondertekenen aan, dan lopen die via Amerikaanse bedrijven (Anthropic, DocuSign), met modelcontractbepalingen.</li>
+              <li>De applicatie en de databases staan bij IONOS, een Europees bedrijf, in Berlijn. De AI-functies draaien standaard bij Mistral AI, een Frans bedrijf, via het EU-endpoint; Mistral bewaart de gegevens niet en traint er niet mee. Kiest uw organisatie zelf voor Anthropic, of zet u digitaal ondertekenen aan, dan lopen die via Amerikaanse bedrijven (Anthropic, DocuSign), met modelcontractbepalingen.</li>
               <li>Het BSN is op veldniveau versleuteld (AES-256-GCM).</li>
               <li>Wie in de backoffice een zorg- of beheerrol heeft, logt in met tweestapsverificatie. Dat is verplicht.</li>
               <li>Elke inzage in een dossier komt in een logboek (NEN 7513). Wordt dat logboek achteraf gewijzigd, dan is dat aan te tonen.</li>

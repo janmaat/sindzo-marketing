@@ -198,7 +198,8 @@ const groups: ModuleGroup[] = [
       { title: 'Wet verplichte ggz (Wvggz)', status: 'demo', body: 'Voor de GGZ-instelling: verplichte zorg met de vormen uit de wet en de titel (crisismaatregel, zorgmachtiging), met de geldigheid als die bekend is. De titel legt u zelf vast. Een signaal als een titel afloopt, is er voor de Wvggz nog niet; voor de Wzd wel.' },
       { title: 'DPIA en verwerkingsregister', status: 'demo', body: 'Een register volgens artikel 30 AVG, een DPIA-beoordeling per verwerking en een overzicht van subverwerkers.' },
       { title: 'NEN 7513-logboek', status: 'demo', body: 'Een logboek van elke toegang tot cliëntgegevens, met een hash-keten die een wijziging achteraf aantoonbaar maakt. Curanta bewaart een logregel over een cliënt zolang het dossier bestaat, en logregels zonder dossier 7 jaar.' },
-      { title: 'Cyberincidenten (NIS2)', status: 'demo', body: 'Cyberincidenten registreren en classificeren, met de meldtermijnen van de Cyberbeveiligingswet: 24 uur, 72 uur en één maand.' },
+      { title: 'Cyberincidenten (NIS2)', status: 'demo', body: 'Cyberincidenten registreren en classificeren, met de meldtermijnen van de Cyberbeveiligingswet: 24 uur, 72 uur en één maand. Curanta meldt niet zelf bij het CSIRT; dat doet uw organisatie.' },
+      { title: 'De Cbw voor het bestuur', status: 'demo', body: 'De tien maatregelen van de zorgplicht staan op één plek, met stand, bewijs en eigenaar. Het bestuur stelt ze vast; die vaststelling ligt daarna vast, met opdrachten met een eigenaar en een datum. Een leveranciersregister met beoordelingen, waarin Curanta zelf al staat. De rapportage voor de bestuursvergadering is een pdf, zonder score. Curanta helpt het bestuur de Cbw-cyclus bij te houden; voldoen aan de wet doet uw organisatie zelf.' },
       { title: 'AI-register', status: 'demo', body: 'AI-systemen classificeren en hun risico\'s documenteren volgens de AI-verordening.' },
       { title: 'Klokkenluidersregeling', status: 'demo', body: 'Voor organisaties met 50 of meer werknemers: een vertrouwelijk meldkanaal, behandeltermijnen en bescherming van de melder, gescheiden van de incidentmeldingen.' },
       { title: 'Cliëntenraad (Wmcz 2018)', status: 'demo', body: 'Adviesaanvragen, instemmingsprocedures, jaarverslag en ledenadministratie. Een cliëntenraad is verplicht als in de regel meer dan tien personen zorg verlenen.' },
@@ -266,10 +267,11 @@ const groups: ModuleGroup[] = [
     wie: 'Zorgverleners, planners, P&O en management.',
     modules: [
       { title: 'Voorstel bij de SOEP-rapportage', status: 'demo', noot: 'taalmodel alleen als de AI-functies aan staan', body: 'Op de knop Analyseer stelt een taalmodel een evaluatie en een plan voor. U neemt over wat klopt; Curanta slaat niets vanzelf op. Controleer of het voorstel overeenkomt met wat u zag. Zonder taalmodel valt de functie terug op vaste regels.' },
+      { title: 'Rapportageduur per team', status: 'demo', body: 'U ziet per team en per maand hoe lang het schrijven van een rapportage duurt, met en zonder het voorstel van de coach, en hoe vaak het voorstel is overgenomen, aangepast of niet gebruikt. Per team, nooit per medewerker; onder 5 rapportages staat er geen getal. De export bevat de meetmethode.' },
       { title: 'Kennisassistent', status: 'demo', noot: 'taalmodel', body: 'Vragen over protocollen en werkinstructies van uw organisatie, met verwijzing naar de bron. Controleer het antwoord in de bron voordat u ernaar handelt.' },
       { title: 'Cao-assistent', status: 'demo', noot: 'taalmodel', body: 'Antwoorden uit de cao-tekst die uw organisatie zelf inlaadt, met artikel, versie en pagina. Een verlopen tekst geeft geen antwoord. Uitleg, geen besluit: bij twijfel beslist P&O. Curanta levert geen cao-tekst mee.' },
       { title: 'Spraakinvoer', status: 'demo', body: 'Spraak naar tekst op het SOEP-scherm van de backoffice, verwerkt op het apparaat zelf: er gaat geen geluid naar buiten. Kan de browser dat niet, dan is er geen microfoon. In het medewerkerportaal: spraakberichten, geen spraak naar tekst.' },
-      { title: 'Prognoses', status: 'demo', body: 'De benodigde dienst-uren per weekdag, de zorgvraag per cliënt naast de uren van de Wmo-beschikking, en de verwachte wachttijd per urgentie. Statistiek met uitleg van de berekening, geen taalmodel.' },
+      { title: 'Prognoses', status: 'demo', body: 'De zorgvraag per team en per week (geïndiceerde uren, geplande bezoeken en de instroom van de wachtlijst) naast de geroosterde uren en de contracturen, met het verschil. Daarnaast de zorgvraag per cliënt naast de uren van de Wmo-beschikking, en de verwachte wachttijd per urgentie. Het scherm zegt waarop elke voorspelling rust. Statistiek, geen taalmodel; wie welke dienst draait, beslist de planner.' },
       { title: 'Signalen bij diensten en ziekmeldingen', status: 'demo', body: 'Vaste regels, geen AI. Curanta signaleert overlap en ongebruikelijk lange diensten, en bij een ziekmelding de diensten die geraakt worden. De planner krijgt een bericht en past het rooster zelf aan.' },
     ],
   },
@@ -286,7 +288,7 @@ const groups: ModuleGroup[] = [
   },
 ];
 
-const AI_TOELICHTING = 'Vragen aan een taalmodel gaan via één centraal punt naar Anthropic (VS), gepseudonimiseerd. Dat gebeurt alleen als uw organisatie de AI-functies aanzet.';
+const AI_TOELICHTING = 'Vragen aan een taalmodel gaan via één centraal punt, gepseudonimiseerd, standaard naar Mistral AI via het EU-endpoint. Mistral bewaart de gegevens niet en traint er niet mee. Uw organisatie kan ook Anthropic (VS) kiezen, of AI in één keer uitzetten.';
 ---
 <Base
   title="Product: alle onderdelen met hun status | Curanta"

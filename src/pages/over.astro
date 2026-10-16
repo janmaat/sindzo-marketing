@@ -37,7 +37,7 @@ const themas = [
     eyebrow: 'Gegevens',
     titel: 'Waar de gegevens van uw cliënten staan',
     tekst:
-      'Het cliëntdossier staat bij IONOS Cloud in Berlijn, binnen de EU. Het BSN is op veldniveau versleuteld. Cliënten en mantelzorgers werken in een eigen cliëntportaal, los van de backoffice. Zet u de AI-functies aan, dan gaan gegevens naar Anthropic in de VS. Ze zijn dan gepseudonimiseerd, en voor de doorgifte gelden de modelcontractbepalingen (SCC). Zonder die functies gaat er niets heen.',
+      'Het cliëntdossier staat bij IONOS Cloud in Berlijn, binnen de EU. Het BSN is op veldniveau versleuteld. Cliënten en mantelzorgers werken in een eigen cliëntportaal, los van de backoffice. De AI-functies draaien standaard bij Mistral AI, via het EU-endpoint, gepseudonimiseerd; Mistral bewaart de gegevens niet en traint er niet mee. Kiest uw organisatie zelf voor Anthropic, dan gaan ze naar de VS, onder de modelcontractbepalingen (SCC). Zet u AI uit, dan gaat er niets heen.',
   },
   {
     eyebrow: 'Overstappen',
@@ -110,8 +110,9 @@ const gesprek = [
           <p>
             Zorgpartijen en het kabinet hebben afgesproken dat administratie in 2030 hooguit 20 procent van de werktijd
             kost (Aanvullend Zorg- en Welzijnsakkoord, 2025). Ze beginnen met rapporteren door in te spreken, en met het
-            plannen van personeel. Vanaf dit najaar kan een organisatie in de vvt of de ggz daar geld voor
-            aanvragen (VWS, mei 2026).
+            plannen van personeel. Van 1 tot en met 31 januari 2027 kan een organisatie in de vvt of de ggz daar
+            voor haar Zvw-zorg geld voor aanvragen, de doorbraakmiddelen (modelplannen, september 2026). Wat die
+            aanvraag van uw software vraagt, staat in <a href="/kennisbank/doorbraakmiddelen-modelplan-software" class="font-semibold text-curanta-700 hover:underline">de kennisbank</a>.
           </p>
           <p>
             In Curanta doet AI een voorstel, en de zorgmedewerker beslist. Schrijft zij een SOEP-rapportage, dan stelt
@@ -145,7 +146,8 @@ const gesprek = [
             ransomware en aanvallen via leveranciers de grootste dreigingen voor de zorg (Cybersecuritybeeld Zorg 2025).
           </p>
           <p>
-            Wie in de backoffice een zorg- of beheerrol heeft, logt altijd in met tweestapsverificatie. Waar de gegevens van
+            In Curanta stelt het bestuur de maatregelen vast en ziet het zijn leveranciers terug in een register, met
+            Curanta zelf erin. Wie in de backoffice een zorg- of beheerrol heeft, logt altijd in met tweestapsverificatie. Waar de gegevens van
             uw cliënten staan, leest u verderop. Een externe pentest en de NEN 7510-audit moeten nog plaatsvinden. Wat
             geregeld is en wat niet, staat in het <a href="/trust" class="font-semibold text-curanta-700 hover:underline">Trust Centre</a>.
           </p>

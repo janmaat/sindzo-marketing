@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// Na een presentatie-aanvraag (zie presentatie/index.astro). Geen belofte van een antwoord: Jan beoordeelt de
+// aanvraag, en een afgewezen aanvraag krijgt geen bericht (ADR 2026-10-11, wijziging 15-10-2026).
+---
+<Base
+  title="Aanvraag ontvangen | Curanta"
+  noindex
+  description="Uw aanvraag voor een presentatie over Curanta is ontvangen."
+>
+  <section class="container-prose py-20 sm:py-28">
+    <div class="max-w-2xl">
+      <div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-curanta-100">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-8 w-8 text-curanta-700">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h1 class="mt-6 font-display text-4xl font-bold tracking-tightish text-ink-900 sm:text-5xl">
+        Uw aanvraag is ontvangen.
+      </h1>
+      <p class="mt-5 text-lg text-ink-700">
+        Wij bekijken hem, meestal binnen 1 werkdag. Past Curanta bij uw organisatie, dan krijgt u een mail van Curanta
+        met uw persoonlijke link en toegangscode voor de presentatie.
+      </p>
+      <p class="mt-4 text-ink-700">
+        Geen mail ontvangen? Kijk dan ook in de map met ongewenste mail, of mail
+        <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/oplossing" class="btn-primary no-underline">Bekijk intussen de onderdelen</a>
+        <a href="/trust" class="inline-flex items-center rounded-full border border-ink-300 px-5 py-2.5 text-sm font-semibold text-ink-900 no-underline hover:bg-ink-100">Trust Centre</a>
+      </div>
+    </div>
+  </section>
+</Base>
