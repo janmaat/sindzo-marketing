@@ -13,6 +13,12 @@ interface Props {
   noindex?: boolean;
   /** 'article' voor kennisbankartikelen; de rest is 'website'. */
   ogType?: 'website' | 'article';
+  /**
+   * Alleen op de 404-pagina: 'niet-gevonden'. De bezoekmeting (demo.curanta.nl/bezoekmeting.js) telt de
+   * pagina dan als niet gevonden en niet als gewone weergave; zonder deze tag valt ze terug op "404" in
+   * de titel.
+   */
+  paginasoort?: 'niet-gevonden';
 }
 
 const {
@@ -22,6 +28,7 @@ const {
   image = '/og.png',
   noindex = false,
   ogType = 'website',
+  paginasoort,
 } = Astro.props;
 
 const url = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
@@ -90,6 +97,7 @@ const orgLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={url} />}
+    {paginasoort && <meta name="curanta-pagina" content={paginasoort} />}
     <meta property="og:site_name" content="Curanta" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
