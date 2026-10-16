@@ -25,6 +25,9 @@ import portaalBeeld from '../assets/schermen/pc-start.jpg';
 //   Medimo, Wtta-overgangsjaar 2027 (toelatinguitleenmarkt.nl, 08-10-2026).
 // "In de demo" is nagelopen in de code: alle modules staan aan in de demo-organisatie, de
 // koppelingen met externe partijen niet (die vragen certificaten of contracten).
+// 15-10-2026 (besluit Jan, gelijk aan /integraties): iWmo/iJw en iWlz getoetst aan de XSD en met de
+// hand aangeleverd (iWlz: route per zorgkantoor); Zvw AW319 naar "inrichten"; eOverdracht-document
+// gebouwd en te downloaden, verzenden niet.
 
 interface ModuleEntry {
   title: string;
@@ -101,7 +104,7 @@ const groups: ModuleGroup[] = [
   {
     id: 'declaratie',
     group: 'Declaratie, financiering en verblijf',
-    kort: 'Wmo, Jeugdwet en Wlz in één systeem, van productie tot declaratie, met verblijf, logeren en het volledig pakket thuis. Zvw-declaratie voor de wijkverpleging is in ontwikkeling.',
+    kort: 'Wmo, Jeugdwet, Wlz en de Zvw voor de wijkverpleging in één systeem, van productie tot declaratie, met verblijf, logeren en het volledig pakket thuis. De declaratiebestanden levert u zelf aan.',
     wie: 'De zorgadministratie, declaratiemedewerkers en controllers.',
     beeld: {
       src: verblijfBeeld,
@@ -110,12 +113,12 @@ const groups: ModuleGroup[] = [
       bijschrift: 'Verblijf, logeren en de maandproductie voor de Wlz. Opname oktober 2026.',
     },
     modules: [
-      { title: 'iWmo en iJw', status: 'demo', noot: 'aanleveren via VECOZO: afgerond vóór uw eerste declaratiemaand', body: 'Productcodes per gemeente, toewijzingen en de berichten bij start en stop van de zorg. Curanta stelt de maanddeclaratie (Wmo323, Jw323) op uit goedgekeurde productie. Een retourbericht leest u zelf in; Curanta zet de afkeuringen per oorzaak bij elkaar. Automatisch ophalen is in ontwikkeling.' },
-      { title: 'iWlz en eigen bijdrage', status: 'demo', noot: 'aanleveren via VECOZO: afgerond vóór uw eerste declaratiemaand', body: 'Berichten aan het zorgkantoor over de start en wijzigingen van de Wlz-zorg. Daaruit stelt het CAK de eigen bijdrage vast; u levert zelf niets aan het CAK. Retourberichten leest u zelf in; automatisch ophalen is in ontwikkeling.' },
+      { title: 'iWmo en iJw', status: 'demo', noot: 'u levert zelf aan in het VECOZO-portaal', body: 'Productcodes per gemeente, toewijzingen en de berichten bij start en stop van de zorg, volgens iStandaard 3.2 en getoetst aan het officiële schema. Curanta stelt de maanddeclaratie (Wmo323, Jw323) op uit goedgekeurde productie. Een retourbericht leest u zelf in; Curanta zet de afkeuringen per oorzaak bij elkaar. Rechtstreeks versturen en ophalen is in ontwikkeling.' },
+      { title: 'iWlz en eigen bijdrage', status: 'demo', noot: 'aanleveren bij het zorgkantoor, route per zorgkantoor af te stemmen', body: 'Berichten aan het zorgkantoor over het begin en het einde van de Wlz-zorg, volgens iStandaard 2.4.3 en getoetst aan het officiële schema. Daaruit stelt het CAK de eigen bijdrage vast; u levert zelf niets aan het CAK. Retourberichten leest u zelf in.' },
       { title: 'Productie en budget', status: 'demo', body: 'Productie per cliënt, met de bron van elke regel; financieringsmix, budgetreserveringen en signalen.' },
       { title: 'Facturatie en pgb', status: 'demo', body: 'Facturen, betalingen, sjablonen en pgb-afrekeningen.' },
       { title: 'Cliëntkas en bewindvoering', status: 'demo', body: 'Zakgeld en kas per cliënt, uitgaven vastleggen en een overzicht voor de bewindvoerder.' },
-      { title: 'Wlz in de gehandicaptenzorg', status: 'demo', noot: 'aanleveren via VECOZO: afgerond vóór uw eerste declaratiemaand', body: 'Productie per uur of dagdeel bij een modulair pakket thuis, automatisch gekoppeld aan de juiste Wlz-toewijzing. Een afgeronde dagbestedingsactiviteit wordt per aanwezige cliënt een conceptregel. Regels die niet kunnen, staan er met de reden bij.' },
+      { title: 'Wlz in de gehandicaptenzorg', status: 'demo', noot: 'aanleveren bij het zorgkantoor, route per zorgkantoor af te stemmen', body: 'Productie per uur of dagdeel bij een modulair pakket thuis, automatisch gekoppeld aan de juiste Wlz-toewijzing. Een afgeronde dagbestedingsactiviteit wordt per aanwezige cliënt een conceptregel. Regels die niet kunnen, staan er met de reden bij.' },
       { title: 'Verblijf met een zzp', status: 'demo', body: 'Opname, ontslag en afwezigheid in een woonvorm volgens de regels van de NZa. Met één knop maakt u de maandproductie per etmaal. Een catalogus met de zorgzwaartepakketten (zzp\'s) voor vg, vv, lvg, sglvg, lg en zg (NZa 2026).' },
       { title: 'Logeren', status: 'demo', body: 'Logeerperiodes met de dagen volgens de NZa-definitie en de grens van 156 nachten per jaar, met een signaal in de werkvoorraad.' },
       { title: 'Volledig pakket thuis (vpt)', status: 'demo', noot: 'geen voorbeeld in de demo', body: 'Het vpt als leveringsvorm, met de prestaties van de NZa. Volle logeerdagen tellen vanzelf als afwezigheid.' },
@@ -123,7 +126,7 @@ const groups: ModuleGroup[] = [
       { title: 'Zorginkoop en contracten', status: 'demo', body: 'Contracten met gemeenten onder Wmo en Jeugdwet: looptijden, productafspraken en tarieven.' },
       { title: 'AGB-codes', status: 'inrichten', body: 'AGB-codes valideren en dagelijks synchroniseren met de open dataset van Vektis; de synchronisatie richten wij per klant in.' },
       { title: 'Controle op verzekering (COV)', status: 'inrichten', body: 'Curanta legt per cliënt vast bij welke verzekeraar hij verzekerd is, en waar dat vandaan komt. U neemt het over van de zorgpas of uit de COV-controle in het VECOZO-portaal. De automatische vraag aan VECOZO ronden wij af bij uw aansluiting.' },
-      { title: 'Zvw-declaratie wijkverpleging', status: 'ontwikkeling', body: 'Productcodes, tarieven en prestaties zijn er. Curanta stelt de berichten (AW319 en AW320) op en verwerkt ze. Het aanleveren via VECOZO ronden wij af vóór uw eerste declaratiemaand.' },
+      { title: 'Zvw-declaratie wijkverpleging', status: 'inrichten', body: 'Productcodes, tarieven en prestaties zijn er. Curanta maakt per zorgverzekeraar en maand het declaratiebericht (AW319), getoetst aan de recordlayout en de testset van Vektis. U levert het aan in het VECOZO-portaal en leest het antwoord (AW320) in. Rechtstreeks versturen volgt.' },
     ],
   },
   {
@@ -247,7 +250,7 @@ const groups: ModuleGroup[] = [
       { title: 'ZorgDomein', status: 'inrichten', body: 'Inkomende verwijzingen met bijlagen. In een praktijk met een behandelagenda zet u een geaccepteerde verwijzing meteen op de wachtlijst. Antwoorden vanuit Curanta is in ontwikkeling.' },
       { title: 'Medimo', status: 'inrichten', body: 'Medicatieoverzicht, voorschriften en toediening uitwisselen met Medimo.' },
       { title: 'Publieke FHIR-API voor de BgZ', status: 'inrichten', body: 'Een API (FHIR R4), alleen om te lezen. Hij levert de Basisgegevensset Zorg (BgZ) van een cliënt als document, getoetst aan de profielen van Nictiz. Beschikbaar voor vooraf geregistreerde systemen; er is geen testomgeving en geen algemene lees- of schrijftoegang.' },
-      { title: 'eOverdracht', status: 'ontwikkeling', body: 'Curanta kan 11 van de 14 onderdelen van de Minimale eOverdracht uit het dossier vullen. Het volledige eOverdracht-document, de kwalificatie en het verzenden zijn nog niet gebouwd.' },
+      { title: 'eOverdracht', status: 'ontwikkeling', body: 'Curanta maakt het overdrachtsdocument volgens eOverdracht 4.0, met alle 14 onderdelen van de Minimale eOverdracht, voor zover ze in het dossier staan. U downloadt het en stuurt het zelf mee, bijvoorbeeld via ZorgMail. Curanta verstuurt het niet automatisch en is niet door Nictiz gekwalificeerd.' },
       { title: 'MedMij en LSP', status: 'ontwikkeling', body: 'Uitwisseling met persoonlijke gezondheidsomgevingen via MedMij en met het Landelijk Schakelpunt. Registratie, certificaten en aansluittrajecten zijn er nog niet.' },
       { title: 'Ysis (Gerimedica)', status: 'ontwikkeling', body: 'Uitwisseling van het dossier met Ysis. Geen import: overstappen uit Ysis is een migratieproject.' },
       { title: 'Nmbrs', status: 'inrichten', body: 'De goedgekeurde salarisexport rechtstreeks naar Nmbrs. Vraagt een Nmbrs-partnerapp, een sleutel en toestemming van uw organisatie; de test met Nmbrs doen wij bij de eerste klant.' },

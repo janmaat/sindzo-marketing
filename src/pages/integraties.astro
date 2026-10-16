@@ -18,12 +18,22 @@ interface Integration {
 // richten per klant" betekent dat de koppeling er is, maar pas werkt met een certificaat, contract
 // of toegang van uw organisatie bij de andere partij. In de demo zijn deze koppelingen niet live
 // (nagelopen in de code: buiten Development geen stub, zonder certificaat "niet gekoppeld").
+//
+// Herzien 15-10-2026 (besluit Jan, claimtoets tegen Ponscura-koppel, feitenblad 5b8013fcd):
+// - iWmo/iJw, iWlz, Zvw en de CAK-kaart van "ontwikkeling" naar "inrichten": de berichten zijn gebouwd,
+//   worden getoetst (iStandaarden aan de XSD, AW319 aan recordlayout en testset van Vektis) en u levert
+//   ze met de hand aan. Rechtstreeks versturen via VECOZO is niet beproefd en staat standaard uit.
+// - iWlz: hoe het zorgkantoor ontvangt is een open vraag aan VECOZO; de route stemmen wij per
+//   zorgkantoor af bij de start.
+// - eOverdracht blijft "ontwikkeling": het document (STU3, eOverdracht 4.0) is gebouwd en te
+//   downloaden, transport en kwalificatie niet.
+// - Entra ID blijft "ontwikkeling" tot Jans eindtest met een echte tenant (deploy/SSO-ENTRA-TESTEN.md).
 const integrations: Integration[] = [
   // Standaarden
   { name: 'FHIR R4 en de BgZ', category: 'Standaarden', status: 'inrichten', doc: '/api',
     body: 'Een publieke FHIR R4-API, alleen om te lezen. Hij levert de Basisgegevensset Zorg (BgZ) van een cliënt als document, gevalideerd tegen de profielen van Nictiz. Beschikbaar zodra wij het systeem dat de gegevens ophaalt, hebben geregistreerd. Geen testomgeving en geen algemene lees- of schrijftoegang.' },
   { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'ontwikkeling',
-    body: 'Curanta vult 11 van de 14 onderdelen van de Minimale eOverdracht uit het dossier. Het volledige eOverdracht-document (STU3), de kwalificatie en het verzenden zijn nog niet gebouwd.' },
+    body: 'Curanta maakt het overdrachtsdocument volgens eOverdracht 4.0, met alle 14 onderdelen van de Minimale eOverdracht, voor zover ze in het dossier staan. U downloadt het en stuurt het zelf mee, bijvoorbeeld via ZorgMail. Curanta verstuurt het niet automatisch en is niet door Nictiz gekwalificeerd.' },
   { name: 'MedMij', category: 'Standaarden', status: 'ontwikkeling',
     body: 'Uitwisselen met een persoonlijke gezondheidsomgeving vraagt registratie bij Stichting MedMij, een PKIoverheid-certificaat en een conformiteitstest. Die zijn er nog niet.' },
   { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'ontwikkeling',
@@ -40,19 +50,22 @@ const integrations: Integration[] = [
     body: 'Medicatieoverzicht, voorschriften, toedienregistratie en allergieën. Zonder Medimo legt u het medicatiegebruik in het dossier zelf vast (naam en ATC-code).' },
 
   // Financieel
-  // 14-10-2026, claimtoets: geen van de VECOZO-stromen is tegen VECOZO beproefd, en de iStandaard-berichten
-  // (iWmo, iJw, iWlz, CAK) worden nog niet aan het officiële schema getoetst. Die staan daarom op "ontwikkeling",
-  // met de toezegging van Jan (14-10-2026): afgerond vóór de eerste declaratiemaand van de klant. GGZ en COV staan
-  // op "inrichten": daar is een handmatige weg gebouwd die vandaag werkt (feitenblad, rij VECOZO).
-  { name: 'Gemeenten (iWmo en iJw)', category: 'Financieel', status: 'ontwikkeling',
-    body: 'Toewijzingen, berichten bij start en stop en de maanddeclaratie (Wmo323, Jw323) stelt Curanta nu al op, uit goedgekeurde productie. Het bericht volgens de iStandaard en het aanleveren via VECOZO ronden wij af vóór uw eerste declaratiemaand. Retourberichten leest u zelf in.' },
-  { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'ontwikkeling',
-    body: 'De iWlz-berichten en de maanddeclaratie stelt Curanta nu al op, uit goedgekeurde productie. Het bericht volgens de iStandaard en het aanleveren via VECOZO ronden wij af vóór uw eerste declaratiemaand. Retourberichten leest u zelf in.' },
+  // 15-10-2026, claimtoets: iWmo/iJw 3.2 en iWlz 2.4.3 worden verplicht getoetst aan de officiële XSD's
+  // (Istandaard32Opsteller.cs, Istandaard32Xsd.cs, Iwlz243.cs). Aanleveren gaat standaard met de hand
+  // (IstandaardAanleverwijze.cs): iWmo/iJw in het VECOZO-portaal, iWlz bij het zorgkantoor. Rechtstreeks
+  // versturen is nooit tegen VECOZO beproefd. Daarom "inrichten" (besluit Jan 15-10-2026). De toezegging
+  // "vóór uw eerste declaratiemaand" van 14-10 is vervallen: wat er nu staat, is gebouwd.
+  { name: 'Gemeenten (iWmo en iJw)', category: 'Financieel', status: 'inrichten',
+    body: 'Curanta stelt de berichten op volgens iStandaard 3.2: start en stop van de zorg, verzoeken om toewijzing of wijziging en de maanddeclaratie (Wmo323, Jw323) uit goedgekeurde productie. Elk bericht wordt getoetst aan het officiële schema. U downloadt het en levert het aan in het VECOZO-portaal. Antwoorden van de gemeente leest u in, als bestand of geplakt. Rechtstreeks versturen vanuit Curanta volgt.' },
+  { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'inrichten',
+    body: 'Curanta stelt de iWlz-berichten op volgens iStandaard 2.4.3, zoals de melding van begin en einde van de zorg, en leest de berichten van het zorgkantoor in. Ze worden getoetst aan het officiële schema. De maanddeclaratie maakt Curanta als Vektis-bericht (AW319) uit goedgekeurde productie. U downloadt de bestanden en levert ze aan bij het zorgkantoor. Hoe dat gaat, stemmen wij bij de start per zorgkantoor af: of het VECOZO-portaal iWlz-bestanden en een Wlz-declaratie (AW319) aanneemt, is een open vraag aan VECOZO.' },
   // 14-10-2026: een zorgaanbieder levert niets rechtstreeks aan het CAK. Bij de Wlz geeft het zorgkantoor de start
   // en wijziging van de zorg door (iWlz AW35/AW39 van de aanbieder, CA317/CA319 naar het CAK), bij de Wmo de gemeente
   // (iEb). Bron: istandaarden.nl, iWlz 2.4.3 en iEb 4.0.
-  { name: 'Eigen bijdrage (CAK)', category: 'Financieel', status: 'ontwikkeling',
-    body: 'Het CAK stelt de eigen bijdrage van de cliënt vast uit wat het zorgkantoor en de gemeente doorgeven; u levert zelf niets aan het CAK. Curanta meldt de start en wijzigingen van de Wlz-zorg aan het zorgkantoor. Dat ronden wij af vóór uw eerste declaratiemaand.' },
+  // 15-10-2026: kaart blijft (besluit Jan), status gelijk aan iWlz. De CAK-module is verwijderd; de meldingen
+  // begin/einde zijn WMO305/307 (Istandaard32Opsteller.cs) en AW35/AW39 (Iwlz243.cs).
+  { name: 'Eigen bijdrage (CAK)', category: 'Financieel', status: 'inrichten',
+    body: 'U levert niets aan het CAK. Het CAK krijgt zijn gegevens van het zorgkantoor (Wlz) en de gemeente (Wmo), op basis van uw meldingen over het begin en het einde van de zorg. Die meldingen stelt u op in Curanta.' },
   { name: 'Controle op verzekering (COV)', category: 'Financieel', status: 'inrichten',
     body: 'Curanta legt per cliënt vast bij welke verzekeraar hij verzekerd is, en waar dat vandaan komt. U neemt het over van de zorgpas of uit de COV-controle in het VECOZO-portaal. De automatische vraag aan VECOZO ronden wij af bij uw aansluiting.' },
   { name: 'AGB-register (Vektis)', category: 'Financieel', status: 'inrichten',
@@ -61,8 +74,8 @@ const integrations: Integration[] = [
   // VECOZO-portaal is gebouwd (Ponscura c5d17a29b). Rechtstreeks versturen vanuit Curanta is nog niet beproefd.
   { name: 'Zorgverzekeraars (GGZ, GDS801)', category: 'Financieel', status: 'inrichten',
     body: 'GGZ-declaraties volgens de standaard van Vektis. Curanta maakt het bericht en toetst het aan het officiële schema. U levert het aan in het VECOZO-portaal, met het VECOZO-account van uw organisatie; rechtstreeks versturen vanuit Curanta volgt. Het retourbericht (GDS802) leest u in.' },
-  { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'ontwikkeling',
-    body: 'Zvw-declaratie voor de wijkverpleging. Productcodes, tarieven en prestaties zijn er, en Curanta stelt de berichten (AW319 en AW320) op en verwerkt ze. Het aanleveren via VECOZO ronden wij af vóór uw eerste declaratiemaand.' },
+  { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'inrichten',
+    body: 'Zvw-declaratie voor de wijkverpleging. Curanta maakt uit goedgekeurde zorg per zorgverzekeraar en maand het declaratiebericht (AW319), getoetst aan de recordlayout en de testset van Vektis. U levert het aan in het VECOZO-portaal en leest het antwoord (AW320) in. Rechtstreeks versturen vanuit Curanta volgt.' },
 
   // Sensoren en domotica
   { name: 'Domotica', category: 'Sensoren en domotica', status: 'inrichten',
@@ -78,7 +91,7 @@ const integrations: Integration[] = [
   { name: 'UZI-pas', category: 'Identiteit', status: 'inrichten',
     body: 'Curanta leest de pas uit en controleert de certificaatketen en of de pas is ingetrokken. Beschikbaar zodra wij de UZI-hostnaam op onze server hebben ingericht; dat is nog niet gebeurd. De eindtest met een echte pas doen wij bij de eerste klant.' },
   { name: 'Microsoft Entra ID (SSO)', category: 'Identiteit', status: 'ontwikkeling',
-    body: 'Inloggen met het account van uw organisatie, met rollen uit groepen. De instellingen zijn er; inloggen via SSO nog niet.' },
+    body: 'Aanmelden met het Microsoft-werkaccount in de backoffice en het medewerkerportaal, met rollen uit groepen, is gebouwd. De eindtest met een echte Microsoft-omgeving volgt. Alleen Microsoft Entra ID: geen SAML en geen andere aanbieders. Het cliëntportaal heeft geen SSO.' },
 
   // Klinisch
   { name: 'Ysis (Gerimedica)', category: 'Klinisch', status: 'ontwikkeling',
