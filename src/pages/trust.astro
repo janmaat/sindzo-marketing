@@ -34,7 +34,9 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
     intro: 'Leidend is ons werkdocument voor NEN 7510, de norm voor informatiebeveiliging in de zorg. Ook wat nog niet gedaan is, staat erbij: een externe pentest (een gecontroleerde inbraakpoging) en de versleuteling van de hele database.',
     items: [
       { label: 'NEN 7510:2024', stand: 'uitvoering', note: 'Maatregelen ingevoerd, met een eerste beoordeling. Een externe audit is gepland. Curanta is niet gecertificeerd.', doc: '/procurement' },
-      { label: 'NEN 7513 (logging)', stand: 'geregeld', note: 'Auditlog met hash-keten, zodat een wijziging achteraf aantoonbaar is. Een logregel over een cliënt blijft bewaard zolang het dossier bestaat; logregels zonder dossier 7 jaar.' },
+      { label: 'NEN 7513 (logging)', stand: 'geregeld', note: 'Auditlog met hash-keten, zodat een wijziging achteraf aantoonbaar is. Elke regel zegt of iemand gegevens inzag, vastlegde, wijzigde of verwijderde. Een logregel over een cliënt blijft bewaard zolang het dossier bestaat; logregels zonder dossier 7 jaar.' },
+      { label: 'Auditlogs naar uw SIEM', stand: 'uitvoering', note: 'Gebouwd: elke minuut het beveiligingslogboek en de beheeraudit naar het SIEM van uw organisatie, en het NEN 7513-logboek gepseudonimiseerd als u dat aanzet. De test met een echte Splunk, Azure Monitor en syslog-server volgt.', doc: '/oplossing#kwaliteit' },
+      { label: 'Scanblokkade', stand: 'geregeld', note: 'Wie bekende zwakke plekken van websites afzoekt, wordt automatisch geblokkeerd, oplopend tot een week. Verkeer van buiten Europa telt Curanta apart; binnen de EU weigert Curanta niemand.' },
       { label: 'NEN 7512 (uitwisseling)', stand: 'uitvoering', note: 'Uitgangspunt bij het bouwen van de koppelingen; nog niet extern getoetst.' },
       { label: 'Tweestapsverificatie', stand: 'geregeld', note: 'Verplicht in de backoffice voor zorg- en beheerrollen.' },
       { label: 'Versleuteling BSN', stand: 'geregeld', note: 'Curanta versleutelt het BSN op veldniveau, met AES-256-GCM. Zoeken gaat via een aparte hash, zonder te ontsleutelen.' },
