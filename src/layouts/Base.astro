@@ -2,6 +2,7 @@
 import Nav from '../components/Nav.astro';
 import EarlyAccessBanner from '../components/EarlyAccessBanner.astro';
 import Footer from '../components/Footer.astro';
+import { LINKEDIN_BEDRIJFSPAGINA } from '../config/linkedin';
 import '../styles/global.css';
 
 interface Props {
@@ -86,6 +87,8 @@ const orgLd = {
       availableLanguage: ['Dutch', 'English'],
     },
   ],
+  // Koppelt de site aan het profiel van de organisatie elders (skill site-inhoudscontrole, Vindbaarheid).
+  ...(LINKEDIN_BEDRIJFSPAGINA ? { sameAs: [LINKEDIN_BEDRIJFSPAGINA] } : {}),
 };
 ---
 <!doctype html>

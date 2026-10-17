@@ -3,11 +3,25 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import PlanCard from '../components/PlanCard.astro';
 import Cta from '../components/Cta.astro';
+import Veelgesteld from '../components/Veelgesteld.astro';
 import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 
 // Prijzen zijn indicatief en bewust zichtbaar — concurrenten verbergen
 // pricing tot na demo, wat procurement-cyclus verlengt. Wij tonen ranges
 // zodat bestuurders interne business case kunnen maken vóór gesprek.
+
+// Zichtbaar op de pagina én als FAQPage (component Veelgesteld, 17-10-2026); de tekst is ongewijzigd.
+const prijsVragen = [
+  { vraag: "Wat telt als \"actieve medewerker\"?", antwoord: "Een gebruiker die in de afgelopen 30 dagen heeft ingelogd. Slapende accounts tellen niet mee: u betaalt niet voor mensen die niet werken." },
+  { vraag: "Wat kost een zorgmedewerker die alleen het medewerkerportaal gebruikt?", antwoord: "€19 per maand, in elk plan. Dat geldt voor wie alleen het medewerkerportaal nodig heeft. Wie ook in de backoffice werkt, betaalt het bedrag van het plan (bijvoorbeeld een wijkverpleegkundige die indicaties stelt)." },
+  { vraag: "Hoe zit het met cliënten en mantelzorgers?", antwoord: "Het cliëntportaal en het mantelzorgerportaal zijn gratis, in alle plannen. Cliënten, mantelzorgers en familie tellen niet als medewerker." },
+  { vraag: "Hoe loggen gebruikers in?", antwoord: "Met tweestapsverificatie, inbegrepen in elk plan. Inloggen met DigiD voor cliënten en mantelzorgers is een betaalde optie." },
+  { vraag: "Wat kost het bij meer dan 500 medewerkers?", antwoord: "Vanaf 500 medewerkers geldt een staffeltarief. Bij een Enterprise-contract stemmen wij dat met u af; bel ons voor een indicatie." },
+  { vraag: "Zitten koppelingen in de prijs?", antwoord: "De koppelingen die gebouwd zijn (zie <a href=\"/integraties\" class=\"text-curanta-700 hover:underline\">de stand per koppeling</a>) zitten in het abonnement; daar rekenen wij niets extra voor. Wat de externe partij zelf rekent, bijvoorbeeld een Vecozo-certificaat of een ZorgMail-abonnement, betaalt u rechtstreeks aan die partij." },
+  { vraag: "Is migratie van mijn huidige ECD inbegrepen?", antwoord: "Migratie vanuit <strong>Nedap Ons</strong>, <strong>Gerimedica Ysis</strong>, <strong>SDB</strong> of <strong>Pluriform Zorg (Adapcare)</strong> doen wij als migratieproject, tegen een vaste prijs vooraf. Er is geen open einde. Een kant-en-klare import per bronsysteem is er nog niet; de route stellen wij per organisatie samen op. De uitwerking per bronsysteem, met ook de weg terug naar buiten, staat op de pagina <a href=\"/overstappen\" class=\"text-curanta-700 hover:underline\">Overstappen en exit</a>." },
+  { vraag: "Hoelang duurt een implementatie?", antwoord: "Dat spreken wij per organisatie af, na een migratie-inschatting. Wij zijn nieuw en noemen liever geen doorlooptijd die nog geen enkele klant heeft gehaald. De training is in alle plannen inbegrepen. De implementatie is maatwerk, met een prijs die wij vooraf afspreken. De migratie is een project tegen een vaste prijs vooraf, dus zonder open einde." },
+  { vraag: "Kan ik tussentijds van plan wisselen?", antwoord: "Naar een hoger plan kan altijd direct; naar een lager plan per contractjaar. Het contract is een jaarcontract, en het aantal medewerkers schaalt per maand mee. Uw gegevens blijven van u: bij vertrek krijgt u een export in JSON, zonder exit-fee." },
+];
 ---
 <Base
   image="/og/prijzen.png"
@@ -386,47 +400,7 @@ import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
     </p>
   </section>
 
-  <section class="container-prose py-16 border-t border-ink-100">
-    <h2 class="font-display text-2xl font-bold text-ink-900">Veelgestelde vragen over prijs</h2>
-    <dl class="mt-8 space-y-6 max-w-3xl">
-      <div>
-        <dt class="font-semibold text-ink-900">Wat telt als "actieve medewerker"?</dt>
-        <dd class="mt-1 text-sm text-ink-700">Een gebruiker die in de afgelopen 30 dagen heeft ingelogd. Slapende accounts tellen niet mee: u betaalt niet voor mensen die niet werken.</dd>
-      </div>
-      <div>
-        <dt class="font-semibold text-ink-900">Wat kost een zorgmedewerker die alleen het medewerkerportaal gebruikt?</dt>
-        <dd class="mt-1 text-sm text-ink-700">€19 per maand, in elk plan. Dat geldt voor wie alleen het medewerkerportaal nodig heeft. Wie ook in de backoffice werkt, betaalt het bedrag van het plan (bijvoorbeeld een wijkverpleegkundige die indicaties stelt).</dd>
-      </div>
-      <div>
-        <dt class="font-semibold text-ink-900">Hoe zit het met cliënten en mantelzorgers?</dt>
-        <dd class="mt-1 text-sm text-ink-700">Het cliëntportaal en het mantelzorgerportaal zijn gratis, in alle plannen. Cliënten, mantelzorgers en familie tellen niet als medewerker.</dd>
-      </div>
-      <div>
-        <dt class="font-semibold text-ink-900">Hoe loggen gebruikers in?</dt>
-        <dd class="mt-1 text-sm text-ink-700">Met tweestapsverificatie, inbegrepen in elk plan. Inloggen met DigiD voor cliënten en mantelzorgers is een betaalde optie.</dd>
-      </div>
-      <div>
-        <dt class="font-semibold text-ink-900">Wat kost het bij meer dan 500 medewerkers?</dt>
-        <dd class="mt-1 text-sm text-ink-700">Vanaf 500 medewerkers geldt een staffeltarief. Bij een Enterprise-contract stemmen wij dat met u af; bel ons voor een indicatie.</dd>
-      </div>
-      <div>
-        <dt class="font-semibold text-ink-900">Zitten koppelingen in de prijs?</dt>
-        <dd class="mt-1 text-sm text-ink-700">De koppelingen die gebouwd zijn (zie <a href="/integraties" class="text-curanta-700 hover:underline">de stand per koppeling</a>) zitten in het abonnement; daar rekenen wij niets extra voor. Wat de externe partij zelf rekent, bijvoorbeeld een Vecozo-certificaat of een ZorgMail-abonnement, betaalt u rechtstreeks aan die partij.</dd>
-      </div>
-      <div>
-        <dt class="font-semibold text-ink-900">Is migratie van mijn huidige ECD inbegrepen?</dt>
-        <dd class="mt-1 text-sm text-ink-700">Migratie vanuit <strong>Nedap Ons</strong>, <strong>Gerimedica Ysis</strong>, <strong>SDB</strong> of <strong>Pluriform Zorg (Adapcare)</strong> doen wij als migratieproject, tegen een vaste prijs vooraf. Er is geen open einde. Een kant-en-klare import per bronsysteem is er nog niet; de route stellen wij per organisatie samen op. De uitwerking per bronsysteem, met ook de weg terug naar buiten, staat op de pagina <a href="/overstappen" class="text-curanta-700 hover:underline">Overstappen en exit</a>.</dd>
-      </div>
-      <div>
-        <dt class="font-semibold text-ink-900">Hoelang duurt een implementatie?</dt>
-        <dd class="mt-1 text-sm text-ink-700">Dat spreken wij per organisatie af, na een migratie-inschatting. Wij zijn nieuw en noemen liever geen doorlooptijd die nog geen enkele klant heeft gehaald. De training is in alle plannen inbegrepen. De implementatie is maatwerk, met een prijs die wij vooraf afspreken. De migratie is een project tegen een vaste prijs vooraf, dus zonder open einde.</dd>
-      </div>
-      <div>
-        <dt class="font-semibold text-ink-900">Kan ik tussentijds van plan wisselen?</dt>
-        <dd class="mt-1 text-sm text-ink-700">Naar een hoger plan kan altijd direct; naar een lager plan per contractjaar. Het contract is een jaarcontract, en het aantal medewerkers schaalt per maand mee. Uw gegevens blijven van u: bij vertrek krijgt u een export in JSON, zonder exit-fee.</dd>
-      </div>
-    </dl>
-  </section>
+  <Veelgesteld titel="Veelgestelde vragen over prijs" vragen={prijsVragen} />
 
   <Cta
     title="Niet zeker welk plan past?"

@@ -1,0 +1,47 @@
+---
+// Vragen en antwoorden, zichtbaar op de pagina én als FAQPage voor zoekmachines en AI-assistenten
+// (skill site-inhoudscontrole, "Vindbaarheid", 17-10-2026). Beide komen uit dezelfde lijst, zodat
+// de gestructureerde gegevens nooit iets anders zeggen dan het scherm. Elk antwoord is een claim:
+// toets het tegen het feitenblad.
+import type { Vraag } from '../config/vragen';
+
+interface Props {
+  vragen: Vraag[];
+  titel?: string;
+  /** Andere achtergrond of rand, afhankelijk van de pagina. */
+  klasse?: string;
+}
+
+const { vragen, titel = 'Veelgestelde vragen', klasse = 'container-prose py-16 border-t border-ink-100' } = Astro.props;
+
+const alsTekst = (html: string) =>
+  html
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: 'nl-NL',
+  mainEntity: vragen.map((v) => ({
+    '@type': 'Question',
+    name: v.vraag,
+    acceptedAnswer: { '@type': 'Answer', text: alsTekst(v.antwoord) },
+  })),
+};
+---
+<section class={klasse}>
+  <h2 class="font-display text-2xl font-bold text-ink-900">{titel}</h2>
+  <dl class="mt-8 space-y-6 max-w-3xl">
+    {vragen.map((v) => (
+      <div>
+        <dt class="font-semibold text-ink-900">{v.vraag}</dt>
+        <dd class="mt-1 text-sm text-ink-700" set:html={v.antwoord} />
+      </div>
+    ))}
+  </dl>
+</section>
+<script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
