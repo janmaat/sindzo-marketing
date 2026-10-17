@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@1.11.0",
+        "--isolated",
+        "--no-usage-statistics"
+      ]
+    },
+    "buffer": {
+      "type": "http",
+      "url": "https://mcp.buffer.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${BUFFER_API_KEY:-ontbreekt}"
+      }
+    }
+  }
+}
