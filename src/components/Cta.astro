@@ -1,5 +1,5 @@
 ---
-import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_EERSTE, DEMO_GESPREK } from '../config/demo';
 import DotPattern from './magic/DotPattern.astro';
 
 // Afsluitende oproep onderaan een pagina. Standaard de twee demo-knoppen van de site
@@ -13,11 +13,14 @@ interface Props {
   primary?: Knop;
   secondary?: Knop;
 }
+// Zonder demo-toegang (src/config/demo.ts) is er standaard één knop: de demonstratie.
 const {
-  title = 'Zelf rondkijken, of een demo op uw eigen proces?',
-  subtitle = 'Kijk zelf rond in een werkende omgeving met verzonnen cliënten. Of stuur ons drie typische werkstromen uit uw organisatie; dan laten wij zien hoe Curanta ze ondersteunt.',
-  primary = DEMO_ZELF,
-  secondary = DEMO_GESPREK,
+  title = DEMO_ZELF_AANGEBODEN ? 'Zelf rondkijken, of een demo op uw eigen proces?' : 'Curanta zien op uw eigen proces?',
+  subtitle = DEMO_ZELF_AANGEBODEN
+    ? 'Kijk zelf rond in een werkende omgeving met verzonnen cliënten. Of stuur ons drie typische werkstromen uit uw organisatie; dan laten wij zien hoe Curanta ze ondersteunt.'
+    : 'Stuur ons drie typische werkstromen uit uw organisatie; dan laten wij met verzonnen cliënten zien hoe Curanta ze ondersteunt.',
+  primary = DEMO_EERSTE,
+  secondary = DEMO_ZELF_AANGEBODEN ? DEMO_GESPREK : undefined,
 } = Astro.props;
 ---
 <section class="container-prose py-20">
@@ -35,9 +38,11 @@ const {
           <a href={primary.href} class="inline-flex items-center justify-center rounded-full bg-accent-500 px-6 py-3 text-sm font-bold text-[#06231f] no-underline transition hover:bg-accent-600">
             {primary.label}
           </a>
-          <a href={secondary.href} class="inline-flex items-center justify-center rounded-full border border-curanta-300/40 px-6 py-3 text-sm font-semibold text-white no-underline transition hover:bg-curanta-800">
-            {secondary.label}
-          </a>
+          {secondary && secondary.href !== primary.href && (
+            <a href={secondary.href} class="inline-flex items-center justify-center rounded-full border border-curanta-300/40 px-6 py-3 text-sm font-semibold text-white no-underline transition hover:bg-curanta-800">
+              {secondary.label}
+            </a>
+          )}
         </div>
         <a href="/presentatie" class="text-sm font-medium text-curanta-100 underline-offset-2 hover:underline">Of bekijk eerst een presentatie, wanneer het u uitkomt →</a>
         <a href="/contact" class="text-sm font-medium text-curanta-100 underline-offset-2 hover:underline">Of stel ons een vraag →</a>

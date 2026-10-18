@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import StatusLabel from '../components/StatusLabel.astro';
 import Cta from '../components/Cta.astro';
-import { DEMO_ZELF } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_EERSTE } from '../config/demo';
 import type { Status } from '../config/status';
 
 // Vergelijking met drie gevestigde VVT-leveranciers. Herzien 08-10-2026: elke cel over een andere
@@ -152,7 +152,7 @@ const domein = (url: string) => new URL(url).hostname.replace(/^www\./, '');
     subtitle="Per onderwerp wat Curanta heeft en wat wij over Nedap Ons, mijnCaress en Pluriform Zorg in publieke bronnen vonden. Met de bron bij elke cel, ook waar zij verder zijn dan Curanta."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href={DEMO_ZELF.href} class="btn-primary no-underline">{DEMO_ZELF.label}</a>
+      <a href={DEMO_EERSTE.href} class="btn-primary no-underline">{DEMO_EERSTE.label}</a>
       <a href="/trust" class="btn-secondary no-underline">Trust Centre</a>
     </div>
   </PageHero>
@@ -246,6 +246,8 @@ const domein = (url: string) => new URL(url).hostname.replace(/^www\./, '');
 
   <Cta
     title="Deze vergelijking naast de demo leggen?"
-    subtitle="Kijk zelf rond met een eigen demo-toegang. Of vraag een demonstratie aan; daarin laten wij de punten uit deze vergelijking in het systeem zien."
+    subtitle={DEMO_ZELF_AANGEBODEN
+      ? 'Kijk zelf rond met een eigen demo-toegang. Of vraag een demonstratie aan; daarin laten wij de punten uit deze vergelijking in het systeem zien.'
+      : 'Vraag een demonstratie aan; daarin laten wij de punten uit deze vergelijking in het systeem zien.'}
   />
 </Base>

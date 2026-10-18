@@ -12,13 +12,17 @@
 //   gepland      — op de planning, nog niet begonnen
 //
 // Bron per onderdeel: het feitenblad (D:\Repos\Ponscura\docs\campagne\feitenblad-curanta.md).
+import { DEMO_ZELF_AANGEBODEN } from './demo';
+
 export type Status = 'demo' | 'inrichten' | 'ontwikkeling' | 'gepland';
 
 export const STATUS: Record<Status, { label: string; dot: string; uitleg: string }> = {
   demo: {
     label: 'Gebouwd, te zien in de demo',
     dot: 'bg-accent-600',
-    uitleg: 'Gebouwd; u kunt het in de demo-omgeving bekijken, met verzonnen gegevens.',
+    uitleg: DEMO_ZELF_AANGEBODEN
+      ? 'Gebouwd; u kunt het in de demo-omgeving bekijken, met verzonnen gegevens.'
+      : 'Gebouwd; wij laten het zien in een demonstratie, met verzonnen gegevens.',
   },
   inrichten: {
     label: 'Gebouwd, in te richten per klant',

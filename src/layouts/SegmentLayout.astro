@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 import Screenshot from '../components/Screenshot.astro';
 import Veelgesteld from '../components/Veelgesteld.astro';
-import { DEMO_ZELF } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_EERSTE } from '../config/demo';
 import { algemeneVragen, type Vraag } from '../config/vragen';
 
 interface Trigger { title: string; body: string; }
@@ -50,7 +50,7 @@ const {
         <a href="/contact" class="btn-primary no-underline">Neem contact op</a>
       ) : (
         <>
-          <a href={DEMO_ZELF.href} class="btn-primary no-underline">{DEMO_ZELF.label}</a>
+          <a href={DEMO_EERSTE.href} class="btn-primary no-underline">{DEMO_EERSTE.label}</a>
           <a href="/oplossing" class="btn-secondary no-underline">Bekijk de modules</a>
         </>
       )}
@@ -184,7 +184,9 @@ const {
   ) : (
     <Cta
       title="Liever Curanta op uw eigen werkprocessen zien?"
-      subtitle="Kijk zelf rond in een werkende omgeving met verzonnen cliënten. Of stuur ons drie typische werkstromen uit uw organisatie; dan laten wij zien hoe Curanta ze ondersteunt, zonder vast script."
+      subtitle={DEMO_ZELF_AANGEBODEN
+        ? 'Kijk zelf rond in een werkende omgeving met verzonnen cliënten. Of stuur ons drie typische werkstromen uit uw organisatie; dan laten wij zien hoe Curanta ze ondersteunt, zonder vast script.'
+        : 'Stuur ons drie typische werkstromen uit uw organisatie; dan laten wij met verzonnen cliënten zien hoe Curanta ze ondersteunt, zonder vast script.'}
     />
   )}
 </Base>

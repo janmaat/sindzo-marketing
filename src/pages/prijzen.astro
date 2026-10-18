@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import PlanCard from '../components/PlanCard.astro';
 import Cta from '../components/Cta.astro';
 import Veelgesteld from '../components/Veelgesteld.astro';
-import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
+import { DEMO_EERSTE, DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 
 // Prijzen zijn indicatief en bewust zichtbaar — concurrenten verbergen
 // pricing tot na demo, wat procurement-cyclus verlengt. Wij tonen ranges
@@ -406,6 +406,6 @@ const prijsVragen = [
     title="Niet zeker welk plan past?"
     subtitle="Vertel ons over uw situatie (sector, omvang, huidige systemen). Wij reageren binnen 1 werkdag, ook als ons advies is dat een andere leverancier beter past."
     primary={{ label: 'Vraag een advies', href: '/contact' }}
-    secondary={DEMO_ZELF}
+    secondary={DEMO_EERSTE}
   />
 </Base>

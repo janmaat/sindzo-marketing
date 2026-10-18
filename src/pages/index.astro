@@ -37,7 +37,7 @@ import Screenshot from '../components/Screenshot.astro';
 import StatusLabel from '../components/StatusLabel.astro';
 import Icon from '../components/Icon.astro';
 import DotPattern from '../components/magic/DotPattern.astro';
-import { DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 import type { Status } from '../config/status';
 
 import zorgplan from '../assets/schermen/bo-zorgplan.jpg';
@@ -371,14 +371,14 @@ const voordelen = [
             medewerker per maand. Training en hosting zitten in de prijs; de implementatie is maatwerk, met een prijs die wij vooraf afspreken.
           </p>
           <div class="mt-7 flex flex-wrap items-center gap-3">
-            <a href={DEMO_ZELF.href} class="btn-primary btn-lg no-underline">{DEMO_ZELF.label}</a>
-            <a href={DEMO_GESPREK.href} class="btn-secondary btn-lg no-underline">{DEMO_GESPREK.label}</a>
+            {DEMO_ZELF_AANGEBODEN && <a href={DEMO_ZELF.href} class="btn-primary btn-lg no-underline">{DEMO_ZELF.label}</a>}
+            <a href={DEMO_GESPREK.href} class={`${DEMO_ZELF_AANGEBODEN ? 'btn-secondary' : 'btn-primary'} btn-lg no-underline`}>{DEMO_GESPREK.label}</a>
           </div>
           <p class="mt-5 flex gap-2 text-sm leading-relaxed text-ink-700">
             <Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />
             <span>
-              Met <strong class="font-semibold text-ink-900">demo-toegang</strong> kijkt u zelf rond, met
-              verzonnen cliënten. In een <strong class="font-semibold text-ink-900">demonstratie</strong>
+              {DEMO_ZELF_AANGEBODEN && <>Met <strong class="font-semibold text-ink-900">demo-toegang</strong> kijkt u zelf rond, met
+              verzonnen cliënten. </>}In een <strong class="font-semibold text-ink-900">demonstratie</strong>
               laten wij Curanta zien aan de hand van uw eigen zorgproces. Op een aanvraag reageren wij
               binnen 1 werkdag.
             </span>
@@ -932,8 +932,8 @@ const voordelen = [
             wij zien hoe Curanta ze ondersteunt.
           </p>
           <div class="mt-7 flex flex-wrap gap-3">
-            <a href={DEMO_ZELF.href} class="btn-primary btn-lg no-underline">{DEMO_ZELF.label}</a>
-            <a href={DEMO_GESPREK.href} class="btn-secondary btn-lg no-underline">{DEMO_GESPREK.label}</a>
+            {DEMO_ZELF_AANGEBODEN && <a href={DEMO_ZELF.href} class="btn-primary btn-lg no-underline">{DEMO_ZELF.label}</a>}
+            <a href={DEMO_GESPREK.href} class={`${DEMO_ZELF_AANGEBODEN ? 'btn-secondary' : 'btn-primary'} btn-lg no-underline`}>{DEMO_GESPREK.label}</a>
           </div>
           <p class="mt-5 text-sm text-ink-700">
             Liever eerst bellen? <a href="tel:+31852501301" class="font-semibold text-curanta-700">085 250 1301</a>

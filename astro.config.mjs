@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { DEMO_ZELF_AANGEBODEN } from './src/config/demo.ts';
 
 // Marketing-site config. Doel: snel, statisch, edge-cacheable.
 // Hosting: Plesk op de STRATO-server (Apache achter nginx) — zie deploy/ en public/.htaccess.
@@ -17,7 +18,9 @@ export default defineConfig({
       // pagina's (bedankt, demo-form-result) sluiten we uit; legal-pagina's
       // krijgen lage prio. Productpagina's en kennisbank-artikelen tussen
       // 0.7-1.0.
-      filter: (page) => !page.includes('/bedankt') && !page.includes('/login'),
+      // /demo-omgeving alleen als demo-toegang aangeboden wordt (src/config/demo.ts); anders staat er noindex op.
+      filter: (page) => !page.includes('/bedankt') && !page.includes('/login')
+        && (DEMO_ZELF_AANGEBODEN || !page.includes('/demo-omgeving')),
       serialize(item) {
         const url = new URL(item.url);
         const path = url.pathname;
