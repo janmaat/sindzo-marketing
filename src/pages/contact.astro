@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { DEMO_ZELF } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF } from '../config/demo';
 ---
 <Base
   title="Contact | Curanta"
@@ -57,9 +57,11 @@ import { DEMO_ZELF } from '../config/demo';
       </div>
     </div>
 
-    <p class="mt-10 text-ink-700">
-      Liever eerst zelf kijken?
-      <a href={DEMO_ZELF.href} class="font-semibold text-curanta-700 hover:underline">{DEMO_ZELF.label} →</a>
-    </p>
+    {DEMO_ZELF_AANGEBODEN && (
+      <p class="mt-10 text-ink-700">
+        Liever eerst zelf kijken?
+        <a href={DEMO_ZELF.href} class="font-semibold text-curanta-700 hover:underline">{DEMO_ZELF.label} →</a>
+      </p>
+    )}
   </section>
 </Base>

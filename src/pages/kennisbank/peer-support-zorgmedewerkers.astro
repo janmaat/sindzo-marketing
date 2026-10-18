@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Cta from '../../components/Cta.astro';
+import { DEMO_ZELF_AANGEBODEN } from '../../config/demo';
 
 const publicatieDatum = '2026-05-30';
 const bijgewerktDatum = '2026-09-27';
@@ -296,6 +297,8 @@ const articleLd = {
 
   <Cta
     title="Vragen over dit artikel?"
-    subtitle="Stel ze ons gerust, ook als FG of HR-leiding. Wilt u zelf rondkijken: in de demo werkt u met verzonnen gegevens."
+    subtitle={DEMO_ZELF_AANGEBODEN
+      ? 'Stel ze ons gerust, ook als FG of HR-leiding. Wilt u zelf rondkijken: in de demo werkt u met verzonnen gegevens.'
+      : 'Stel ze ons gerust, ook als FG of HR-leiding. In een demonstratie laten wij het zien met verzonnen gegevens.'}
   />
 </Base>

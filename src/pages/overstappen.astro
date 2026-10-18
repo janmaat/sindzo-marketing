@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
-import { DEMO_ZELF } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_EERSTE } from '../config/demo';
 
 // Onderzocht: de reden dat zorgorganisaties niet van ECD wisselen is niet
 // tevredenheid maar dataportabiliteit — ze kunnen hun cliëntgegevens niet
@@ -167,10 +167,12 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
     <div class="container-prose max-w-3xl">
       <h2 class="font-display text-2xl font-bold text-ink-900">Wilt u eerst zien wat u ervoor terugkrijgt?</h2>
       <p class="mt-4 text-ink-700 leading-relaxed">
-        Logisch. Een migratie is geen besluit dat u op een brochure neemt. Kijk zelf rond in een
-        werkende omgeving met verzonnen cliënten; u kunt er niets stukmaken.
+        Logisch. Een migratie is geen besluit dat u op een brochure neemt.
+        {DEMO_ZELF_AANGEBODEN
+          ? 'Kijk zelf rond in een werkende omgeving met verzonnen cliënten; u kunt er niets stukmaken.'
+          : 'Stuur ons drie werkstromen uit uw organisatie; dan laten wij ze zien in een werkende omgeving met verzonnen cliënten.'}
       </p>
-      <a href={DEMO_ZELF.href} class="mt-6 inline-block btn-primary no-underline">{DEMO_ZELF.label}</a>
+      <a href={DEMO_EERSTE.href} class="mt-6 inline-block btn-primary no-underline">{DEMO_EERSTE.label}</a>
     </div>
   </section>
 
@@ -178,6 +180,6 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
     title="Wat kost uw overstap?"
     subtitle="Noem ons uw huidige systeem, uw aantal cliënten en uw aantal medewerkers. Wij reageren binnen 1 werkdag en maken een afspraak voor de migratie-inschatting, ook als de uitkomst is dat u beter kunt blijven zitten."
     primary={{ label: 'Vraag een migratie-inschatting', href: '/contact' }}
-    secondary={DEMO_ZELF}
+    secondary={DEMO_EERSTE}
   />
 </Base>

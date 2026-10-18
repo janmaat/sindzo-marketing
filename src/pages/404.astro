@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { DEMO_ZELF } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_EERSTE } from '../config/demo';
 
 // Custom 404. .htaccess (Apache op de Strato-server) serveert dit
 // automatisch als dist/404.html als een route niet matched.
@@ -37,7 +37,7 @@ import { DEMO_ZELF } from '../config/demo';
         { title: 'Koppelingen', body: 'Vecozo, ZorgMail, ZorgDomein, Medimo en meer, met de status per koppeling.', href: '/integraties' },
         { title: 'Trust Centre', body: 'De stand van beveiliging en privacy, zonder geheimhoudingsverklaring (NDA).', href: '/trust' },
         { title: 'Prijzen', body: 'Vier plannen, met prijs.', href: '/prijzen' },
-        { title: DEMO_ZELF.label, body: 'Verzonnen cliënten, u kunt niets stukmaken.', href: DEMO_ZELF.href },
+        { title: DEMO_EERSTE.label, body: DEMO_ZELF_AANGEBODEN ? 'Verzonnen cliënten, u kunt niets stukmaken.' : 'Op uw eigen werkstromen, met verzonnen cliënten.', href: DEMO_EERSTE.href },
       ].map((card) => (
         <a href={card.href} class="rounded-xl border border-ink-100 bg-white p-5 no-underline transition hover:border-curanta-300 hover:shadow-sm">
           <h2 class="font-display text-base font-semibold text-ink-900">{card.title}</h2>
