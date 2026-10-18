@@ -83,7 +83,7 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
       <div class="max-w-3xl">
         <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Wat het kost en hoe lang het duurt</h2>
         <p class="mt-4 text-ink-700 leading-relaxed">
-          In elk ECD-selectieadvies komt dezelfde valkuil terug: organisaties onderschatten hoeveel werk
+          In ECD-selectieadviezen komt steeds dezelfde valkuil terug: organisaties onderschatten hoeveel werk
           de invoering is. Ze kijken naar de software en vergeten de voorbereiding, de training en de
           begeleiding. Daarom staan die hier bij de prijs, niet ernaast.
         </p>
@@ -92,11 +92,13 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
       {/* Term links, uitleg rechts, in plaats van drie gelijke kaarten (Taste Skill, 14-10-2026). */}
       <dl class="mt-10 max-w-4xl divide-y divide-ink-200 border-y border-ink-200">
         <div class="grid gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-8" data-reveal>
-          <dt class="font-display text-lg font-semibold text-ink-900">Wat in elk plan zit</dt>
+          {/* Tot 18-10-2026 stond hier "De invoering en de training zitten in het abonnement": sinds het besluit
+              van Jan op 15-10 is de implementatie maatwerk (feitenblad, rij Implementatie). */}
+          <dt class="font-display text-lg font-semibold text-ink-900">Training en implementatie</dt>
           <dd class="text-pretty leading-relaxed text-ink-700">
-            De invoering en de training zitten in het abonnement. Daarvoor krijgt u geen aparte
-            factuur. Het overzetten van uw gegevens is een eigen project, tegen een vaste prijs die u
-            vooraf weet.
+            De training zit in het abonnement. De implementatie is maatwerk, met een prijs die wij
+            vooraf afspreken. Het overzetten van uw gegevens is een eigen project, tegen een vaste prijs
+            die u vooraf weet.
           </dd>
         </div>
         <div class="grid gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-8" data-reveal style="--reveal-vertraging:80ms">
@@ -118,6 +120,8 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
 
       <p class="mt-6 text-sm text-ink-500">
         De tarieven per plan staan bij <a href="/prijzen" class="text-curanta-700 hover:underline">de prijzen</a>.
+        Hoe uw eigen implementatieproject werkt, leest u bij
+        <a href="/implementatie" class="text-curanta-700 hover:underline">de implementatie</a>.
       </p>
     </div>
   </section>

@@ -2,65 +2,95 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
+import Veelgesteld from '../components/Veelgesteld.astro';
 import { DEMO_GESPREK } from '../config/demo';
 
-// Fasen zonder weeknummers: de doorlooptijd stellen wij per organisatie vast na de
-// migratie-inschatting (feitenblad, besluit 14c8478 en Jan 25-09-2026: "geen implementatietijdlijn
-// in weken, wel een volgorde van fasen"). Ook weg: dagelijkse standup, triage binnen 24 uur,
-// maatwerkkoppelingen en een jaarlijkse architectuurreview — beloften zonder feitenbladbasis.
+// Het implementatieproject op project.curanta.nl (18-10-2026). Marktonderzoek in de Ponscura-repo:
+// docs/campagne/marktonderzoek-implementatie-2026-10-18.md. Een klantportaal met planning en taken is niet
+// uniek (een andere leverancier heeft er een). Nergens gevonden: dat wat de klant invult de inrichting wordt,
+// en dat de software daarna elke dag meet of het er staat. Daarom beschrijft dit blok die twee, zonder
+// "uniek" en zonder concurrent. Elke zin staat in het feitenblad, rij "Implementatieproject": 22 van de 70
+// onderdelen worden overgenomen, 24 gemeten (ImplementatieGereedheidJob, elke 24 uur). Niet noemen: uploaden,
+// herinneringen, een import uit het vorige pakket (bestaan niet), een doorlooptijd of een klantresultaat.
+const project = [
+  {
+    kop: 'Eén keer invullen',
+    tekst: 'Wat u invult en wij goedkeuren, nemen wij met één handeling over in uw inrichting: uw organisatie, AGB-codes, locaties en teams, de eerste gebruikers, functies en rollen, contracten, tarieven en koppelingen. U ziet vooraf wat er verandert. Niemand voert het een tweede keer in.',
+  },
+  {
+    kop: 'Elke dag gecontroleerd',
+    tekst: 'Daarna meet Curanta elke dag wat er werkelijk in uw organisatie staat, bijvoorbeeld "2 contracten actief, 1 als concept". U leest het bij het onderdeel. Is iets goedgekeurd maar ontbreekt het, dan krijgen wij een waarschuwing. Zo blijkt vóór de start wat er nog mist.',
+  },
+  {
+    kop: 'Altijd zien hoe het ervoor staat',
+    tekst: 'Per onderdeel staat wie het doet (u, wij of samen), aan wie het is toegewezen, hoeveel er al is ingevuld en hoe ver het is. Sturen wij iets terug, dan staat de reden erbij. Een vraag stelt u bij het onderdeel zelf, zodat hij niet in een mailbox verdwijnt.',
+  },
+  {
+    kop: 'Weten wat u buiten Curanta regelt',
+    tekst: 'Een deel regelt u bij een andere partij, zoals VECOZO, Vektis of het CIBG. Het onderdeel zegt waarom het nodig is, wat eerst moet, hoe lang het daar duurt en wat het kost. Ook staat erbij wat Curanta er nu mee kan, en wat nog niet.',
+  },
+];
+
+// De vijf fasen van het implementatieproject (catalogus: Inventariseren, Inrichten, Proefdraaien, Overzetten,
+// Starten), gelijk aan de presentatie "Zo starten we". Tot 18-10-2026 stonden hier zes andere fasen; de
+// beloften zijn dezelfde gebleven en alleen anders verdeeld. Fasen zonder weeknummers: de doorlooptijd stellen
+// wij per organisatie vast na de migratie-inschatting (feitenblad, besluit 14c8478 en Jan 25-09-2026: "geen
+// implementatietijdlijn in weken, wel een volgorde van fasen"). Ook weg: dagelijkse standup, triage binnen 24 uur,
+// maatwerkkoppelingen en een jaarlijkse architectuurreview, beloften zonder feitenbladbasis.
 const phases = [
   {
-    title: 'Verkenning',
+    title: 'Inventariseren',
     deliverables: [
       'Werksessie over uw zorgproces (drie typische werkstromen)',
+      'Uw financiers, contracten en AGB-codes',
       'Overzicht van uw huidige systemen en koppelingen',
       'Overzicht van de betrokkenen: bestuur, I&A, FG, eindgebruikers',
       'Migratie-inschatting (huidig ECD)',
     ],
   },
   {
-    title: 'Inrichting',
+    title: 'Inrichten',
     deliverables: [
       'Uw organisatie en gebruikersaccounts aanmaken',
       'Functies koppelen aan rollen en rechten',
       'Modules aanzetten volgens uw plan',
       'Huisstijl en organisatieprofiel',
+      'Koppelingen aansluiten met uw certificaten en contracten',
     ],
   },
   {
-    title: 'Migratie en training',
+    title: 'Proefdraaien',
     deliverables: [
-      'Migratie van cliënten, contracten en zorgplannen, als project tegen een vaste prijs',
       'Training van 5-10 sleutelgebruikers',
-      'Training van eindgebruikers',
       'Proefperiode met één team naast het oude systeem',
-    ],
-  },
-  {
-    title: 'Eerste team in gebruik',
-    deliverables: [
-      'Eén locatie of één wijk gaat over',
-      'Korte lijnen in de eerste weken',
-      'Reactie op meldingen binnen 1 werkdag',
       'Wat het team terugmeldt, verwerken wij in de inrichting',
     ],
   },
   {
-    title: 'Brede ingebruikname',
+    title: 'Overzetten',
     deliverables: [
-      'Per locatie of team, in fasen',
-      'Begeleiding bij de ingebruikname, op locatie waar dat nodig is',
-      'Een tweede ring sleutelgebruikers opgeleid',
-      'Vast ritme voor nieuwe versies en een overzicht van wijzigingen',
+      'Migratie van cliënten, contracten en zorgplannen, als project tegen een vaste prijs',
+      'Training van eindgebruikers',
     ],
   },
   {
-    title: 'Verbeteren',
+    title: 'Starten',
     deliverables: [
-      'Eerste evaluatie: rapportagetijd en ervaren regeldruk',
-      'Aanvullende modules aanzetten',
+      'Samen beslissen of alles klaar is voor de start',
+      'Eén locatie of één wijk gaat over',
+      'Korte lijnen in de eerste weken',
+      'Reactie op meldingen binnen 1 werkdag',
     ],
   },
+];
+
+const daarna = [
+  'Per locatie of team, in fasen',
+  'Begeleiding bij de ingebruikname, op locatie waar dat nodig is',
+  'Een tweede ring sleutelgebruikers opgeleid',
+  'Vast ritme voor nieuwe versies en een overzicht van wijzigingen',
+  'Eerste evaluatie: rapportagetijd en ervaren regeldruk',
+  'Aanvullende modules aanzetten',
 ];
 
 const principles = [
@@ -81,10 +111,38 @@ const principles = [
     body: 'Eerst één locatie, dan verder uitbreiden. Liever later breed in gebruik, met teams die er goed mee werken, dan alles op dag 1 met chaos.',
   },
 ];
+
+// Elk antwoord is een claim (feitenblad: Implementatieproject, Implementatie, Marktcijfers 18-10).
+const vragen = [
+  {
+    vraag: 'Wat is het implementatieproject?',
+    antwoord: 'Na het contract krijgt uw organisatie een eigen omgeving op project.curanta.nl. Daar staat per fase wat wij van u nodig hebben. Uw projectleider nodigt collega’s uit en wijst onderdelen toe. U vult in, dient in, en wij keuren goed of sturen terug met een reden.',
+  },
+  {
+    vraag: 'Moet ik gegevens twee keer invoeren, in het project en in Curanta?',
+    antwoord: 'Nee. Wat u in het project invult en wij goedkeuren, nemen wij met één handeling over in Curanta. Dat geldt bijvoorbeeld voor uw AGB-codes, locaties en teams, contracten en tarieven. U ziet vooraf wat er verandert.',
+  },
+  {
+    vraag: 'Hoe weet ik of alles klaarstaat voor de start?',
+    antwoord: 'Curanta meet elke dag wat er werkelijk in uw organisatie staat, en u leest de uitkomst bij het onderdeel. Vóór de start beslissen wij samen met u of alles klaar is: gebruikers, koppelingen en werkwijze.',
+  },
+  {
+    vraag: 'Hoe lever ik een VECOZO-certificaat aan?',
+    antwoord: 'In een beveiligd venster in het project, niet per mail. Het certificaat wordt meteen gecontroleerd: klopt het wachtwoord, zit de sleutel erin, en tot wanneer is het geldig. Daarna staat het alleen in de kluis van uw organisatie. Niemand kan de inhoud lezen.',
+  },
+  {
+    vraag: 'Komen er gegevens van cliënten in het project?',
+    antwoord: 'Nee. Het project gaat over uw organisatie, niet over uw cliënten. Er is geen veld voor een BSN. Het overzetten van cliëntgegevens is een apart project tegen een vaste prijs.',
+  },
+  {
+    vraag: 'Wat kost de implementatie?',
+    antwoord: 'De implementatie is maatwerk, met een prijs die wij vooraf afspreken. Training kost niets extra. Het overzetten van uw gegevens is een eigen project tegen een vaste prijs, die u na de migratie-inschatting weet.',
+  },
+];
 ---
 <Base
   title="Implementatie: zo gaat u over op Curanta | Curanta"
-  description="Zo verloopt een implementatie: een projectgroep met bestuur, zorg en FG, sleutelgebruikers en een start in fasen. De duur stemmen wij per organisatie af."
+  description="Uw eigen implementatieproject: wat u invult, staat daarna in Curanta, en Curanta controleert elke dag of het er staat. Met een projectgroep, sleutelgebruikers en een start in fasen."
 >
   <PageHero
     eyebrow="Implementatie"
@@ -96,6 +154,56 @@ const principles = [
       <a href="/procurement" class="btn-secondary no-underline">Documenten voor inkoop</a>
     </div>
   </PageHero>
+
+  <section class="container-prose py-16" aria-labelledby="project-kop">
+    <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
+      <div class="lg:col-span-5">
+        <p class="text-sm font-semibold text-curanta-700">Uw implementatieproject</p>
+        <h2 id="project-kop" class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">
+          Wat u invult, staat daarna in Curanta.
+        </h2>
+        <p class="mt-4 leading-relaxed text-ink-700">
+          Na het contract krijgt uw organisatie een eigen implementatieproject op project.curanta.nl. Daar
+          staat per fase wat wij van u nodig hebben. Uw projectleider nodigt collega’s uit en verdeelt het
+          werk. De administratie vult de AGB-codes en contracten in, HR de functies, ICT de koppelingen.
+        </p>
+        <p class="mt-4 leading-relaxed text-ink-700">
+          Certificaten en wachtwoorden, zoals het VECOZO-systeemcertificaat, levert u aan in een beveiligd
+          venster en niet per mail. Gegevens van cliënten komen er nooit in.
+        </p>
+        <p class="mt-4 text-sm leading-relaxed text-ink-500">
+          De omgeving is alleen te zien met een persoonlijke uitnodiging. In een gesprek laten wij u een
+          testproject zien.
+        </p>
+      </div>
+      <dl class="divide-y divide-ink-200 border-y border-ink-200 lg:col-span-7">
+        {project.map((p) => (
+          <div class="grid gap-2 py-5 sm:grid-cols-[12rem_1fr] sm:gap-6">
+            <dt class="font-display text-lg font-semibold text-ink-900">{p.kop}</dt>
+            <dd class="text-pretty text-sm leading-relaxed text-ink-700">{p.tekst}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="border-t border-ink-100 bg-curanta-50/60 py-12">
+    <div class="container-prose max-w-3xl">
+      <h2 class="font-display text-xl font-semibold text-ink-900">Waarom wij het werk aan uw kant klein willen houden</h2>
+      <p class="mt-3 leading-relaxed text-ink-700">
+        De meeste zorgorganisaties stappen maar één keer per tien jaar over op een ander ECD. Bijna niemand in
+        uw organisatie heeft het dus eerder gedaan. In een marktconsultatie noemden leveranciers een jaar voor de
+        implementatie en een half jaar nazorg passend, afhankelijk van de tijd die de zorgorganisatie zelf kan
+        vrijmaken. En twee ECD’s stoppen eind 2026, een derde eind 2027: veel organisaties moeten de komende
+        twee jaar tegelijk over.
+      </p>
+      <p class="mt-3 text-sm text-ink-500">
+        Bronnen: M&amp;I/Partners, <a href="https://mxi.nl/kennis/745/veranderingen-in-de-ecd-markt" rel="noopener">Veranderingen in de ECD-markt</a> (januari 2026)
+        en <a href="https://mxi.nl/kennis/786/ecd-inventarisatie-2026-gehandicaptenzorg-en-ouderenzorg" rel="noopener">ECD-inventarisatie 2026</a> (september 2026);
+        verslag van de marktconsultatie ECD van Stichting Nidos (februari 2025, TenderNed).
+      </p>
+    </div>
+  </section>
 
   <section class="container-prose py-16">
     <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Vier principes</h2>
@@ -118,9 +226,9 @@ const principles = [
     <div class="container-prose">
       <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">De fasen, van start tot dagelijks gebruik</h2>
       <p class="mt-3 max-w-2xl text-ink-700">
-        Dit is de volgorde. Hoe lang elke fase duurt, hangt af van uw omvang, de migratie en de
-        beschikbaarheid van uw projectgroep. Dat stellen wij samen vast na de migratie-inschatting,
-        vóór u tekent.
+        Dit is de volgorde, dezelfde als in uw implementatieproject. Hoe lang elke fase duurt, hangt af van uw
+        omvang, de migratie en de beschikbaarheid van uw projectgroep. Dat stellen wij samen vast na de
+        migratie-inschatting, vóór u tekent.
       </p>
       <ol class="mt-10 space-y-4">
         {phases.map((p, i) => (
@@ -140,6 +248,19 @@ const principles = [
           </li>
         ))}
       </ol>
+      <div class="mt-6 rounded-xl border border-dashed border-ink-200 bg-white/70 p-6">
+        <div class="grid gap-4 sm:grid-cols-[300px_1fr] sm:items-start">
+          <div class="font-display text-lg font-semibold text-ink-900">Na de start</div>
+          <ul class="space-y-1.5 text-sm text-ink-700">
+            {daarna.map((d) => (
+              <li class="flex items-start gap-2">
+                <span class="mt-1.5 inline-block h-1.5 w-1.5 rounded-full bg-curanta-500"></span>
+                <span>{d}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -159,6 +280,7 @@ const principles = [
         <h2 class="font-display text-xl font-semibold text-ink-900">Wat wij leveren</h2>
         <ul class="mt-4 space-y-2.5 text-sm text-ink-700">
           <li>Eén vast aanspreekpunt bij Curanta</li>
+          <li>Een eigen implementatieproject voor uw projectgroep</li>
           <li>Migratie als project tegen een vaste prijs, met een validatierapport</li>
           <li>Training voor sleutelgebruikers en eindgebruikers</li>
           <li>Begeleiding bij de ingebruikname, op locatie waar dat nodig is</li>
@@ -168,6 +290,8 @@ const principles = [
       </div>
     </div>
   </section>
+
+  <Veelgesteld titel="Veelgestelde vragen over de implementatie" vragen={vragen} />
 
   <Cta
     title="De aanpak in detail bespreken?"
