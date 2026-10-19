@@ -28,11 +28,12 @@ interface Integration {
 // - eOverdracht blijft "ontwikkeling": het document (STU3, eOverdracht 4.0) is gebouwd en te
 //   downloaden, transport en kwalificatie niet.
 // - Entra ID blijft "ontwikkeling" tot Jans eindtest met een echte tenant (deploy/SSO-ENTRA-TESTEN.md).
-// - SIEM blijft "ontwikkeling" tot de eindtest met een echte Splunk, Azure Monitor en syslog-collector
-//   (deploy/SIEM-TESTEN.md, ADR 2026-10-17-siem-doorsturen).
+// - SIEM "inrichten" sinds 19-10-2026: eindtest geslaagd tegen een echte Splunk, Azure Monitor en syslog-server
+//   (deploy/SIEM-TESTEN.md, ADR 2026-10-17-siem-doorsturen). De webhook is alleen tegen een eigen ontvanger
+//   getest; noem hem daarom niet als getest.
 const integrations: Integration[] = [
-  { name: 'Uw SIEM (auditlogs)', category: 'Beveiliging', status: 'ontwikkeling',
-    body: 'Elke minuut het beveiligingslogboek en de beheeraudit naar het SIEM van uw organisatie: via een webhook (JSON of CEF), Splunk HEC, Azure Monitor (Logs Ingestion API) of syslog over TLS. Het NEN 7513-toegangslogboek alleen als u dat aanzet, gepseudonimiseerd. Gebouwd; de test met een echte Splunk, Azure Monitor en syslog-server volgt.' },
+  { name: 'Uw SIEM (auditlogs)', category: 'Beveiliging', status: 'inrichten',
+    body: 'Elke minuut het beveiligingslogboek en de beheeraudit naar het SIEM van uw organisatie: via een webhook (JSON of CEF), Splunk HEC, Azure Monitor (Logs Ingestion API) of syslog over TLS. Het NEN 7513-toegangslogboek alleen als u dat aanzet, gepseudonimiseerd. Getest met Splunk, Azure Monitor en een syslog-server. U richt de koppeling in op het beheerscherm, met de gegevens van uw SIEM.' },
   // Standaarden
   { name: 'FHIR R4 en de BgZ', category: 'Standaarden', status: 'inrichten', doc: '/api',
     body: 'Een publieke FHIR R4-API, alleen om te lezen. Hij levert de Basisgegevensset Zorg (BgZ) van een cliënt als document, gevalideerd tegen de profielen van Nictiz. Beschikbaar zodra wij het systeem dat de gegevens ophaalt, hebben geregistreerd. Geen testomgeving en geen algemene lees- of schrijftoegang.' },
