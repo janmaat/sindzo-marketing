@@ -95,6 +95,20 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
           </label>
         </div>
 
+        {/* Bij VVT: de wijkverpleging en het verpleeghuis zijn twee presentaties (opmerkingen 17-10-2026, keuze Jan
+            19-10-2026). Het script toont dit veld alleen bij VVT en maakt het dan verplicht; zonder script staat het er
+            altijd en mag het leeg blijven, en dan kiest Curanta bij het goedkeuren. Curanta neemt het alleen bij VVT over. */}
+        <label class="mt-5 block" id="zorgvorm-veld">
+          <span class="text-sm font-semibold text-ink-900">Welke zorg levert uw organisatie? <span class="font-normal text-ink-500">(bij VVT)</span></span>
+          <select name="zorgvorm" class={veld}>
+            <option value="">Kies wat u levert</option>
+            <option value="wijkverpleging">Wijkverpleging, bij de cliënt thuis</option>
+            <option value="verpleeghuis">Verpleeghuiszorg</option>
+            <option value="beide">Allebei</option>
+          </select>
+          <span class="mt-1 block text-xs text-ink-500">Voor de wijkverpleging en het verpleeghuis is er elk een eigen presentatie. Levert u allebei, dan krijgt u ze allebei.</span>
+        </label>
+
         <label class="mt-5 block">
           <span class="text-sm font-semibold text-ink-900">Waar wilt u vooral meer over weten? (optioneel)</span>
           <textarea name="toelichting" rows="3" maxlength="1000"
@@ -170,9 +184,20 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
 
     var labels = { naam: 'uw naam', email: 'uw e-mailadres', organisatie: 'de organisatie', functie: 'de functie',
       telefoon: 'het telefoonnummer', toelichting: 'de toelichting', toestemming: 'het vakje voor de privacyverklaring',
-      sector: 'de sector' };
+      sector: 'de sector', zorgvorm: 'welke zorg u levert' };
     var contact = ' Lukt het niet? Bel 085 250 1301 of mail info@curanta.nl.';
     var knop = form.querySelector('button[type="submit"]');
+    var zorgvormVeld = document.getElementById('zorgvorm-veld');
+
+    function isVvt() { return form.elements['sector'].value === 'vvt'; }
+    function toonZorgvorm() {
+      if (!zorgvormVeld) return;
+      zorgvormVeld.classList.toggle('hidden', !isVvt());
+      form.elements['zorgvorm'].required = isVvt();
+      if (!isVvt()) form.elements['zorgvorm'].value = '';
+    }
+    form.elements['sector'].addEventListener('change', toonZorgvorm);
+    toonZorgvorm();
 
     function toon(tekst) {
       melding.textContent = tekst;
@@ -199,6 +224,7 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
       if (!window.fetch || !window.FormData) return;
       e.preventDefault();
       var ontbreekt = ['naam', 'email', 'organisatie', 'sector'].filter(function (v) { return !form.elements[v].value.trim(); });
+      if (isVvt() && !form.elements['zorgvorm'].value) ontbreekt.push('zorgvorm');
       if (!form.elements['toestemming'].checked) ontbreekt.push('toestemming');
       if (ontbreekt.length) { toon(velden(ontbreekt)); return; }
       melding.classList.add('hidden');
