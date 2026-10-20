@@ -31,21 +31,246 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
   },
   { naam: 'Pluriform Zorg (Adapcare)' },
 ];
+
+// 20-10-2026 (opdracht Jan): de pagina neemt de zorg weg over wat een overstap met zich meebrengt. Het hele traject
+// staat op project.curanta.nl, en ervaren specialisten van Curanta begeleiden de mensen (feitenblad, rij "Begeleiding
+// bij de implementatie", besluit Jan 20-10: algemeen, één vaste contactpersoon, ook op locatie). De zorgen per rol
+// komen uit het marktonderzoek in de Ponscura-repo, docs/campagne/marktonderzoek-overstapzorgen-2026-10-20.md; de
+// citaten staan in het feitenblad (Marktcijfers, aanvulling 20-10). Geen citaat van een concurrent: die mag niet bij
+// naam op de site. Elk antwoord komt uit de catalogus van het implementatieproject (feitenblad, rij "Overstap in het
+// implementatieproject"). Niet beloven: dat declaraties zonder onderbreking doorlopen, een doorlooptijd, een
+// uitvalprocedure of een resultaat van een klant (nog niemand rondde het traject af).
+const rollen: { rol: string; zorg: string; citaat: string; bron: string; bronUrl: string; antwoord: string[] }[] = [
+  {
+    rol: 'Bestuur',
+    zorg: 'Het duurt langer en kost meer dan gedacht.',
+    citaat: 'De organisatie trok voor de voorbereidingen één maand uit, maar dat was te optimistisch.',
+    bron: 'Vilans, over het omzetten van alle zorgplannen bij Carintreggeland (2022)',
+    bronUrl: 'https://www.vilans.nl/actueel/verhalen/geen-vijfminutenregistratie-meer-bij-carintreggeland',
+    antwoord: [
+      'U weet vooraf wat het kost. De implementatie is maatwerk, met een prijs die wij vooraf afspreken. Het overzetten van uw gegevens is een project tegen een vaste prijs.',
+      'In het project staat een overzicht voor uw bestuur: de stand op één pagina, om af te drukken of door te sturen. Elke fase sluit af met een akkoord van uw projectleider en van Curanta. En vóór de start toetsen wij samen of alles klaar is.',
+    ],
+  },
+  {
+    rol: 'Projectleider',
+    zorg: 'Niemand weet precies wie wat doet.',
+    citaat: 'regelmatig onduidelijkheid … over wie welke taken oppakte',
+    bron: 'Fitz, over de zorgadministratie bij een overstap in de ouderenzorg (2023)',
+    bronUrl: 'https://www.fitz.nl/blog/ondersteuning-zorgadministratie-implementatie-nieuw-ecd',
+    antwoord: [
+      'Bij elk onderdeel staat wie het doet: uw organisatie, Curanta of samen. U nodigt collega’s uit met hun rol en wijst onderdelen toe. Een vraag stelt u bij het onderdeel zelf. Stuurt Curanta iets terug, dan staat de reden erbij.',
+      'Wie iets open heeft staan en een tijd niet inlogde, krijgt hoogstens één mail per week met wat nu klaarstaat. U leest daarin ook wat er bij uw collega’s openstaat. Past iets niet in een onderdeel, dan neemt u contact op met uw vaste contactpersoon.',
+    ],
+  },
+  {
+    rol: 'Zorgmedewerkers',
+    zorg: 'De overstap komt bovenop het werk in de zorg.',
+    citaat: '1.849 zorgdossiers overgezet door EVV-collega’s',
+    bron: 'Careyn, feiten en cijfers over de invoering van hun ECD (jaarverslag 2023)',
+    bronUrl: 'https://careyn2023.jaarverslag.org/wp-content/uploads/sites/590/2024/06/feiten-en-cijfers-ecd.pdf',
+    antwoord: [
+      'Het overzetten is ons werk, als project tegen een vaste prijs. Uw mensen controleren daarna een steekproef. Alleen bij een klein cliëntenbestand is overzetten met de hand soms goedkoper; dat zeggen wij dan vooraf.',
+      'Bij het proefdraaien werken uw sleutelgebruikers met verzonnen gegevens, terwijl uw huidige pakket gewoon doorloopt. De training kost niets extra en kan ook bij u op locatie. U plant de momenten zelf in het project, zodat de training niet maanden voor de start valt. In Curanta zelf staan Nederlands ingesproken instructievideo’s, bij het scherm waar ze over gaan.',
+    ],
+  },
+  {
+    rol: 'Administratie',
+    zorg: 'De declaraties lopen vast na de start.',
+    citaat: 'Tijdens de overgang is er tijdelijk niet gefactureerd',
+    bron: 'Ciro, jaarverslag 2024 (medisch-specialistische zorg)',
+    bronUrl: 'https://www.ciro-horn.nl/sites/default/files/2025-05/Jaarverslag%20Ciro%202024.pdf',
+    antwoord: [
+      'De gegevens waar uw declaraties op rusten, vult u één keer in het project in: AGB-codes, contracten met gemeenten en het zorgkantoor, tarieven, en welke zorg bij welke declaratiecode hoort. Wat wij goedkeuren, nemen wij over in Curanta. Daarna meet Curanta elke dag wat er werkelijk staat, bijvoorbeeld hoeveel contracten actief zijn.',
+      'Wat u bij VECOZO zelf regelt, staat stap voor stap bij het onderdeel, met de doorlooptijd en de kosten daar. Uw certificaat levert u aan in een beveiligd venster; het wordt meteen gecontroleerd, ook op de datum waarop het verloopt. Waar een test bestaat, testen wij de koppeling vóór de start, bij VECOZO in de ketentestomgeving. Welke declaratiestromen klaar zijn, staat per koppeling op de pagina <a href="/integraties" class="text-curanta-700 hover:underline">Koppelingen</a>.',
+    ],
+  },
+  {
+    rol: 'ICT en functioneel beheer',
+    zorg: 'Gegevens komen niet goed over.',
+    citaat: 'Als medewerkers op dag één data missen, trekken ze het nieuwe systeem direct in twijfel.',
+    bron: 'ICT-adviseur van Mondriaan (ggz), in een praktijkverhaal van Cegeka (2025)',
+    bronUrl: 'https://www.cegeka.com/nl-nl/case-studies/mondriaan',
+    antwoord: [
+      'Vooraf leggen wij samen vast wat er overgaat, op welk moment, wie het aan uw kant controleert en wat we doen als het tegenvalt. Dan zetten wij eerst één keer op proef over, en u controleert de aantallen en een steekproef.',
+      'Voor elke koppeling staat in het project wat er nodig is en bij welke partij u iets regelt. Voor Medimo ligt er een conceptmail aan de leverancier klaar. Certificaten en wachtwoorden gaan niet per mail. Na het overnemen staan ze alleen in de kluis van uw organisatie.',
+    ],
+  },
+  {
+    rol: 'Privacy en kwaliteit',
+    zorg: 'Het oude dossier raakt buiten bereik.',
+    citaat: 'Regel dit voordat het contract met de oude leverancier eindigt. Daarna is het duurder en soms simpelweg niet meer mogelijk.',
+    bron: 'Data Matters, over het archiveren van een oud ECD (september 2026)',
+    bronUrl: 'https://datamatters.nl/2026/09/15/van-epd-of-ecd-naar-archief/',
+    antwoord: [
+      'Al in de eerste fase vraagt het project wanneer uw huidige contract afloopt en welke exports uw pakket levert. Zo regelt u de export op tijd. Bij het overzetten bevestigt u dat de export en de logging van uw oude pakket veilig bewaard zijn.',
+      'Gegevens van cliënten komen nooit in het project; er is geen veld voor een BSN. Pas na de verwerkersovereenkomst zetten wij gegevens over. Voor uw DPIA beschrijft Curanta wat u nodig heeft: welke gegevens wij verwerken en waar ze heen gaan, hoe wij ze beveiligen, wie onze subverwerkers zijn en hoe lang wij ze bewaren. Ook onze eigen voorwaarden staan in het project: wij zetten pas echte cliëntgegevens over als de hele server versleuteld is en er een externe functionaris gegevensbescherming is.',
+    ],
+  },
+];
+
+// Voorbeeldweergave van het overzicht op project.curanta.nl (Pages/Overzicht.cshtml in de Ponscura-repo), met een
+// verzonnen organisatie. De woorden komen uit het scherm zelf (Labels.cs): de vijf fasen, "x van y af", "bij Curanta",
+// "Afgerond met akkoord", de statussen en "ongeveer … minuten". De aantallen per fase passen bij de catalogus
+// (Proefdraaien 4, Overzetten 3, Starten 4 onderdelen); de invultijden staan zo in de catalogus.
+const fasen = [
+  { naam: 'Inventariseren', af: 11, totaal: 11, regel: '11 van 11 af', akkoord: true },
+  { naam: 'Inrichten', af: 9, totaal: 18, regel: '9 van 18 af · 3 bij Curanta', nu: true },
+  { naam: 'Proefdraaien', af: 0, totaal: 4, regel: '0 van 4 af' },
+  { naam: 'Overzetten', af: 0, totaal: 3, regel: '0 van 3 af' },
+  { naam: 'Starten', af: 0, totaal: 4, regel: '0 van 4 af' },
+];
+const voorU = [
+  { titel: 'Contracten met gemeenten', status: 'Bezig', klasse: 'bg-sky-100 text-sky-900', regel: 'Inrichten · 3 van 5 ingevuld · ongeveer 20 minuten' },
+  { titel: 'VECOZO', status: 'Teruggestuurd', klasse: 'bg-amber-100 text-amber-900', regel: 'Inrichten · ongeveer 15 minuten' },
+  { titel: 'Functies en rollen', status: 'Nog niet begonnen', klasse: 'bg-ink-100 text-ink-700', regel: 'Inrichten · ongeveer 25 minuten' },
+];
 ---
 <Base
   title="Overstappen van uw huidige ECD | Curanta"
-  description="Overstappen vanuit Nedap Ons, Ysis, SDB of Pluriform Zorg als project tegen een vaste prijs vooraf. En zo komt u er weer uit: export, geen exit-fee."
+  description="Overstappen op Curanta: het hele traject op één plek, project.curanta.nl, met één vaste contactpersoon en specialisten die uw mensen begeleiden. Migratie tegen een vaste prijs, en een export zonder exit-fee."
 >
   <PageHero
     eyebrow="Overstappen"
-    title="Vastzitten is geen argument om te blijven."
-    subtitle="De meest genoemde reden om bij een ECD te blijven, is niet dat het zo goed is. Het is dat de gegevens er niet uit komen. Alles opnieuw invoeren is voor niemand te doen. Daar hebben wij een antwoord op: vóór u klant wordt, en ook voor als u ooit weer weg wilt."
+    title="Een overstap die u kunt overzien."
+    subtitle="Bijna niemand in uw organisatie heeft eerder een ECD vervangen. Dat hoeft ook niet. Het hele traject staat op één plek, uw eigen project op project.curanta.nl. Ervaren specialisten van Curanta begeleiden uw mensen, en u heeft één vaste contactpersoon, van de start tot na de livegang."
   >
     <div slot="actions" class="flex flex-wrap items-center gap-3">
-      <a href="/contact" class="btn-primary no-underline">Vraag een migratie-inschatting</a>
-      <a href="#eruit" class="btn-secondary no-underline">Eerst: hoe komt u er weer uit?</a>
+      <a href={HOOFDKNOP.href} class="btn-primary no-underline">{HOOFDKNOP.label}</a>
+      <a href="/contact" class="btn-secondary no-underline">Vraag een migratie-inschatting</a>
+      <a href="#eruit" class="text-sm font-semibold text-curanta-700 hover:underline">Eerst weten hoe u er weer uit komt?</a>
     </div>
   </PageHero>
+
+  <section class="container-prose py-16" aria-labelledby="project-kop">
+    <div class="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-14">
+      <div class="lg:col-span-5">
+        <p class="text-sm font-semibold text-curanta-700">Uw implementatieproject</p>
+        <h2 id="project-kop" class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">
+          Het hele traject op één plek.
+        </h2>
+        <p class="mt-4 leading-relaxed text-ink-700">
+          Na het contract krijgt uw organisatie een eigen project op project.curanta.nl. Daar staat alles wat bij de
+          overstap hoort, in vijf fasen: wat er moet gebeuren, in welke volgorde, wie het doet en hoe ver het is. Uw
+          projectleider nodigt collega’s uit met een rol, van zorg en planning tot administratie, HR, ICT en privacy.
+          Wie inlogt, ziet meteen wat er klaarligt, en ongeveer hoe lang het invullen duurt.
+        </p>
+        <p class="mt-4 leading-relaxed text-ink-700">
+          Wat u invult en wij goedkeuren, nemen wij met één handeling over in Curanta. Niemand typt het een tweede
+          keer over.
+        </p>
+        <p class="mt-4 leading-relaxed text-ink-700">
+          Achter het project staan mensen. Ervaren specialisten van Curanta beoordelen wat u indient, beantwoorden uw
+          vragen en begeleiden uw mensen, ook op locatie bij de training en de start. U heeft één vaste contactpersoon.
+        </p>
+        <p class="mt-4 text-sm leading-relaxed text-ink-500">
+          Gegevens van cliënten komen nooit in het project. Die zetten wij apart over, als eigen project tegen een
+          vaste prijs. Hoe het project verder werkt, leest u bij <a href="/implementatie#project-kop" class="text-curanta-700 hover:underline">de implementatie</a>.
+        </p>
+      </div>
+
+      {/* Nagebouwd, geen schermafbeelding: er is nog geen opname van een project (marktonderzoek 18-10, M1). Het
+          label zegt dat, zoals Screenshot.astro dat doet bij soort "voorbeeld". */}
+      <figure class="lg:col-span-7">
+        <div
+          role="img"
+          aria-label="Voorbeeld van het overzicht in een implementatieproject: de vijf fasen met hun voortgang, en drie onderdelen die bij de projectleider klaarliggen, elk met een status en ongeveer de tijd die het invullen kost."
+          class="overflow-hidden rounded-xl bg-white shadow-[0_8px_30px_rgba(14,79,87,0.12)] ring-1 ring-ink-300"
+        >
+          <div aria-hidden="true">
+            <div class="flex items-center gap-1.5 border-b border-ink-200 bg-curanta-50 px-3 py-2">
+              <span class="h-2.5 w-2.5 rounded-full bg-ink-300"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ink-300"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ink-300"></span>
+              <span class="ml-3 truncate rounded-md bg-white px-2.5 py-0.5 text-[11px] font-medium text-ink-500">project.curanta.nl/overzicht</span>
+            </div>
+            <div class="p-5 sm:p-7">
+              <p class="text-xs font-semibold uppercase tracking-wide text-curanta-700">VVT · Compliance Pro</p>
+              <p class="mt-1 font-display text-xl font-bold text-ink-900">Implementatie Thuiszorg Voorbeeld</p>
+              <p class="mt-2 text-sm leading-relaxed text-ink-700">
+                Welkom, Anna. U doet mee als Projectleider. Het project staat in de fase Inrichten.
+              </p>
+              <p class="mt-1 text-xs text-curanta-700 underline">Overzicht voor uw bestuur</p>
+
+              <p class="mt-6 text-sm font-semibold text-ink-900">Voortgang</p>
+              <ol class="mt-3 grid gap-2 sm:grid-cols-5">
+                {fasen.map((f) => (
+                  <li class={`rounded-lg border p-2.5 ${f.nu ? 'border-curanta-500 bg-curanta-50' : 'border-ink-200'}`}>
+                    <span class="block text-xs font-semibold text-ink-900">{f.naam}</span>
+                    <span class="mt-2 block h-1.5 overflow-hidden rounded-full bg-ink-100">
+                      <span class="block h-full rounded-full bg-curanta-500" style={`width:${Math.round((f.af / f.totaal) * 100)}%`}></span>
+                    </span>
+                    <span class="mt-1.5 block text-[11px] leading-snug text-ink-500">{f.regel}</span>
+                    {f.akkoord && <span class="block text-[11px] font-semibold text-curanta-700">Afgerond met akkoord</span>}
+                  </li>
+                ))}
+              </ol>
+
+              <p class="mt-6 text-sm font-semibold text-ink-900">Voor u</p>
+              <p class="mt-1 text-xs text-ink-500">3 onderdelen; samen ongeveer 1 uur invullen, als u de gegevens bij de hand heeft. Dat is een schatting van Curanta.</p>
+              <ul class="mt-3 divide-y divide-ink-100 border-y border-ink-100">
+                {voorU.map((o) => (
+                  <li class="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2.5">
+                    <span class="text-sm font-semibold text-curanta-800 underline">{o.titel}</span>
+                    <span class={`rounded px-1.5 py-0.5 text-[11px] font-semibold ${o.klasse}`}>{o.status}</span>
+                    <span class="w-full text-xs text-ink-500 sm:w-auto">{o.regel}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p class="mt-6 text-sm font-semibold text-ink-900">Teruggestuurd door Curanta</p>
+              <p class="mt-1 text-xs leading-relaxed text-ink-700">
+                <span class="font-semibold text-curanta-800 underline">VECOZO</span>
+                <span class="text-ink-500">U heeft twee AGB-codes. Wij hebben voor elke AGB-code een eigen certificaat nodig.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <figcaption class="mt-3 text-xs leading-relaxed text-ink-500">
+          <span class="mr-1.5 inline-block rounded bg-amber-100 px-1.5 py-0.5 font-semibold text-amber-900">Voorbeeldweergave</span>
+          Nagebouwd naar het overzicht in een implementatieproject, met een verzonnen organisatie. Een echt
+          testproject laten wij u zien in een gesprek.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="border-t border-ink-100 bg-curanta-50/60 py-16" aria-labelledby="rollen-kop">
+    <div class="container-prose">
+      <div class="max-w-3xl">
+        <h2 id="rollen-kop" class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Wat er bij een overstap op mensen afkomt</h2>
+        <p class="mt-4 leading-relaxed text-ink-700">
+          Wij lazen wat zorgorganisaties en hun adviseurs over een overstap opschreven, in jaarverslagen, vakbladen en
+          praktijkverhalen. Steeds komen dezelfde zorgen terug, en elke rol heeft er een eigen. Hieronder staat per rol
+          de zorg, met een citaat uit de praktijk, en wat er in uw project voor geregeld is.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+        {rollen.map((r, i) => (
+          <article class="flex flex-col rounded-2xl border border-ink-100 bg-white p-7" data-reveal style={`--reveal-vertraging:${(i % 2) * 80}ms`}>
+            <p class="text-sm font-semibold text-curanta-700">{r.rol}</p>
+            <h3 class="mt-1 font-display text-lg font-semibold text-ink-900">{r.zorg}</h3>
+            <blockquote class="mt-4 border-l-2 border-ink-200 pl-4">
+              <p class="text-pretty text-sm italic leading-relaxed text-ink-700">“{r.citaat}”</p>
+              <footer class="mt-1.5 text-xs text-ink-500">
+                <a href={r.bronUrl} rel="noopener" class="hover:underline">{r.bron}</a>
+              </footer>
+            </blockquote>
+            {r.antwoord.map((a) => (
+              <p class="mt-4 text-pretty text-sm leading-relaxed text-ink-700" set:html={a} />
+            ))}
+          </article>
+        ))}
+      </div>
+
+      <p class="mt-8 max-w-3xl text-sm leading-relaxed text-ink-500">
+        Nog geen zorgorganisatie heeft dit traject bij Curanta afgerond. De eerste implementatie loopt sinds oktober
+        2026, bij een organisatie in de basis-ggz. Daarom beschrijven wij hier wat er gebeurt, en beloven wij geen
+        uitkomst.
+      </p>
+    </div>
+  </section>
 
   <section class="container-prose py-16">
     <div class="max-w-3xl">
@@ -120,7 +345,7 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
 
       <p class="mt-6 text-sm text-ink-500">
         De tarieven per plan staan bij <a href="/prijzen" class="text-curanta-700 hover:underline">de prijzen</a>.
-        Hoe uw eigen implementatieproject werkt, leest u bij
+        De fasen van uw implementatieproject staan bij
         <a href="/implementatie" class="text-curanta-700 hover:underline">de implementatie</a>.
       </p>
     </div>
