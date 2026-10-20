@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
+import { DEMO_ZELF_AANGEBODEN } from '../config/demo';
 
 // De drie mensen achter Curanta. Elk feit hier staat in het feitenblad (rij "Mensen", besluit Jan 15-10-2026),
 // met dezelfde levensloop als op sigillum.nl/over, maar zonder het notariaat: Curanta gaat over de zorg.
@@ -71,7 +72,7 @@ const principes: { titel: string; tekst: string; link?: { href: string; label: s
 const gesprek = [
   { titel: 'U noemt twee of drie knelpunten', tekst: 'Waar het rapporteren tijd kost, waar de overdracht tussen diensten misgaat, of waar declaraties blijven hangen.' },
   { titel: 'Wij laten zien wat Curanta daarbij doet', tekst: 'Wij laten alleen zien wat bij die knelpunten hoort. En we zeggen erbij wat u nog moet laten aansluiten of instellen.' },
-  { titel: 'Samen bepalen we de volgende stap', tekst: 'Demo-toegang voor u en uw collega’s, een gesprek over beveiliging en privacy, of een migratie-inschatting.' },
+  { titel: 'Samen bepalen we de volgende stap', tekst: `${DEMO_ZELF_AANGEBODEN ? 'Demo-toegang' : 'Een online presentatie'} voor u en uw collega’s, een gesprek over beveiliging en privacy, of een migratie-inschatting.` },
 ];
 ---
 <Base
