@@ -1,9 +1,9 @@
 ---
-import { DEMO_ZELF_AANGEBODEN, DEMO_EERSTE, DEMO_GESPREK } from '../config/demo';
+import { HOOFDKNOP, DEMO_GESPREK } from '../config/demo';
 import DotPattern from './magic/DotPattern.astro';
 
-// Afsluitende oproep onderaan een pagina. Standaard de twee demo-knoppen van de site
-// (src/config/demo.ts); een pagina met een eigen vraag ("laat het doorrekenen", "vraag de
+// Afsluitende oproep onderaan een pagina. Standaard de online presentatie (het speerpunt, besluit Jan 20-10-2026) en
+// daarnaast de demonstratie (src/config/demo.ts); een pagina met een eigen vraag ("laat het doorrekenen", "vraag de
 // architectuurplaat aan") geeft een eigen primaire en tweede knop mee, zodat titel en knop
 // hetzelfde vragen.
 interface Knop { label: string; href: string; }
@@ -13,14 +13,11 @@ interface Props {
   primary?: Knop;
   secondary?: Knop;
 }
-// Zonder demo-toegang (src/config/demo.ts) is er standaard één knop: de demonstratie.
 const {
-  title = DEMO_ZELF_AANGEBODEN ? 'Zelf rondkijken, of een demo op uw eigen proces?' : 'Curanta zien op uw eigen proces?',
-  subtitle = DEMO_ZELF_AANGEBODEN
-    ? 'Kijk zelf rond in een werkende omgeving met verzonnen cliënten. Of stuur ons drie typische werkstromen uit uw organisatie; dan laten wij zien hoe Curanta ze ondersteunt.'
-    : 'Stuur ons drie typische werkstromen uit uw organisatie; dan laten wij met verzonnen cliënten zien hoe Curanta ze ondersteunt.',
-  primary = DEMO_EERSTE,
-  secondary = DEMO_ZELF_AANGEBODEN ? DEMO_GESPREK : undefined,
+  title = 'Bekijk Curanta wanneer het u uitkomt',
+  subtitle = 'Vraag een online presentatie aan: korte video\'s, de dia\'s en hoe het werkt in de applicatie. Zonder afspraak, en zo vaak als u wilt. Liever samen? Dan laten wij Curanta zien aan de hand van uw eigen werkstromen.',
+  primary = HOOFDKNOP,
+  secondary = DEMO_GESPREK,
 } = Astro.props;
 ---
 <section class="container-prose py-20">
@@ -44,7 +41,6 @@ const {
             </a>
           )}
         </div>
-        <a href="/presentatie" class="text-sm font-medium text-curanta-100 underline-offset-2 hover:underline">Of bekijk eerst een presentatie, wanneer het u uitkomt →</a>
         <a href="/contact" class="text-sm font-medium text-curanta-100 underline-offset-2 hover:underline">Of stel ons een vraag →</a>
       </div>
     </div>

@@ -6,7 +6,7 @@ import Screenshot from '../components/Screenshot.astro';
 import StatusLegenda from '../components/StatusLegenda.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import Cta from '../components/Cta.astro';
-import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, DEMO_GESPREK, PRESENTATIE } from '../config/demo';
 import type { Status } from '../config/status';
 
 import dossierBeeld from '../assets/schermen/bo-zorgplan.jpg';
@@ -304,8 +304,9 @@ const AI_TOELICHTING = 'Vragen aan een taalmodel gaan via één centraal punt, g
     subtitle="Curanta is één systeem met losse onderdelen. U zet aan wat u gebruikt; alles deelt hetzelfde dossier. Per onderdeel ziet u wat het doet en of u het in de demo kunt bekijken."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      {DEMO_ZELF_AANGEBODEN && <a href={DEMO_ZELF.href} class="btn-primary no-underline">{DEMO_ZELF.label}</a>}
-      <a href={DEMO_GESPREK.href} class={`${DEMO_ZELF_AANGEBODEN ? 'btn-secondary' : 'btn-primary'} no-underline`}>{DEMO_GESPREK.label}</a>
+      <a href={PRESENTATIE.href} class="btn-primary no-underline">{PRESENTATIE.label}</a>
+      <a href={DEMO_GESPREK.href} class="btn-secondary no-underline">{DEMO_GESPREK.label}</a>
+      {DEMO_ZELF_AANGEBODEN && <a href={DEMO_ZELF.href} class="btn-secondary no-underline">{DEMO_ZELF.label}</a>}
     </div>
   </PageHero>
 

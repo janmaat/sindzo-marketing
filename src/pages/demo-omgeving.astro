@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { DEMO_ZELF_AANGEBODEN, DEMO_GESPREK } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_GESPREK, PRESENTATIE } from '../config/demo';
 
 // Tot 26-09-2026 stonden hier een openbaar wachtwoord en de demo-accounts, waaronder
 // admin@curanta.nl. Met dat account waren in de demo ook de aanvragen van bezoekers te zien
@@ -31,10 +31,11 @@ import { DEMO_ZELF_AANGEBODEN, DEMO_GESPREK } from '../config/demo';
     <PageHero
       eyebrow="Demo-omgeving"
       title="Demo-toegang bieden wij op dit moment niet aan."
-      subtitle="Wel laten wij Curanta graag zien in een demonstratie: de backoffice, het medewerkerportaal en het cliëntportaal, met verzonnen cliënten en aan de hand van werkstromen uit uw organisatie. Wij reageren binnen 1 werkdag."
+      subtitle="Wel kunt u Curanta rustig zelf bekijken in een online presentatie, wanneer het u uitkomt: korte video's, de dia's en hoe het werkt in de applicatie. Liever samen? Dan laten wij de backoffice, het medewerkerportaal en het cliëntportaal zien in een demonstratie, met verzonnen cliënten en aan de hand van werkstromen uit uw organisatie."
     >
       <div slot="actions" class="flex flex-wrap items-center gap-3">
-        <a href={DEMO_GESPREK.href} class="btn-primary no-underline">{DEMO_GESPREK.label}</a>
+        <a href={PRESENTATIE.href} class="btn-primary no-underline">{PRESENTATIE.label}</a>
+        <a href={DEMO_GESPREK.href} class="btn-secondary no-underline">{DEMO_GESPREK.label}</a>
         <a href="/contact" class="btn-secondary no-underline">Liever eerst bellen</a>
       </div>
     </PageHero>
