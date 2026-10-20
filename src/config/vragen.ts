@@ -3,7 +3,7 @@
 // de sectorpagina's en als FAQPage voor zoekmachines en AI-assistenten (component Veelgesteld).
 // Een antwoord is een claim: verandert een feit, dan eerst het feitenblad, dan hier.
 // Het antwoord mag eenvoudige HTML bevatten (een link); de FAQPage krijgt de tekst zonder tags.
-import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, DEMO_GESPREK } from './demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, DEMO_GESPREK, PRESENTATIE } from './demo';
 
 export interface Vraag {
   vraag: string;
@@ -51,6 +51,6 @@ export const algemeneVragen: Vraag[] = [
     // Zonder demo-toegang (src/config/demo.ts): de demonstratie, met de reactietermijn uit het feitenblad.
     antwoord: DEMO_ZELF_AANGEBODEN
       ? `Ja. In de demo-omgeving kijkt u rond met verzonnen cliënten, in de backoffice, het medewerkerportaal en het cliëntportaal. ${link(DEMO_ZELF.href, DEMO_ZELF.label)}; wij mailen u zodra uw toegang klaarstaat.`
-      : `Ja, in een demonstratie. Wij laten de backoffice, het medewerkerportaal en het cliëntportaal zien met verzonnen cliënten, aan de hand van werkstromen uit uw organisatie. ${link(DEMO_GESPREK.href, DEMO_GESPREK.label)}; wij reageren binnen 1 werkdag.`,
+      : `Ja. In de online presentatie bekijkt u Curanta rustig zelf, wanneer het u uitkomt: korte video's, de dia's en hoe het werkt in de applicatie. ${link(PRESENTATIE.href, PRESENTATIE.label)}; wij bekijken uw aanvraag meestal binnen 1 werkdag. Liever samen? Dan laten wij Curanta zien aan de hand van werkstromen uit uw organisatie: ${link(DEMO_GESPREK.href, DEMO_GESPREK.label)}.`,
   },
 ];

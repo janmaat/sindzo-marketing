@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 import Veelgesteld from '../components/Veelgesteld.astro';
-import { DEMO_GESPREK } from '../config/demo';
+import { DEMO_GESPREK, PRESENTATIE } from '../config/demo';
 
 // Het implementatieproject op project.curanta.nl (18-10-2026). Marktonderzoek in de Ponscura-repo:
 // docs/campagne/marktonderzoek-implementatie-2026-10-18.md. Een klantportaal met planning en taken is niet
@@ -150,7 +150,7 @@ const vragen = [
     subtitle="Een nieuw systeem slaagt of faalt zelden op de software, en vaak op de verandering in de organisatie. Daarom werken wij met een projectgroep uit bestuur, zorg en FG, met sleutelgebruikers en met een start in fasen. De duur stellen wij per organisatie vast, na de migratie-inschatting."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href={DEMO_GESPREK.href} class="btn-primary no-underline">{DEMO_GESPREK.label}</a>
+      <a href={PRESENTATIE.href} class="btn-primary no-underline">{PRESENTATIE.label}</a>
       <a href="/procurement" class="btn-secondary no-underline">Documenten voor inkoop</a>
     </div>
   </PageHero>

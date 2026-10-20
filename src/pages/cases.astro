@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, DEMO_EERSTE, DEMO_GESPREK } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, HOOFDKNOP, DEMO_GESPREK } from '../config/demo';
 
 // Deze pagina stond eerder als eerlijke empty-state, maar beloofde twee dingen
 // die niet waar zijn: een referentie-call met "een organisatie die Curanta al
@@ -75,7 +75,7 @@ const controleerbaar = [
     subtitle="Dat is een reëel bezwaar en wij gaan er niet omheen praten. Curanta is nieuw. De eerste implementatie loopt, bij een organisatie in de basis-ggz, maar er is nog geen zorgorganisatie die u kan vertellen hoe het is om drie jaar met ons te werken. Wat wij in plaats daarvan bieden, is geen verhaal, maar iets dat u zelf kunt nakijken."
   >
     <div slot="actions">
-      <a href={DEMO_EERSTE.href} class="btn-primary no-underline">{DEMO_EERSTE.label}</a>
+      <a href={HOOFDKNOP.href} class="btn-primary no-underline">{HOOFDKNOP.label}</a>
     </div>
   </PageHero>
 

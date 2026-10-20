@@ -1,5 +1,5 @@
 ---
-import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, DEMO_GESPREK, PRESENTATIE } from '../config/demo';
 import { LINKEDIN_BEDRIJFSPAGINA } from '../config/linkedin';
 const year = new Date().getFullYear();
 const columns = [
@@ -42,9 +42,9 @@ const columns = [
       { label: 'Kennisbank', href: '/kennisbank' },
       { label: 'Contact', href: '/contact' },
       ...(LINKEDIN_BEDRIJFSPAGINA ? [{ label: 'LinkedIn', href: LINKEDIN_BEDRIJFSPAGINA, external: true }] : []),
-      ...(DEMO_ZELF_AANGEBODEN ? [{ label: DEMO_ZELF.label, href: DEMO_ZELF.href }] : []),
+      { label: PRESENTATIE.label, href: PRESENTATIE.href },
       { label: DEMO_GESPREK.label, href: DEMO_GESPREK.href },
-      { label: 'Presentatie aanvragen', href: '/presentatie' },
+      ...(DEMO_ZELF_AANGEBODEN ? [{ label: DEMO_ZELF.label, href: DEMO_ZELF.href }] : []),
     ],
   },
 ];

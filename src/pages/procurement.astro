@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
-import { DEMO_ZELF_AANGEBODEN, DEMO_EERSTE } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, HOOFDKNOP } from '../config/demo';
 
 // Inkoopdossier (slug /procurement blijft). Bewust zonder formulier vóór de documenten: in de
 // Nederlandse zorg verlengt elke drempel de cyclus met dagen, omdat inkoop, FG en architectuur
@@ -125,7 +125,7 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
     subtitle="In de zorg heeft een aankoop minstens vier interne lezers: bestuur, inkoop, FG en I&A. Hieronder vraagt u elk document aan met één mail, zonder geheimhoudingsverklaring (NDA) en zonder verkoopgesprek."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
-      <a href={DEMO_EERSTE.href} class="btn-primary no-underline">{DEMO_EERSTE.label}</a>
+      <a href={HOOFDKNOP.href} class="btn-primary no-underline">{HOOFDKNOP.label}</a>
       <a href="/trust" class="btn-secondary no-underline">Naar het Trust Centre</a>
     </div>
   </PageHero>
@@ -237,6 +237,6 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
     title={DEMO_ZELF_AANGEBODEN ? 'Na het lezen zelf kijken?' : 'Na het lezen in het systeem kijken?'}
     subtitle={DEMO_ZELF_AANGEBODEN
       ? 'Kijk zelf rond in een werkende omgeving met verzonnen cliënten. Of stuur drie typische werkstromen uit uw organisatie; dan laten wij uw eigen processen op het scherm zien, zonder verkooppraatje.'
-      : 'Stuur drie typische werkstromen uit uw organisatie; dan laten wij uw eigen processen op het scherm zien, met verzonnen cliënten en zonder verkooppraatje.'}
+      : 'Bekijk Curanta rustig zelf in de online presentatie, wanneer het u uitkomt. Of stuur drie typische werkstromen uit uw organisatie; dan laten wij uw eigen processen op het scherm zien, met verzonnen cliënten en zonder verkooppraatje.'}
   />
 </Base>

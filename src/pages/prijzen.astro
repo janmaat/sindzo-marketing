@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import PlanCard from '../components/PlanCard.astro';
 import Cta from '../components/Cta.astro';
 import Veelgesteld from '../components/Veelgesteld.astro';
-import { DEMO_EERSTE, DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
+import { HOOFDKNOP, DEMO_ZELF, DEMO_GESPREK, PRESENTATIE } from '../config/demo';
 
 // Prijzen zijn indicatief en bewust zichtbaar — concurrenten verbergen
 // pricing tot na demo, wat procurement-cyclus verlengt. Wij tonen ranges
@@ -48,7 +48,7 @@ const prijsVragen = [
           'Ondersteuning per e-mail binnen 1 werkdag',
           'NEN 7510-basismaatregelen',
         ]}
-        cta={DEMO_GESPREK}
+        cta={PRESENTATIE}
       />
       <PlanCard
         name="Compliance Pro"
@@ -68,7 +68,7 @@ const prijsVragen = [
           'Collega-netwerk en lotgenoten (lotgenoten na uw DPIA)',
           'Telefonische ondersteuning 09:00-17:00',
         ]}
-        cta={DEMO_GESPREK}
+        cta={PRESENTATIE}
       />
       <PlanCard
         name="Totaalzorg Plus"
@@ -82,7 +82,7 @@ const prijsVragen = [
           'Buddy voor internationaal geworven collega\'s',
           'CO₂-rapportage woon-werkverkeer (WPM, verplicht vanaf 100 werknemers)',
         ]}
-        cta={DEMO_GESPREK}
+        cta={PRESENTATIE}
       />
       <PlanCard
         name="Enterprise"
@@ -406,6 +406,6 @@ const prijsVragen = [
     title="Niet zeker welk plan past?"
     subtitle="Vertel ons over uw situatie (sector, omvang, huidige systemen). Wij reageren binnen 1 werkdag, ook als ons advies is dat een andere leverancier beter past."
     primary={{ label: 'Vraag een advies', href: '/contact' }}
-    secondary={DEMO_EERSTE}
+    secondary={HOOFDKNOP}
   />
 </Base>

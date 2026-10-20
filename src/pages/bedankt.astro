@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { DEMO_EERSTE, DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
+import { HOOFDKNOP, DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
 
 // /bedankt — landing na succesvolle of mislukte form-submit.
 // Query params:
@@ -112,7 +112,7 @@ import { DEMO_EERSTE, DEMO_ZELF, DEMO_GESPREK } from '../config/demo';
         Wilt u contact? Kies dan hieronder.
       </p>
       <div class="mt-10 flex flex-wrap gap-3">
-        <a href={DEMO_EERSTE.href} class="btn-primary no-underline">{DEMO_EERSTE.label}</a>
+        <a href={HOOFDKNOP.href} class="btn-primary no-underline">{HOOFDKNOP.label}</a>
         <a href="/contact" class="btn-secondary no-underline">Contact</a>
       </div>
     </div>

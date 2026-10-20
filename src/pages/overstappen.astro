@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
-import { DEMO_ZELF_AANGEBODEN, DEMO_EERSTE } from '../config/demo';
+import { DEMO_ZELF_AANGEBODEN, DEMO_KNOP, HOOFDKNOP } from '../config/demo';
 
 // Onderzocht: de reden dat zorgorganisaties niet van ECD wisselen is niet
 // tevredenheid maar dataportabiliteit — ze kunnen hun cliëntgegevens niet
@@ -172,7 +172,7 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
           ? 'Kijk zelf rond in een werkende omgeving met verzonnen cliënten; u kunt er niets stukmaken.'
           : 'Stuur ons drie werkstromen uit uw organisatie; dan laten wij ze zien in een werkende omgeving met verzonnen cliënten.'}
       </p>
-      <a href={DEMO_EERSTE.href} class="mt-6 inline-block btn-primary no-underline">{DEMO_EERSTE.label}</a>
+      <a href={DEMO_KNOP.href} class="mt-6 inline-block btn-primary no-underline">{DEMO_KNOP.label}</a>
     </div>
   </section>
 
@@ -180,6 +180,6 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
     title="Wat kost uw overstap?"
     subtitle="Noem ons uw huidige systeem, uw aantal cliënten en uw aantal medewerkers. Wij reageren binnen 1 werkdag en maken een afspraak voor de migratie-inschatting, ook als de uitkomst is dat u beter kunt blijven zitten."
     primary={{ label: 'Vraag een migratie-inschatting', href: '/contact' }}
-    secondary={DEMO_EERSTE}
+    secondary={HOOFDKNOP}
   />
 </Base>

@@ -8,7 +8,7 @@
 // Zo klopt elke knop op beide branches, en raakt een merge alleen dit bestand.
 //
 // AAN/UIT (besluit Jan 18-10-2026): demo-toegang bieden wij nog even niet aan. Met false verdwijnt de knop
-// "Vraag demo-toegang aan" overal, staat waar er één knop is "Vraag een demonstratie aan" (DEMO_EERSTE),
+// "Vraag demo-toegang aan" overal, staat bij de demo de knop "Vraag een demonstratie aan" (DEMO_KNOP),
 // beloven de teksten geen zelf rondkijken meer, en is /demo-omgeving een korte pagina met noindex die
 // buiten de sitemap blijft. Weer aanbieden: zet dit op true; verder hoeft er niets te veranderen.
 export const DEMO_ZELF_AANGEBODEN = false;
@@ -26,5 +26,17 @@ export const DEMO_GESPREK = {
   href: '/demo',
 };
 
-/** De knop voor een plek waar er maar één staat: demo-toegang als die aangeboden wordt, anders de demonstratie. */
-export const DEMO_EERSTE = DEMO_ZELF_AANGEBODEN ? DEMO_ZELF : DEMO_GESPREK;
+/** De demoknop: demo-toegang als die aangeboden wordt, anders de demonstratie. Voor plekken die over de demo gaan. */
+export const DEMO_KNOP = DEMO_ZELF_AANGEBODEN ? DEMO_ZELF : DEMO_GESPREK;
+
+// SPEERPUNT (besluit Jan 20-10-2026): de online presentatie is de hoofdroute van site en campagne. Lekker makkelijk,
+// alles rustig zelf bekijken wanneer het de bezoeker uitkomt, zonder afspraak. Waar één knop staat (menubalk,
+// sectorpagina's, afsluitende oproep) is het deze; de demonstratie (DEMO_GESPREK) is de tweede keuze. Dezelfde tekst
+// overal, ook in advertenties en berichten: "Online presentatie aanvragen".
+export const PRESENTATIE = {
+  label: 'Online presentatie aanvragen',
+  href: '/presentatie',
+};
+
+/** De knop voor een plek waar er maar één staat. */
+export const HOOFDKNOP = PRESENTATIE;
