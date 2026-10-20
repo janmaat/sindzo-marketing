@@ -54,6 +54,9 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
         <input type="hidden" name="utm_term" />
         <input type="hidden" name="utm_content" />
         <input type="hidden" name="invultijd" />
+        {/* gclid gaat alléén mee als de bezoeker het vakje "advertentiemeting" aanvinkt (zoals op /demo, sinds 20-10-2026);
+            een uitgeschakeld veld wordt niet verstuurd. */}
+        <input type="hidden" name="gclid" disabled />
 
         <div class="grid gap-5 sm:grid-cols-2">
           <label class="block sm:col-span-2">
@@ -133,6 +136,19 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
           </span>
         </label>
 
+        {/* Alleen zichtbaar voor wie via een Google-advertentie binnenkwam (gclid in de URL). Aanvinken = toestemming voor
+            "Ad User Data" in de conversie-upload; zonder vinkje verlaat de klikcode dit formulier niet. */}
+        <label id="advertentiemeting" class="hidden mt-3 flex items-start gap-3 text-sm text-ink-700">
+          <input type="checkbox" name="adMeting" value="yes"
+                 class="mt-0.5 h-4 w-4 rounded border-ink-300 text-curanta-600 focus:ring-curanta-500" />
+          <span>
+            Optioneel: u kwam binnen via een advertentie van ons. Mogen wij Google laten weten
+            dát deze advertentie tot een aanvraag leidde? Wij geven daarbij alleen de klik-code
+            van de advertentie en het tijdstip door. Geen naam, e-mailadres of organisatie.
+            <a href="/privacy#delen" class="text-curanta-700 hover:underline">Meer hierover</a>.
+          </span>
+        </label>
+
         <p id="aanvraag-melding" role="alert" tabindex="-1" class="hidden mt-5 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900"></p>
         <button type="submit" class="btn-primary mt-7">Online presentatie aanvragen</button>
         <p class="mt-4 text-xs text-ink-500">
@@ -205,6 +221,18 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
     }
     form.elements['sector'].addEventListener('change', toonZorgvorm);
     toonZorgvorm();
+
+    // De klikcode van een Google-advertentie gaat alleen mee met het vinkje (zoals op /demo).
+    var gclid = here.get('gclid');
+    if (gclid) {
+      var gclidVeld = form.elements['gclid'];
+      var vinkje = form.elements['adMeting'];
+      gclidVeld.value = gclid.slice(0, 200);
+      document.getElementById('advertentiemeting').classList.remove('hidden');
+      // Ook bij terugkeren via 'vorige': de browser herstelt het vinkje, niet de disabled-stand.
+      gclidVeld.disabled = !vinkje.checked;
+      vinkje.addEventListener('change', function () { gclidVeld.disabled = !vinkje.checked; });
+    }
 
     function toon(tekst) {
       melding.textContent = tekst;
