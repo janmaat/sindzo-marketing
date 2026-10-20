@@ -925,15 +925,24 @@ const voordelen = [
       <div class="grid gap-6 lg:grid-cols-2">
         <div class="spotlight rounded-2xl bg-white p-8 shadow-[0_6px_18px_rgba(14,79,87,0.06)] sm:p-10" data-reveal>
           <h3 class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Curanta bekijken</h3>
-          <p class="mt-4 leading-relaxed text-ink-700">
-            Vraag een eigen toegang tot de demo aan en kijk rond in de backoffice, het
-            medewerkerportaal en het cliëntportaal. Of vraag een demonstratie aan: noem drie werkstromen
-            of casussen uit uw organisatie, zoals uw intake, uw overdracht of uw maandafsluiting. Dan laten
-            wij zien hoe Curanta ze ondersteunt.
-          </p>
+          {DEMO_ZELF_AANGEBODEN ? (
+            <p class="mt-4 leading-relaxed text-ink-700">
+              Vraag een eigen toegang tot de demo aan en kijk rond in de backoffice, het
+              medewerkerportaal en het cliëntportaal. Of vraag een demonstratie aan: noem drie werkstromen
+              of casussen uit uw organisatie, zoals uw intake, uw overdracht of uw maandafsluiting. Dan laten
+              wij zien hoe Curanta ze ondersteunt.
+            </p>
+          ) : (
+            <p class="mt-4 leading-relaxed text-ink-700">
+              Vraag een demonstratie aan: noem drie werkstromen of casussen uit uw organisatie, zoals uw
+              intake, uw overdracht of uw maandafsluiting. Dan laten wij zien hoe Curanta ze ondersteunt.
+              Of vraag een online presentatie aan en bekijk hem wanneer het u uitkomt.
+            </p>
+          )}
           <div class="mt-7 flex flex-wrap gap-3">
             {DEMO_ZELF_AANGEBODEN && <a href={DEMO_ZELF.href} class="btn-primary btn-lg no-underline">{DEMO_ZELF.label}</a>}
             <a href={DEMO_GESPREK.href} class={`${DEMO_ZELF_AANGEBODEN ? 'btn-secondary' : 'btn-primary'} btn-lg no-underline`}>{DEMO_GESPREK.label}</a>
+            {!DEMO_ZELF_AANGEBODEN && <a href="/presentatie" class="btn-secondary btn-lg no-underline">Online presentatie aanvragen</a>}
           </div>
           <p class="mt-5 text-sm text-ink-700">
             Liever eerst bellen? <a href="tel:+31852501301" class="font-semibold text-curanta-700">085 250 1301</a>
