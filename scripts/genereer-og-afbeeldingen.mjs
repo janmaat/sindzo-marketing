@@ -32,66 +32,74 @@ const OUT = 'public';
 const W = 1200;
 const H = 630;
 
-/** eyebrow = kleine mint-bovenregel, hero = de kop, sub = mint onderregel. */
+/**
+ * eyebrow = kleine mint-bovenregel, hero = de kop, sub = mint onderregel.
+ *
+ * 21-10-2026 herschreven (positionering "volwaardig product", besluit Jan). De vorige teksten beweerden dingen die
+ * niet in het feitenblad staan of niet kloppen: "aantoonbaar veilig" (pentest en NEN 7510-audit volgen nog),
+ * "NL-hosting" (IONOS Cloud, Berlijn), "jaarlijkse indexering vooraf bekend", "MedMij", "XIS-keurmerk",
+ * "Blended care" (e-health is gepland), en "Klein team" (geen teamgrootte, feitenblad rij Wie). Elke regel hieronder
+ * staat in het feitenblad of op de pagina zelf. Een plaatje wordt overal gedeeld waar een link naartoe gaat.
+ */
 const IMAGES = [
   {
     file: 'og.png',
-    hero: 'Eén zorgsuite voor de Nederlandse zorgpraktijk.',
-    sub: 'Bewust open · aantoonbaar veilig.',
+    hero: 'Zorgsoftware waarvan u de prijs al weet.',
+    sub: 'Dossier · planning · declaratie · kwaliteit, in één systeem.',
   },
   {
     file: 'og/oplossing.png',
-    eyebrow: 'Oplossing',
-    hero: 'Eén zorgsuite, modulair geactiveerd.',
-    sub: 'Dossier · planning · declaratie · kwaliteit.',
+    eyebrow: 'Product',
+    hero: 'Alle onderdelen, in één systeem.',
+    sub: 'Van cliëntdossier en planning tot declaratie, kwaliteit en HRM.',
   },
   {
     file: 'og/integraties.png',
-    eyebrow: 'Integraties & standaarden',
-    hero: 'Aantoonbaar open — geen vendor lock-in.',
-    sub: 'FHIR R4 · MedMij · Wegiz · open API.',
+    eyebrow: 'Koppelingen',
+    hero: 'De gebouwde koppelingen zitten in het abonnement.',
+    sub: 'ZorgMail · ZorgDomein · Medimo · FHIR-API · Nmbrs.',
   },
   {
     file: 'og/prijzen.png',
     eyebrow: 'Prijzen',
-    hero: 'Eerlijke prijzen, op tafel.',
-    sub: 'Modulair · geen verrassingen · jaarlijkse indexering vooraf bekend.',
+    hero: 'De prijs staat gewoon op de site.',
+    sub: '€19 tot €39 per actieve medewerker per maand · cliëntportaal gratis.',
   },
   {
     file: 'og/trust.png',
     eyebrow: 'Trust Centre',
-    hero: 'Compliance op tafel, niet in een PDF achter een NDA.',
-    sub: 'Eerlijke status per kader · NL-hosting · AVG.',
+    hero: 'Beveiliging en privacy, met de stand per onderwerp.',
+    sub: 'Gegevens in de EU · BSN versleuteld · NEN 7513-logboek.',
   },
   {
     file: 'og/over.png',
     eyebrow: 'Over Curanta',
     hero: 'Gebouwd voor de Nederlandse zorg.',
-    sub: 'Klein team · korte lijnen · geen handover.',
+    sub: 'Door ondernemers in software en zorg.',
   },
   {
     file: 'og/voor-vvt.png',
-    eyebrow: 'Voor VVT-organisaties',
-    hero: 'Eén platform voor intra- en extramurale zorg.',
-    sub: 'Gebouwd voor arbeidskrapte.',
+    eyebrow: 'Voor de VVT',
+    hero: 'Wijkverpleging, thuiszorg en verpleeghuizen in één systeem.',
+    sub: 'Routes · rapportage onderweg · declareren onder Wmo, Wlz en Zvw.',
   },
   {
     file: 'og/voor-ghz.png',
     eyebrow: 'Voor de gehandicaptenzorg',
-    hero: 'OPP, dagbesteding en familieportaal — zonder duizend losse formulieren.',
-    sub: 'GHZ-vocabulaire ingebouwd, niet bijgebogen.',
+    hero: 'Ondersteuningsplan, dagbesteding en verwanten in één dossier.',
+    sub: 'Signaleringsplan · verblijf en logeren onder de Wlz · Wzd.',
   },
   {
     file: 'og/voor-ggz.png',
     eyebrow: 'Voor de GGZ',
-    hero: 'Blended care, ZPM-declaratie en wachtlijstreductie in één dossier.',
-    sub: 'Van kleinschalige praktijk tot gespecialiseerde instelling.',
+    hero: 'Trajecten volgens het zorgprestatiemodel, in één dossier.',
+    sub: 'Declareren volgens Vektis · afscherming per cliënt · ROM.',
   },
   {
     file: 'og/voor-huisartsen.png',
-    eyebrow: 'Voor de eerstelijn — in voorbereiding',
-    hero: 'Een HIS dat aantoonbaar voldoet aan de eisen van de huisartsensector.',
-    sub: 'XIS-keurmerk · MedMij/PGO · migratiepad.',
+    eyebrow: 'Voor de eerstelijn',
+    hero: 'Huisartsen en Curanta: samenwerking, geen HIS.',
+    sub: 'Voor VVT, gehandicaptenzorg, GGZ, kraamzorg en jeugdzorg.',
   },
 ];
 
@@ -170,10 +178,20 @@ if (!cssChunk) {
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
+// Eerst naar de preview, zodat setContent dezelfde herkomst heeft: vanaf about:blank weigert Chromium het lettertype
+// van localhost (CORS, net::ERR_FAILED) en valt de render ongemerkt terug op een systeemletter (gezien 21-10-2026).
+await page.goto(ORIGIN);
 
 for (const img of IMAGES) {
   await page.setContent(template(img), { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
+  const merkletter = await page.evaluate(() =>
+    [...document.fonts].some((f) => f.family.includes('Plus Jakarta Sans') && f.status === 'loaded'),
+  );
+  if (!merkletter) {
+    console.error(`Plus Jakarta Sans niet geladen voor ${img.file}; de render zou een systeemletter tonen.`);
+    process.exit(1);
+  }
   const dest = path.join(OUT, img.file);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   await page.screenshot({ path: dest, type: 'png' });
