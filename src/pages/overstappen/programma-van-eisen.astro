@@ -1,0 +1,94 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { HOOFDKNOP } from '../../config/demo';
+import inhoud from '../../config/overstap-inhoud.json';
+
+// Minimum-programma van eisen voor een overstap (21-10-2026). Het laatste standaard-PvE in de care is van 2015 (ActiZ)
+// en 2013 (VGN); het opvolgdocument "Professionele omgeving" is uitdrukkelijk geen PvE (onderzoek "Overstapdrempels
+// zorgsoftware en keuzehulp", Ponscura-repo, reports/). Dit is geen volledig PvE maar het deel over overstap, exit en
+// continuïteit dat in elk PvE hoort, leverancier-neutraal geformuleerd. De inhoud staat in overstap-inhoud.json; het
+// Word-bestand komt uit dezelfde bron (scripts/maak-pve-docx.py), dus pagina en bestand zeggen hetzelfde.
+const aantal = inhoud.pve.reduce((n, c) => n + c.eisen.length, 0);
+---
+<Base
+  title="Programma van eisen voor een overstap | Curanta"
+  description={`${aantal} eisen voor de overstap naar een ander ECD: migratie, declaraties rond de overstap, het oude dossier, exit, beveiliging en continuïteit. Leverancier-neutraal, als webpagina en als Word-bestand.`}
+>
+  <PageHero
+    eyebrow="Overstappen"
+    title="De eisen die bij een overstap horen."
+    subtitle={`Een programma van eisen gaat vaak over functies. Dit deel gaat over de overstap zelf: hoe uw gegevens meegaan, hoe de declaraties doorlopen, hoe u bij het oude dossier blijft en hoe u er later weer uit komt. ${aantal} eisen, die u bij elke leverancier kunt neerleggen.`}
+  >
+    <div slot="actions" class="flex flex-wrap items-center gap-3 print:hidden">
+      <a href="/documenten/programma-van-eisen-overstap-curanta.docx" class="btn-primary no-underline" download>Download als Word-bestand</a>
+      <button type="button" onclick="window.print()" class="btn-secondary">Afdrukken of opslaan als pdf</button>
+    </div>
+  </PageHero>
+
+  <section class="border-b border-amber-200 bg-amber-50 py-6">
+    <div class="container-prose">
+      <p class="max-w-3xl text-sm text-amber-900">
+        <strong>Opgesteld door Curanta</strong>, een leverancier van zorgsoftware. Wij hebben de eisen zo geschreven dat
+        elke leverancier ze kan beantwoorden, ook wij. Vul ze aan met uw eigen eisen voor zorg, planning en
+        administratie, en laat uw jurist of FG meekijken. Dit is geen juridisch advies. Peildatum {inhoud.peildatum}.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-prose py-14">
+    <ol class="space-y-14">
+      {inhoud.pve.map((c, ci) => (
+        <li class="break-inside-avoid-page">
+          <h2 class="font-display text-2xl font-bold text-ink-900">{ci + 1}. {c.categorie}</h2>
+          <table class="mt-5 w-full max-w-4xl border-collapse text-left text-sm">
+            <thead>
+              <tr class="border-b border-ink-300 text-ink-500">
+                <th scope="col" class="w-12 py-2 pr-3 font-semibold">Nr.</th>
+                <th scope="col" class="py-2 pr-3 font-semibold">Eis</th>
+                <th scope="col" class="hidden w-24 py-2 font-semibold print:table-cell">Voldoet</th>
+              </tr>
+            </thead>
+            <tbody>
+              {c.eisen.map((e, ei) => (
+                <tr class="border-b border-ink-100 align-top">
+                  <td class="py-3 pr-3 font-semibold text-ink-500">{ci + 1}.{ei + 1}</td>
+                  <td class="py-3 pr-3">
+                    <p class="text-pretty font-medium text-ink-900">{e.eis}</p>
+                    <p class="mt-1 text-pretty text-ink-600">{e.waarom}</p>
+                  </td>
+                  <td class="hidden py-3 text-ink-500 print:table-cell">ja / deels / nee</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </li>
+      ))}
+    </ol>
+
+    <div class="mt-14 max-w-3xl space-y-3 text-sm leading-relaxed text-ink-600">
+      <p>
+        De termijnen bij vertrek komen uit de Dataverordening (Verordening (EU) 2023/2854), zoals de ACM die uitlegt in
+        haar <a href={inhoud.bronnen.acmLeidraad.url} rel="noopener" class="text-curanta-700 hover:underline">leidraad over overstappen tussen clouddiensten</a>
+        ({inhoud.bronnen.acmLeidraad.datum}). Of die regels voor uw huidige contract gelden, hangt af van het soort dienst;
+        laat dat toetsen.
+      </p>
+      <p class="print:hidden">
+        Wilt u ook weten wat u uw huidige leverancier moet vragen? Daarvoor is er
+        <a href="/overstappen/vragen-aan-uw-leverancier" class="text-curanta-700 hover:underline">een aparte lijst</a>.
+        Wilt u de eisen toespitsen op uw eigen situatie, met een planning vanaf de einddatum van uw contract? Doe dan
+        <a href="/overstapscan" class="text-curanta-700 hover:underline">de overstapscan</a>.
+      </p>
+    </div>
+  </section>
+
+  <div class="print:hidden">
+    <Cta
+      title="Wilt u zien hoe Curanta deze eisen beantwoordt?"
+      subtitle="In de online presentatie ziet u de overstap en de exit in Curanta zelf. Wat wij nog niet hebben, staat er ook in."
+      primary={HOOFDKNOP}
+      secondary={{ label: 'Overstappen', href: '/overstappen' }}
+    />
+  </div>
+</Base>

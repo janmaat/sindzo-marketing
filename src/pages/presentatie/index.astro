@@ -219,6 +219,15 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
       form.elements['zorgvorm'].required = isVvt();
       if (!isVvt()) form.elements['zorgvorm'].value = '';
     }
+    // Vanuit de overstapscan (21-10-2026): sector, zorgvorm en een korte samenvatting staan in de URL, alleen als de
+    // bezoeker daar zelf op "Online presentatie aanvragen" klikte. Alleen bekende waarden; de bezoeker past het aan.
+    ['sector', 'zorgvorm'].forEach(function (k) {
+      var v = here.get(k), el = form.elements[k];
+      if (v && el && Array.prototype.some.call(el.options, function (o) { return o.value === v; })) el.value = v;
+    });
+    var uitScan = here.get('toelichting');
+    if (uitScan && !form.elements['toelichting'].value) form.elements['toelichting'].value = uitScan.slice(0, 1000);
+
     form.elements['sector'].addEventListener('change', toonZorgvorm);
     toonZorgvorm();
 

@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { HOOFDKNOP } from '../../config/demo';
+import inhoud from '../../config/overstap-inhoud.json';
+
+// Vragen voor de huidige leverancier (21-10-2026). De grootste drempel bij een overstap ligt bij de oude leverancier:
+// export, kosten, het oude dossier en de opzegging (onderzoek "Overstapdrempels zorgsoftware en keuzehulp"). Deze lijst
+// is leverancier-neutraal en geldt ook voor Curanta zelf; onze eigen antwoorden staan op /overstappen#eruit.
+---
+<Base
+  title="Vragen aan uw huidige leverancier | Curanta"
+  description="Tien vragen die u uw huidige ECD-leverancier stelt voordat u overstapt: export, BSN, kosten, opzegtermijn en de Dataverordening, het oude dossier, declaraties, logging en vernietiging."
+>
+  <PageHero
+    eyebrow="Overstappen"
+    title="Wat u uw huidige leverancier vraagt, vóór u opzegt."
+    subtitle="Bij een overstap hangt veel af van de leverancier die u verlaat. Stel deze vragen schriftelijk, en op tijd: na het einde van het contract is het meestal duurder, en soms niet meer mogelijk."
+  >
+    <div slot="actions" class="flex flex-wrap items-center gap-3 print:hidden">
+      <button type="button" onclick="window.print()" class="btn-primary">Afdrukken of opslaan als pdf</button>
+      <a href="/overstappen/programma-van-eisen" class="btn-secondary no-underline">Naar de eisen voor de nieuwe leverancier</a>
+    </div>
+  </PageHero>
+
+  <section class="container-prose py-14">
+    <ol class="max-w-3xl space-y-7">
+      {inhoud.leveranciersvragen.map((v, i) => (
+        <li class="flex gap-4 break-inside-avoid">
+          <span class="font-display text-lg font-bold text-curanta-700">{i + 1}.</span>
+          <div>
+            <p class="text-pretty font-display text-lg font-semibold text-ink-900">{v.vraag}</p>
+            <p class="mt-1 text-pretty text-sm leading-relaxed text-ink-700">{v.toelichting}</p>
+            <p class="mt-3 hidden h-12 border-b border-dashed border-ink-300 print:block" aria-hidden="true"></p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="mt-12 max-w-3xl rounded-2xl border border-ink-100 bg-curanta-50/60 p-7 text-sm leading-relaxed text-ink-700">
+      <h2 class="font-display text-lg font-semibold text-ink-900">Over de Dataverordening</h2>
+      <p class="mt-2">
+        Sinds 12-09-2025 geldt de Dataverordening (Verordening (EU) 2023/2854) ook voor online software. U kunt een
+        overstap aanvragen met hoogstens 2 maanden opzegtermijn. Daarna loopt de dienst hoogstens 30 dagen door
+        terwijl u overstapt, en u heeft minstens 30 dagen om uw gegevens op te halen. Vanaf 12-01-2027 mag een
+        aanbieder geen overstapkosten meer rekenen. De ACM legt de regels uit in haar
+        <a href={inhoud.bronnen.acmLeidraad.url} rel="noopener" class="text-curanta-700 hover:underline">leidraad over overstappen tussen clouddiensten</a>
+        ({inhoud.bronnen.acmLeidraad.datum}).
+      </p>
+      <p class="mt-2">
+        Of en hoe dat voor uw contract geldt, hangt af van het soort dienst en de afspraken die u maakte. Laat dat door
+        een jurist toetsen. Dit is geen juridisch advies.
+      </p>
+    </div>
+
+    <p class="mt-8 max-w-3xl text-sm leading-relaxed text-ink-600 print:hidden">
+      Dezelfde vragen kunt u ook aan ons stellen. Onze antwoorden staan op de pagina
+      <a href="/overstappen#eruit" class="text-curanta-700 hover:underline">Overstappen, bij "En hoe u er weer uit komt"</a>,
+      en in artikel 9 van <a href="/voorwaarden#beeindiging" class="text-curanta-700 hover:underline">onze voorwaarden</a>.
+    </p>
+    <p class="mt-3 max-w-3xl text-xs text-ink-500">Opgesteld door Curanta. Peildatum {inhoud.peildatum}.</p>
+  </section>
+
+  <div class="print:hidden">
+    <Cta
+      title="Liever alles op een rij voor uw eigen organisatie?"
+      subtitle="De overstapscan maakt van uw antwoorden een overzicht dat u kunt afdrukken: een planning vanaf de einddatum van uw contract, uw eisen, deze vragen en een kostenoverzicht."
+      primary={{ label: 'Doe de overstapscan', href: '/overstapscan' }}
+      secondary={HOOFDKNOP}
+    />
+  </div>
+</Base>

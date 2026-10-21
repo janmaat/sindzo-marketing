@@ -27,10 +27,33 @@ const onRequest = (subject: string) =>
   `mailto:trust@curanta.nl?subject=${encodeURIComponent('Aanvraag document: ' + subject)}`;
 
 const resources: Resource[] = [
+  // 21-10-2026: het deel van het PVE over de overstap bestaat nu als pagina en Word-bestand (feitenblad, Documenten
+  // voor inkoop); het volledige PVE voor zorg, planning en administratie blijft op aanvraag.
   {
     category: 'Programma van eisen en selectie',
-    title: 'Programma van eisen (PVE)',
-    body: 'Een Word-document met categorieën eisen die u kunt aanvinken en aanpassen. Bedoeld om zorgvuldig te kiezen, niet als spreadsheet om in te vullen.',
+    title: 'Programma van eisen voor een overstap',
+    body: 'De eisen over migratie, declaraties rond de overstap, het oude dossier, exit, beveiliging en continuïteit. Leverancier-neutraal, als webpagina en als Word-bestand.',
+    file: '/overstappen/programma-van-eisen',
+    format: 'Webpagina en Word',
+  },
+  {
+    category: 'Programma van eisen en selectie',
+    title: 'Vragen aan uw huidige leverancier',
+    body: 'Tien vragen die u stelt vóór u opzegt: export, BSN, kosten, opzegtermijn en de Dataverordening, het oude dossier, declaraties, logging en vernietiging.',
+    file: '/overstappen/vragen-aan-uw-leverancier',
+    format: 'Webpagina',
+  },
+  {
+    category: 'Programma van eisen en selectie',
+    title: 'Overstapscan',
+    body: 'Tien vragen over uw situatie, en een overzicht om te delen met bestuur, OR en cliëntenraad: planning vanaf de einddatum van uw contract, eisen, vragen en kosten.',
+    file: '/overstapscan',
+    format: 'Webpagina',
+  },
+  {
+    category: 'Programma van eisen en selectie',
+    title: 'Programma van eisen (PVE), volledig',
+    body: 'Een Word-document met categorieën eisen voor zorg, planning en administratie, die u kunt aanvinken en aanpassen. Bedoeld om zorgvuldig te kiezen, niet als spreadsheet om in te vullen.',
     file: onRequest('Programma van eisen'),
     format: 'Op aanvraag',
   },
@@ -100,7 +123,7 @@ const resources: Resource[] = [
   {
     category: 'Implementatie',
     title: 'Migratie per bronsysteem',
-    body: 'Per bronsysteem wat wij overzetten, wat handwerk is en wat het kost. Migratie vanuit Nedap Ons, Gerimedica Ysis, SDB en Pluriform Zorg (Adapcare) is een project tegen een vaste prijs vooraf. Kant-en-klare imports zijn er nog niet.',
+    body: 'Per bronsysteem wat wij overzetten, wat handwerk is en wat het kost. Migratie vanuit Nedap Ons, Gerimedica Ysis, SDB, mijnCaress, Lable Care, Fierit en Pluriform Zorg (Adapcare) is een project tegen een vaste prijs vooraf. Kant-en-klare imports zijn er nog niet.',
     file: onRequest('Migratie per bronsysteem'),
     format: 'Op aanvraag',
   },
@@ -133,8 +156,9 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
   <section class="border-y border-amber-200 bg-amber-50 py-6">
     <div class="container-prose">
       <p class="text-sm text-amber-900">
-        <strong>Documenten op aanvraag.</strong>
-        Deze documenten liggen nog niet kant-en-klaar: wij stellen ze op aanvraag op, afgestemd
+        <strong>De meeste documenten op aanvraag.</strong>
+        Het programma van eisen voor een overstap, de vragen aan uw huidige leverancier en de overstapscan staan online.
+        De andere documenten liggen nog niet kant-en-klaar: wij stellen ze op aanvraag op, afgestemd
         op uw sector, omvang en vragen. Wij reageren binnen 1 werkdag. Laat uw eigen jurist of FG
         meekijken bij uw definitieve programma van eisen (PVE) of verwerkersovereenkomst. Onze
         documenten zijn geen juridisch advies.

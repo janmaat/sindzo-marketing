@@ -1,0 +1,107 @@
+{
+  "_toelichting": "Eén bron voor /overstapscan, /overstappen/programma-van-eisen, /overstappen/vragen-aan-uw-leverancier, /overstappen/pakket-stopt en het Word-bestand (scripts/maak-pve-docx.py). Opgesteld 21-10-2026 uit het onderzoek 'Overstapdrempels zorgsoftware en keuzehulp' (Ponscura-repo, reports/). Leverancier-neutraal: geen eis die stilletjes alleen Curanta haalt. Feiten over Curanta komen uit het feitenblad.",
+  "peildatum": "21-10-2026",
+  "bronnen": {
+    "mi2026": { "naam": "M&I/Partners, ECD-inventarisatie 2026", "datum": "10-09-2026", "url": "https://mxi.nl/kennis/786/ecd-inventarisatie-2026-gehandicaptenzorg-en-ouderenzorg" },
+    "mi2026jan": { "naam": "M&I/Partners, Veranderingen in de ECD-markt", "datum": "14-01-2026", "url": "https://mxi.nl/kennis/745/veranderingen-in-de-ecd-markt" },
+    "nidos": { "naam": "Stichting Nidos, verslag marktconsultatie ECD op TenderNed", "datum": "06-02-2025", "url": "https://www.tenderned.nl/papi/tenderned-rs-tns/v2/publicaties/362093/documenten/11952982/content" },
+    "acmLeidraad": { "naam": "ACM, Leidraad overstappen tussen clouddiensten (Dataverordening)", "datum": "19-10-2026", "url": "https://www.acm.nl/nl/publicaties/acm-publiceert-leidraad-over-overstappen-tussen-clouddiensten" },
+    "acmLeidraadPdf": { "naam": "ACM, Leidraad Cloud", "datum": "2026", "url": "https://www.acm.nl/system/files/documents/leidraad-cloud.pdf" },
+    "dataAct": { "naam": "Verordening (EU) 2023/2854 (Dataverordening), art. 23-31", "datum": "geldt sinds 12-09-2025", "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32023R2854" },
+    "heldy": { "naam": "Heldy-kostengids voor Nederlandse zorgaanbieders", "datum": "april 2026", "url": "" }
+  },
+  "stoppendePakketten": [
+    { "pakket": "mijnCaress", "leverancier": "PinkRoccade Healthcare", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026" },
+    { "pakket": "Lable Care", "leverancier": "Lable", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026" },
+    { "pakket": "Fierit", "leverancier": "Tenzinger", "einde": "eind 2027", "eindjaar": 2027, "bron": "mi2026" }
+  ],
+  "pve": [
+    {
+      "categorie": "Overstap en migratie",
+      "eisen": [
+        { "eis": "De leverancier beschrijft schriftelijk welke gegevens uit ons huidige pakket overgaan (cliënten, zorgplannen, rapportages, indicaties, medewerkers, bestanden) en welke niet.", "waarom": "Wat niet meegaat, moet u op een andere manier bewaren of opnieuw invoeren." },
+        { "eis": "De leverancier zet de gegevens over. Zorgmedewerkers typen geen dossiers over, tenzij wij daar vooraf zelf voor kiezen.", "waarom": "Overtypen komt bovenop het werk in de zorg." },
+        { "eis": "Er is eerst een proefoverzet. Wij controleren aantallen en een steekproef voordat de echte overzet plaatsvindt.", "waarom": "Fouten vindt u liever vóór de start dan erna." },
+        { "eis": "De prijs van de migratie staat vooraf vast, of er is een bovengrens.", "waarom": "Zonder vaste prijs of bovengrens draagt u het risico van uitloop." },
+        { "eis": "De leverancier zegt vooraf wat wij zelf moeten doen en hoeveel tijd dat ongeveer kost (projectleider, sleutelgebruikers, controle).", "waarom": "De eigen inzet is de kostenpost die het vaakst wordt onderschat." }
+      ]
+    },
+    {
+      "categorie": "Declaraties rond de overstap",
+      "eisen": [
+        { "eis": "Per financier is vooraf afgesproken tot welke periode het oude pakket declareert en vanaf welke periode het nieuwe.", "waarom": "Zo valt er geen periode tussen twee pakketten in, en wordt er niets dubbel gedeclareerd." },
+        { "eis": "Lopende toewijzingen van gemeenten en het zorgkantoor gaan mee, of de leverancier beschrijft hoe ze opnieuw worden opgevraagd.", "waarom": "Zonder toewijzing kunt u in het nieuwe pakket niet declareren." },
+        { "eis": "Het nieuwe pakket ondersteunt de berichten die wij gebruiken, met de versie erbij.", "waarom": "Vraag per stroom naar de versie en of het bericht wordt getoetst aan het officiële schema.", "stromen": ["wmo", "jeugd", "wlz", "zvw", "ggz"] },
+        { "eis": "De leverancier zegt of declaraties rechtstreeks worden verstuurd of met de hand worden aangeleverd (bijvoorbeeld via het VECOZO-portaal).", "waarom": "Met de hand aanleveren vraagt tijd van de administratie; dat hoort in uw planning." },
+        { "eis": "Het oude pakket blijft beschikbaar tot de laatste retourberichten zijn verwerkt.", "waarom": "Correcties en afwijzingen komen soms maanden later." }
+      ]
+    },
+    {
+      "categorie": "Het oude dossier",
+      "eisen": [
+        { "eis": "Vóór de opzegging van het oude pakket is vastgelegd hoe oude dossiers leesbaar blijven zolang de bewaartermijn loopt.", "waarom": "Een dossier bewaart u in de regel 20 jaar (Wgbo). Dat geldt ook als de leverancier stopt." },
+        { "eis": "De export van het oude pakket en de logging (wie heeft wat ingezien) zijn veilig bewaard voordat het oude contract eindigt.", "waarom": "Na het einde van het contract is dat duurder, en soms niet meer mogelijk." }
+      ]
+    },
+    {
+      "categorie": "Exit en dataportabiliteit",
+      "eisen": [
+        { "eis": "Bij vertrek krijgen wij al onze gegevens, inclusief bestanden, in een gestructureerd, gangbaar en machineleesbaar formaat.", "waarom": "De Dataverordening vraagt dat; leg het ook in het contract vast." },
+        { "eis": "Het contract noemt de termijnen bij vertrek: de opzegtermijn, de overgangsperiode waarin de dienst doorloopt, en hoe lang wij de gegevens kunnen ophalen.", "waarom": "Volgens de Dataverordening hoogstens 2 maanden opzegtermijn, hoogstens 30 dagen overgang en minstens 30 dagen om gegevens op te halen." },
+        { "eis": "Het contract zegt welke gegevens wel en niet overdraagbaar zijn, en welke technische beperkingen bekend zijn.", "waarom": "De Dataverordening vraagt een uitputtende beschrijving." },
+        { "eis": "Er zijn geen kosten voor de overstap of de export. Bij vroegtijdig opzeggen staat in het contract welke vergoeding geldt, als die er is.", "waarom": "Vanaf 12-01-2027 mag een aanbieder geen overstapkosten meer rekenen." },
+        { "eis": "Het BSN gaat bij vertrek zo mee dat het volgende pakket cliënten kan herkennen en kan declareren, via een beveiligde route.", "waarom": "Een export met alleen een deel van het BSN is voor declareren niet genoeg." },
+        { "eis": "Na afloop wist de leverancier al onze gegevens en levert een vernietigingsverklaring.", "waarom": "U blijft verwerkingsverantwoordelijke, ook voor wat bij de oude leverancier staat." }
+      ]
+    },
+    {
+      "categorie": "Informatiebeveiliging en privacy",
+      "eisen": [
+        { "eis": "De leverancier toont de stand van NEN 7510 aan: een certificaat, of de geplande audit met datum en het bewijs per maatregel.", "waarom": "Bepaal vooraf of een certificaat voor uw organisatie een harde eis is." },
+        { "eis": "Er is een verwerkersovereenkomst met een lijst van subverwerkers en waar de gegevens staan.", "waarom": "Nodig vóór er een cliëntgegeven wordt overgezet." },
+        { "eis": "Het BSN is apart beveiligd, bijvoorbeeld versleuteld op veldniveau.", "waarom": "Het BSN valt onder art. 87 AVG en art. 46 UAVG." },
+        { "eis": "Wie een dossier inziet, wordt vastgelegd volgens NEN 7513, en wij kunnen dat logboek inzien en exporteren.", "waarom": "Dat vraagt u voor uw eigen controle en bij een klacht of incident." },
+        { "eis": "Tweestapsverificatie is verplicht te stellen voor iedereen die bij cliëntgegevens kan.", "waarom": "Wachtwoorden alleen zijn onvoldoende voor gegevens over gezondheid." },
+        { "eis": "De leverancier levert wat wij nodig hebben voor onze DPIA: welke gegevens, waar ze heen gaan, beveiliging, subverwerkers en bewaartermijnen.", "waarom": "De DPIA maakt u zelf; de leverancier levert de bouwstenen." }
+      ]
+    },
+    {
+      "categorie": "Continuïteit",
+      "eisen": [
+        { "eis": "De leverancier beschrijft wat er gebeurt als hij stopt, failliet gaat of wordt overgenomen: hoe lang de dienst doorloopt en hoe wij bij onze gegevens komen.", "waarom": "Bij een online dienst beschermt alleen broncode in bewaring u niet tegen het wegvallen van hosting en gegevens." },
+        { "eis": "Er is een noodprocedure voor als het pakket niet bereikbaar is, en die wordt vóór de start geoefend.", "waarom": "Zorg moet doorgaan, ook als het systeem uitvalt." },
+        { "eis": "De leverancier geeft referenties, en wij mogen zelf kiezen wie wij bellen.", "waarom": "Een leverancier noemt anders vaak alleen zijn tevredenste klanten." }
+      ]
+    },
+    {
+      "categorie": "Contract en prijs",
+      "eisen": [
+        { "eis": "De prijs van abonnement, implementatie, migratie, training en koppelingen staat vooraf in het voorstel, per eenheid (bijvoorbeeld per medewerker of per cliënt).", "waarom": "Leveranciers rekenen in verschillende eenheden; vergelijk pas als u ze hebt omgerekend." },
+        { "eis": "Het contract noemt hoe prijzen worden geïndexeerd, met een maximum.", "waarom": "Over meerdere jaren telt de indexering zwaar mee." },
+        { "eis": "Er is een regeling voor de periode waarin het oude contract nog doorloopt.", "waarom": "Zo betaalt u niet maandenlang twee pakketten." }
+      ]
+    },
+    {
+      "categorie": "Implementatie en gebruik",
+      "eisen": [
+        { "eis": "Er is een plan in fasen, met per fase wie wat doet en wie akkoord geeft.", "waarom": "Een planning alleen zegt niet wie er verantwoordelijk is." },
+        { "eis": "Sleutelgebruikers kunnen vóór de start proefdraaien met verzonnen gegevens, terwijl het huidige pakket doorloopt.", "waarom": "Zo leren uw mensen het werk kennen zonder risico voor cliënten." },
+        { "eis": "Training past bij mensen met kleine contracten: op locatie, in korte delen of met video, op momenten die wij zelf plannen.", "waarom": "Niet iedereen kan naar een klassikale training." },
+        { "eis": "Zorgmedewerkers kunnen werken zonder bereik, en wat ze vastleggen gaat niet verloren.", "waarom": "In de wijk en in sommige gebouwen is het bereik slecht.", "stromen": ["wmo", "wlz", "zvw", "jeugd"] },
+        { "eis": "Er is één vaste contactpersoon bij de leverancier, van de start tot na de livegang.", "waarom": "Wisselende contactpersonen kosten u uitleg en tijd." }
+      ]
+    }
+  ],
+  "leveranciersvragen": [
+    { "vraag": "Welke gegevens kunt u bij ons vertrek exporteren, en in welk formaat?", "toelichting": "Vraag naar cliënten, zorgplannen, rapportages, indicaties, medewerkers, roosters, declaraties en bestanden, en of het een gestructureerd, machineleesbaar formaat is." },
+    { "vraag": "Gaat het BSN volledig mee in de export, en hoe?", "toelichting": "Het volgende pakket heeft het volledige BSN nodig om cliënten te herkennen en te declareren." },
+    { "vraag": "Wat kost de export, en wat kost hulp bij de overstap?", "toelichting": "Onder de Dataverordening mag een aanbieder vanaf 12-01-2027 geen overstapkosten meer rekenen." },
+    { "vraag": "Wat is onze opzegtermijn, en wat verandert de Dataverordening aan ons contract?", "toelichting": "Voor een online dienst geldt een overstapverzoek met hoogstens 2 maanden opzegtermijn, ook bij een vaste looptijd. Of en hoe dat voor uw contract geldt, laat u door een jurist toetsen." },
+    { "vraag": "Hoe lang na het einde van het contract kunnen wij nog in het oude pakket lezen, en wat kost dat?", "toelichting": "Een dossier bewaart u in de regel 20 jaar. Spreek af hoe het oude dossier leesbaar blijft." },
+    { "vraag": "Hoe lang kunnen wij na de opzegging nog declareren en retourberichten verwerken?", "toelichting": "Correcties en afwijzingen komen soms maanden na de laatste declaratie." },
+    { "vraag": "Levert u de logging mee (wie heeft welk dossier ingezien), en hoe lang bewaart u die?", "toelichting": "Het toegangslogboek (NEN 7513) heeft u nodig bij een klacht of incident over de periode vóór de overstap." },
+    { "vraag": "Welke koppelingen moeten wij zelf opzeggen of overzetten?", "toelichting": "Bijvoorbeeld het VECOZO-certificaat, ZorgMail, de apotheek of het medicatiesysteem, en de salarisadministratie." },
+    { "vraag": "Wanneer en hoe vernietigt u onze gegevens na de overstap, en krijgen wij daar een verklaring van?", "toelichting": "U blijft verwerkingsverantwoordelijke voor wat bij de oude leverancier staat." },
+    { "vraag": "Wie is ons aanspreekpunt bij de overstap, en wat doet u wel en wat niet?", "toelichting": "Leg het antwoord schriftelijk vast; het hoort bij uw planning." }
+  ]
+}

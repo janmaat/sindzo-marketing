@@ -24,10 +24,21 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
     toelichting: 'De planning bepalen we samen. Wij zeggen liever "nog niet" dan dat we u een datum beloven die we niet halen.',
   },
   { naam: 'SDB' },
+  // 21-10-2026 (besluit Jan): de stoppende pakketten bij naam, met M&I/Partners 2026 als bron en zonder oordeel.
   {
     naam: 'mijnCaress (PinkRoccade)',
-    toelichting: 'Volgens M&I/Partners (ECD-inventarisatie 2025) trekt mijnCaress zich als ECD terug uit de markt.',
-    bron: 'https://mxi.nl/kennis/730/ecd-inventarisatie-2025-gehandicaptenzorg-en-ouderenzorg',
+    toelichting: 'Stopt eind 2026, volgens M&I/Partners (ECD-inventarisatie 2026).',
+    bron: 'https://mxi.nl/kennis/786/ecd-inventarisatie-2026-gehandicaptenzorg-en-ouderenzorg',
+  },
+  {
+    naam: 'Lable Care',
+    toelichting: 'Stopt eind 2026, volgens M&I/Partners (ECD-inventarisatie 2026).',
+    bron: 'https://mxi.nl/kennis/786/ecd-inventarisatie-2026-gehandicaptenzorg-en-ouderenzorg',
+  },
+  {
+    naam: 'Fierit (Tenzinger)',
+    toelichting: 'Gaat eind 2027 uit de markt, volgens M&I/Partners (ECD-inventarisatie 2026).',
+    bron: 'https://mxi.nl/kennis/786/ecd-inventarisatie-2026-gehandicaptenzorg-en-ouderenzorg',
   },
   { naam: 'Pluriform Zorg (Adapcare)' },
 ];
@@ -139,7 +150,7 @@ const voorU = [
   >
     <div slot="actions" class="flex flex-wrap items-center gap-3">
       <a href={HOOFDKNOP.href} class="btn-primary no-underline">{HOOFDKNOP.label}</a>
-      <a href="/contact" class="btn-secondary no-underline">Vraag een migratie-inschatting</a>
+      <a href="/overstapscan" class="btn-secondary no-underline">Doe de overstapscan</a>
       <a href="#eruit" class="text-sm font-semibold text-curanta-700 hover:underline">Eerst weten hoe u er weer uit komt?</a>
     </div>
   </PageHero>
@@ -301,7 +312,40 @@ const voorU = [
     <p class="mt-6 text-sm text-ink-500 max-w-3xl">
       Staat uw systeem er niet bij? Vraag het gewoon. Wij zeggen het ook als een import niet
       loont en handmatig overzetten goedkoper is. Dat komt voor bij kleine cliëntenbestanden.
+      Stopt uw pakket? Lees eerst <a href="/overstappen/pakket-stopt" class="text-curanta-700 hover:underline">wat u dan als eerste regelt</a>.
     </p>
+  </section>
+
+  {/* 21-10-2026: hulpmiddelen voor de keuze zelf, ook als die niet op Curanta uitkomt. Onderzoek "Overstapdrempels
+      zorgsoftware en keuzehulp": voor zorginstellingen bestaat in Nederland geen onafhankelijke keuzehulp en geen actueel
+      PvE; een scan die de koper zijn eigen situatie laat vastleggen past binnen de claimgrenzen, een ranglijst niet. */}
+  <section class="border-y border-ink-100 bg-curanta-50/60 py-16" aria-labelledby="kiezen-kop">
+    <div class="container-prose">
+      <div class="max-w-3xl">
+        <h2 id="kiezen-kop" class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Voor uw keuze, met of zonder ons</h2>
+        <p class="mt-4 leading-relaxed text-ink-700">
+          Een ECD kiest u voor jaren. Deze hulpmiddelen gaan over de overstap zelf, en u kunt ze bij elke leverancier
+          gebruiken. Ze beoordelen geen andere leverancier.
+        </p>
+      </div>
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        <a href="/overstapscan" class="group rounded-2xl border border-ink-100 bg-white p-7 no-underline hover:border-curanta-300">
+          <p class="text-sm font-semibold text-curanta-700">Overstapscan</p>
+          <h3 class="mt-1 font-display text-lg font-semibold text-ink-900 group-hover:underline">Uw overstap op een rij</h3>
+          <p class="mt-3 text-sm leading-relaxed text-ink-700">Tien vragen, en een overzicht om te delen met bestuur, OR en cliëntenraad: planning, eisen, vragen en kosten. Ook als Curanta nu niet bij u past.</p>
+        </a>
+        <a href="/overstappen/programma-van-eisen" class="group rounded-2xl border border-ink-100 bg-white p-7 no-underline hover:border-curanta-300">
+          <p class="text-sm font-semibold text-curanta-700">Programma van eisen</p>
+          <h3 class="mt-1 font-display text-lg font-semibold text-ink-900 group-hover:underline">De eisen die bij een overstap horen</h3>
+          <p class="mt-3 text-sm leading-relaxed text-ink-700">Migratie, declaraties rond de overstap, het oude dossier, exit en continuïteit. Als webpagina en als Word-bestand.</p>
+        </a>
+        <a href="/overstappen/vragen-aan-uw-leverancier" class="group rounded-2xl border border-ink-100 bg-white p-7 no-underline hover:border-curanta-300">
+          <p class="text-sm font-semibold text-curanta-700">Vragen aan uw leverancier</p>
+          <h3 class="mt-1 font-display text-lg font-semibold text-ink-900 group-hover:underline">Wat u vraagt vóór u opzegt</h3>
+          <p class="mt-3 text-sm leading-relaxed text-ink-700">Tien vragen over de export, het BSN, de kosten, het oude dossier en wat de Dataverordening aan uw contract verandert.</p>
+        </a>
+      </div>
+    </div>
   </section>
 
   <section class="border-y border-ink-100 bg-curanta-50/60 py-16">
@@ -332,6 +376,15 @@ const voorU = [
           <dd class="text-pretty leading-relaxed text-ink-700">
             Die spreken we per organisatie af, na de migratie-inschatting. Hij hangt af van uw omvang,
             uw gegevens en uw koppelingen; een vaste doorlooptijd noemen wij daarom niet.
+          </dd>
+        </div>
+        {/* Besluit Jan 21-10-2026; voorwaarden art. 5. */}
+        <div class="grid gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-8" data-reveal style="--reveal-vertraging:120ms">
+          <dt class="font-display text-lg font-semibold text-ink-900">Geen dubbele kosten</dt>
+          <dd class="text-pretty leading-relaxed text-ink-700">
+            Loopt uw huidige contract nog door als u bij ons begint? Dan betaalt u het abonnement van Curanta pas vanaf
+            het einde van dat contract, tot hoogstens zes maanden na de start. Implementatie en migratie gaan zoals
+            afgesproken.
           </dd>
         </div>
         <div class="grid gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-8" data-reveal style="--reveal-vertraging:160ms">
@@ -368,6 +421,9 @@ const voorU = [
         <ul class="mt-4 space-y-3 text-sm text-ink-700">
           <li>Een volledige export van uw gegevens en bestanden in JSON, zonder exit-fee.</li>
           <li>Bij beëindiging krijgt u de export binnen 5 werkdagen. U heeft 30 dagen om hem op te halen. Na afloop van die 30 dagen wissen wij al uw gegevens, en u krijgt een vernietigingsverklaring.</li>
+          {/* Voorwaarden art. 9; product: BSN-lijst bij vertrek (ADR 2026-10-21 in de Ponscura-repo). */}
+          <li>Het volledige BSN staat niet in de gewone export. Na uw opzegging levert Curanta het apart, in een versleuteld bestand met een los wachtwoord, zodat uw volgende pakket kan declareren.</li>
+          <li>Overstappen kan ook tijdens een contractjaar, met 2 maanden opzegtermijn, zoals de Dataverordening dat regelt. Wij rekenen daar geen vergoeding voor.</li>
           <li>Naar een lager plan wisselen kan per contractjaar, ook zonder exit-fee.</li>
         </ul>
       </div>
@@ -396,9 +452,12 @@ const voorU = [
         Logisch. Een migratie is geen besluit dat u op een brochure neemt.
         {DEMO_ZELF_AANGEBODEN
           ? 'Kijk zelf rond in een werkende omgeving met verzonnen cliënten; u kunt er niets stukmaken.'
-          : 'Stuur ons drie werkstromen uit uw organisatie; dan laten wij ze zien in een werkende omgeving met verzonnen cliënten.'}
+          : 'Bekijk eerst de online presentatie, wanneer het u uitkomt. Daarna kunt u op onze uitnodiging zelf rondkijken in de demo-omgeving, met verzonnen cliënten. Of stuur ons drie werkstromen uit uw organisatie; dan laten wij ze zien.'}
       </p>
-      <a href={DEMO_KNOP.href} class="mt-6 inline-block btn-primary no-underline">{DEMO_KNOP.label}</a>
+      <div class="mt-6 flex flex-wrap gap-3">
+        {!DEMO_ZELF_AANGEBODEN && <a href={HOOFDKNOP.href} class="btn-primary no-underline">{HOOFDKNOP.label}</a>}
+        <a href={DEMO_KNOP.href} class={`${DEMO_ZELF_AANGEBODEN ? 'btn-primary' : 'btn-secondary'} no-underline`}>{DEMO_KNOP.label}</a>
+      </div>
     </div>
   </section>
 
