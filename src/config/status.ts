@@ -11,6 +11,10 @@
 //   ontwikkeling — er wordt aan gebouwd; nog niet te gebruiken
 //   gepland      — op de planning, nog niet begonnen
 //
+// Labels sinds 21-10-2026 (besluit Jan: de site laat een volwaardig product zien, geen beginnend bedrijf):
+// "Beschikbaar" in plaats van "Gebouwd, te zien in de demo". Wat gebouwd is, kan een organisatie afnemen; de
+// demo is alleen de plek waar u het ziet. De betekenis van de vier statussen is niet veranderd.
+//
 // Bron per onderdeel: het feitenblad (D:\Repos\Ponscura\docs\campagne\feitenblad-curanta.md).
 import { DEMO_ZELF_AANGEBODEN } from './demo';
 
@@ -18,27 +22,27 @@ export type Status = 'demo' | 'inrichten' | 'ontwikkeling' | 'gepland';
 
 export const STATUS: Record<Status, { label: string; dot: string; uitleg: string }> = {
   demo: {
-    label: 'Gebouwd, te zien in de demo',
+    label: 'Beschikbaar',
     dot: 'bg-accent-600',
     uitleg: DEMO_ZELF_AANGEBODEN
-      ? 'Gebouwd; u kunt het in de demo-omgeving bekijken, met verzonnen gegevens.'
-      : 'Gebouwd; wij laten het zien in een demonstratie, met verzonnen gegevens.',
+      ? 'Onderdeel van Curanta. U kunt het in de demo-omgeving bekijken, met verzonnen gegevens.'
+      : 'Onderdeel van Curanta. U ziet het in de online presentatie of in een demonstratie, met verzonnen gegevens.',
   },
   inrichten: {
-    label: 'Gebouwd, in te richten per klant',
+    label: 'Beschikbaar, in te richten',
     dot: 'bg-sky-600',
     uitleg:
-      'Gebouwd, maar pas bruikbaar na inrichting of een test bij uw organisatie. Denk aan een certificaat, contract of toegang bij een externe partij, een eindtest met echte gegevens, of een eigen besluit zoals een DPIA.',
+      'Onderdeel van Curanta, te gebruiken zodra het bij uw organisatie is ingericht. Denk aan een certificaat, contract of toegang bij een externe partij, een eindtest met uw gegevens, of een eigen besluit zoals een DPIA.',
   },
   ontwikkeling: {
     label: 'In ontwikkeling',
     dot: 'bg-amber-500',
-    uitleg: 'Wij bouwen eraan. Bij elk onderdeel staat wat er al werkt en wat nog volgt.',
+    uitleg: 'Wij bouwen eraan. Bij het onderdeel staat wat er al werkt.',
   },
   gepland: {
-    label: 'Gepland',
+    label: 'Op de roadmap',
     dot: 'bg-ink-300',
-    uitleg: 'Op de planning, nog niet begonnen.',
+    uitleg: 'Gepland; de bouw is nog niet begonnen.',
   },
 };
 

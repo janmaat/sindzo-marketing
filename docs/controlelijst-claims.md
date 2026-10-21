@@ -17,7 +17,7 @@ niet sterker geformuleerd dan het feitenblad toelaat; waar twijfel was, is het w
 
 | # | Claim | Waar op de site | Waarom bevestigen |
 |---|---|---|---|
-| A1 | Founding-partnerprogramma: maximaal **drie** plekken, **36 maanden** vaste prijs, meepraten over de roadmap | banner op elke pagina, homepage (afsluiting), /cases, /trust | Feitenblad [besluit Jan 24-09]. Nog actueel? Zijn er nog drie plekken vrij? Zo niet: banner en teksten aanpassen. |
+| A1 | Partnerprogramma (tot 21-10-2026 "founding partner"): maximaal **drie** plekken, **36 maanden** vaste prijs, meepraten over de roadmap | /cases#partner, /trust (banner en homepagekaart weg sinds 21-10-2026) | Feitenblad [besluit Jan 24-09]. Nog actueel? Zijn er nog drie plekken vrij? Zo niet: banner en teksten aanpassen. |
 | A2 | NEN 7510: externe audit "gepland" | homepage, /trust, /vergelijking | Feitenblad: "Q4 2026 [te bevestigen]". Q4 is nu begonnen. De site noemt daarom geen kwartaal meer. Datum en auditor bevestigen, of "gepland" vervangen. |
 | A3 | ISO 27001: audit gepland 2027 | /trust, /vergelijking | Feitenblad: [te bevestigen]. |
 | A4 | /vergelijking: controledatum **8 oktober 2026** in plaats van peildatum 29-05-2026 | /vergelijking | Feitenblad zegt "peildatum 29-05-2026". De vergelijking is opnieuw nagelopen met bronnen (zie D3); het feitenblad moet mee. |

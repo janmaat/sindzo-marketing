@@ -94,7 +94,7 @@ const integrations: Integration[] = [
   { name: 'DigiD', category: 'Identiteit', status: 'inrichten',
     body: 'Inloggen op het cliëntportaal met DigiD, minimaal niveau Substantieel. Een betaalde optie; de aansluiting bij Logius regelen wij per klant.' },
   { name: 'UZI-pas', category: 'Identiteit', status: 'inrichten',
-    body: 'Curanta leest de pas uit en controleert de certificaatketen en of de pas is ingetrokken. Beschikbaar zodra wij de UZI-hostnaam op onze server hebben ingericht; dat is nog niet gebeurd. De eindtest met een echte pas doen wij bij de eerste klant.' },
+    body: 'Curanta leest de pas uit en controleert de certificaatketen en of de pas is ingetrokken. Beschikbaar zodra wij de UZI-hostnaam op onze server hebben ingericht; dat is nog niet gebeurd. De eindtest met een echte pas doen wij bij de implementatie, met uw organisatie.' },
   { name: 'Microsoft Entra ID (SSO)', category: 'Identiteit', status: 'ontwikkeling',
     body: 'Aanmelden met het Microsoft-werkaccount in de backoffice en het medewerkerportaal, met rollen uit groepen, is gebouwd. De eindtest met een echte Microsoft-omgeving volgt. Alleen Microsoft Entra ID: geen SAML en geen andere aanbieders. Het cliëntportaal heeft geen SSO.' },
 
@@ -110,7 +110,7 @@ const integrations: Integration[] = [
   { name: 'Boekhoudpakketten', category: 'Backoffice', status: 'demo',
     body: 'Geen koppeling maar een bestand: verkoopboekingen, toegekende declaraties en kosten voor Twinfield, SnelStart, AFAS, Exact (journaalposten) of Yuki. U leest het zelf in. Het Yuki-bestand is nog niet in een echte Yuki-administratie ingelezen.' },
   { name: 'Nmbrs', category: 'Backoffice', status: 'inrichten',
-    body: 'De goedgekeurde salarisexport rechtstreeks naar Nmbrs. Vraagt een Nmbrs-partnerapp, een sleutel en toestemming van uw organisatie. De test met Nmbrs doen wij bij de eerste klant. Zonder Nmbrs: een CSV-export voor elke salarisadministratie.' },
+    body: 'De goedgekeurde salarisexport rechtstreeks naar Nmbrs. Vraagt een Nmbrs-partnerapp, een sleutel en toestemming van uw organisatie. De test met Nmbrs doen wij bij de implementatie, met uw organisatie. Zonder Nmbrs: een CSV-export voor elke salarisadministratie.' },
 ];
 
 const categories = Array.from(new Set(integrations.map(i => i.category)));

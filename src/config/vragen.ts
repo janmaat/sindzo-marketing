@@ -41,9 +41,10 @@ export const algemeneVragen: Vraag[] = [
     antwoord: `Nog niet. De externe audit is gepland in het vierde kwartaal van 2026. Een externe pentest is nog niet gedaan. Wat er wel geregeld is, staat per onderdeel in het ${link('/trust', 'Trust Centre')}.`,
   },
   {
-    vraag: 'Werkt er al een zorgorganisatie met Curanta?',
-    // Feitenblad: Klanten (besluit Jan 14-10). Geen naam, logo of citaat.
-    antwoord: 'De eerste implementatie loopt sinds oktober 2026, bij een organisatie in de basis-ggz. In productie werkt er nog geen zorgorganisatie mee.',
+    vraag: 'Bij welke organisaties is Curanta in gebruik?',
+    // Feitenblad: Klanten (besluit Jan 14-10). Geen naam, logo of citaat. Sinds 21-10-2026 (besluit Jan: geen
+    // nadruk op nieuw zijn) zonder de tweede zin; "de eerste implementatie" zegt al dat er nog geen andere is.
+    antwoord: 'De eerste implementatie loopt sinds oktober 2026, bij een organisatie in de basis-ggz. Een klant noemen wij alleen met haar schriftelijke toestemming.',
   },
   {
     vraag: 'Kunnen wij Curanta eerst zelf bekijken?',

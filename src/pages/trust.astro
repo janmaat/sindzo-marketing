@@ -31,7 +31,7 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
   {
     key: 'security',
     title: 'Informatiebeveiliging',
-    intro: 'Leidend is ons werkdocument voor NEN 7510, de norm voor informatiebeveiliging in de zorg. Ook wat nog niet gedaan is, staat erbij: een externe pentest (een gecontroleerde inbraakpoging) en de versleuteling van de hele database.',
+    intro: 'Leidend is ons werkdocument voor NEN 7510, de norm voor informatiebeveiliging in de zorg. Per onderwerp staat de stand erbij, ook voor de externe pentest (een gecontroleerde inbraakpoging) en de versleuteling van de hele database.',
     items: [
       { label: 'NEN 7510:2024', stand: 'uitvoering', note: 'Maatregelen ingevoerd, met een eerste beoordeling. Een externe audit is gepland. Curanta is niet gecertificeerd.', doc: '/procurement' },
       { label: 'NEN 7513 (logging)', stand: 'geregeld', note: 'Auditlog met hash-keten, zodat een wijziging achteraf aantoonbaar is. Elke regel zegt of iemand gegevens inzag, vastlegde, wijzigde of verwijderde. Een logregel over een cliënt blijft bewaard zolang het dossier bestaat; logregels zonder dossier 7 jaar.' },
@@ -40,7 +40,7 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
       { label: 'NEN 7512 (uitwisseling)', stand: 'uitvoering', note: 'Uitgangspunt bij het bouwen van de koppelingen; nog niet extern getoetst.' },
       { label: 'Tweestapsverificatie', stand: 'geregeld', note: 'Verplicht in de backoffice voor zorg- en beheerrollen.' },
       { label: 'Versleuteling BSN', stand: 'geregeld', note: 'Curanta versleutelt het BSN op veldniveau, met AES-256-GCM. Zoeken gaat via een aparte hash, zonder te ontsleutelen.' },
-      { label: 'Versleuteling hele database', stand: 'niet', note: 'Nog niet. Een voorwaarde vóór de eerste klant.' },
+      { label: 'Versleuteling hele database', stand: 'niet', note: 'Nog niet. Dit gebeurt voordat er echte cliëntgegevens in Curanta staan.' },
       { label: 'Externe pentest', stand: 'niet', note: 'Nog niet uitgevoerd.' },
       { label: 'ISO 27001', stand: 'gepland', note: 'Audit gepland in 2027.' },
     ],
@@ -73,7 +73,7 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
   {
     key: 'operations',
     title: 'Beschikbaarheid en continuïteit',
-    intro: 'Hosting in de EU en een openbare statuspagina. Er draait nog geen klant in productie, dus gemeten cijfers zijn er nog niet.',
+    intro: 'Hosting in de EU en een openbare statuspagina, met per onderwerp het doel en de stand.',
     items: [
       { label: 'Hosting in de EU', stand: 'geregeld', note: 'IONOS Cloud, Berlijn (Duitsland).', doc: '/privacy' },
       { label: 'Openbare statuspagina', stand: 'geregeld', note: 'Actuele beschikbaarheid per onderdeel; geen incidenthistorie.', doc: 'https://app.curanta.nl/status' },
@@ -241,8 +241,8 @@ const termijnen = [
       </ul>
       <p class="mt-5 text-sm text-ink-700">
         Ondersteuning: per e-mail, met een reactie binnen 1 werkdag; vanaf Compliance Pro ook
-        telefonisch van 09:00 tot 17:00. Founding partners krijgen 36 maanden een vaste prijs en
-        praten mee over de roadmap. Vragen over continuïteit:
+        telefonisch van 09:00 tot 17:00. Partners krijgen 36 maanden een vaste prijs en
+        praten mee over de roadmap (<a href="/cases#partner" class="text-curanta-700">het partnerprogramma</a>). Vragen over continuïteit:
         <a href="mailto:trust@curanta.nl" class="text-curanta-700">trust@curanta.nl</a>.
       </p>
     </div>

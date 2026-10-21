@@ -2,15 +2,18 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, HOOFDKNOP, DEMO_GESPREK } from '../config/demo';
+import { AANTAL_ONDERDELEN } from '../config/onderdelen';
 
-// Deze pagina stond eerder als eerlijke empty-state, maar beloofde twee dingen
-// die niet waar zijn: een referentie-call met "een organisatie die Curanta al
-// gebruikt", en de suggestie dat er wél klanten zijn die alleen nog niets willen
-// zeggen. Er zijn nog geen klanten. Dat expliciet zeggen is geloofwaardiger dan
-// de "toonaangevende zorgorganisaties"-vaagheid van de concurrentie — en sinds
-// er een openbare demo-omgeving staat, is er ook een echt alternatief om
-// tegenover het ontbreken van referenties te zetten.
-// Zie docs/marktonderzoek-conversie-curanta-2026-08-17.md.
+// Zelf nakijken (de url /cases blijft, want daar wijzen links en de brochure naar).
+//
+// Tot 21-10-2026 opende deze pagina met "Wij hebben nog geen referenties" en "Curanta is nieuw". Besluit Jan
+// 21-10-2026: de site laat een volwaardig product zien, geen beginnend bedrijf; dat het nieuw is, schreeuwen wij
+// niet van de daken. Wat blijft: geen verzonnen referenties, geen suggestie van klanten die er niet zijn
+// (feitenblad, rij Klanten). Wie het vraagt, krijgt het eerlijke antwoord: in de veelgestelde vragen en hieronder
+// bij "Klantverhalen".
+//
+// Het partnerprogramma heette hier "founding partner". Dezelfde voorwaarden (feitenblad: maximaal drie, nog twee
+// plekken, 36 maanden een vaste prijs, invloed op de roadmap), zonder het woord dat "start-up" zegt.
 
 const controleerbaar = [
   DEMO_ZELF_AANGEBODEN
@@ -19,15 +22,21 @@ const controleerbaar = [
         href: DEMO_ZELF.href,
         linkLabel: DEMO_ZELF.label,
         body:
-          'Geen presentatie, geen video, geen begeleide rondleiding waarin wij bepalen wat u ziet. Drie portalen en verzonnen cliënten. Kijk rond als planner en bekijk of onze aannames bij uw proces passen.',
+          'Drie portalen en verzonnen cliënten. Kijk rond als planner of als zorgmedewerker en bekijk of Curanta bij uw proces past.',
       }
     : {
         titel: 'De applicatie, op uw processen',
         href: DEMO_GESPREK.href,
         linkLabel: DEMO_GESPREK.label,
         body:
-          'Geen video en geen vast script. U stuurt drie werkstromen uit uw organisatie, wij laten ze zien in de drie portalen met verzonnen cliënten, en u bepaalt welke schermen u wilt zien.',
+          'Geen vast script. U stuurt drie werkstromen uit uw organisatie, wij laten ze zien in de drie portalen met verzonnen cliënten, en u bepaalt welke schermen u wilt zien.',
       },
+  {
+    titel: 'Alle onderdelen',
+    href: '/oplossing',
+    linkLabel: 'Bekijk de onderdelen',
+    body: `${AANTAL_ONDERDELEN} onderdelen, van het cliëntdossier en de planning tot declaratie, kwaliteit en HRM. Per onderdeel staat wat het doet en of het bij uw organisatie nog ingericht moet worden.`,
+  },
   {
     titel: 'Wat het kost',
     href: '/prijzen',
@@ -36,18 +45,11 @@ const controleerbaar = [
       'Onze tarieven staan online, per plan, met wat er wel en niet in zit. Zo kunt u ze naast een offerte leggen.',
   },
   {
-    titel: 'Wat nog niet klaar is',
+    titel: 'Beveiliging en privacy',
     href: '/trust',
     linkLabel: 'Naar het Trust Centre',
     body:
-      'Per onderwerp wat geregeld is, wat in uitvoering is en wat nog niet is begonnen, zoals de externe pentest en de certificering. Geen inlog nodig; u mag het doorsturen aan uw inkoper of FG.',
-  },
-  {
-    titel: 'Hoe wij bouwen',
-    href: '/adr',
-    linkLabel: 'Lees de besluiten',
-    body:
-      'Onze architectuurbesluiten staan openbaar, met de afweging erbij. U kunt zien waarom iets zo werkt, en dus ook beoordelen of u die afwegingen deelt.',
+      'Per onderwerp wat geregeld is en wat in uitvoering is, zoals de NEN 7510-audit. Geen inlog nodig; u mag het doorsturen aan uw inkoper of FG.',
   },
   {
     titel: 'Hoe u er weer uit komt',
@@ -57,22 +59,22 @@ const controleerbaar = [
       'Overstappen vanuit Nedap Ons, Ysis, SDB, mijnCaress en Pluriform Zorg (Adapcare) tegen een vaste prijs. Op dezelfde pagina staat de weg naar buiten. Uw gegevens en bestanden krijgt u mee in een volledige export in JSON, zonder exit-fee.',
   },
   {
-    titel: 'Wat wij onderbouwen',
+    titel: 'Naast andere leveranciers',
     href: '/vergelijking',
     linkLabel: 'Bekijk de vergelijking',
     body:
-      'Curanta naast Nedap Ons, mijnCaress en Pluriform Zorg, met bron en controledatum per onderwerp, ook waar zij verder zijn. Vindt u een fout? Laat het ons weten; wij reageren binnen 1 werkdag.',
+      'Curanta naast Nedap Ons, mijnCaress en Pluriform Zorg, met bron en controledatum per onderwerp. Vindt u een fout? Laat het ons weten; wij reageren binnen 1 werkdag.',
   },
 ];
 ---
 <Base
-  title="Referenties | Curanta"
-  description="Wij hebben nog geen klantreferenties. Dit kunt u wél zelf nakijken: de werkende demo, de prijzen, het Trust Centre en onze architectuurbesluiten."
+  title="Zelf nakijken | Curanta"
+  description="Kijk zelf na wat Curanta doet, wat het kost, hoe het beveiligd is en hoe u er weer uit komt, voordat u kiest."
 >
   <PageHero
-    eyebrow="Referenties"
-    title="Wij hebben nog geen referenties."
-    subtitle="Dat is een reëel bezwaar en wij gaan er niet omheen praten. Curanta is nieuw. De eerste implementatie loopt, bij een organisatie in de basis-ggz, maar er is nog geen zorgorganisatie die u kan vertellen hoe het is om drie jaar met ons te werken. Wat wij in plaats daarvan bieden, is geen verhaal, maar iets dat u zelf kunt nakijken."
+    eyebrow="Zelf nakijken"
+    title="Kijk het zelf na, voordat u kiest."
+    subtitle="Een ECD kiest u voor jaren. Bij Curanta ziet u vooraf wat u bij veel leveranciers pas in een aanbesteding of na het tekenen ziet: het systeem op uw eigen processen, de prijs, de stand van de beveiliging, de besluiten achter de techniek en de weg naar buiten."
   >
     <div slot="actions">
       <a href={HOOFDKNOP.href} class="btn-primary no-underline">{HOOFDKNOP.label}</a>
@@ -84,8 +86,8 @@ const controleerbaar = [
       <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Zes dingen die u kunt controleren</h2>
       <p class="mt-4 text-ink-700 leading-relaxed">
         Een logo op een website zegt dat iemand een contract heeft ondertekend. Het zegt niet of
-        het systeem werkt, wat het kost, of u er weer uit komt. Hieronder staat wat u wél kunt
-        vaststellen zonder ons op ons woord te hoeven geloven.
+        het systeem bij u past, wat het kost, of u er weer uit komt. Hieronder staat wat u zelf kunt
+        vaststellen, zonder ons op ons woord te hoeven geloven.
       </p>
     </div>
 
@@ -102,13 +104,15 @@ const controleerbaar = [
     </div>
   </section>
 
-  <section id="founding" class="border-y border-ink-100 bg-curanta-50/60 py-16">
+  {/* Het oude anker #founding blijft bestaan voor links van buiten (LinkedIn, mails, de presentatie). */}
+  <section id="partner" class="border-y border-ink-100 bg-curanta-50/60 py-16">
+    <span id="founding" aria-hidden="true"></span>
     <div class="container-prose">
       <div class="max-w-3xl">
-        <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Wat u ervoor terugkrijgt als u nu instapt</h2>
+        <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Het partnerprogramma</h2>
         <p class="mt-4 text-ink-700 leading-relaxed">
-          Vroeg instappen bij een nieuwe leverancier is een risico. Het hoort u dus iets op te
-          leveren. Dit is wat een founding partner bij ons krijgt (maximaal drie; er zijn nog twee plekken):
+          Met maximaal drie zorgorganisaties werken wij als partner extra nauw samen. Er zijn nog twee
+          plekken. Dit is wat een partner krijgt:
         </p>
       </div>
 
@@ -124,7 +128,7 @@ const controleerbaar = [
           <h3 class="font-display text-lg font-semibold text-ink-900">Tariefgarantie</h3>
           <p class="mt-3 text-sm text-ink-700 leading-relaxed">
             Het tarief waarop u instapt staat 36 maanden vast, ook wanneer onze prijzen voor
-            nieuwe klanten stijgen. Dit geldt voor de eerste drie founding partners.
+            nieuwe klanten stijgen.
           </p>
         </div>
       </div>
@@ -133,8 +137,8 @@ const controleerbaar = [
         <h3 class="font-display text-lg font-semibold text-ink-900">En wat wij van u vragen</h3>
         <p class="mt-3 text-ink-700 leading-relaxed">
           Meekijken en zeggen wat u ziet. Loop uw eigen processen na (een intake, een dienst, een
-          maandafsluiting) en vertel ons waar het schuurt. Wij zoeken geen lijst met ontbrekende
-          functies. Wij zoeken de plekken waar Curanta niet past bij hoe u werkt. Dat is de ruil.
+          maandafsluiting) en vertel ons waar het schuurt. Wij zoeken geen lijst met functies. Wij
+          zoeken de plekken waar Curanta nog beter kan aansluiten bij hoe u werkt.
         </p>
       </div>
     </div>
@@ -143,12 +147,11 @@ const controleerbaar = [
   <section class="container-prose py-16">
     <div class="grid gap-8 md:grid-cols-2">
       <div class="rounded-2xl border border-ink-100 bg-white p-8">
-        <h2 class="font-display text-xl font-semibold text-ink-900">Wanneer wij hier wél klantverhalen plaatsen</h2>
+        <h2 class="font-display text-xl font-semibold text-ink-900">Klantverhalen</h2>
         <p class="mt-3 text-ink-700 leading-relaxed">
-          Zodra een partner zelf vindt dat er iets te vertellen valt. Wij maken de tekst samen en
-          u keurt elke alinea goed. Wij publiceren pas als u dat prettig vindt. Wij betalen geen
-          referenten en geven geen korting voor een klantverhaal. Een verhaal moet uw eigen reden
-          hebben, anders is het advertentie.
+          De eerste implementatie loopt sinds oktober 2026, bij een organisatie in de basis-ggz. Een klantverhaal
+          plaatsen wij alleen als de organisatie dat zelf wil: wij maken de tekst samen, en u keurt elke alinea
+          goed. Wij betalen geen referenten en geven geen korting voor een klantverhaal.
         </p>
       </div>
 
