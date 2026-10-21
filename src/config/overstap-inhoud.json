@@ -1,5 +1,5 @@
 {
-  "_toelichting": "Eén bron voor /overstapscan, /overstappen/programma-van-eisen, /overstappen/vragen-aan-uw-leverancier, /overstappen/pakket-stopt en het Word-bestand (scripts/maak-pve-docx.py). Opgesteld 21-10-2026 uit het onderzoek 'Overstapdrempels zorgsoftware en keuzehulp' (Ponscura-repo, reports/). Leverancier-neutraal: geen eis die stilletjes alleen Curanta haalt. Feiten over Curanta komen uit het feitenblad.",
+  "_toelichting": "Eén bron voor /overstapscan, /overstappen/programma-van-eisen, /overstappen/vragen-aan-uw-leverancier, /overstappen/pakket-stopt en het Word-bestand (scripts/maak-pve-docx.py). Opgesteld 21-10-2026 uit docs/campagne/marktonderzoek-overstap-keuzehulp-2026-10-21.md (Ponscura-repo). Leverancier-neutraal: geen eis die stilletjes alleen Curanta haalt. Feiten over Curanta komen uit het feitenblad.",
   "peildatum": "21-10-2026",
   "bronnen": {
     "mi2026": { "naam": "M&I/Partners, ECD-inventarisatie 2026", "datum": "10-09-2026", "url": "https://mxi.nl/kennis/786/ecd-inventarisatie-2026-gehandicaptenzorg-en-ouderenzorg" },
