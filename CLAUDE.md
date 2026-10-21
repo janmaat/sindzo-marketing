@@ -19,9 +19,17 @@ site met `site-inhoudscontrole` (beide in `D:\Repos\Ponscura\.claude\skills\`).
   bouwde; nooit een teamgrootte of "implementatieteam". Geen Ponscura op de site;
   de rechtspersoon (Maat Holding B.V.) alleen in /privacy en /voorwaarden, waar de wet hem vraagt; footer, /over en /contact noemen Curanta met adres en KvK-nummer (besluit Jan 15-10-2026).
 - De twee demoknoppen staan in `src/config/demo.ts`: tekst overal gelijk, bestemming per branch.
-- Geen klantlogo's, citaten, klantaantallen of casussen. De eerste implementatie loopt sinds oktober 2026,
-  bij een organisatie in de basis-ggz; in productie werkt er nog geen zorgorganisatie mee. Zo mag het er
-  staan, zonder naam, tot de klant schriftelijk toestemt (besluit Jan 14-10-2026). Nog twee founding-plekken.
+- **Een volwaardig product, geen beginnend bedrijf** (besluit Jan 21-10-2026). Curanta staat naast Nedap Ons
+  en de andere grote pakketten. Zet dus niet uit uzelf "Curanta is nieuw", "nieuwe leverancier", "nog geen
+  klant in productie", "als eerste", "founding partner" of een early-access-banner op een pagina. Laat de
+  breedte zien (het aantal onderdelen uit `src/config/onderdelen.ts`) en wat een koper zelf kan nakijken.
+  De stand per onderdeel en per beveiligingsonderwerp blijft op /oplossing, /integraties en /trust.
+- Het blijft eerlijk. Geen klantlogo's, citaten, klantaantallen of casussen, en geen "in gebruik bij",
+  "bewezen", "marktleider" of iets anders dat klanten suggereert die er niet zijn. Op een directe vraag
+  (veelgestelde vragen, /cases onder "Klantverhalen") staat het antwoord: de eerste implementatie loopt
+  sinds oktober 2026, bij een organisatie in de basis-ggz, zonder naam tot de klant schriftelijk toestemt
+  (besluit Jan 14-10-2026). Het partnerprogramma (maximaal drie, nog twee plekken) heet "partnerprogramma"
+  en staat op /cases#partner.
 - Nederlands, u-vorm, voor bestuurders en managers van zorgorganisaties.
 - Werk op de branch die `site-inhoudscontrole` noemt; `develop` in de hoofdmap kan ongecommit werk van
   een andere sessie bevatten.
