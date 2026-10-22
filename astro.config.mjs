@@ -19,7 +19,10 @@ export default defineConfig({
       // krijgen lage prio. Productpagina's en kennisbank-artikelen tussen
       // 0.7-1.0.
       // /demo-omgeving alleen als demo-toegang aangeboden wordt (src/config/demo.ts); anders staat er noindex op.
+      // ⚠ Elke pagina met noindex hoort hier: een noindex-pagina in de sitemap meldt Search Console als fout
+      // ("Ingediende URL gemarkeerd als noindex"). /presentatie/aangevraagd stond er tot 22-10-2026 in.
       filter: (page) => !page.includes('/bedankt') && !page.includes('/login')
+        && !page.includes('/presentatie/aangevraagd')
         && (DEMO_ZELF_AANGEBODEN || !page.includes('/demo-omgeving')),
       serialize(item) {
         const url = new URL(item.url);
