@@ -1,5 +1,6 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
+import { CYBERBEVEILIGINGSWET } from '../../config/kennisbank';
 import beeld from '../../assets/schermen/bo-signaleringsplan.jpg';
 // Herzien 08-10-2026 met wat in de week van 4–7 oktober is gebouwd (signaleringsplan, akkoord op het
 // OPP in het portaal, verblijf met zzp, logeren, vpt, Wzd volgens de wet van 1-7-2025). Nagelopen in
@@ -43,6 +44,7 @@ import beeld from '../../assets/schermen/bo-signaleringsplan.jpg';
     'Een echte aanlevering van het Wzd-overzicht bij de IGJ; u levert het zelf aan via Mijn IGJ.',
     'Ggz-wonen, toeslagen, deeltijdverblijf en mutatiedagen bij het verblijf.',
   ]}
+  artikelen={[CYBERBEVEILIGINGSWET]}
   regulatory={['Wzd', 'Wlz', 'Wkkgz', 'Wtza', 'AVG', 'NEN 7510']}
   proofPoints={[
     { value: 'OPP', label: 'Met signaleringsplan en akkoord van de vertegenwoordiger' },

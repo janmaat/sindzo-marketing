@@ -2,7 +2,9 @@
 import Base from '../layouts/Base.astro';
 import StatusLabel from '../components/StatusLabel.astro';
 import StatusLegenda from '../components/StatusLegenda.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
+import { CYBERBEVEILIGINGSWET } from '../config/kennisbank';
 import type { Status } from '../config/status';
 
 // Trust Centre. Herzien 08-10-2026:
@@ -247,6 +249,8 @@ const termijnen = [
       </p>
     </div>
   </section>
+
+  <RelatedArticles articles={[CYBERBEVEILIGINGSWET]} />
 
   <section class="container-prose py-16">
     <div class="rounded-2xl bg-curanta-50 p-8 sm:p-12">
