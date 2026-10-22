@@ -19,10 +19,10 @@ import { BSN_LIJST_LIVE } from '../config/product';
 
 const CURANTA = {
   nen7510: { status: 'nee', tekst: 'Curanta is niet NEN 7510-gecertificeerd. De externe audit staat gepland voor Q4 2026.' }, // NEN 7510:2024
-  vecozoDirect: { status: 'nee', tekst: 'Curanta stelt de berichten op en toetst ze; u levert ze zelf aan via het VECOZO-portaal of bij het zorgkantoor. Rechtstreeks versturen is gebouwd maar nooit tegen VECOZO beproefd.' }, // VECOZO
+  vecozoDirect: { status: 'ja', tekst: 'Ja, vóór uw eerste declaratiemaand. Curanta stelt de berichten op en toetst ze aan het officiële schema. Rechtstreeks versturen via VECOZO maken wij per organisatie gereed en beproeven wij in de testomgeving van VECOZO, vóór uw eerste declaratiemaand.' }, // VECOZO; besluit Jan 22-10: positief, met de toezegging van 14-10
   import: { status: 'nee', tekst: 'Een kant-en-klare import is er niet. Het overzetten is een project tegen een vaste prijs, na een migratie-inschatting.' }, // Migratie
-  eoverdracht: { status: 'nee', tekst: 'Het eOverdracht-document stelt Curanta op uit het dossier en is te downloaden. Versturen via een netwerk is niet gebouwd.' }, // BgZ / eOverdracht
-  referentie: { status: 'nee', tekst: 'Nog niet. De eerste implementatie loopt sinds oktober 2026, bij een organisatie in de basis-ggz.' }, // Klanten (op een directe vraag)
+  eoverdracht: { status: 'deels', tekst: 'Curanta stelt het eOverdracht-document met alle 14 onderdelen op uit het dossier; u downloadt het en stuurt het mee. Versturen via het netwerk: in ontwikkeling.' }, // BgZ / eOverdracht; feitenblad "Curanta is af" (22-10): stand per onderdeel, geen bouwtaal
+  referentie: { status: 'deels', tekst: 'De eerste implementatie loopt sinds oktober 2026, bij een organisatie in de basis-ggz. In ons partnerprogramma zijn nog twee plekken.' }, // Klanten (op een directe vraag), Partnerprogramma; besluit Jan 22-10
   nen7513: { status: 'ja', tekst: 'Ja. Elke inzage komt in een logboek met hash-keten; de organisatie kan het inzien en exporteren.' }, // NEN 7513
   entra: { status: 'deels', tekst: 'Gebouwd voor de backoffice en het medewerkerportaal, maar nog niet getest met Microsoft zelf. Tot die test noemen wij het "in ontwikkeling".' }, // Entra ID
   zonderBereik: { status: 'ja', tekst: 'Het medewerkerportaal werkt ook zonder bereik: aankomst, vertrek, taken en ritten, en op een geopend bezoek ook uren, rapportage en overdracht.' }, // Offline
