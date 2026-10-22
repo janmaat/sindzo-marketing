@@ -112,6 +112,9 @@
   AddType application/manifest+json .webmanifest
   AddType font/woff2 .woff2
   AddType image/svg+xml .svg
+  # Video op /presentatie (22-10-2026). Zonder text/vtt weigert de browser de ondertitels, want nosniff staat aan.
+  AddType video/mp4 .mp4
+  AddType text/vtt .vtt
 </IfModule>
 
 # ----- 404-pagina -----
