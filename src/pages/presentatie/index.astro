@@ -3,9 +3,16 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import { DEMO_GESPREK } from '../../config/demo';
-import { Picture } from 'astro:assets';
-import presentatieVideo from '../../assets/schermen/presentatie-video.jpg';
 
+// Landingspagina van de campagne (22-10-2026). De eerste bezoekers uit een ChatGPT-advertentie vertrokken binnen 3 tot
+// 16 seconden: de pagina ging ervan uit dat zij Curanta al kenden, en het beeld van de presentatie leek een video maar
+// speelde niet af. Nu zegt het eerste scherm wat Curanta is (dezelfde feiten als de homepage), speelt één deel van de
+// presentatie meteen af, en vraagt het formulier alleen wat nodig is om de aanvraag te beoordelen.
+// De video is deel 3 van de basispresentatie voor de wijkverpleging (Ponscura: artifacts/presentatie/bibliotheek/
+// basis-vvt/video), opnieuw verpakt zonder de ondertitelstroom en met +faststart; de ondertitels staan ernaast als .vtt
+// (.htaccess serveert die als text/vtt; met nosniff weigert de browser ze anders). Geen deel 2 "Waarom Curanta": dat
+// opent met "waarom wij toch met Curanta komen", en dat past niet bij een volwaardig product (besluit Jan 21-10-2026).
+//
 // Een presentatie aanvragen (besluit Jan 15-10-2026, ADR 2026-10-11 "Wijziging 15-10-2026" in Ponscura).
 // De aanvraag gaat naar app.curanta.nl (POST /api/presentatie-aanvraag). Jan beoordeelt hem daar; keurt hij hem
 // goed, dan mailt app.curanta.nl de uitnodiging voor presentatie.curanta.nl. Wijst hij hem af, dan hoort de
@@ -15,32 +22,49 @@ const formAction = `${import.meta.env.PUBLIC_APP_URL ?? 'https://app.curanta.nl'
 const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-curanta-500 focus:ring-curanta-500';
 ---
 <Base
-  title="Presentatie aanvragen | Curanta"
-  description="Vraag een online presentatie over Curanta aan en bekijk hem wanneer het u uitkomt: korte video's, de dia's en hoe het werkt in de applicatie."
+  title="Online presentatie aanvragen | Curanta"
+  description="Curanta: dossier, planning, declaratie en kwaliteit in één systeem, €19 tot €39 per medewerker per maand. Bekijk een deel van de presentatie meteen."
 >
   <PageHero
-    eyebrow="Presentatie"
-    title="Bekijk Curanta wanneer het u uitkomt."
-    subtitle="Vraag een online presentatie aan. U bekijkt hem in uw browser: de presentatie in korte video's, de dia's, en hoe het werkt in de applicatie. Zonder afspraak, en zo vaak als u wilt."
+    eyebrow="Online presentatie"
+    title="Zorgsoftware die u eerst rustig kunt bekijken"
+    subtitle="Curanta is één systeem voor het cliëntdossier, de planning, de declaratie en de kwaliteit, in de ouderen- en thuiszorg, de gehandicaptenzorg en de ggz. U betaalt €19 tot €39 per actieve medewerker per maand."
   >
-    {/* Advies 20-10-2026: op een telefoon (390×844) stond er geen aanvraagknop in het eerste scherm; het formulier
-        kwam pas na de grote afbeelding. De knop springt naar het formulier, en zegt meteen wat er daarna gebeurt. */}
+    {/* Advies 20-10-2026: op een telefoon (390×844) stond er geen aanvraagknop in het eerste scherm. De eerste knop
+        springt naar het formulier, de tweede naar de video, voor wie eerst wil zien wat hij aanvraagt. */}
     <div slot="actions">
-      <a href="#presentatie-aanvraag" class="btn-primary btn-lg no-underline">Online presentatie aanvragen</a>
+      <div class="flex flex-wrap items-center gap-3">
+        <a href="#presentatie-aanvraag" class="btn-primary btn-lg no-underline">Online presentatie aanvragen</a>
+        <a href="#video" class="btn-secondary btn-lg no-underline">Eerst 3 minuten bekijken</a>
+      </div>
       <p class="mt-3 text-sm text-ink-600">Wij beoordelen uw aanvraag meestal binnen 1 werkdag. Daarna krijgt u uw persoonlijke link per mail.</p>
     </div>
   </PageHero>
 
-  <section class="container-prose pt-12">
-    <figure class="mx-auto max-w-4xl">
-      <div class="overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm">
-        <Picture src={presentatieVideo} formats={['avif', 'webp']} width={1266} sizes="(min-width: 960px) 900px, 100vw"
-                 alt="presentatie.curanta.nl: het deel 'Het werk in de wijk' van de presentatie voor de wijkverpleging, met een dia over het planbord, ondertiteling en rechts de vijf delen van de presentatie." />
+  <section id="video" class="container-prose scroll-mt-24 pt-12" aria-labelledby="video-kop">
+    <div class="mx-auto max-w-4xl">
+      <h2 id="video-kop" class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Het werk in de wijk</h2>
+      <p class="mt-2 max-w-2xl text-pretty text-ink-700">
+        Deel 3 van de presentatie voor de wijkverpleging, 2:55 minuten. De wijkverpleegkundige stelt het zorgplan op,
+        de planner maakt er een rooster van, en de zorgmedewerker werkt onderweg op de telefoon, ook zonder bereik.
+      </p>
+      {/* preload="none": de 7,9 MB laden pas als de bezoeker op afspelen drukt; het stilstaande beeld is de dia over het planbord. */}
+      <video class="mt-5 aspect-video w-full rounded-xl border border-ink-200 bg-ink-900 shadow-sm"
+             controls preload="none" playsinline width="1920" height="1080"
+             poster="/video/het-werk-in-de-wijk.jpg">
+        <source src="/video/het-werk-in-de-wijk.mp4" type="video/mp4" />
+        <track kind="captions" src="/video/het-werk-in-de-wijk.vtt" srclang="nl" label="Nederlands" default />
+        <a href="/video/het-werk-in-de-wijk.mp4">Download de video (mp4, 7,9 MB)</a>
+      </video>
+      <div class="mt-6 flex flex-col gap-4 rounded-2xl border border-ink-100 bg-ink-100/50 p-6 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-sm text-ink-700">
+          <strong class="font-semibold text-ink-900">In de hele presentatie</strong> ziet u vijf korte video's over uw eigen
+          sector, de dia's om na te lezen en schermvideo's uit Curanta zelf. Er is een presentatie voor de wijkverpleging,
+          het verpleeghuis, de gehandicaptenzorg, de ggz, de kraamzorg en de jeugdzorg.
+        </p>
+        <a href="#presentatie-aanvraag" class="btn-primary shrink-0 no-underline">Online presentatie aanvragen</a>
       </div>
-      <figcaption class="mt-3 text-center text-sm text-ink-500">
-        Zo ziet uw presentatie eruit: korte video's met ondertiteling, de dia's, en schermvideo's uit Curanta zelf.
-      </figcaption>
-    </figure>
+    </div>
   </section>
 
   <section class="container-prose py-16">
@@ -58,8 +82,12 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
             een uitgeschakeld veld wordt niet verstuurd. */}
         <input type="hidden" name="gclid" disabled />
 
-        <div class="grid gap-5 sm:grid-cols-2">
-          <label class="block sm:col-span-2">
+        <h2 class="font-display text-xl font-semibold text-ink-900">Vraag de hele presentatie aan</h2>
+
+        {/* Verplicht staat voorop (22-10-2026): naam, e-mail, organisatie, sector. Telefoon, functie en toelichting staan
+            in de uitklapper hieronder; de server behandelt ze als optioneel, zoals voorheen. */}
+        <div class="mt-6 grid gap-5 sm:grid-cols-2">
+          <label class="block">
             <span class="text-sm font-semibold text-ink-900">Naam</span>
             <input required type="text" name="naam" autocomplete="name" maxlength="120" class={veld} />
           </label>
@@ -69,26 +97,8 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
             <span class="mt-1 block text-xs text-ink-500">Hierheen sturen wij uw persoonlijke link.</span>
           </label>
           <label class="block">
-            <span class="text-sm font-semibold text-ink-900">Telefoon (optioneel)</span>
-            <input type="tel" name="telefoon" autocomplete="tel" maxlength="40" class={veld} />
-          </label>
-          <label class="block sm:col-span-2">
             <span class="text-sm font-semibold text-ink-900">Organisatie</span>
             <input required type="text" name="organisatie" autocomplete="organization" maxlength="160" class={veld} />
-          </label>
-          <label class="block">
-            <span class="text-sm font-semibold text-ink-900">Functie (optioneel)</span>
-            <select name="functie" class={veld}>
-              <option value="">Kies een functie</option>
-              <option>Bestuurder / RvB</option>
-              <option>Manager I&amp;A / CIO</option>
-              <option>CMIO / CNIO / zorginhoudelijk leider</option>
-              <option>Manager zorg</option>
-              <option>Functioneel beheer</option>
-              <option>FG / CISO / privacy</option>
-              <option>Finance / control</option>
-              <option>Anders</option>
-            </select>
           </label>
           <label class="block">
             <span class="text-sm font-semibold text-ink-900">Sector</span>
@@ -119,12 +129,35 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
           <span class="mt-1 block text-xs text-ink-500">Voor de wijkverpleging en het verpleeghuis is er elk een eigen presentatie. Levert u allebei, dan krijgt u ze allebei.</span>
         </label>
 
-        <label class="mt-5 block">
-          <span class="text-sm font-semibold text-ink-900">Waar wilt u vooral meer over weten? (optioneel)</span>
-          <textarea name="toelichting" rows="3" maxlength="1000"
-                    placeholder="Bijvoorbeeld: rapporteren bij de cliënt, de planning, of overstappen van ons huidige ECD"
-                    class={veld}></textarea>
-        </label>
+        <details id="meer-vertellen" class="group mt-5 rounded-md border border-ink-100 px-4 py-3">
+          <summary class="cursor-pointer text-sm font-semibold text-curanta-700">Meer vertellen (optioneel): telefoon, functie, uw vraag</summary>
+          <div class="mt-4 grid gap-5 sm:grid-cols-2">
+            <label class="block">
+              <span class="text-sm font-semibold text-ink-900">Telefoon</span>
+              <input type="tel" name="telefoon" autocomplete="tel" maxlength="40" class={veld} />
+            </label>
+            <label class="block">
+              <span class="text-sm font-semibold text-ink-900">Functie</span>
+              <select name="functie" class={veld}>
+                <option value="">Kies een functie</option>
+                <option>Bestuurder / RvB</option>
+                <option>Manager I&amp;A / CIO</option>
+                <option>CMIO / CNIO / zorginhoudelijk leider</option>
+                <option>Manager zorg</option>
+                <option>Functioneel beheer</option>
+                <option>FG / CISO / privacy</option>
+                <option>Finance / control</option>
+                <option>Anders</option>
+              </select>
+            </label>
+            <label class="block sm:col-span-2">
+              <span class="text-sm font-semibold text-ink-900">Waar wilt u vooral meer over weten?</span>
+              <textarea name="toelichting" rows="3" maxlength="1000"
+                        placeholder="Bijvoorbeeld: rapporteren bij de cliënt, de planning, of overstappen van ons huidige ECD"
+                        class={veld}></textarea>
+            </label>
+          </div>
+        </details>
 
         <label class="mt-5 flex items-start gap-3 text-sm text-ink-700">
           <input required type="checkbox" name="toestemming" value="yes"
@@ -227,6 +260,10 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
     });
     var uitScan = here.get('toelichting');
     if (uitScan && !form.elements['toelichting'].value) form.elements['toelichting'].value = uitScan.slice(0, 1000);
+    // De optionele velden staan ingeklapt. Open ze als er al iets in staat (overstapscan, of 'vorige' in de browser).
+    var meer = document.getElementById('meer-vertellen');
+    function openMeer() { if (meer) meer.open = true; }
+    if (['telefoon', 'functie', 'toelichting'].some(function (k) { return form.elements[k].value; })) openMeer();
 
     form.elements['sector'].addEventListener('change', toonZorgvorm);
     toonZorgvorm();
@@ -251,6 +288,8 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
     }
 
     function velden(lijst) {
+      // Een fout in een ingeklapt veld moet de bezoeker kunnen zien.
+      if (lijst.some(function (v) { return v === 'telefoon' || v === 'functie' || v === 'toelichting'; })) openMeer();
       var namen = lijst.map(function (v) { return labels[v] || v; });
       var tekst = namen.length > 1 ? namen.slice(0, -1).join(', ') + ' en ' + namen[namen.length - 1] : namen[0];
       return 'Controleer ' + tekst + '.';
