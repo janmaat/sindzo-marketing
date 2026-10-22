@@ -1,5 +1,6 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
+import { BSN_LIJST_LIVE } from '../config/product';
 
 const sections = [
   { id: 'definities', title: 'Definities' },
@@ -135,8 +136,9 @@ const sections = [
     <strong>Wat overdraagbaar is.</strong> Overdraagbaar zijn alle gegevens die Klant en zijn gebruikers in de Dienst
     hebben vastgelegd of die bij het gebruik zijn ontstaan, met de bestanden waarnaar die gegevens verwijzen, zoals
     beschreven bij de export in de applicatie. Bekende beperkingen: de export bevat het BSN alleen als laatste vier
-    cijfers en een hash; het volledige BSN levert Curanta in de periode na de opzegging apart, in een versleuteld
-    bestand voor wie bij Klant de export beheert. Niet overdraagbaar zijn aanmeldgeheimen (zoals wachtwoorden en
+    cijfers en een hash{BSN_LIJST_LIVE
+      ? '; het volledige BSN levert Curanta in de periode na de opzegging apart, in een versleuteld bestand voor wie bij Klant de export beheert'
+      : ''}. Niet overdraagbaar zijn aanmeldgeheimen (zoals wachtwoorden en
     codes), gegevens die in de applicatie alleen de medewerker zelf ziet (het collega-netwerk en de
     lotgenotenfunctie; die haalt de medewerker zelf op), registers die voor alle klanten gelijk zijn, en de software en
     de inrichting van Curanta zelf.

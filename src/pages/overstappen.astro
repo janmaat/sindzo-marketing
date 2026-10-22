@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 import { DEMO_ZELF_AANGEBODEN, DEMO_KNOP, HOOFDKNOP } from '../config/demo';
+import { BSN_LIJST_LIVE } from '../config/product';
 
 // Onderzocht: de reden dat zorgorganisaties niet van ECD wisselen is niet
 // tevredenheid maar dataportabiliteit — ze kunnen hun cliëntgegevens niet
@@ -422,7 +423,9 @@ const voorU = [
           <li>Een volledige export van uw gegevens en bestanden in JSON, zonder exit-fee.</li>
           <li>Bij beëindiging krijgt u de export binnen 5 werkdagen. U heeft 30 dagen om hem op te halen. Na afloop van die 30 dagen wissen wij al uw gegevens, en u krijgt een vernietigingsverklaring.</li>
           {/* Voorwaarden art. 9; product: BSN-lijst bij vertrek (ADR 2026-10-21 in de Ponscura-repo). */}
-          <li>Het volledige BSN staat niet in de gewone export. Na uw opzegging levert Curanta het apart, in een versleuteld bestand met een los wachtwoord, zodat uw volgende pakket kan declareren.</li>
+          {BSN_LIJST_LIVE
+            ? <li>Het volledige BSN staat niet in de gewone export. Na uw opzegging levert Curanta het apart, in een versleuteld bestand met een los wachtwoord, zodat uw volgende pakket kan declareren.</li>
+            : <li>Het BSN staat in de export als laatste vier cijfers; vraag ons vóór uw vertrek hoe het volledige BSN naar uw volgende pakket gaat.</li>}
           <li>Overstappen kan ook tijdens een contractjaar, met 2 maanden opzegtermijn, zoals de Dataverordening dat regelt. Wij rekenen daar geen vergoeding voor.</li>
           <li>Naar een lager plan wisselen kan per contractjaar, ook zonder exit-fee.</li>
         </ul>

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import inhoud from '../config/overstap-inhoud.json';
+import { BSN_LIJST_LIVE } from '../config/product';
 
 // De overstapscan (21-10-2026). Waarom zo, en niet als keuzehulp die een pakket aanraadt: in het onderzoek
 // docs/campagne/marktonderzoek-overstap-keuzehulp-2026-10-21.md (Ponscura-repo) kostte een adviseur van een merk die ook
@@ -27,7 +28,9 @@ const CURANTA = {
   zonderBereik: { status: 'ja', tekst: 'Het medewerkerportaal werkt ook zonder bereik: aankomst, vertrek, taken en ritten, en op een geopend bezoek ook uren, rapportage en overdracht.' }, // Offline
   medimo: { status: 'ja', tekst: 'Gebouwd; de aansluiting richten wij per organisatie in.' }, // Koppelingen gebouwd
   talen: { status: 'ja', tekst: 'Het cliëntportaal is er in 5 talen: Nederlands, Engels, Turks, Arabisch en Duits.' }, // Talen cliëntportaal
-  exitBsn: { status: 'ja', tekst: 'Bij vertrek krijgt u een volledige export in JSON met de bestanden, zonder exit-fee. Het volledige BSN levert Curanta in die periode apart, in een versleuteld bestand.' }, // Export, Exit
+  exitBsn: BSN_LIJST_LIVE
+    ? { status: 'ja', tekst: 'Bij vertrek krijgt u een volledige export in JSON met de bestanden, zonder exit-fee. Het volledige BSN levert Curanta in die periode apart, in een versleuteld bestand.' }
+    : { status: 'deels', tekst: 'Bij vertrek krijgt u een volledige export in JSON met de bestanden, zonder exit-fee. Het BSN staat daarin alleen als laatste vier cijfers.' }, // Export, Exit
 };
 
 const EISEN = [
