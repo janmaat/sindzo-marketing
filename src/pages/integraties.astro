@@ -61,6 +61,12 @@ const integrations: Integration[] = [
   // (IstandaardAanleverwijze.cs): iWmo/iJw in het VECOZO-portaal, iWlz bij het zorgkantoor. Rechtstreeks
   // versturen is nooit tegen VECOZO beproefd. Daarom "inrichten" (besluit Jan 15-10-2026). De toezegging
   // "vóór uw eerste declaratiemaand" van 14-10 is vervallen: wat er nu staat, is gebouwd.
+  // 22-10-2026 (besluit Jan, app 7303bf79e): rechtstreeks aanleveren via de Berichtenservice van VECOZO is gebouwd voor
+  // iWmo, iJw, iWlz, Wlz-AW319, Zvw-AW319 en GGZ-GDS801, per organisatie en per stroom aan te zetten. Ingericht, nog
+  // niet beproefd: per stroom pas naar de productieomgeving van VECOZO na een proef in de testomgeving
+  // (ADR 2026-10-22-vecozo-transport, deploy/VECOZO-TESTEN.md in de Ponscura-repo). Nooit "live" of "beproefd".
+  { name: 'VECOZO (rechtstreeks aanleveren)', category: 'Financieel', status: 'inrichten',
+    body: 'Rechtstreeks aanleveren via VECOZO is ingericht voor Wmo, Jeugdwet, Wlz, wijkverpleging en GGZ: Curanta biedt het bericht aan, volgt de stand en haalt de retourberichten op, met één kenmerk per aanbieding zodat niets dubbel wordt gedeclareerd. Wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot die tijd, en wanneer u dat wilt, levert u met de hand aan in het VECOZO-portaal.' },
   { name: 'Gemeenten (iWmo en iJw)', category: 'Financieel', status: 'inrichten',
     body: 'Curanta stelt de berichten op volgens iStandaard 3.2: start en stop van de zorg, verzoeken om toewijzing of wijziging en de maanddeclaratie (Wmo323, Jw323) uit goedgekeurde productie. Elk bericht wordt getoetst aan het officiële schema. U downloadt het en levert het aan in het VECOZO-portaal. Antwoorden van de gemeente leest u in, als bestand of geplakt. Rechtstreeks versturen vanuit Curanta volgt.' },
   { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'inrichten',
