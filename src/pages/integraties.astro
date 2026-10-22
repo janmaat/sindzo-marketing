@@ -25,8 +25,9 @@ interface Integration {
 //   ze met de hand aan. Rechtstreeks versturen via VECOZO is niet beproefd en staat standaard uit.
 // - iWlz: hoe het zorgkantoor ontvangt is een open vraag aan VECOZO; de route stemmen wij per
 //   zorgkantoor af bij de start.
-// - eOverdracht blijft "ontwikkeling": het document (STU3, eOverdracht 4.0) is gebouwd en te
-//   downloaden, transport en kwalificatie niet.
+// - eOverdracht sinds 22-10-2026 "inrichten": het transport (Nictiz-workflow, Twiin-notificatie, Nuts v6) staat op
+//   productie (aa4aa4436), getest tussen twee Nuts-nodes; aansluiting op een netwerk, ketentest en Nictiz-kwalificatie
+//   per klant (ADR 2026-10-22-eoverdracht-transport in de Ponscura-repo).
 // - Entra ID blijft "ontwikkeling" tot Jans eindtest met een echte tenant (deploy/SSO-ENTRA-TESTEN.md).
 // - SIEM "inrichten" sinds 19-10-2026: eindtest geslaagd tegen een echte Splunk, Azure Monitor en syslog-server
 //   (deploy/SIEM-TESTEN.md, ADR 2026-10-17-siem-doorsturen). De webhook is alleen tegen een eigen ontvanger
@@ -37,8 +38,8 @@ const integrations: Integration[] = [
   // Standaarden
   { name: 'FHIR R4 en de BgZ', category: 'Standaarden', status: 'inrichten', doc: '/api',
     body: 'Een publieke FHIR R4-API, alleen om te lezen. Hij levert de Basisgegevensset Zorg (BgZ) van een cliënt als document, gevalideerd tegen de profielen van Nictiz. Beschikbaar zodra wij het systeem dat de gegevens ophaalt, hebben geregistreerd. Geen testomgeving en geen algemene lees- of schrijftoegang.' },
-  { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'ontwikkeling',
-    body: 'Curanta maakt het overdrachtsdocument volgens eOverdracht 4.0, met alle 14 onderdelen van de Minimale eOverdracht, voor zover ze in het dossier staan. U downloadt het en stuurt het zelf mee, bijvoorbeeld via ZorgMail. Curanta verstuurt het niet automatisch en is niet door Nictiz gekwalificeerd.' },
+  { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'inrichten',
+    body: 'Curanta maakt het overdrachtsdocument volgens eOverdracht 4.0, met alle 14 onderdelen van de Minimale eOverdracht, voor zover ze in het dossier staan, en biedt het aan via het eOverdracht-netwerk: de ontvangende organisatie haalt het op en meldt terug of zij de overdracht accepteert. Een binnengekomen overdracht beoordeelt een zorgverlener voordat er iets in het dossier komt. De aansluiting op het netwerk regelen wij bij de implementatie, met het UZI-servercertificaat van uw organisatie; de ketentest met uw ketenpartner hoort daarbij. Getest tussen twee omgevingen, niet door Nictiz gekwalificeerd. Downloaden en zelf meesturen kan ook.' },
   { name: 'MedMij', category: 'Standaarden', status: 'ontwikkeling',
     body: 'Uitwisselen met een persoonlijke gezondheidsomgeving vraagt registratie bij Stichting MedMij, een PKIoverheid-certificaat en een conformiteitstest. Die zijn er nog niet.' },
   { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'ontwikkeling',
