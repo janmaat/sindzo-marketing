@@ -2,7 +2,9 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import { DEMO_ZELF_AANGEBODEN, HOOFDKNOP } from '../config/demo';
+import { CYBERBEVEILIGINGSWET } from '../config/kennisbank';
 
 // Inkoopdossier (slug /procurement blijft). Bewust zonder formulier vóór de documenten: in de
 // Nederlandse zorg verlengt elke drempel de cyclus met dagen, omdat inkoop, FG en architectuur
@@ -256,6 +258,8 @@ const categories = Array.from(new Set(resources.map(r => r.category)));
       </div>
     </div>
   </section>
+
+  <RelatedArticles articles={[CYBERBEVEILIGINGSWET]} />
 
   <Cta
     title={DEMO_ZELF_AANGEBODEN ? 'Na het lezen zelf kijken?' : 'Na het lezen in het systeem kijken?'}

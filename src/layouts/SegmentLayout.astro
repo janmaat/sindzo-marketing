@@ -4,8 +4,10 @@ import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 import Screenshot from '../components/Screenshot.astro';
 import Veelgesteld from '../components/Veelgesteld.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import { DEMO_ZELF_AANGEBODEN, HOOFDKNOP } from '../config/demo';
 import { algemeneVragen, type Vraag } from '../config/vragen';
+import type { KennisbankArtikel } from '../config/kennisbank';
 
 interface Trigger { title: string; body: string; }
 interface Module { name: string; note: string; }
@@ -36,11 +38,14 @@ interface Props {
   alleenSamenwerking?: boolean;
   /** Vragen van deze sector; ze staan vóór de algemene vragen (src/config/vragen.ts). */
   vragen?: Vraag[];
+  /** Kennisbankartikelen over onderwerpen die op deze pagina aan bod komen (src/config/kennisbank.ts). */
+  artikelen?: KennisbankArtikel[];
 }
 
 const {
   title, description, eyebrow, hero, subtitle,
   triggers, modules, regulatory, proofPoints, caseQuote, image, alleenSamenwerking = false, nogNiet = [], beeld, prijsNoot, vragen = [],
+  artikelen = [],
 } = Astro.props;
 ---
 <Base title={title} description={description} image={image}>
@@ -173,6 +178,8 @@ const {
       ))}
     </ul>
   </section>
+
+  {artikelen.length > 0 && <RelatedArticles articles={artikelen} />}
 
   {alleenSamenwerking ? (
     <Cta

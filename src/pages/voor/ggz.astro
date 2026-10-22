@@ -1,5 +1,6 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
+import { CYBERBEVEILIGINGSWET } from '../../config/kennisbank';
 // Herzien 08-10-2026 met wat in de week van 2–7 oktober is gebouwd (GDS801/GDS802, afscherming per
 // cliënt, ROM-uitdraai, nota zonder contract, omzetplafonds, Wvggz).
 //
@@ -54,6 +55,7 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
     'Spraakgestuurd rapporteren of ambient listening.',
   ]}
   prijsNoot="Voor de vrijgevestigde praktijk is er het plan Praktijk: €29 per medewerker per maand, met de behandelagenda en de GGZ-declaratie."
+  artikelen={[CYBERBEVEILIGINGSWET]}
   regulatory={['Wvggz', 'Wkkgz', 'Zorgprestatiemodel', 'AVG', 'NEN 7510']}
   proofPoints={[
     { value: 'GDS801', label: 'Volgens de standaard van Vektis, getoetst aan het schema' },

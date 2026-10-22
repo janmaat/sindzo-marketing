@@ -1,5 +1,6 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
+import { DOORBRAAKMIDDELEN, MEERTALIG_PORTAAL, PEER_SUPPORT } from '../../config/kennisbank';
 import beeld from '../../assets/schermen/mw-bezoek.jpg';
 ---
 <SegmentLayout
@@ -47,6 +48,7 @@ import beeld from '../../assets/schermen/mw-bezoek.jpg';
     'eOverdracht automatisch verzenden naar ziekenhuis of vervolgzorg, en een kwalificatie door Nictiz.',
     'Inspreken onderweg in het medewerkerportaal; in de backoffice kan het wel, op het apparaat zelf.',
   ]}
+  artikelen={[DOORBRAAKMIDDELEN, MEERTALIG_PORTAAL, PEER_SUPPORT]}
   regulatory={['Wkkgz', 'Wtza', 'AVG', 'NEN 7510', 'Wegiz', 'Wzd (extramurale toepassing)']}
   proofPoints={[
     { value: 'EU', label: 'Hosting (IONOS, Berlijn) · ondersteuning in het Nederlands' },
