@@ -17,7 +17,7 @@ import beeld from '../../assets/schermen/mw-bezoek.jpg';
     { title: 'Wijk en verpleeghuis apart', body: 'Verhuist een cliënt van de wijk naar het verpleeghuis, dan blijft het dossier hetzelfde. Eén cliënt, één rapportage, waar u de zorg ook levert. In het verpleeghuis legt u afdeling, kamer en bed vast, en het team van de afdeling kan vanzelf bij de dossiers van zijn bewoners.' },
     { title: 'Tijd kwijt aan het dossier', body: 'Zorgprofessionals besteden 34% van hun werktijd aan administratie, terwijl zij zelf 23% acceptabel vinden (Berenschot voor VWS, meting 2025). Bij elk bezoek staan de taken uit het zorgplan klaar, en metingen staan al in de rapportage. Wilt u dat, dan doet Curanta een voorstel voor de evaluatie, en de zorgverlener leest het na.' },
     { title: 'Geld voor minder administratie', body: 'Van 1 tot en met 31 januari 2027 kunt u voor uw Zvw-zorg de doorbraakmiddelen aanvragen, voor spraakgestuurd rapporteren en voor capaciteitsplanning. Beide vragen een nulmeting. Curanta laat per team zien hoe lang rapporteren duurt, en welk deel van de geroosterde uren naar cliënten gaat: de maat die het modelplan voor capaciteitsplanning in de vvt gebruikt is het aandeel cliëntgebonden tijd. Wat de aanvraag verder van uw software vraagt, staat in de kennisbank.' },
-    { title: 'eOverdracht en de Wegiz', body: 'Het doel: een overdracht naar het ziekenhuis, de huisarts of de vervolgzorg via de BgZ, zonder printer of fax. Curanta maakt het overdrachtsdocument volgens eOverdracht 4.0, met alle 14 onderdelen van de Minimale eOverdracht voor zover ze in het dossier staan. U downloadt het en stuurt het zelf mee, bijvoorbeeld via ZorgMail. Automatisch verzenden bouwen wij nog. (De Wegiz is de Wet elektronische gegevensuitwisseling in de zorg.)' },
+    { title: 'eOverdracht en de Wegiz', body: 'Het doel: een overdracht naar het ziekenhuis, de huisarts of de vervolgzorg via de BgZ, zonder printer of fax. Curanta maakt het overdrachtsdocument volgens eOverdracht 4.0, met alle 14 onderdelen van de Minimale eOverdracht voor zover ze in het dossier staan. Curanta biedt het aan via het eOverdracht-netwerk; de ontvangende organisatie haalt het op en meldt terug of zij de overdracht accepteert. De aansluiting regelen wij bij de implementatie, met het UZI-servercertificaat van uw organisatie. Downloaden en zelf meesturen, bijvoorbeeld via ZorgMail, kan ook. (De Wegiz is de Wet elektronische gegevensuitwisseling in de zorg.)' },
     { title: 'Cliënten die Nederlands niet als eerste taal hebben', body: 'Veel oudere cliënten en hun familie lezen formele teksten beter in hun eigen taal. De menu’s en vaste teksten van het cliëntportaal zijn er in vijf talen: Nederlands, Engels, Turks, Arabisch en Duits. Hoe andere leveranciers dat doen, staat met bronnen op de vergelijkingspagina.' },
   ]}
   modules={[
@@ -39,12 +39,12 @@ import beeld from '../../assets/schermen/mw-bezoek.jpg';
     { name: 'Collega-netwerk (welzijn)', note: 'Buddy of intervisiepartner, strikt gescheiden van HR' },
   ]}
   vragen={[
-    { vraag: 'Kunnen wij de Zvw-declaratie via VECOZO doen?', antwoord: 'Curanta maakt de Zvw-declaratie klaar; u levert hem zelf aan in het VECOZO-portaal. Rechtstreeks versturen via VECOZO bouwen wij nog.' },
+    { vraag: 'Kunnen wij de Zvw-declaratie via VECOZO doen?', antwoord: 'Ja. Curanta maakt de Zvw-declaratie (AW319). Rechtstreeks aanleveren via VECOZO is ingericht, met het ophalen van het retourbericht; wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot dan levert u hem aan in het VECOZO-portaal.' },
     { vraag: 'Helpt Curanta bij een aanvraag voor de doorbraakmiddelen?', antwoord: 'Van 1 tot en met 31 januari 2027 kunt u voor uw Zvw-zorg de doorbraakmiddelen aanvragen. Curanta laat per team zien hoe lang rapporteren duurt, en welk deel van de geroosterde uren naar cliënten gaat. Inspreken onderweg in het medewerkerportaal is er nog niet. Wat de aanvraag van uw software vraagt, staat in <a href="/kennisbank/doorbraakmiddelen-modelplan-software" class="text-curanta-700 hover:underline">de kennisbank</a>.' },
   ]}
   nogNiet={[
-    'Declaraties rechtstreeks versturen via VECOZO. Nu levert u het bestand zelf aan in het VECOZO-portaal.',
-    'eOverdracht automatisch verzenden naar ziekenhuis of vervolgzorg, en een kwalificatie door Nictiz.',
+    'De proef van het rechtstreeks aanleveren in de testomgeving van VECOZO: die doen wij per organisatie, vóór uw eerste declaratiemaand.',
+    'De kwalificatie van eOverdracht door Nictiz en de ketentest met uw ketenpartner: die volgen bij de aansluiting.',
     'Inspreken onderweg in het medewerkerportaal; in de backoffice kan het wel, op het apparaat zelf.',
   ]}
   regulatory={['Wkkgz', 'Wtza', 'AVG', 'NEN 7510', 'Wegiz', 'Wzd (extramurale toepassing)']}
