@@ -14,7 +14,7 @@ interface Props {
   /** 'article' voor kennisbankartikelen; de rest is 'website'. */
   ogType?: 'website' | 'article';
   /**
-   * Alleen op de 404-pagina: 'niet-gevonden'. De bezoekmeting (demo.curanta.nl/bezoekmeting.js) telt de
+   * Alleen op de 404-pagina: 'niet-gevonden'. De bezoekmeting (app.curanta.nl/bezoekmeting.js) telt de
    * pagina dan als niet gevonden en niet als gewone weergave; zonder deze tag valt ze terug op "404" in
    * de titel.
    */
@@ -129,15 +129,15 @@ const orgLd = {
     </script>
     {/*
       Eigen bezoekersmeting — de enige meting op curanta.nl (geen meetdienst van derden; besluit
-      Jan 25-09-2026, zie het feitenblad). Cookieloos; de cijfers staan in de verkoopdatabase van
-      de demo-backoffice (demo.curanta.nl, /admin/bezoekers). Daar draait de proefomgeving die
-      /api/bezoek aanneemt; op app.curanta.nl (productie sinds 28-09-2026) bestaat dat endpoint niet.
-      Script en endpoint leven in Curanta.Host, dus wijzigingen aan de meting gaan mee met een uitrol
-      daarvan. Alleen in productie: het endpoint neemt ook localhost aan, anders telt `npm run dev`
+      Jan 25-09-2026, zie het feitenblad). Cookieloos; de cijfers staan in de verkoopdatabank op de
+      Linux-server, te zien op app.curanta.nl/admin/bezoekers. Sinds 22-10-2026 neemt de productie-backoffice
+      (app.curanta.nl) /api/bezoek aan; daarvoor deed alleen de demo (demo.curanta.nl) dat (ADR
+      2026-10-17-verkoopbeheer-op-productie, wijziging 22-10). Script en endpoint leven in Curanta.Host, dus
+      wijzigingen aan de meting gaan mee met een uitrol daarvan. Alleen in productie: het endpoint neemt ook localhost aan, anders telt `npm run dev`
       mee in de echte cijfers.
     */}
     {import.meta.env.PROD && (
-      <script src="https://demo.curanta.nl/bezoekmeting.js" defer></script>
+      <script src="https://app.curanta.nl/bezoekmeting.js" defer></script>
     )}
   </head>
   <body class="min-h-screen flex flex-col">
