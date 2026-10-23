@@ -88,6 +88,10 @@ const integrations: Integration[] = [
     body: 'GGZ-declaraties volgens de standaard van Vektis. Curanta maakt het bericht en toetst het aan het officiële schema. U levert het aan in het VECOZO-portaal, met het VECOZO-account van uw organisatie, of rechtstreeks via VECOZO (zie VECOZO, rechtstreeks aanleveren). Het retourbericht (GDS802) leest u in.' },
   { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'inrichten',
     body: 'Zvw-declaratie voor de wijkverpleging. Curanta maakt uit goedgekeurde zorg per zorgverzekeraar en maand het declaratiebericht (AW319), getoetst aan de recordlayout en de testset van Vektis. U levert het aan in het VECOZO-portaal en leest het antwoord (AW320) in. Rechtstreeks aanleveren via VECOZO is ingericht: zie VECOZO (rechtstreeks aanleveren).' },
+  // 23-10-2026: KZ301 v3.2 (Ponscura 388c0148b, ADR 2026-10-23-kz301-kraamzorgdeclaratie). Alleen met de hand; het
+  // rechtstreeks aanleveren via VECOZO dekt de kraamzorg niet, en het retourbericht leest de klant in het VECOZO-portaal.
+  { name: 'Zorgverzekeraars (kraamzorg)', category: 'Financieel', status: 'inrichten',
+    body: 'Zvw-declaratie voor de kraamzorg. Curanta maakt uit de goedgekeurde kraambezoeken per zorgverzekeraar en maand het declaratiebericht (KZ301), getoetst aan de recordlayout en de testset van Vektis. U levert het aan in het VECOZO-portaal en leest daar ook het retourbericht. Rechtstreeks aanleveren via VECOZO is er voor de kraamzorg niet.' },
 
   // Sensoren en domotica
   { name: 'Domotica', category: 'Sensoren en domotica', status: 'inrichten',

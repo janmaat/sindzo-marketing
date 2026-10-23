@@ -118,7 +118,7 @@ const rollen: { rol: string; zorg: string; citaat: string; bron: string; bronUrl
     bronUrl: 'https://datamatters.nl/2026/09/15/van-epd-of-ecd-naar-archief/',
     antwoord: [
       'Al in de eerste fase vraagt het project wanneer uw huidige contract afloopt en welke exports uw pakket levert. Zo regelt u de export op tijd. Vóór u uw oude pakket opzegt, legt u vast hoe oude dossiers leesbaar blijven zolang de bewaartermijn loopt, ook als die leverancier stopt. En u bevestigt dat de export en de logging veilig bewaard zijn.',
-      'Gegevens van cliënten komen nooit in het project; er is geen veld voor een BSN. Pas na de verwerkersovereenkomst zetten wij gegevens over. Voor uw DPIA beschrijft Curanta wat u nodig heeft: welke gegevens wij verwerken en waar ze heen gaan, hoe wij ze beveiligen, wie onze subverwerkers zijn en hoe lang wij ze bewaren. Ook onze eigen voorwaarden staan in het project: wij zetten pas echte cliëntgegevens over als de hele server versleuteld is en er een externe functionaris gegevensbescherming is.',
+      'In de velden van het project komen geen gegevens van cliënten; er is geen veld voor een BSN. Een bestand dat wij voor de inrichting nodig hebben, zoals een medewerkerslijst of een voorbeeldexport, levert u bij het onderdeel aan: het staat versleuteld, wij openen het pas als het schoon is gescand, en het is weg dertig dagen nadat wij het gebruikten. Pas na de verwerkersovereenkomst zetten wij gegevens over. Voor uw DPIA beschrijft Curanta wat u nodig heeft: welke gegevens wij verwerken en waar ze heen gaan, hoe wij ze beveiligen, wie onze subverwerkers zijn en hoe lang wij ze bewaren. Ook onze eigen voorwaarden staan in het project: wij zetten pas echte cliëntgegevens over als de hele server versleuteld is en er een externe functionaris gegevensbescherming is.',
     ],
   },
 ];
@@ -423,6 +423,8 @@ const voorU = [
         <ul class="mt-4 space-y-3 text-sm text-ink-700">
           <li>Een volledige export van uw gegevens en bestanden in JSON, zonder exit-fee.</li>
           <li>Bij beëindiging krijgt u de export binnen 5 werkdagen. U heeft 30 dagen om hem op te halen. Na afloop van die 30 dagen wissen wij al uw gegevens, en u krijgt een vernietigingsverklaring.</li>
+          {/* Feitenblad, rij Exit: wisgrendel sinds 23-10-2026 (ADR 2026-10-23-wisgrendel-organisatie-na-export in de Ponscura-repo). */}
+          <li>Wij wissen pas als vaststaat dat de dossiers bij u liggen: u bevestigt in Curanta dat u de volledige export hebt ontvangen. Ziet u af van de export, of gaan de dossiers rechtstreeks naar een opvolger, dan leggen wij dat eerst vast, met de reden.</li>
           {/* Voorwaarden art. 9; product: BSN-lijst bij vertrek (ADR 2026-10-21 in de Ponscura-repo). */}
           {BSN_LIJST_LIVE
             ? <li>Het volledige BSN staat niet in de gewone export. Na uw opzegging levert Curanta het apart, in een versleuteld bestand met een los wachtwoord, zodat uw volgende pakket kan declareren.</li>

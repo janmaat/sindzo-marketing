@@ -40,7 +40,7 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
       { label: 'Auditlogs naar uw SIEM', stand: 'geregeld', note: 'Elke minuut het beveiligingslogboek en de beheeraudit naar het SIEM van uw organisatie, en het NEN 7513-logboek gepseudonimiseerd als u dat aanzet. Getest met Splunk, Azure Monitor en een syslog-server.', doc: '/oplossing#kwaliteit' },
       { label: 'Scanblokkade', stand: 'geregeld', note: 'Wie bekende zwakke plekken van websites afzoekt, wordt automatisch geblokkeerd, oplopend tot een week. Verkeer van buiten Europa telt Curanta apart; binnen de EU weigert Curanta niemand.' },
       { label: 'NEN 7512 (uitwisseling)', stand: 'uitvoering', note: 'Uitgangspunt bij het bouwen van de koppelingen; nog niet extern getoetst.' },
-      { label: 'Tweestapsverificatie', stand: 'geregeld', note: 'Verplicht in de backoffice voor zorg- en beheerrollen.' },
+      { label: 'Tweestapsverificatie', stand: 'geregeld', note: 'Verplicht in de backoffice voor zorg- en beheerrollen. Een nieuwe collega stelt het bij zijn eerste aanmelding zelf in, met een authenticator-app; tot dan opent Curanta voor hem alleen dat scherm.' },
       { label: 'Versleuteling BSN', stand: 'geregeld', note: 'Curanta versleutelt het BSN op veldniveau, met AES-256-GCM. Zoeken gaat via een aparte hash, zonder te ontsleutelen.' },
       { label: 'Versleuteling hele database', stand: 'geregeld', note: 'Uw gegevens staan versleuteld opgeslagen: volumeversleuteling op de server, ook voor de bijlagen en de back-ups. Het wachtwoord van dat volume staat niet op de server.' },
       { label: 'Externe pentest', stand: 'niet', note: 'Nog niet uitgevoerd.' },
@@ -84,7 +84,7 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
       { label: 'Hersteltest', stand: 'geregeld', note: 'Hersteltoets van de back-up geslaagd op 21 oktober 2026.' },
       { label: 'Back-up buiten de server', stand: 'niet', note: 'Nog niet. De back-ups staan versleuteld op de server zelf, nog niet ook op een andere plek.' },
       { label: 'Bij uitval', stand: 'geregeld', note: 'Elke dag een versleuteld noodoverzicht (pdf) met per cliënt de contactgegevens, waarschuwingen, allergieën en de medicatie van de dag; in het medewerkerportaal een kopie op het toestel; en een noodprocedure voor uw organisatie.', doc: '/oplossing#ecd' },
-      { label: 'Exit-procedure', stand: 'geregeld', note: 'In onze voorwaarden (artikel 9): wij leveren de export binnen 5 werkdagen, en u hebt 30 dagen om hem op te halen. Na afloop van die 30 dagen wissen wij uw gegevens; u krijgt een vernietigingsverklaring.', doc: '/voorwaarden#beeindiging' },
+      { label: 'Exit-procedure', stand: 'geregeld', note: 'In onze voorwaarden (artikel 9): wij leveren de export binnen 5 werkdagen, en u hebt 30 dagen om hem op te halen. Na afloop van die 30 dagen wissen wij uw gegevens; u krijgt een vernietigingsverklaring. Wissen kan pas nadat u hebt bevestigd dat u de volledige export hebt ontvangen, of nadat wij hebben vastgelegd waarom het zonder kan.', doc: '/voorwaarden#beeindiging' },
     ],
   },
   {
@@ -237,7 +237,7 @@ const termijnen = [
   <section id="continuiteit" class="container-prose scroll-mt-20 border-b border-ink-200 py-16">
     <div class="max-w-3xl">
       <h2 class="font-display text-2xl font-bold text-curanta-900">De vraag die inkopers stellen: "Wat als Curanta wegvalt?"</h2>
-      <p class="mt-3 text-ink-700">Curanta is een nieuwe, kleine leverancier. Dit is de stand:</p>
+      <p class="mt-3 text-ink-700">Dit is de stand:</p>
       <ul class="mt-5 space-y-3 text-sm text-ink-700">
         <li class="flex gap-3"><span class={`status-dot mt-1.5 shrink-0 ${STAND.uitvoering.dot}`} aria-hidden="true"></span><span><strong>Broncode in bewaring bij een derde (escrow):</strong> in voorbereiding.</span></li>
         <li class="flex gap-3"><span class={`status-dot mt-1.5 shrink-0 ${STAND.uitvoering.dot}`} aria-hidden="true"></span><span><strong>Ontwikkelaarspartnerschap:</strong> in voorbereiding.</span></li>

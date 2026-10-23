@@ -27,8 +27,8 @@ export const algemeneVragen: Vraag[] = [
   },
   {
     vraag: 'Kunnen wij onze gegevens meenemen als wij stoppen?',
-    // Feitenblad: Export, Exit (besluit Jan 25-09; "na afloop" besluit Jan 13-10).
-    antwoord: 'Ja. U krijgt een volledige export van uw gegevens en bestanden in JSON, binnen 5 werkdagen. Daarna hebt u 30 dagen om hem op te halen. Na afloop van die 30 dagen wissen wij uw gegevens, met een vernietigingsverklaring.',
+    // Feitenblad: Export, Exit (besluit Jan 25-09; "na afloop" besluit Jan 13-10; wisgrendel 23-10-2026).
+    antwoord: 'Ja. U krijgt een volledige export van uw gegevens en bestanden in JSON, binnen 5 werkdagen. Daarna hebt u 30 dagen om hem op te halen. Na afloop van die 30 dagen wissen wij uw gegevens, met een vernietigingsverklaring. Dat doen wij pas nadat u hebt bevestigd dat u de volledige export hebt ontvangen.',
   },
   {
     vraag: 'Hoe stappen wij over van ons huidige ECD?',
