@@ -33,7 +33,9 @@ import beeld from '../../assets/schermen/mw-bezoek.jpg';
     { name: 'Bezettingsnorm', note: 'Een minimale bezetting per team en dagdeel, met een signaal als het rooster eronder zakt' },
     { name: 'Waarschuwingen', note: 'MRSA, valrisico of agressie bovenaan het dossier, en zonder bereik op de telefoon' },
     { name: 'Cao-controle', note: 'Rusttijden, pauzes en maximale diensten, met signalen voordat u het rooster publiceert' },
-    { name: 'eOverdracht', note: 'Document om te downloaden en zelf mee te sturen; verzenden in ontwikkeling' },
+    { name: 'eOverdracht', note: 'Via het eOverdracht-netwerk, of downloaden en zelf meesturen; de aansluiting regelen wij bij de implementatie' },
+    { name: 'EVV en zorgplan per bezoek', note: 'Een EVV\'er per cliënt; interventies per dagdeel of vast bezoek; signaal als het eerste zorgplan na zes weken niet staat' },
+    { name: 'Noodoverzicht', note: 'Elke dag een versleutelde pdf met de medicatie van de dag, voor als Curanta niet bereikbaar is' },
     { name: 'Medicatie', note: 'Toedienlijst; overzicht uit Medimo of uit de eigen registratie' },
     { name: 'iWmo, productie en budget', note: 'Van toewijzing tot declaratie en budgetbewaking' },
     { name: 'Cliëntportaal', note: 'Voor cliënten en mantelzorgers: taken, foto\'s, berichten; in 5 talen' },
@@ -45,13 +47,13 @@ import beeld from '../../assets/schermen/mw-bezoek.jpg';
   ]}
   nogNiet={[
     'De proef van het rechtstreeks aanleveren in de testomgeving van VECOZO: die doen wij per organisatie, vóór uw eerste declaratiemaand.',
-    'De kwalificatie van eOverdracht door Nictiz en de ketentest met uw ketenpartner: die volgen bij de aansluiting.',
+    'Een kwalificatie van eOverdracht door Nictiz. De ketentest met uw ketenpartner doen wij bij de aansluiting.',
     'Inspreken onderweg in het medewerkerportaal; in de backoffice kan het wel, op het apparaat zelf.',
   ]}
   artikelen={[DOORBRAAKMIDDELEN, MEERTALIG_PORTAAL, PEER_SUPPORT]}
   regulatory={['Wkkgz', 'Wtza', 'AVG', 'NEN 7510', 'Wegiz', 'Wzd (extramurale toepassing)']}
   proofPoints={[
-    { value: 'EU', label: 'Hosting (IONOS, Berlijn) · ondersteuning in het Nederlands' },
+    { value: 'EU', label: 'Hosting in Duitsland, versleuteld · ondersteuning in het Nederlands' },
     { value: '1×', label: 'Inloggen: alle modules in één werkruimte' },
     { value: 'FHIR', label: 'API voor de Basisgegevensset Zorg (BgZ), alleen lezen, na registratie' },
     { value: 'NEN 7513', label: 'Logboek met hash-keten, bewaard zolang het dossier bestaat' },

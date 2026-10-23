@@ -198,8 +198,8 @@ const voorbeelden: Voorbeeld[] = [
     ],
     statussen: [
       { status: 'demo', tekst: 'Productieregistratie, declaraties opstellen, incidentmeldingen en klachten' },
-      { status: 'inrichten', tekst: 'Declaraties voor de Wmo, de Jeugdwet, de Wlz en de wijkverpleging (Zvw). Curanta maakt de bestanden en toetst ze; u levert ze zelf aan, bij de gemeente en de zorgverzekeraar via het VECOZO-portaal. De route voor de Wlz stemmen wij per zorgkantoor af.' },
-      { status: 'ontwikkeling', tekst: 'Rechtstreeks versturen via VECOZO en retourberichten automatisch ophalen. Nu leest u de antwoorden zelf in.' },
+      { status: 'inrichten', tekst: 'Declaraties voor de Wmo, de Jeugdwet, de Wlz en de wijkverpleging (Zvw). Curanta maakt de bestanden en toetst ze; u levert ze met de hand aan in het VECOZO-portaal, of rechtstreeks via VECOZO. De route voor de Wlz stemmen wij per zorgkantoor af.' },
+      { status: 'inrichten', tekst: 'Rechtstreeks aanleveren via VECOZO, met het ophalen van de retourberichten: ingericht. Wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand.' },
     ],
     link: { label: 'Alle onderdelen van declaratie en kwaliteit', href: '/oplossing#declaratie' },
     beelden: [
@@ -224,7 +224,7 @@ const doelgroepen = [
     naam: 'VVT',
     kop: 'Wijkverpleging, thuiszorg en verpleeghuizen',
     tekst: 'Routes en bezoeken, rapportage onderweg, medicatie uit Medimo of de eigen registratie, en declareren onder de Wmo en de Wlz.',
-    let: 'Ook de Zvw-declaratie voor de wijkverpleging: Curanta maakt en toetst het bestand, u levert het aan via het VECOZO-portaal.',
+    let: 'Ook de Zvw-declaratie voor de wijkverpleging: Curanta maakt en toetst het bestand, en u levert het aan via VECOZO.',
     href: '/voor/vvt',
     link: 'Curanta voor de VVT',
     foto: fotoVvt,
@@ -295,7 +295,7 @@ const waaromNu = [
     icoon: 'schild',
     kop: 'Beveiliging weegt zwaarder',
     markt: 'Sinds 15 augustus 2026 geldt de Cyberbeveiligingswet, voor zorgaanbieders vanaf 50 fte. Het bestuur is ook verantwoordelijk voor de leveranciers die het kiest.',
-    curanta: 'In Curanta stelt het bestuur de maatregelen vast en houdt het een leveranciersregister bij, met Curanta zelf erin. Het BSN is op veldniveau versleuteld, en de gegevens staan bij IONOS Cloud in Berlijn.',
+    curanta: 'In Curanta stelt het bestuur de maatregelen vast en houdt het een leveranciersregister bij, met Curanta zelf erin. Het BSN is op veldniveau versleuteld, en de gegevens staan versleuteld opgeslagen, in de EU.',
   },
 ] as const;
 
@@ -770,8 +770,9 @@ const voordelen = [
       </ul>
       <p class="mt-6 text-ink-700">
         Ook voor de <a href="/voor/kraamzorg" class="font-semibold text-curanta-700">kraamzorg</a> (het kraamdossier,
-        met de controles van moeder en kind) en de <a href="/voor/jeugdzorg" class="font-semibold text-curanta-700">jeugdzorg</a>
-        (jeugddossier en meldcode).
+        met de controles van moeder en kind en de kraambezoeken in de planning) en de <a href="/voor/jeugdzorg" class="font-semibold text-curanta-700">jeugdzorg</a>
+        (jeugddossier, hulpverleningsplan en meldcode). Fysiotherapie, ergotherapie, logopedie en diëtetiek
+        werken in Curanta als behandeldienst naast de instelling.
       </p>
       <p class="mt-5 text-xs text-ink-500">
         Foto's: Age Cymru (Unsplash), Cliff Booth (Pexels), Vitaly Gariev (Unsplash). Het zijn geen
@@ -788,8 +789,9 @@ const voordelen = [
           Overstappen, inrichten en begeleiden
         </h2>
         <p class="mt-4 leading-relaxed text-ink-700">
-          Curanta heeft geen kant-en-klare import uit een ander systeem. Uw gegevens overzetten is
-          daarom een project tegen een vaste prijs, die u vooraf weet. Ook de implementatie is maatwerk,
+          Cliënten en medewerkers importeert u uit een CSV- of Excelbestand, met een sjabloon uit Curanta.
+          Zorgplannen en het oude dossier kunnen als pdf mee in het dossier van de cliënt. Het overzetten is
+          een project tegen een vaste prijs, die u vooraf weet. Ook de implementatie is maatwerk,
           met een prijs die wij vooraf afspreken. Training en basisondersteuning kosten niets extra.
         </p>
         <p class="mt-4 leading-relaxed text-ink-700">
@@ -845,7 +847,7 @@ const voordelen = [
               <Icon naam="vink" class="h-5 w-5 text-accent-500" /> Geregeld
             </h3>
             <ul class="mt-4 space-y-3 text-curanta-100">
-              <li>De applicatie en de databases staan bij IONOS, een Europees bedrijf, in Berlijn. De AI-functies draaien standaard bij Mistral AI, een Frans bedrijf, via het EU-endpoint; Mistral bewaart de gegevens niet en traint er niet mee. Kiest uw organisatie zelf voor Anthropic, of zet u digitaal ondertekenen aan, dan lopen die via Amerikaanse bedrijven (Anthropic, DocuSign), met modelcontractbepalingen.</li>
+              <li>De applicatie en de databases staan bij een Europese hostingpartij in Duitsland, versleuteld opgeslagen. De AI-functies draaien standaard bij Mistral AI, een Frans bedrijf, via het EU-endpoint; Mistral bewaart de gegevens niet en traint er niet mee. Kiest uw organisatie zelf voor Anthropic, of zet u digitaal ondertekenen aan, dan lopen die via Amerikaanse bedrijven (Anthropic, DocuSign), met modelcontractbepalingen.</li>
               <li>Het BSN is op veldniveau versleuteld (AES-256-GCM).</li>
               <li>Wie in de backoffice een zorg- of beheerrol heeft, logt in met tweestapsverificatie. Dat is verplicht.</li>
               <li>Elke inzage in een dossier komt in een logboek (NEN 7513). Wordt dat logboek achteraf gewijzigd, dan is dat aan te tonen.</li>
@@ -857,7 +859,7 @@ const voordelen = [
               <Icon naam="klok" class="h-5 w-5 text-amber-300" /> In uitvoering
             </h3>
             {/* 21-10-2026: alleen wat de slogan nodig heeft (feitenblad, rij Slogan beveiliging: de pentest en de
-                NEN 7510-audit). De versleuteling van de hele database en de FG staan in het Trust Centre. */}
+                NEN 7510-audit). De FG en de back-up buiten de server staan in het Trust Centre. */}
             <ul class="mt-4 space-y-3 text-curanta-100">
               <li>NEN 7510:2024: de maatregelen zijn ingevoerd; de externe audit staat gepland voor het vierde kwartaal van 2026.</li>
               <li>Een externe pentest is nog niet uitgevoerd.</li>

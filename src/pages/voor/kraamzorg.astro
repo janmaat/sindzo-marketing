@@ -3,21 +3,25 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
 import beeld from '../../assets/schermen/bo-kraamzorg.jpg';
 // Nieuw 08-10-2026 (besluit Jan: eigen doelgroeppagina). Nagelopen in de code: kraamweekregistratie
 // (Ponscura 4e1b70705, ADR 2026-10-05-kraamweekregistratie), KraamzorgDossier, SegmentenDemoSeed.
-// Kraamzorg is een dossiermodule, geen volledig vakgebied: declaratie, indicatieberekening en
-// planning van kraambezoeken ontbreken. Dat staat zichtbaar onder "Wat er nog niet is".
+// 23-10-2026: kraambezoeken in de planning en het medewerkerportaal, indicatie per onderdeel met herindicatie,
+// meerlingen en de eigen bijdrage per verzekeraar zijn gebouwd (Ponscura 7ef39ffb9, ccae3c3e9, 9a56f4a0c,
+// c473816ae; feitenblad, rij Kraamzorg). De Zvw-declaratie (KZ301) en de LIP-berekening ontbreken nog; die staan
+// onder "Wat er nog niet is".
 ---
 <SegmentLayout
   beeld={{ src: beeld, adres: 'app.curanta.nl', alt: 'Backoffice: het kraamdossier van een verzonnen cliënt, met indicatie-uren, de overdracht aan de JGZ en grafieken van de temperatuur van moeder en kind en het gewicht van het kind.', bijschrift: 'Het kraamdossier met de controles van de kraamweek. Opname oktober 2026.' }}
   segmentKey="kraamzorg"
   segmentLabel="Kraamzorg"
-  title="Kraamzorgsoftware: het kraamdossier | Curanta"
-  description="Het kraamdossier in Curanta: controles van moeder en kind per kraamdag, weekgrafieken en de overdracht aan de JGZ."
+  title="Kraamzorgsoftware: dossier, planning en eigen bijdrage | Curanta"
+  description="Kraamzorg in Curanta: het kraamdossier, kraambezoeken in de planning en op de telefoon, de indicatie per onderdeel en de eigen bijdrage."
   eyebrow="Voor de kraamzorg"
-  hero="Het kraamdossier: controles van moeder en kind"
-  subtitle="De kraamverzorgende legt per controlemoment vast wat zij bij moeder en kind ziet. De leidinggevende houdt het dossier bij. Na de bevalling legt u de overdracht aan de jeugdgezondheidszorg (JGZ) vast. Declaratie en planning van kraambezoeken zitten er nog niet in."
+  hero="Het kraamdossier, de planning en de eigen bijdrage"
+  subtitle="De kraamverzorgende legt per controlemoment vast wat zij bij moeder en kind ziet. De planner zet de kraambezoeken op het planbord, en de kraamverzorgende ziet ze in het medewerkerportaal. Na de bevalling legt u de overdracht aan de jeugdgezondheidszorg (JGZ) vast. De Zvw-declaratie voor de kraamzorg zit er nog niet in."
   triggers={[
     { title: 'Controles per kraamdag', body: 'Bij de moeder onder meer temperatuur, pols, stand van de baarmoeder en vloeien. Bij het kind onder meer temperatuur, gewicht, geel zien en de navel. Het overleg met de verloskundige staat erbij, en grafieken tonen temperatuur en gewicht over de week.' },
-    { title: 'Uren in zicht', body: 'Bezoeken tellen af van het aantal uren uit de indicatie. Die uren vult u zelf in.' },
+    { title: 'Uren in zicht', body: 'De indicatie legt u per onderdeel vast, met herindicatie; bij een meerling staat elk kind apart. Bezoeken tellen af van de uren uit de indicatie. Die uren vult u zelf in.' },
+    { title: 'Bezoeken plannen en op de telefoon', body: 'Kraambezoeken plant u op het planbord, en een collega kan een dossier waarnemen. De kraamverzorgende ziet het bezoek in het medewerkerportaal en legt daar de uren per onderdeel en de controles vast.' },
+    { title: 'De eigen bijdrage', body: 'Per verzekeraar stelt u in wie de eigen bijdrage int. Int uw organisatie hem, dan maakt Curanta na het afsluiten van het dossier de factuur via de facturatie. Een correctie gaat met een creditnota.' },
     { title: 'De overdracht aan de JGZ', body: 'Na de bevalling legt u vast of de kraamvrouw toestemming gaf voor de overdracht aan de jeugdgezondheidszorg. U legt ook vast hoe de overdracht ging. Curanta verstuurt zelf niets.' },
     { title: 'Correcties met een reden', body: 'De leidinggevende kan de bevallingsdatum corrigeren. De reden is verplicht en wordt bij de correctie bewaard; het logboek toont dat er gecorrigeerd is.' },
   ]}
@@ -25,17 +29,20 @@ import beeld from '../../assets/schermen/bo-kraamzorg.jpg';
     { name: 'Kraamdossier', note: 'Geboortegegevens met Apgar, voeding en afsluiten' },
     { name: 'Kraamweekregistratie', note: 'Controles van moeder en kind per controlemoment' },
     { name: 'Weekgrafieken', note: 'Temperatuur en gewicht' },
+    { name: 'Kraambezoeken in de planning', note: 'Op het planbord en in het medewerkerportaal, met de uren per onderdeel' },
+    { name: 'Indicatie per onderdeel', note: 'Met herindicatie, en meerdere kinderen bij een meerling' },
+    { name: 'Eigen bijdrage', note: 'Per verzekeraar in te stellen; factuur via de facturatie, correctie met een creditnota' },
     { name: 'Overdracht aan de JGZ', note: 'Toestemming en wijze vastleggen; geen digitaal verzenden' },
     { name: 'Logboek (NEN 7513)', note: 'Wie het dossier inzag of wijzigde' },
     { name: 'Uitlegvideo’s', note: 'Een eigen reeks voor de kraamzorg in de app' },
   ]}
   vragen={[
-    { vraag: 'Kan Curanta declareren voor de kraamzorg?', antwoord: 'Nog niet. Declareren bij zorgverzekeraars (Zvw) voor de kraamzorg zit er nog niet in, net als kraambezoeken in de planning. Wel: de controles per kraamdag, de uren uit de indicatie die u zelf invult, en de overdracht aan de JGZ vastleggen.' },
+    { vraag: 'Kan Curanta declareren voor de kraamzorg?', antwoord: 'Nog niet bij de zorgverzekeraar: de Zvw-declaratie voor de kraamzorg zit er nog niet in. Wel: de eigen bijdrage per verzekeraar, met een factuur via de facturatie als uw organisatie die int. En de kraambezoeken in de planning, de controles per kraamdag, de indicatie per onderdeel en de overdracht aan de JGZ.' },
   ]}
   nogNiet={[
     'Declareren bij zorgverzekeraars (Zvw) voor de kraamzorg.',
     'Een berekening van de indicatie volgens het Landelijk Indicatieprotocol: de uren vult u zelf in.',
-    'Kraambezoeken in de planning, en de kraamzorg in het medewerkerportaal.',
+    'Een bezoek dat in het medewerkerportaal is afgerond, komt nog niet vanzelf in het kraamdossier.',
     'Grenswaarden of signalen bij de controles: Curanta legt vast, maar bewaakt geen protocol.',
     'De overdracht aan de JGZ digitaal versturen.',
   ]}

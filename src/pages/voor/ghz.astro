@@ -28,7 +28,10 @@ import beeld from '../../assets/schermen/bo-signaleringsplan.jpg';
     { name: 'Ondersteuningsplan (OPP) en verslag begeleiding (AVB)', note: 'Doelen per levensdomein, methodiek, akkoord in het portaal' },
     { name: 'Signaleringsplan', note: 'Fasen, signalen en afspraken; incidenten sinds de vaststelling' },
     { name: 'Groepszorg en dagbesteding', note: 'Aanwezigheid wordt een conceptregel voor de Wlz' },
-    { name: 'Verblijf, zzp en logeren', note: 'Afwezigheid volgens de NZa; maandproductie per etmaal' },
+    { name: 'Verblijf, zzp en logeren', note: 'Afwezigheid volgens de NZa; maandproductie per etmaal; deeltijdverblijf en mutatiedagen' },
+    { name: 'Toeslagen, meerzorg en vervoer', note: 'Met het kenmerk van het zorgkantoor; vervoer naar de dagbesteding per aanwezigheidsdag' },
+    { name: 'Medewerkerportaal voor wonen en dagbesteding', note: 'Wzd vastleggen, aanwezigheid aftekenen, slaapdiensten in het rooster' },
+    { name: 'Behandeldienst', note: 'Fysiotherapie, ergotherapie, logopedie en diëtetiek naast het wonen; de behandeluren verantwoorden, niet declareren' },
     { name: 'Wlz-declaratie', note: 'Berichten en maanddeclaratie opstellen; u levert ze zelf aan bij het zorgkantoor' },
     { name: 'CIZ-zorgprofiel', note: 'Het profiel van het Centrum indicatiestelling zorg naast de Wlz-toewijzing, met een waarschuwing bij verschil' },
     { name: 'Wet zorg en dwang', note: 'Stappenplan, titels, verlof en ontslag, overzicht voor de IGJ' },
@@ -42,7 +45,8 @@ import beeld from '../../assets/schermen/bo-signaleringsplan.jpg';
   nogNiet={[
     'De proef van het rechtstreeks aanleveren in de testomgeving van VECOZO: die doen wij per organisatie, vóór uw eerste declaratiemaand.',
     'Een echte aanlevering van het Wzd-overzicht bij de IGJ; u levert het zelf aan via Mijn IGJ.',
-    'Ggz-wonen, toeslagen, deeltijdverblijf en mutatiedagen bij het verblijf.',
+    'Meerzorg bij ggz-wonen en ggz-b, en toeslagen voor dagbesteding van een kind per dagdeel.',
+    'Deeltijdverblijf in de vv.',
   ]}
   artikelen={[CYBERBEVEILIGINGSWET]}
   regulatory={['Wzd', 'Wlz', 'Wkkgz', 'Wtza', 'AVG', 'NEN 7510']}
@@ -50,6 +54,6 @@ import beeld from '../../assets/schermen/bo-signaleringsplan.jpg';
     { value: 'OPP', label: 'Met signaleringsplan en akkoord van de vertegenwoordiger' },
     { value: 'Wlz', label: 'Verblijf, logeren, volledig en modulair pakket thuis (vpt en mpt)' },
     { value: 'Wzd', label: 'Wettekst van 1 juli 2025' },
-    { value: 'EU', label: 'Hosting bij IONOS in Berlijn' },
+    { value: 'EU', label: 'Hosting in Duitsland, versleuteld opgeslagen' },
   ]}
 />

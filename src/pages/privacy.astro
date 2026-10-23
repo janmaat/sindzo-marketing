@@ -19,7 +19,7 @@ const sections = [
   title="Privacyverklaring"
   description="Hoe Curanta persoonsgegevens verwerkt: welke gegevens, waarvoor, hoe lang, met wie, en wat uw rechten zijn. Met een versleuteld BSN en hosting in de EU."
   eyebrow="Privacy"
-  lastUpdated="2026-10-18"
+  lastUpdated="2026-10-23"
   sections={sections}
 >
   <h2 id="wie">1. Wie wij zijn</h2>
@@ -122,9 +122,10 @@ const sections = [
   <h2 id="delen">5. Met wie wij gegevens delen</h2>
   <p>Wij delen uw gegevens niet zonder reden. Wel werken wij met de volgende partijen samen:</p>
   <ul>
-    <li><strong>Hosting</strong>: Strato AG (Duitsland) voor deze website; IONOS Cloud (Berlijn,
-      Duitsland) voor de Curanta-applicatie en de demo-omgeving.</li>
-    <li><strong>E-mail</strong>: Strato (Duitsland), de mailserver van curanta.nl.</li>
+    <li><strong>Hosting</strong>: een hostingpartij in Duitsland (EU), voor deze website, de Curanta-applicatie
+      en de demo-omgeving. Wie dat is, staat in de
+      <a href="https://app.curanta.nl/trust/subverwerkers">subverwerkerslijst</a>.</li>
+    <li><strong>E-mail</strong>: de mailserver van curanta.nl, bij een hostingpartij in Duitsland (EU).</li>
     <li><strong>Betalingen van klanten</strong>: Mollie B.V. (Amsterdam). Voor de facturen van Curanta
       geven wij de naam van de organisatie, het e-mailadres van het factuurcontact, het factuurnummer en
       het bedrag door, voor een betaallink of automatische incasso.</li>
@@ -143,8 +144,9 @@ const sections = [
   <h2 id="sub-verwerkers">6. Subverwerkers</h2>
   <p>Voor de Curanta-applicatie zijn dit de subverwerkers:</p>
   <ul>
-    <li><strong>IONOS Cloud</strong> (Berlijn, Duitsland): hosting van de applicatie en de databases.</li>
-    <li><strong>Strato</strong> (Duitsland): e-mail.</li>
+    <li><strong>Een hostingpartij in Duitsland (EU)</strong>: hosting van de applicatie, de databases en de
+      bestanden, en de e-mail. De naam staat in de
+      <a href="https://app.curanta.nl/trust/subverwerkers">subverwerkerslijst</a>.</li>
     <li><strong>Mistral AI</strong> (Frankrijk, EU-endpoint): de standaardaanbieder van de AI-functies, met
       gepseudonimiseerde gegevens. Mistral bewaart de gegevens niet en traint er niet mee.</li>
     <li><strong>Anthropic</strong> (Verenigde Staten): alleen als uw organisatie zelf voor Anthropic kiest, met
@@ -160,13 +162,13 @@ const sections = [
   <p>Wij hanteren passende technische en organisatorische maatregelen:</p>
   <ul>
     <li>Versleutelde verbindingen (TLS) voor al het verkeer.</li>
-    <li>Het BSN in de Curanta-applicatie versleuteld op veldniveau (AES-256-GCM).</li>
+    <li>De gegevens van de Curanta-applicatie versleuteld opgeslagen (volumeversleuteling op de server), en het
+      BSN daarnaast versleuteld op veldniveau (AES-256-GCM).</li>
     <li>NEN 7510-werkdocument (externe audit gepland Q4 2026).</li>
     <li>Een logboek met een hash-keten, zodat een wijziging achteraf aantoonbaar is.</li>
     <li>Tweestapsverificatie in de backoffice, verplicht voor zorg- en beheerrollen.</li>
   </ul>
   <p>
-    De database als geheel is nog niet versleuteld; dat gebeurt voordat er echte cliëntgegevens van een zorgorganisatie in staan.
     Het volledige overzicht staat in ons <a href="/trust">Trust Centre</a>.
   </p>
 

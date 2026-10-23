@@ -23,7 +23,7 @@ export const algemeneVragen: Vraag[] = [
   {
     vraag: 'Waar staan onze gegevens?',
     // Feitenblad: hosting, subverwerkers, AI-keuze per organisatie.
-    antwoord: `Bij IONOS Cloud in Berlijn, in Duitsland (EU). De AI-functies lopen standaard bij Mistral AI, via het EU-endpoint; Mistral bewaart de gegevens niet en traint er niet mee. Uw organisatie kan de AI-functies ook helemaal uitzetten. De subverwerkers staan in het ${link('/trust', 'Trust Centre')}.`,
+    antwoord: `In Duitsland, binnen de EU, versleuteld opgeslagen. De AI-functies lopen standaard bij Mistral AI, via het EU-endpoint; Mistral bewaart de gegevens niet en traint er niet mee. Uw organisatie kan de AI-functies ook helemaal uitzetten. De subverwerkers staan in het ${link('/trust', 'Trust Centre')}.`,
   },
   {
     vraag: 'Kunnen wij onze gegevens meenemen als wij stoppen?',
@@ -33,7 +33,7 @@ export const algemeneVragen: Vraag[] = [
   {
     vraag: 'Hoe stappen wij over van ons huidige ECD?',
     // Feitenblad: Migratie, Doorlooptijd.
-    antwoord: `Als migratieproject tegen een vaste prijs, na een migratie-inschatting. Een kant-en-klare import per bronsysteem is er nog niet; de route stellen wij per organisatie samen op. Hoe lang het duurt, spreken wij na die inschatting af. Meer op ${link('/overstappen', 'Overstappen en exit')}.`,
+    antwoord: `Als migratieproject tegen een vaste prijs, na een migratie-inschatting. Cliënten en medewerkers importeert u uit een CSV- of Excelbestand, met een sjabloon uit Curanta. Zorgplannen en het oude dossier kunnen als pdf mee in het dossier van de cliënt. De route stellen wij per organisatie samen op. Hoe lang het duurt, spreken wij na die inschatting af. Meer op ${link('/overstappen', 'Overstappen en exit')}.`,
   },
   {
     vraag: 'Is Curanta gecertificeerd voor NEN 7510?',

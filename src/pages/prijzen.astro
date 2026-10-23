@@ -20,7 +20,7 @@ const prijsVragen = [
   { vraag: "Hoe loggen gebruikers in?", antwoord: "Met tweestapsverificatie, inbegrepen in elk plan. Inloggen met DigiD voor cliënten en mantelzorgers is een betaalde optie." },
   { vraag: "Wat kost het bij meer dan 500 medewerkers?", antwoord: "Vanaf 500 medewerkers geldt een staffeltarief. Bij een Enterprise-contract stemmen wij dat met u af; bel ons voor een indicatie." },
   { vraag: "Zitten koppelingen in de prijs?", antwoord: "De koppelingen die gebouwd zijn (zie <a href=\"/integraties\" class=\"text-curanta-700 hover:underline\">de stand per koppeling</a>) zitten in het abonnement; daar rekenen wij niets extra voor. Wat de externe partij zelf rekent, bijvoorbeeld een Vecozo-certificaat of een ZorgMail-abonnement, betaalt u rechtstreeks aan die partij." },
-  { vraag: "Is migratie van mijn huidige ECD inbegrepen?", antwoord: "Migratie vanuit <strong>Nedap Ons</strong>, <strong>Gerimedica Ysis</strong>, <strong>SDB</strong>, <strong>mijnCaress (PinkRoccade)</strong>, <strong>Lable Care</strong>, <strong>Fierit (Tenzinger)</strong> of <strong>Pluriform Zorg (Adapcare)</strong> doen wij als migratieproject, tegen een vaste prijs vooraf. Er is geen open einde. Een kant-en-klare import per bronsysteem is er nog niet; de route stellen wij per organisatie samen op. De uitwerking per bronsysteem, met ook de weg terug naar buiten, staat op de pagina <a href=\"/overstappen\" class=\"text-curanta-700 hover:underline\">Overstappen en exit</a>." },
+  { vraag: "Is migratie van mijn huidige ECD inbegrepen?", antwoord: "Migratie vanuit <strong>Nedap Ons</strong>, <strong>Gerimedica Ysis</strong>, <strong>SDB</strong>, <strong>mijnCaress (PinkRoccade)</strong>, <strong>Lable Care</strong>, <strong>Fierit (Tenzinger)</strong> of <strong>Pluriform Zorg (Adapcare)</strong> doen wij als migratieproject, tegen een vaste prijs vooraf. Er is geen open einde. Cliënten en medewerkers importeert u uit een CSV- of Excelbestand, met een sjabloon uit Curanta; zorgplannen en het oude dossier kunnen als pdf mee in het dossier van de cliënt. De route stellen wij per organisatie samen op. De uitwerking per bronsysteem, met ook de weg terug naar buiten, staat op de pagina <a href=\"/overstappen\" class=\"text-curanta-700 hover:underline\">Overstappen en exit</a>." },
   { vraag: "Hoelang duurt een implementatie?", antwoord: "Dat spreken wij per organisatie af, na een migratie-inschatting. Hoe lang het duurt, hangt af van uw omvang, uw gegevens en uw koppelingen; een vaste doorlooptijd noemen wij daarom niet. De training is in alle plannen inbegrepen. De implementatie is maatwerk, met een prijs die wij vooraf afspreken. De migratie is een project tegen een vaste prijs vooraf, dus zonder open einde." },
   { vraag: "Betaal ik dubbel zolang mijn huidige contract nog loopt?", antwoord: "Nee. Loopt uw huidige contract nog door als u bij Curanta begint, dan betaalt u het abonnement pas vanaf het einde van dat contract, tot hoogstens zes maanden na de start. Implementatie en migratie gaan zoals afgesproken. Zo staat het in artikel 5 van <a href=\"/voorwaarden#prijzen\" class=\"text-curanta-700 hover:underline\">de voorwaarden</a>." },
   { vraag: "Kan ik tussentijds van plan wisselen?", antwoord: "Naar een hoger plan kan altijd direct; naar een lager plan per contractjaar. Het contract is een jaarcontract, en het aantal medewerkers schaalt per maand mee. Uw gegevens blijven van u: bij vertrek krijgt u een export in JSON, zonder exit-fee. Overstappen naar een andere aanbieder kan ook tijdens het contractjaar, met 2 maanden opzegtermijn (artikel 9 van de voorwaarden)." },
@@ -80,6 +80,7 @@ const prijsVragen = [
         features={[
           'Alles uit Compliance Pro',
           'Volledige planning, routeplanning en cao-controle',
+          'De behandelagenda, ook voor een behandeldienst (fysiotherapie, ergotherapie, logopedie, diëtetiek)',
           'Zorgvraag naast rooster en formatie, per team en per week',
           'Inzet van zzp\'ers met AGB-controle',
           'Buddy voor internationaal geworven collega\'s',
@@ -384,7 +385,7 @@ const prijsVragen = [
         maatwerk (besluit Jan) en staat eronder, bij wat wel apart is. */}
     <ul class="mt-8 grid max-w-5xl gap-x-14 gap-y-8 md:grid-cols-2">
       {[
-        ['Hosting', 'IONOS Cloud in Berlijn (EU). Geen extra kosten.'],
+        ['Hosting', 'In de EU (Duitsland), versleuteld opgeslagen. Geen extra kosten.'],
         ['Gebouwde koppelingen', 'Zitten in het abonnement. Wat de externe partij zelf rekent (bijvoorbeeld een Vecozo-certificaat of een ZorgMail-abonnement) betaalt u rechtstreeks aan die partij.'],
         ['Training', 'Training voor uw medewerkers bij de start.'],
         ['Nieuwe versies', 'U krijgt nieuwe versies zonder meerprijs.'],
