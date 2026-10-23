@@ -70,7 +70,8 @@
       "eisen": [
         { "eis": "De leverancier beschrijft wat er gebeurt als hij stopt, failliet gaat of wordt overgenomen: hoe lang de dienst doorloopt en hoe wij bij onze gegevens komen.", "waarom": "Bij een online dienst beschermt alleen broncode in bewaring u niet tegen het wegvallen van hosting en gegevens." },
         { "eis": "Er is een noodprocedure voor als het pakket niet bereikbaar is, en die wordt vóór de start geoefend.", "waarom": "Zorg moet doorgaan, ook als het systeem uitvalt." },
-        { "eis": "De leverancier geeft referenties, en wij mogen zelf kiezen wie wij bellen.", "waarom": "Een leverancier noemt anders vaak alleen zijn tevredenste klanten." }
+        { "eis": "De leverancier geeft referenties, en wij mogen zelf kiezen wie wij bellen.", "waarom": "Een leverancier noemt anders vaak alleen zijn tevredenste klanten." },
+        { "eis": "De leverancier noemt de versie van het platform waarop het pakket draait en tot wanneer die versie beveiligingsupdates krijgt, en meldt ons ruim vooraf wanneer hij overstapt.", "waarom": "De zorgplicht van de Cyberbeveiligingswet noemt het onderhouden van systemen en het omgaan met kwetsbaarheden. Een versie zonder updates van de maker krijgt bij een nieuw lek geen oplossing." }
       ]
     },
     {
@@ -102,6 +103,9 @@
     { "vraag": "Levert u de logging mee (wie heeft welk dossier ingezien), en hoe lang bewaart u die?", "toelichting": "Het toegangslogboek (NEN 7513) heeft u nodig bij een klacht of incident over de periode vóór de overstap." },
     { "vraag": "Welke koppelingen moeten wij zelf opzeggen of overzetten?", "toelichting": "Bijvoorbeeld het VECOZO-certificaat, ZorgMail, de apotheek of het medicatiesysteem, en de salarisadministratie." },
     { "vraag": "Wanneer en hoe vernietigt u onze gegevens na de overstap, en krijgen wij daar een verklaring van?", "toelichting": "U blijft verwerkingsverantwoordelijke voor wat bij de oude leverancier staat." },
-    { "vraag": "Wie is ons aanspreekpunt bij de overstap, en wat doet u wel en wat niet?", "toelichting": "Leg het antwoord schriftelijk vast; het hoort bij uw planning." }
+    { "vraag": "Wie is ons aanspreekpunt bij de overstap, en wat doet u wel en wat niet?", "toelichting": "Leg het antwoord schriftelijk vast; het hoort bij uw planning." },
+    { "vraag": "Op welke versie van het platform draait het pakket, en tot wanneer krijgt die versie beveiligingsupdates van de maker?", "toelichting": "Een beveiligingsupdate helpt alleen als uw software hem kan ontvangen. Stel deze vraag ook aan de leverancier die u overweegt." },
+    { "vraag": "Wanneer heeft u voor het laatst een onderdeel vervangen omdat het niet meer onderhouden werd?", "toelichting": "Het antwoord laat zien of een leverancier zijn software bijhoudt, of pas iets doet als het moet." },
+    { "vraag": "Wat doet u als er morgen een lek in uw software wordt gevonden, en hoe hoort onze organisatie dat?", "toelichting": "De zorgplicht van de Cyberbeveiligingswet noemt het omgaan met kwetsbaarheden, ook bij uw leveranciers." }
   ]
 }

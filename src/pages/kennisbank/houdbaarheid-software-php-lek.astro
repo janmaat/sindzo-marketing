@@ -1,0 +1,163 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+import RelatedArticles from '../../components/RelatedArticles.astro';
+import { CYBERBEVEILIGINGSWET } from '../../config/kennisbank';
+import { DOTNET, LEKKEN_GEMETEN } from '../../config/fundament';
+
+// Prompt site-houdbaarheid 01 (23-10-2026). Externe feiten nagelezen in de bron op 23-10-2026: php.net (security
+// advisory 21-10-2026, geen release voor 8.1 en ouder), CERT-EU Security Advisory 2026-018, CISA-alert 21-10-2026,
+// CybelAngel (eigen scan: 54% van de sites die hun versie tonen draait een end-of-life-versie).
+// ⚠ Het cijfer 59% uit de prompt is een Shodan-telling die CybelAngel citeert; Mallory corrigeerde zijn telling op
+// 21-10 naar 73,5%. Daarom hier alleen de eigen scan van CybelAngel, met de opmerking dat tellingen uiteenlopen.
+// Over Curanta alleen feitenbladrijen: Onderhoud en updates, Fundament, Bekende lekken, RPO/RTO, Hele database,
+// Noodoverzicht, Externe pentest, NEN 7510. Niet: "bij ons kan dit niet", "Cbw-ready", "100% veilig", een hoster.
+// Curanta noemt hier bewust niet dat het zelf geen PHP gebruikt: de server waarop het draait heeft een beheerpaneel
+// dat wél op PHP draait, en de zin zou lezen als "bij ons kan dit niet".
+const publicatieDatum = '2026-10-23';
+const bijgewerktDatum = '2026-10-23';
+const leesTijd = '~5 minuten';
+const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const titel = 'Software heeft een houdbaarheidsdatum: wat het PHP-lek van oktober 2026 betekent voor zorgorganisaties';
+const omschrijving = 'Wat er in oktober 2026 met PHP gebeurde, wat de Cyberbeveiligingswet over onderhoud zegt, en vijf vragen voor uw softwareleverancier.';
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: titel,
+  description: omschrijving,
+  datePublished: publicatieDatum,
+  dateModified: bijgewerktDatum,
+  inLanguage: 'nl-NL',
+  author: { '@type': 'Organization', name: 'Curanta' },
+  publisher: { '@type': 'Organization', name: 'Curanta' },
+  keywords: 'PHP2Shell, beveiligingsupdate, kwetsbaarheden, Cyberbeveiligingswet, zorgplicht, leverancier, zorgsoftware'
+};
+
+const vragen = [
+  'Op welke versie van het platform draait het pakket, en tot wanneer krijgt die versie beveiligingsupdates van de maker?',
+  'Hoe vaak controleert u uw software op bekende lekken, en wanneer was de laatste controle?',
+  'Wanneer heeft u voor het laatst een onderdeel vervangen omdat het niet meer onderhouden werd?',
+  'Wat doet u als er morgen een lek in uw software wordt gevonden, en hoe hoort onze organisatie dat?',
+  'Hoe ver vooraf hoort u ons wanneer u overstapt op een nieuwe versie van het platform?',
+];
+---
+<Base
+  title="Software heeft een houdbaarheidsdatum | Curanta"
+  ogType="article"
+  description={omschrijving}
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
+
+  <article class="container-prose py-16">
+    <header class="max-w-3xl">
+      <div class="flex flex-wrap items-center gap-3 text-xs text-ink-500">
+        <a href="/kennisbank" class="text-curanta-700 hover:underline no-underline">Kennisbank</a>
+        <span>·</span>
+        <span>Informatiebeveiliging</span>
+        <span>·</span>
+        <time datetime={publicatieDatum}>{dateNl}</time>
+        <span>·</span>
+        <span>{leesTijd}</span>
+      </div>
+      <h1 class="mt-5 font-display text-4xl font-bold leading-tight tracking-tightish text-ink-900 sm:text-5xl">
+        Software heeft een <em class="italic text-accent-600">houdbaarheids{'­'}datum</em>.
+      </h1>
+      <p class="mt-6 text-lg text-ink-700 leading-relaxed">
+        In oktober 2026 werden twee ernstige lekken in PHP bekend, de programmeertaal onder een groot deel van de
+        websites en webapplicaties. Binnen een dag was er een oplossing, maar alleen voor de versies die de makers
+        nog onderhouden. Voor een bestuurder is de les eenvoudig: een beveiligingsupdate helpt alleen als uw software
+        hem kan ontvangen.
+      </p>
+    </header>
+
+    <div class="prose-content mt-12 max-w-3xl text-ink-700 leading-relaxed">
+      <h2>Wat er gebeurde</h2>
+      <p>
+        Op 20 oktober 2026 werden twee lekken in PHP openbaar, samen PHP2Shell genoemd (CVE-2026-109618 en
+        CVE-2026-109619). Iemand van buiten kan daarmee code uitvoeren op een webserver, zonder in te loggen. De ernst
+        is 9,2 op een schaal van 10.
+      </p>
+      <p>
+        Op 21 oktober bracht het PHP-project een oplossing uit voor de versies 8.2 tot en met 8.5. PHP 8.1 en ouder
+        kregen geen nieuwe versie: die onderhoudt het project niet meer. Hoeveel servers dat raakt, verschilt per
+        telling. In de eigen scan van CybelAngel draaide 54 procent van de websites die hun PHP-versie tonen, op zo'n
+        versie; andere tellingen kwamen hoger uit.
+      </p>
+      <p>
+        Voor wie niet meteen kon bijwerken, gaven CERT-EU en het Amerikaanse CISA hetzelfde advies: scherm de
+        toepassing af van het internet, of haal haar offline, tot de oplossing erop staat. Voor een cliëntdossier
+        betekent dat werken zonder systeem.
+      </p>
+
+      <h2>Het gaat niet alleen om PHP</h2>
+      <p>
+        Elke software draait op een platform, en elk platform heeft een einddatum voor beveiligingsupdates. Zit uw
+        leverancier op een versie die de maker niet meer onderhoudt, dan krijgt ook zijn pakket bij een nieuw lek
+        geen oplossing. Afschermen of uitzetten is dan wat overblijft.
+      </p>
+      <p>
+        De Cyberbeveiligingswet noemt dit uitdrukkelijk. De zorgplicht gaat ook over het onderhoud van systemen en
+        het omgaan met kwetsbaarheden (NIS2 art. 21 lid 2, onder e). En over uw leveranciers: de beveiliging van de
+        toeleveringsketen (onder d). Het bestuur keurt die maatregelen goed (Cbw art. 24).
+        Wat de wet verder van het bestuur vraagt, staat in
+        <a href="/kennisbank/cyberbeveiligingswet-bestuur-zorg">ons artikel over de Cyberbeveiligingswet</a>.
+      </p>
+      <p>
+        Er speelt nog iets. Twee ECD's stoppen eind 2026, een derde eind 2027 (M&amp;I/Partners). Een pakket dat
+        stopt, krijgt ook geen beveiligingsupdates meer. Wie nu een opvolger kiest, kijkt dus ook naar hoe lang het
+        nieuwe pakket meegaat.
+      </p>
+
+      <h2>Vijf vragen voor uw leverancier</h2>
+      <ol>
+        {vragen.map((v) => <li>{v}</li>)}
+      </ol>
+      <p>
+        Meer vragen voor een overstap staan in <a href="/overstappen/vragen-aan-uw-leverancier">de vragen aan uw
+        leverancier</a> en in <a href="/overstappen/programma-van-eisen">het programma van eisen voor een overstap</a>.
+        Ze zijn leverancier-neutraal: u kunt ze ook aan ons stellen.
+      </p>
+
+      <h2>Hoe Curanta het doet</h2>
+      <ul>
+        <li>Elke maand controleren wij het platform op beveiliging. Een beveiligingsupdate brengen wij uit zodra hij nodig is, zonder te wachten op de volgende versie. Elke vier maanden komt er een nieuwe versie.</li>
+        <li>Microsoft brengt elk jaar in november een nieuwe versie van .NET uit, de techniek onder Curanta, en wij stappen een paar weken later over. Nu is dat {DOTNET.versie}, met beveiligingsupdates tot {DOTNET.updatesTot}. De databank is PostgreSQL 18, ondersteund tot november 2030.</li>
+        <li>Op {LEKKEN_GEMETEN} zat er in Curanta geen enkel softwarepakket met een bekend lek, en geen pakket dat de maker niet meer onderhoudt.</li>
+        <li>Gaat er toch iets mis? De hersteltoets van de back-up slaagde op 21 oktober 2026. Uw gegevens staan versleuteld opgeslagen. En bij uitval is er elke dag een versleuteld noodoverzicht.</li>
+      </ul>
+
+      <h2>Wat er bij ons nog niet is</h2>
+      <p>
+        Een externe pentest is nog niet uitgevoerd. De audit voor NEN 7510 is gepland; Curanta is niet gecertificeerd.
+        En een back-up buiten de server is er nog niet. De stand per onderwerp staat in het
+        <a href="/trust">Trust Centre</a>, onder <a href="/trust#herstel">Als het toch gebeurt</a>.
+      </p>
+
+      <h3 class="font-display text-lg font-semibold text-ink-900">Bronnen</h3>
+      <ul class="text-sm">
+        <li>PHP, "Security advisory: Critical remote code execution vulnerabilities, update now", 21 oktober 2026, <a href="https://www.php.net/archive/2026#2026-10-21-5" rel="noopener">php.net</a></li>
+        <li>CERT-EU, Security Advisory 2026-018, "Critical Vulnerabilities in PHP", 21 oktober 2026, <a href="https://cert.europa.eu/publications/security-advisories/2026-018/" rel="noopener">cert.europa.eu</a></li>
+        <li><span lang="en">CISA, "Critical Vulnerabilities in PHP Require Immediate Patching"</span>, 21 oktober 2026, <a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching" rel="noopener">cisa.gov</a></li>
+        <li>CybelAngel, <span lang="en">"What We Know About php2shell"</span>, 21 oktober 2026, <a href="https://cybelangel.com/blog/critical-php-rce-vulnerabilities-cve-2026-109618-and-cve-2026-109619/" rel="noopener">cybelangel.com</a></li>
+        <li>Richtlijn (EU) 2022/2555 (NIS2), art. 21, <a href="https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:32022L2555" rel="noopener">eur-lex.europa.eu</a>; Cyberbeveiligingswet, BWBR0052872, art. 24, <a href="https://wetten.overheid.nl/BWBR0052872" rel="noopener">wetten.overheid.nl</a></li>
+        <li>M&amp;I/Partners, ECD-inventarisatie 2026, 10 september 2026, <a href="https://mxi.nl/kennis/786/ecd-inventarisatie-2026-gehandicaptenzorg-en-ouderenzorg" rel="noopener">mxi.nl</a></li>
+        <li>Microsoft, .NET Support Policy, <a href="https://dotnet.microsoft.com/platform/support/policy/dotnet-core" rel="noopener">dotnet.microsoft.com</a>; PostgreSQL, Versioning Policy, <a href="https://www.postgresql.org/support/versioning/" rel="noopener">postgresql.org</a></li>
+      </ul>
+
+      <p class="text-xs text-ink-500 italic mt-8">
+        Ziet u een fout of mist u een bron? Mail
+        <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>;
+        wij reageren binnen 1 werkdag en zetten een correctie met datum onder dit artikel.
+      </p>
+    </div>
+  </article>
+
+  <RelatedArticles articles={[CYBERBEVEILIGINGSWET]} />
+
+  <Cta
+    title="Weet u tot wanneer uw software updates krijgt?"
+    subtitle="Vraag het uw leverancier, en ons. In de online presentatie ziet u hoe Curanta werkt, wanneer het u uitkomt. Liever samen? Dan laten wij het in een demonstratie zien, met verzonnen cliënten."
+  />
+</Base>

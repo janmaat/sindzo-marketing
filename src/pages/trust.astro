@@ -4,7 +4,8 @@ import StatusLabel from '../components/StatusLabel.astro';
 import StatusLegenda from '../components/StatusLegenda.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
-import { CYBERBEVEILIGINGSWET } from '../config/kennisbank';
+import { CYBERBEVEILIGINGSWET, HOUDBAARHEID } from '../config/kennisbank';
+import { DOTNET, LEKKEN_GEMETEN } from '../config/fundament';
 import type { Status } from '../config/status';
 
 // Trust Centre. Herzien 08-10-2026:
@@ -75,16 +76,33 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
   {
     key: 'operations',
     title: 'Beschikbaarheid en continuïteit',
-    intro: 'Hosting in de EU en een openbare statuspagina, met per onderwerp het doel en de stand.',
+    intro: 'Hosting in de EU, het onderhoud van de software en een openbare statuspagina, met per onderwerp het doel en de stand.',
     items: [
       { label: 'Hosting in de EU', stand: 'geregeld', note: 'Op een server in Duitsland (EU). Wie de hostingpartij is, staat in de subverwerkerslijst.', doc: 'https://app.curanta.nl/trust/subverwerkers' },
+      // Feitenblad, rij Onderhoud en updates (besluit Jan 23-10-2026). Niet: "binnen x uur", "altijd de nieuwste versie".
+      { label: 'Onderhoud van de software', stand: 'geregeld', note: `Elke maand controleren wij het platform op beveiliging. Een beveiligingsupdate brengen wij uit zodra hij nodig is, zonder te wachten op de volgende versie, en elke vier maanden komt er een nieuwe versie. Op ${LEKKEN_GEMETEN} zat er in Curanta geen enkel softwarepakket met een bekend lek, en geen pakket dat de maker niet meer onderhoudt.` },
+      // Feitenblad, rij Fundament. De jaarlijkse overstap is de hoofdzin, de huidige versie de bijzin: na november
+      // 2026 is het .NET 11, een versie met kortere ondersteuning. Bewaakt door scripts/controleer-fundament.mjs.
+      { label: 'Techniek onder Curanta', stand: 'geregeld', note: `Microsoft brengt elk jaar in november een nieuwe versie van .NET uit, de techniek onder Curanta, en wij stappen een paar weken later over. Nu is dat ${DOTNET.versie}, met beveiligingsupdates van Microsoft tot ${DOTNET.updatesTot}. De databank is PostgreSQL 18, ondersteund tot november 2030.` },
       { label: 'Openbare statuspagina', stand: 'geregeld', note: 'Actuele beschikbaarheid per onderdeel; geen incidenthistorie.', doc: 'https://app.curanta.nl/status' },
       { label: 'Beschikbaarheid', stand: 'uitvoering', note: 'Doel 99,9% op kantooruren. Nog geen gemeten historie.', doc: 'https://app.curanta.nl/status' },
+      { label: 'Exit-procedure', stand: 'geregeld', note: 'In onze voorwaarden (artikel 9): wij leveren de export binnen 5 werkdagen, en u hebt 30 dagen om hem op te halen. Na afloop van die 30 dagen wissen wij uw gegevens; u krijgt een vernietigingsverklaring. Wissen kan pas nadat u hebt bevestigd dat u de volledige export hebt ontvangen, of nadat wij hebben vastgelegd waarom het zonder kan.', doc: '/voorwaarden#beeindiging' },
+    ],
+  },
+  {
+    // Toegevoegd 23-10-2026 (prompt site-houdbaarheid 01, aanvulling Janus Hoeks: "we gaan ervan uit dat het
+    // gebeurt"). Alleen bestaande feitenbladrijen: RPO/RTO, hersteltoets, back-up, versleuteling, noodoverzicht,
+    // Cbw-module. ⛔ Niet: 24/7-incidentrespons (besluit Jan 25-09), de externe bewaking ("nog niet noemen").
+    key: 'herstel',
+    title: 'Als het toch gebeurt',
+    intro: 'Wij gaan ervan uit dat er een keer iets misgaat, ook met de nieuwste techniek. Daarom staat hier ook hoe wij herstellen, en hoe uw team dan doorwerkt.',
+    items: [
       { label: 'RPO en RTO', stand: 'uitvoering', note: 'Doel in onze voorwaarden: RPO 1 uur (hoogstens 1 uur aan gegevens kwijt) en RTO 4 uur (binnen 4 uur weer in gebruik). Nog niet aangetoond: de hersteltoets herstelde de database op dezelfde server.', doc: '/voorwaarden#sla' },
       { label: 'Hersteltest', stand: 'geregeld', note: 'Hersteltoets van de back-up geslaagd op 21 oktober 2026.' },
       { label: 'Back-up buiten de server', stand: 'niet', note: 'Nog niet. De back-ups staan versleuteld op de server zelf, nog niet ook op een andere plek.' },
+      { label: 'Een gestolen schijf of back-up', stand: 'geregeld', note: 'Uw gegevens staan versleuteld opgeslagen, ook de bijlagen, de back-ups en de logs. Het wachtwoord van dat volume staat niet op de server.' },
       { label: 'Bij uitval', stand: 'geregeld', note: 'Elke dag een versleuteld noodoverzicht (pdf) met per cliënt de contactgegevens, waarschuwingen, allergieën en de medicatie van de dag; in het medewerkerportaal een kopie op het toestel; en een noodprocedure voor uw organisatie.', doc: '/oplossing#ecd' },
-      { label: 'Exit-procedure', stand: 'geregeld', note: 'In onze voorwaarden (artikel 9): wij leveren de export binnen 5 werkdagen, en u hebt 30 dagen om hem op te halen. Na afloop van die 30 dagen wissen wij uw gegevens; u krijgt een vernietigingsverklaring. Wissen kan pas nadat u hebt bevestigd dat u de volledige export hebt ontvangen, of nadat wij hebben vastgelegd waarom het zonder kan.', doc: '/voorwaarden#beeindiging' },
+      { label: 'Een cyberincident bij uw organisatie', status: 'demo', note: 'U legt het incident vast in de module voor de Cyberbeveiligingswet, en Curanta bewaakt de meldtermijnen van 24 uur, 72 uur en één maand. Melden bij het CSIRT doet uw organisatie zelf.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '/oplossing#kwaliteit' },
     ],
   },
   {
@@ -252,7 +270,7 @@ const termijnen = [
     </div>
   </section>
 
-  <RelatedArticles articles={[CYBERBEVEILIGINGSWET]} />
+  <RelatedArticles articles={[CYBERBEVEILIGINGSWET, HOUDBAARHEID]} />
 
   <section class="container-prose py-16">
     <div class="rounded-2xl bg-curanta-50 p-8 sm:p-12">
