@@ -323,6 +323,32 @@ const aiAct = [
   },
 ] as const;
 
+// De drie zorgen bij een overstap (prompt site-houdbaarheid 01, stap 4; rapport "Overstapdrempels zorgsoftware en
+// keuzehulp", 21-10-2026: zekerheid verkoopt een overstap). Per zorg één feit dat al op /overstappen of /trust staat,
+// met een link. Feitenblad: rijen Overstap in het implementatieproject (Declaraties rond de overstap, proefoverzet)
+// en Exit. ⛔ Niet: "declaraties lopen zonder onderbreking door", een import uit het vorige pakket, of dat Curanta
+// zelf het oude dossier bewaart.
+const zorgen = [
+  {
+    icoon: 'lijst',
+    kop: 'De declaraties',
+    tekst: 'Rond de start spreekt u per financier af tot welke periode uw huidige pakket declareert, en vanaf welke periode Curanta. Uw huidige pakket blijft beschikbaar tot de laatste retourberichten binnen zijn.',
+    link: { href: '/overstappen', label: 'Zo verloopt de overstap' },
+  },
+  {
+    icoon: 'dossier',
+    kop: 'Uw gegevens',
+    tekst: 'Het overzetten is ons werk, als project tegen een vaste prijs. Eerst zetten wij één keer op proef over, en uw mensen controleren de aantallen en een steekproef.',
+    link: { href: '/overstappen', label: 'Wat er overgaat en wie controleert' },
+  },
+  {
+    icoon: 'download',
+    kop: 'De leverancier zelf',
+    tekst: 'Gaat u weg, dan krijgt u binnen 5 werkdagen een volledige export van uw gegevens en bestanden, zonder exit-fee. Wat er gebeurt als Curanta wegvalt, staat met de stand erbij in het Trust Centre.',
+    link: { href: '/trust#continuiteit', label: 'Als Curanta wegvalt' },
+  },
+] as const;
+
 const voordelen = [
   {
     icoon: 'mensen',
@@ -413,7 +439,39 @@ const voordelen = [
     </div>
   </section>
 
-  {/* 1a. Twee manieren om Curanta te leren kennen (besluit Jan 15-10-2026): wij komen langs, of de klant bekijkt de
+  {/* 1a. Waarom nu, en hoe zonder risico (23-10-2026). Staat bewust direct onder de introductie: een bestuurder
+      stapt alleen over met een goede reden, en wil eerst weten dat drie dingen goed gaan. Het uitgebreide "waarom nu"
+      staat verderop (1c). */}
+  <section class="border-t border-ink-200 bg-white py-16 sm:py-20" aria-labelledby="zorgen-kop">
+    <div class="container-prose">
+      <div class="grid gap-4 lg:grid-cols-12 lg:gap-14 lg:items-end" data-reveal>
+        <h2 id="zorgen-kop" class="font-display text-3xl font-bold text-curanta-900 sm:text-4xl lg:col-span-5">
+          Overstappen, en wat er niet mis mag gaan
+        </h2>
+        <p class="text-lg leading-relaxed text-ink-700 lg:col-span-7">
+          Twee ECD's stoppen eind 2026, een derde eind 2027 (M&amp;I/Partners). Sinds 15 augustus 2026 hoort voor zorgaanbieders
+          vanaf 50 fte ook het onderhoud van systemen bij de maatregelen die het bestuur vaststelt (Cyberbeveiligingswet). Wie nu
+          overstapt, wil vooral zeker weten dat drie dingen goed gaan.
+        </p>
+      </div>
+      <ul class="mt-12 grid gap-6 md:grid-cols-3">
+        {zorgen.map((z, i) => (
+          <li class="flex flex-col rounded-2xl border border-ink-200 bg-white p-6" data-reveal style={`--reveal-vertraging:${i * 80}ms`}>
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-curanta-50 text-curanta-700">
+              <Icon naam={z.icoon} class="h-5 w-5" />
+            </span>
+            <h3 class="mt-4 font-display text-lg font-bold text-curanta-900">{z.kop}</h3>
+            <p class="mt-2 leading-relaxed text-ink-700">{z.tekst}</p>
+            <a href={z.link.href} class="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-curanta-700 no-underline hover:underline">
+              {z.link.label} <Icon naam="pijl" class="h-4 w-4" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* 1b. Twee manieren om Curanta te leren kennen (besluit Jan 15-10-2026): wij komen langs, of de klant bekijkt de
       presentatie online in eigen tempo (presentatie.curanta.nl, aan te vragen op /presentatie). Bedoeld om de drempel te
       verlagen. Feitenblad: rijen Demonstratie en Presentatie aanvragen. */}
   <section class="border-t border-ink-200 py-16 sm:py-20" aria-labelledby="kennismaken-kop">
@@ -486,7 +544,7 @@ const voordelen = [
     </div>
   </section>
 
-  {/* 1b. Waarom nu opnieuw kiezen: de markt naast de prijs (15-10-2026). Per ontwikkeling het feit met bron,
+  {/* 1c. Waarom nu opnieuw kiezen: de markt naast de prijs (15-10-2026). Per ontwikkeling het feit met bron,
       wat Curanta doet. Sinds 21-10-2026 zonder aparte "nog niet"-regel; waar een lezer zonder die regel te veel
       zou denken (inspreken onderweg), staat het in de zin over Curanta zelf. */}
   <section class="py-16 sm:py-20" aria-labelledby="waarom-nu-kop">
