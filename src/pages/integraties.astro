@@ -49,7 +49,7 @@ const integrations: Integration[] = [
   { name: 'ZorgMail', category: 'Communicatie', status: 'inrichten',
     body: 'Beveiligde berichten en bijlagen via het ZorgMail-netwerk. Vraagt een ZorgMail-abonnement van uw organisatie.' },
   { name: 'ZorgDomein', category: 'Communicatie', status: 'inrichten',
-    body: 'Inkomende verwijzingen met bijlagen via ZorgDomein. Antwoorden vanuit Curanta is in ontwikkeling.' },
+    body: 'Inkomende verwijzingen met bijlagen via ZorgDomein. Antwoorden vanuit Curanta kan nog niet.' },
 
   // Medicatie
   { name: 'Medimo', category: 'Medicatie', status: 'inrichten',
@@ -68,7 +68,7 @@ const integrations: Integration[] = [
   { name: 'VECOZO (rechtstreeks aanleveren)', category: 'Financieel', status: 'inrichten',
     body: 'Rechtstreeks aanleveren via VECOZO is ingericht voor Wmo, Jeugdwet, Wlz, wijkverpleging en GGZ: Curanta biedt het bericht aan, volgt de stand en haalt de retourberichten op, met één kenmerk per aanbieding zodat niets dubbel wordt gedeclareerd. Wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot die tijd, en wanneer u dat wilt, levert u met de hand aan in het VECOZO-portaal.' },
   { name: 'Gemeenten (iWmo en iJw)', category: 'Financieel', status: 'inrichten',
-    body: 'Curanta stelt de berichten op volgens iStandaard 3.2: start en stop van de zorg, verzoeken om toewijzing of wijziging en de maanddeclaratie (Wmo323, Jw323) uit goedgekeurde productie. Elk bericht wordt getoetst aan het officiële schema. U downloadt het en levert het aan in het VECOZO-portaal. Antwoorden van de gemeente leest u in, als bestand of geplakt. Rechtstreeks versturen vanuit Curanta volgt.' },
+    body: 'Curanta stelt de berichten op volgens iStandaard 3.2: start en stop van de zorg, verzoeken om toewijzing of wijziging en de maanddeclaratie (Wmo323, Jw323) uit goedgekeurde productie. Elk bericht wordt getoetst aan het officiële schema. U downloadt het en levert het aan in het VECOZO-portaal. Antwoorden van de gemeente leest u in, als bestand of geplakt. Rechtstreeks aanleveren via VECOZO is ingericht: zie VECOZO (rechtstreeks aanleveren).' },
   { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'inrichten',
     body: 'Curanta stelt de iWlz-berichten op volgens iStandaard 2.4.3, zoals de melding van begin en einde van de zorg, en leest de berichten van het zorgkantoor in. Ze worden getoetst aan het officiële schema. De maanddeclaratie maakt Curanta als Vektis-bericht (AW319) uit goedgekeurde productie. U downloadt de bestanden en levert ze aan bij het zorgkantoor. Hoe dat gaat, stemmen wij bij de start per zorgkantoor af: of het VECOZO-portaal iWlz-bestanden en een Wlz-declaratie (AW319) aanneemt, is een open vraag aan VECOZO.' },
   // 14-10-2026: een zorgaanbieder levert niets rechtstreeks aan het CAK. Bij de Wlz geeft het zorgkantoor de start
@@ -85,9 +85,13 @@ const integrations: Integration[] = [
   // 14-10-2026: het bericht wordt getoetst aan de officiële XSD van Vektis en de handmatige aanlevering via het
   // VECOZO-portaal is gebouwd (Ponscura c5d17a29b). Rechtstreeks versturen vanuit Curanta is nog niet beproefd.
   { name: 'Zorgverzekeraars (GGZ, GDS801)', category: 'Financieel', status: 'inrichten',
-    body: 'GGZ-declaraties volgens de standaard van Vektis. Curanta maakt het bericht en toetst het aan het officiële schema. U levert het aan in het VECOZO-portaal, met het VECOZO-account van uw organisatie; rechtstreeks versturen vanuit Curanta volgt. Het retourbericht (GDS802) leest u in.' },
+    body: 'GGZ-declaraties volgens de standaard van Vektis. Curanta maakt het bericht en toetst het aan het officiële schema. U levert het aan in het VECOZO-portaal, met het VECOZO-account van uw organisatie, of rechtstreeks via VECOZO (zie VECOZO, rechtstreeks aanleveren). Het retourbericht (GDS802) leest u in.' },
   { name: 'Zorgverzekeraars (Zvw)', category: 'Financieel', status: 'inrichten',
-    body: 'Zvw-declaratie voor de wijkverpleging. Curanta maakt uit goedgekeurde zorg per zorgverzekeraar en maand het declaratiebericht (AW319), getoetst aan de recordlayout en de testset van Vektis. U levert het aan in het VECOZO-portaal en leest het antwoord (AW320) in. Rechtstreeks versturen vanuit Curanta volgt.' },
+    body: 'Zvw-declaratie voor de wijkverpleging. Curanta maakt uit goedgekeurde zorg per zorgverzekeraar en maand het declaratiebericht (AW319), getoetst aan de recordlayout en de testset van Vektis. U levert het aan in het VECOZO-portaal en leest het antwoord (AW320) in. Rechtstreeks aanleveren via VECOZO is ingericht: zie VECOZO (rechtstreeks aanleveren).' },
+  // 23-10-2026: KZ301 v3.2 (Ponscura 388c0148b, ADR 2026-10-23-kz301-kraamzorgdeclaratie). Alleen met de hand; het
+  // rechtstreeks aanleveren via VECOZO dekt de kraamzorg niet, en het retourbericht leest de klant in het VECOZO-portaal.
+  { name: 'Zorgverzekeraars (kraamzorg)', category: 'Financieel', status: 'inrichten',
+    body: 'Zvw-declaratie voor de kraamzorg. Curanta maakt uit de goedgekeurde kraambezoeken per zorgverzekeraar en maand het declaratiebericht (KZ301), getoetst aan de recordlayout en de testset van Vektis. U levert het aan in het VECOZO-portaal en leest daar ook het retourbericht. Rechtstreeks aanleveren via VECOZO is er voor de kraamzorg niet.' },
 
   // Sensoren en domotica
   { name: 'Domotica', category: 'Sensoren en domotica', status: 'inrichten',
@@ -103,7 +107,7 @@ const integrations: Integration[] = [
   { name: 'UZI-pas', category: 'Identiteit', status: 'inrichten',
     body: 'Curanta leest de pas uit en controleert de certificaatketen en of de pas is ingetrokken. Beschikbaar zodra wij de UZI-hostnaam op onze server hebben ingericht; dat is nog niet gebeurd. De eindtest met een echte pas doen wij bij de implementatie, met uw organisatie.' },
   { name: 'Microsoft Entra ID (SSO)', category: 'Identiteit', status: 'ontwikkeling',
-    body: 'Aanmelden met het Microsoft-werkaccount in de backoffice en het medewerkerportaal, met rollen uit groepen, is gebouwd. De eindtest met een echte Microsoft-omgeving volgt. Alleen Microsoft Entra ID: geen SAML en geen andere aanbieders. Het cliëntportaal heeft geen SSO.' },
+    body: 'Aanmelden met het Microsoft-werkaccount in de backoffice en het medewerkerportaal, met rollen uit groepen, is gebouwd. De eindtest met een echte Microsoft-omgeving is nog niet gedaan. Alleen Microsoft Entra ID: geen SAML en geen andere aanbieders. Het cliëntportaal heeft geen SSO.' },
 
   // Klinisch
   { name: 'Ysis (Gerimedica)', category: 'Klinisch', status: 'ontwikkeling',

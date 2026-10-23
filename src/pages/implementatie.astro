@@ -10,8 +10,11 @@ import { DEMO_GESPREK, PRESENTATIE } from '../config/demo';
 // uniek (een andere leverancier heeft er een). Nergens gevonden: dat wat de klant invult de inrichting wordt,
 // en dat de software daarna elke dag meet of het er staat. Daarom beschrijft dit blok die twee, zonder
 // "uniek" en zonder concurrent. Elke zin staat in het feitenblad, rij "Implementatieproject": 22 van de 70
-// onderdelen worden overgenomen, 24 gemeten (ImplementatieGereedheidJob, elke 24 uur). Niet noemen: uploaden,
-// herinneringen, een import uit het vorige pakket (bestaan niet), een doorlooptijd of een klantresultaat.
+// onderdelen worden overgenomen, 24 gemeten (ImplementatieGereedheidJob, elke 24 uur). Niet noemen: een import uit
+// het vorige pakket (bestaat niet), een doorlooptijd of een klantresultaat.
+// 23-10-2026: bestanden aanleveren per onderdeel (ADR 2026-10-23-bestanden-in-de-projectomgeving). Zeg dat Curanta een
+// bestand pas opent als het schoon is gescand, niet dat elk bestand bij ontvangst gescand wordt: de scanner op de
+// server is nog in te richten (feitenblad, rij Implementatieproject).
 const project = [
   {
     kop: 'Eén keer invullen',
@@ -132,7 +135,11 @@ const vragen = [
   },
   {
     vraag: 'Komen er gegevens van cliënten in het project?',
-    antwoord: 'Nee. Het project gaat over uw organisatie, niet over uw cliënten. Er is geen veld voor een BSN. Het overzetten van cliëntgegevens is een apart project tegen een vaste prijs.',
+    antwoord: 'Niet in de velden: het project gaat over uw organisatie, en er is geen veld voor een BSN. Een bestand dat wij voor de inrichting nodig hebben, zoals een voorbeeldexport uit uw huidige pakket, kan wel persoonsgegevens bevatten; dat krijgt dezelfde bescherming als een wachtwoord. Het overzetten van de dossiers is een apart project tegen een vaste prijs.',
+  },
+  {
+    vraag: 'Hoe lever ik bestanden aan?',
+    antwoord: 'Bij het onderdeel waar het bestand bij hoort, in een beveiligd venster zoals bij de certificaten, en pas na de verwerkersovereenkomst. Het gaat om pdf, Word, Excel en PowerPoint zonder macro’s, CSV, tekst, XML, JSON, ZIP en afbeeldingen, tot 25 MB per keer. Het bestand staat versleuteld. Alleen wij openen het, en pas als het schoon is gescand; elke download komt in het logboek. Het is weg bij het afsluiten van het project, en dertig dagen nadat wij het gebruikten.',
   },
   {
     vraag: 'Wat kost de implementatie?',
@@ -169,7 +176,8 @@ const vragen = [
         </p>
         <p class="mt-4 leading-relaxed text-ink-700">
           Certificaten en wachtwoorden, zoals het VECOZO-systeemcertificaat, levert u aan in een beveiligd
-          venster en niet per mail. Gegevens van cliënten komen er nooit in.
+          venster en niet per mail. Bestanden, zoals een medewerkerslijst of een getekend contract, levert u
+          zo ook aan, bij het onderdeel. In de velden van het project komen geen gegevens van cliënten.
         </p>
         <p class="mt-4 text-sm leading-relaxed text-ink-500">
           De omgeving is alleen te zien met een persoonlijke uitnodiging. In een gesprek laten wij u een

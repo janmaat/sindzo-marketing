@@ -16,14 +16,15 @@ import beeld from '../../assets/schermen/bo-jeugdzorg.jpg';
   hero="Het jeugddossier, met de meldcode erin"
   subtitle="De jeugdhulpverlener werkt aan hulpvragen met behandelstappen en ziet de toewijzingen van de gemeente aftellen. Hij doorloopt de meldcode, met de aandachtsfunctionaris als vraagbaak; die ziet alleen wat daarvoor nodig is."
   triggers={[
-    { title: 'Hulpvragen en toewijzingen', body: 'Per jeugdige de hulpvragen met behandelstappen, de vertegenwoordigers en de toewijzingen onder de Jeugdwet, met het verbruik dat aftelt.' },
+    { title: 'Hulpvragen, plan en toewijzingen', body: 'Per jeugdige de hulpvragen met behandelstappen, het hulpverleningsplan met doelen, evaluatie en instemming, de vertegenwoordigers en de toewijzingen onder de Jeugdwet, met het verbruik dat aftelt. Alle toewijzingen staan in één register; de ingelezen toewijzing van de gemeente is leidend. Wordt de jeugdige 18 of 23, dan geeft Curanta een signaal.' },
     { title: 'De meldcode in vijf stappen', body: 'De jeugdhulpverlener doorloopt de vijf stappen tot een besluit, met de aandachtsfunctionaris als vraagbaak; een afgeronde stap is niet meer te wijzigen. Melden bij Veilig Thuis doet u zelf; Curanta legt het besluit vast.' },
-    { title: 'Alleen zien wat nodig is', body: 'De aandachtsfunctionaris ziet de meldcode, de verwijsindex en het logboek, niet het hele dossier. Bij een inzageverzoek kan zij gegevens weglakken en een pdf maken. Curanta legt de verstrekking vast.' },
+    { title: 'Alleen zien wat nodig is', body: 'Het jeugddossier opent alleen voor wie een zorgrelatie met de jeugdige heeft, waarneemt met een reden, of coördinator is. Voor ouders en de jeugdige zelf volgt het cliëntportaal de leeftijdsgrenzen van 12, 16 en 18 jaar. De aandachtsfunctionaris ziet de meldcode, de verwijsindex en het logboek, niet het hele dossier. Bij een inzageverzoek kan zij gegevens weglakken en een pdf maken. Curanta legt de verstrekking vast.' },
   ]}
   modules={[
-    { name: 'Jeugddossier', note: 'Hulpvragen, behandelstappen, vertegenwoordigers, risico' },
+    { name: 'Jeugddossier', note: 'Hulpvragen, behandelstappen, hulpverleningsplan, vertegenwoordigers, risico' },
     { name: 'Meldcode', note: 'Vijf stappen tot een besluit, met de aandachtsfunctionaris als vraagbaak' },
-    { name: 'Toewijzingen en declaratie (iJw)', note: 'Verbruik dat aftelt; het declaratiebericht (Jw323) uit goedgekeurde productie' },
+    { name: 'Toewijzingen en declaratie (iJw)', note: 'Eén register, verbruik dat aftelt; per traject per stuk of per bedrag; het declaratiebericht (Jw323) uit goedgekeurde productie' },
+    { name: 'Slaap- en bereikbaarheidsdiensten', note: 'In het rooster, getoetst aan de cao Jeugdzorg, ook als een medewerker een open dienst overneemt' },
     { name: 'Inzageverzoek', note: 'Weglakken en een pdf; Curanta legt de verstrekking vast' },
     { name: 'Multidisciplinair overleg (MDO) en planning', note: 'De algemene onderdelen van Curanta' },
     { name: 'Uitlegvideo’s', note: 'Een eigen reeks voor de jeugdzorg in de app' },
@@ -35,7 +36,7 @@ import beeld from '../../assets/schermen/bo-jeugdzorg.jpg';
   ]}
   nogNiet={[
     'De proef van het rechtstreeks aanleveren in de testomgeving van VECOZO: die doen wij per organisatie, vóór uw eerste declaratiemaand.',
-    'Een signaal naar de Verwijsindex: er is nog geen aansluiting.',
+    'Een signaal naar de Verwijsindex: er is nog geen aansluiting. Een VIR-signaal legt u met de hand vast.',
     'Melden bij Veilig Thuis vanuit Curanta: dat doet u zelf.',
   ]}
   regulatory={['Jeugdwet', 'Meldcode', 'Wkkgz', 'AVG', 'NEN 7510']}
