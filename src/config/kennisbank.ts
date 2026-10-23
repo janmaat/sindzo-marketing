@@ -35,3 +35,10 @@ export const PEER_SUPPORT: KennisbankArtikel = {
   body: 'Het onderzoek, de AZW-cijfers en de privacyregels op een rij, met de vragen voor HR en FG.',
   href: '/kennisbank/peer-support-zorgmedewerkers',
 };
+
+export const HOUDBAARHEID: KennisbankArtikel = {
+  eyebrow: 'Informatiebeveiliging',
+  title: 'Software heeft een houdbaarheidsdatum',
+  body: 'Wat het PHP-lek van oktober 2026 betekent voor zorgorganisaties, wat de Cyberbeveiligingswet over onderhoud zegt, en vijf vragen voor uw leverancier.',
+  href: '/kennisbank/houdbaarheid-software-php-lek',
+};
