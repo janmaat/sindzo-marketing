@@ -26,6 +26,7 @@ export const KRUIMELNAMEN: Record<string, string> = {
   api: 'FHIR-API',
   adr: 'Architectuurbesluiten',
   cases: 'Zelf nakijken',
+  adviseurs: 'Voor adviseurs',
   privacy: 'Privacy',
   voorwaarden: 'Voorwaarden',
   cookies: 'Cookies',
