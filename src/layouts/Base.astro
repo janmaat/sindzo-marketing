@@ -183,7 +183,8 @@ const kruimelLd = !noindex && delen.length > 0 ? {
     */}
     <script is:inline>
       (function () {
-        var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
+        // gbraid en wbraid: de klikcode die Google bij een deel van het iOS-verkeer meestuurt in plaats van een gclid.
+        var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'gbraid', 'wbraid'];
         var here = new URLSearchParams(window.location.search);
         var carry = keys.filter(function (k) { return here.get(k); });
         if (!carry.length) return;

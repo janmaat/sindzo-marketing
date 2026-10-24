@@ -16,8 +16,8 @@ import inhoud from '../config/overstap-inhoud.json';
 // na beoordeling), Prijzen, Implementatie (maatwerk), Migratie, Documenten voor inkoop (op aanvraag; het programma van
 // eisen voor een overstap, de dertien vragen en de overstapscan staan online), Contract (art. 9, concept, juridisch nog
 // te toetsen), Export en Exit, Positionering (aantal onderdelen uit src/config/onderdelen.ts), Demonstratie.
-// De link naar het formulier zet "Hoe kwam u bij ons?" op Adviseur (?herkomst=adviseur, zie presentatie/index.astro).
-const aanvraag = `${PRESENTATIE.href}?herkomst=adviseur#presentatie-aanvraag`;
+// De link naar het formulier zet "Hoe kwam u bij ons?" op Adviseur (?gevonden_via=adviseur, zie presentatie/index.astro).
+const aanvraag = `${PRESENTATIE.href}?gevonden_via=adviseur#presentatie-aanvraag`;
 const aantalEisen = inhoud.pve.reduce((n, c) => n + c.eisen.length, 0);
 const aantalVragen = inhoud.leveranciersvragen.length;
 

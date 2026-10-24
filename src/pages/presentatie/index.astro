@@ -91,17 +91,18 @@ const nakijken = [
   },
 ];
 
-// Aanbeveling 9 (24-10-2026): "Hoe kwam u bij ons?", optioneel. Veldnamen (herkomst, herkomstToelichting) en waarden
-// zijn voorlopig; de presentatiemodule in Ponscura neemt ze over en toont ze in het trechteroverzicht. Een leeg veld
-// is geen fout. Een link kan de keuze vooraf invullen met ?herkomst=<waarde> (bijvoorbeeld vanaf /adviseurs).
-const herkomsten = [
+// Aanbeveling 9 (24-10-2026): "Hoe kwam u bij ons?", optioneel. Veldnamen en waarden zijn die van de API van de
+// presentatiemodule in Ponscura (PresentatieGevondenVia: gevonden_via en gevonden_via_toelichting); een andere waarde
+// telt daar als niet ingevuld. Een leeg veld is geen fout. Een link kan de keuze vooraf invullen met
+// ?gevonden_via=<waarde> (bijvoorbeeld vanaf /adviseurs).
+const gevondenVia = [
   { waarde: 'zoekmachine', label: 'Zoekmachine (Google, Bing)' },
-  { waarde: 'advertentie', label: 'Advertentie' },
+  { waarde: 'ai-assistent', label: 'AI-assistent (ChatGPT e.d.)' },
   { waarde: 'linkedin', label: 'LinkedIn' },
-  { waarde: 'collega', label: 'Collega of andere organisatie' },
-  { waarde: 'adviseur', label: 'Adviseur' },
-  { waarde: 'ai-assistent', label: 'ChatGPT of een andere AI-assistent' },
-  { waarde: 'beurs', label: 'Beurs of bijeenkomst' },
+  { waarde: 'collega', label: 'Collega of netwerk' },
+  { waarde: 'adviseur', label: 'Adviseur of selectiebureau' },
+  { waarde: 'evenement', label: 'Congres of evenement' },
+  { waarde: 'advertentie', label: 'Advertentie' },
   { waarde: 'anders', label: 'Anders' },
 ];
 
@@ -223,9 +224,12 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
         <input type="hidden" name="invultijd" />
         {/* "stoppend" als de bezoeker met ?van=stoppend kwam (aanbeveling 11); anders uitgeschakeld en niet verstuurd. */}
         <input type="hidden" name="van" disabled />
-        {/* gclid gaat alléén mee als de bezoeker het vakje "advertentiemeting" aanvinkt (zoals op /demo, sinds 20-10-2026);
-            een uitgeschakeld veld wordt niet verstuurd. */}
+        {/* De klikcode van Google (gclid, of bij een deel van het iOS-verkeer gbraid of wbraid) gaat alléén mee als de
+            bezoeker het vakje "advertentiemeting" aanvinkt (zoals op /demo, sinds 20-10-2026); een uitgeschakeld veld
+            wordt niet verstuurd. */}
         <input type="hidden" name="gclid" disabled />
+        <input type="hidden" name="gbraid" disabled />
+        <input type="hidden" name="wbraid" disabled />
 
         <h2 class="font-display text-xl font-semibold text-ink-900">Vraag de hele presentatie aan</h2>
 
@@ -277,16 +281,16 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
         <div class="mt-5 grid gap-5 sm:grid-cols-2">
           <label class="block">
             <span class="text-sm font-semibold text-ink-900">Hoe kwam u bij ons? <span class="font-normal text-ink-500">(optioneel)</span></span>
-            <select name="herkomst" class={veld}>
+            <select name="gevonden_via" class={veld}>
               <option value="">Kies een antwoord</option>
-              {herkomsten.map((h) => <option value={h.waarde}>{h.label}</option>)}
+              {gevondenVia.map((h) => <option value={h.waarde}>{h.label}</option>)}
             </select>
           </label>
           {/* Zonder script altijd zichtbaar; met script pas na een keuze. */}
-          <label class="block" id="herkomst-toelichting-veld">
+          <label class="block" id="gevonden-via-toelichting-veld">
             <span class="text-sm font-semibold text-ink-900">Wie of welke? <span class="font-normal text-ink-500">(optioneel)</span></span>
-            <input type="text" name="herkomstToelichting" maxlength="200" class={veld}
-                   placeholder="Bijvoorbeeld het adviesbureau of de beurs" />
+            <input type="text" name="gevonden_via_toelichting" maxlength="200" class={veld}
+                   placeholder="Bijvoorbeeld het adviesbureau of het congres" />
           </label>
         </div>
 
@@ -402,8 +406,8 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
 
     var labels = { naam: 'uw naam', email: 'uw e-mailadres', organisatie: 'de organisatie', functie: 'de functie',
       telefoon: 'het telefoonnummer', toelichting: 'de toelichting', toestemming: 'het vakje voor de privacyverklaring',
-      sector: 'de sector', zorgvorm: 'welke zorg u levert', herkomst: 'hoe u bij ons kwam',
-      herkomstToelichting: 'wie of welke' };
+      sector: 'de sector', zorgvorm: 'welke zorg u levert', gevonden_via: 'hoe u bij ons kwam',
+      gevonden_via_toelichting: 'wie of welke' };
     var contact = ' Lukt het niet? Bel 085 250 1301 of mail info@curanta.nl.';
     var knop = form.querySelector('button[type="submit"]');
     var zorgvormVeld = document.getElementById('zorgvorm-veld');
@@ -417,7 +421,7 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
     }
     // Vanuit de overstapscan (21-10-2026): sector, zorgvorm en een korte samenvatting staan in de URL, alleen als de
     // bezoeker daar zelf op "Online presentatie aanvragen" klikte. Alleen bekende waarden; de bezoeker past het aan.
-    ['sector', 'zorgvorm', 'herkomst'].forEach(function (k) {
+    ['sector', 'zorgvorm', 'gevonden_via'].forEach(function (k) {
       var v = here.get(k), el = form.elements[k];
       if (v && el && Array.prototype.some.call(el.options, function (o) { return o.value === v; })) el.value = v;
     });
@@ -448,12 +452,12 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
     toonZorgvorm();
 
     // "Hoe kwam u bij ons?": het vrije veld verschijnt pas na een keuze (zonder script staat het er altijd).
-    var herkomstToelichting = document.getElementById('herkomst-toelichting-veld');
-    function toonHerkomstToelichting() {
-      if (herkomstToelichting) herkomstToelichting.classList.toggle('hidden', !form.elements['herkomst'].value);
+    var gevondenViaToelichting = document.getElementById('gevonden-via-toelichting-veld');
+    function toonGevondenViaToelichting() {
+      if (gevondenViaToelichting) gevondenViaToelichting.classList.toggle('hidden', !form.elements['gevonden_via'].value);
     }
-    form.elements['herkomst'].addEventListener('change', toonHerkomstToelichting);
-    toonHerkomstToelichting();
+    form.elements['gevonden_via'].addEventListener('change', toonGevondenViaToelichting);
+    toonGevondenViaToelichting();
 
     // Wie met ?van=stoppend komt (aanbeveling 11), ziet eerst het blok over de overstap, en de aanvraag krijgt
     // van=stoppend mee. Alleen deze ene waarde; zonder de parameter gaat het veld niet mee.
@@ -464,16 +468,17 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
       form.elements['van'].disabled = false;
     }
 
-    // De klikcode van een Google-advertentie gaat alleen mee met het vinkje (zoals op /demo).
-    var gclid = here.get('gclid');
-    if (gclid) {
-      var gclidVeld = form.elements['gclid'];
+    // De klikcode van een Google-advertentie (gclid, gbraid of wbraid) gaat alleen mee met het vinkje (zoals op /demo).
+    var klikVelden = ['gclid', 'gbraid', 'wbraid']
+      .filter(function (k) { return here.get(k); })
+      .map(function (k) { var el = form.elements[k]; el.value = here.get(k).slice(0, 200); return el; });
+    if (klikVelden.length) {
       var vinkje = form.elements['adMeting'];
-      gclidVeld.value = gclid.slice(0, 200);
       document.getElementById('advertentiemeting').classList.remove('hidden');
       // Ook bij terugkeren via 'vorige': de browser herstelt het vinkje, niet de disabled-stand.
-      gclidVeld.disabled = !vinkje.checked;
-      vinkje.addEventListener('change', function () { gclidVeld.disabled = !vinkje.checked; });
+      var zetKlikVelden = function () { klikVelden.forEach(function (el) { el.disabled = !vinkje.checked; }); };
+      zetKlikVelden();
+      vinkje.addEventListener('change', zetKlikVelden);
     }
 
     function toon(tekst) {
