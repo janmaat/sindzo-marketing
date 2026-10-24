@@ -2,6 +2,7 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { LINKEDIN_BEDRIJFSPAGINA } from '../config/linkedin';
+import { KRUIMELNAMEN } from '../config/kruimels';
 import '../styles/global.css';
 
 interface Props {
@@ -89,6 +90,24 @@ const orgLd = {
   // Koppelt de site aan het profiel van de organisatie elders (skill site-inhoudscontrole, Vindbaarheid).
   ...(LINKEDIN_BEDRIJFSPAGINA ? { sameAs: [LINKEDIN_BEDRIJFSPAGINA] } : {}),
 };
+
+// Kruimelpad (BreadcrumbList), afgeleid uit het pad: /voor/ggz → Curanta › Voor wie › GGZ. Niet op de homepage en
+// niet op pagina's met noindex. Namen uit src/config/kruimels.ts; de laatste kruimel valt terug op de paginatitel.
+const delen = Astro.url.pathname.split('/').filter(Boolean);
+const titelZonderMerk = title.replace(/\s*\|\s*Curanta\s*$/, '');
+const kruimelLd = !noindex && delen.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Curanta', item: new URL('/', Astro.site).toString() },
+    ...delen.map((deel, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: KRUIMELNAMEN[deel] ?? (i === delen.length - 1 ? titelZonderMerk : deel),
+      item: new URL('/' + delen.slice(0, i + 1).join('/'), Astro.site).toString(),
+    })),
+  ],
+} : null;
 ---
 <!doctype html>
 <html lang="nl">
@@ -119,6 +138,7 @@ const orgLd = {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#0E4F57" />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(orgLd)} />
+    {kruimelLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(kruimelLd)} />}
     {/* Het merkfont staat zelf gehost in /fonts (zie global.css); preload van de latin-subset
         zodat de eerste weergave niet op de CSS hoeft te wachten om hem te ontdekken. */}
     <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />

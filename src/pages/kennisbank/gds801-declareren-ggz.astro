@@ -1,0 +1,111 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+import RelatedArticles from '../../components/RelatedArticles.astro';
+import { HOUDBAARHEID } from '../../config/kennisbank';
+
+// Toegevoegd 24-10-2026 voor de zoekterm "gds801" (Search Console: positie 19 op /voor/ggz, zonder uitleg op de site).
+// Extern nagelezen op 24-10-2026: Vektis, standaard GDS801 versie 2.0 (generieke declaratiestandaard, ingangsdatum
+// 01-01-2025, declaratiecodelijsten 071, 073 t/m 083 en 999, via VECOZO) en GDS802 (retourinformatie); de
+// invulinstructie voor prestatiecodelijst 071 (ggz en forensische zorg, zorgprestatiemodel).
+// Over Curanta alleen het feitenblad: rijen VECOZO (GDS801 getoetst aan de Vektis-XSD; standaard met de hand
+// aanleveren; rechtstreeks ingericht, nog niet beproefd) en GGZ-instelling (tussentijds declareren, per zorgdatum de
+// juiste verzekeraar, zorglabels mee in de GDS801). Niet: "via VECOZO verstuurd", "live", "beproefd".
+const publicatieDatum = '2026-10-24';
+const bijgewerktDatum = '2026-10-24';
+const leesTijd = '~4 minuten';
+const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const omschrijving = 'Wat GDS801 is, welke zorg ermee declareert, hoe het retourbericht GDS802 werkt, en waar u op let als u in de ggz declareert.';
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'GDS801: declareren in de ggz volgens de standaard van Vektis',
+  description: omschrijving,
+  datePublished: publicatieDatum,
+  dateModified: bijgewerktDatum,
+  inLanguage: 'nl-NL',
+  author: { '@type': 'Organization', name: 'Curanta' },
+  publisher: { '@type': 'Organization', name: 'Curanta' },
+  keywords: 'GDS801, GDS802, Vektis, declareren, ggz, zorgprestatiemodel, prestatiecodelijst 071, VECOZO'
+};
+---
+<Base title="GDS801: declareren in de ggz | Curanta" ogType="article" description={omschrijving}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
+
+  <article class="container-prose py-16">
+    <header class="max-w-3xl">
+      <div class="flex flex-wrap items-center gap-3 text-xs text-ink-500">
+        <a href="/kennisbank" class="text-curanta-700 hover:underline no-underline">Kennisbank</a>
+        <span>·</span>
+        <span>Declareren</span>
+        <span>·</span>
+        <time datetime={publicatieDatum}>{dateNl}</time>
+        <span>·</span>
+        <span>{leesTijd}</span>
+      </div>
+      <h1 class="mt-5 font-display text-4xl font-bold leading-tight tracking-tightish text-ink-900 sm:text-5xl">
+        GDS801: declareren in de ggz.
+      </h1>
+      <p class="mt-6 text-lg text-ink-700 leading-relaxed">
+        Wie in de ggz bij een zorgverzekeraar declareert, doet dat met GDS801, het declaratiebericht van Vektis. Dit
+        artikel legt uit wat de standaard is, hoe het antwoord terugkomt, en waar het in de praktijk misgaat.
+      </p>
+    </header>
+
+    <div class="prose-content mt-12 max-w-3xl text-ink-700 leading-relaxed">
+      <h2>Wat GDS801 is</h2>
+      <p>
+        GDS801 is de generieke declaratiestandaard van Vektis. Een zorgaanbieder of servicebureau stuurt er declaraties
+        mee naar een zorgverzekeraar, en de berichten lopen via VECOZO. De huidige versie is 2.0, geldig sinds
+        1 januari 2025.
+      </p>
+      <p>
+        De standaard is niet alleen voor de ggz. Hij geldt voor een reeks declaratiecodelijsten. De ggz en de
+        forensische zorg gebruiken prestatiecodelijst 071: de prestaties van het zorgprestatiemodel.
+      </p>
+
+      <h2>Het antwoord: GDS802</h2>
+      <p>
+        Op een declaratie komt een retourbericht terug, GDS802, met de uitkomst van de verzekeraar. Lees het retourbericht in voordat u de volgende periode declareert. Een afwijzing
+        die blijft liggen, komt anders maand na maand terug.
+      </p>
+
+      <h2>Waar het in de praktijk misgaat</h2>
+      <ul>
+        <li><strong>De verkeerde verzekeraar.</strong> Wisselt een cliënt in een lopend traject van verzekeraar, dan hoort elke prestatie bij de verzekeraar op de zorgdatum, niet bij die van de afsluiting.</li>
+        <li><strong>Een bericht dat niet aan het schema voldoet.</strong> Vektis publiceert per versie een schema. Toets een bericht daaraan vóór u het aanlevert.</li>
+        <li><strong>Zorg zonder contract.</strong> Heeft u geen contract met de verzekeraar van een cliënt, dan gaat de nota naar de cliënt, met de gegevens die de NZa voorschrijft.</li>
+      </ul>
+
+      <h2>Hoe Curanta het doet</h2>
+      <ul>
+        <li>Uit de prestaties van gesloten trajecten maakt Curanta per zorgverzekeraar het GDS801-bericht, en toetst het aan het schema van Vektis. Zorglabels, zoals de toeslag voor een tolk, gaan mee.</li>
+        <li>Een instelling kan tussentijds declareren, en elke prestatie gaat naar de verzekeraar op de zorgdatum.</li>
+        <li>Het retourbericht GDS802 leest u in.</li>
+        <li>Aanleveren doet u standaard zelf, in het VECOZO-portaal. Rechtstreeks aanleveren via VECOZO is ingericht; dat beproeven wij per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand.</li>
+      </ul>
+      <p>Meer over de ggz in Curanta staat op <a href="/voor/ggz">de pagina voor de ggz</a>.</p>
+
+      <h3 class="font-display text-lg font-semibold text-ink-900">Bronnen</h3>
+      <ul class="text-sm">
+        <li>Vektis, standaard GDS801 versie 2.0, generieke declaratiestandaard, ingangsdatum 1 januari 2025, <a href="https://www.vektis.nl/standaardisatie/standaarden/GDS801-2.0" rel="noopener">vektis.nl</a></li>
+        <li>Vektis, invulinstructie GDS801 en GDS802 voor prestatiecodelijst 071 (ggz en forensische zorg), <a href="https://vektis.nl/standaardisatie/standaarden/GDS801-2.0/download/GDS801-GDS802_INV_PCL071v2.0u15.pdf" rel="noopener">vektis.nl</a></li>
+      </ul>
+
+      <p class="text-xs text-ink-500 italic mt-8">
+        Ziet u een fout of mist u een bron? Mail
+        <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>;
+        wij reageren binnen 1 werkdag en zetten een correctie met datum onder dit artikel.
+      </p>
+    </div>
+  </article>
+
+  <RelatedArticles articles={[HOUDBAARHEID]} />
+
+  <Cta
+    title="Declareren in de ggz bekijken?"
+    subtitle="In de online presentatie ziet u hoe Curanta werkt, wanneer het u uitkomt. Liever samen? Dan laten wij het in een demonstratie zien, met verzonnen cliënten."
+  />
+</Base>

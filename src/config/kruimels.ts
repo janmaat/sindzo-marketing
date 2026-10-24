@@ -1,0 +1,34 @@
+// Namen voor het kruimelpad (BreadcrumbList) dat Base.astro uit het pad van een pagina afleidt. Toegevoegd 24-10-2026:
+// Google toont dan "curanta.nl › Voor wie › GGZ" in de zoekresultaten, en Search Console krijgt een rapport
+// "Broodkruimels" om het te bewaken. Een paginadeel dat hier niet staat, krijgt als laatste kruimel de paginatitel
+// (zonder " | Curanta"); dat is goed voor kennisbankartikelen en de pagina's onder /overstappen.
+export const KRUIMELNAMEN: Record<string, string> = {
+  voor: 'Voor wie',
+  vvt: 'VVT',
+  ghz: 'Gehandicaptenzorg',
+  ggz: 'GGZ',
+  jeugdzorg: 'Jeugdzorg',
+  kraamzorg: 'Kraamzorg',
+  huisartsen: 'Huisartsen',
+  kennisbank: 'Kennisbank',
+  overstappen: 'Overstappen',
+  overstapscan: 'Overstapscan',
+  presentatie: 'Presentatie',
+  prijzen: 'Prijzen',
+  trust: 'Trust Centre',
+  oplossing: 'Product',
+  integraties: 'Koppelingen',
+  implementatie: 'Implementatie',
+  vergelijking: 'Vergelijking',
+  over: 'Over Curanta',
+  contact: 'Contact',
+  procurement: 'Inkoopdossier',
+  api: 'FHIR-API',
+  adr: 'Architectuurbesluiten',
+  cases: 'Zelf nakijken',
+  privacy: 'Privacy',
+  voorwaarden: 'Voorwaarden',
+  cookies: 'Cookies',
+  demo: 'Demonstratie',
+  login: 'Inloggen',
+};
