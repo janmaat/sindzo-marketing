@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import { DEMO_GESPREK } from '../../config/demo';
+import { groups as onderdeelGroepen, AANTAL_ONDERDELEN } from '../../config/onderdelen';
 
 // Landingspagina van de campagne (22-10-2026). De eerste bezoekers uit een ChatGPT-advertentie vertrokken binnen 3 tot
 // 16 seconden: de pagina ging ervan uit dat zij Curanta al kenden, en het beeld van de presentatie leek een video maar
@@ -35,11 +36,75 @@ const videos = [
   },
 ];
 //
-// Een presentatie aanvragen (besluit Jan 15-10-2026, ADR 2026-10-11 "Wijziging 15-10-2026" in Ponscura).
-// De aanvraag gaat naar app.curanta.nl (POST /api/presentatie-aanvraag). Jan beoordeelt hem daar; keurt hij hem
-// goed, dan mailt app.curanta.nl de uitnodiging voor presentatie.curanta.nl. Wijst hij hem af, dan hoort de
-// aanvrager niets: daarom belooft deze pagina geen antwoord, alleen een beoordeling.
+// Een presentatie aanvragen (ADR 2026-10-11 in Ponscura; besluit Jan 24-10-2026). De aanvraag gaat naar app.curanta.nl
+// (POST /api/presentatie-aanvraag). Met een zakelijk maildomein gaat de uitnodiging voor presentatie.curanta.nl meteen
+// de deur uit en kijkt Jan achteraf; met een gratis maildomein (gmail, hotmail, ...; de lijst staat in de module)
+// beoordeelt Jan de aanvraag eerst. Een afgewezen aanvrager krijgt een korte, vriendelijke mail, behalve bij spam.
 // Geen captcha (de site laadt geen scripts van derden): honeypot, invultijd en een snelheidsrem op de server.
+// Aanbeveling 10 (24-10-2026): wat de bezoeker krijgt, met de vijf delen en hun duur. Titels en duur komen uit de
+// presentatiecatalogus (Ponscura: src/Modules/Platform/Ponscura.Platform.Presentatie/Catalogus/presentatiecatalogus.json,
+// duurSeconden, stand 24-10-2026). Verandert een video, dan hier ook.
+const introductie: Record<string, { titel: string; delen: [string, number][] }> = {
+  wijkverpleging: { titel: 'de wijkverpleging', delen: [['Uw organisatie', 125], ['Waarom Curanta', 148], ['Het werk in de wijk', 175], ['De cliënt, privacy en het geld', 123], ['Samen starten', 149]] },
+  verpleeghuis: { titel: 'het verpleeghuis', delen: [['Uw organisatie', 107], ['Waarom Curanta', 119], ['Indicatie, opname en zorg', 107], ['Roosteren', 132], ['Privacy, het geld en samen starten', 146]] },
+};
+const mmss = (sec: number) => `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
+const minuten = (delen: [string, number][]) => Math.round(delen.reduce((n, [, s]) => n + s, 0) / 60);
+// "Uw overstap in één project" (catalogus: implementatie-project, vier delen: 76 + 94 + 143 + 186 seconden = 8:19).
+const overstapProject: [string, number][] = [['Wat er op mensen afkomt', 76], ['Uw eigen project', 94], ['Hoe het werk loopt', 143], ['De overstap zelf', 186]];
+const overstapMinuten = Math.floor(overstapProject.reduce((n, [, s]) => n + s, 0) / 60);
+
+// Wat een koper zelf kan nakijken, in plaats van klantnamen of citaten (die staan er niet: feitenblad, rij Klanten).
+// Elke zin volgt het feitenblad: Migratie, Geen dubbele kosten, Overstap in het implementatieproject, VECOZO,
+// NEN 7510:2024, Export en Exit, Positionering (aantal onderdelen uit src/config/onderdelen.ts), Prijzen, en het
+// programma van eisen voor een overstap (36 eisen, dertien vragen; Documenten voor inkoop).
+const nakijken = [
+  {
+    kop: 'De overstap',
+    tekst: 'Cliënten en medewerkers importeert u uit een CSV- of Excelbestand, met een sjabloon uit Curanta. Eerst zetten wij uw gegevens één keer op proef over; u controleert de aantallen en een steekproef. Loopt uw huidige contract nog, dan betaalt u het abonnement pas vanaf het einde van dat contract, tot hoogstens zes maanden na de start.',
+    link: { label: 'Overstappen', href: '/overstappen' },
+  },
+  {
+    kop: 'Declareren via VECOZO',
+    tekst: 'Berichten voor de Wmo, de Jeugdwet en de Wlz toetst Curanta bij het opstellen aan het officiële schema. Standaard levert u ze zelf aan, in het VECOZO-portaal of bij het zorgkantoor. Rechtstreeks aanleveren via VECOZO is ingericht; wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand.',
+    link: { label: 'Koppelingen', href: '/integraties' },
+  },
+  {
+    kop: 'NEN 7510',
+    tekst: 'De maatregelen van NEN 7510:2024 zijn ingevoerd. De externe audit staat gepland voor het vierde kwartaal van 2026; een certificaat heeft Curanta dus nog niet. Per beveiligingsonderwerp staat de stand in het Trust Centre.',
+    link: { label: 'Trust Centre', href: '/trust' },
+  },
+  {
+    kop: 'Breedte en prijs',
+    tekst: `${AANTAL_ONDERDELEN} onderdelen in ${onderdeelGroepen.length} groepen, van het cliëntdossier en de planning tot declaratie, kwaliteit en HRM, met per onderdeel de stand. De prijs staat per plan op de site: €19 tot €39 per actieve medewerker per maand.`,
+    link: { label: 'Alle onderdelen', href: '/oplossing' },
+  },
+  {
+    kop: 'Weer weggaan',
+    tekst: 'Gaat u weg, dan krijgt u binnen 5 werkdagen een volledige export van uw gegevens en bestanden in JSON. Een exit-fee rekenen wij niet.',
+    link: { label: 'Uw gegevens mee', href: '/overstappen#eruit' },
+  },
+  {
+    kop: 'Eisen voor elke leverancier',
+    tekst: 'Het programma van eisen voor een overstap (36 eisen) en de dertien vragen aan uw huidige leverancier zijn leverancier-neutraal. U legt ze naast elk pakket, ook naast Curanta. De overstapscan maakt er een planning bij, terug vanaf de einddatum van uw contract.',
+    link: { label: 'Programma van eisen', href: '/overstappen/programma-van-eisen' },
+  },
+];
+
+// Aanbeveling 9 (24-10-2026): "Hoe kwam u bij ons?", optioneel. Veldnamen (herkomst, herkomstToelichting) en waarden
+// zijn voorlopig; de presentatiemodule in Ponscura neemt ze over en toont ze in het trechteroverzicht. Een leeg veld
+// is geen fout. Een link kan de keuze vooraf invullen met ?herkomst=<waarde> (bijvoorbeeld vanaf /adviseurs).
+const herkomsten = [
+  { waarde: 'zoekmachine', label: 'Zoekmachine (Google, Bing)' },
+  { waarde: 'advertentie', label: 'Advertentie' },
+  { waarde: 'linkedin', label: 'LinkedIn' },
+  { waarde: 'collega', label: 'Collega of andere organisatie' },
+  { waarde: 'adviseur', label: 'Adviseur' },
+  { waarde: 'ai-assistent', label: 'ChatGPT of een andere AI-assistent' },
+  { waarde: 'beurs', label: 'Beurs of bijeenkomst' },
+  { waarde: 'anders', label: 'Anders' },
+];
+
 const formAction = `${import.meta.env.PUBLIC_APP_URL ?? 'https://app.curanta.nl'}/api/presentatie-aanvraag`;
 const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-curanta-500 focus:ring-curanta-500';
 ---
@@ -59,9 +124,32 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
         <a href="#presentatie-aanvraag" class="btn-primary btn-lg no-underline">Online presentatie aanvragen</a>
         <a href="#video" class="btn-secondary btn-lg no-underline">Eerst een deel bekijken</a>
       </div>
-      <p class="mt-3 text-sm text-ink-600">Wij beoordelen uw aanvraag meestal binnen 1 werkdag. Daarna krijgt u uw persoonlijke link per mail.</p>
+      <p class="mt-3 text-sm text-ink-600">Met een zakelijk e-mailadres krijgt u uw persoonlijke link meteen per mail. Met een ander adres bekijken wij uw aanvraag eerst, meestal binnen 1 werkdag.</p>
     </div>
   </PageHero>
+
+  {/* Aanbeveling 11 (24-10-2026): wie met ?van=stoppend komt (vanaf /overstappen/pakket-stopt of de overstapscan),
+      ziet eerst dit blok. Bewust zonder leveranciersnaam op /presentatie (besluit Jan 24-10-2026); de namen en de
+      bronnen staan op /overstappen/pakket-stopt. Zonder script blijft het verborgen. */}
+  <section id="overstap-nu" data-van="stoppend" class="hidden container-prose pt-12">
+    <div class="mx-auto max-w-4xl rounded-2xl border border-curanta-100 bg-curanta-50/60 p-7">
+      <h2 class="font-display text-2xl font-bold text-curanta-900">Stopt uw huidige pakket?</h2>
+      <p class="mt-3 max-w-3xl text-ink-700">
+        Dan wilt u vooral weten hoe de overstap gaat. Daarover gaat <strong class="font-semibold text-ink-900">Uw overstap in
+        één project</strong>, een onderdeel van de presentatie: vier korte video's van samen ruim {overstapMinuten} minuten.
+      </p>
+      <ol class="mt-4 grid gap-2 text-sm text-ink-700 sm:grid-cols-2">
+        {overstapProject.map(([titel, sec], i) => (
+          <li class="flex gap-3"><span class="font-semibold text-curanta-700 tabular-nums">{i + 1}.</span><span>{titel} <span class="tabular-nums text-ink-500">({mmss(sec)})</span></span></li>
+        ))}
+      </ol>
+      <p class="mt-4 max-w-3xl text-sm text-ink-700">
+        Wilt u eerst een planning? De <a href="/overstapscan" class="text-curanta-700 hover:underline">overstapscan</a>
+        rekent terug vanaf de einddatum van uw pakket. Wat u van elke volgende leverancier vraagt, staat in
+        <a href="/overstappen/programma-van-eisen" class="text-curanta-700 hover:underline">het programma van eisen voor een overstap</a>.
+      </p>
+    </div>
+  </section>
 
   <section id="video" class="container-prose scroll-mt-24 pt-12">
     <div class="mx-auto max-w-4xl">
@@ -79,14 +167,46 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
           </video>
         </div>
       ))}
-      <div class="mt-6 flex flex-col gap-4 rounded-2xl border border-ink-100 bg-ink-100/50 p-6 sm:flex-row sm:items-center sm:justify-between">
-        <p class="text-sm text-ink-700">
-          <strong class="font-semibold text-ink-900">In de hele presentatie</strong> ziet u vijf korte video's over uw eigen
-          sector, de dia's om na te lezen en schermvideo's uit Curanta zelf. Er is een presentatie voor de wijkverpleging,
-          het verpleeghuis, de gehandicaptenzorg, de ggz, de kraamzorg en de jeugdzorg.
+      <div class="mt-8 rounded-2xl border border-ink-100 bg-ink-100/50 p-6 sm:p-8">
+        <h2 class="font-display text-xl font-semibold text-ink-900">Wat u in de presentatie ziet</h2>
+        {Object.entries(introductie).map(([zorgvorm, intro], i) => (
+          <div data-video-zorgvorm={zorgvorm} class={i === 0 ? '' : 'hidden'}>
+            <p class="mt-2 text-sm text-ink-700">
+              U begint met de introductie voor {intro.titel}: vijf korte delen van samen ongeveer {minuten(intro.delen)} minuten.
+            </p>
+            <ol class="mt-4 grid gap-2 text-sm text-ink-700 sm:grid-cols-2">
+              {intro.delen.map(([titel, sec], j) => (
+                <li class="flex gap-3"><span class="font-semibold text-curanta-700 tabular-nums">{j + 1}.</span><span>{titel} <span class="tabular-nums text-ink-500">({mmss(sec)})</span></span></li>
+              ))}
+            </ol>
+          </div>
+        ))}
+        <p class="mt-4 text-sm text-ink-700">
+          Daarna kijkt u verder wanneer het u uitkomt: schermvideo's uit Curanta zelf, de dia's om na te lezen, en
+          "Uw overstap in één project". Voor de gehandicaptenzorg, de ggz, de kraamzorg en de jeugdzorg is er een eigen
+          introductie van 11 tot 13 minuten.
         </p>
-        <a href="#presentatie-aanvraag" class="btn-primary shrink-0 no-underline">Online presentatie aanvragen</a>
+        <a href="#presentatie-aanvraag" class="btn-primary mt-5 inline-block no-underline">Online presentatie aanvragen</a>
       </div>
+    </div>
+  </section>
+
+  <section class="container-prose pt-16" aria-labelledby="nakijken-kop">
+    <div class="mx-auto max-w-4xl">
+      <h2 id="nakijken-kop" class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Wat u zelf kunt nakijken</h2>
+      <p class="mt-2 max-w-2xl text-pretty text-ink-700">
+        U kiest een pakket voor jaren. Op de vragen die bij een overstap het zwaarst wegen, staat hier het antwoord, met
+        de pagina waar u het naleest.
+      </p>
+      <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+        {nakijken.map((n) => (
+          <li class="flex flex-col rounded-2xl border border-ink-100 bg-white p-6">
+            <h3 class="font-display text-lg font-semibold text-ink-900">{n.kop}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-700">{n.tekst}</p>
+            <a href={n.link.href} class="mt-3 text-sm font-semibold text-curanta-700 no-underline hover:underline">{n.link.label} →</a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -101,6 +221,8 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
         <input type="hidden" name="utm_term" />
         <input type="hidden" name="utm_content" />
         <input type="hidden" name="invultijd" />
+        {/* "stoppend" als de bezoeker met ?van=stoppend kwam (aanbeveling 11); anders uitgeschakeld en niet verstuurd. */}
+        <input type="hidden" name="van" disabled />
         {/* gclid gaat alléén mee als de bezoeker het vakje "advertentiemeting" aanvinkt (zoals op /demo, sinds 20-10-2026);
             een uitgeschakeld veld wordt niet verstuurd. */}
         <input type="hidden" name="gclid" disabled />
@@ -151,6 +273,22 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
           </select>
           <span class="mt-1 block text-xs text-ink-500">Voor de wijkverpleging en het verpleeghuis is er elk een eigen presentatie. Levert u allebei, dan krijgt u ze allebei.</span>
         </label>
+
+        <div class="mt-5 grid gap-5 sm:grid-cols-2">
+          <label class="block">
+            <span class="text-sm font-semibold text-ink-900">Hoe kwam u bij ons? <span class="font-normal text-ink-500">(optioneel)</span></span>
+            <select name="herkomst" class={veld}>
+              <option value="">Kies een antwoord</option>
+              {herkomsten.map((h) => <option value={h.waarde}>{h.label}</option>)}
+            </select>
+          </label>
+          {/* Zonder script altijd zichtbaar; met script pas na een keuze. */}
+          <label class="block" id="herkomst-toelichting-veld">
+            <span class="text-sm font-semibold text-ink-900">Wie of welke? <span class="font-normal text-ink-500">(optioneel)</span></span>
+            <input type="text" name="herkomstToelichting" maxlength="200" class={veld}
+                   placeholder="Bijvoorbeeld het adviesbureau of de beurs" />
+          </label>
+        </div>
 
         <details id="meer-vertellen" class="group mt-5 rounded-md border border-ink-100 px-4 py-3">
           <summary class="cursor-pointer text-sm font-semibold text-curanta-700">Meer vertellen (optioneel): telefoon, functie, uw vraag</summary>
@@ -223,15 +361,16 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
             </li>
             <li class="flex gap-3">
               <span class="font-semibold text-curanta-700">2.</span>
-              <span>Wij bekijken uw aanvraag, meestal binnen 1 werkdag.</span>
+              <span>Met een zakelijk e-mailadres krijgt u meteen een mail met een persoonlijke link en een toegangscode.</span>
             </li>
             <li class="flex gap-3">
               <span class="font-semibold text-curanta-700">3.</span>
-              <span>Past Curanta bij uw organisatie, dan krijgt u een mail met een persoonlijke link en een toegangscode. Die zijn 30 dagen geldig en alleen voor u.</span>
+              <span>Met een ander adres, bijvoorbeeld van gmail of hotmail, bekijken wij uw aanvraag eerst, meestal binnen 1 werkdag. Daarna krijgt u een mail.</span>
             </li>
           </ol>
           <p class="mt-4 text-sm text-ink-700">
-            Wil een collega ook kijken? Antwoord dan op die mail met zijn of haar naam en e-mailadres.
+            De link en de code zijn 30 dagen geldig en alleen voor u. Is de link verlopen, dan vraagt u zelf een nieuwe aan.
+            Wil een collega ook kijken? Elke collega krijgt een eigen link; in de presentatie staat hoe.
           </p>
         </div>
         <div class="rounded-2xl border border-ink-100 bg-white p-6">
@@ -263,7 +402,8 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
 
     var labels = { naam: 'uw naam', email: 'uw e-mailadres', organisatie: 'de organisatie', functie: 'de functie',
       telefoon: 'het telefoonnummer', toelichting: 'de toelichting', toestemming: 'het vakje voor de privacyverklaring',
-      sector: 'de sector', zorgvorm: 'welke zorg u levert' };
+      sector: 'de sector', zorgvorm: 'welke zorg u levert', herkomst: 'hoe u bij ons kwam',
+      herkomstToelichting: 'wie of welke' };
     var contact = ' Lukt het niet? Bel 085 250 1301 of mail info@curanta.nl.';
     var knop = form.querySelector('button[type="submit"]');
     var zorgvormVeld = document.getElementById('zorgvorm-veld');
@@ -277,7 +417,7 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
     }
     // Vanuit de overstapscan (21-10-2026): sector, zorgvorm en een korte samenvatting staan in de URL, alleen als de
     // bezoeker daar zelf op "Online presentatie aanvragen" klikte. Alleen bekende waarden; de bezoeker past het aan.
-    ['sector', 'zorgvorm'].forEach(function (k) {
+    ['sector', 'zorgvorm', 'herkomst'].forEach(function (k) {
       var v = here.get(k), el = form.elements[k];
       if (v && el && Array.prototype.some.call(el.options, function (o) { return o.value === v; })) el.value = v;
     });
@@ -306,6 +446,23 @@ const veld = 'mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 t
 
     form.elements['sector'].addEventListener('change', toonZorgvorm);
     toonZorgvorm();
+
+    // "Hoe kwam u bij ons?": het vrije veld verschijnt pas na een keuze (zonder script staat het er altijd).
+    var herkomstToelichting = document.getElementById('herkomst-toelichting-veld');
+    function toonHerkomstToelichting() {
+      if (herkomstToelichting) herkomstToelichting.classList.toggle('hidden', !form.elements['herkomst'].value);
+    }
+    form.elements['herkomst'].addEventListener('change', toonHerkomstToelichting);
+    toonHerkomstToelichting();
+
+    // Wie met ?van=stoppend komt (aanbeveling 11), ziet eerst het blok over de overstap, en de aanvraag krijgt
+    // van=stoppend mee. Alleen deze ene waarde; zonder de parameter gaat het veld niet mee.
+    if (here.get('van') === 'stoppend') {
+      var blok = document.getElementById('overstap-nu');
+      if (blok) blok.classList.remove('hidden');
+      form.elements['van'].value = 'stoppend';
+      form.elements['van'].disabled = false;
+    }
 
     // De klikcode van een Google-advertentie gaat alleen mee met het vinkje (zoals op /demo).
     var gclid = here.get('gclid');
