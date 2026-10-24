@@ -42,3 +42,10 @@ export const HOUDBAARHEID: KennisbankArtikel = {
   body: 'Wat het PHP-lek van oktober 2026 betekent voor zorgorganisaties, wat de Cyberbeveiligingswet over onderhoud zegt, en vijf vragen voor uw leverancier.',
   href: '/kennisbank/houdbaarheid-software-php-lek',
 };
+
+export const GDS801: KennisbankArtikel = {
+  eyebrow: 'Declareren',
+  title: 'GDS801: declareren in de ggz',
+  body: 'Wat de declaratiestandaard van Vektis is, hoe het retourbericht GDS802 werkt, en waar het in de praktijk misgaat.',
+  href: '/kennisbank/gds801-declareren-ggz',
+};
