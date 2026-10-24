@@ -19,7 +19,7 @@ import inhoud from '../../config/overstap-inhoud.json';
     subtitle="Bij een overstap hangt veel af van de leverancier die u verlaat. Stel deze vragen schriftelijk, en op tijd: na het einde van het contract is het meestal duurder, en soms niet meer mogelijk."
   >
     <div slot="actions" class="flex flex-wrap items-center gap-3 print:hidden">
-      <button type="button" onclick="window.print()" class="btn-primary">Afdrukken of opslaan als pdf</button>
+      <button type="button" data-afdrukken class="btn-primary">Afdrukken of opslaan als pdf</button>
       <a href="/overstappen/programma-van-eisen" class="btn-secondary no-underline">Naar de eisen voor de nieuwe leverancier</a>
     </div>
   </PageHero>
@@ -71,3 +71,8 @@ import inhoud from '../../config/overstap-inhoud.json';
     />
   </div>
 </Base>
+
+<script>
+  // Geen onclick-attribuut: de CSP staat geen inline handlers toe (scripts/csp-hashes.mjs).
+  document.querySelectorAll('[data-afdrukken]').forEach((knop) => knop.addEventListener('click', () => window.print()));
+</script>

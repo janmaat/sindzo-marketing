@@ -9,6 +9,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Cross-Origin-Opener-Policy: same-origin
 
 # ----- Fingerprinted assets — far-future cache + immutable -----
 /_astro/*
