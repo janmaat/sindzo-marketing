@@ -436,7 +436,8 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
       if (a.eisen.length) samenvatting.push('harde eisen: ' + a.eisen.map(function (id) { return data.EISEN.filter(function (x) { return x.id === id; })[0].label; }).join('; '));
       var presSector = { 'vvt-wijk': 'vvt', verpleeghuis: 'vvt', ghz: 'ghz', ggz: 'ggz', 'ggz-praktijk': 'ggz', jeugd: 'jeugdzorg', kraam: 'kraamzorg' }[a.sector] || 'anders';
       var zorgvorm = a.sector === 'vvt-wijk' ? 'wijkverpleging' : a.sector === 'verpleeghuis' ? 'verpleeghuis' : '';
-      var link = '/presentatie?sector=' + encodeURIComponent(presSector) + (zorgvorm ? '&zorgvorm=' + zorgvorm : '') + '&toelichting=' + encodeURIComponent(samenvatting.join(', ').slice(0, 900)) + '#presentatie-aanvraag';
+      // Stopt het huidige pakket, dan opent /presentatie met het blok over de overstap (?van=stoppend, 24-10-2026).
+      var link = '/presentatie?sector=' + encodeURIComponent(presSector) + (zorgvorm ? '&zorgvorm=' + zorgvorm : '') + (stopt ? '&van=stoppend' : '') + '&toelichting=' + encodeURIComponent(samenvatting.join(', ').slice(0, 900)) + '#presentatie-aanvraag';
       html.push('<section class="rounded-2xl border border-ink-100 bg-curanta-50/60 p-7 print:hidden"><h3 class="font-display text-xl font-bold text-ink-900">Volgende stap</h3><p class="mt-2 max-w-3xl text-ink-700">Bekijk Curanta in de online presentatie, wanneer het u uitkomt. Klikt u op de knop, dan staat een korte samenvatting van deze scan in het aanvraagformulier; u kunt die aanpassen of weghalen voordat u verstuurt. Na de presentatie kunt u op onze uitnodiging zelf rondkijken in de demo-omgeving.</p><div class="mt-5 flex flex-wrap gap-3"><a class="btn-primary no-underline" href="' + esc(link) + '">Online presentatie aanvragen</a><a class="btn-secondary no-underline" href="/contact">Vraag een migratie-inschatting</a></div></section>');
 
       inhoud.innerHTML = html.join('');

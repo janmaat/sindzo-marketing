@@ -1,6 +1,7 @@
 {
   "_toelichting": "Eén bron voor /overstapscan, /overstappen/programma-van-eisen, /overstappen/vragen-aan-uw-leverancier, /overstappen/pakket-stopt en het Word-bestand (scripts/maak-pve-docx.py). Opgesteld 21-10-2026 uit docs/campagne/marktonderzoek-overstap-keuzehulp-2026-10-21.md (Ponscura-repo). Leverancier-neutraal: geen eis die stilletjes alleen Curanta haalt. Feiten over Curanta komen uit het feitenblad.",
   "peildatum": "21-10-2026",
+  "stoppendGecontroleerd": "24-10-2026",
   "bronnen": {
     "mi2026": { "naam": "M&I/Partners, ECD-inventarisatie 2026", "datum": "10-09-2026", "url": "https://mxi.nl/kennis/786/ecd-inventarisatie-2026-gehandicaptenzorg-en-ouderenzorg" },
     "mi2026jan": { "naam": "M&I/Partners, Veranderingen in de ECD-markt", "datum": "14-01-2026", "url": "https://mxi.nl/kennis/745/veranderingen-in-de-ecd-markt" },
@@ -8,12 +9,17 @@
     "acmLeidraad": { "naam": "ACM, Leidraad overstappen tussen clouddiensten (Dataverordening)", "datum": "19-10-2026", "url": "https://www.acm.nl/nl/publicaties/acm-publiceert-leidraad-over-overstappen-tussen-clouddiensten" },
     "acmLeidraadPdf": { "naam": "ACM, Leidraad Cloud", "datum": "2026", "url": "https://www.acm.nl/system/files/documents/leidraad-cloud.pdf" },
     "dataAct": { "naam": "Verordening (EU) 2023/2854 (Dataverordening), art. 23-31", "datum": "geldt sinds 12-09-2025", "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32023R2854" },
-    "heldy": { "naam": "Heldy-kostengids voor Nederlandse zorgaanbieders", "datum": "april 2026", "url": "" }
+    "heldy": { "naam": "Heldy-kostengids voor Nederlandse zorgaanbieders", "datum": "april 2026", "url": "" },
+    "mi2025": { "naam": "M&I/Partners, ECD-inventarisatie 2025", "datum": "04-09-2025", "url": "https://mxi.nl/kennis/730/ecd-inventarisatie-2025-gehandicaptenzorg-en-ouderenzorg" },
+    "lable2025": { "naam": "Lable, \"Lable gaat haar activiteiten beëindigen\"", "datum": "15-10-2025", "url": "https://lable.nl/" }
   },
   "stoppendePakketten": [
-    { "pakket": "mijnCaress", "leverancier": "PinkRoccade Healthcare", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026" },
-    { "pakket": "Lable Care", "leverancier": "Lable", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026" },
-    { "pakket": "Fierit", "leverancier": "Tenzinger", "einde": "eind 2027", "eindjaar": 2027, "bron": "mi2026" }
+    { "pakket": "mijnCaress", "leverancier": "PinkRoccade Healthcare", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026",
+      "aangekondigd": "M&I/Partners meldde op 04-09-2025 dat mijnCaress zich als ECD uit de markt terugtrekt, en op 10-09-2026 dat PinkRoccade Healthcare eind 2026 stopt met zijn ECD.", "aankondigingBronnen": ["mi2025", "mi2026"] },
+    { "pakket": "Lable Care", "leverancier": "Lable", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026",
+      "aangekondigd": "Lable kondigde op 15-10-2025 aan dat het zijn activiteiten beëindigt. Volgens M&I/Partners (10-09-2026) stopt Lable eind 2026 met zijn ECD.", "aankondigingBronnen": ["lable2025", "mi2026"] },
+    { "pakket": "Fierit", "leverancier": "Tenzinger", "einde": "eind 2027", "eindjaar": 2027, "bron": "mi2026",
+      "aangekondigd": "Tenzinger kondigde aan te stoppen met Fierit. Volgens M&I/Partners (10-09-2026) verdwijnt Fierit eind 2027 uit de markt.", "aankondigingBronnen": ["mi2026"] }
   ],
   "pve": [
     {
