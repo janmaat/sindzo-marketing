@@ -1,15 +1,45 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-// Na een presentatie-aanvraag (zie presentatie/index.astro). Geen belofte van een antwoord: Jan beoordeelt de
-// aanvraag, en een afgewezen aanvraag krijgt geen bericht (ADR 2026-10-11, wijziging 15-10-2026).
+// Na een presentatie-aanvraag (zie presentatie/index.astro). Besluit Jan 24-10-2026: met een zakelijk maildomein gaat
+// de uitnodiging meteen de deur uit; met een gratis maildomein beoordeelt Jan de aanvraag eerst. Deze pagina weet niet
+// welk van de twee het werd (de aanvraag wordt bewust nooit aan een bezoek gekoppeld), dus staan beide er.
+// Aanbeveling 8 uit het onderzoek naar de online presentatie (24-10-2026): de wachttijd nuttig maken met wat de
+// aanvrager nu al kan doen. Duur van de introductie per sector uit de presentatiecatalogus (10 tot 13 minuten).
+const intussen = [
+  {
+    kop: 'Bekijk alvast een deel',
+    tekst: 'Op de aanvraagpagina speelt deel 3 van de presentatie, met ondertitels: het werk in de wijk, of indicatie, opname en zorg in het verpleeghuis.',
+    link: { label: 'Naar de video', href: '/presentatie#video' },
+  },
+  {
+    kop: 'Maak een planning',
+    tekst: 'De overstapscan stelt tien vragen en rekent terug vanaf de einddatum van uw huidige contract. De uitkomst blijft in uw browser.',
+    link: { label: 'Doe de overstapscan', href: '/overstapscan' },
+  },
+  {
+    kop: 'Zet de eisen klaar',
+    tekst: 'Het programma van eisen voor een overstap telt 36 eisen, als webpagina en als Word-bestand. Daarnaast staan er dertien vragen voor uw huidige leverancier.',
+    link: { label: 'Programma van eisen', href: '/overstappen/programma-van-eisen' },
+  },
+  {
+    kop: 'Reken de prijs na',
+    tekst: 'U betaalt €19 tot €39 per actieve medewerker per maand. Op de prijzenpagina staat wat elk plan kost, met een rekenvoorbeeld.',
+    link: { label: 'Prijzen', href: '/prijzen' },
+  },
+  {
+    kop: 'Lees de stand van de beveiliging',
+    tekst: 'Per onderwerp ziet u wat geregeld is en wat nog niet, zoals de externe audit voor NEN 7510.',
+    link: { label: 'Trust Centre', href: '/trust' },
+  },
+];
 ---
 <Base
   title="Aanvraag ontvangen | Curanta"
   noindex
-  description="Uw aanvraag voor een presentatie over Curanta is ontvangen."
+  description="Uw aanvraag voor de online presentatie van Curanta is ontvangen. Wat er nu gebeurt, en wat u intussen kunt doen."
 >
-  <section class="container-prose py-20 sm:py-28">
+  <section class="container-prose py-16 sm:py-24">
     <div class="max-w-2xl">
       <div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-curanta-100">
         <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-8 w-8 text-curanta-700">
@@ -19,18 +49,47 @@ import Base from '../../layouts/Base.astro';
       <h1 class="mt-6 font-display text-4xl font-bold tracking-tightish text-ink-900 sm:text-5xl">
         Uw aanvraag is ontvangen.
       </h1>
-      <p class="mt-5 text-lg text-ink-700">
-        Wij bekijken hem, meestal binnen 1 werkdag. Past Curanta bij uw organisatie, dan krijgt u een mail van Curanta
-        met uw persoonlijke link en toegangscode voor de presentatie.
+
+      <h2 class="mt-10 font-display text-xl font-semibold text-ink-900">Wat er nu gebeurt</h2>
+      <ul class="mt-4 space-y-4 text-ink-700">
+        <li class="flex gap-3">
+          <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-curanta-600" aria-hidden="true"></span>
+          <span>
+            <strong class="font-semibold text-ink-900">Vroeg u aan met een zakelijk e-mailadres?</strong> Dan is de mail
+            met uw persoonlijke link en toegangscode al onderweg.
+          </span>
+        </li>
+        <li class="flex gap-3">
+          <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-curanta-600" aria-hidden="true"></span>
+          <span>
+            <strong class="font-semibold text-ink-900">Gebruikte u een ander adres</strong>, bijvoorbeeld van gmail of
+            hotmail? Dan bekijken wij uw aanvraag eerst, meestal binnen 1 werkdag. Daarna krijgt u een mail.
+          </span>
+        </li>
+      </ul>
+      <p class="mt-6 text-ink-700">
+        In de presentatie begint u met de introductie voor uw sector: vijf korte delen van samen 10 tot 13 minuten. Daarna
+        kijkt u verder wanneer het u uitkomt. De link is 30 dagen geldig en alleen voor u. Is hij verlopen, dan vraagt u
+        zelf een nieuwe aan.
       </p>
       <p class="mt-4 text-ink-700">
-        Geen mail ontvangen? Kijk dan ook in de map met ongewenste mail, of mail
-        <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>.
+        Geen mail ontvangen? Kijk dan ook in de map met ongewenste mail. Staat hij daar niet, mail dan
+        <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a> of bel
+        <a href="tel:+31852501301" class="text-curanta-700 hover:underline">085 250 1301</a>.
       </p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/oplossing" class="btn-primary no-underline">Bekijk intussen de onderdelen</a>
-        <a href="/trust" class="inline-flex items-center rounded-full border border-ink-300 px-5 py-2.5 text-sm font-semibold text-ink-900 no-underline hover:bg-ink-100">Trust Centre</a>
-      </div>
+    </div>
+
+    <div class="mt-14 max-w-4xl">
+      <h2 class="font-display text-xl font-semibold text-ink-900">Wat u intussen kunt doen</h2>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+        {intussen.map((n) => (
+          <li class="flex flex-col rounded-2xl border border-ink-100 bg-white p-6">
+            <h3 class="font-display text-lg font-semibold text-ink-900">{n.kop}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-700">{n.tekst}</p>
+            <a href={n.link.href} class="mt-3 text-sm font-semibold text-curanta-700 no-underline hover:underline">{n.link.label} →</a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </Base>
