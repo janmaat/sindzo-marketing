@@ -738,7 +738,7 @@ const voordelen = [
               alt={v.beelden[0].alt}
               adres={v.beelden[0].adres}
               bijschrift={v.beelden[0].bijschrift}
-              sizes={gestapeld ? '(min-width: 1400px) 650px, (min-width: 768px) 48vw, 100vw' : '(min-width: 1400px) 760px, (min-width: 1024px) 56vw, 100vw'}
+              sizes={gestapeld ? '(min-width: 1400px) 650px, (min-width: 768px) 48vw, calc(100vw - 48px)' : '(min-width: 1400px) 760px, (min-width: 1024px) 56vw, calc(100vw - 48px)'}
             />
             {v.beelden[1] && (
               <Screenshot

@@ -54,7 +54,10 @@ export default defineConfig({
     }),
   ],
   build: {
-    inlineStylesheets: 'auto',
+    // 'always' sinds 24-10-2026: de gedeelde stylesheet (±9,5 KB, ±2,5 KB gecomprimeerd) blokkeerde het
+    // renderen op mobiel met ±150 ms (PageSpeed "render-blocking-insight"). Inline in de HTML kost per
+    // pagina die paar KB extra, maar spaart een verzoek vóór de eerste weergave.
+    inlineStylesheets: 'always',
   },
   vite: {
     server: {

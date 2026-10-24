@@ -85,6 +85,13 @@
     Header set Cache-Control "public, max-age=604800"
   </FilesMatch>
 
+  # Alles in /_astro/ heeft een hash in de naam, ook de afbeeldingen (avif, webp, jpg) die astro:assets
+  # maakt; die vielen tot 24-10-2026 buiten de regel hierboven en kregen geen cachetijd (PageSpeed
+  # "cache-insight"). Staat ná de week-regel, zodat een webp in /_astro/ toch een jaar krijgt.
+  <If "%{REQUEST_URI} =~ m#^/_astro/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+
   # HTML mag nooit langer dan een paar minuten cachen — anders zien
   # bezoekers oude versies na een deploy.
   <FilesMatch "\.html$">
