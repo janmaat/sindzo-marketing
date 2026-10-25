@@ -23,7 +23,7 @@ const aantal = inhoud.pve.reduce((n, c) => n + c.eisen.length, 0);
   >
     <div slot="actions" class="flex flex-wrap items-center gap-3 print:hidden">
       <a href="/documenten/programma-van-eisen-overstap-curanta.docx" class="btn-primary no-underline" download>Download als Word-bestand</a>
-      <button type="button" onclick="window.print()" class="btn-secondary">Afdrukken of opslaan als pdf</button>
+      <button type="button" data-afdrukken class="btn-secondary">Afdrukken of opslaan als pdf</button>
     </div>
   </PageHero>
 
@@ -92,3 +92,8 @@ const aantal = inhoud.pve.reduce((n, c) => n + c.eisen.length, 0);
     />
   </div>
 </Base>
+
+<script>
+  // Geen onclick-attribuut: de CSP staat geen inline handlers toe (scripts/csp-hashes.mjs).
+  document.querySelectorAll('[data-afdrukken]').forEach((knop) => knop.addEventListener('click', () => window.print()));
+</script>

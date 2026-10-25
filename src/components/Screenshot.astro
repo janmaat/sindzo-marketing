@@ -27,7 +27,10 @@ interface Props {
 }
 const {
   src, alt, adres, bijschrift, soort = 'scherm',
-  sizes = '(min-width: 1400px) 1300px, 100vw', eager = false, class: klasse = '',
+  // De breedte binnen .container-prose: max 1400 met 32 px marge, daaronder 32 of 24 px aan elke kant.
+  // Met '100vw' koos een telefoon de 960-variant voor een beeld van ±364 px (PageSpeed 24-10-2026).
+  sizes = '(min-width: 1400px) 1336px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 48px)',
+  eager = false, class: klasse = '',
 } = Astro.props;
 
 const volledig = await getImage({ src, format: 'jpg', width: src.width });
@@ -50,7 +53,7 @@ const label = soort === 'scherm'
       src={src}
       alt={alt}
       formats={['avif', 'webp']}
-      widths={[640, 960, 1280, src.width]}
+      widths={[480, 640, 960, 1280, src.width]}
       sizes={sizes}
       loading={eager ? 'eager' : 'lazy'}
       fetchpriority={eager ? 'high' : 'auto'}

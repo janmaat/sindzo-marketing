@@ -85,6 +85,13 @@
     Header set Cache-Control "public, max-age=604800"
   </FilesMatch>
 
+  # Alles in /_astro/ heeft een hash in de naam, ook de afbeeldingen (avif, webp, jpg) die astro:assets
+  # maakt; die vielen tot 24-10-2026 buiten de regel hierboven en kregen geen cachetijd (PageSpeed
+  # "cache-insight"). Staat ná de week-regel, zodat een webp in /_astro/ toch een jaar krijgt.
+  <If "%{REQUEST_URI} =~ m#^/_astro/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+
   # HTML mag nooit langer dan een paar minuten cachen — anders zien
   # bezoekers oude versies na een deploy.
   <FilesMatch "\.html$">
@@ -98,11 +105,15 @@
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
   # X-Frame-Options voor oudere browsers; CSP frame-ancestors voor moderne
   Header always set X-Frame-Options "DENY"
+  # Een pagina van een ander domein die curanta.nl in een venster opent, krijgt er geen greep op (24-10-2026).
+  Header always set Cross-Origin-Opener-Policy "same-origin"
   # Content-Security-Policy (16-10-2026). Alleen eigen bestanden, plus demo.curanta.nl (demoformulier) en
-  # app.curanta.nl (presentatieformulier, en sinds 22-10-2026 de bezoekmeting). 'unsafe-inline' blijft nodig voor de
-  # inline scripts van Astro; zonder dat zou elke build nieuwe hashes vragen. Wat de policy wél tegenhoudt:
+  # app.curanta.nl (presentatieformulier, en sinds 22-10-2026 de bezoekmeting). Wat de policy tegenhoudt:
   # scripts en verbindingen naar andere domeinen, formulieren naar elders, inlijsten, <base> en plug-ins.
-  # Getoetst op alle 36 pagina's in Chromium (0 meldingen); een strengere tegenproef gaf er 296.
+  # Sinds 24-10-2026 ook geïnjecteerde inline scripts: `npm run build` draait scripts/csp-hashes.mjs, dat in
+  # dist/.htaccess 'unsafe-inline' bij script-src vervangt door de hashes van de inline scripts die Astro bouwde.
+  # Hier blijft 'unsafe-inline' staan als ankerpunt voor dat script. Inline handlers (onclick=) kunnen niet meer;
+  # de build faalt erop. style-src houdt 'unsafe-inline' (style-attributen, en de inline CSS uit astro.config).
   # Komt er een externe bron bij (een video, een kaart), dan moet die hier bij.
   Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://app.curanta.nl; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://demo.curanta.nl https://app.curanta.nl; form-action 'self' https://demo.curanta.nl https://app.curanta.nl; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
 </IfModule>
