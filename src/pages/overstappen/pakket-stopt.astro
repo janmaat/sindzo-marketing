@@ -9,17 +9,20 @@ import inhoud from '../../config/overstap-inhoud.json';
 // naam, met M&I/Partners als bron en zonder oordeel over die pakketten of hun leveranciers. De doorlooptijd komt uit een
 // marktconsultatie (Nidos 2025, feitenblad): "zeg 'in een marktconsultatie', niet 'gemiddeld'". Curanta noemt zelf geen
 // doorlooptijd (feitenblad, Beloften en termijnen).
+// 25-10-2026: PUUR. voor de gehandicaptenzorg erbij, met de aankondiging van Ecare zelf als bron (13-10-2025, geen
+// einddatum). M&I/Partners noemt het niet. Bevinding kennisonderzoek zorg_campagne (T4-concurrentie, bron [2]).
 const bron = inhoud.bronnen.mi2026;
+const ecare = inhoud.bronnen.ecareGhz;
 const nidos = inhoud.bronnen.nidos;
 ---
 <Base
   title="Uw ECD stopt: wat nu? | Curanta"
-  description="mijnCaress en Lable Care stoppen eind 2026, Fierit eind 2027. Wat u nu regelt: tijd bij uw leverancier, het oude dossier, de declaraties en een planning."
+  description="mijnCaress en Lable Care stoppen eind 2026, Fierit eind 2027, en PUUR. voor de gehandicaptenzorg wordt afgebouwd. Wat u nu regelt, en in welke volgorde."
 >
   <PageHero
     eyebrow="Overstappen"
     title="Uw ECD stopt. Wat regelt u eerst?"
-    subtitle="Drie ECD's gaan uit de markt. Kiest u nu een opvolger, dan kiest u onder tijdsdruk, en vaak voor tien jaar. Op deze pagina staat wat u eerst regelt, en wat u van een volgende leverancier vraagt."
+    subtitle="Drie ECD's gaan uit de markt, en Ecare bouwt PUUR. voor de gehandicaptenzorg af. Kiest u nu een opvolger, dan kiest u onder tijdsdruk, en vaak voor tien jaar. Op deze pagina staat wat u eerst regelt, en wat u van een volgende leverancier vraagt."
   >
     <div slot="actions" class="flex flex-wrap items-center gap-3">
       <a href="/overstapscan" class="btn-primary no-underline">Maak een planning met de overstapscan</a>
@@ -31,8 +34,9 @@ const nidos = inhoud.bronnen.nidos;
     <div class="max-w-3xl">
       <h2 class="font-display text-2xl font-bold text-ink-900">Welke pakketten stoppen</h2>
       <p class="mt-4 leading-relaxed text-ink-700">
-        Volgens M&amp;I/Partners zijn dit de ECD's in de ouderen- en gehandicaptenzorg die uit de markt gaan. De
-        einddatum en wat er daarna nog kan, hoort u van uw eigen leverancier; vraag het schriftelijk.
+        Dit zijn de ECD's in de ouderen- en gehandicaptenzorg die uit de markt gaan, volgens M&amp;I/Partners of
+        volgens de leverancier zelf. De einddatum en wat er daarna nog kan, hoort u van uw eigen leverancier; vraag het
+        schriftelijk.
       </p>
     </div>
     <table class="mt-8 w-full max-w-3xl border-collapse text-left text-sm">
@@ -54,7 +58,9 @@ const nidos = inhoud.bronnen.nidos;
       </tbody>
     </table>
     <p class="mt-3 max-w-3xl text-xs text-ink-500">
-      Bron: <a href={bron.url} rel="noopener" class="hover:underline">{bron.naam}</a> ({bron.datum}). Gecontroleerd op {inhoud.peildatum}.
+      Bronnen: <a href={bron.url} rel="noopener" class="hover:underline">{bron.naam}</a> ({bron.datum}), voor
+      mijnCaress, Lable Care en Fierit; Ecare, <a href={ecare.url} rel="noopener" class="hover:underline">aankondiging over PUUR. voor de gehandicaptenzorg</a>
+      ({ecare.datum}). Gecontroleerd op 25-10-2026.
     </p>
   </section>
 
@@ -121,6 +127,14 @@ const nidos = inhoud.bronnen.nidos;
         begonnen. Wie nu begint, heeft nog ruimte om rustig te kiezen. Reken terug vanaf de einddatum: wanneer moet het
         contract met de nieuwe leverancier getekend zijn, en wanneer vraagt u het advies van uw ondernemingsraad en uw
         cliëntenraad? De overstapscan rekent het voor u uit.
+      </p>
+      <h2 class="mt-12 font-display text-2xl font-bold text-ink-900">Werkt u met PUUR. in de gehandicaptenzorg?</h2>
+      <p class="mt-4 leading-relaxed text-ink-700">
+        Ecare maakte op 13 oktober 2025 bekend dat het PUUR. voor de gehandicaptenzorg gefaseerd afbouwt. Voor de
+        ouderenzorg en de ggz blijft PUUR. bestaan. Een einddatum noemde Ecare niet; voor bestaande klanten verandert er
+        volgens Ecare op korte termijn niets. Ecare zegt overgangstijd toe, en hulp bij de export en de overstap naar
+        een ander ECD. Vraag daarom schriftelijk tot wanneer u PUUR. kunt gebruiken, en wat de export en een eventuele
+        verlenging kosten (<a href={ecare.url} rel="noopener" class="text-curanta-700 hover:underline">Ecare, {ecare.datum}</a>).
       </p>
     </div>
   </section>

@@ -8,12 +8,14 @@
     "acmLeidraad": { "naam": "ACM, Leidraad overstappen tussen clouddiensten (Dataverordening)", "datum": "19-10-2026", "url": "https://www.acm.nl/nl/publicaties/acm-publiceert-leidraad-over-overstappen-tussen-clouddiensten" },
     "acmLeidraadPdf": { "naam": "ACM, Leidraad Cloud", "datum": "2026", "url": "https://www.acm.nl/system/files/documents/leidraad-cloud.pdf" },
     "dataAct": { "naam": "Verordening (EU) 2023/2854 (Dataverordening), art. 23-31", "datum": "geldt sinds 12-09-2025", "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32023R2854" },
+    "ecareGhz": { "naam": "Ecare, Ecare stopt gefaseerd met PUUR. voor de gehandicaptenzorg", "datum": "13-10-2025", "url": "https://ecare.nl/blog-nieuws/ecare-stopt-gefaseerd-met-puur-voor-de-gehandicaptenzorg/" },
     "heldy": { "naam": "Heldy-kostengids voor Nederlandse zorgaanbieders", "datum": "april 2026", "url": "" }
   },
   "stoppendePakketten": [
     { "pakket": "mijnCaress", "leverancier": "PinkRoccade Healthcare", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026" },
     { "pakket": "Lable Care", "leverancier": "Lable", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026" },
-    { "pakket": "Fierit", "leverancier": "Tenzinger", "einde": "eind 2027", "eindjaar": 2027, "bron": "mi2026" }
+    { "pakket": "Fierit", "leverancier": "Tenzinger", "einde": "eind 2027", "eindjaar": 2027, "bron": "mi2026" },
+    { "pakket": "PUUR. voor de gehandicaptenzorg", "leverancier": "Ecare", "einde": "gefaseerd, nog geen einddatum", "eindjaar": null, "bron": "ecareGhz" }
   ],
   "pve": [
     {
