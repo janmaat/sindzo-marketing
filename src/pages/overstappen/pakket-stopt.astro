@@ -50,7 +50,7 @@ const nidos = inhoud.bronnen.nidos;
       <tbody>
         {inhoud.stoppendePakketten.map((p) => (
           <tr class="border-b border-ink-100">
-            <td class="py-3 pr-4 font-semibold text-ink-900">{p.pakket}</td>
+            <td class="py-3 pr-4 font-semibold text-ink-900">{p.pagina ? <a href={p.pagina} class="text-curanta-700 hover:underline">{p.pakket}</a> : p.pakket}</td>
             <td class="py-3 pr-4 text-ink-700">{p.leverancier}</td>
             <td class="py-3 text-ink-700">{p.einde}</td>
           </tr>

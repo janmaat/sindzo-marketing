@@ -1,0 +1,153 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { HOOFDKNOP } from '../../config/demo';
+import inhoud from '../../config/overstap-inhoud.json';
+
+// Eén pagina per pakket dat uit de markt gaat (25-10-2026). Aanleiding: "fierit stopt" en "mijncaress stopt" zijn zelf
+// Google-suggesties (kennisonderzoek zorg_campagne, T8 §5); wie daarop zoekt, landde tot nu toe op niets van ons.
+// Grenzen, zoals op /overstappen/pakket-stopt (besluit Jan 21-10): het pakket bij naam, de bron erbij, geen oordeel
+// over pakket of leverancier. De einddatum komt alleen van M&I/Partners (gegevens van de leveranciers zelf, peildatum
+// 1-7-2026; nagelezen 25-10-2026). Een openbare aankondiging van PinkRoccade of Tenzinger zelf vond het onderzoek niet
+// (T4, concurrenten/mijncaress.md en fierit.md), dus de pagina zegt "volgens M&I/Partners" en "vraag het schriftelijk".
+// Een kant-en-klare import uit deze pakketten heeft Curanta niet: de migratie is een project tegen een vaste prijs.
+export function getStaticPaths() {
+  return [
+    {
+      params: { pakket: 'mijncaress-stopt' },
+      props: {
+        pakket: 'mijnCaress',
+        leverancier: 'PinkRoccade Healthcare',
+        titel: 'mijnCaress stopt eind 2026: wat nu? | Curanta',
+        beschrijving: 'Volgens M&I/Partners stopt PinkRoccade Healthcare eind 2026 met het ECD mijnCaress. Wat u nu regelt: tijd, het oude dossier en de declaraties.',
+        hero: 'mijnCaress stopt eind 2026. Wat regelt u nu?',
+        ondertitel: 'Volgens M&I/Partners stopt PinkRoccade Healthcare eind 2026 met mijnCaress. Heeft u nog geen opvolger, dan gaat het nu eerst om tijd bij uw huidige leverancier, en pas daarna om een keuze.',
+        bekend: [
+          '"Zowel PinkRoccade Healthcare als Lable stoppen eind 2026 met hun ECD", schrijft M&I/Partners in de ECD-inventarisatie van 10 september 2026.',
+          'In de honderd grootste organisaties in de ouderenzorg werkte op 1 juli 2026 nog één organisatie met mijnCaress; een jaar eerder waren het er zes (M&I/Partners). Hoeveel kleinere organisaties het nog gebruiken, telt M&I niet.',
+          'M&I/Partners haalt de gegevens bij de leveranciers zelf op. De einddatum en de voorwaarden voor uw contract hoort u van PinkRoccade Healthcare.',
+        ],
+        tijd: 'In een marktconsultatie noemden leveranciers een jaar voor de implementatie van een ECD, en een halfjaar nazorg. Heeft u nog geen opvolger gekozen, dan is een volledige nieuwe implementatie vóór eind 2026 dus niet realistisch, ook niet bij ons. Regel daarom eerst de tijd die u nodig hebt: verlenging, of alleen nog lezen, tot uw opvolger draait.',
+        vragen: [
+          'Tot welke datum kunnen wij mijnCaress nog volledig gebruiken, en tegen welke prijs is verlenging mogelijk?',
+          'Kunnen wij het dossier daarna nog lezen, hoe lang, en wat kost dat?',
+          'In welk formaat krijgen wij de export van cliënten, zorgplannen, rapportages en bijlagen, en wanneer?',
+          'Tot welke periode kunnen wij nog declareren, en blijven retourberichten binnenkomen?',
+          'Wat gebeurt er met de andere producten van PinkRoccade Healthcare in ons contract?',
+        ],
+      },
+    },
+    {
+      params: { pakket: 'fierit-stopt' },
+      props: {
+        pakket: 'Fierit',
+        leverancier: 'Tenzinger',
+        titel: 'Fierit stopt eind 2027: wat nu? | Curanta',
+        beschrijving: 'Volgens M&I/Partners gaat Fierit van Tenzinger eind 2027 uit de markt. Hoe u terugrekent vanaf die datum, en wat u Tenzinger schriftelijk vraagt.',
+        hero: 'Fierit stopt eind 2027. Wat regelt u nu?',
+        ondertitel: 'Volgens M&I/Partners haalt Tenzinger Fierit eind 2027 uit de markt. Wie nu begint, heeft nog ruimte om rustig te kiezen. Reken terug vanaf de einddatum.',
+        bekend: [
+          '"Ook Tenzinger kondigde aan te stoppen met Fierit. Deze oplossing verdwijnt eind 2027 uit de markt", schrijft M&I/Partners in de ECD-inventarisatie van 10 september 2026.',
+          'Veel Fierit-klanten kiezen daarom al een nieuw ECD, of voeren het al in (M&I/Partners).',
+          'M&I/Partners haalt de gegevens bij de leveranciers zelf op. De einddatum en de voorwaarden voor uw contract hoort u van Tenzinger.',
+        ],
+        tijd: 'In een marktconsultatie noemden leveranciers een jaar voor de implementatie van een ECD, en een halfjaar nazorg. Wilt u vóór eind 2027 over zijn, dan tekent u het contract met een nieuwe leverancier dus uiterlijk rond eind 2026. Daarvóór liggen nog de selectie en het advies van uw ondernemingsraad en cliëntenraad. De overstapscan rekent het voor u uit.',
+        vragen: [
+          'Welke einddatum geldt voor ons contract, en kunnen wij verlengen als de overstap uitloopt?',
+          'Kunnen wij het dossier na de einddatum nog lezen, hoe lang, en wat kost dat?',
+          'In welk formaat krijgen wij de export van cliënten, zorgplannen, rapportages en bijlagen, en wanneer?',
+          'Tot welke datum krijgt Fierit nog wettelijke wijzigingen, zoals nieuwe versies van de declaratieberichten?',
+          'Doet Tenzinger ook uw applicatiebeheer of functioneel beheer? Vraag dan wie dat tot de overstap blijft doen.',
+        ],
+      },
+    },
+  ];
+}
+
+const { pakket, leverancier, titel, beschrijving, hero, ondertitel, bekend, tijd, vragen } = Astro.props;
+const bron = inhoud.bronnen.mi2026;
+const nidos = inhoud.bronnen.nidos;
+---
+<Base title={titel} description={beschrijving}>
+  <PageHero eyebrow="Overstappen" title={hero} subtitle={ondertitel}>
+    <div slot="actions" class="flex flex-wrap items-center gap-3">
+      <a href="/overstapscan" class="btn-primary no-underline">Maak een planning met de overstapscan</a>
+      <a href={HOOFDKNOP.href} class="btn-secondary no-underline">{HOOFDKNOP.label}</a>
+    </div>
+  </PageHero>
+
+  <section class="container-prose py-14">
+    <div class="max-w-3xl">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Wat er bekend is over {pakket}</h2>
+      <ul class="mt-4 list-disc space-y-2 pl-5 leading-relaxed text-ink-700">
+        {bekend.map((b) => <li>{b}</li>)}
+      </ul>
+      <p class="mt-3 text-xs text-ink-500">
+        Bron: <a href={bron.url} rel="noopener" class="hover:underline">{bron.naam}</a> ({bron.datum}), nagelezen op 25-10-2026.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-y border-ink-100 bg-curanta-50/60 py-14">
+    <div class="container-prose max-w-3xl">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Eerst tijd, dan een keuze</h2>
+      <p class="mt-4 leading-relaxed text-ink-700">
+        {tijd} (<a href={nidos.url} rel="noopener" class="text-curanta-700 hover:underline">Nidos, {nidos.datum}</a>)
+      </p>
+      <h3 class="mt-10 font-display text-lg font-semibold text-ink-900">Vraag {leverancier} schriftelijk</h3>
+      <ol class="mt-3 list-decimal space-y-2 pl-5 leading-relaxed text-ink-700">
+        {vragen.map((v) => <li>{v}</li>)}
+      </ol>
+      <p class="mt-4 text-sm leading-relaxed text-ink-700">
+        Meer vragen, voor elke leverancier, staan in <a href="/overstappen/vragen-aan-uw-leverancier" class="text-curanta-700 hover:underline">de vragen aan uw leverancier</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-prose py-14">
+    <div class="max-w-3xl">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Wat u verder regelt</h2>
+      <ul class="mt-4 space-y-4 leading-relaxed text-ink-700">
+        <li>
+          <strong class="text-ink-900">Het oude dossier.</strong> Een dossier bewaart u in de regel 20 jaar, ook als het
+          pakket stopt. Regel de export en de logging vóór het contract eindigt; daarna is het duurder, en soms niet meer
+          mogelijk.
+        </li>
+        <li>
+          <strong class="text-ink-900">De declaraties.</strong> Spreek per financier af tot welke periode {pakket}
+          declareert en vanaf welke periode het nieuwe pakket. Houd {pakket} beschikbaar tot de laatste retourberichten
+          binnen zijn.
+        </li>
+        <li>
+          <strong class="text-ink-900">De opvolger.</strong> U stapt over omdat een pakket stopt. Vraag de volgende
+          leverancier dus ook hoe u er later weer uit komt, en wat er gebeurt als hij zelf stopt. De eisen daarvoor staan
+          in <a href="/overstappen/programma-van-eisen" class="text-curanta-700 hover:underline">het programma van eisen voor een overstap</a>.
+        </li>
+      </ul>
+      <p class="mt-6 text-sm text-ink-700">
+        Alle pakketten die uit de markt gaan, staan op <a href="/overstappen/pakket-stopt" class="text-curanta-700 hover:underline">Uw ECD stopt: wat nu?</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-ink-100 bg-ink-100/40 py-14">
+    <div class="container-prose max-w-3xl">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Als u Curanta overweegt</h2>
+      <p class="mt-4 leading-relaxed text-ink-700">
+        Een kant-en-klare import uit {pakket} hebben wij niet. Het overzetten van uw gegevens is bij ons een project
+        tegen een vaste prijs, na een migratie-inschatting. Cliënten en medewerkers importeert u uit een CSV- of
+        Excelbestand, met een sjabloon uit Curanta. Zorgplannen en het oude dossier kunnen als pdf mee in het dossier
+        van de cliënt. Loopt uw contract met {leverancier} nog door als u bij ons begint, dan betaalt u het abonnement van
+        Curanta pas vanaf het einde van dat contract, tot hoogstens zes maanden na de start.
+      </p>
+    </div>
+  </section>
+
+  <Cta
+    title="Eerst zien wat u ervoor terugkrijgt?"
+    subtitle="Bekijk Curanta in de online presentatie, wanneer het u uitkomt. Daarna kunt u op onze uitnodiging zelf rondkijken in de demo-omgeving, met verzonnen cliënten."
+    primary={HOOFDKNOP}
+    secondary={{ label: 'Doe de overstapscan', href: '/overstapscan' }}
+  />
+</Base>

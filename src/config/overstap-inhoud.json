@@ -12,9 +12,9 @@
     "heldy": { "naam": "Heldy-kostengids voor Nederlandse zorgaanbieders", "datum": "april 2026", "url": "" }
   },
   "stoppendePakketten": [
-    { "pakket": "mijnCaress", "leverancier": "PinkRoccade Healthcare", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026" },
+    { "pakket": "mijnCaress", "leverancier": "PinkRoccade Healthcare", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026", "pagina": "/overstappen/mijncaress-stopt" },
     { "pakket": "Lable Care", "leverancier": "Lable", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026" },
-    { "pakket": "Fierit", "leverancier": "Tenzinger", "einde": "eind 2027", "eindjaar": 2027, "bron": "mi2026" },
+    { "pakket": "Fierit", "leverancier": "Tenzinger", "einde": "eind 2027", "eindjaar": 2027, "bron": "mi2026", "pagina": "/overstappen/fierit-stopt" },
     { "pakket": "PUUR. voor de gehandicaptenzorg", "leverancier": "Ecare", "einde": "gefaseerd, nog geen einddatum", "eindjaar": null, "bron": "ecareGhz" }
   ],
   "pve": [
