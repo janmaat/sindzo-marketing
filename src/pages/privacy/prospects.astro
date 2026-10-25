@@ -1,0 +1,115 @@
+---
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+// Privacyverklaring voor wie Curanta benadert als mogelijke klant: het verkoopregister "Markt" in app.curanta.nl
+// (opdracht prompts/markt-zorg/ stap 05 in de repo Ponscura). De termijnen komen uit MarktBewaartermijnen
+// (src/Modules/Platform/Ponscura.Platform.Markt/Application/MarktBewaartermijnen.cs): wie daar een termijn wijzigt,
+// wijzigt hem hier mee. Noindex tot de belangenafweging en de DPIA juridisch getoetst zijn.
+const sections = [
+  { id: 'wie', title: 'Wie wij zijn' },
+  { id: 'welke-gegevens', title: 'Welke gegevens' },
+  { id: 'bronnen', title: 'Waar ze vandaan komen' },
+  { id: 'waarom', title: 'Waarom' },
+  { id: 'bewaartermijnen', title: 'Hoe lang' },
+  { id: 'bezwaar', title: 'Niet meer benaderd worden' },
+  { id: 'rechten', title: 'Uw andere rechten' },
+];
+---
+<LegalLayout
+  title="Privacy voor zorgorganisaties die wij benaderen"
+  description="Welke gegevens Curanta bijhoudt over zorgorganisaties en hun medewerkers die wij benaderen, waar ze vandaan komen, hoe lang wij ze bewaren en hoe u zegt dat wij moeten stoppen."
+  eyebrow="Privacy"
+  lastUpdated="2026-10-25"
+  sections={sections}
+  noindex
+>
+  <p>
+    Werkt u bij een zorgorganisatie en heeft Curanta u gebeld of gesproken? Dan leest u hier welke gegevens wij daarbij
+    bijhouden. De algemene <a href="/privacy">privacyverklaring</a> gaat over deze website en over de Curanta-applicatie.
+  </p>
+
+  <h2 id="wie">1. Wie wij zijn</h2>
+  <p>
+    <strong>Curanta</strong>, Marshallstraat 26, 5705 CN Helmond, ingeschreven bij de Kamer van Koophandel onder nummer
+    09147820. Voor de gegevens op deze pagina zijn wij <em>verwerkingsverantwoordelijke</em>. Vragen:
+    <a href="mailto:privacy@curanta.nl">privacy@curanta.nl</a>.
+  </p>
+
+  <h2 id="welke-gegevens">2. Welke gegevens</h2>
+  <p>Wij houden een register bij van zorgorganisaties in Nederland. Daarin staan:</p>
+  <ul>
+    <li><strong>Gegevens over de organisatie</strong>: naam, KvK-nummer, rechtsvorm, adres, het algemene telefoonnummer, de
+      website, welke zorg zij levert, hoe groot zij is, welk elektronisch cliëntdossier (ECD) zij gebruikt en wanneer het
+      contract daarvoor ongeveer afloopt, en berichten over de organisatie, zoals een fusie of een aanbesteding.</li>
+    <li><strong>Welke functies de website van de organisatie noemt</strong>, bijvoorbeeld een informatiemanager. Zonder
+      naam.</li>
+    <li><strong>Gegevens over u</strong>, alleen als wij u spraken of u ons een visitekaartje gaf: uw naam, functie, uw
+      zakelijke e-mailadres en telefoonnummer met waar wij ze van hebben, wanneer wij contact hadden en een korte notitie
+      over het gesprek.</li>
+  </ul>
+  <p>
+    Wij houden geen persoonlijke interesses bij, geen privéadres of geboortedatum, en geen gegevens over gezondheid,
+    geloof of andere bijzondere persoonsgegevens. Over de cliënten van uw organisatie houden wij niets bij.
+  </p>
+  <p>
+    Bij een eenmanszaak, vof, cv of maatschap is de naam van de organisatie vaak de naam van een persoon. Zo'n
+    organisatie bellen of mailen wij alleen als zij daar toestemming voor gaf.
+  </p>
+
+  <h2 id="bronnen">3. Waar ze vandaan komen</h2>
+  <p>
+    De gegevens over de organisatie komen uit openbare registers, zoals het Handelsregister van de KvK, DigiMV en het
+    Landelijk Register Zorgaanbieders, en van de eigen website van de organisatie. Wij verzamelen ze zelf en noteren bij
+    elk gegeven waar het vandaan komt. Namen van mensen nemen wij daaruit niet over. Uw eigen gegevens komen van u, uit
+    een gesprek of van uw visitekaartje.
+  </p>
+
+  <h2 id="waarom">4. Waarom</h2>
+  <p>
+    Curanta verkoopt zorgsoftware. Wij willen zorgorganisaties benaderen op een moment dat het past, bijvoorbeeld als hun
+    ECD binnenkort stopt, en niet vaker dan nodig. Daarvoor geven wij elke organisatie een prioriteit, op grond van
+    zakelijke gegevens zoals het ECD en het contract. Er volgt geen beslissing uit: een medewerker van Curanta beslist of
+    wij bellen.
+  </p>
+  <p>
+    Wij doen dit op grond van ons <em>gerechtvaardigd belang</em> (artikel 6 lid 1 sub f AVG), en hebben afgewogen of
+    dat belang zwaarder weegt dan uw privacy. Vanuit dit register versturen wij geen mailings, en de gegevens geven wij
+    aan niemand door. Ze staan bij een hostingpartij in Duitsland (EU).
+  </p>
+
+  <h2 id="bewaartermijnen">5. Hoe lang</h2>
+  <ul>
+    <li>Uw gegevens verwijderen wij 24 maanden na ons laatste contact, tenzij uw organisatie dan nog een aanvraag,
+      presentatie of proefomgeving bij ons heeft lopen.</li>
+    <li>Een notitie over een gesprek maken wij na 24 maanden leeg.</li>
+    <li>Een bericht over de organisatie verwijderen wij als wij het 36 maanden niet meer tegenkwamen.</li>
+    <li>Wordt uw organisatie klant, dan verwijderen wij uw gegevens uit dit register 90 dagen later.</li>
+    <li>Het logboek van wie wat deed in het register bewaren wij 7 jaar. Daarin staan geen namen en geen notities.</li>
+  </ul>
+
+  <h2 id="bezwaar">6. Niet meer benaderd worden</h2>
+  <p>
+    Wilt u niet meer benaderd worden? Zeg het tegen wie u belt, of mail <a href="mailto:privacy@curanta.nl">privacy@curanta.nl</a>.
+    Dan benaderen wij u niet meer, ook niet voor een presentatie of een proefomgeving van Curanta. Hetzelfde kan voor uw
+    hele organisatie.
+  </p>
+  <p>
+    Na 30 dagen verwijderen wij uw gegevens; die tijd is er om een vergissing van ons te herstellen. Om te zorgen dat wij
+    u daarna niet opnieuw benaderen, bewaren wij alleen een code die uit uw e-mailadres is berekend (een hash). Van een
+    organisatie die niet benaderd wil worden, houden wij de openbare gegevens met die wens. Vraagt u ons de organisatie
+    te verwijderen, dan blijft alleen een code uit het KvK-nummer en uit naam en plaats.
+  </p>
+
+  <h2 id="rechten">7. Uw andere rechten</h2>
+  <p>U kunt ons vragen:</p>
+  <ul>
+    <li>welke gegevens wij over u hebben (<strong>inzage</strong>); u krijgt ze als bestand;</li>
+    <li>onjuiste gegevens te <strong>verbeteren</strong>;</li>
+    <li>uw gegevens te <strong>verwijderen</strong>, ook voordat de termijn om is.</li>
+  </ul>
+  <p>
+    Mail daarvoor naar <a href="mailto:privacy@curanta.nl">privacy@curanta.nl</a>. Wij antwoorden binnen 30 dagen. Bent u
+    het niet met ons eens, dan kunt u een klacht indienen bij de
+    <a href="https://www.autoriteitpersoonsgegevens.nl">Autoriteit Persoonsgegevens</a>.
+  </p>
+</LegalLayout>

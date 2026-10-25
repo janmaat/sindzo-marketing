@@ -23,6 +23,7 @@ export default defineConfig({
       // ("Ingediende URL gemarkeerd als noindex"). /presentatie/aangevraagd stond er tot 22-10-2026 in.
       filter: (page) => !page.includes('/bedankt') && !page.includes('/login')
         && !page.includes('/presentatie/aangevraagd')
+        && !page.includes('/privacy/prospects')
         && (DEMO_ZELF_AANGEBODEN || !page.includes('/demo-omgeving')),
       serialize(item) {
         const url = new URL(item.url);
