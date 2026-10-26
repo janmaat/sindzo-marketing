@@ -18,7 +18,7 @@ import type { Status } from '../config/status';
 //
 // "Laatst herzien" is een vaste datum, geen builddatum: elke uitrol zette anders de datum van
 // vandaag, ook zonder herziening. Bijwerken bij een inhoudelijke herziening.
-const HERZIEN = '23 oktober 2026';
+const HERZIEN = '26 oktober 2026';
 
 type Stand = 'geregeld' | 'uitvoering' | 'gepland' | 'niet';
 const STAND: Record<Stand, { label: string; dot: string }> = {
@@ -44,8 +44,11 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
       { label: 'Tweestapsverificatie', stand: 'geregeld', note: 'Verplicht in de backoffice voor zorg- en beheerrollen. Een nieuwe collega stelt het bij zijn eerste aanmelding zelf in, met een authenticator-app; tot dan opent Curanta voor hem alleen dat scherm.' },
       { label: 'Versleuteling BSN', stand: 'geregeld', note: 'Curanta versleutelt het BSN op veldniveau, met AES-256-GCM. Zoeken gaat via een aparte hash, zonder te ontsleutelen.' },
       { label: 'Versleuteling hele database', stand: 'geregeld', note: 'Uw gegevens staan versleuteld opgeslagen: volumeversleuteling op de server, ook voor de bijlagen en de back-ups. Het wachtwoord van dat volume staat niet op de server.' },
-      { label: 'Externe pentest', stand: 'niet', note: 'Nog niet uitgevoerd.' },
-      { label: 'ISO 27001', stand: 'gepland', note: 'Audit gepland in 2027.' },
+      // Besluit Jan 26-10-2026 (gelijk aan /veiligheid#garantie en #streven): virusscan als toezegging bij de oplevering;
+      // pentest en ISO 27001 zonder datum.
+      { label: 'Virusscan op uploads', stand: 'gepland', note: 'Bij de oplevering aan uw organisatie gegarandeerd: elk bestand dat iemand in Curanta uploadt, scannen wij op virussen.', doc: '/veiligheid#garantie' },
+      { label: 'Externe pentest', stand: 'niet', note: 'Nog niet uitgevoerd. Wij werken naar een externe pentest toe.', doc: '/veiligheid#streven' },
+      { label: 'ISO 27001', stand: 'gepland', note: 'Wij werken naar certificering toe. Een datum is er nog niet.', doc: '/veiligheid#streven' },
     ],
   },
   {
@@ -92,14 +95,16 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
   {
     // Toegevoegd 23-10-2026 (prompt site-houdbaarheid 01, aanvulling Janus Hoeks: "we gaan ervan uit dat het
     // gebeurt"). Alleen bestaande feitenbladrijen: RPO/RTO, hersteltoets, back-up, versleuteling, noodoverzicht,
-    // Cbw-module. ⛔ Niet: 24/7-incidentrespons (besluit Jan 25-09), de externe bewaking ("nog niet noemen").
+    // Cbw-module. ⛔ Niet: 24/7-incidentrespons (besluit Jan 25-09). Sinds 26-10-2026 (besluit Jan) wel: de bewaking van
+    // buitenaf en de back-up buiten de server, als toezegging bij de oplevering (zelfde tekst als /veiligheid#garantie).
     key: 'herstel',
     title: 'Als het toch gebeurt',
     intro: 'Wij gaan ervan uit dat er een keer iets misgaat, ook met de nieuwste techniek. Daarom staat hier ook hoe wij herstellen, en hoe uw team dan doorwerkt.',
     items: [
       { label: 'RPO en RTO', stand: 'uitvoering', note: 'Doel in onze voorwaarden: RPO 1 uur (hoogstens 1 uur aan gegevens kwijt) en RTO 4 uur (binnen 4 uur weer in gebruik). Nog niet aangetoond: de hersteltoets herstelde de database op dezelfde server.', doc: '/voorwaarden#sla' },
       { label: 'Hersteltest', stand: 'geregeld', note: 'Hersteltoets van de back-up geslaagd op 21 oktober 2026.' },
-      { label: 'Back-up buiten de server', stand: 'niet', note: 'Nog niet. De back-ups staan versleuteld op de server zelf, nog niet ook op een andere plek.' },
+      { label: 'Back-up buiten de server', stand: 'gepland', note: 'Bij de oplevering aan uw organisatie gegarandeerd: een versleutelde kopie van uw gegevens, op een andere plek in de EU. Nu staan de back-ups versleuteld op de server zelf.', doc: '/veiligheid#garantie' },
+      { label: 'Bewaking dag en nacht', stand: 'gepland', note: 'Bij de oplevering aan uw organisatie gegarandeerd: van buitenaf controleren wij 24 uur per dag, 7 dagen per week of Curanta bereikbaar is.', doc: '/veiligheid#garantie' },
       { label: 'Een gestolen schijf of back-up', stand: 'geregeld', note: 'Uw gegevens staan versleuteld opgeslagen, ook de bijlagen, de back-ups en de logs. Het wachtwoord van dat volume staat niet op de server.' },
       { label: 'Bij uitval', stand: 'geregeld', note: 'Elke dag een versleuteld noodoverzicht (pdf) met per cliënt de contactgegevens, waarschuwingen, allergieën en de medicatie van de dag; in het medewerkerportaal een kopie op het toestel; en een noodprocedure voor uw organisatie.', doc: '/oplossing#ecd' },
       { label: 'Een cyberincident bij uw organisatie', status: 'demo', note: 'U legt het incident vast in de module voor de Cyberbeveiligingswet, en Curanta bewaakt de meldtermijnen van 24 uur, 72 uur en één maand. Melden bij het CSIRT doet uw organisatie zelf.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '/oplossing#kwaliteit' },
