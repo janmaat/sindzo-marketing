@@ -19,6 +19,7 @@ const routes = [
   '/oplossing',
   '/integraties',
   '/trust',
+  '/veiligheid',
   '/prijzen',
   '/voor/vvt',
   '/voor/ghz',
