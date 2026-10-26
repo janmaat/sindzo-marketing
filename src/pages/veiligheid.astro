@@ -1,0 +1,443 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { DOTNET, LEKKEN_GEMETEN } from '../config/fundament';
+
+// Veiligheid in gewone taal (opdracht Jan 26-10-2026: "een soortgelijke pagina als sigillum.nl/veiligheid#oplevering").
+// Waar /trust per onderwerp de stand geeft (geregeld, in uitvoering, nog niet) en de wettelijke termijnen, zegt deze
+// pagina wat er vanaf de eerste dag voor een organisatie geregeld is, en wat bij haar blijft.
+//
+// Elke bewering hieronder komt uit het feitenblad (Ponscura, docs/campagne/feitenblad-curanta.md, § Hosting,
+// beveiliging en continuïteit) of is getoetst tegen de code die op productie draait (b8db0946d, 26-10-2026). De bron
+// staat per regel in het commentaar. ⛔ Bewust niet op deze pagina (feitenblad): een hosternaam, een datacenter of
+// "Nederland" als plaats van de gegevens; "LUKS"; een back-up buiten de server (er is er nog geen); de externe
+// bewaking (gebouwd, niet ingericht: "nog niet noemen"); 24/7-incidentrespons; een pentest of certificaat; een
+// virusscan op uploads (de scanner op de productieserver is nog in te richten); RPO/RTO als gemeten.
+//
+// "Laatst herzien" is een vaste datum: bijwerken bij een inhoudelijke herziening, niet bij elke uitrol.
+const HERZIEN = '26 oktober 2026';
+
+interface Blok { id: string; titel: string; icoon: 'server' | 'sleutel' | 'slot' | 'lijst' | 'klok' | 'schild'; punten: string[] }
+
+// Statische tekst van deze pagina (geen invoer van buiten): links staan als HTML in de punten.
+const blokken: Blok[] = [
+  {
+    id: 'waar',
+    titel: 'Waar uw gegevens staan',
+    icoon: 'server',
+    punten: [
+      // Feitenblad, rij Applicatie en databases: "in de EU" / "in Duitsland (EU)", geen hosternaam.
+      'Op een server in Duitsland, binnen de EU. Welke hostingpartij dat is, staat in de <a href="https://app.curanta.nl/trust/subverwerkers">subverwerkerslijst</a>.',
+      // Feitenblad, rij Hele database (volumeversleuteling; databank, bijlagen, back-ups, logs; sleutel niet op de server).
+      'Versleuteld opgeslagen, met volumeversleuteling op de server. Dat geldt voor de databank, de bijlagen, de back-ups en de logs. De sleutel staat niet op die server.',
+      // Code: Ponscura.Core.Infrastructure/Persistence/Tenantfilter.cs (filter op elke ITenantScoped-entiteit),
+      // bewaakt door TenantfilterVolgtDeContextTests.
+      'De gegevens van alle organisaties staan in één databank. Op elk gegeven van een organisatie legt Curanta een vast filter op die organisatie. Een gebruiker van een andere organisatie krijgt uw gegevens dus niet te zien.',
+      // Feitenblad, rijen Subverwerkers en AI-keuze per organisatie.
+      'De AI-functies lopen standaard via Mistral AI, op het Europese endpoint. Mistral bewaart de gegevens niet en traint er niet mee. Naar een aanbieder in de VS (Anthropic) gaat het alleen als uw organisatie daar zelf voor kiest.',
+    ],
+  },
+  {
+    id: 'wie',
+    titel: 'Wie erin kan',
+    icoon: 'sleutel',
+    punten: [
+      // Feitenblad, rij Tweestapsverificatie. Niet "voor iedereen", geen sms of passkeys.
+      'In de backoffice is tweestapsverificatie met een authenticator-app verplicht voor zorg- en beheerrollen. Een nieuwe collega stelt die bij de eerste aanmelding zelf in.',
+      // Code: Curanta.Host/Infrastructure/Authentication/LoginLockoutService.cs:99-108 (5 pogingen in 15 minuten,
+      // 15 minuten dicht), Program.cs:3146-3156 (het beleid van de organisatie); feitenblad, rij Klachtbrief,
+      // wachtwoordbeleid (wachtwoord- en sessiebeleid afgedwongen).
+      'Na vijf mislukte pogingen binnen een kwartier gaat de aanmelding een kwartier dicht. Uw organisatie kan die grenzen zelf instellen, net als het beleid voor wachtwoorden en sessies.',
+      // ADR 2026-08-06-dossiertoegang-zorgrelatie-reikwijdte (IDossiertoegang, waarneming met reden, NEN 7513);
+      // feitenblad, rijen VVT: EVV (telt als zorgrelatie) en Verpleeghuis (afdeling).
+      'Een zorgmedewerker opent het dossier van een cliënt met wie hij een zorgrelatie heeft, bijvoorbeeld door een bezoek in het rooster of als eerst verantwoordelijke (EVV\'er). Zonder relatie kan hij waarnemen, met een reden die in het logboek komt.',
+      // Feitenblad, rij Herkomstbeveiliging (scanblokkade: 10 minuten, 1 dag, 1 week).
+      'Wie bekende zwakke plekken van websites afzoekt, wordt automatisch geblokkeerd, oplopend tot een week.',
+    ],
+  },
+  {
+    id: 'gevoelig',
+    titel: 'Gevoelige gegevens extra beschermd',
+    icoon: 'slot',
+    punten: [
+      // Feitenblad, rij BSN.
+      'Het BSN is daarbovenop op veldniveau versleuteld, met AES-256-GCM. Zoeken op BSN gaat via een aparte hash, zonder het te ontsleutelen.',
+      // Feitenblad, rij Herkomstbeveiliging (HSTS een jaar); live gemeten 26-10-2026: Strict-Transport-Security
+      // max-age=31536000 op app.curanta.nl. Geen TLS-versie: dat oudere versies geweigerd worden, is niet gemeten.
+      'Al het verkeer met Curanta gaat over een versleutelde verbinding. Uw browser krijgt de opdracht om een jaar lang geen onversleutelde verbinding te maken.',
+      // Code: Ponscura.Core.Infrastructure/Observability/HostMiddlewareExtensions.cs:19-39 en 111 (CSP met
+      // script-src 'self' en frame-ancestors 'none', X-Frame-Options DENY); live gemeten 26-10-2026.
+      'Curanta geeft de browser strenge regels mee: de applicatie laat zich niet in een andere website inbedden en laadt geen scripts van andere partijen.',
+      // Feitenblad, rij Offline (medewerkerportaal).
+      'Het medewerkerportaal bewaart een versleutelde kopie op het toestel, zodat een zorgmedewerker ook zonder bereik verder kan. Die kopie bevat geen medicatie en geen BSN, en een collega kan er niet bij.',
+    ],
+  },
+  {
+    id: 'vastgelegd',
+    titel: 'Wat er gebeurt, wordt vastgelegd',
+    icoon: 'lijst',
+    punten: [
+      // Feitenblad, rij NEN 7513 (hash-keten; soort handeling; bewaartermijn, nooit kaal "7 jaar").
+      'Het toegangslogboek (NEN 7513) legt vast wie welk dossier inzag, en wie gegevens vastlegde, wijzigde of verwijderde. Een hash-keten maakt een latere wijziging zichtbaar. Een regel over een cliënt blijft bewaard zolang zijn dossier bestaat; regels zonder dossier zeven jaar.',
+      // Feitenblad, rij NEN 7513 (signaal "herhaald geweigerde toegang"); de taakrol voor de toegangssignalering
+      // (ADR 2026-09-19-taakrolpolicies-zonder-beheerdersomweg).
+      'Wie herhaaldelijk wordt geweigerd, komt als signaal bij de collega aan wie u de toegangssignalering toewijst.',
+      // ADR 2026-10-23-audit-alleen-toevoegen-rondeverslag-en-kopie-buiten-de-server, § 1; commit 927b1841ee
+      // (trigger BeheerauditAlleenToevoegen), in productie sinds 5b7dfdd98. Niet "niemand kan": een eigenaar van de
+      // tabel kan de trigger uitzetten (zelfde ADR).
+      'Wie rollen, rechten of instellingen wijzigt, komt in de beheeraudit. De databank weigert elke wijziging van die regels; verwijderen kan alleen na de bewaartermijn van zeven jaar.',
+      // Feitenblad, rij Auditlogs naar het SIEM. Niet "werkt met elk SIEM".
+      'Het beveiligingslogboek en de beheeraudit kunnen elke minuut naar het SIEM van uw organisatie; dat richten wij per klant in. Getest met Splunk, Azure Monitor en een syslog-server.',
+    ],
+  },
+  {
+    id: 'bijgewerkt',
+    titel: 'Bijgewerkt en nagekeken',
+    icoon: 'klok',
+    punten: [
+      // Feitenblad, rij Onderhoud en updates. Niet "binnen x uur", niet "altijd de nieuwste versie".
+      'Elke maand controleren wij het platform op beveiliging.',
+      'Een beveiligingsupdate brengen wij uit zodra hij nodig is, zonder te wachten op de volgende versie. Elke vier maanden komt er een nieuwe versie.',
+      // Feitenblad, rij Bekende lekken: alleen met datum (LEKKEN_GEMETEN in src/config/fundament.ts).
+      `Op ${LEKKEN_GEMETEN} zat er in Curanta geen enkel softwarepakket met een bekend lek, en geen pakket dat de maker niet meer onderhoudt.`,
+      // Feitenblad, rij Fundament: de jaarlijkse overstap is de hoofdzin, de huidige versie de bijzin.
+      `Elk jaar stappen wij over op de nieuwe versie van .NET, de techniek onder Curanta, een paar weken nadat Microsoft hem in november uitbrengt. Nu is dat ${DOTNET.versie}, met beveiligingsupdates van Microsoft tot ${DOTNET.updatesTot}.`,
+    ],
+  },
+  {
+    id: 'misgaat',
+    titel: 'Als er toch iets misgaat',
+    icoon: 'schild',
+    punten: [
+      // Feitenblad, rijen RPO / RTO (hersteltoets 21-10-2026, herstel tot een tijdstip) en Hele database (back-up
+      // buiten de server: open punt, noemen bij de back-up); ADR 2026-10-19-linux, deel Productie.
+      'Van de databank is er een back-up waarmee wij kunnen terugzetten tot een bepaald tijdstip. De hersteltoets van die back-up slaagde op 21 oktober 2026. Een back-up buiten de server is er nog niet.',
+      // Feitenblad, rij Noodoverzicht; docs/help/admin/noodprocedure.md (vooraf downloaden per dienst).
+      'Uw team downloadt elke dag een versleuteld noodoverzicht (pdf) met per cliënt de contactgegevens, waarschuwingen, allergieën en de medicatie van die dag. Zo werkt het door als Curanta niet bereikbaar is.',
+      // Code: Curanta.Host/Infrastructure/Documents/DpaPdfGenerator.cs:216-222 (artikel 5, versie 2026.3).
+      'Een datalek bij Curanta melden wij binnen 24 uur aan uw organisatie. Zo staat het in de verwerkersovereenkomst.',
+      // Feitenblad, rijen Statuspagina (geen incidenthistorie) en Beschikbaarheid (doel, geen gemeten historie).
+      'Op de <a href="https://app.curanta.nl/status">statuspagina</a> ziet u de actuele beschikbaarheid. Ons doel is 99,9% op kantooruren; een gemeten historie is er nog niet.',
+    ],
+  },
+];
+
+// Wat Curanta doet en wat bij de organisatie blijft. Bronnen per regel in het commentaar.
+const verdeling: { onderwerp: string; curanta: string; u: string }[] = [
+  {
+    // AVG art. 4 en 28; feitenblad, rij Overstap in het implementatieproject ("pas na de verwerkersovereenkomst
+    // gegevens overzetten").
+    onderwerp: 'De gegevens van uw cliënten',
+    curanta: 'Curanta is verwerker: wij verwerken de gegevens alleen voor u, volgens de verwerkersovereenkomst.',
+    u: 'Uw organisatie is verwerkingsverantwoordelijke (AVG) en bepaalt welke gegevens zij vastlegt, en waarvoor.',
+  },
+  {
+    // /trust (Verwerkersovereenkomst: op aanvraag); feitenblad, rij Overstap in het implementatieproject.
+    onderwerp: 'Verwerkersovereenkomst',
+    curanta: 'Wij stellen hem op, met de subverwerkers en de beveiligingsmaatregelen erin. U vraagt hem aan via trust@curanta.nl.',
+    u: 'Tekenen doet u, net als wij, voordat er gegevens van cliënten in Curanta komen.',
+  },
+  {
+    // Feitenblad, rijen Tweestapsverificatie en Klachtbrief, wachtwoordbeleid.
+    onderwerp: 'Rollen en toegang',
+    curanta: 'Wij dwingen tweestapsverificatie af voor zorg- en beheerrollen, en het beleid voor wachtwoorden en sessies dat u instelt.',
+    u: 'Uw beheerder maakt accounts aan, geeft collega\'s een rol en trekt die weer in.',
+  },
+  {
+    // ADR 2026-10-23-meekijken-met-toestemming.
+    onderwerp: 'Toestemming om mee te kijken',
+    curanta: 'Wij vragen per keer toestemming, met een ticket en een reden, en leggen elke handeling vast.',
+    u: 'Uw beheerder keurt de aanvraag goed of wijst hem af.',
+  },
+  {
+    // DpaPdfGenerator.cs:216-222 (24 uur); AVG art. 33 lid 1 (72 uur) en art. 34 (hoog risico).
+    onderwerp: 'Een datalek',
+    curanta: 'Een datalek bij Curanta melden wij binnen 24 uur aan u.',
+    u: 'U beoordeelt het en meldt het zo nodig binnen 72 uur bij de Autoriteit Persoonsgegevens. Brengt het een hoog risico mee voor de cliënten of medewerkers, dan informeert u hen ook.',
+  },
+  {
+    // Feitenblad, rij Cyberbeveiligingswet (Curanta meldt niet zelf bij het CSIRT).
+    onderwerp: 'Een cyberincident',
+    curanta: 'In de module voor de Cyberbeveiligingswet bewaakt Curanta de meldtermijnen van 24 uur, 72 uur en één maand.',
+    u: 'U legt het incident vast. Valt uw organisatie onder de wet, dan meldt u een significant incident zelf bij het CSIRT.',
+  },
+  {
+    // Feitenblad, rij Overstap in het implementatieproject (DPIA: Curanta levert de beschrijving ...).
+    onderwerp: 'DPIA',
+    curanta: 'Wij leveren de beschrijving van de verwerking, de gegevensstromen, de beveiliging, de subverwerkers en de bewaartermijnen.',
+    u: 'De DPIA voor uw eigen verwerking voert u zelf uit.',
+  },
+  {
+    // Code: Ponscura.Core/Contracts/Compliance/SubverwerkerKennisgevingstermijnen.cs:22-25 (30 dagen vooraf, 14 dagen
+    // bezwaar); ADR 2026-10-23-subverwerkertermijnen-en-terugbellen-uit-het-register.
+    onderwerp: 'Subverwerkers',
+    curanta: 'Een nieuwe of vervallen subverwerker melden wij 30 dagen voor de ingangsdatum.',
+    u: 'Bezwaar maken kan tot 14 dagen na die melding.',
+  },
+  {
+    // Feitenblad, rijen Onderhoud en updates, RPO / RTO, Hele database.
+    onderwerp: 'Server, back-up en updates',
+    curanta: 'Wij beheren de server, de back-up en de updates van de software.',
+    u: 'De computers en telefoons waarop uw medewerkers met Curanta werken, beheert u zelf.',
+  },
+  {
+    // Feitenblad, rijen Noodoverzicht en Overstap in het implementatieproject (str.uitval: noodprocedure, geoefend).
+    onderwerp: 'Uitval',
+    curanta: 'Curanta levert het noodoverzicht en de versleutelde kopie in het medewerkerportaal.',
+    u: 'Wat uw mensen doen als Curanta niet bereikbaar is, legt u vast en oefent u.',
+  },
+  {
+    // Feitenblad, rij Exit (wisgrendel).
+    onderwerp: 'Vertrek',
+    curanta: 'Wij leveren de export en wissen uw gegevens daarna, met een vernietigingsverklaring.',
+    u: 'De export haalt u op, en daarna bevestigt u dat hij volledig binnen is.',
+  },
+];
+
+const onderwerpen = [
+  { href: '#oplevering', label: 'Vanaf de eerste dag' },
+  { href: '#meekijken', label: 'Meekijken door Curanta' },
+  { href: '#herstel', label: 'Herstel en uitval' },
+  { href: '#vertrek', label: 'Als u vertrekt' },
+  { href: '#verdeling', label: 'Wat bij u blijft' },
+  { href: '#documenten', label: 'Documenten' },
+];
+---
+<Base
+  image="/og/trust.png"
+  title="Veiligheid van uw cliëntgegevens | Curanta"
+  description="Waar uw gegevens staan, wie erin kan, wat Curanta vastlegt en wat er gebeurt als het misgaat. En wat Curanta regelt en wat bij uw organisatie blijft."
+>
+  <section class="border-b border-ink-200 bg-curanta-50">
+    <div class="container-prose py-14 sm:py-16">
+      <p class="eyebrow">Veiligheid · laatst herzien {HERZIEN}</p>
+      <h1 class="mt-3 max-w-3xl font-display text-4xl font-bold text-curanta-900 sm:text-5xl">
+        Wat Curanta voor uw cliëntgegevens regelt, en wat bij u blijft
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg text-ink-700">
+        Voor de gegevens van uw cliënten blijft uw organisatie verantwoordelijk. Dat zegt de AVG, en
+        NEN 7510 vraagt u om aan te tonen hoe u ze beschermt. Curanta is daarop ingericht. Hieronder
+        staat in gewone taal wat er vanaf de eerste dag geregeld is, en welk deel bij u ligt.
+      </p>
+      <p class="mt-3 max-w-2xl text-ink-700">
+        De stand per onderwerp, ook wat nog niet geregeld is, en de wettelijke termijnen vindt u in het
+        <a href="/trust" class="font-semibold text-curanta-700">Trust Centre</a>.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-3 text-sm">
+        <a href="/trust" class="btn-primary no-underline">Naar het Trust Centre</a>
+        <a href="mailto:trust@curanta.nl?subject=Verwerkersovereenkomst" class="btn-secondary no-underline">Vraag de verwerkersovereenkomst aan</a>
+      </div>
+      <nav class="mt-10 border-t border-ink-200 pt-6" aria-label="Onderwerpen op deze pagina">
+        <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+          {onderwerpen.map((o) => <li><a href={o.href} class="text-curanta-700">{o.label}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <section id="oplevering" class="container-prose scroll-mt-20 border-b border-ink-200 py-14" aria-labelledby="oplevering-kop">
+    <div class="max-w-3xl">
+      <h2 id="oplevering-kop" class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Vanaf de eerste dag</h2>
+      <p class="mt-3 text-ink-700">
+        Dit staat klaar zodra uw organisatie met Curanta werkt. Waar u zelf iets kiest of laat
+        inrichten, staat dat erbij.
+      </p>
+    </div>
+    <ul class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {blokken.map((b) => (
+        <li id={b.id} class="scroll-mt-20 rounded-xl bg-white p-5 ring-1 ring-ink-200">
+          <div class="flex items-center gap-3">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-curanta-50 text-curanta-700">
+              <Icon naam={b.icoon} />
+            </span>
+            <h3 class="font-display text-lg font-bold text-curanta-900">{b.titel}</h3>
+          </div>
+          <ul class="mt-4 space-y-3 text-sm leading-relaxed text-ink-700">
+            {b.punten.map((p) => (
+              <li class="flex gap-2.5">
+                <span class="mt-1 shrink-0 text-accent-600"><Icon naam="vink" class="h-4 w-4" /></span>
+                <span class="[&_a]:font-semibold [&_a]:text-curanta-700" set:html={p} />
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {/* ADR 2026-10-23-meekijken-met-toestemming (in productie sinds fec35473c; code Curanta.Host/Infrastructure/
+      Ondersteuning/Ondersteuningstoegang.cs:27 en 68-72: hoogstens 8 uur, noodtoegang hoogstens 2 uur). Vier ogen bij
+      Curanta staat sinds 24-10-2026 uit (ADR 2026-10-24-passkey-optioneel-en-vier-ogen-uit): niet noemen. */}
+  <section id="meekijken" class="container-prose scroll-mt-20 border-b border-ink-200 py-14" aria-labelledby="meekijken-kop">
+    <div class="grid gap-10 md:grid-cols-[260px_1fr]">
+      <div>
+        <h2 id="meekijken-kop" class="font-display text-2xl font-bold text-curanta-900">Meekijken door Curanta</h2>
+        <p class="mt-3 text-sm leading-relaxed text-ink-700">
+          Soms moeten wij zien wat u ziet om een vraag te beantwoorden. Dat kan alleen als een
+          beheerder van uw organisatie daar toestemming voor geeft, per keer.
+        </p>
+      </div>
+      <ul class="space-y-3 text-sm leading-relaxed text-ink-700">
+        <li>Een aanvraag noemt een ticket, een reden en een duur van hoogstens 8 uur.</li>
+        <li>
+          Standaard zien wij schermen en instellingen, alleen om te lezen, zonder cliëntgegevens en
+          dossiers. Dossierinhoud alleen als uw beheerder dat uitdrukkelijk toestaat. U kunt ook
+          instellen dat Curanta nooit dossierinhoud mag zien.
+        </li>
+        <li>
+          Uw beheerders krijgen bij de aanvraag, de start en het einde een melding en een e-mail, en
+          die kunnen zij niet uitzetten. Op de pagina Ondersteuning in Curanta ziet u alle toegang van
+          de laatste 90 dagen.
+        </li>
+        <li>Elke regel in het toegangslogboek staat op naam van wie bij Curanta meekeek, met de vermelding dat het Curanta was.</li>
+        <li>
+          Bij een storing zonder iemand van u aan de lijn kunnen wij noodtoegang nemen: alleen
+          meekijken, hoogstens 2 uur, met een melding aan uw beheerders zodra die begint.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  {/* Feitenblad, rijen RPO / RTO (doel, niet aangetoond; hersteltoets op dezelfde server), Hele database (geen
+      back-up buiten de server) en Overstap in het implementatieproject (str.uitval: noodprocedure geoefend vóór de
+      go/no-go); docs/help/admin/noodprocedure.md. */}
+  <section id="herstel" class="container-prose scroll-mt-20 border-b border-ink-200 py-14" aria-labelledby="herstel-kop">
+    <div class="grid gap-10 md:grid-cols-[260px_1fr]">
+      <div>
+        <h2 id="herstel-kop" class="font-display text-2xl font-bold text-curanta-900">Herstel en uitval</h2>
+        <p class="mt-3 text-sm leading-relaxed text-ink-700">
+          Wat wij als doel hebben gesteld, wat daarvan aangetoond is, en hoe uw team doorwerkt.
+        </p>
+      </div>
+      <div class="space-y-4 text-sm leading-relaxed text-ink-700">
+        <p>
+          In onze <a href="/voorwaarden#sla" class="font-semibold text-curanta-700">voorwaarden</a> staat
+          als doel: hoogstens 1 uur aan gegevens kwijt (RPO) en binnen 4 uur weer in gebruik (RTO). Dat
+          doel is nog niet aangetoond. De hersteltoets van 21 oktober 2026 zette de databank terug op
+          dezelfde server, en een kopie op een andere plek is er nog niet.
+        </p>
+        <p>
+          Voor de uren dat Curanta niet bereikbaar is, legt u in uw implementatieproject een
+          noodprocedure vast en oefent u die één keer. Pas daarna toetsen wij samen of alles klaar is
+          om te starten. Bij een storing werkt uw team met het noodoverzicht en met de kopie in het
+          medewerkerportaal; wat het op papier vastlegt, voert het daarna in.
+        </p>
+        <p>
+          Een cyberincident bij uw eigen organisatie legt u vast in de module voor de
+          Cyberbeveiligingswet. Meer daarover in het <a href="/trust#herstel" class="font-semibold text-curanta-700">Trust Centre</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* Feitenblad, rijen Export (JSON met bestanden; BSN als laatste vier cijfers en hash; BSN-lijst bij vertrek,
+      BSN_LIJST_LIVE sinds 22-10-2026) en Exit (5 werkdagen, 30 dagen, "na afloop", wisgrendel). Voorwaarden art. 9
+      is een concept: zo noemt /voorwaarden het zelf. */}
+  <section id="vertrek" class="container-prose scroll-mt-20 border-b border-ink-200 py-14" aria-labelledby="vertrek-kop">
+    <div class="grid gap-10 md:grid-cols-[260px_1fr]">
+      <div>
+        <h2 id="vertrek-kop" class="font-display text-2xl font-bold text-curanta-900">Als u vertrekt</h2>
+        <p class="mt-3 text-sm leading-relaxed text-ink-700">
+          Uw gegevens gaan met u mee. Daarna wissen wij ze, maar pas als vaststaat dat u ze hebt.
+        </p>
+      </div>
+      <ul class="space-y-3 text-sm leading-relaxed text-ink-700">
+        <li>
+          U krijgt een volledige export van uw gegevens en bestanden, in JSON. Het BSN staat daarin
+          alleen als laatste vier cijfers en hash. Na uw opzegging levert Curanta het volledige BSN
+          apart, in een versleuteld bestand met een los wachtwoord.
+        </li>
+        <li>
+          Na het einde van het contract leveren wij de export binnen 5 werkdagen, en u hebt 30 dagen om
+          hem op te halen. Na afloop van die 30 dagen wissen wij uw gegevens; u krijgt een
+          vernietigingsverklaring.
+        </li>
+        <li>
+          Wij wissen pas nadat u hebt bevestigd dat u de volledige export hebt ontvangen, of nadat wij
+          hebben vastgelegd waarom het zonder kan, bijvoorbeeld omdat u schriftelijk afzag van de export.
+        </li>
+        <li>
+          Zo staat het in artikel 9 van onze <a href="/voorwaarden#beeindiging" class="font-semibold text-curanta-700">voorwaarden</a> (concept).
+          Hoe een overstap verder verloopt, leest u bij <a href="/overstappen#eruit" class="font-semibold text-curanta-700">Overstappen</a>.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="verdeling" class="scroll-mt-20 border-b border-ink-200 bg-curanta-50 py-14" aria-labelledby="verdeling-kop">
+    <div class="container-prose">
+      <div class="max-w-3xl">
+        <h2 id="verdeling-kop" class="font-display text-2xl font-bold text-curanta-900 sm:text-3xl">Wat Curanta doet, en wat bij u blijft</h2>
+        <p class="mt-3 text-ink-700">
+          Software neemt uw verantwoordelijkheid niet over. Per onderwerp ziet u wie wat doet.
+        </p>
+      </div>
+      <ul class="mt-8 grid gap-4 md:grid-cols-2">
+        {verdeling.map((v) => (
+          <li class="rounded-xl bg-white p-5 ring-1 ring-ink-200">
+            <h3 class="font-display text-lg font-bold text-curanta-900">{v.onderwerp}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ink-700"><span class="font-semibold text-ink-900">Curanta:</span> {v.curanta}</p>
+            <p class="mt-2 text-sm leading-relaxed text-ink-700"><span class="font-semibold text-ink-900">U:</span> {v.u}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* Alleen documenten die er zijn. Feitenblad, Documenten voor inkoop: op aanvraag, nooit "downloaden"; geen
+      pentestrapport (feitenblad, rij Externe pentest: nog niet uitgevoerd). */}
+  <section id="documenten" class="container-prose scroll-mt-20 border-b border-ink-200 py-14" aria-labelledby="documenten-kop">
+    <div class="grid gap-10 md:grid-cols-[260px_1fr]">
+      <div>
+        <h2 id="documenten-kop" class="font-display text-2xl font-bold text-curanta-900">Documenten</h2>
+        <p class="mt-3 text-sm leading-relaxed text-ink-700">Wat u zelf kunt nalezen, en wat wij op aanvraag sturen.</p>
+      </div>
+      <ul class="grid gap-3 sm:grid-cols-2">
+        <li class="rounded-xl bg-white p-4 ring-1 ring-ink-200">
+          <h3 class="text-sm font-bold text-curanta-900">Verwerkersovereenkomst</h3>
+          <p class="mt-2 text-sm leading-snug text-ink-700">Op aanvraag, zonder geheimhoudingsverklaring vooraf.</p>
+          <a href="mailto:trust@curanta.nl?subject=Verwerkersovereenkomst" class="mt-2 inline-block text-xs font-semibold text-curanta-700">Mail trust@curanta.nl</a>
+        </li>
+        <li class="rounded-xl bg-white p-4 ring-1 ring-ink-200">
+          <h3 class="text-sm font-bold text-curanta-900">Subverwerkerslijst</h3>
+          <p class="mt-2 text-sm leading-snug text-ink-700">Wie gegevens voor Curanta verwerkt, waar, en vanaf wanneer.</p>
+          <a href="https://app.curanta.nl/trust/subverwerkers" class="mt-2 inline-block text-xs font-semibold text-curanta-700">Naar de lijst</a>
+        </li>
+        <li class="rounded-xl bg-white p-4 ring-1 ring-ink-200">
+          <h3 class="text-sm font-bold text-curanta-900">Privacyverklaring</h3>
+          <p class="mt-2 text-sm leading-snug text-ink-700">Welke gegevens Curanta verwerkt, waarvoor en hoe lang.</p>
+          <a href="/privacy" class="mt-2 inline-block text-xs font-semibold text-curanta-700">Naar de privacyverklaring</a>
+        </li>
+        <li class="rounded-xl bg-white p-4 ring-1 ring-ink-200">
+          <h3 class="text-sm font-bold text-curanta-900">Algemene voorwaarden</h3>
+          <p class="mt-2 text-sm leading-snug text-ink-700">Met de service levels en de exit (artikel 9). Concept-versie.</p>
+          <a href="/voorwaarden" class="mt-2 inline-block text-xs font-semibold text-curanta-700">Naar de voorwaarden</a>
+        </li>
+        <li class="rounded-xl bg-white p-4 ring-1 ring-ink-200">
+          <h3 class="text-sm font-bold text-curanta-900">Inkoopdossier</h3>
+          <p class="mt-2 text-sm leading-snug text-ink-700">Voor inkoop en de informatiebeveiliger, met de stand van NEN 7510.</p>
+          <a href="/procurement" class="mt-2 inline-block text-xs font-semibold text-curanta-700">Naar het inkoopdossier</a>
+        </li>
+        <li class="rounded-xl bg-white p-4 ring-1 ring-ink-200">
+          <h3 class="text-sm font-bold text-curanta-900">Uw eigen vragenlijst</h3>
+          <p class="mt-2 text-sm leading-snug text-ink-700">Werkt u met CAIQ, SIG of BSI C5, dan vullen wij die in.</p>
+          <a href="mailto:trust@curanta.nl?subject=Vragenlijst%20beveiliging" class="mt-2 inline-block text-xs font-semibold text-curanta-700">Mail uw vragenlijst</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="container-prose py-16">
+    <div class="rounded-2xl bg-curanta-50 p-8 sm:p-12">
+      <h2 class="font-display text-2xl font-bold text-curanta-900">Een vraag over beveiliging of privacy?</h2>
+      <p class="mt-3 max-w-2xl text-ink-700">
+        Mail ons aanspreekpunt voor privacy en beveiliging; wij reageren binnen 1 werkdag. Liever
+        bellen? Dat kan op 085 250 1301.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="mailto:trust@curanta.nl" class="btn-primary no-underline">trust@curanta.nl</a>
+        <a href="tel:+31852501301" class="btn-secondary no-underline">085 250 1301</a>
+      </div>
+    </div>
+  </section>
+</Base>
