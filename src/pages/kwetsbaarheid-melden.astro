@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+// 27-10-2026 (onderzoek concurrentie-sites, docs/campagne/onderzoek-concurrentie-sites-2026-10-27.md): een vaste
+// meldroute voor kwetsbaarheden, naar het voorbeeld van de Leidraad Coordinated Vulnerability Disclosure van het NCSC.
+// Van de concurrenten heeft alleen Nedap een geldige security.txt; die staat hier in /.well-known/security.txt.
+//
+// Feitenblad: trust@curanta.nl is het adres voor security (rij Security, trust); de enige termijnbelofte is "wij
+// reageren binnen 1 werkdag" (Beloften en termijnen). Bewust níét: een beloning, een termijn voor het herstel, of de
+// toezegging dat Curanta geen aangifte doet. Die laatste staat in de leidraad van het NCSC, maar is een juridische
+// keuze voor Jan.
+const domeinen = [
+  ['curanta.nl', 'deze website'],
+  ['app.curanta.nl', 'de backoffice'],
+  ['klant.curanta.nl', 'het cliëntportaal'],
+  ['medewerker.curanta.nl', 'het medewerkerportaal'],
+  ['project.curanta.nl', 'de implementatieprojecten'],
+  ['presentatie.curanta.nl', 'de online presentatie'],
+];
+---
+<Base
+  image="/og/kwetsbaarheid-melden.png"
+  title="Een kwetsbaarheid melden | Curanta"
+  description="Vindt u een zwakke plek in Curanta of op curanta.nl? Meld het aan trust@curanta.nl. Wat wij met uw melding doen, en wat wij van u vragen."
+>
+  <PageHero
+    eyebrow="Vertrouwen"
+    title="Een kwetsbaarheid melden"
+    subtitle="Vindt u een zwakke plek in Curanta of op deze website? Meld het ons. Dan kunnen wij het oplossen voordat iemand er misbruik van maakt."
+  />
+
+  <section class="container-prose py-16">
+    <div class="max-w-3xl space-y-12 text-ink-700">
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink-900">Zo meldt u het</h2>
+        <p class="mt-3">
+          Mail naar <a href="mailto:trust@curanta.nl" class="font-semibold text-curanta-700 hover:underline">trust@curanta.nl</a>.
+          Zet erin:
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-6">
+          <li>wat u vond, en op welk adres of in welk onderdeel;</li>
+          <li>hoe wij het kunnen nadoen, stap voor stap;</li>
+          <li>hoe wij u kunnen bereiken, als u een antwoord wilt.</li>
+        </ul>
+        <p class="mt-3">Nederlands of Engels, allebei goed.</p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink-900">Wat wij doen</h2>
+        <ul class="mt-3 list-disc space-y-1 pl-6">
+          <li>Wij reageren binnen 1 werkdag.</li>
+          <li>Wij houden u op de hoogte van wat wij eraan doen.</li>
+          <li>Wij gebruiken uw gegevens alleen voor uw melding, en geven ze zonder uw toestemming aan niemand.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink-900">Wat wij van u vragen</h2>
+        <ul class="mt-3 list-disc space-y-1 pl-6">
+          <li>Bekijk, kopieer of wijzig niet meer gegevens dan nodig is om het probleem aan te tonen. Ziet u gegevens van cliënten of medewerkers, stop dan en meld het ons.</li>
+          <li>Vertel het niemand anders zolang het niet is opgelost.</li>
+          <li>Verstoor de dienst niet: geen aanval die Curanta overbelast, geen social engineering, en niets bij ons kantoor.</li>
+          <li>Laat geen scanner los die duizenden adressen opvraagt. Wie veel bekende scanpaden opvraagt, blokkeren wij een tijd. Dat beschermt de zorgorganisaties die met Curanta werken.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink-900">Waar het over gaat</h2>
+        <ul class="mt-3 space-y-1">
+          {domeinen.map(([domein, wat]) => <li><span class="font-semibold text-ink-900">{domein}</span>: {wat}</li>)}
+        </ul>
+        <p class="mt-3">
+          Gaat het over een dienst van een andere partij die Curanta gebruikt? Meld het ons ook; wij geven het door.
+          Welke partijen dat zijn, staat in de <a href="https://app.curanta.nl/trust/subverwerkers" class="text-curanta-700 hover:underline">lijst van subverwerkers</a>.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-ink-100 bg-ink-100/40 p-6">
+        <p>
+          Voor een programma: dezelfde gegevens staan in
+          <a href="/.well-known/security.txt" class="text-curanta-700 hover:underline">/.well-known/security.txt</a>.
+          Hoe Curanta beveiligd is, en wat nog niet geregeld is, leest u in het
+          <a href="/trust" class="text-curanta-700 hover:underline">Trust Centre</a> en op
+          <a href="/veiligheid" class="text-curanta-700 hover:underline">Veiligheid</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
