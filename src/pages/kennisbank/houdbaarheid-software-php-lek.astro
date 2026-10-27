@@ -15,7 +15,7 @@ import { DOTNET, LEKKEN_GEMETEN } from '../../config/fundament';
 // Curanta noemt hier bewust niet dat het zelf geen PHP gebruikt: de server waarop het draait heeft een beheerpaneel
 // dat wél op PHP draait, en de zin zou lezen als "bij ons kan dit niet".
 const publicatieDatum = '2026-10-23';
-const bijgewerktDatum = '2026-10-23';
+const bijgewerktDatum = '2026-10-26';
 const leesTijd = '~5 minuten';
 const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -133,7 +133,8 @@ const vragen = [
       <h2>Wat er bij ons nog niet is</h2>
       <p>
         Een externe pentest is nog niet uitgevoerd. De audit voor NEN 7510 is gepland; Curanta is niet gecertificeerd.
-        En een back-up buiten de server is er nog niet. De stand per onderwerp staat in het
+        En een back-up buiten de server is er nog niet; die is, als versleutelde kopie op een andere plek in de EU,
+        <a href="/veiligheid#garantie">bij de oplevering aan uw organisatie</a> geregeld. De stand per onderwerp staat in het
         <a href="/trust">Trust Centre</a>, onder <a href="/trust#herstel">Als het toch gebeurt</a>.
       </p>
 

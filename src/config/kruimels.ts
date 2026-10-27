@@ -16,6 +16,7 @@ export const KRUIMELNAMEN: Record<string, string> = {
   presentatie: 'Presentatie',
   prijzen: 'Prijzen',
   trust: 'Trust Centre',
+  veiligheid: 'Veiligheid',
   oplossing: 'Product',
   integraties: 'Koppelingen',
   implementatie: 'Implementatie',

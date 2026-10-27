@@ -33,7 +33,7 @@ export default defineConfig({
         if (path === '/' || path === '') {
           priority = 1.0;
           changefreq = 'weekly';
-        } else if (['/oplossing', '/vergelijking', '/prijzen', '/integraties', '/trust',
+        } else if (['/oplossing', '/vergelijking', '/prijzen', '/integraties', '/trust', '/veiligheid',
                     // Toegevoegd 2026-08-17: de open demo-omgeving en de overstap-pagina
                     // zijn onze twee sterkste conversiemiddelen, dus dezelfde prioriteit
                     // als de productpagina's.
