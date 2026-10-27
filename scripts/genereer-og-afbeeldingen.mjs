@@ -247,6 +247,30 @@ const IMAGES = [
     hero: 'Wat Curanta voor uw cliëntgegevens regelt, en wat bij u blijft.',
     sub: 'Waar uw gegevens staan · wie erin kan · als het misgaat',
   },
+  {
+    file: 'og/app.png',
+    eyebrow: 'Op de telefoon',
+    hero: 'Curanta als app op de telefoon.',
+    sub: 'Medewerkerportaal en cliëntportaal · zonder app store',
+  },
+  {
+    file: 'og/per-rol.png',
+    eyebrow: 'Per rol',
+    hero: 'Wat Curanta voor uw rol betekent.',
+    sub: 'Bestuur · FG en CISO · planning · zorgadministratie',
+  },
+  {
+    file: 'og/toegankelijkheid.png',
+    eyebrow: 'Vertrouwen',
+    hero: 'Toegankelijkheid van curanta.nl.',
+    sub: 'De norm · wat wij gemeten hebben · wat nog niet getoetst is',
+  },
+  {
+    file: 'og/kwetsbaarheid-melden.png',
+    eyebrow: 'Vertrouwen',
+    hero: 'Een kwetsbaarheid melden.',
+    sub: 'trust@curanta.nl · wij reageren binnen 1 werkdag',
+  },
 ];
 
 const esc = (s) =>
