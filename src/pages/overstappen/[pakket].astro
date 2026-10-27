@@ -18,6 +18,7 @@ export function getStaticPaths() {
       params: { pakket: 'mijncaress-stopt' },
       props: {
         pakket: 'mijnCaress',
+        beeld: '/og/overstappen/mijncaress-stopt.png',
         leverancier: 'PinkRoccade Healthcare',
         titel: 'mijnCaress stopt eind 2026: wat nu? | Curanta',
         beschrijving: 'Volgens M&I/Partners stopt PinkRoccade Healthcare eind 2026 met het ECD mijnCaress. Wat u nu regelt: tijd, het oude dossier en de declaraties.',
@@ -42,6 +43,7 @@ export function getStaticPaths() {
       params: { pakket: 'fierit-stopt' },
       props: {
         pakket: 'Fierit',
+        beeld: '/og/overstappen/fierit-stopt.png',
         leverancier: 'Tenzinger',
         titel: 'Fierit stopt eind 2027: wat nu? | Curanta',
         beschrijving: 'Volgens M&I/Partners gaat Fierit van Tenzinger eind 2027 uit de markt. Hoe u terugrekent vanaf die datum, en wat u Tenzinger schriftelijk vraagt.',
@@ -65,11 +67,11 @@ export function getStaticPaths() {
   ];
 }
 
-const { pakket, leverancier, titel, beschrijving, hero, ondertitel, bekend, tijd, vragen } = Astro.props;
+const { pakket, beeld, leverancier, titel, beschrijving, hero, ondertitel, bekend, tijd, vragen } = Astro.props;
 const bron = inhoud.bronnen.mi2026;
 const nidos = inhoud.bronnen.nidos;
 ---
-<Base title={titel} description={beschrijving}>
+<Base image={beeld} title={titel} description={beschrijving}>
   <PageHero eyebrow="Overstappen" title={hero} subtitle={ondertitel}>
     <div slot="actions" class="flex flex-wrap items-center gap-3">
       <a href="/overstapscan" class="btn-primary no-underline">Maak een planning met de overstapscan</a>
@@ -138,7 +140,7 @@ const nidos = inhoud.bronnen.nidos;
         Een kant-en-klare import uit {pakket} hebben wij niet. Het overzetten van uw gegevens is bij ons een project
         tegen een vaste prijs, na een migratie-inschatting. Cliënten en medewerkers importeert u uit een CSV- of
         Excelbestand, met een sjabloon uit Curanta. Zorgplannen en het oude dossier kunnen als pdf mee in het dossier
-        van de cliënt. Loopt uw contract met {leverancier} nog door als u bij ons begint, dan betaalt u het abonnement van
+        van de cliënt. Loopt uw contract met {leverancier} nog door als u bij ons begint? Dan betaalt u het abonnement van
         Curanta pas vanaf het einde van dat contract, tot hoogstens zes maanden na de start.
       </p>
     </div>

@@ -229,6 +229,24 @@ const IMAGES = [
     hero: 'Kijk het zelf na, voordat u kiest.',
     sub: 'Het systeem · de prijs · de beveiliging · de weg naar buiten',
   },
+  {
+    file: 'og/overstappen/mijncaress-stopt.png',
+    eyebrow: 'Overstappen',
+    hero: 'mijnCaress stopt eind 2026. Wat regelt u nu?',
+    sub: 'Volgens M&I/Partners · tijd · het oude dossier · de declaraties',
+  },
+  {
+    file: 'og/overstappen/fierit-stopt.png',
+    eyebrow: 'Overstappen',
+    hero: 'Fierit stopt eind 2027. Wat regelt u nu?',
+    sub: 'Volgens M&I/Partners · reken terug vanaf de einddatum',
+  },
+  {
+    file: 'og/veiligheid.png',
+    eyebrow: 'Veiligheid',
+    hero: 'Wat Curanta voor uw cliëntgegevens regelt, en wat bij u blijft.',
+    sub: 'Waar uw gegevens staan · wie erin kan · als het misgaat',
+  },
 ];
 
 const esc = (s) =>
