@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { HOOFDKNOP } from '../config/demo';
+
+// 27-10-2026 (onderzoek concurrentie-sites): Nedap en Ecare hebben pagina's per rol. Hier per rol wat die het eerst
+// wil weten, met een link naar de pagina waar het uitgebreid staat. Geen nieuwe feiten: elke regel komt uit het
+// feitenblad (rijen Prijzen, Geen dubbele kosten, Implementatieproject, Export, Exit, Cyberbeveiligingswet, BSN, Hele
+// database, NEN 7513, Tweestapsverificatie, Meekijken, Datalek, SIEM, AI-keuze, NEN 7510, Rooster per plan,
+// Roostertoets, Planning sinds 17-10, Medewerkerportaal, VECOZO, Salarisexport, Migratie, Facturering).
+const rollen = [
+  {
+    id: 'bestuur',
+    rol: 'Bestuur en directie',
+    vraag: 'Wat kost het, wat levert het op, en hoe komen wij er weer uit?',
+    punten: [
+      'De prijs staat op de site: €19 tot €39 per actieve medewerker per maand, training en hosting inbegrepen. De implementatie is maatwerk, met een prijs die wij vooraf afspreken.',
+      'Loopt uw huidige contract nog door? Dan betaalt u het abonnement pas vanaf het einde daarvan, tot hoogstens zes maanden na de start.',
+      'Eén systeem voor dossier, planning, declaratie, kwaliteit en HRM: 111 onderdelen in 12 groepen.',
+      'Voor de Cyberbeveiligingswet: de vaststelling van de maatregelen door het bestuur, en een bestuurdersrapportage als pdf.',
+      'Bij vertrek een volledige export van uw gegevens en bestanden in JSON. Wij wissen pas nadat u hebt bevestigd dat u de volledige export hebt ontvangen.',
+    ],
+    links: [['/prijzen', 'Prijzen'], ['/implementatie', 'Implementatie'], ['/overstappen', 'Overstappen']],
+  },
+  {
+    id: 'fg-ciso',
+    rol: 'FG, CISO en informatiebeveiliging',
+    vraag: 'Waar staan de gegevens, wie kan erin, en wat wordt er vastgelegd?',
+    punten: [
+      'Hosting in de EU. Uw gegevens staan versleuteld opgeslagen (volumeversleuteling op de server); het BSN is daarbovenop op veldniveau versleuteld.',
+      'Een NEN 7513-logboek met een hash-keten, en in de backoffice tweestapsverificatie voor elke rol die cliëntgegevens ziet.',
+      'Curanta kijkt alleen mee met toestemming van uw beheerder, per keer en hoogstens 8 uur, en elke regel in het logboek staat op naam van de meekijker.',
+      'Een datalek bij Curanta melden wij binnen 24 uur aan u; zo staat het in de verwerkersovereenkomst.',
+      'Auditlogs gaan desgewenst elke minuut naar uw eigen SIEM; getest met Splunk, Azure Monitor en een syslog-server.',
+      'AI zet u voor de hele organisatie uit, of u kiest de aanbieder: standaard Mistral AI via het EU-endpoint.',
+      'Curanta is nog niet gecertificeerd. De externe audit voor NEN 7510 is gepland in het vierde kwartaal van 2026.',
+    ],
+    links: [['/veiligheid', 'Veiligheid'], ['/trust', 'Trust Centre'], ['/kwetsbaarheid-melden', 'Een kwetsbaarheid melden']],
+  },
+  {
+    id: 'planning',
+    rol: 'Planning en roostering',
+    vraag: 'Past het rooster bij de zorgvraag, de cao en de wet?',
+    punten: [
+      'In elk plan voert u diensten per medewerker in, met de contracturen ernaast. Curanta toetst ze aan de Arbeidstijdenwet: rust, 12 uur per dienst, 60 uur per week en pauzes.',
+      'De volledige planning (Totaalzorg Plus en Enterprise): planbord, routeplanning, planhulp, zelfroosteren en een cao-toets met toeslagen.',
+      'Een bezettingsnorm per team en dagdeel, ook per deskundigheidsniveau ("minimaal 5, waarvan 1 niveau 4"), met een signaal als het rooster eronder zakt.',
+      'Neemt een medewerker een open dienst over, dan toetst Curanta dat zoals bij het inroosteren.',
+    ],
+    links: [['/oplossing#planning', 'Planning en medewerkerportaal'], ['/app', 'Curanta als app']],
+  },
+  {
+    id: 'administratie',
+    rol: 'Zorgadministratie en financiën',
+    vraag: 'Gaat de declaratie goed, en hoeveel werk is het?',
+    punten: [
+      'Declaraties voor Wmo, Jeugdwet en Wlz, getoetst aan de officiële schema\'s van het Zorginstituut. Die voor de Zvw, de GGZ (GDS801) en de kraamzorg (KZ301) volgen de standaard van Vektis.',
+      'U levert ze aan in het VECOZO-portaal. Rechtstreeks aanleveren via VECOZO is ingericht; wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand.',
+      'Een salarisexport per maand of per 4 weken, met de toeslaguren volgens de cao die u kiest.',
+      'Cliënten en medewerkers importeert u uit een CSV- of Excelbestand, met een sjabloon uit Curanta.',
+    ],
+    links: [['/integraties', 'Koppelingen'], ['/oplossing', 'Alle onderdelen']],
+  },
+];
+---
+<Base
+  image="/og/per-rol.png"
+  title="Per rol: bestuur, FG, planning en administratie | Curanta"
+  description="Wat Curanta betekent voor het bestuur, de FG en CISO, de planning en de zorgadministratie: per rol de vragen die het eerst gesteld worden."
+>
+  <PageHero
+    eyebrow="Per rol"
+    title="Wat Curanta voor uw rol betekent"
+    subtitle="Een bestuurder vraagt iets anders dan een planner. Hier staat per rol wat het eerst gevraagd wordt, met de pagina waar het uitgebreid staat. Voor de zorgmedewerker onderweg is er de app."
+  >
+    <div slot="actions">
+      <a href={HOOFDKNOP.href} class="btn-primary no-underline">{HOOFDKNOP.label}</a>
+    </div>
+  </PageHero>
+
+  <section class="container-prose py-12">
+    <nav aria-label="Rollen op deze pagina" class="flex flex-wrap gap-3">
+      {rollen.map((r) => <a href={`#${r.id}`} class="rounded-full border border-ink-200 px-4 py-1.5 text-sm font-semibold text-curanta-700 no-underline hover:bg-curanta-50">{r.rol}</a>)}
+      <a href="/app" class="rounded-full border border-ink-200 px-4 py-1.5 text-sm font-semibold text-curanta-700 no-underline hover:bg-curanta-50">Zorgmedewerker</a>
+    </nav>
+
+    <div class="mt-12 space-y-14">
+      {rollen.map((r) => (
+        <div id={r.id} class="scroll-mt-24 max-w-3xl">
+          <h2 class="font-display text-2xl font-bold text-ink-900">{r.rol}</h2>
+          <p class="mt-1 text-ink-500">{r.vraag}</p>
+          <ul class="mt-4 list-disc space-y-2 pl-6 text-ink-700">
+            {r.punten.map((p) => <li>{p}</li>)}
+          </ul>
+          <p class="mt-4 text-sm">
+            Meer:{' '}
+            {r.links.map(([href, label], i) => <>{i > 0 && ' · '}<a href={href} class="font-semibold text-curanta-700 underline">{label}</a></>)}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>

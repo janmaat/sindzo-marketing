@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { HOOFDKNOP } from '../config/demo';
+
+// 27-10-2026 (onderzoek concurrentie-sites): elke grote leverancier heeft een pagina voor zijn app (Ons Vandaag, App
+// Anne, FieritApp, Octopus). Curanta heeft er geen eigen merknaam voor: het medewerkerportaal en het cliëntportaal
+// heten zo (feitenblad, rij Namen van de portalen). Beide zijn als app te installeren (PWA: manifest en service worker
+// in Curanta.Medewerker en Curanta.Portaal; help 14-pwa.md en 04-app-installeren.md).
+//
+// Feitenblad: rijen Medewerkerportaal, Rooster per plan, Offline ("werkt ook zonder bereik", nooit "offline-first"),
+// Talen cliëntportaal (5), Huisstijl en Eigen domein cliëntportaal, Cliënt- en mantelzorgerportaal (gratis), DigiD
+// (betaalde optie). Bewust níét: "in de App Store", pushmeldingen (op productie niet vastgesteld), spraak onderweg.
+---
+<Base
+  image="/og/app.png"
+  title="Curanta als app op de telefoon | Curanta"
+  description="Het medewerkerportaal en het cliëntportaal van Curanta installeert u als app op de telefoon, zonder app store. Wat ze doen, ook zonder bereik."
+>
+  <PageHero
+    eyebrow="Op de telefoon"
+    title="Curanta als app op de telefoon"
+    subtitle="De zorgmedewerker heeft het medewerkerportaal, de cliënt en de mantelzorger het cliëntportaal. Allebei zet u als app op het beginscherm, zonder app store. Ze openen schermvullend, met het icoon van Curanta."
+  >
+    <div slot="actions">
+      <a href={HOOFDKNOP.href} class="btn-primary no-underline">{HOOFDKNOP.label}</a>
+    </div>
+  </PageHero>
+
+  <section class="container-prose py-16">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink-900">Het medewerkerportaal</h2>
+        <p class="mt-2 text-ink-700">Voor de zorgmedewerker onderweg, op medewerker.curanta.nl. In elk plan:</p>
+        <ul class="mt-4 list-disc space-y-1 pl-6 text-ink-700">
+          <li>het eigen rooster;</li>
+          <li>de bezoeken met de taken, aankomst en vertrek, en de rapportage (SOEP);</li>
+          <li>het zorgplan en de overdracht;</li>
+          <li>verlof aanvragen, kilometers vastleggen en ziek melden;</li>
+          <li>meldingen.</li>
+        </ul>
+        <p class="mt-4 text-ink-700">
+          Met de volledige planning (Totaalzorg Plus en Enterprise) ook de uren, beschikbaarheid, open diensten,
+          ruilen en zelf roosteren. Wat in welk plan zit, staat op <a href="/prijzen" class="text-curanta-700 underline">Prijzen</a>.
+        </p>
+
+        <h3 class="mt-8 font-display text-lg font-semibold text-ink-900">Ook zonder bereik</h3>
+        <p class="mt-2 text-ink-700">
+          Het medewerkerportaal bewaart een versleutelde kopie op het toestel. Daarin staan het rooster van 7 dagen, de bezoeken van
+          vandaag en morgen, en de kern van het dossier, zonder medicatie en zonder BSN. Zonder bereik meldt de
+          zorgmedewerker aankomst en vertrek, vinkt taken af en legt ritten vast. Op een bezoek dat al open stond,
+          schrijft hij ook de uren, de rapportage en de overdracht.
+        </p>
+        <p class="mt-3 text-ink-700">
+          Wat nog niet verstuurd is, blijft versleuteld bewaard tot dezelfde medewerker weer inlogt; een collega kan
+          er niet bij. Medicatie aftekenen vraagt wel verbinding.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink-900">Het cliëntportaal</h2>
+        <p class="mt-2 text-ink-700">Voor cliënten en mantelzorgers, op klant.curanta.nl. Gratis voor hen.</p>
+        <ul class="mt-4 list-disc space-y-1 pl-6 text-ink-700">
+          <li>In vijf talen: Nederlands, Engels, Turks, Arabisch en Duits.</li>
+          <li>In de huisstijl van uw organisatie, met uw logo en kleuren. Ook op een eigen adres, zoals mijn.uworganisatie.nl.</li>
+          <li>De afspraken op een lijst of in een maandkalender, ook in de eigen agenda te zetten.</li>
+          <li>Een naaste ziet alleen wat de cliënt hem toestaat.</li>
+          <li>Bij minderjarigen volgt het portaal de leeftijdsgrenzen van 12, 16 en 18 jaar.</li>
+          <li>Inloggen met DigiD kan, als betaalde optie.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-16 rounded-2xl border border-ink-100 bg-ink-100/40 p-6 sm:p-8">
+      <h2 class="font-display text-xl font-semibold text-ink-900">Zo zet u het op het beginscherm</h2>
+      <div class="mt-4 grid gap-6 text-ink-700 sm:grid-cols-2">
+        <div>
+          <h3 class="font-semibold text-ink-900">iPhone en iPad</h3>
+          <p class="mt-1">Open het portaal in Safari en log in. Tik op de deelknop (het vierkant met de pijl omhoog) en kies <span class="font-semibold">Zet op beginscherm</span>.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-ink-900">Android</h3>
+          <p class="mt-1">Open het portaal in Chrome en log in. Tik op <span class="font-semibold">Installeren</span>, of kies in het menu (de drie puntjes) <span class="font-semibold">App installeren</span>.</p>
+        </div>
+      </div>
+      <p class="mt-4 text-sm text-ink-500">
+        Een app store is niet nodig. Op een computer kan het ook: in Chrome of Edge staat een installeerknop in de adresbalk.
+      </p>
+    </div>
+  </section>
+</Base>
