@@ -12,6 +12,8 @@ const bijgewerktNl = new Date(bijgewerktDatum).toLocaleDateString('nl-NL', { day
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
+  image: new URL('/og/kennisbank/peer-support-zorgmedewerkers.png', Astro.site).toString(),
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
   headline: 'Peer-support voor zorgmedewerkers: wat het onderzoek zegt, en wat niet',
   description: 'Wat bekend is over collegiale steun voor zorgmedewerkers, wat de arbeidsmarktcijfers van AZW laten zien, en waar een werkgever op let bij privacy, de DPIA en psychosociale arbeidsbelasting.',
   datePublished: publicatieDatum,
@@ -23,6 +25,7 @@ const articleLd = {
 };
 ---
 <Base
+  image="/og/kennisbank/peer-support-zorgmedewerkers.png"
   title="Peer-support voor zorgmedewerkers: wat het onderzoek zegt"
   ogType="article"
   description="Wat bekend is over collegiale steun voor zorgmedewerkers, wat de AZW-cijfers laten zien, en waar een werkgever op let: privacy, DPIA en werkdruk."

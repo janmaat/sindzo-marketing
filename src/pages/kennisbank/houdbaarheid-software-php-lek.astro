@@ -25,6 +25,8 @@ const omschrijving = 'Wat er in oktober 2026 met PHP gebeurde, wat de Cyberbevei
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
+  image: new URL('/og/kennisbank/houdbaarheid-software-php-lek.png', Astro.site).toString(),
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
   headline: titel,
   description: omschrijving,
   datePublished: publicatieDatum,
@@ -44,6 +46,7 @@ const vragen = [
 ];
 ---
 <Base
+  image="/og/kennisbank/houdbaarheid-software-php-lek.png"
   title="Software heeft een houdbaarheidsdatum | Curanta"
   ogType="article"
   description={omschrijving}

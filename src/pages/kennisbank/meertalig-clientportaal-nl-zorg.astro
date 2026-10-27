@@ -11,6 +11,8 @@ const bijgewerktNl = new Date(bijgewerktDatum).toLocaleDateString('nl-NL', { day
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
+  image: new URL('/og/kennisbank/meertalig-clientportaal-nl-zorg.png', Astro.site).toString(),
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
   headline: 'Een cliëntportaal in de taal van de cliënt: wat de wet vraagt, en wat niet',
   description: 'Wat de Wgbo, de Wkkgz, de AVG en de Wet aanvullende bepalingen verwerking persoonsgegevens in de zorg zeggen over begrijpelijke informatie en inzage, wat CBS-cijfers laten zien over oudere migranten, en welke vragen u uw leverancier stelt.',
   datePublished: publicatieDatum,
@@ -22,6 +24,7 @@ const articleLd = {
 };
 ---
 <Base
+  image="/og/kennisbank/meertalig-clientportaal-nl-zorg.png"
   title="Meertalig cliëntportaal: wat de wet vraagt, en wat niet"
   ogType="article"
   description="Wat Wgbo, Wkkgz, AVG en Wabvpz zeggen over begrijpelijke informatie en inzage, wat het CBS weet over oudere migranten, en wat u uw leverancier vraagt."

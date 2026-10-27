@@ -21,6 +21,8 @@ const omschrijving = 'Wat GDS801 is, welke zorg ermee declareert, hoe het retour
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
+  image: new URL('/og/kennisbank/gds801-declareren-ggz.png', Astro.site).toString(),
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
   headline: 'GDS801: declareren in de ggz volgens de standaard van Vektis',
   description: omschrijving,
   datePublished: publicatieDatum,
@@ -31,7 +33,8 @@ const articleLd = {
   keywords: 'GDS801, GDS802, Vektis, declareren, ggz, zorgprestatiemodel, prestatiecodelijst 071, VECOZO'
 };
 ---
-<Base title="GDS801: declareren in de ggz | Curanta" ogType="article" description={omschrijving}>
+<Base
+  image="/og/kennisbank/gds801-declareren-ggz.png" title="GDS801: declareren in de ggz | Curanta" ogType="article" description={omschrijving}>
   <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
 
   <article class="container-prose py-16">

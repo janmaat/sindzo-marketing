@@ -13,6 +13,8 @@ const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'num
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
+  image: new URL('/og/kennisbank/cyberbeveiligingswet-bestuur-zorg.png', Astro.site).toString(),
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
   headline: 'De Cyberbeveiligingswet: wat het bestuur van een zorgorganisatie moet vaststellen',
   description: 'Voor wie de Cyberbeveiligingswet geldt, wat het bestuur zelf moet goedkeuren en bijhouden, wat de wet over leveranciers zegt, en wanneer u een incident meldt.',
   datePublished: publicatieDatum,
@@ -37,9 +39,10 @@ const onderwerpen = [
 ];
 ---
 <Base
-  title="Cyberbeveiligingswet: wat het bestuur in de zorg moet vaststellen"
+  image="/og/kennisbank/cyberbeveiligingswet-bestuur-zorg.png"
+  title="Cyberbeveiligingswet (NIS2): wat het zorgbestuur vaststelt"
   ogType="article"
-  description="Voor wie de Cyberbeveiligingswet geldt, wat het bestuur van een zorgorganisatie zelf goedkeurt, wat de wet over leveranciers zegt, en wanneer u meldt."
+  description="Voor wie de Cyberbeveiligingswet (NIS2) in de zorg geldt, wat het bestuur zelf goedkeurt, wat de wet over leveranciers zegt, en wanneer u meldt."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
 

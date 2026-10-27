@@ -15,6 +15,8 @@ const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'num
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
+  image: new URL('/og/kennisbank/doorbraakmiddelen-modelplan-software.png', Astro.site).toString(),
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
   headline: 'Doorbraakmiddelen: wat het modelplan van uw software vraagt',
   description: 'Wie de doorbraakmiddelen voor spraakgestuurd rapporteren en capaciteitsplanning kan aanvragen, wanneer, voor hoeveel, en wat de modelplannen van uw zorgsoftware vragen.',
   datePublished: publicatieDatum,
@@ -26,6 +28,7 @@ const articleLd = {
 };
 ---
 <Base
+  image="/og/kennisbank/doorbraakmiddelen-modelplan-software.png"
   title="Doorbraakmiddelen: wat het modelplan van uw software vraagt"
   ogType="article"
   description="Wie de doorbraakmiddelen voor spraakgestuurd rapporteren en capaciteitsplanning aanvraagt, wanneer, hoeveel, en wat het modelplan van uw software vraagt."

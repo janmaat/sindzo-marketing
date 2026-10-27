@@ -101,6 +101,134 @@ const IMAGES = [
     hero: 'Huisartsen en Curanta: samenwerking, geen HIS.',
     sub: 'Voor VVT, gehandicaptenzorg, GGZ, kraamzorg en jeugdzorg.',
   },
+  // 27-10-2026 (SEO-ronde): een eigen beeld voor elke pagina die op LinkedIn of in een mail wordt gedeeld. Kop en
+  // onderregel komen uit de h1 en de omschrijving van de pagina zelf; niets wat daar niet staat.
+  {
+    file: 'og/kennisbank.png',
+    eyebrow: 'Kennisbank',
+    hero: 'Wat de wet en het onderzoek zeggen, met bron.',
+    sub: 'Cyberbeveiligingswet · doorbraakmiddelen · GDS801 · cliëntportaal',
+  },
+  {
+    file: 'og/kennisbank/cyberbeveiligingswet-bestuur-zorg.png',
+    eyebrow: 'Kennisbank',
+    hero: 'De Cyberbeveiligingswet: wat het bestuur moet vaststellen.',
+    sub: 'Voor wie de wet geldt · zorgplicht · leveranciers · melden',
+  },
+  {
+    file: 'og/kennisbank/doorbraakmiddelen-modelplan-software.png',
+    eyebrow: 'Kennisbank',
+    hero: 'Doorbraakmiddelen: wat het modelplan van uw software vraagt.',
+    sub: 'Spraakgestuurd rapporteren · capaciteitsplanning',
+  },
+  {
+    file: 'og/kennisbank/gds801-declareren-ggz.png',
+    eyebrow: 'Kennisbank',
+    hero: 'GDS801: declareren in de ggz.',
+    sub: 'Het declaratiebericht · het retourbericht GDS802 · waar het misgaat',
+  },
+  {
+    file: 'og/kennisbank/houdbaarheid-software-php-lek.png',
+    eyebrow: 'Kennisbank',
+    hero: 'Software heeft een houdbaarheidsdatum.',
+    sub: 'Wat er met PHP gebeurde · vijf vragen voor uw leverancier',
+  },
+  {
+    file: 'og/kennisbank/meertalig-clientportaal-nl-zorg.png',
+    eyebrow: 'Kennisbank',
+    hero: 'Een cliëntportaal in de taal van de cliënt: wat de wet vraagt.',
+    sub: 'Wgbo · Wkkgz · AVG · Wabvpz',
+  },
+  {
+    file: 'og/kennisbank/peer-support-zorgmedewerkers.png',
+    eyebrow: 'Kennisbank',
+    hero: 'Peer-support voor zorgmedewerkers: wat het onderzoek zegt.',
+    sub: 'De arbeidsmarkt · het onderzoek · privacy en DPIA',
+  },
+  {
+    file: 'og/overstappen.png',
+    eyebrow: 'Overstappen',
+    hero: 'Een overstap die u kunt overzien.',
+    sub: 'Eén vaste contactpersoon · migratie tegen een vaste prijs · export zonder exit-fee',
+  },
+  {
+    file: 'og/overstappen/pakket-stopt.png',
+    eyebrow: 'Overstappen',
+    hero: 'Uw ECD stopt. Wat regelt u eerst?',
+    sub: 'Tijd bij uw leverancier · het oude dossier · de declaraties',
+  },
+  {
+    file: 'og/overstappen/programma-van-eisen.png',
+    eyebrow: 'Overstappen',
+    hero: 'De eisen die bij een overstap horen.',
+    sub: '36 eisen · leverancier-neutraal · ook als Word-bestand',
+  },
+  {
+    file: 'og/overstappen/vragen-aan-uw-leverancier.png',
+    eyebrow: 'Overstappen',
+    hero: 'Wat u uw huidige leverancier vraagt, vóór u opzegt.',
+    sub: 'Dertien vragen · export · BSN · het oude dossier · declaraties',
+  },
+  {
+    file: 'og/overstapscan.png',
+    eyebrow: 'Overstapscan',
+    hero: 'Uw overstap op een rij, voordat u een leverancier spreekt.',
+    sub: 'Tien vragen · geen opslag · geen account',
+  },
+  {
+    file: 'og/voor-jeugdzorg.png',
+    eyebrow: 'Voor de jeugdzorg',
+    hero: 'Het cliëntdossier voor jeugdzorg en jeugd-ggz.',
+    sub: 'Hulpvragen · toewijzingen · declaratie onder de Jeugdwet · meldcode',
+  },
+  {
+    file: 'og/voor-kraamzorg.png',
+    eyebrow: 'Voor de kraamzorg',
+    hero: 'Het kraamdossier, de planning en de declaratie.',
+    sub: 'Kraambezoek op de telefoon · eigen bijdrage · KZ301',
+  },
+  {
+    file: 'og/implementatie.png',
+    eyebrow: 'Implementatie',
+    hero: 'Zo verloopt een implementatie.',
+    sub: 'Eén vaste contactpersoon · sleutelgebruikers · een start in fasen',
+  },
+  {
+    file: 'og/vergelijking.png',
+    eyebrow: 'Vergelijking',
+    hero: 'Curanta naast drie gevestigde leveranciers.',
+    sub: 'Per onderwerp, met bron en controledatum',
+  },
+  {
+    file: 'og/presentatie.png',
+    eyebrow: 'Online presentatie',
+    hero: 'Zorgsoftware die u eerst rustig kunt bekijken.',
+    sub: 'Wanneer het u uitkomt · zonder afspraak',
+  },
+  {
+    file: 'og/procurement.png',
+    eyebrow: 'Inkoopdossier',
+    hero: 'Alles wat uw inkoop, FG en I&A willen lezen.',
+    sub: 'Programma van eisen · verwerkersovereenkomst · SLA · op aanvraag',
+  },
+  {
+    file: 'og/adviseurs.png',
+    eyebrow: 'Voor adviseurs',
+    hero: 'U helpt een zorgorganisatie kiezen.',
+    sub: 'Wat u zelf nakijkt · een online presentatie voor uw klant',
+  },
+  {
+    file: 'og/voor.png',
+    eyebrow: 'Voor wie',
+    hero: 'Voor wie is Curanta gebouwd?',
+    sub: 'VVT · gehandicaptenzorg · GGZ · kraamzorg · jeugdzorg',
+  },
+  {
+    file: 'og/cases.png',
+    eyebrow: 'Zelf nakijken',
+    hero: 'Kijk het zelf na, voordat u kiest.',
+    sub: 'Het systeem · de prijs · de beveiliging · de weg naar buiten',
+  },
 ];
 
 const esc = (s) =>
@@ -114,8 +242,8 @@ const heroSize = (hero) => (hero.length > 62 ? 54 : hero.length > 46 ? 62 : 72);
 
 const template = ({ eyebrow, hero, sub }) => `<!doctype html>
 <meta charset="utf-8">
-<link rel="stylesheet" href="${ORIGIN}/_astro/${cssChunk}">
 <style>
+  ${fontFace}
   *{ margin:0; padding:0; box-sizing:border-box; }
   html,body{ width:${W}px; height:${H}px; }
   body{
@@ -161,18 +289,18 @@ ${eyebrow ? `<div class="eyebrow">${esc(eyebrow)}</div>` : '<div class="rule"></
 <div class="domain">curanta.nl</div>
 `;
 
-// De site bundelt zijn CSS in één chunk met een hash in de naam; daarin zitten
-// de @font-face-regels voor Plus Jakarta Sans. Zonder die chunk valt de render
-// terug op een systeemfont en wijkt het woordmerk-font af van de site.
-let cssChunk;
+// De @font-face-regels voor Plus Jakarta Sans. Sinds 26-10-2026 (b2ae655) staat de CSS inline in elke pagina in
+// plaats van in een chunk onder dist/_astro; daarom lezen we de regels uit de gebouwde homepage. De paden
+// (/fonts/...) zijn relatief aan de preview, waar ook setContent draait (zie page.goto hieronder).
+let fontFace;
 try {
-  cssChunk = fs.readdirSync('dist/_astro').find((f) => f.endsWith('.css'));
+  fontFace = (fs.readFileSync('dist/index.html', 'utf8').match(/@font-face\{[^}]*\}/g) ?? []).join('\n');
 } catch {
-  console.error('dist/_astro niet gevonden — draai eerst `npm run build`.');
+  console.error('dist/index.html niet gevonden — draai eerst `npm run build`.');
   process.exit(1);
 }
-if (!cssChunk) {
-  console.error('Geen CSS-chunk in dist/_astro gevonden.');
+if (!fontFace.includes('Plus Jakarta Sans')) {
+  console.error('Geen @font-face voor Plus Jakarta Sans in dist/index.html gevonden.');
   process.exit(1);
 }
 
