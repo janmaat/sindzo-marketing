@@ -140,7 +140,7 @@ const voorbeelden: Voorbeeld[] = [
     statussen: [
       { status: 'demo', tekst: 'Dossier, zorgplan, rapportage en cliëntportaal' },
     ],
-    ai: 'Twee plekken gebruiken op verzoek een taalmodel: de rapportage in de backoffice (een voorstel voor de evaluatie en het plan) en de samenvatting van het zorgplan in gewone taal voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en begrijpt de cliënt het? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. De gegevens gaan gepseudonimiseerd naar het taalmodel: standaard bij Mistral AI, via het EU-endpoint, en alleen als uw organisatie daar zelf voor kiest naar Anthropic in de VS.',
+    ai: 'Twee plekken gebruiken op verzoek een taalmodel. De eerste is de rapportage in de backoffice: een voorstel voor de evaluatie en het plan. De tweede is de samenvatting van het zorgplan in gewone taal, voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en begrijpt de cliënt het? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. De gegevens gaan gepseudonimiseerd naar het taalmodel. Standaard is dat Mistral AI, via het EU-endpoint; alleen als uw organisatie daar zelf voor kiest, is het Anthropic in de VS.',
     link: { label: 'Alle onderdelen van het dossier', href: '/oplossing#ecd' },
     beelden: [
       {
@@ -288,7 +288,7 @@ const waaromNu = [
   {
     icoon: 'mensen',
     kop: 'De administratie moet omlaag',
-    markt: 'In 2030 mag administratie hooguit 20 procent van de werktijd kosten (Aanvullend Zorg- en Welzijnsakkoord, 2025). Van 1 tot en met 31 januari 2027 kunnen vvt en ggz voor hun Zvw-zorg geld aanvragen voor spraakgestuurd rapporteren, en de vvt ook voor capaciteitsplanning (modelplannen, september 2026). Een nulmeting hoort erbij.',
+    markt: 'In 2030 mag administratie hooguit 20 procent van de werktijd kosten (Aanvullend Zorg- en Welzijnsakkoord, 2025). Van 1 tot en met 31 januari 2027 kunnen vvt en ggz voor hun Zvw-zorg geld aanvragen voor spraakgestuurd rapporteren. De vvt kan dat ook voor capaciteitsplanning (modelplannen, september 2026). Een nulmeting hoort erbij.',
     curanta: 'In Curanta stelt AI bij een SOEP-rapportage de E en de P voor, en vat het de overdracht tussen diensten samen. Per team ziet u hoe lang rapporteren duurt, en welk deel van de geroosterde uren naar cliënten gaat. Inspreken kan in de backoffice, met de tekst op het apparaat zelf; onderweg in het medewerkerportaal nog niet.',
   },
   {
@@ -416,9 +416,7 @@ const voordelen = [
           <p class="mt-3 flex gap-2 text-sm leading-relaxed text-ink-700">
             <Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />
             <span>
-              Eén systeem voor de hele organisatie: {AANTAL_ONDERDELEN} onderdelen, van het cliëntdossier en de
-              planning tot declaratie, kwaliteit en HRM, met een medewerkerportaal voor onderweg en een gratis
-              cliëntportaal voor cliënten en mantelzorgers. <a href="#onderdelen" class="font-medium text-curanta-700 hover:underline">Wat er allemaal in zit</a>
+              Eén systeem voor de hele organisatie: {AANTAL_ONDERDELEN} onderdelen, van het cliëntdossier en de planning tot declaratie, kwaliteit en HRM. Daarbij een medewerkerportaal voor onderweg en een gratis cliëntportaal voor cliënten en mantelzorgers. <a href="#onderdelen" class="font-medium text-curanta-700 hover:underline">Wat er allemaal in zit</a>
             </span>
           </p>
         </div>

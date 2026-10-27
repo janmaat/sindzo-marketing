@@ -74,7 +74,7 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
   <PageHero
     eyebrow="Overstapscan"
     title="Uw overstap op een rij, voordat u een leverancier spreekt."
-    subtitle="Tien vragen over uw organisatie, uw contract en uw eisen. U krijgt een overzicht dat u kunt afdrukken en delen: een planning vanaf de einddatum van uw contract, uw eisen voor de overstap, de vragen voor uw huidige leverancier en een kostenoverzicht. Ook als de uitkomst is dat Curanta nu niet bij u past."
+    subtitle="Tien vragen over uw organisatie, uw contract en uw eisen. U krijgt een overzicht dat u kunt afdrukken en delen. Daarin staan een planning vanaf de einddatum van uw contract, uw eisen voor de overstap, de vragen voor uw huidige leverancier en een kostenoverzicht. Ook als de uitkomst is dat Curanta nu niet bij u past."
   />
 
   <section class="container-prose py-12">
@@ -420,7 +420,7 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
         kosten += '<div class="grid gap-1 py-4 sm:grid-cols-[13rem_1fr] sm:gap-6"><dt class="font-semibold text-ink-900">Abonnement Curanta</dt><dd class="text-ink-700">' +
           '<p>' + a.backoffice + ' in de backoffice en ' + a.portaal + ' alleen in het medewerkerportaal (€ 19). Per maand, exclusief btw, indicatief:</p><ul class="mt-2 space-y-1">' +
           regels.map(function (r) { return '<li>' + esc(r[0]) + ': <strong>' + euro(r[1]) + '</strong> per maand, ' + euro(r[1] * 12) + ' per jaar</li>'; }).join('') +
-          '</ul><p class="mt-2 text-sm">U betaalt per actieve medewerker: wie de afgelopen 30 dagen inlogde. Training, hosting en basissupport kosten niets extra. Loopt uw huidige contract nog door als u bij Curanta begint, dan betaalt u het abonnement pas vanaf het einde van dat contract, tot hoogstens zes maanden na de start. Zie <a href="/prijzen" class="text-curanta-700 hover:underline">de prijzen</a>.</p></dd></div>';
+          '</ul><p class="mt-2 text-sm">U betaalt per actieve medewerker: wie de afgelopen 30 dagen inlogde. Training, hosting en basissupport kosten niets extra. Loopt uw huidige contract nog door als u bij Curanta begint? Dan betaalt u het abonnement pas vanaf het einde van dat contract, tot hoogstens zes maanden na de start. Zie <a href="/prijzen" class="text-curanta-700 hover:underline">de prijzen</a>.</p></dd></div>';
         kosten += '<div class="grid gap-1 py-4 sm:grid-cols-[13rem_1fr] sm:gap-6"><dt class="font-semibold text-ink-900">Ter vergelijking: de markt</dt><dd class="text-ink-700">' + totaal + ' gebruikers × € 50 tot € 90 per maand is ' + euro(totaal * 50) + ' tot ' + euro(totaal * 90) + ' per maand. Dat is de bandbreedte uit de ' + bron('heldy') + ', geen tarief van één leverancier. Leveranciers rekenen in verschillende eenheden; reken hun voorstel om naar uw eigen aantallen.</dd></div>';
       }
       kosten += '<div class="grid gap-1 py-4 sm:grid-cols-[13rem_1fr] sm:gap-6"><dt class="font-semibold text-ink-900">Implementatie</dt><dd class="text-ink-700">In de markt € 4.000 tot € 15.000, en training € 1.000 tot € 5.000 (' + bron('heldy') + '). Bij Curanta is de implementatie maatwerk, met een prijs die wij vooraf afspreken; training kost niets extra.</dd></div>';
