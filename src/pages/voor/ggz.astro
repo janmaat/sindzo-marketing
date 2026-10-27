@@ -14,15 +14,19 @@ import { CYBERBEVEILIGINGSWET, GDS801 } from '../../config/kennisbank';
 // - Wvggz: de geldigheid van een titel is optioneel en wordt niet bewaakt; alleen Wzd-titels hebben termijnen.
 // - FHIR: registratie van een systeem doet Curanta (FhirClientRegistry), niet de klant.
 // SQ-48 en 4DKL staan er bewust als "in ontwikkeling": de vraagteksten ontbreken tot de rechthebbenden toestemmen.
+//
+// 25-10-2026: "EPD" in titel, beschrijving, kop en een vraag. De ggz zoekt op "EPD", niet op "ECD" ("epd ggz" geeft 10
+// Google-suggesties, "ecd ggz" geen; kennisonderzoek zorg_campagne, T8 §5). Het antwoord noemt alleen wat de pagina al
+// beschrijft (feitenblad, rijen Praktijk en GGZ-instelling).
 ---
 <SegmentLayout
   image="/og/voor-ggz.png"
   segmentKey="ggz"
   segmentLabel="GGZ"
-  title="GGZ-software voor praktijk en instelling | Curanta"
-  description="GGZ-software voor praktijk en instelling: de administratie van traject tot declaratie (zorgprestatiemodel, Vektis), afscherming per cliënt, omzetplafonds."
+  title="EPD en GGZ-software voor praktijk en instelling | Curanta"
+  description="Het EPD voor de ggz-praktijk en -instelling: dossier en administratie van traject tot declaratie (zorgprestatiemodel, Vektis), afgeschermd per cliënt."
   eyebrow="Voor de GGZ"
-  hero="GGZ-software van traject tot declaratie"
+  hero="GGZ-software en EPD: van traject tot declaratie"
   subtitle="Voor de vrijgevestigde praktijk en de GGZ-instelling. De behandelaar legt per traject de prestaties vast, en Curanta toetst ze aan de tarieven en regels van de NZa. De administratie maakt er een declaratie van voor de zorgverzekeraar, of een nota als er geen contract is. De zorginhoud ziet alleen wie de cliënt behandelt."
   triggers={[
     { title: 'Declareren zonder overtikken', body: 'Uit de prestaties van gesloten trajecten maakt Curanta per zorgverzekeraar het declaratiebericht (GDS801), volgens de standaard van Vektis en getoetst aan het officiële schema. U levert het aan in het VECOZO-portaal, of rechtstreeks via VECOZO zodra dat voor uw organisatie is beproefd. Wijst de verzekeraar een prestatie af, dan declareert u die opnieuw. Een toegekende prestatie die niet klopte, crediteert u en declareert u gecorrigeerd.' },
@@ -48,6 +52,7 @@ import { CYBERBEVEILIGINGSWET, GDS801 } from '../../config/kennisbank';
     { name: 'Aanmelding en wachtlijst', note: 'Na aansluiting op ZorgDomein accepteert u een verwijzing en zet u de cliënt op de wachtlijst van de behandelagenda' },
   ]}
   vragen={[
+    { vraag: 'Is Curanta een EPD voor de ggz?', antwoord: 'Ja. In de ggz heet het dossier meestal EPD, het elektronisch patiëntendossier; in Curanta heet het het cliëntdossier. Daarin legt de behandelaar per traject de prestaties en de rapportage vast, en de cliënt vult de vragenlijsten PHQ-9 en GAD-7 zelf in. Voor de instelling zijn er ook de typering, het behandelplan en het crisisplan. De zorginhoud ziet alleen wie de cliënt behandelt.' },
     { vraag: 'Wat kost Curanta voor een vrijgevestigde praktijk?', antwoord: 'Het plan Praktijk: €29 per medewerker per maand, met de behandelagenda en de GGZ-declaratie. Meer op <a href="/prijzen#praktijk" class="text-curanta-700 hover:underline">de pagina Prijzen</a>.' },
     { vraag: 'Hoe declareren wij bij de zorgverzekeraar?', antwoord: 'Uit de prestaties van gesloten trajecten maakt Curanta per zorgverzekeraar het declaratiebericht (GDS801), volgens de standaard van Vektis. Rechtstreeks aanleveren via VECOZO is ingericht; wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot dan levert u het bestand aan in het VECOZO-portaal.' },
     { vraag: 'Toetst Curanta de wachttijden aan de Treeknorm?', antwoord: 'Ja. Per cliënt toetst Curanta of de intake binnen 4 weken na de aanmelding was, en of de behandeling binnen 10 weken na de intake begon. Bij een aanmelding uit de cliëntlogistiek toetst Curanta alleen de wachttijd tot de intake. Per rij ziet u hoeveel intakes en behandelingen te laat kwamen, en wie nu al langer dan 4 weken op een intake wacht. De wachttijden aanleveren aan een portaal doet u zelf, vanuit de export.' },

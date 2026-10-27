@@ -13,7 +13,7 @@ import { HOOFDKNOP, DEMO_ZELF, DEMO_GESPREK, PRESENTATIE } from '../config/demo'
 // Zichtbaar op de pagina én als FAQPage (component Veelgesteld, 17-10-2026); de tekst is ongewijzigd.
 const prijsVragen = [
   // 22-10-2026 (zoekkans "wat kost een ECD"): bandbreedte en tarieven uit het feitenblad (Heldy-kostengids april 2026, rekenvoorbeeld site).
-  { vraag: "Wat kost een ECD?", antwoord: "In de markt kost een ECD ongeveer €50 tot €90 per gebruiker per maand. Daar komt €4.000 tot €15.000 bij voor de implementatie, en €1.000 tot €5.000 voor training (Heldy-kostengids voor Nederlandse zorgaanbieders, april 2026). Leveranciers rekenen wel in verschillende eenheden, dus reken een voorstel om naar uw eigen aantallen. Curanta kost €19 tot €39 per actieve medewerker per maand, en €19 voor wie alleen het medewerkerportaal gebruikt. Training zit in het abonnement; de implementatie is maatwerk, met een prijs die wij vooraf afspreken. Een voorbeeld: 40 zorgmedewerkers in het medewerkerportaal en 5 mensen in de backoffice op Compliance Pro kosten €905 per maand." },
+  { vraag: "Wat kost een ECD?", antwoord: "Dat verschilt per leverancier, en niet elke leverancier publiceert een prijs. Wie dat wel doet, rekent per gebruiker, per cliënt of met een staffel; reken een voorstel dus om naar uw eigen aantallen. Op deze pagina staat wat leveranciers zelf publiceren. Curanta kost €19 tot €39 per actieve medewerker per maand, en €19 voor wie alleen het medewerkerportaal gebruikt. Training zit in het abonnement; de implementatie is maatwerk, met een prijs die wij vooraf afspreken. Een voorbeeld: 40 zorgmedewerkers in het medewerkerportaal en 5 mensen in de backoffice op Compliance Pro kosten €905 per maand." },
   { vraag: "Wat telt als \"actieve medewerker\"?", antwoord: "Een gebruiker die in de afgelopen 30 dagen heeft ingelogd. Slapende accounts tellen niet mee: u betaalt niet voor mensen die niet werken." },
   { vraag: "Wat kost een zorgmedewerker die alleen het medewerkerportaal gebruikt?", antwoord: "€19 per maand, in elk plan. Dat geldt voor wie alleen het medewerkerportaal nodig heeft. Wie ook in de backoffice werkt, betaalt het bedrag van het plan (bijvoorbeeld een wijkverpleegkundige die indicaties stelt)." },
   { vraag: "Hoe zit het met cliënten en mantelzorgers?", antwoord: "Het cliëntportaal en het mantelzorgerportaal zijn gratis, in alle plannen. Cliënten, mantelzorgers en familie tellen niet als medewerker." },
@@ -194,15 +194,19 @@ const prijsVragen = [
       referentiekader — en juist het kader maakt ze pas een argument. Bewust een
       vergelijking met een marktbandbreedte en niet met een genoemde concurrent:
       dat laatste vraagt om gelijksoortige, verifieerbare cijfers per leverancier,
-      en die publiceert niemand in deze markt. */}
+      en die publiceert niemand in deze markt.
+      25-10-2026: de regel "Abonnement per gebruiker per maand: €50 tot €90" is weg, ook uit de vraag "Wat kost een
+      ECD?". Die bandbreedte rust op één artikel van een concurrent (Heldy, zonder bronnen); de Benchmark Care 2026 van
+      Berenschot komt omgerekend op ongeveer €19 per medewerker per maand (kennisonderzoek zorg_campagne, T7). De
+      overige regels blijven, met Heldy als bron bij naam. */}
   <section class="border-y border-ink-100 bg-curanta-50/60 py-16">
     <div class="container-prose">
       <div class="max-w-3xl">
-        <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Waar deze bedragen staan in de markt</h2>
+        <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Wat er naast het abonnement bij komt</h2>
         <p class="mt-4 text-ink-700 leading-relaxed">
           Een licentieprijs zegt weinig zonder de rest van de rekening. In selectietrajecten
           gaat het mis op precies twee posten: de eenmalige implementatie, en de vraag wie de
-          migratie betaalt. Daarom staan die hier naast het abonnement.
+          migratie betaalt. Daarom staan die hier, met wat ze bij Curanta zijn.
         </p>
       </div>
 
@@ -216,11 +220,6 @@ const prijsVragen = [
             </tr>
           </thead>
           <tbody class="divide-y divide-ink-100 text-ink-700">
-            <tr>
-              <td class="px-4 py-3">Abonnement per gebruiker per maand</td>
-              <td class="px-4 py-3">€50 tot €90</td>
-              <td class="px-4 py-3 font-semibold text-curanta-900">€19 tot €39 per actieve medewerker</td>
-            </tr>
             <tr>
               <td class="px-4 py-3">Eenmalige implementatie en training</td>
               <td class="px-4 py-3">implementatie €4.000 tot €15.000, training €1.000 tot €5.000</td>
@@ -251,14 +250,14 @@ const prijsVragen = [
       </div>
 
       <p class="mt-4 max-w-3xl text-xs text-ink-500">
-        Marktbandbreedte uit de Heldy-kostengids voor Nederlandse zorgaanbieders (april 2026).
-        Het is een bandbreedte, geen tarief van één bepaalde leverancier. Niet elke leverancier
+        De bedragen in de middelste kolom komen uit de kostengids van Heldy, zelf een leverancier van
+        zorgsoftware (april 2026). Het zijn bandbreedtes, geen tarief van één bepaalde leverancier. Niet elke leverancier
         publiceert een prijs, en wie dat doet, rekent vaak in een andere eenheid (zie hieronder).
         Wat u werkelijk betaalt, hangt bij ons én bij anderen af van schaal, segment en modulekeuze.
       </p>
 
       <p class="mt-6 max-w-3xl text-sm text-ink-700 leading-relaxed">
-        Dat wij onderaan die bandbreedte zitten, is een keuze en geen introductieactie. In onze
+        Onze prijs is een keuze en geen introductieactie. In onze
         kosten zit geen verkoopafdeling, geen implementatieafdeling en geen laag accountmanagers.
         Wat u verder vooraf kunt nakijken, staat op de pagina
         <a href="/cases" class="text-curanta-700 hover:underline">Zelf nakijken</a>.

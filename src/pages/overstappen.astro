@@ -30,6 +30,7 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
     naam: 'mijnCaress (PinkRoccade)',
     toelichting: 'Stopt eind 2026, volgens M&I/Partners (ECD-inventarisatie 2026).',
     bron: 'https://mxi.nl/kennis/786/ecd-inventarisatie-2026-gehandicaptenzorg-en-ouderenzorg',
+    pagina: '/overstappen/mijncaress-stopt',
   },
   {
     naam: 'Lable Care',
@@ -40,6 +41,14 @@ const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
     naam: 'Fierit (Tenzinger)',
     toelichting: 'Gaat eind 2027 uit de markt, volgens M&I/Partners (ECD-inventarisatie 2026).',
     bron: 'https://mxi.nl/kennis/786/ecd-inventarisatie-2026-gehandicaptenzorg-en-ouderenzorg',
+    pagina: '/overstappen/fierit-stopt',
+  },
+  // 25-10-2026: de afbouw in de gehandicaptenzorg, met de aankondiging van Ecare zelf als bron.
+  {
+    naam: 'PUUR. in de gehandicaptenzorg (Ecare)',
+    toelichting: 'Ecare bouwt PUUR. voor de gehandicaptenzorg gefaseerd af, zonder einddatum (aankondiging van 13 oktober 2025).',
+    bron: 'https://ecare.nl/blog-nieuws/ecare-stopt-gefaseerd-met-puur-voor-de-gehandicaptenzorg/',
+    bronNaam: 'Ecare',
   },
   { naam: 'Pluriform Zorg (Adapcare)' },
 ];
@@ -306,7 +315,8 @@ const voorU = [
           <dt class="font-display text-lg font-semibold text-ink-900">{b.naam}</dt>
           <dd class="text-pretty leading-relaxed text-ink-700">
             {b.toelichting ?? 'Zoals hierboven: een migratieproject tegen een vaste prijs.'}
-            {b.bron && <a href={b.bron} rel="noopener" class="ml-1 text-sm font-semibold text-curanta-700">Bron: M&amp;I/Partners</a>}
+            {b.bron && <a href={b.bron} rel="noopener" class="ml-1 text-sm font-semibold text-curanta-700">Bron: {b.bronNaam ?? 'M&I/Partners'}</a>}
+            {b.pagina && <a href={b.pagina} class="ml-2 text-sm font-semibold text-curanta-700">Wat u nu regelt</a>}
           </dd>
         </div>
       ))}
