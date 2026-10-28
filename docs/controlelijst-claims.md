@@ -18,8 +18,8 @@ niet sterker geformuleerd dan het feitenblad toelaat; waar twijfel was, is het w
 | # | Claim | Waar op de site | Waarom bevestigen |
 |---|---|---|---|
 | A1 | Partnerprogramma (tot 21-10-2026 "founding partner"): maximaal **drie** plekken, **36 maanden** vaste prijs, meepraten over de roadmap | /cases#partner, /trust (banner en homepagekaart weg sinds 21-10-2026) | Feitenblad [besluit Jan 24-09]. Nog actueel? Zijn er nog drie plekken vrij? Zo niet: banner en teksten aanpassen. |
-| A2 | NEN 7510: externe audit "gepland" | homepage, /trust, /vergelijking | Feitenblad: "Q4 2026 [te bevestigen]". Q4 is nu begonnen. De site noemt daarom geen kwartaal meer. Datum en auditor bevestigen, of "gepland" vervangen. |
-| A3 | ISO 27001: audit gepland 2027 | /trust, /vergelijking | Feitenblad: [te bevestigen]. |
+| A2 | NEN 7510: externe audit "gepland" | homepage, /trust, /vergelijking | Opgelost 28-10-2026 (besluit Jan 28-10, besluit 9): overal "streeft naar certificering; het traject is in voorbereiding", zonder datum, kwartaal of jaar, tot een instelling fase 1 heeft ingepland. |
+| A3 | ISO 27001: audit gepland 2027 | /trust, /vergelijking | Opgelost 28-10-2026: feitenblad (26-10) zegt "noem geen jaar"; /vergelijking zegt nu "streeft naar certificering". |
 | A4 | /vergelijking: controledatum **8 oktober 2026** in plaats van peildatum 29-05-2026 | /vergelijking | Feitenblad zegt "peildatum 29-05-2026". De vergelijking is opnieuw nagelopen met bronnen (zie D3); het feitenblad moet mee. |
 | A5 | Inbegrepen bij de implementatie: "training van 5–10 sleutelgebruikers", "begeleiding op locatie waar dat nodig is", "proefperiode met één team naast het oude systeem" | /implementatie (ongewijzigd); homepage noemt alleen "eerst sleutelgebruikers, daarna de andere medewerkers" | Staat niet in het feitenblad. Klopt dit als toezegging, ook financieel (twee systemen naast elkaar)? |
 | A6 | Demotoegang: "iedere bezoeker krijgt een eigen toegang" | /demo-omgeving, homepage ("Vraag demo-toegang aan") | In `appsettings.Demo.json` staat `Demotoegang:Ingeschakeld=false`; een app-poolvariabele kan dat overschrijven. Op de server nagaan wat live geldt. |
