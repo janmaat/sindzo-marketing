@@ -37,8 +37,8 @@ export const algemeneVragen: Vraag[] = [
   },
   {
     vraag: 'Is Curanta gecertificeerd voor NEN 7510?',
-    // Feitenblad: NEN 7510:2024 (audit gepland Q4 2026, bevestigd 13-10), externe pentest.
-    antwoord: `Nog niet. De externe audit is gepland in het vierde kwartaal van 2026. Een externe pentest is nog niet gedaan. Wat er wel geregeld is, staat per onderdeel in het ${link('/trust', 'Trust Centre')}.`,
+    // Feitenblad: NEN 7510:2024 (streven naar certificering, traject in voorbereiding, geen datum; besluit Jan 28-10), externe pentest.
+    antwoord: `Nog niet. Curanta streeft naar NEN 7510-certificering; het traject is in voorbereiding. Een externe pentest is nog niet gedaan. Wat er wel geregeld is, staat per onderdeel in het ${link('/trust', 'Trust Centre')}.`,
   },
   {
     vraag: 'Bij welke organisaties is Curanta in gebruik?',

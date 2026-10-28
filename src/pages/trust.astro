@@ -36,7 +36,7 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
     title: 'Informatiebeveiliging',
     intro: 'Leidend is ons werkdocument voor NEN 7510, de norm voor informatiebeveiliging in de zorg. Per onderwerp staat de stand erbij, ook voor de externe pentest (een gecontroleerde inbraakpoging) en de versleuteling van de hele database.',
     items: [
-      { label: 'NEN 7510:2024', stand: 'uitvoering', note: 'Maatregelen ingevoerd, met een eerste beoordeling. Een externe audit is gepland. Curanta is niet gecertificeerd.', doc: '/procurement' },
+      { label: 'NEN 7510:2024', stand: 'uitvoering', note: 'Maatregelen ingevoerd, met een eerste beoordeling. Curanta is niet gecertificeerd; het certificeringstraject is in voorbereiding.', doc: '/procurement' },
       { label: 'NEN 7513 (logging)', stand: 'geregeld', note: 'Auditlog met hash-keten, zodat een wijziging achteraf aantoonbaar is. Elke regel zegt of iemand gegevens inzag, vastlegde, wijzigde of verwijderde. Een logregel over een cliënt blijft bewaard zolang het dossier bestaat; logregels zonder dossier 7 jaar.' },
       { label: 'Auditlogs naar uw SIEM', stand: 'geregeld', note: 'Elke minuut het beveiligingslogboek en de beheeraudit naar het SIEM van uw organisatie, en het NEN 7513-logboek gepseudonimiseerd als u dat aanzet. Getest met Splunk, Azure Monitor en een syslog-server.', doc: '/oplossing#kwaliteit' },
       { label: 'Scanblokkade', stand: 'geregeld', note: 'Wie bekende zwakke plekken van websites afzoekt, wordt automatisch geblokkeerd, oplopend tot een week. Verkeer van buiten Europa telt Curanta apart; binnen de EU weigert Curanta niemand.' },
