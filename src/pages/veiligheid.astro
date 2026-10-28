@@ -115,9 +115,9 @@ const blokken: Blok[] = [
     titel: 'Als er toch iets misgaat',
     icoon: 'schild',
     punten: [
-      // Feitenblad, rijen RPO / RTO (hersteltoets 21-10-2026, herstel tot een tijdstip) en Hele database (back-up
-      // buiten de server: open punt, noemen bij de back-up); ADR 2026-10-19-linux, deel Productie.
-      'Van de databank is er een back-up waarmee wij kunnen terugzetten tot een bepaald tijdstip. De hersteltoets van die back-up slaagde op 21 oktober 2026. Een versleutelde kopie op een andere plek in de EU is <a href="#garantie">bij de oplevering aan uw organisatie</a> geregeld.',
+      // Feitenblad, rij RPO / RTO (terugzetten tot een tijdstip beproefd; kopie buiten de server sinds 27-10-2026,
+      // besluit Jan 28-10); ADR 2026-10-19-linux, deel Productie.
+      'Van de databank is er een back-up waarmee wij kunnen terugzetten tot een bepaald tijdstip. Daarnaast gaat er elke dag een versleutelde kopie naar een plek buiten de server, in de EU.',
       // Feitenblad, rij Noodoverzicht; docs/help/admin/noodprocedure.md (vooraf downloaden per dienst).
       'Uw team downloadt elke dag een versleuteld noodoverzicht (pdf) met per cliënt de contactgegevens, waarschuwingen, allergieën en de medicatie van die dag. Zo werkt het door als Curanta niet bereikbaar is.',
       // Code: Curanta.Host/Infrastructure/Documents/DpaPdfGenerator.cs:216-222 (artikel 5, versie 2026.3).
@@ -204,7 +204,7 @@ const verdeling: { onderwerp: string; curanta: string; u: string }[] = [
 const garanties: { titel: string; tekst: string; icoon: 'server' | 'klok' | 'download' | 'schild' }[] = [
   { titel: 'Hosting in de EU', icoon: 'server', tekst: 'Uw gegevens staan op een server in Duitsland, binnen de EU. Dat is nu al zo.' },
   { titel: 'Bewaking dag en nacht', icoon: 'klok', tekst: 'Van buitenaf controleren wij 24 uur per dag, 7 dagen per week of Curanta bereikbaar is.' },
-  { titel: 'Een back-up buiten de server', icoon: 'download', tekst: 'Een versleutelde kopie van uw gegevens, op een andere plek in de EU.' },
+  { titel: 'Een back-up buiten de server', icoon: 'download', tekst: 'Elke dag een versleutelde kopie van uw gegevens, op een andere plek in de EU. Dat is sinds 27 oktober 2026 al zo.' },
   { titel: 'Een virusscan op elke upload', icoon: 'schild', tekst: 'Elk bestand dat iemand in Curanta uploadt, scannen wij op virussen.' },
 ];
 
@@ -368,24 +368,24 @@ const onderwerpen = [
     </div>
   </section>
 
-  {/* Feitenblad, rijen RPO / RTO (doel, niet aangetoond; hersteltoets op dezelfde server), Hele database (geen
-      back-up buiten de server) en Overstap in het implementatieproject (str.uitval: noodprocedure geoefend vóór de
+  {/* Feitenblad, rijen RPO / RTO (doel; terugzetten tot een tijdstip beproefd; kopie buiten de server sinds
+      27-10-2026), Hele database en Overstap in het implementatieproject (str.uitval: noodprocedure geoefend vóór de
       go/no-go); docs/help/admin/noodprocedure.md. */}
   <section id="herstel" class="container-prose scroll-mt-20 border-b border-ink-200 py-14" aria-labelledby="herstel-kop">
     <div class="grid gap-10 md:grid-cols-[260px_1fr]">
       <div>
         <h2 id="herstel-kop" class="font-display text-2xl font-bold text-curanta-900">Herstel en uitval</h2>
         <p class="mt-3 text-sm leading-relaxed text-ink-700">
-          Wat wij als doel hebben gesteld, wat daarvan aangetoond is, en hoe uw team doorwerkt.
+          Wat wij als doel hebben gesteld, hoe wij uw gegevens veiligstellen, en hoe uw team doorwerkt.
         </p>
       </div>
       <div class="space-y-4 text-sm leading-relaxed text-ink-700">
         <p>
           In onze <a href="/voorwaarden#sla" class="font-semibold text-curanta-700">voorwaarden</a> staat
-          als doel: hoogstens 1 uur aan gegevens kwijt (RPO) en binnen 4 uur weer in gebruik (RTO). Dat
-          doel is nog niet aangetoond. De hersteltoets van 21 oktober 2026 zette de databank terug op
-          dezelfde server. Een versleutelde kopie op een andere plek in de EU is bij de oplevering aan uw
-          organisatie geregeld.
+          als doel: hoogstens 1 uur aan gegevens kwijt (RPO) en binnen 4 uur weer in gebruik (RTO). De
+          databank wordt doorlopend geback-upt en kan terug tot een bepaald tijdstip. Elke dag gaat er
+          bovendien een versleutelde kopie naar een plek buiten de server, in de EU; een kopie telt pas als
+          de ontvangst is bevestigd.
         </p>
         <p>
           Voor de uren dat Curanta niet bereikbaar is, legt u in uw implementatieproject een
