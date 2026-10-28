@@ -104,7 +104,7 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
     intro: 'Wij gaan ervan uit dat er een keer iets misgaat, ook met de nieuwste techniek. Daarom staat hier ook hoe wij herstellen, en hoe uw team dan doorwerkt.',
     items: [
       { label: 'RPO en RTO', stand: 'uitvoering', note: 'Doel in onze voorwaarden: RPO 1 uur (hoogstens 1 uur aan gegevens kwijt) en RTO 4 uur (binnen 4 uur weer in gebruik). De database wordt doorlopend geback-upt, en elke dag gaat er een versleutelde kopie naar een plek buiten de server.', doc: '/voorwaarden#sla' },
-      { label: 'Hersteltest', stand: 'uitvoering', note: 'Terugzetten tot een bepaald tijdstip is beproefd. De hersteloefening met de kopie buiten de server, op een aparte machine, volgt.' },
+      { label: 'Hersteltest', stand: 'geregeld', note: 'Geslaagd op 28 oktober 2026: de kopie van buiten de server is op een aparte machine gecontroleerd, ontsleuteld en teruggezet. Binnen twee minuten stond de database weer.' },
       { label: 'Back-up buiten de server', stand: 'geregeld', note: 'Sinds 27 oktober 2026 gaat er elke dag een versleutelde kopie van de database, de sleutels en de bijlagen naar een plek buiten de server, in de EU. Een kopie telt pas als de ontvangst is bevestigd.', doc: '/veiligheid#garantie' },
       { label: 'Bewaking dag en nacht', stand: 'gepland', note: 'Bij de oplevering aan uw organisatie gegarandeerd: van buitenaf controleren wij 24 uur per dag, 7 dagen per week of Curanta bereikbaar is.', doc: '/veiligheid#garantie' },
       { label: 'Een gestolen schijf of back-up', stand: 'geregeld', note: 'Uw gegevens staan versleuteld opgeslagen, ook de bijlagen, de back-ups en de logs. Het wachtwoord van dat volume staat niet op de server.' },
