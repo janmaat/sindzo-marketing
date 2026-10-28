@@ -117,7 +117,7 @@ const blokken: Blok[] = [
     punten: [
       // Feitenblad, rij RPO / RTO (terugzetten tot een tijdstip beproefd; kopie buiten de server sinds 27-10-2026,
       // besluit Jan 28-10); ADR 2026-10-19-linux, deel Productie.
-      'Van de databank is er een back-up waarmee wij kunnen terugzetten tot een bepaald tijdstip. Daarnaast gaat er elke dag een versleutelde kopie naar een plek buiten de server, in de EU.',
+      'Van de databank is er een back-up waarmee wij kunnen terugzetten tot een bepaald tijdstip. Daarnaast gaat er elke dag een versleutelde kopie naar een plek buiten de server, in de EU. De hersteloefening met die kopie slaagde op 28 oktober 2026, op een aparte machine.',
       // Feitenblad, rij Noodoverzicht; docs/help/admin/noodprocedure.md (vooraf downloaden per dienst).
       'Uw team downloadt elke dag een versleuteld noodoverzicht (pdf) met per cliënt de contactgegevens, waarschuwingen, allergieën en de medicatie van die dag. Zo werkt het door als Curanta niet bereikbaar is.',
       // Code: Curanta.Host/Infrastructure/Documents/DpaPdfGenerator.cs:216-222 (artikel 5, versie 2026.3).
@@ -385,7 +385,8 @@ const onderwerpen = [
           als doel: hoogstens 1 uur aan gegevens kwijt (RPO) en binnen 4 uur weer in gebruik (RTO). De
           databank wordt doorlopend geback-upt en kan terug tot een bepaald tijdstip. Elke dag gaat er
           bovendien een versleutelde kopie naar een plek buiten de server, in de EU; een kopie telt pas als
-          de ontvangst is bevestigd.
+          de ontvangst is bevestigd. Op 28 oktober 2026 hebben wij die kopie op een aparte machine
+          teruggezet: binnen twee minuten stond de databank weer.
         </p>
         <p>
           Voor de uren dat Curanta niet bereikbaar is, legt u in uw implementatieproject een
