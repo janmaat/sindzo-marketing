@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, HOOFDKNOP, DEMO_GESPREK } from '../config/demo';
-import { AANTAL_ONDERDELEN } from '../config/onderdelen';
 
 // Zelf nakijken (de url /cases blijft, want daar wijzen links en de brochure naar).
 //
@@ -35,7 +34,7 @@ const controleerbaar = [
     titel: 'Alle onderdelen',
     href: '/oplossing',
     linkLabel: 'Bekijk de onderdelen',
-    body: `${AANTAL_ONDERDELEN} onderdelen, van het cliëntdossier en de planning tot declaratie, kwaliteit en HRM. Per onderdeel staat wat het doet en of het bij uw organisatie nog ingericht moet worden.`,
+    body: `Een volledig pakket, van het cliëntdossier en de planning tot declaratie, kwaliteit en HRM. U zet aan wat u gebruikt. Per onderdeel staat wat het doet en of het bij uw organisatie nog ingericht moet worden.`,
   },
   {
     titel: 'Wat het kost',

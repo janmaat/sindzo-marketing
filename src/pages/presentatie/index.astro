@@ -3,7 +3,6 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import HoneypotField from '../../components/HoneypotField.astro';
 import { DEMO_GESPREK } from '../../config/demo';
-import { groups as onderdeelGroepen, AANTAL_ONDERDELEN } from '../../config/onderdelen';
 
 // Landingspagina van de campagne (22-10-2026). De eerste bezoekers uit een ChatGPT-advertentie vertrokken binnen 3 tot
 // 16 seconden: de pagina ging ervan uit dat zij Curanta al kenden, en het beeld van de presentatie leek een video maar
@@ -76,7 +75,7 @@ const nakijken = [
   },
   {
     kop: 'Breedte en prijs',
-    tekst: `${AANTAL_ONDERDELEN} onderdelen in ${onderdeelGroepen.length} groepen, van het cliëntdossier en de planning tot declaratie, kwaliteit en HRM, met per onderdeel de stand. De prijs staat per plan op de site: €19 tot €39 per actieve medewerker per maand.`,
+    tekst: `Een volledig pakket, van het cliëntdossier en de planning tot declaratie, kwaliteit en HRM, met per onderdeel de stand. U zet aan wat u gebruikt. De prijs staat per plan op de site: €19 tot €39 per actieve medewerker per maand.`,
     link: { label: 'Alle onderdelen', href: '/oplossing' },
   },
   {

@@ -3,11 +3,6 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 import { DEMO_ZELF_AANGEBODEN } from '../config/demo';
-import { groups, AANTAL_ONDERDELEN } from '../config/onderdelen';
-
-// Aantal onderdelen en groepen uit dezelfde bron als /oplossing en de homepage (feitenblad, rij Positionering).
-const aantalOnderdelen = AANTAL_ONDERDELEN;
-const aantalGroepen = groups.length;
 
 // De drie mensen achter Curanta. Elk feit hier staat in het feitenblad (rij "Mensen", besluit Jan 15-10-2026),
 // met dezelfde levensloop als op sigillum.nl/over, maar zonder het notariaat: Curanta gaat over de zorg.
@@ -168,8 +163,9 @@ const gesprek = [
           <h3 class="font-display text-lg font-semibold text-ink-900">Onze missie</h3>
           <p class="mt-2 text-ink-700 leading-relaxed">
             Daarom maken wij één volledig pakket voor de hele zorgorganisatie: alles wat zij nodig heeft, in één systeem.
-            Vandaag zijn dat {aantalOnderdelen} onderdelen in {aantalGroepen} groepen. Het cliëntdossier, de planning, de
-            declaratie en de kwaliteit horen erbij, en ook portalen voor zorgmedewerkers, cliënten en mantelzorgers. Veiligheid
+            Het cliëntdossier, de planning, de declaratie en de kwaliteit horen erbij, en ook portalen voor
+            zorgmedewerkers, cliënten en mantelzorgers. Toch blijft het eenvoudig: u zet aan wat u gebruikt, en alleen
+            dat ziet u in het menu. Veiligheid
             gaat daarbij voor alles. Het systeem moet betaalbaar blijven, en meegaan als de zorg verandert. Bij elk onderdeel staat wat het
             doet en wat bij uw organisatie nog ingericht moet worden.
           </p>
