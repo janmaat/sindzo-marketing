@@ -3,10 +3,10 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 import { DEMO_ZELF_AANGEBODEN } from '../config/demo';
-import { groups } from '../config/onderdelen';
+import { groups, AANTAL_ONDERDELEN } from '../config/onderdelen';
 
 // Aantal onderdelen en groepen uit dezelfde bron als /oplossing en de homepage (feitenblad, rij Positionering).
-const aantalOnderdelen = groups.reduce((n, g) => n + g.modules.length, 0);
+const aantalOnderdelen = AANTAL_ONDERDELEN;
 const aantalGroepen = groups.length;
 
 // De drie mensen achter Curanta. Elk feit hier staat in het feitenblad (rij "Mensen", besluit Jan 15-10-2026),
