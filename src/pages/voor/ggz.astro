@@ -18,6 +18,10 @@ import { CYBERBEVEILIGINGSWET, GDS801 } from '../../config/kennisbank';
 // 25-10-2026: "EPD" in titel, beschrijving, kop en een vraag. De ggz zoekt op "EPD", niet op "ECD" ("epd ggz" geeft 10
 // Google-suggesties, "ecd ggz" geen; kennisonderzoek zorg_campagne, T8 §5). Het antwoord noemt alleen wat de pagina al
 // beschrijft (feitenblad, rijen Praktijk en GGZ-instelling).
+//
+// 29-10-2026 (besluit Jan): de boekhoudexport noemen, met de stand (in geen pakket in een echte administratie ingelezen,
+// todo/20 in Ponscura), en "een ander pakket voegen wij kosteloos toe". Feitenblad, rij Boekhoudexport. Zoektermen
+// 'boekhoudsoftware ggz' en 'ggz boekhoudsoftware' (Search Console 01-29 okt, ~230 vertoningen).
 ---
 <SegmentLayout
   image="/og/voor-ggz.png"
@@ -49,6 +53,7 @@ import { CYBERBEVEILIGINGSWET, GDS801 } from '../../config/kennisbank';
     { name: 'Behandeldienst', note: 'Fysiotherapie, ergotherapie, logopedie en diëtetiek naast de instelling; niet voor de zelfstandige praktijk' },
     { name: 'Voorstel bij de rapportage (AI)', note: 'Standaard bij Mistral AI via het EU-endpoint, zonder bewaren; niet in het plan Praktijk' },
     { name: 'Cyberbeveiligingswet voor het bestuur', note: 'Zorgplicht, vaststelling door het bestuur en leveranciersregister; voor instellingen' },
+    { name: 'Naar uw boekhoudpakket', note: 'Facturen, declaraties en kosten als bestand voor Twinfield, SnelStart, Yuki, e-Boekhouden.nl, AFAS Profit of Exact Online; een ander pakket voegen wij kosteloos toe. Nog niet in een echte administratie ingelezen' },
     { name: 'Aanmelding en wachtlijst', note: 'Na aansluiting op ZorgDomein accepteert u een verwijzing en zet u de cliënt op de wachtlijst van de behandelagenda' },
   ]}
   vragen={[
@@ -57,7 +62,7 @@ import { CYBERBEVEILIGINGSWET, GDS801 } from '../../config/kennisbank';
     { vraag: 'Hoe declareren wij bij de zorgverzekeraar?', antwoord: 'Uit de prestaties van gesloten trajecten maakt Curanta per zorgverzekeraar het declaratiebericht (GDS801), volgens de standaard van Vektis. Rechtstreeks aanleveren via VECOZO is ingericht; wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot dan levert u het bestand aan in het VECOZO-portaal.' },
     { vraag: 'Toetst Curanta de wachttijden aan de Treeknorm?', antwoord: 'Ja. Per cliënt toetst Curanta of de intake binnen 4 weken na de aanmelding was, en of de behandeling binnen 10 weken na de intake begon. Bij een aanmelding uit de cliëntlogistiek toetst Curanta alleen de wachttijd tot de intake. Per rij ziet u hoeveel intakes en behandelingen te laat kwamen, en wie nu al langer dan 4 weken op een intake wacht. De wachttijden aanleveren aan een portaal doet u zelf, vanuit de export.' },
     // Zoektermen 22-10 (Search Console): 'administratie software ggz', 'boekhoudsoftware ggz'. Feitenblad, rij GGZ-instelling.
-    { vraag: 'Is Curanta administratiesoftware of boekhoudsoftware voor de ggz?', antwoord: 'Curanta doet de zorgadministratie: van traject en prestaties tot de declaratie bij de zorgverzekeraar (GDS801), de nota aan de cliënt zonder contract en de omzetplafonds. Een boekhoudpakket is Curanta niet; uw financiële administratie houdt u bij in uw eigen boekhouding.' },
+    { vraag: 'Is Curanta administratiesoftware of boekhoudsoftware voor de ggz?', antwoord: 'Curanta doet de zorgadministratie: van traject en prestaties tot de declaratie bij de zorgverzekeraar (GDS801), de nota aan de cliënt zonder contract en de omzetplafonds. Een boekhoudpakket is Curanta niet, maar de facturen, de toegekende declaraties en de kosten gaan als bestand naar uw eigen boekhouding. Er zijn bestanden voor Twinfield, SnelStart, Yuki, e-Boekhouden.nl, AFAS Profit en Exact Online; uw boekhouder leest ze zelf in. Staat uw pakket er niet bij, dan voegen wij het kosteloos toe. Nog in geen enkel pakket in een echte administratie ingelezen; dat testen wij bij de implementatie, met uw boekhouder.' },
     { vraag: 'Hoe loopt de administratie van traject tot declaratie?', antwoord: 'De behandelaar legt per traject de prestaties vast. Curanta toetst ze aan de tarieven en regels van de NZa: het tarief, de duur en de datum. Is een traject gesloten, dan maakt de administratie er per zorgverzekeraar een declaratie van (GDS801, volgens de standaard van Vektis). Is er geen contract, dan wordt het een nota. Het retourbericht (GDS802) laat zien welke prestaties zijn toegekend; een afgewezen prestatie declareert u opnieuw, een toegekende die niet klopte crediteert u. Per verzekeraar ziet u hoeveel van het omzetplafond al is gedeclareerd. De administratie ziet daarbij alleen wat zij voor de declaratie nodig heeft, niet de zorginhoud.' },
   ]}
   nogNiet={[
