@@ -69,6 +69,36 @@ const principes: { titel: string; tekst: string; link?: { href: string; label: s
   { titel: 'Eén systeem', tekst: 'De backoffice, het medewerkerportaal en het cliëntportaal werken met dezelfde gegevens. Wat de één vastlegt, ziet de volgende terug, zonder koppeling ertussen.', link: { href: '/oplossing', label: 'Alle onderdelen' } },
 ];
 
+// Waar we naartoe gaan (29-10-2026): wat Curanta voor de komende jaren heeft vastgelegd, geen beloofde functies
+// (feitenblad "Curanta is af"). Elke zin staat in het feitenblad: AZWA 20% (marktcijfers) met de rapportageduur per
+// team (rij AI), de jaarlijkse overstap (rij Fundament), NEN 7510 zonder datum (besluit Jan 28-10) en eOverdracht
+// "in te richten" (rij BgZ / eOverdracht). Geen Wegiz-data: die staan niet in het feitenblad.
+const richting: { titel: string; tekst: string; link?: { href: string; label: string } }[] = [
+  {
+    titel: 'Minder tijd aan de administratie',
+    tekst:
+      'Het zorgakkoord mikt op hooguit 20 procent administratietijd in 2030. Of uw organisatie daar dichterbij komt, ziet u in Curanta per team: hoe lang rapporteren duurt, met en zonder de coach. Per medewerker telt Curanta dat niet.',
+  },
+  {
+    titel: 'Elk jaar de nieuwe techniek',
+    tekst:
+      'Microsoft brengt elk jaar in november een nieuwe versie van .NET uit, de techniek onder Curanta. Wij stappen een paar weken later over, te beginnen met .NET 11 in november 2026.',
+    link: { href: '/kennisbank/houdbaarheid-software-php-lek', label: 'Waarom dat telt' },
+  },
+  {
+    titel: 'Een certificaat voor NEN 7510',
+    tekst:
+      'Curanta streeft naar certificering voor NEN 7510:2024, de norm voor informatiebeveiliging in de zorg. Het traject is in voorbereiding. Een datum noemen wij pas als een certificerende instelling de eerste audit heeft ingepland.',
+    link: { href: '/trust', label: 'Trust Centre' },
+  },
+  {
+    titel: 'Overdragen aan de keten',
+    tekst:
+      'De Wegiz maakt elektronische uitwisseling in de zorg per onderwerp verplicht, en de eOverdracht is daar een van. Curanta stelt het overdrachtsdocument op volgens eOverdracht 4.0 en verstuurt het via het eOverdracht-netwerk. De aansluiting regelen wij bij de implementatie, met het UZI-servercertificaat van uw organisatie. Door Nictiz gekwalificeerd is het nog niet.',
+    link: { href: '/integraties', label: 'Alle koppelingen' },
+  },
+];
+
 const gesprek = [
   { titel: 'U noemt twee of drie knelpunten', tekst: 'Waar het rapporteren tijd kost, waar de overdracht tussen diensten misgaat, of waar declaraties blijven hangen.' },
   { titel: 'Wij laten zien wat Curanta daarbij doet', tekst: 'Wij laten alleen zien wat bij die knelpunten hoort. En we zeggen erbij wat u nog moet laten aansluiten of instellen.' },
@@ -82,9 +112,37 @@ const gesprek = [
 >
   <PageHero
     eyebrow="Over Curanta"
-    title="Wie Curanta bouwt, en waarom."
-    subtitle="Jan Maat heeft sinds 2001 een eigen softwarebedrijf. Hij nam het initiatief tot Curanta. Samen met Erwin van der Star, die bijna vijftien jaar Vitaphone Nederland leidde, en Janus Hoeks, die in 1989 Intemo oprichtte, staat hij achter Curanta. Curanta is één systeem voor de zorg, met het cliëntdossier, de planning, de declaratie en de kwaliteit, en portalen voor zorgmedewerkers, cliënten en mantelzorgers."
+    title="Wie achter Curanta staat, en waarom."
+    subtitle="Jan Maat heeft sinds 2001 een eigen softwarebedrijf. Hij nam het initiatief tot Curanta. Samen met Erwin van der Star, die bijna vijftien jaar Vitaphone Nederland leidde, en Janus Hoeks, die in 1989 Intemo oprichtte, staat hij achter Curanta."
   />
+
+  {/* Visie en missie (29-10-2026). De zin "één systeem voor de zorg …" stond eerst in de ondertitel van de hero en
+      staat nu in de missie, zodat hij één keer op de pagina staat. */}
+  <section class="border-y border-ink-100 bg-ink-100/40 py-16">
+    <div class="container-prose">
+      <span class="eyebrow">Visie en missie</span>
+      <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">Waar Curanta voor staat.</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <article class="rounded-xl border border-ink-100 bg-white p-6">
+          <h3 class="font-display text-lg font-semibold text-ink-900">Onze visie</h3>
+          <p class="mt-2 text-ink-700 leading-relaxed">
+            Een zorgmedewerker hoort haar tijd aan de cliënt te besteden, niet aan haar software. Software voor de zorg
+            volgt daarom het werk zoals het gaat: in de wijk, op de groep en in de praktijk. En de regels zitten in dat
+            werk zelf. Het rooster wordt getoetst bij het plannen, niet bij een controle achteraf.
+          </p>
+        </article>
+        <article class="rounded-xl border border-ink-100 bg-white p-6">
+          <h3 class="font-display text-lg font-semibold text-ink-900">Onze missie</h3>
+          <p class="mt-2 text-ink-700 leading-relaxed">
+            Daarom maken wij één systeem voor de hele zorgorganisatie: het cliëntdossier, de planning, de declaratie en
+            de kwaliteit, met portalen voor zorgmedewerkers, cliënten en mantelzorgers. U ziet vooraf wat het kost, en de
+            gegevens van uw cliënten blijven in de EU. Bij elk onderdeel staat wat het doet en wat bij uw organisatie nog
+            ingericht moet worden.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
 
   {/* Kop links, tekst rechts (15-10-2026): tekst in 16 px zoals de rest van de site, in twee gelijke kolommen zodat de regels rond 75 tekens blijven (besluit Jan 15-10: 18 px was te groot), zoals in PageHero bedoeld, en de
       breedte van de pagina wordt toch gebruikt. Op een smal scherm staat de kop boven de tekst. */}
@@ -247,6 +305,31 @@ const gesprek = [
   </section>
 
   <section class="container-prose py-16">
+    <div class="grid gap-4 lg:grid-cols-2 lg:gap-16 lg:items-end">
+      <div>
+        <span class="eyebrow">De komende jaren</span>
+        <h2 class="mt-2 font-display text-2xl font-bold text-ink-900 sm:text-3xl">Waar we naartoe gaan.</h2>
+      </div>
+      <p class="text-ink-700 leading-relaxed">
+        Software voor de zorg kiest u voor jaren. Dit hebben wij voor die jaren vastgelegd, met de stand van nu erbij.
+      </p>
+    </div>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {richting.map((r) => (
+        <article class="rounded-xl border border-ink-100 bg-white p-6">
+          <h3 class="font-display text-lg font-semibold text-ink-900">{r.titel}</h3>
+          <p class="mt-2 text-sm text-ink-700 leading-relaxed">{r.tekst}</p>
+          {r.link && (
+            <a href={r.link.href} class="mt-3 inline-block text-sm font-semibold text-curanta-700 hover:underline">
+              {r.link.label} →
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-prose pb-16">
     <h2 class="font-display text-2xl font-bold text-ink-900 sm:text-3xl">Zo gaat een eerste gesprek.</h2>
     <ol class="mt-10 grid gap-6 md:grid-cols-3">
       {gesprek.map((s, i) => (
