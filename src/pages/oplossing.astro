@@ -7,7 +7,7 @@ import StatusLegenda from '../components/StatusLegenda.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import Cta from '../components/Cta.astro';
 import { DEMO_ZELF_AANGEBODEN, DEMO_ZELF, DEMO_GESPREK, PRESENTATIE } from '../config/demo';
-import { groups, AANTAL_ONDERDELEN } from '../config/onderdelen';
+import { groups } from '../config/onderdelen';
 
 // Modulekaart, gegroepeerd zoals de backoffice. Herzien 08-10-2026:
 // - vier statussen uit src/config/status.ts (gelijk aan homepage, /integraties en /trust);
@@ -28,13 +28,13 @@ const AI_TOELICHTING = 'Vragen aan een taalmodel gaan via één centraal punt, g
 ---
 <Base
   title="Product: alle onderdelen van Curanta | Curanta"
-  description={`De ${AANTAL_ONDERDELEN} onderdelen van Curanta per groep, van dossier en planning tot declaratie, kwaliteit en HRM: wat elk onderdeel doet en wat u ervoor nodig hebt.`}
+  description={`De onderdelen van Curanta per groep, van dossier en planning tot declaratie, kwaliteit en HRM: wat elk onderdeel doet en wat u ervoor nodig hebt.`}
   image="/og/oplossing.png"
 >
   <PageHero
     eyebrow="Product"
-    title={`Alle ${AANTAL_ONDERDELEN} onderdelen van Curanta`}
-    subtitle="Curanta is één systeem met losse onderdelen. U zet aan wat u gebruikt; alles deelt hetzelfde dossier. Per onderdeel ziet u wat het doet, en of het bij uw organisatie nog ingericht moet worden."
+    title="Alle onderdelen van Curanta"
+    subtitle="Curanta is één systeem met losse onderdelen. U zet aan wat u gebruikt, en alleen dat ziet u in het menu; alles deelt hetzelfde dossier. Per onderdeel ziet u wat het doet, en of het bij uw organisatie nog ingericht moet worden."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href={PRESENTATIE.href} class="btn-primary no-underline">{PRESENTATIE.label}</a>
@@ -51,7 +51,6 @@ const AI_TOELICHTING = 'Vragen aan een taalmodel gaan via één centraal punt, g
           {groups.map((g) => (
             <li>
               <a href={`#${g.id}`} class="font-semibold text-curanta-700 no-underline hover:underline">{g.group}</a>
-              <span class="text-ink-500"> · {g.modules.length}</span>
             </li>
           ))}
         </ol>
