@@ -12,8 +12,10 @@ site met `site-inhoudscontrole` (beide in `D:\Repos\Ponscura\.claude\skills\`).
 
 ## Grenzen
 
-- De site plaatst geen cookies en laadt geen meetdienst van derden; alleen de eigen cookieloze
-  bezoekmeting van app.curanta.nl (feitenblad, besluit Jan 25-09-2026).
+- De site plaatst geen cookies en laadt geen meetdienst van derden; alleen eigen cookieloze meting: de
+  bezoekmeting van app.curanta.nl (feitenblad, besluit Jan 25-09-2026) en, sinds 04-11-2026 (besluit Jan),
+  de centrale dienst Bezoekmeting op statistiek.maat-software.nl. Die twee draaien een overgangsperiode
+  naast elkaar; daarna vergelijken en de oude weghalen.
 - Persoonsnamen alleen op /over: Jan Maat, Erwin C.A. van der Star en Janus Hoeks, met de levensloop uit het
   feitenblad (besluit Jan 15-10-2026). Elders "Curanta" of "wij". "Ons team" alleen daar, bij wie het product
   bouwde; nooit een teamgrootte of "implementatieteam". Geen Ponscura op de site;

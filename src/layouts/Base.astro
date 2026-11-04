@@ -15,8 +15,9 @@ interface Props {
   /** 'article' voor kennisbankartikelen; de rest is 'website'. */
   ogType?: 'website' | 'article';
   /**
-   * Alleen op de 404-pagina: 'niet-gevonden'. De bezoekmeting (app.curanta.nl/bezoekmeting.js) telt de
-   * pagina dan als niet gevonden en niet als gewone weergave; zonder deze tag valt ze terug op "404" in
+   * Alleen op de 404-pagina: 'niet-gevonden'. Beide metingen tellen de pagina dan als niet gevonden en
+   * niet als gewone weergave: app.curanta.nl/bezoekmeting.js leest `curanta-pagina`,
+   * statistiek.maat-software.nl/m.js leest `bezoekmeting-pagina`. Zonder tag vallen ze terug op "404" in
    * de titel.
    */
   paginasoort?: 'niet-gevonden';
@@ -119,6 +120,7 @@ const kruimelLd = !noindex && delen.length > 0 ? {
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={url} />}
     {paginasoort && <meta name="curanta-pagina" content={paginasoort} />}
+    {paginasoort && <meta name="bezoekmeting-pagina" content={paginasoort} />}
     <meta property="og:site_name" content="Curanta" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -148,16 +150,26 @@ const kruimelLd = !noindex && delen.length > 0 ? {
       if ('IntersectionObserver' in window) document.documentElement.classList.add('reveal-aan');
     </script>
     {/*
-      Eigen bezoekersmeting — de enige meting op curanta.nl (geen meetdienst van derden; besluit
-      Jan 25-09-2026, zie het feitenblad). Cookieloos; de cijfers staan in de verkoopdatabank op de
+      Eigen bezoekersmeting (geen meetdienst van derden; besluit Jan 25-09-2026, zie het feitenblad).
+      Sinds 04-11-2026 (besluit Jan) draaien er twee naast elkaar, een paar weken lang; daarna vergelijken en
+      de oude weghalen. Beide alleen in productie en cookieloos.
+
+      1. app.curanta.nl/bezoekmeting.js. De cijfers staan in de verkoopdatabank op de
       Linux-server, te zien op app.curanta.nl/admin/bezoekers. Sinds 22-10-2026 neemt de productie-backoffice
       (app.curanta.nl) /api/bezoek aan; daarvoor deed alleen de demo (demo.curanta.nl) dat (ADR
       2026-10-17-verkoopbeheer-op-productie, wijziging 22-10). Script en endpoint leven in Curanta.Host, dus
       wijzigingen aan de meting gaan mee met een uitrol daarvan. Alleen in productie: het endpoint neemt ook localhost aan, anders telt `npm run dev`
       mee in de echte cijfers.
+
+      2. De centrale dienst Bezoekmeting (statistiek.maat-software.nl/m.js, repo D:\Repos\Bezoekmeting; wat hij
+      bewaart: docs/privacy.md daar). Geen eigen gebeurtenissen op deze site, dus geen window.bm-stub.
+      Beide hosts staan in de CSP (public/.htaccess en deploy/nginx-plesk.conf).
     */}
     {import.meta.env.PROD && (
       <script src="https://app.curanta.nl/bezoekmeting.js" defer></script>
+    )}
+    {import.meta.env.PROD && (
+      <script src="https://statistiek.maat-software.nl/m.js" defer></script>
     )}
   </head>
   <body class="min-h-screen flex flex-col">
