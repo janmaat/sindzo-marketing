@@ -43,6 +43,13 @@ export const HOUDBAARHEID: KennisbankArtikel = {
   href: '/kennisbank/houdbaarheid-software-php-lek',
 };
 
+export const CONTINUITEIT: KennisbankArtikel = {
+  eyebrow: 'Continuïteit',
+  title: 'Doorwerken als uw ECD uitvalt',
+  body: 'Wat uw team in de eerste uren nodig heeft, wat de wet en de NEN 7510 vragen, en tien vragen voor uw leverancier en uzelf.',
+  href: '/kennisbank/doorwerken-als-uw-ecd-uitvalt',
+};
+
 export const GDS801: KennisbankArtikel = {
   eyebrow: 'Declareren',
   title: 'GDS801: declareren in de ggz',

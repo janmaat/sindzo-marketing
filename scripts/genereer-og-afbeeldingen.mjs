@@ -134,6 +134,12 @@ const IMAGES = [
     sub: 'Wat er met PHP gebeurde · vijf vragen voor uw leverancier',
   },
   {
+    file: 'og/kennisbank/doorwerken-als-uw-ecd-uitvalt.png',
+    eyebrow: 'Kennisbank',
+    hero: 'Uw ECD is beveiligd. Kunt u ook doorwerken als het uitvalt?',
+    sub: 'De eerste uren · wat de wet vraagt · tien vragen',
+  },
+  {
     file: 'og/kennisbank/meertalig-clientportaal-nl-zorg.png',
     eyebrow: 'Kennisbank',
     hero: 'Een cliëntportaal in de taal van de cliënt: wat de wet vraagt.',
@@ -174,6 +180,12 @@ const IMAGES = [
     eyebrow: 'Overstapscan',
     hero: 'Uw overstap op een rij, voordat u een leverancier spreekt.',
     sub: 'Tien vragen · geen opslag · geen account',
+  },
+  {
+    file: 'og/continuiteitscheck.png',
+    eyebrow: 'Continuïteitscheck',
+    hero: 'Kan uw team doorwerken als het ECD uitvalt?',
+    sub: 'Twaalf vragen · geen opslag · geen account',
   },
   {
     file: 'og/voor-jeugdzorg.png',

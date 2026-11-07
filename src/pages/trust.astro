@@ -4,7 +4,7 @@ import StatusLabel from '../components/StatusLabel.astro';
 import StatusLegenda from '../components/StatusLegenda.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { NIS2CARE_LIVE, NIS2CARE_URL } from '../config/features';
-import { CYBERBEVEILIGINGSWET, HOUDBAARHEID } from '../config/kennisbank';
+import { CONTINUITEIT, CYBERBEVEILIGINGSWET, HOUDBAARHEID } from '../config/kennisbank';
 import { DOTNET, LEKKEN_GEMETEN } from '../config/fundament';
 import type { Status } from '../config/status';
 
@@ -108,7 +108,7 @@ const pillars: { key: string; title: string; intro: string; items: Item[] }[] = 
       { label: 'Back-up buiten de server', stand: 'geregeld', note: 'Sinds 27 oktober 2026 gaat er elke dag een versleutelde kopie van de database, de sleutels en de bijlagen naar een plek buiten de server, in de EU. Een kopie telt pas als de ontvangst is bevestigd.', doc: '/veiligheid#garantie' },
       { label: 'Bewaking dag en nacht', stand: 'gepland', note: 'Bij de oplevering aan uw organisatie gegarandeerd: van buitenaf controleren wij 24 uur per dag, 7 dagen per week of Curanta bereikbaar is.', doc: '/veiligheid#garantie' },
       { label: 'Een gestolen schijf of back-up', stand: 'geregeld', note: 'Uw gegevens staan versleuteld opgeslagen, ook de bijlagen, de back-ups en de logs. Het wachtwoord van dat volume staat niet op de server.' },
-      { label: 'Bij uitval', stand: 'geregeld', note: 'Elke dag een versleuteld noodoverzicht (pdf) met per cliënt de contactgegevens, waarschuwingen, allergieën en de medicatie van de dag. Daarnaast een kopie op het toestel in het medewerkerportaal, en een noodprocedure voor uw organisatie.', doc: '/oplossing#ecd' },
+      { label: 'Bij uitval', stand: 'geregeld', note: 'Elke dag een versleuteld noodoverzicht (pdf) met per cliënt de contactgegevens, waarschuwingen, allergieën en de medicatie van de dag. Daarnaast een kopie op het toestel in het medewerkerportaal, en een noodprocedure voor uw organisatie. Met de continuïteitscheck ziet u wat uw organisatie zelf nog regelt.', doc: '/continuiteitscheck' },
       { label: 'Een cyberincident bij uw organisatie', status: 'demo', note: 'U legt het incident vast in de module voor de Cyberbeveiligingswet, en Curanta bewaakt de meldtermijnen van 24 uur, 72 uur en één maand. Melden bij het CSIRT doet uw organisatie zelf.', doc: NIS2CARE_LIVE ? NIS2CARE_URL : '/oplossing#kwaliteit' },
     ],
   },
@@ -281,7 +281,7 @@ const termijnen = [
     </div>
   </section>
 
-  <RelatedArticles articles={[CYBERBEVEILIGINGSWET, HOUDBAARHEID]} />
+  <RelatedArticles articles={[CYBERBEVEILIGINGSWET, HOUDBAARHEID, CONTINUITEIT]} />
 
   <section class="container-prose py-16">
     <div class="rounded-2xl bg-curanta-50 p-8 sm:p-12">

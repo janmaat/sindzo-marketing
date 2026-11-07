@@ -1,0 +1,252 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+// De continuïteitscheck (07-11-2026), naast het kennisartikel /kennisbank/doorwerken-als-uw-ecd-uitvalt.
+// Zelfde opzet als de overstapscan, om dezelfde redenen:
+//   - geen ranglijst, geen andere leverancier genoemd of beoordeeld, geen score in procenten;
+//   - de uitkomst is ook zonder Curanta bruikbaar: wat u regelt, en wat u uw leverancier vraagt;
+//   - de antwoorden blijven in de browser: geen opslag, geen cookie, niets verstuurd. Een formulier dat iets
+//     verstuurt kan niet: leads landen in de demo-omgeving, waar elke demobezoeker ze ziet. Alleen als de bezoeker
+//     zelf op "Online presentatie aanvragen" klikt, gaat een korte samenvatting mee naar dat formulier.
+// Elk antwoord van Curanta in CURANTA hieronder komt uit het feitenblad (rij tussen haakjes). Verandert daar iets,
+// dan hier ook. ⛔ Niet: een melding of nabeschouwing bij een storing (besluit Jan 25-10), RPO/RTO als gemeten,
+// een uitwijklocatie, de bewaking van buitenaf als iets dat nu draait.
+
+type Status = 'ja' | 'deels' | 'nee';
+
+const CURANTA: Record<string, { status: Status; tekst: string }> = {
+  overzicht: { status: 'ja', tekst: 'Het noodoverzicht: elke dag een versleutelde pdf, voor de eigen bezoeken of voor een team. Per cliënt het adres of de kamer en het bed, de contactpersoon, waarschuwingen, allergieën en wilsverklaringen. In elk plan.' }, // Noodoverzicht
+  onderweg: { status: 'ja', tekst: 'Het medewerkerportaal werkt ook zonder bereik. Het rooster en de bezoeken van vandaag en morgen staan versleuteld op het toestel, zonder medicatie en zonder BSN.' }, // Offline (medewerkerportaal)
+  medicatie: { status: 'ja', tekst: 'In het noodoverzicht staat de medicatie van die dag, met een leeg vak "Gegeven" om op papier af te tekenen. De kopie in het medewerkerportaal heeft geen medicatie.' }, // Noodoverzicht
+  kopie: { status: 'ja', tekst: 'Sinds 27 oktober 2026 gaat er elke dag een versleutelde kopie van uw gegevens naar een plek buiten de server, in de EU.' }, // RPO / RTO
+  hersteltest: { status: 'ja', tekst: 'Geoefend op 28 oktober 2026, op een aparte machine: de kopie is gecontroleerd, ontsleuteld en teruggezet, en binnen twee minuten stond de databank weer.' }, // RPO / RTO
+  rporto: { status: 'deels', tekst: 'Ons doel: hoogstens 1 uur aan gegevens kwijt, en binnen 4 uur weer in gebruik. Dat zijn doelen; gemeten zijn ze nog niet. Een uitwijklocatie is er niet.' }, // RPO / RTO, Noodoverzicht (geen uitwijklocatie)
+  procedure: { status: 'deels', tekst: 'In de help van Curanta staat een noodprocedure die u kunt overnemen. Wie wat doet, legt uw organisatie zelf vast.' }, // docs/help/admin/noodprocedure.md
+  storing: { status: 'deels', tekst: 'Op app.curanta.nl/status ziet u of Curanta bereikbaar is; die pagina draait op dezelfde server. Bewaking dag en nacht van buitenaf garanderen wij bij de oplevering aan uw organisatie.' }, // Statuspagina, Gegarandeerd bij de oplevering
+  stopt: { status: 'deels', tekst: 'Wie bij u de rol Organisatie-export heeft, laat een volledige export van uw gegevens in JSON maken, met de bestanden. Broncode-escrow is in voorbereiding.' }, // Export, Continuïteit
+};
+
+// Volgorde = prioriteit in de uitkomst: eerst wat de zorg van vandaag raakt.
+const THEMAS = [
+  {
+    id: 'clienten', titel: 'Weten wie zorg nodig heeft',
+    vragen: [
+      { id: 'overzicht', vraag: 'Elk team heeft bij het begin van de dienst een overzicht van de cliënten van die dag, ook zonder het ECD. Daarin staan waarschuwingen, allergieën en wilsverklaringen.', actie: 'Regel een overzicht per team dat bij het begin van elke dienst wordt opgehaald, en wijs aan wie dat doet. Vraag uw leverancier of het pakket zo\'n overzicht kan maken.' },
+      { id: 'onderweg', vraag: 'Medewerkers in de wijk zien hun bezoeken van vandaag ook zonder verbinding.', actie: 'Vraag uw leverancier wat de app laat zien zonder verbinding. Laat medewerkers de app elke ochtend met verbinding openen, zodat hun kopie actueel is.' },
+    ],
+  },
+  {
+    id: 'medicatie', titel: 'Medicatie',
+    vragen: [
+      { id: 'medicatie', vraag: 'De medicatie van vandaag is in te zien zonder het ECD.', actie: 'Dit is het grootste zorgrisico bij uitval. Spreek af waar de medicatie van de dag vandaan komt: een overzicht uit het pakket, of de toedienlijst van de apotheek.' },
+      { id: 'papier', vraag: 'Er liggen papieren toedienlijsten en rapportageformulieren klaar.', actie: 'Leg per team een toedienlijst en een rapportageformulier klaar, en spreek af hoe u aftekent: paraaf en tijd.' },
+    ],
+  },
+  {
+    id: 'gegevens', titel: 'Uw gegevens terug',
+    vragen: [
+      { id: 'kopie', vraag: 'De leverancier maakt elke dag een kopie van uw gegevens, op een plek buiten zijn eigen server.', actie: 'Vraag uw leverancier hoe vaak hij een kopie buiten zijn eigen server maakt, in welk land die staat en of die versleuteld is.' },
+      { id: 'hersteltest', vraag: 'Het terugzetten van die kopie is het afgelopen jaar geoefend, en u kent de uitkomst.', actie: 'Vraag uw leverancier wanneer hij het terugzetten voor het laatst heeft geoefend, en vraag om de uitkomst op papier.' },
+      { id: 'rporto', vraag: 'U weet hoeveel gegevens u hoogstens kwijtraakt, en binnen hoeveel tijd u weer werkt.', actie: 'Vraag uw leverancier naar de RPO (hoeveel gegevens u hoogstens kwijtraakt) en de RTO (binnen hoeveel tijd u weer werkt), en of dat doelen zijn of gemeten waarden. Leg ze vast in het contract.' },
+    ],
+  },
+  {
+    id: 'afspraken', titel: 'Afspraken en oefenen',
+    vragen: [
+      { id: 'procedure', vraag: 'Er is een noodprocedure op papier: wat u vooraf regelt, wat u doet tijdens de storing, en wat daarna.', actie: 'Schrijf een noodprocedure van één à twee pagina\'s, en laat het bestuur hem goedkeuren. Valt u onder de Cyberbeveiligingswet, dan hoort hij bij de zorgplicht.' },
+      { id: 'rollen', vraag: 'Iedereen weet wie de leverancier belt, en wie de medewerkers informeert.', actie: 'Zet in de noodprocedure wie de leverancier belt, met het nummer, en wie de teams informeert.' },
+      { id: 'storing', vraag: 'U ziet zonder te bellen dat er een storing is bij de leverancier, en wanneer die voorbij is.', actie: 'Vraag uw leverancier waar u de stand bij een storing ziet, en of die pagina ook werkt als zijn eigen server uitvalt.' },
+      { id: 'oefenen', vraag: 'De noodprocedure is het afgelopen jaar geoefend, ook het invoeren achteraf van wat op papier stond.', actie: 'Plan een oefening van een dagdeel met één team: werken met het overzicht en het papier, en daarna alles invoeren met het tijdstip waarop het gebeurde.' },
+      { id: 'stopt', vraag: 'U weet hoe u uw gegevens krijgt als de leverancier stopt.', actie: 'Vraag uw leverancier of u zelf een volledige export kunt maken, in welk formaat, en wat er in het contract staat als hij stopt of failliet gaat.' },
+    ],
+  },
+];
+
+const aantal = THEMAS.reduce((n, t) => n + t.vragen.length, 0);
+// Een getal aan het begin van een zin schrijft u voluit.
+const aantalWoord = ({ 10: 'Tien', 11: 'Elf', 12: 'Twaalf', 13: 'Dertien', 14: 'Veertien' } as Record<number, string>)[aantal] ?? String(aantal);
+const scanData = { CURANTA, THEMAS };
+const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
+---
+<Base
+  image="/og/continuiteitscheck.png"
+  title="Continuïteitscheck: doorwerken bij uitval | Curanta"
+  description={`Kan uw team doorwerken als het ECD uitvalt? ${aantalWoord} vragen, een overzicht om te delen en de vragen voor uw leverancier. Geen opslag, geen account.`}
+>
+  <PageHero
+    eyebrow="Continuïteitscheck"
+    title="Uw ECD is beveiligd. Maar kunt u ook doorwerken als het morgen uitvalt?"
+    subtitle={`${aantalWoord} vragen over wat uw team heeft als het dossier niet bereikbaar is. U krijgt een overzicht om af te drukken en te delen. Daarin staat wat al geregeld is, wat u nog regelt en wat u uw leverancier vraagt. Ook als u niet met Curanta werkt.`}
+  />
+
+  <section class="container-prose py-12">
+    <div class="grid gap-10 lg:grid-cols-[1fr_300px]">
+      <form id="check" class="space-y-10 print:hidden" novalidate>
+        <noscript>
+          <p class="rounded-md border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+            De check werkt met JavaScript. Zonder JavaScript vindt u de vragen in
+            <a href="/kennisbank/doorwerken-als-uw-ecd-uitvalt">het artikel over doorwerken als uw ECD uitvalt</a>.
+          </p>
+        </noscript>
+
+        {THEMAS.map((t, ti) => (
+          <fieldset>
+            <legend class="font-display text-lg font-semibold text-ink-900">{ti + 1}. {t.titel}</legend>
+            <div class="mt-4 space-y-5">
+              {t.vragen.map((v) => (
+                <div role="radiogroup" aria-labelledby={`v-${v.id}`}>
+                  <p id={`v-${v.id}`} class="text-sm text-ink-800">{v.vraag}</p>
+                  <div class="mt-2 flex flex-wrap gap-x-6 gap-y-2">
+                    {[['ja', 'Ja'], ['nee', 'Nee'], ['weet-niet', 'Weet ik niet']].map(([w, l]) => (
+                      <label class="flex items-center gap-2 text-sm text-ink-800"><input type="radio" name={v.id} value={w} class={keuze} /> {l}</label>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </fieldset>
+        ))}
+
+        <div>
+          <p id="check-melding" role="alert" tabindex="-1" class="hidden mb-4 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900"></p>
+          <button type="submit" class="btn-primary btn-lg">Maak mijn overzicht</button>
+          <p class="mt-3 text-xs text-ink-500">Uw antwoorden blijven in uw browser. Wij slaan niets op en ontvangen niets.</p>
+        </div>
+      </form>
+
+      <aside class="space-y-6 print:hidden">
+        <div class="rounded-2xl border border-ink-100 bg-ink-100/50 p-6 text-sm text-ink-700">
+          <h2 class="font-display text-lg font-semibold text-ink-900">Wat u krijgt</h2>
+          <ul class="mt-3 list-disc space-y-1.5 pl-5">
+            <li>Per onderwerp wat al geregeld is</li>
+            <li>Wat u nog regelt, met wat het eerst moet</li>
+            <li>De vragen voor uw leverancier</li>
+            <li>Wat Curanta op dezelfde vragen antwoordt, ook waar dat "nog niet" is</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-ink-100 bg-white p-6 text-sm text-ink-700">
+          <h2 class="font-display text-lg font-semibold text-ink-900">Liever eerst lezen?</h2>
+          <ul class="mt-2 space-y-1.5">
+            <li><a href="/kennisbank/doorwerken-als-uw-ecd-uitvalt" class="text-curanta-700 hover:underline">Doorwerken als uw ECD uitvalt: tien vragen</a></li>
+            <li><a href="/trust#herstel" class="text-curanta-700 hover:underline">Trust Centre: als het toch gebeurt</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="uitkomst" class="hidden border-t border-ink-200 bg-white py-12 print:border-0 print:py-0" aria-labelledby="uitkomst-kop">
+    <div class="container-prose">
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <h2 id="uitkomst-kop" tabindex="-1" class="font-display text-3xl font-bold text-ink-900">Doorwerken bij uitval: uw stand</h2>
+        <div class="flex flex-wrap gap-3 print:hidden">
+          <button type="button" id="afdrukken" class="btn-primary">Afdrukken of opslaan als pdf</button>
+          <a href="#check" class="btn-secondary no-underline">Antwoorden aanpassen</a>
+        </div>
+      </div>
+      <p id="uitkomst-datum" class="mt-2 text-sm text-ink-500"></p>
+      <div id="uitkomst-inhoud" class="mt-8 space-y-12"></div>
+      <p class="mt-12 max-w-3xl text-xs leading-relaxed text-ink-500">
+        Opgesteld met de continuïteitscheck van Curanta (curanta.nl/continuiteitscheck), een leverancier van
+        zorgsoftware. De uitkomst beoordeelt geen andere leverancier. Dit is geen juridisch advies en geen toets aan de
+        NEN 7510 of de Cyberbeveiligingswet.
+      </p>
+    </div>
+  </section>
+
+  <script type="application/json" id="check-data" set:html={JSON.stringify(scanData)} />
+</Base>
+
+<script is:inline>
+  (function () {
+    var data = JSON.parse(document.getElementById('check-data').textContent);
+    var form = document.getElementById('check');
+    var melding = document.getElementById('check-melding');
+    var uitkomst = document.getElementById('uitkomst');
+    var inhoud = document.getElementById('uitkomst-inhoud');
+    if (!form || !uitkomst) return;
+
+    var STATUS = { ja: 'Ja', deels: 'Deels', nee: 'Nee' };
+    var STATUSKLASSE = { ja: 'bg-curanta-100 text-curanta-900', deels: 'bg-amber-100 text-amber-900', nee: 'bg-ink-100 text-ink-800' };
+    var ANTWOORD = { ja: 'Geregeld', nee: 'Nog niet', 'weet-niet': 'Weet ik niet' };
+
+    function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+    function waarde(naam) { var el = form.elements[naam]; return el && el.value ? el.value : ''; }
+    function blok(titel, html) { return '<section class="break-inside-avoid-page"><h3 class="font-display text-2xl font-bold text-ink-900">' + esc(titel) + '</h3>' + html + '</section>'; }
+    function toon(tekst) { melding.textContent = tekst; melding.classList.remove('hidden'); melding.focus(); }
+
+    var alleVragen = [];
+    data.THEMAS.forEach(function (t) { t.vragen.forEach(function (v) { alleVragen.push({ thema: t, vraag: v }); }); });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var a = {};
+      var leeg = 0;
+      alleVragen.forEach(function (x) { a[x.vraag.id] = waarde(x.vraag.id); if (!a[x.vraag.id]) leeg++; });
+      if (leeg === alleVragen.length) { toon('Beantwoord ten minste één vraag.'); return; }
+      melding.classList.add('hidden');
+      maak(a);
+    });
+
+    document.getElementById('afdrukken').addEventListener('click', function () { window.print(); });
+
+    function maak(a) {
+      var html = [];
+      var open = alleVragen.filter(function (x) { return a[x.vraag.id] === 'nee' || a[x.vraag.id] === 'weet-niet'; });
+      var geregeld = alleVragen.filter(function (x) { return a[x.vraag.id] === 'ja'; });
+      var onbeantwoord = alleVragen.length - open.length - geregeld.length;
+
+      // 1. Conclusie. Volgorde van de vragen = prioriteit: eerst wat de zorg van vandaag raakt.
+      var conclusie, uitleg;
+      if (!open.length && !onbeantwoord) {
+        conclusie = 'Uw team kan doorwerken.';
+        uitleg = 'Op alle ' + alleVragen.length + ' vragen is het antwoord ja. Houd het zo: oefen elk jaar, en vraag uw leverancier elk jaar naar de uitkomst van zijn hersteloefening.';
+      } else if (!open.length) {
+        conclusie = 'Wat u beantwoordde, is geregeld.';
+        uitleg = onbeantwoord + (onbeantwoord === 1 ? ' vraag liet' : ' vragen liet') + ' u open. Zoek die nog uit; pas dan weet u of uw team kan doorwerken.';
+      } else {
+        conclusie = open.length === 1 ? 'Eén punt vraagt nog aandacht.' : open.length + ' punten vragen nog aandacht.';
+        uitleg = 'Begin met: <strong>' + esc(open[0].thema.titel.toLowerCase()) + '</strong>. ' + esc(open[0].vraag.actie) +
+          (onbeantwoord ? ' ' + onbeantwoord + (onbeantwoord === 1 ? ' vraag liet' : ' vragen liet') + ' u open; die staan hieronder niet.' : '');
+      }
+      html.push(blok('Kan uw team doorwerken?', '<p class="mt-3 font-display text-xl font-semibold text-curanta-800">' + esc(conclusie) + '</p><p class="mt-3 max-w-3xl text-ink-700">' + uitleg + '</p>'));
+
+      // 2. Per onderwerp: wat geregeld is en wat u nog regelt.
+      html.push(blok('Per onderwerp', data.THEMAS.map(function (t) {
+        var rijen = t.vragen.filter(function (v) { return a[v.id]; });
+        if (!rijen.length) return '';
+        var ja = rijen.filter(function (v) { return a[v.id] === 'ja'; }).length;
+        return '<h4 class="mt-6 font-display text-lg font-semibold text-ink-900">' + esc(t.titel) + ' <span class="text-sm font-normal text-ink-500">(' + ja + ' van ' + t.vragen.length + ' geregeld)</span></h4>' +
+          '<ul class="mt-2 max-w-3xl space-y-3">' + rijen.map(function (v) {
+            var ok = a[v.id] === 'ja';
+            return '<li class="text-ink-700"><span class="mr-2 rounded px-1.5 py-0.5 text-xs font-semibold ' + (ok ? 'bg-curanta-100 text-curanta-900' : 'bg-amber-100 text-amber-900') + '">' + ANTWOORD[a[v.id]] + '</span>' + esc(v.vraag) +
+              (ok ? '' : '<br><span class="text-sm"><strong>Wat u regelt:</strong> ' + esc(v.actie) + '</span>') + '</li>';
+          }).join('') + '</ul>';
+      }).join('')));
+
+      // 3. Wat Curanta op dezelfde vragen antwoordt; alleen waar een leverancier een rol heeft.
+      var metCuranta = alleVragen.filter(function (x) { return data.CURANTA[x.vraag.id]; });
+      html.push(blok('Wat Curanta op dezelfde vragen antwoordt', '<p class="mt-3 max-w-3xl text-ink-700">Dezelfde vragen, gesteld aan ons. Ook waar het antwoord "deels" is.</p>' +
+        '<table class="mt-6 w-full max-w-4xl border-collapse text-left text-sm"><thead><tr class="border-b border-ink-300 text-ink-500"><th scope="col" class="py-2 pr-4 font-semibold">Vraag</th><th scope="col" class="w-20 py-2 pr-4 font-semibold">Curanta</th><th scope="col" class="py-2 font-semibold">Toelichting</th></tr></thead><tbody>' +
+        metCuranta.map(function (x) {
+          var c = data.CURANTA[x.vraag.id];
+          return '<tr class="border-b border-ink-100 align-top"><td class="py-3 pr-4 text-ink-900">' + esc(x.vraag.vraag) + '</td><td class="py-3 pr-4"><span class="rounded px-1.5 py-0.5 text-xs font-semibold ' + STATUSKLASSE[c.status] + '">' + STATUS[c.status] + '</span></td><td class="py-3 text-ink-700">' + esc(c.tekst) + '</td></tr>';
+        }).join('') + '</tbody></table>' +
+        '<p class="mt-4 max-w-3xl text-sm text-ink-700">De rest regelt uw organisatie zelf: wie wat doet, het papier en het oefenen. Meer in het <a href="/trust#herstel" class="text-curanta-700 hover:underline">Trust Centre</a>.</p>'));
+
+      // 4. Volgende stap. De samenvatting gaat alleen mee als de bezoeker op de knop klikt.
+      var samenvatting = 'Uit de continuïteitscheck: ' + geregeld.length + ' van ' + alleVragen.length + ' geregeld' +
+        (open.length ? '; open: ' + open.map(function (x) { return x.thema.titel.toLowerCase(); }).filter(function (v, i, l) { return l.indexOf(v) === i; }).join(', ') : '');
+      var link = '/presentatie?toelichting=' + encodeURIComponent(samenvatting.slice(0, 900)) + '#presentatie-aanvraag';
+      html.push('<section class="rounded-2xl border border-ink-100 bg-curanta-50/60 p-7 print:hidden"><h3 class="font-display text-xl font-bold text-ink-900">Volgende stap</h3><p class="mt-2 max-w-3xl text-ink-700">Bekijk in de online presentatie hoe Curanta werkt, wanneer het u uitkomt. Klikt u op de knop, dan staat een korte samenvatting van deze check in het aanvraagformulier; u kunt die aanpassen of weghalen voordat u verstuurt.</p><div class="mt-5 flex flex-wrap gap-3"><a class="btn-primary no-underline" href="' + esc(link) + '">Online presentatie aanvragen</a><a class="btn-secondary no-underline" href="/kennisbank/doorwerken-als-uw-ecd-uitvalt">Lees het artikel</a></div></section>');
+
+      inhoud.innerHTML = html.join('');
+      document.getElementById('uitkomst-datum').textContent = 'Gemaakt op ' + new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + geregeld.length + ' van ' + alleVragen.length + ' geregeld';
+      uitkomst.classList.remove('hidden');
+      var kop = document.getElementById('uitkomst-kop');
+      kop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      kop.focus({ preventScroll: true });
+    }
+  })();
+</script>

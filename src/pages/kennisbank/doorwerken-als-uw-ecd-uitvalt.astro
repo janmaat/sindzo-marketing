@@ -1,0 +1,185 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+import RelatedArticles from '../../components/RelatedArticles.astro';
+import { CYBERBEVEILIGINGSWET, HOUDBAARHEID } from '../../config/kennisbank';
+
+// Continuïteit (07-11-2026, campagne "Uw EPD is beveiligd. Maar kunt u ook doorwerken als het morgen uitvalt?").
+// Leverancier-neutraal: geen ander pakket genoemd, geen incident bij een andere leverancier, geen vergelijking
+// (feitenblad, rij Positionering). Externe feiten nagelezen op 07-11-2026: NIS2 art. 21 lid 2 onder c, letterlijk
+// van eur-lex; het advies van CERT-EU en CISA staat met bron in het artikel over houdbaarheid (23-10-2026).
+// NEN 7510-2:2024 volgt de nummering van ISO/IEC 27002:2022 (5.29, 5.30, 8.13); docs/help/admin/noodprocedure.md
+// in de Ponscura-repo noemt dezelfde maatregelen.
+// Over Curanta alleen feitenbladrijen: Noodoverzicht, Offline (medewerkerportaal), RPO / RTO, Statuspagina,
+// Beschikbaarheid, Gegarandeerd bij de oplevering, Export, Continuïteit (escrow), Externe pentest.
+// ⛔ Niet: een melding of nabeschouwing bij een storing beloven (besluit Jan 25-10), RPO/RTO als gemeten, "de hele
+// dienst hersteld", een uitwijklocatie, de bewaking van buitenaf als iets dat nu draait, een hoster.
+const publicatieDatum = '2026-11-07';
+const leesTijd = '~6 minuten';
+const dateNl = new Date(publicatieDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const titel = 'Doorwerken als uw ECD uitvalt: tien vragen voor bestuurders';
+const omschrijving = 'Uw ECD is beveiligd. Maar kunt u doorwerken als het morgen uitvalt? Wat de wet vraagt, wat u vooraf regelt, en tien vragen.';
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  image: new URL('/og/kennisbank/doorwerken-als-uw-ecd-uitvalt.png', Astro.site).toString(),
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
+  headline: titel,
+  description: omschrijving,
+  datePublished: publicatieDatum,
+  dateModified: publicatieDatum,
+  inLanguage: 'nl-NL',
+  author: { '@type': 'Organization', name: 'Curanta' },
+  publisher: { '@type': 'Organization', name: 'Curanta' },
+  keywords: 'bedrijfscontinuïteit, uitval ECD, noodprocedure, back-up, hersteltest, RPO, RTO, Cyberbeveiligingswet, NEN 7510, zorgsoftware'
+};
+
+const leverancier = [
+  'Wat kan ons team nog inzien als uw dienst uitvalt, en wat moeten wij daarvoor vooraf doen?',
+  'Staat de medicatie van vandaag daarin, en hoe beschermt u dat overzicht?',
+  'Hoe vaak gaat er een kopie van onze gegevens naar een plek buiten uw eigen server? En in welk land staat die?',
+  'Wanneer heeft u voor het laatst geoefend om die kopie terug te zetten, en wat was de uitkomst?',
+  'Hoeveel gegevens raken wij hoogstens kwijt, en binnen hoeveel tijd werken wij weer? Zijn dat doelen of gemeten waarden?',
+  'Hoe horen wij dat er een storing is, en wanneer die voorbij is?',
+];
+
+const eigen = [
+  'Wie haalt bij het begin van elke dienst het overzicht op, en waar ligt het?',
+  'Liggen er papieren formulieren klaar om medicatie af te tekenen en te rapporteren?',
+  'Wie belt de leverancier, en wie informeert de medewerkers?',
+  'Wanneer hebben wij voor het laatst geoefend, ook het invoeren achteraf van wat op papier stond?',
+];
+---
+<Base
+  image="/og/kennisbank/doorwerken-als-uw-ecd-uitvalt.png"
+  title="Doorwerken als uw ECD uitvalt | Curanta"
+  ogType="article"
+  description={omschrijving}
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
+
+  <article class="container-prose py-16">
+    <header class="max-w-3xl">
+      <div class="flex flex-wrap items-center gap-3 text-xs text-ink-500">
+        <a href="/kennisbank" class="text-curanta-700 hover:underline no-underline">Kennisbank</a>
+        <span>·</span>
+        <span>Continuïteit</span>
+        <span>·</span>
+        <time datetime={publicatieDatum}>{dateNl}</time>
+        <span>·</span>
+        <span>{leesTijd}</span>
+      </div>
+      <h1 class="mt-5 font-display text-4xl font-bold leading-tight tracking-tightish text-ink-900 sm:text-5xl">
+        Uw ECD is beveiligd. Maar kunt u ook <em class="italic text-accent-600">doorwerken</em> als het morgen uitvalt?
+      </h1>
+      <p class="mt-6 text-lg text-ink-700 leading-relaxed">
+        Beveiliging verkleint de kans dat het misgaat. Continuïteit bepaalt wat er gebeurt als het tóch misgaat. Voor
+        een zorgorganisatie is dat de vraag die telt. Weet het team van de avonddienst nog bij wie het moet zijn, en
+        welke medicatie die cliënt krijgt?
+      </p>
+    </header>
+
+    <div class="prose-content mt-12 max-w-3xl text-ink-700 leading-relaxed">
+      <h2>Uitval heeft vele oorzaken</h2>
+      <p>
+        In oktober 2026 werd een ernstig lek in PHP bekend. Wie het niet meteen kon dichten, kreeg van CERT-EU en het
+        Amerikaanse CISA hetzelfde advies. Scherm de toepassing af van het internet, of haal haar offline. Voor een
+        cliëntdossier betekent dat werken zonder systeem. Wat er toen gebeurde, staat in
+        <a href="/kennisbank/houdbaarheid-software-php-lek">ons artikel over de houdbaarheid van software</a>.
+      </p>
+      <p>
+        Een lek is maar één oorzaak. Het kan ook een storing bij de leverancier zijn, een update die misgaat, uitval
+        van internet of stroom, of gijzelsoftware. Het gevolg is steeds hetzelfde. Het dossier is een tijd niet bereikbaar, en de zorg
+        gaat door.
+      </p>
+
+      <h2>Wat u in de eerste uren nodig heeft</h2>
+      <p>Bij uitval zijn er een paar dingen die een team meteen moet weten:</p>
+      <ul>
+        <li>welke cliënten vandaag zorg krijgen, en waar: het adres, of de kamer en het bed;</li>
+        <li>welke medicatie zij krijgen, en wanneer;</li>
+        <li>waarschuwingen, allergieën en wilsverklaringen, zoals een niet-reanimerenverklaring;</li>
+        <li>wie u belt: de contactpersoon van de cliënt, en de leverancier.</li>
+      </ul>
+      <p>
+        Na de storing komt de tweede vraag. Hoe komt wat op papier gebeurde terug in het dossier, met het juiste
+        tijdstip? Ook dat hoort in het plan.
+      </p>
+
+      <h2>Wat de wet en de norm vragen</h2>
+      <p>
+        Valt uw organisatie onder de Cyberbeveiligingswet, dan hoort continuïteit bij de zorgplicht. De Europese
+        richtlijn noemt letterlijk "bedrijfscontinuïteit, zoals back-upbeheer en noodvoorzieningenplannen, en
+        crisisbeheer" (NIS2, art. 21 lid 2, onder c). Het bestuur keurt die maatregelen goed. Voor wie de wet geldt,
+        staat in <a href="/kennisbank/cyberbeveiligingswet-bestuur-zorg">ons artikel over de Cyberbeveiligingswet</a>.
+      </p>
+      <p>
+        Ook de NEN 7510 vraagt het. De norm wil dat u de beveiliging tijdens een verstoring regelt (beheersmaatregel 5.29).
+        En dat uw ICT klaar is om door te werken (5.30). Back-ups moeten er zijn, en ze moeten getest
+        worden (8.13).
+      </p>
+      <p>
+        Een deel ligt bij uw leverancier: de kopie van uw gegevens, het herstel, het overzicht voor noodgevallen. Een
+        deel ligt bij uzelf: wie wat doet, het papier, en het oefenen. Daarom zijn de vragen hieronder in tweeën
+        gesplitst.
+      </p>
+
+      <h2>Zes vragen voor uw leverancier</h2>
+      <ol>
+        {leverancier.map((v) => <li>{v}</li>)}
+      </ol>
+
+      <h2>Vier vragen voor uw eigen organisatie</h2>
+      <ol start="7">
+        {eigen.map((v) => <li>{v}</li>)}
+      </ol>
+      <p>
+        Wilt u uw antwoorden op een rij, met wat u nog moet regelen? Doe dan
+        <a href="/continuiteitscheck">de continuïteitscheck</a>. Twaalf vragen, en uw antwoorden blijven in uw browser.
+        De vragen zijn leverancier-neutraal: u kunt ze ook aan ons stellen.
+      </p>
+
+      <h2>Hoe Curanta het doet</h2>
+      <ul>
+        <li>Uw team downloadt elke dag een versleuteld noodoverzicht (pdf), voor de eigen bezoeken of voor een team. Per cliënt staan erin: het adres, de contactpersoon, waarschuwingen, allergieën, wilsverklaringen en de medicatie van die dag, met een vak om het geven af te tekenen. Dat zit in elk plan.</li>
+        <li>Het medewerkerportaal werkt ook zonder bereik. Het rooster en de bezoeken van vandaag en morgen staan versleuteld op het toestel, zonder medicatie en zonder BSN. Wat een medewerker dan vastlegt, gaat mee zodra er weer verbinding is.</li>
+        <li>Sinds 27 oktober 2026 gaat er elke dag een versleutelde kopie van uw gegevens naar een plek buiten de server, in de EU. Het terugzetten daarvan hebben wij op 28 oktober 2026 geoefend, op een aparte machine: binnen twee minuten stond de databank weer.</li>
+        <li>Een volledige export van uw gegevens in JSON, met de bestanden, laat u maken door wie bij u de rol Organisatie-export heeft. Zo heeft u uw gegevens ook zelf.</li>
+        <li>In de help van Curanta staat een noodprocedure: wat u vooraf regelt, wat u doet tijdens de storing en wat daarna. U kunt hem overnemen in uw eigen plan.</li>
+      </ul>
+
+      <h2>Wat er bij ons nog niet is</h2>
+      <p>
+        Onze doelen zijn hoogstens één uur aan gegevens kwijt, en binnen vier uur weer in gebruik. Dat zijn doelen; gemeten
+        zijn ze nog niet. Er is geen uitwijklocatie: valt de server uit, dan bouwen wij Curanta opnieuw op uit de kopie.
+        De statuspagina op app.curanta.nl/status draait op dezelfde server. Bewaking dag en nacht van buitenaf
+        garanderen wij bij de oplevering aan uw organisatie; vandaag draait die nog niet. Een externe pentest is nog
+        niet uitgevoerd, en broncode-escrow is in voorbereiding. De stand per onderwerp staat in het
+        <a href="/trust#herstel">Trust Centre, onder Als het toch gebeurt</a>.
+      </p>
+
+      <h3 class="font-display text-lg font-semibold text-ink-900">Bronnen</h3>
+      <ul class="text-sm">
+        <li>Richtlijn (EU) 2022/2555 (NIS2), art. 21 lid 2, onder c, <a href="https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:32022L2555" rel="noopener">eur-lex.europa.eu</a>; Cyberbeveiligingswet, BWBR0052872, <a href="https://wetten.overheid.nl/BWBR0052872" rel="noopener">wetten.overheid.nl</a></li>
+        <li>NEN 7510-2:2024, beheersmaatregelen 5.29, 5.30 en 8.13, <a href="https://www.nen.nl/" rel="noopener">nen.nl</a></li>
+        <li>CERT-EU, Security Advisory 2026-018, "Critical Vulnerabilities in PHP", 21 oktober 2026, <a href="https://cert.europa.eu/publications/security-advisories/2026-018/" rel="noopener">cert.europa.eu</a></li>
+        <li><span lang="en">CISA, "Critical Vulnerabilities in PHP Require Immediate Patching"</span>, 21 oktober 2026, <a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching" rel="noopener">cisa.gov</a></li>
+      </ul>
+
+      <p class="text-xs text-ink-500 italic mt-8">
+        Ziet u een fout of mist u een bron? Mail
+        <a href="mailto:info@curanta.nl" class="text-curanta-700 hover:underline">info@curanta.nl</a>;
+        wij reageren binnen 1 werkdag en zetten een correctie met datum onder dit artikel.
+      </p>
+    </div>
+  </article>
+
+  <RelatedArticles articles={[HOUDBAARHEID, CYBERBEVEILIGINGSWET]} />
+
+  <Cta
+    title="Weet u wat uw team doet als het dossier uitvalt?"
+    subtitle="Leg het naast de continuïteitscheck. In de online presentatie ziet u hoe Curanta werkt, wanneer het u uitkomt. Liever samen? Dan laten wij het in een demonstratie zien, met verzonnen cliënten."
+  />
+</Base>

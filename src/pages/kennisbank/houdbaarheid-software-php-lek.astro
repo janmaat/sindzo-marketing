@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Cta from '../../components/Cta.astro';
 import RelatedArticles from '../../components/RelatedArticles.astro';
-import { CYBERBEVEILIGINGSWET } from '../../config/kennisbank';
+import { CONTINUITEIT, CYBERBEVEILIGINGSWET } from '../../config/kennisbank';
 import { DOTNET, LEKKEN_GEMETEN } from '../../config/fundament';
 
 // Prompt site-houdbaarheid 01 (23-10-2026). Externe feiten nagelezen in de bron op 23-10-2026: php.net (security
@@ -156,7 +156,7 @@ const vragen = [
     </div>
   </article>
 
-  <RelatedArticles articles={[CYBERBEVEILIGINGSWET]} />
+  <RelatedArticles articles={[CYBERBEVEILIGINGSWET, CONTINUITEIT]} />
 
   <Cta
     title="Weet u tot wanneer uw software updates krijgt?"
