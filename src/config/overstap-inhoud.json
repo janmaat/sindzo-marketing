@@ -16,13 +16,13 @@
   },
   "stoppendePakketten": [
     { "pakket": "mijnCaress", "leverancier": "PinkRoccade Healthcare", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026", "pagina": "/overstappen/mijncaress-stopt",
-      "aangekondigd": "M&I/Partners meldde op 04-09-2025 dat mijnCaress zich als ECD uit de markt terugtrekt, en op 10-09-2026 dat PinkRoccade Healthcare eind 2026 stopt met zijn ECD.", "aankondigingBronnen": ["mi2025", "mi2026"] },
+      "aangekondigd": "M&I/Partners meldde op 04-09-2025 dat mijnCaress zich als ECD uit de markt terugtrekt. Op 10-09-2026 meldde M&I/Partners dat PinkRoccade Healthcare eind 2026 stopt met zijn ECD.", "aankondigingBronnen": ["mi2025", "mi2026"] },
     { "pakket": "Lable Care", "leverancier": "Lable", "einde": "eind 2026", "eindjaar": 2026, "bron": "mi2026",
       "aangekondigd": "Lable kondigde op 15-10-2025 aan dat het zijn activiteiten beëindigt. Volgens M&I/Partners (10-09-2026) stopt Lable eind 2026 met zijn ECD.", "aankondigingBronnen": ["lable2025", "mi2026"] },
     { "pakket": "Fierit", "leverancier": "Tenzinger", "einde": "eind 2027", "eindjaar": 2027, "bron": "mi2026", "pagina": "/overstappen/fierit-stopt",
       "aangekondigd": "Tenzinger kondigde aan te stoppen met Fierit. Volgens M&I/Partners (10-09-2026) verdwijnt Fierit eind 2027 uit de markt.", "aankondigingBronnen": ["mi2026"] },
     { "pakket": "PUUR. voor de gehandicaptenzorg", "leverancier": "Ecare", "einde": "gefaseerd, nog geen einddatum", "eindjaar": null, "bron": "ecareGhz",
-      "aangekondigd": "Ecare kondigde op 13-10-2025 aan dat het gefaseerd stopt met PUUR. voor de gehandicaptenzorg; een einddatum noemt Ecare niet.", "aankondigingBronnen": ["ecareGhz"] }
+      "aangekondigd": "Ecare kondigde op 13-10-2025 aan dat het gefaseerd stopt met PUUR. voor de gehandicaptenzorg. Een einddatum noemt Ecare niet.", "aankondigingBronnen": ["ecareGhz"] }
   ],
   "pve": [
     {
@@ -41,7 +41,7 @@
         { "eis": "Per financier is vooraf afgesproken tot welke periode het oude pakket declareert en vanaf welke periode het nieuwe.", "waarom": "Zo valt er geen periode tussen twee pakketten in, en wordt er niets dubbel gedeclareerd." },
         { "eis": "Lopende toewijzingen van gemeenten en het zorgkantoor gaan mee, of de leverancier beschrijft hoe ze opnieuw worden opgevraagd.", "waarom": "Zonder toewijzing kunt u in het nieuwe pakket niet declareren." },
         { "eis": "Het nieuwe pakket ondersteunt de berichten die wij gebruiken, met de versie erbij.", "waarom": "Vraag per stroom naar de versie en of het bericht wordt getoetst aan het officiële schema.", "stromen": ["wmo", "jeugd", "wlz", "zvw", "ggz"] },
-        { "eis": "De leverancier zegt of declaraties rechtstreeks worden verstuurd of met de hand worden aangeleverd (bijvoorbeeld via het VECOZO-portaal).", "waarom": "Met de hand aanleveren vraagt tijd van de administratie; dat hoort in uw planning." },
+        { "eis": "De leverancier zegt of declaraties rechtstreeks worden verstuurd of met de hand worden aangeleverd (bijvoorbeeld via het VECOZO-portaal).", "waarom": "Met de hand aanleveren vraagt tijd van de administratie. Die tijd hoort in uw planning." },
         { "eis": "Het oude pakket blijft beschikbaar tot de laatste retourberichten zijn verwerkt.", "waarom": "Correcties en afwijzingen komen soms maanden later." }
       ]
     },
@@ -55,7 +55,7 @@
     {
       "categorie": "Exit en dataportabiliteit",
       "eisen": [
-        { "eis": "Bij vertrek krijgen wij al onze gegevens, inclusief bestanden, in een gestructureerd, gangbaar en machineleesbaar formaat.", "waarom": "De Dataverordening vraagt dat; leg het ook in het contract vast." },
+        { "eis": "Bij vertrek krijgen wij al onze gegevens, inclusief bestanden, in een gestructureerd, gangbaar en machineleesbaar formaat.", "waarom": "De Dataverordening vraagt dat. Leg het ook in het contract vast." },
         { "eis": "Het contract noemt de termijnen bij vertrek: de opzegtermijn, de overgangsperiode waarin de dienst doorloopt, en hoe lang wij de gegevens kunnen ophalen.", "waarom": "Volgens de Dataverordening hoogstens 2 maanden opzegtermijn, hoogstens 30 dagen overgang en minstens 30 dagen om gegevens op te halen." },
         { "eis": "Het contract zegt welke gegevens wel en niet overdraagbaar zijn, en welke technische beperkingen bekend zijn.", "waarom": "De Dataverordening vraagt een uitputtende beschrijving." },
         { "eis": "Er zijn geen kosten voor de overstap of de export. Bij vroegtijdig opzeggen staat in het contract welke vergoeding geldt, als die er is.", "waarom": "Vanaf 12-01-2027 mag een aanbieder geen overstapkosten meer rekenen." },
@@ -77,10 +77,10 @@
     {
       "categorie": "Continuïteit",
       "eisen": [
-        { "eis": "De leverancier beschrijft wat er gebeurt als hij stopt, failliet gaat of wordt overgenomen: hoe lang de dienst doorloopt en hoe wij bij onze gegevens komen.", "waarom": "Bij een online dienst beschermt alleen broncode in bewaring u niet tegen het wegvallen van hosting en gegevens." },
+        { "eis": "De leverancier beschrijft wat er gebeurt als hij stopt, failliet gaat of wordt overgenomen: hoe lang de dienst doorloopt en hoe wij bij onze gegevens komen.", "waarom": "Bij een online dienst is broncode in bewaring alleen niet genoeg. Die beschermt u niet als de hosting en de gegevens wegvallen." },
         { "eis": "Er is een noodprocedure voor als het pakket niet bereikbaar is, en die wordt vóór de start geoefend.", "waarom": "Zorg moet doorgaan, ook als het systeem uitvalt." },
         { "eis": "De leverancier geeft referenties, en wij mogen zelf kiezen wie wij bellen.", "waarom": "Een leverancier noemt anders vaak alleen zijn tevredenste klanten." },
-        { "eis": "De leverancier noemt de versie van het platform waarop het pakket draait en tot wanneer die versie beveiligingsupdates krijgt, en meldt ons ruim vooraf wanneer hij overstapt.", "waarom": "De zorgplicht van de Cyberbeveiligingswet noemt het onderhouden van systemen en het omgaan met kwetsbaarheden. Een versie zonder updates van de maker krijgt bij een nieuw lek geen oplossing." }
+        { "eis": "De leverancier noemt de versie van het platform waarop het pakket draait, en tot wanneer die versie beveiligingsupdates krijgt. Hij meldt ons ruim vooraf wanneer hij overstapt op een nieuwe versie.", "waarom": "De zorgplicht van de Cyberbeveiligingswet noemt het onderhouden van systemen en het omgaan met kwetsbaarheden. Een versie zonder updates van de maker krijgt bij een nieuw lek geen oplossing." }
       ]
     },
     {

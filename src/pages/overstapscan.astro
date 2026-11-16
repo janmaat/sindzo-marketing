@@ -19,16 +19,16 @@ import { BSN_LIJST_LIVE } from '../config/product';
 
 const CURANTA = {
   nen7510: { status: 'nee', tekst: 'Curanta is niet NEN 7510-gecertificeerd. Curanta streeft naar certificering; het traject is in voorbereiding.' }, // NEN 7510:2024
-  vecozoDirect: { status: 'ja', tekst: 'Ja, vóór uw eerste declaratiemaand. Curanta stelt de berichten op en toetst ze aan het officiële schema. Rechtstreeks aanleveren via VECOZO is ingericht; wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand.' }, // VECOZO; besluit Jan 22-10: positief, met de toezegging van 14-10
-  import: { status: 'deels', tekst: 'Cliënten en medewerkers importeert u uit een CSV- of Excelbestand, met een sjabloon uit Curanta. Zorgplannen en het oude dossier zet Curanta niet om; die kunnen als pdf mee in het dossier van de cliënt. Het overzetten is een project tegen een vaste prijs, na een migratie-inschatting.' }, // Migratie (import: besluit Jan 23-10)
-  eoverdracht: { status: 'ja', tekst: 'Ja. Curanta biedt het eOverdracht-document aan via het netwerk; de ontvanger haalt het op en meldt terug. De aansluiting regelen wij bij de implementatie, met het UZI-servercertificaat van uw organisatie. Getest tussen twee omgevingen, nog niet met een ketenpartner, en niet door Nictiz gekwalificeerd.' }, // BgZ / eOverdracht; live sinds 22-10 (aa4aa4436)
+  vecozoDirect: { status: 'ja', tekst: 'Ja, vóór uw eerste declaratiemaand. Curanta stelt de berichten op en toetst ze aan het officiële schema. Rechtstreeks aanleveren via VECOZO is ingericht. Wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand.' }, // VECOZO; besluit Jan 22-10: positief, met de toezegging van 14-10
+  import: { status: 'deels', tekst: 'Cliënten en medewerkers importeert u uit een CSV- of Excelbestand, met een sjabloon uit Curanta. Zorgplannen en het oude dossier zet Curanta niet om. Die kunnen als pdf mee in het dossier van de cliënt. Het overzetten is een project tegen een vaste prijs, na een migratie-inschatting.' }, // Migratie (import: besluit Jan 23-10)
+  eoverdracht: { status: 'ja', tekst: 'Ja. Curanta biedt het eOverdracht-document aan via het netwerk. De ontvanger haalt het op en meldt terug. De aansluiting regelen wij bij de implementatie, met het UZI-servercertificaat van uw organisatie. Getest tussen twee omgevingen, nog niet met een ketenpartner, en niet door Nictiz gekwalificeerd.' }, // BgZ / eOverdracht; live sinds 22-10 (aa4aa4436)
   referentie: { status: 'deels', tekst: 'De eerste implementatie loopt sinds oktober 2026, bij een organisatie in de basis-ggz. In ons partnerprogramma zijn nog twee plekken.' }, // Klanten (op een directe vraag), Partnerprogramma; besluit Jan 22-10
   // Kraamzorg: de KZ301 gaat alleen met de hand (feitenblad, rijen Kraamzorg en VECOZO, 23-10-2026).
-  vecozoDirectKraam: { status: 'nee', tekst: 'Voor de kraamzorg niet. Curanta maakt de Zvw-declaratie (KZ301) en toetst hem aan de recordlayout en de testset van Vektis; u levert hem aan in het VECOZO-portaal.' },
-  nen7513: { status: 'ja', tekst: 'Ja. Elke inzage komt in een logboek met hash-keten; de organisatie kan het inzien en exporteren.' }, // NEN 7513
+  vecozoDirectKraam: { status: 'nee', tekst: 'Voor de kraamzorg niet. Curanta maakt de Zvw-declaratie (KZ301) en toetst hem aan de recordlayout en de testset van Vektis. U levert hem aan in het VECOZO-portaal.' },
+  nen7513: { status: 'ja', tekst: 'Ja. Elke inzage komt in een logboek met hash-keten. De organisatie kan het inzien en exporteren.' }, // NEN 7513
   entra: { status: 'deels', tekst: 'Gebouwd voor de backoffice en het medewerkerportaal, maar nog niet getest met Microsoft zelf. Tot die test noemen wij het "in ontwikkeling".' }, // Entra ID
   zonderBereik: { status: 'ja', tekst: 'Het medewerkerportaal werkt ook zonder bereik: aankomst, vertrek, taken en ritten, en op een geopend bezoek ook uren, rapportage en overdracht.' }, // Offline
-  medimo: { status: 'ja', tekst: 'Gebouwd; de aansluiting richten wij per organisatie in.' }, // Koppelingen gebouwd
+  medimo: { status: 'ja', tekst: 'Gebouwd. De aansluiting richten wij per organisatie in.' }, // Koppelingen gebouwd
   talen: { status: 'ja', tekst: 'Het cliëntportaal is er in 5 talen: Nederlands, Engels, Turks, Arabisch en Duits.' }, // Talen cliëntportaal
   exitBsn: BSN_LIJST_LIVE
     ? { status: 'ja', tekst: 'Bij vertrek krijgt u een volledige export in JSON met de bestanden, zonder exit-fee. Het volledige BSN levert Curanta in die periode apart, in een versleuteld bestand.' }
@@ -255,7 +255,7 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
       <p class="mt-12 max-w-3xl text-xs leading-relaxed text-ink-500">
         Opgesteld met de overstapscan van Curanta (curanta.nl/overstapscan), een leverancier van zorgsoftware. De
         uitkomst beoordeelt geen andere leverancier. De termijnen bij vertrek komen uit de Dataverordening, zoals de ACM die
-        uitlegt; laat toetsen of ze voor uw contract gelden. Dit is geen juridisch advies.
+        uitlegt. Laat toetsen of ze voor uw contract gelden. Dit is geen juridisch advies.
       </p>
     </div>
   </section>
@@ -343,7 +343,7 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
         uitleg = '<p class="mt-3 text-ink-700">' + esc(a.pakket) + ' stopt ' + esc(stopt.einde) + ' (' + bron('mi2026') + '). In een marktconsultatie noemden leveranciers een jaar voor de implementatie van een ECD (' + bron('nidos') + '). Een volledige nieuwe implementatie vóór die datum is dus niet realistisch, ook niet bij Curanta. Vraag uw huidige leverancier eerst wat er na de einddatum nog kan: verlenging, alleen lezen, een export. Kies daarna rustig een opvolger.</p>';
       } else if (a.tevredenheid === 'tevreden' && !stopt && maandenTotEinde !== null && maandenTotEinde > 24) {
         conclusie = 'Blijven lijkt nu verstandiger.';
-        uitleg = '<p class="mt-3 text-ink-700">U bent tevreden en uw contract loopt nog ruim twee jaar. Een overstap kost uw organisatie tijd en aandacht; daar is nu weinig reden voor. Zet in uw agenda wanneer u volgens de planning hieronder moet beginnen, en stel uw huidige leverancier nu al de vragen over de export en het oude dossier.</p>';
+        uitleg = '<p class="mt-3 text-ink-700">U bent tevreden en uw contract loopt nog ruim twee jaar. Een overstap kost uw organisatie tijd en aandacht. Daar is nu weinig reden voor. Zet in uw agenda wanneer u volgens de planning hieronder moet beginnen, en stel uw huidige leverancier nu al de vragen over de export en het oude dossier.</p>';
       } else {
         conclusie = 'Curanta kan op uw lijst.';
         uitleg = '<p class="mt-3 text-ink-700">Op de eisen die u hard noemde, zegt Curanta geen nee. Kijk in de online presentatie na of het werk in uw organisatie past. Wat de overstap kost, spreken wij af na een migratie-inschatting.</p>';
@@ -365,22 +365,22 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
         var opzeggen = a.opzeg ? plusMaanden(einde, -a.opzeg) : null;
         var voorbij = function (d) { return d < new Date(vandaag.getFullYear(), vandaag.getMonth(), 1); };
         stappen.push(['Nu', 'Stel uw huidige leverancier de vragen hieronder, schriftelijk. Zet uw eisen op papier en bepaal wie de overstap trekt.']);
-        stappen.push(['Vóór het besluit', 'Vraag het advies van uw ondernemingsraad op een moment dat het nog invloed kan hebben op het besluit (art. 25 WOR), en betrek uw cliëntenraad (Wmcz 2018).']);
+        stappen.push(['Vóór het besluit', 'Vraag het advies van uw ondernemingsraad op een moment dat het nog invloed kan hebben op het besluit (art. 25 WOR). Betrek ook uw cliëntenraad (Wmcz 2018).']);
         stappen.push([maand(contract), 'Streefdatum voor het contract met de nieuwe leverancier: een jaar vóór het einde. In een marktconsultatie noemden leveranciers een jaar voor de implementatie (' + bron('nidos') + ').' + (voorbij(contract) ? ' <strong>Die datum is voorbij.</strong> Vraag uw huidige leverancier om verlenging of een overgangsoplossing, of plan de start in delen.' : '')]);
-        if (opzeggen) stappen.push([maand(opzeggen), 'Uiterlijk opzeggen bij uw huidige leverancier, met ' + a.opzeg + (a.opzeg === 1 ? ' maand' : ' maanden') + ' opzegtermijn.' + (voorbij(opzeggen) ? ' <strong>Die datum is voorbij.</strong>' : '') + ' Valt uw contract onder de Dataverordening, dan kunt u een overstap ook aanvragen met hoogstens 2 maanden opzegtermijn; laat dat toetsen.']);
-        stappen.push(['Vóór ' + maand(einde), 'De export en de logging van het oude pakket zijn veilig bewaard, en vastgelegd is hoe oude dossiers leesbaar blijven zolang de bewaartermijn loopt.']);
-        stappen.push([maand(einde), (stopt && !a.einde ? esc(a.pakket) + ' stopt (' + esc(stopt.einde) + ').' : 'Uw huidige contract eindigt.') + ' Per financier is afgesproken tot welke periode het oude pakket declareert; het blijft beschikbaar tot de laatste retourberichten binnen zijn.']);
+        if (opzeggen) stappen.push([maand(opzeggen), 'Uiterlijk opzeggen bij uw huidige leverancier, met ' + a.opzeg + (a.opzeg === 1 ? ' maand' : ' maanden') + ' opzegtermijn.' + (voorbij(opzeggen) ? ' <strong>Die datum is voorbij.</strong>' : '') + ' Valt uw contract onder de Dataverordening, dan kunt u een overstap ook aanvragen met hoogstens 2 maanden opzegtermijn. Laat dat toetsen.']);
+        stappen.push(['Vóór ' + maand(einde), 'De export en de logging van het oude pakket zijn veilig bewaard. Ook is vastgelegd hoe oude dossiers leesbaar blijven zolang de bewaartermijn loopt.']);
+        stappen.push([maand(einde), (stopt && !a.einde ? esc(a.pakket) + ' stopt (' + esc(stopt.einde) + ').' : 'Uw huidige contract eindigt.') + ' Per financier is afgesproken tot welke periode het oude pakket declareert. Het oude pakket blijft beschikbaar tot de laatste retourberichten binnen zijn.']);
       } else if (a.pakket === 'Nog geen ECD') {
         stappen.push(['Nu', 'Zet uw eisen op papier en bepaal wie de invoering trekt. Kies een startdatum, en reken vanaf die datum terug.']);
         stappen.push(['Een jaar vóór de start', 'Streefdatum voor het contract met de leverancier. In een marktconsultatie noemden leveranciers een jaar voor de implementatie (' + bron('nidos') + '). Vraag elke leverancier wat hij voor uw organisatie verwacht.']);
-        stappen.push(['Vóór het besluit', 'Advies van uw ondernemingsraad (art. 25 WOR) en betrokkenheid van uw cliëntenraad (Wmcz 2018).']);
+        stappen.push(['Vóór het besluit', 'Vraag het advies van uw ondernemingsraad (art. 25 WOR) en betrek uw cliëntenraad (Wmcz 2018).']);
       } else {
         stappen.push(['Nu', 'Zoek de einddatum en de opzegtermijn van uw huidige contract op. Daarna kunt u terugrekenen.']);
         stappen.push(['Een jaar vóór het einde', 'Streefdatum voor het contract met de nieuwe leverancier. In een marktconsultatie noemden leveranciers een jaar voor de implementatie (' + bron('nidos') + ').']);
-        stappen.push(['Vóór het besluit', 'Advies van uw ondernemingsraad (art. 25 WOR) en betrokkenheid van uw cliëntenraad (Wmcz 2018).']);
+        stappen.push(['Vóór het besluit', 'Vraag het advies van uw ondernemingsraad (art. 25 WOR) en betrek uw cliëntenraad (Wmcz 2018).']);
       }
       if (a.projectleider === 'minder' || a.projectleider === 'nee') {
-        stappen.push(['Let op', 'Een projectleider met ongeveer twee dagen per week is wat wij bij een implementatie van u vragen. Met minder tijd duurt het langer; plan ruimer.']);
+        stappen.push(['Let op', 'Een projectleider met ongeveer twee dagen per week is wat wij bij een implementatie van u vragen. Met minder tijd duurt het langer. Plan dan ruimer.']);
       }
       html.push(blok('Uw planning', '<ol class="mt-5 max-w-3xl divide-y divide-ink-100 border-y border-ink-100">' + stappen.map(function (s) {
         return '<li class="grid gap-1 py-4 sm:grid-cols-[11rem_1fr] sm:gap-6"><span class="font-semibold text-ink-900">' + esc(s[0]) + '</span><span class="text-ink-700">' + s[1] + '</span></li>';
@@ -424,7 +424,7 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
         // 25-10-2026: "Ter vergelijking: de markt" (€ 50 tot € 90 per gebruiker, Heldy) is weg; die bandbreedte rust op
         // één artikel van een concurrent (kennisonderzoek zorg_campagne, T7). Zie /prijzen.
       }
-      kosten += '<div class="grid gap-1 py-4 sm:grid-cols-[13rem_1fr] sm:gap-6"><dt class="font-semibold text-ink-900">Implementatie</dt><dd class="text-ink-700">In de markt € 4.000 tot € 15.000, en training € 1.000 tot € 5.000 (' + bron('heldy') + '). Bij Curanta is de implementatie maatwerk, met een prijs die wij vooraf afspreken; training kost niets extra.</dd></div>';
+      kosten += '<div class="grid gap-1 py-4 sm:grid-cols-[13rem_1fr] sm:gap-6"><dt class="font-semibold text-ink-900">Implementatie</dt><dd class="text-ink-700">In de markt € 4.000 tot € 15.000, en training € 1.000 tot € 5.000 (' + bron('heldy') + '). Bij Curanta is de implementatie maatwerk, met een prijs die wij vooraf afspreken. De training kost niets extra.</dd></div>';
       kosten += '<div class="grid gap-1 py-4 sm:grid-cols-[13rem_1fr] sm:gap-6"><dt class="font-semibold text-ink-900">Migratie</dt><dd class="text-ink-700">Bij Curanta een project tegen een vaste prijs, na een migratie-inschatting. Vraag elke leverancier om een vaste prijs of een bovengrens.</dd></div>';
       kosten += '<div class="grid gap-1 py-4 sm:grid-cols-[13rem_1fr] sm:gap-6"><dt class="font-semibold text-ink-900">Bij uw huidige leverancier</dt><dd class="text-ink-700">De export, het leesbaar houden van het oude dossier en de maanden dat beide pakketten lopen. Vraag ernaar met de vragen hierboven.</dd></div>';
       kosten += '</dl>';
@@ -440,7 +440,7 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
       var zorgvorm = a.sector === 'vvt-wijk' ? 'wijkverpleging' : a.sector === 'verpleeghuis' ? 'verpleeghuis' : '';
       // Stopt het huidige pakket, dan opent /presentatie met het blok over de overstap (?van=stoppend, 24-10-2026).
       var link = '/presentatie?sector=' + encodeURIComponent(presSector) + (zorgvorm ? '&zorgvorm=' + zorgvorm : '') + (stopt ? '&van=stoppend' : '') + '&toelichting=' + encodeURIComponent(samenvatting.join(', ').slice(0, 900)) + '#presentatie-aanvraag';
-      html.push('<section class="rounded-2xl border border-ink-100 bg-curanta-50/60 p-7 print:hidden"><h3 class="font-display text-xl font-bold text-ink-900">Volgende stap</h3><p class="mt-2 max-w-3xl text-ink-700">Bekijk Curanta in de online presentatie, wanneer het u uitkomt. Klikt u op de knop, dan staat een korte samenvatting van deze scan in het aanvraagformulier; u kunt die aanpassen of weghalen voordat u verstuurt. Na de presentatie kunt u op onze uitnodiging zelf rondkijken in de demo-omgeving.</p><div class="mt-5 flex flex-wrap gap-3"><a class="btn-primary no-underline" href="' + esc(link) + '">Online presentatie aanvragen</a><a class="btn-secondary no-underline" href="/contact">Vraag een migratie-inschatting</a></div></section>');
+      html.push('<section class="rounded-2xl border border-ink-100 bg-curanta-50/60 p-7 print:hidden"><h3 class="font-display text-xl font-bold text-ink-900">Volgende stap</h3><p class="mt-2 max-w-3xl text-ink-700">Bekijk Curanta in de online presentatie, wanneer het u uitkomt. Klikt u op de knop, dan staat een korte samenvatting van deze scan in het aanvraagformulier. U kunt die aanpassen of weghalen voordat u verstuurt. Na de presentatie kunt u op onze uitnodiging zelf rondkijken in de demo-omgeving.</p><div class="mt-5 flex flex-wrap gap-3"><a class="btn-primary no-underline" href="' + esc(link) + '">Online presentatie aanvragen</a><a class="btn-secondary no-underline" href="/contact">Vraag een migratie-inschatting</a></div></section>');
 
       inhoud.innerHTML = html.join('');
       document.getElementById('uitkomst-datum').textContent = 'Gemaakt op ' + vandaag.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + SECTOR[a.sector] + ' · huidig pakket: ' + a.pakket;

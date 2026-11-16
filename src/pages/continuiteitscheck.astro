@@ -23,7 +23,7 @@ const CURANTA: Record<string, { status: Status; tekst: string }> = {
   hersteltest: { status: 'ja', tekst: 'Geoefend op 28 oktober 2026, op een aparte machine: de kopie is gecontroleerd, ontsleuteld en teruggezet, en binnen twee minuten stond de databank weer.' }, // RPO / RTO
   rporto: { status: 'deels', tekst: 'Ons doel: hoogstens 1 uur aan gegevens kwijt, en binnen 4 uur weer in gebruik. Dat zijn doelen; gemeten zijn ze nog niet. Een uitwijklocatie is er niet.' }, // RPO / RTO, Noodoverzicht (geen uitwijklocatie)
   procedure: { status: 'deels', tekst: 'In de help van Curanta staat een noodprocedure die u kunt overnemen. Wie wat doet, legt uw organisatie zelf vast.' }, // docs/help/admin/noodprocedure.md
-  storing: { status: 'deels', tekst: 'Op app.curanta.nl/status ziet u of Curanta bereikbaar is; die pagina draait op dezelfde server. Bewaking dag en nacht van buitenaf garanderen wij bij de oplevering aan uw organisatie.' }, // Statuspagina, Gegarandeerd bij de oplevering
+  storing: { status: 'deels', tekst: 'Op app.curanta.nl/status ziet u of Curanta bereikbaar is. Die pagina draait op dezelfde server. Bewaking dag en nacht van buitenaf garanderen wij bij de oplevering aan uw organisatie.' }, // Statuspagina, Gegarandeerd bij de oplevering
   stopt: { status: 'deels', tekst: 'Wie bij u de rol Organisatie-export heeft, laat een volledige export van uw gegevens in JSON maken, met de bestanden. Broncode-escrow is in voorbereiding.' }, // Export, Continuïteit
 };
 
@@ -48,7 +48,7 @@ const THEMAS = [
     vragen: [
       { id: 'kopie', vraag: 'De leverancier maakt elke dag een kopie van uw gegevens, op een plek buiten zijn eigen server.', actie: 'Vraag uw leverancier hoe vaak hij een kopie buiten zijn eigen server maakt, in welk land die staat en of die versleuteld is.' },
       { id: 'hersteltest', vraag: 'Het terugzetten van die kopie is het afgelopen jaar geoefend, en u kent de uitkomst.', actie: 'Vraag uw leverancier wanneer hij het terugzetten voor het laatst heeft geoefend, en vraag om de uitkomst op papier.' },
-      { id: 'rporto', vraag: 'U weet hoeveel gegevens u hoogstens kwijtraakt, en binnen hoeveel tijd u weer werkt.', actie: 'Vraag uw leverancier naar de RPO (hoeveel gegevens u hoogstens kwijtraakt) en de RTO (binnen hoeveel tijd u weer werkt), en of dat doelen zijn of gemeten waarden. Leg ze vast in het contract.' },
+      { id: 'rporto', vraag: 'U weet hoeveel gegevens u hoogstens kwijtraakt, en binnen hoeveel tijd u weer werkt.', actie: 'Vraag uw leverancier naar de RPO (hoeveel gegevens u hoogstens kwijtraakt) en de RTO (binnen hoeveel tijd u weer werkt). Vraag ook of dat doelen zijn of gemeten waarden. Leg ze vast in het contract.' },
     ],
   },
   {
@@ -204,11 +204,11 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
         uitleg = 'Op alle ' + alleVragen.length + ' vragen is het antwoord ja. Houd het zo: oefen elk jaar, en vraag uw leverancier elk jaar naar de uitkomst van zijn hersteloefening.';
       } else if (!open.length) {
         conclusie = 'Wat u beantwoordde, is geregeld.';
-        uitleg = onbeantwoord + (onbeantwoord === 1 ? ' vraag liet' : ' vragen liet') + ' u open. Zoek die nog uit; pas dan weet u of uw team kan doorwerken.';
+        uitleg = onbeantwoord + (onbeantwoord === 1 ? ' vraag liet' : ' vragen liet') + ' u open. Zoek die nog uit. Pas dan weet u of uw team kan doorwerken.';
       } else {
         conclusie = open.length === 1 ? 'Eén punt vraagt nog aandacht.' : open.length + ' punten vragen nog aandacht.';
         uitleg = 'Begin met: <strong>' + esc(open[0].thema.titel.toLowerCase()) + '</strong>. ' + esc(open[0].vraag.actie) +
-          (onbeantwoord ? ' ' + onbeantwoord + (onbeantwoord === 1 ? ' vraag liet' : ' vragen liet') + ' u open; die staan hieronder niet.' : '');
+          (onbeantwoord ? ' ' + onbeantwoord + (onbeantwoord === 1 ? ' vraag liet' : ' vragen liet') + ' u open. Die staan hieronder niet.' : '');
       }
       html.push(blok('Kan uw team doorwerken?', '<p class="mt-3 font-display text-xl font-semibold text-curanta-800">' + esc(conclusie) + '</p><p class="mt-3 max-w-3xl text-ink-700">' + uitleg + '</p>'));
 
@@ -239,7 +239,7 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
       var samenvatting = 'Uit de continuïteitscheck: ' + geregeld.length + ' van ' + alleVragen.length + ' geregeld' +
         (open.length ? '; open: ' + open.map(function (x) { return x.thema.titel.toLowerCase(); }).filter(function (v, i, l) { return l.indexOf(v) === i; }).join(', ') : '');
       var link = '/presentatie?toelichting=' + encodeURIComponent(samenvatting.slice(0, 900)) + '#presentatie-aanvraag';
-      html.push('<section class="rounded-2xl border border-ink-100 bg-curanta-50/60 p-7 print:hidden"><h3 class="font-display text-xl font-bold text-ink-900">Volgende stap</h3><p class="mt-2 max-w-3xl text-ink-700">Bekijk in de online presentatie hoe Curanta werkt, wanneer het u uitkomt. Klikt u op de knop, dan staat een korte samenvatting van deze check in het aanvraagformulier; u kunt die aanpassen of weghalen voordat u verstuurt.</p><div class="mt-5 flex flex-wrap gap-3"><a class="btn-primary no-underline" href="' + esc(link) + '">Online presentatie aanvragen</a><a class="btn-secondary no-underline" href="/kennisbank/doorwerken-als-uw-ecd-uitvalt">Lees het artikel</a></div></section>');
+      html.push('<section class="rounded-2xl border border-ink-100 bg-curanta-50/60 p-7 print:hidden"><h3 class="font-display text-xl font-bold text-ink-900">Volgende stap</h3><p class="mt-2 max-w-3xl text-ink-700">Bekijk in de online presentatie hoe Curanta werkt, wanneer het u uitkomt. Klikt u op de knop, dan staat een korte samenvatting van deze check in het aanvraagformulier. U kunt die aanpassen of weghalen voordat u verstuurt.</p><div class="mt-5 flex flex-wrap gap-3"><a class="btn-primary no-underline" href="' + esc(link) + '">Online presentatie aanvragen</a><a class="btn-secondary no-underline" href="/kennisbank/doorwerken-als-uw-ecd-uitvalt">Lees het artikel</a></div></section>');
 
       inhoud.innerHTML = html.join('');
       document.getElementById('uitkomst-datum').textContent = 'Gemaakt op ' + new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + geregeld.length + ' van ' + alleVragen.length + ' geregeld';
