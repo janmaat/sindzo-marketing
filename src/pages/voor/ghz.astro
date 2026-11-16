@@ -15,14 +15,14 @@ import beeld from '../../assets/schermen/bo-signaleringsplan.jpg';
   description="ECD en software voor de gehandicaptenzorg: ondersteuningsplan met signaleringsplan, dagbesteding, verblijf en Wlz, Wzd en een portaal voor verwanten."
   eyebrow="Voor de gehandicaptenzorg"
   hero="Ondersteuningsplan, verblijf en de Wzd in één systeem"
-  subtitle="Voor wonen, dagbesteding en ambulante begeleiding. De begeleider werkt vanuit het ondersteuningsplan (OPP) en het signaleringsplan. De administratie declareert verblijf en dagbesteding onder de Wet langdurige zorg (Wlz). De Wzd-functionaris houdt het stappenplan en de termijnen van de Wet zorg en dwang (Wzd) bij."
+  subtitle="Voor wonen, dagbesteding en ambulante begeleiding. De begeleider werkt vanuit het ondersteuningsplan (OPP) en het signaleringsplan. De administratie declareert verblijf en dagbesteding onder de Wet langdurige zorg (Wlz). Het stappenplan en de termijnen van de Wet zorg en dwang (Wzd) houdt de Wzd-functionaris bij."
   triggers={[
     { title: 'De begeleider werkt vanuit het OPP', body: 'De begeleider begint op het scherm Vandaag met de eigen cliënten. Daar rapporteert de begeleider op de doelen uit het OPP en tekent af, ook in de app op de telefoon. In het verslag begeleiding staat per doel hoeveel rapportages er zijn.' },
     { title: 'Spanning op tijd zien', body: 'Het signaleringsplan beschrijft per fase (rust, spanning, crisis) de signalen en de afspraken. Incidenten sinds de vaststelling staan erbij, zodat het team ziet wanneer het plan herzien moet worden.' },
     { title: 'Verwanten lezen mee en geven akkoord', body: 'De mentor of vertegenwoordiger leest in het cliëntportaal het vrijgegeven OPP, het signaleringsplan en de verslagen. Akkoord geven gaat met een handtekening. Het akkoord komt met naam en relatie terug in het OPP.' },
     { title: 'Verblijf en logeren onder de Wlz', body: 'Opname, afwezigheid volgens de Nederlandse Zorgautoriteit (NZa) en de maandproductie per etmaal, met de zorgzwaartepakketten (zzp) van 2026. Logeren met de grens van 156 nachten en het volledig pakket thuis als leveringsvorm.' },
     { title: 'Het bestuur en de Cyberbeveiligingswet', body: 'Een zorgaanbieder vanaf 50 fte valt onder de Cyberbeveiligingswet, en het bestuur keurt de maatregelen zelf goed. In Curanta staan de tien onderwerpen van de zorgplicht op één plek. Het bestuur stelt ze vast en houdt een leveranciersregister bij, met Curanta zelf erin. Incidenten registreert u met de meldtermijnen van 24 uur, 72 uur en een maand.' },
-    { title: 'De Wzd volgens de wet van 2025', body: 'De vormen van onvrijwillige zorg, het stappenplan met termijnen, een zorgverantwoordelijke per cliënt, de juridische titel van het verblijf en beslissingen over verlof en ontslag. Curanta toetst het halfjaarlijkse overzicht voor de Inspectie Gezondheidszorg en Jeugd (IGJ) aan het schema van de IGJ. U levert het zelf aan via Mijn IGJ. Een echte aanlevering is er nog niet.' },
+    { title: 'De Wzd volgens de wet van 2025', body: 'In Curanta staan de vormen van onvrijwillige zorg, het stappenplan met termijnen en een zorgverantwoordelijke per cliënt. Ook de juridische titel van het verblijf en beslissingen over verlof en ontslag legt u er vast. Curanta toetst het halfjaarlijkse overzicht voor de Inspectie Gezondheidszorg en Jeugd (IGJ) aan het schema van de IGJ. U levert het zelf aan via Mijn IGJ. Een echte aanlevering is er nog niet.' },
   ]}
   modules={[
     { name: 'Ondersteuningsplan (OPP) en verslag begeleiding (AVB)', note: 'Doelen per levensdomein, methodiek, akkoord in het portaal' },
@@ -41,14 +41,14 @@ import beeld from '../../assets/schermen/bo-signaleringsplan.jpg';
   vragen={[
     // Zoekterm 'ondersteuningsplan gehandicaptenzorg voorbeeld' (Search Console 22-10, positie 13). Alles staat al op deze pagina.
     { vraag: 'Hoe ziet een ondersteuningsplan in Curanta eruit?', antwoord: 'Het ondersteuningsplan (OPP) heeft doelen per levensdomein, met de methodiek. De begeleider rapporteert op die doelen, en in het verslag begeleiding staat per doel hoeveel rapportages er zijn. Naast het OPP staat het signaleringsplan, met per fase (rust, spanning, crisis) de signalen en de afspraken. De mentor of vertegenwoordiger leest het vrijgegeven OPP in het cliëntportaal en geeft akkoord met een handtekening.' },
-    { vraag: 'Hoe gaat de Wlz-declaratie naar het zorgkantoor?', antwoord: 'Curanta maakt de iWlz-berichten en de Wlz-declaratie (AW319). Rechtstreeks aanleveren via VECOZO is ingericht, met het ophalen van de retourberichten; wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot dan levert u de bestanden met de hand aan.' },
+    { vraag: 'Hoe gaat de Wlz-declaratie naar het zorgkantoor?', antwoord: 'Curanta maakt de iWlz-berichten (het standaard berichtenverkeer van de Wlz) en de Wlz-declaratie (AW319). Rechtstreeks aanleveren via VECOZO is ingericht, ook het ophalen van de retourberichten. Wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot dan levert u de bestanden met de hand aan.' },
     { vraag: 'Ondersteunt Curanta de Wet zorg en dwang?', antwoord: 'Ja, volgens de wet van 2025: de vormen van onvrijwillige zorg, het stappenplan met termijnen en een zorgverantwoordelijke per cliënt. Curanta toetst het halfjaarlijkse overzicht voor de IGJ aan het schema van de IGJ. U levert het zelf aan via Mijn IGJ.' },
   ]}
   nogNiet={[
     'De proef van het rechtstreeks aanleveren in de testomgeving van VECOZO: die doen wij per organisatie, vóór uw eerste declaratiemaand.',
     'Een echte aanlevering van het Wzd-overzicht bij de IGJ; u levert het zelf aan via Mijn IGJ.',
     'Meerzorg bij ggz-wonen en ggz-b, en toeslagen voor dagbesteding van een kind per dagdeel.',
-    'Deeltijdverblijf in de vv.',
+    'Deeltijdverblijf in de verpleging en verzorging (vv).',
   ]}
   artikelen={[CYBERBEVEILIGINGSWET]}
   regulatory={['Wzd', 'Wlz', 'Wkkgz', 'Wtza', 'AVG', 'NEN 7510']}
