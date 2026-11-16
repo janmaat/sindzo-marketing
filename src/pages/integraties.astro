@@ -34,12 +34,12 @@ interface Integration {
 //   getest; noem hem daarom niet als getest.
 const integrations: Integration[] = [
   { name: 'Uw SIEM (auditlogs)', category: 'Beveiliging', status: 'inrichten',
-    body: 'Elke minuut gaan het beveiligingslogboek en de beheeraudit naar het SIEM van uw organisatie. Dat kan via een webhook (JSON of CEF), Splunk HEC, Azure Monitor (Logs Ingestion API) of syslog over TLS. Het NEN 7513-toegangslogboek alleen als u dat aanzet, gepseudonimiseerd. Getest met Splunk, Azure Monitor en een syslog-server. U richt de koppeling in op het beheerscherm, met de gegevens van uw SIEM.' },
+    body: 'Elke minuut gaan het beveiligingslogboek en de beheeraudit naar het SIEM van uw organisatie. Dat kan via een webhook (JSON of CEF), Splunk HEC, Azure Monitor (Logs Ingestion API) of syslog over TLS. Het NEN 7513-toegangslogboek gaat alleen mee als u dat aanzet, en dan gepseudonimiseerd. Getest met Splunk, Azure Monitor en een syslog-server. U richt de koppeling in op het beheerscherm, met de gegevens van uw SIEM.' },
   // Standaarden
   { name: 'FHIR R4 en de BgZ', category: 'Standaarden', status: 'inrichten', doc: '/api',
     body: 'Een publieke FHIR R4-API, alleen om te lezen. Hij levert de Basisgegevensset Zorg (BgZ) van een cliënt als document, gevalideerd tegen de profielen van Nictiz. Beschikbaar zodra wij het systeem dat de gegevens ophaalt, hebben geregistreerd. Geen testomgeving en geen algemene lees- of schrijftoegang.' },
   { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'inrichten',
-    body: 'Curanta maakt het overdrachtsdocument volgens eOverdracht 4.0, met alle 14 onderdelen van de Minimale eOverdracht, voor zover ze in het dossier staan. Curanta biedt het aan via het eOverdracht-netwerk. De ontvangende organisatie haalt het op en meldt terug of zij de overdracht accepteert. Een binnengekomen overdracht beoordeelt een zorgverlener voordat er iets in het dossier komt. De aansluiting op het netwerk regelen wij bij de implementatie, met het UZI-servercertificaat van uw organisatie; de ketentest met uw ketenpartner hoort daarbij. Getest tussen twee omgevingen, niet door Nictiz gekwalificeerd. Downloaden en zelf meesturen kan ook.' },
+    body: 'Curanta maakt het overdrachtsdocument volgens eOverdracht 4.0, met alle 14 onderdelen van de Minimale eOverdracht, voor zover ze in het dossier staan. Curanta biedt het aan via het eOverdracht-netwerk. De ontvangende organisatie haalt het op en meldt terug of zij de overdracht accepteert. Een binnengekomen overdracht beoordeelt een zorgverlener voordat er iets in het dossier komt. De aansluiting op het netwerk regelen wij bij de implementatie, met het UZI-servercertificaat van uw organisatie. De ketentest met uw ketenpartner hoort daarbij. Getest tussen twee omgevingen, niet door Nictiz gekwalificeerd. Downloaden en zelf meesturen kan ook.' },
   { name: 'MedMij', category: 'Standaarden', status: 'ontwikkeling',
     body: 'Uitwisselen met een persoonlijke gezondheidsomgeving vraagt registratie bij Stichting MedMij, een PKIoverheid-certificaat en een conformiteitstest. Die zijn er nog niet.' },
   { name: 'LSP (VZVZ)', category: 'Standaarden', status: 'ontwikkeling',
@@ -47,7 +47,7 @@ const integrations: Integration[] = [
 
   // Communicatie
   { name: 'ZorgMail', category: 'Communicatie', status: 'inrichten',
-    body: 'Beveiligde berichten en bijlagen via het ZorgMail-netwerk. Vraagt een ZorgMail-abonnement van uw organisatie.' },
+    body: 'Beveiligde berichten en bijlagen via het ZorgMail-netwerk. Hiervoor is een ZorgMail-abonnement van uw organisatie nodig.' },
   { name: 'ZorgDomein', category: 'Communicatie', status: 'inrichten',
     body: 'Inkomende verwijzingen met bijlagen via ZorgDomein. Antwoorden vanuit Curanta kan nog niet.' },
 
@@ -68,9 +68,9 @@ const integrations: Integration[] = [
   { name: 'VECOZO (rechtstreeks aanleveren)', category: 'Financieel', status: 'inrichten',
     body: 'Rechtstreeks aanleveren via VECOZO is ingericht voor Wmo, Jeugdwet, Wlz, wijkverpleging en GGZ. Curanta biedt het bericht aan, volgt de stand en haalt de retourberichten op. Elke aanbieding heeft één kenmerk, zodat niets dubbel wordt gedeclareerd. Wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot die tijd, en wanneer u dat wilt, levert u met de hand aan in het VECOZO-portaal.' },
   { name: 'Gemeenten (iWmo en iJw)', category: 'Financieel', status: 'inrichten',
-    body: 'Curanta stelt de berichten op volgens iStandaard 3.2: start en stop van de zorg, verzoeken om toewijzing of wijziging en de maanddeclaratie (Wmo323, Jw323) uit goedgekeurde productie. Elk bericht wordt getoetst aan het officiële schema. U downloadt het en levert het aan in het VECOZO-portaal. Antwoorden van de gemeente leest u in, als bestand of geplakt. Rechtstreeks aanleveren via VECOZO is ingericht: zie VECOZO (rechtstreeks aanleveren).' },
+    body: 'Curanta stelt de berichten op volgens iStandaard 3.2. Het gaat om de start en stop van de zorg, verzoeken om toewijzing of wijziging, en de maanddeclaratie (Wmo323, Jw323) uit goedgekeurde productie. Elk bericht wordt getoetst aan het officiële schema. U downloadt het en levert het aan in het VECOZO-portaal. Antwoorden van de gemeente leest u in, als bestand of geplakt. Rechtstreeks aanleveren via VECOZO is ingericht: zie VECOZO (rechtstreeks aanleveren).' },
   { name: 'Zorgkantoren (iWlz)', category: 'Financieel', status: 'inrichten',
-    body: 'Curanta stelt de iWlz-berichten op volgens iStandaard 2.4.3, zoals de melding van begin en einde van de zorg, en leest de berichten van het zorgkantoor in. Ze worden getoetst aan het officiële schema. De maanddeclaratie maakt Curanta als Vektis-bericht (AW319) uit goedgekeurde productie. U downloadt de bestanden en levert ze aan bij het zorgkantoor. Hoe dat gaat, stemmen wij bij de start per zorgkantoor af: of het VECOZO-portaal iWlz-bestanden en een Wlz-declaratie (AW319) aanneemt, is een open vraag aan VECOZO.' },
+    body: 'Curanta stelt de iWlz-berichten op volgens iStandaard 2.4.3, zoals de melding van begin en einde van de zorg, en leest de berichten van het zorgkantoor in. Ze worden getoetst aan het officiële schema. De maanddeclaratie maakt Curanta als Vektis-bericht (AW319) uit goedgekeurde productie. U downloadt de bestanden en levert ze aan bij het zorgkantoor. Hoe dat gaat, stemmen wij bij de start per zorgkantoor af. Of het VECOZO-portaal iWlz-bestanden en een Wlz-declaratie (AW319) aanneemt, is namelijk een open vraag aan VECOZO.' },
   // 14-10-2026: een zorgaanbieder levert niets rechtstreeks aan het CAK. Bij de Wlz geeft het zorgkantoor de start
   // en wijziging van de zorg door (iWlz AW35/AW39 van de aanbieder, CA317/CA319 naar het CAK), bij de Wmo de gemeente
   // (iEb). Bron: istandaarden.nl, iWlz 2.4.3 en iEb 4.0.
@@ -81,7 +81,7 @@ const integrations: Integration[] = [
   { name: 'Controle op verzekering (COV)', category: 'Financieel', status: 'inrichten',
     body: 'Curanta legt per cliënt vast bij welke verzekeraar hij verzekerd is, en waar dat vandaan komt. U neemt het over van de zorgpas of uit de COV-controle in het VECOZO-portaal. De automatische vraag aan VECOZO ronden wij af bij uw aansluiting.' },
   { name: 'AGB-register (Vektis)', category: 'Financieel', status: 'inrichten',
-    body: 'AGB-codes valideren en dagelijks synchroniseren met de open dataset van Vektis. De synchronisatie richten wij per klant in.' },
+    body: 'Curanta controleert AGB-codes en synchroniseert ze dagelijks met de open dataset van Vektis. De synchronisatie richten wij per klant in.' },
   // 14-10-2026: het bericht wordt getoetst aan de officiële XSD van Vektis en de handmatige aanlevering via het
   // VECOZO-portaal is gebouwd (Ponscura c5d17a29b). Rechtstreeks versturen vanuit Curanta is nog niet beproefd.
   { name: 'Zorgverzekeraars (GGZ, GDS801)', category: 'Financieel', status: 'inrichten',
@@ -99,7 +99,7 @@ const integrations: Integration[] = [
 
   // E-health
   { name: 'E-healthaanbieders', category: 'E-health', status: 'gepland',
-    body: 'Koppelingen voor blended zorg: zorg die persoonlijk contact en e-health combineert. Vragen een overeenkomst en API-toegang per aanbieder; die zijn er nog niet.' },
+    body: 'Koppelingen voor blended zorg: zorg die persoonlijk contact en e-health combineert. Daarvoor zijn per aanbieder een overeenkomst en API-toegang nodig; die zijn er nog niet.' },
 
   // Identiteit
   { name: 'DigiD', category: 'Identiteit', status: 'inrichten',
@@ -115,13 +115,13 @@ const integrations: Integration[] = [
 
   // Backoffice
   { name: 'DocuSign', category: 'Backoffice', status: 'inrichten',
-    body: 'Digitaal ondertekenen van HR-documenten in het personeelsdossier. Vraagt een DocuSign-account van uw organisatie; DocuSign verwerkt de gegevens in de VS.' },
+    body: 'Digitaal ondertekenen van HR-documenten in het personeelsdossier. Hiervoor is een DocuSign-account van uw organisatie nodig. DocuSign verwerkt de gegevens in de VS.' },
   { name: 'Mollie (betaallink voor cliënten)', category: 'Backoffice', status: 'inrichten',
-    body: 'Een betaallink op de factuur; de cliënt betaalt op het eigen Mollie-account van uw organisatie. Vraagt een Mollie-account van uw organisatie. Nog niet te gebruiken: de aanmelding van Curanta bij Mollie is nog niet rond.' },
+    body: 'Een betaallink op de factuur; de cliënt betaalt op het eigen Mollie-account van uw organisatie. Hiervoor is een Mollie-account van uw organisatie nodig. Nog niet te gebruiken: de aanmelding van Curanta bij Mollie is nog niet rond.' },
   { name: 'Boekhoudpakketten', category: 'Backoffice', status: 'inrichten',
-    body: 'Geen koppeling maar een bestand: verkoopboekingen, toegekende declaraties en kosten voor Twinfield, SnelStart, Yuki, e-Boekhouden.nl, AFAS Profit of Exact Online. Uw boekhouder leest het zelf in. Staat uw pakket er niet bij, dan voegen wij het kosteloos toe. Nog in geen enkel pakket in een echte administratie ingelezen; dat testen wij bij de implementatie, met uw boekhouder.' },
+    body: 'Geen koppeling maar een bestand: verkoopboekingen, toegekende declaraties en kosten voor Twinfield, SnelStart, Yuki, e-Boekhouden.nl, AFAS Profit of Exact Online. Uw boekhouder leest het zelf in. Staat uw pakket er niet bij, dan voegen wij het kosteloos toe. Het bestand is nog in geen enkel pakket in een echte administratie ingelezen. Dat testen wij bij de implementatie, met uw boekhouder.' },
   { name: 'Nmbrs', category: 'Backoffice', status: 'inrichten',
-    body: 'De goedgekeurde salarisexport rechtstreeks naar Nmbrs. Vraagt een Nmbrs-partnerapp, een sleutel en toestemming van uw organisatie. De test met Nmbrs doen wij bij de implementatie, met uw organisatie. Zonder Nmbrs: een CSV-export voor elke salarisadministratie.' },
+    body: 'De goedgekeurde salarisexport rechtstreeks naar Nmbrs. Hiervoor zijn een Nmbrs-partnerapp, een sleutel en toestemming van uw organisatie nodig. De test met Nmbrs doen wij bij de implementatie, met uw organisatie. Zonder Nmbrs: een CSV-export voor elke salarisadministratie.' },
 ];
 
 const categories = Array.from(new Set(integrations.map(i => i.category)));
