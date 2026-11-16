@@ -11,7 +11,7 @@ const sections = [
   { id: 'beveiliging', title: 'Beveiliging' },
   { id: 'rechten', title: 'Uw rechten (AVG)' },
   { id: 'cookies', title: 'Cookies' },
-  { id: 'fg', title: 'Functionaris voor Gegevensbescherming' },
+  { id: 'fg', title: 'Functionaris voor gegevensbescherming' },
   { id: 'wijzigingen', title: 'Wijzigingen' },
 ];
 ---
@@ -29,31 +29,31 @@ const sections = [
     voor de Nederlandse zorgmarkt.
   </p>
   <p>
-    Voor de marketing-website (curanta.nl) zijn wij <em>verwerkingsverantwoordelijke</em>. Voor de
+    Voor de marketingwebsite (curanta.nl) zijn wij <em>verwerkingsverantwoordelijke</em>. Voor de
     Curanta-applicatie (app.curanta.nl) zijn wij <em>verwerker</em> namens de zorgaanbieder die de
     applicatie afneemt. Die rol- en aansprakelijkheidsverdeling staat in onze
     <a href="/procurement">verwerkersovereenkomst</a>.
   </p>
   <p>
-    Voor de <a href="/demo-omgeving">demo-omgeving</a>, waar u met een eigen demotoegang inlogt op
-    app.curanta.nl, klant.curanta.nl en medewerker.curanta.nl, zijn wij zelf
-    <em>verwerkingsverantwoordelijke</em>. Daar werkt geen zorgaanbieder; alle cliënten en
+    Voor de <a href="/demo-omgeving">demo-omgeving</a> zijn wij zelf
+    <em>verwerkingsverantwoordelijke</em>. Daar logt u met een eigen demotoegang in op app.curanta.nl,
+    klant.curanta.nl en medewerker.curanta.nl. Er werkt geen zorgaanbieder; alle cliënten en
     medewerkers in die omgeving zijn verzonnen.
   </p>
 
   <h2 id="welke-data">2. Welke gegevens verwerken wij</h2>
   <p>Via deze website verwerken wij:</p>
   <ul>
-    <li><strong>Contactgegevens</strong> die u zelf invult (naam, e-mail, telefoon, organisatie, rol), bij een aanvraag via het formulier op /demo.</li>
+    <li><strong>Contactgegevens</strong> die u zelf invult bij een aanvraag via het formulier op /demo (naam, e-mail, telefoon, organisatie, rol).</li>
     <li><strong>Presentatie-aanvraag</strong>: wat u invult op /presentatie (naam, e-mail, organisatie, functie, sector,
       bij VVT welke zorg uw organisatie levert, telefoon, uw toelichting en, als u dat invult, hoe u bij ons kwam), met
       eventuele campagnecodes. Met een zakelijk e-mailadres maken wij meteen een persoonlijke uitnodiging voor
-      presentatie.curanta.nl en mailen wij u de link en een toegangscode; met een ander adres pas nadat wij de aanvraag
-      hebben beoordeeld. Daar leggen wij vast wanneer u inlogt; wat u bekijkt alleen als u daar bij de eerste keer
-      inloggen toestemming voor geeft.</li>
-    <li><strong>Technische gegevens</strong>: IP-adres, browser-type, bezochte pagina's, tijdstip. Voor beveiliging en geaggregeerde statistiek.</li>
-    <li><strong>Campagnebron</strong> bij een aanvraag (demonstratie of online presentatie): als u via een link met campagnecodes binnenkwam
-      (bijvoorbeeld een advertentie of nieuwsbrief), bewaren wij die codes (<code>utm_source</code>,
+      presentatie.curanta.nl, en mailen wij u de link en een toegangscode. Met een ander adres doen wij dat pas nadat wij
+      de aanvraag hebben beoordeeld. Op presentatie.curanta.nl leggen wij vast wanneer u inlogt. Wat u bekijkt, leggen
+      wij alleen vast als u daar bij de eerste keer inloggen toestemming voor geeft.</li>
+    <li><strong>Technische gegevens</strong>: IP-adres, browsertype, bezochte pagina's, tijdstip. Voor beveiliging en geaggregeerde statistiek.</li>
+    <li><strong>Campagnebron</strong> bij een aanvraag (demonstratie of online presentatie). Kwam u binnen via een link met
+      campagnecodes (bijvoorbeeld uit een advertentie of nieuwsbrief), dan bewaren wij die codes (<code>utm_source</code>,
       <code>utm_campaign</code> e.d.) bij uw aanvraag. Zo weten wij welke campagnes werken. De codes
       reizen mee in de adresbalk, niet in een cookie.</li>
     <li><strong>Advertentie-klikcode</strong> (<code>gclid</code>): alléén als u via een Google-advertentie
@@ -61,17 +61,18 @@ const sections = [
       advertentiemeting aanvinkt.</li>
     <li><strong>Bezoekstatistiek</strong>: wij tellen het bezoek aan deze website om te zien welke
       pagina's en kanalen werken. Sinds 4 november 2026 doen wij dat een paar weken lang op twee manieren
-      naast elkaar, om de uitkomsten te vergelijken; daarna houden wij er één over. Beide plaatsen geen
+      naast elkaar, om de uitkomsten te vergelijken. Daarna houden wij er één over. Beide plaatsen geen
       cookies, slaan niets op in uw browser en lezen geen schermgrootte of andere kenmerken van uw apparaat.
       <ul>
       <li><strong>Via app.curanta.nl.</strong> Per bezoek bewaren wij de bekeken pagina, de verwijzende website,
       eventuele campagnecodes (utm), het soort apparaat, het tijdstip, het land en, in Nederland, de
       provincie en de plaats (zonder wijk). In ons eigen overzicht zien wij die gegevens per bezoek, ook
       als er maar één bezoek uit een plaats kwam. Ook tellen wij hoe lang een pagina in beeld was en hoe
-      ver u in de tekst kwam. Een IP-adres bewaren wij niet: uw IP-adres en browsergegevens
+      ver u in de tekst kwam. Een IP-adres bewaren wij niet. Uw IP-adres en browsergegevens
       worden alleen gebruikt om land, provincie en plaats af te leiden, om te zien of een bezoek uit een
-      datacenter kwam (dan is het meestal een geautomatiseerd programma en tellen wij het niet mee), en om
-      een code te maken die elke dag verandert. Daarmee zijn bezoekers niet over dagen heen te volgen. Wie u bent, weten wij niet: wij
+      datacenter kwam, en om een code te maken die elke dag verandert. Een bezoek uit een datacenter tellen
+      wij niet mee: het is meestal een geautomatiseerd programma. Omdat de code elke dag verandert, zijn
+      bezoekers niet over dagen heen te volgen. Wie u bent, weten wij niet: wij
       bewaren geen IP-adres, geen naam en geen organisatie, en wij kennen uw adres niet. Wel kan een bezoek
       met plaats en tijdstip, samen met andere kennis, soms naar een persoon wijzen. Daarom zien alleen wij
       deze gegevens, gebruiken wij ze alleen om de website te verbeteren, halen wij de plaats er na 90 dagen af
@@ -79,23 +80,30 @@ const sections = [
       gegevens staan bij Curanta zelf en zijn niet gekoppeld aan wat u in een formulier invult.</li>
       <li><strong>Via statistiek.maat-software.nl.</strong> Dat is onze centrale statistiekdienst, op een server
       bij een hostingpartij in Duitsland (EU). Uw IP-adres en de gegevens die uw browser meestuurt, gebruikt
-      de dienst alleen op het moment van uw bezoek: om met een code die elke dag verandert de bezoeken van
-      één dag samen te tellen, en om daaruit uw land, provincie en plaats bij benadering, uw browser en
+      de dienst alleen op het moment van uw bezoek: om de bezoeken van één dag samen te tellen met een code
+      die elke dag verandert, en om daaruit uw land, provincie en plaats bij benadering, uw browser en
       besturingssysteem en het soort netwerk af te leiden. Uw IP-adres en browsergegevens zelf bewaart de
-      dienst niet. Per bekeken pagina bewaart hij de pagina en het tijdstip, de verwijzende website en
-      pagina (zonder zoekterm of andere parameters), eventuele campagnecodes (utm), het soort apparaat, de
-      browser en het besturingssysteem (zonder versie), land, provincie en plaats bij benadering (vaak de
-      plaats van uw internetprovider), het soort netwerk (thuis of mobiel, organisatie, datacenter of
-      doorgeefdienst) en bij het eigen netwerk van een organisatie de naam daarvan, hoe lang de pagina in beeld was en hoe ver u in de tekst kwam. Klikt u op een link
-      naar een telefoonnummer, een e-mailadres, een andere website of een download, of start u een video,
-      dan bewaart hij dat ook; van een telefoonnummer of e-mailadres alleen het soort link, niet het nummer
-      of adres. Over dagen heen zijn bezoekers niet te volgen.
+      dienst niet. Per bekeken pagina bewaart hij:
+      <ul>
+      <li>de pagina en het tijdstip;</li>
+      <li>de verwijzende website en pagina (zonder zoekterm of andere parameters);</li>
+      <li>eventuele campagnecodes (utm);</li>
+      <li>het soort apparaat;</li>
+      <li>de browser en het besturingssysteem (zonder versie);</li>
+      <li>land, provincie en plaats bij benadering (vaak de plaats van uw internetprovider);</li>
+      <li>het soort netwerk (thuis of mobiel, organisatie, datacenter of doorgeefdienst) en bij het eigen
+      netwerk van een organisatie de naam daarvan;</li>
+      <li>hoe lang de pagina in beeld was en hoe ver u in de tekst kwam.</li>
+      </ul>
+      Klikt u op een link naar een telefoonnummer, een e-mailadres, een andere website of een download, of
+      start u een video, dan bewaart hij dat ook. Van een telefoonnummer of e-mailadres bewaart hij alleen
+      het soort link, niet het nummer of adres. Over dagen heen zijn bezoekers niet te volgen.
       Land, plaats en netwerk komen uit de databanken van <a href="https://db-ip.com">DB-IP</a>
-      (IP Geolocation by DB-IP, CC BY 4.0); de dienst zoekt ze zelf op, er gaat geen gegeven naar DB-IP.
+      (IP Geolocation by DB-IP, CC BY 4.0). De dienst zoekt ze zelf op; er gaat geen gegeven naar DB-IP.
       Na 24 maanden wist de dienst de gegevens.</li>
       </ul>
     </li>
-    <li><strong>Geen cookie-data</strong>: deze website plaatst geen cookies (zie <a href="/cookies">cookie-pagina</a>).</li>
+    <li><strong>Geen cookiegegevens</strong>: deze website plaatst geen cookies (zie de <a href="/cookies">cookiepagina</a>).</li>
   </ul>
   <p>In de demo-omgeving verwerken wij:</p>
   <ul>
@@ -103,12 +111,12 @@ const sections = [
       beveiligingslog. Bij een demo-account slaan wij uw IP-adres en browser níét op bij de sessie zelf,
       zodat andere bezoekers ze niet kunnen zien.</li>
     <li><strong>Wat u zelf invult.</strong> U deelt de demo-omgeving met andere bezoekers: wat u invult,
-      kunnen zij lezen. Vul daarom geen echte persoonsgegevens in, ook niet die van uzelf. Het blijft
-      staan tot wij de demo opnieuw opbouwen. E-mail verstuurt de demo alleen naar adressen op
+      kunnen zij lezen. Vul daarom geen echte persoonsgegevens in, ook niet die van uzelf. Wat u invult,
+      blijft staan tot wij de demo opnieuw opbouwen. E-mail verstuurt de demo alleen naar adressen op
       curanta.nl.</li>
   </ul>
   <p>
-    De Curanta-applicatie verwerkt zorggegevens (BSN, dossier-content, etc.). Daarvoor geldt de
+    De Curanta-applicatie verwerkt zorggegevens, zoals het BSN en de inhoud van dossiers. Daarvoor geldt de
     verwerkersovereenkomst tussen Curanta en de zorgaanbieder, niet deze verklaring.
   </p>
 
@@ -120,12 +128,12 @@ const sections = [
     <tbody>
       <tr><td>Reactie op demo-aanvraag of vraag</td><td>Gerechtvaardigd belang / uitvoering overeenkomst</td></tr>
       <tr><td>Uw presentatie-aanvraag beoordelen en u uitnodigen voor presentatie.curanta.nl</td><td>Gerechtvaardigd belang / op uw verzoek</td></tr>
-      <tr><td>Beveiliging website (logging, anti-misbruik)</td><td>Gerechtvaardigd belang</td></tr>
+      <tr><td>Beveiliging van de website (logging, misbruik tegengaan)</td><td>Gerechtvaardigd belang</td></tr>
       <tr><td>Demo-omgeving aanbieden en beveiligen (aanmeldlog)</td><td>Gerechtvaardigd belang</td></tr>
       <tr><td>Bezoekstatistiek (per bezoek, zonder IP-adres en zonder uw naam; zie punt 2)</td><td>Gerechtvaardigd belang</td></tr>
       <tr><td>Weten via welke campagne of welke weg een aanvraag binnenkwam (campagnecodes, en hoe u bij ons kwam als u dat invult)</td><td>Gerechtvaardigd belang</td></tr>
       <tr><td>Google laten weten dat een advertentieklik tot een aanvraag leidde</td><td>Toestemming (apart vakje, altijd in te trekken)</td></tr>
-      <tr><td>Nieuwsbrief of marketing (indien aangemeld)</td><td>Toestemming</td></tr>
+      <tr><td>Nieuwsbrief of marketing (als u zich hebt aangemeld)</td><td>Toestemming</td></tr>
     </tbody>
   </table>
   <p>
@@ -140,7 +148,7 @@ const sections = [
       beoordeling; anders 12 maanden na uw aanvraag. Uw uitnodiging, met wat u op presentatie.curanta.nl deed, verwijderen
       wij 12 maanden na uw laatste bezoek.</li>
     <li><strong>Bezoekstatistiek</strong>: 24 maanden, daarna automatisch gewist. Dat geldt voor beide metingen.</li>
-    <li><strong>Sollicitaties</strong>: 4 weken na afwijzing (Sollicitatiecode NVP), tenzij u toestemming geeft voor langere bewaartermijn.</li>
+    <li><strong>Sollicitaties</strong>: 4 weken na afwijzing (Sollicitatiecode NVP), tenzij u toestemming geeft voor een langere bewaartermijn.</li>
     <li><strong>Beveiligingslogs</strong>: 12 maanden.</li>
     <li><strong>Boekhouding</strong> (klantfacturen etc.): 7 jaar (fiscale bewaarplicht).</li>
   </ul>
@@ -210,7 +218,7 @@ const sections = [
     <li>een eerder gegeven <strong>toestemming in te trekken</strong>.</li>
   </ul>
   <p>
-    Verzoeken: mail naar <a href="mailto:privacy@curanta.nl">privacy@curanta.nl</a>. Wij reageren
+    Voor een verzoek mailt u naar <a href="mailto:privacy@curanta.nl">privacy@curanta.nl</a>. Wij reageren
     binnen 30 dagen. U kunt ook een klacht indienen bij de
     <a href="https://www.autoriteitpersoonsgegevens.nl">Autoriteit Persoonsgegevens</a>.
   </p>
@@ -218,11 +226,11 @@ const sections = [
   <h2 id="cookies">9. Cookies</h2>
   <p>
     Deze website plaatst geen cookies, ook geen functionele. Onze eigen bezoekstatistiek (zie
-    punt 2) werkt cookieloos, via beide metingen. Details op de
-    <a href="/cookies">cookie-pagina</a>.
+    punt 2) werkt zonder cookies, bij beide metingen. Meer hierover staat op de
+    <a href="/cookies">cookiepagina</a>.
   </p>
 
-  <h2 id="fg">10. Functionaris voor Gegevensbescherming</h2>
+  <h2 id="fg">10. Functionaris voor gegevensbescherming</h2>
   <p>
     Curanta heeft nog geen functionaris voor gegevensbescherming (FG) aangesteld. Dat doen wij, met een
     externe FG, voordat de eerste zorgorganisatie Curanta met echte cliëntgegevens gebruikt; wij melden die
