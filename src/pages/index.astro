@@ -140,7 +140,7 @@ const voorbeelden: Voorbeeld[] = [
     statussen: [
       { status: 'demo', tekst: 'Dossier, zorgplan, rapportage en cliëntportaal' },
     ],
-    ai: 'Twee plekken gebruiken op verzoek een taalmodel. De eerste is de rapportage in de backoffice: een voorstel voor de evaluatie en het plan. De tweede is de samenvatting van het zorgplan in gewone taal, voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en begrijpt de cliënt het? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. De gegevens gaan gepseudonimiseerd naar het taalmodel. Standaard is dat Mistral AI, via het EU-endpoint; alleen als uw organisatie daar zelf voor kiest, is het Anthropic in de VS.',
+    ai: 'Op twee plekken gebruikt Curanta op verzoek een taalmodel. De eerste is de rapportage in de backoffice: een voorstel voor de evaluatie en het plan. De tweede is de samenvatting van het zorgplan in gewone taal, voor het cliëntportaal. Lees elk voorstel na: klopt het met wat u zag, staat er niets in dat u niet hebt waargenomen, en begrijpt de cliënt het? Niets wordt vanzelf opgeslagen of zichtbaar; dat doet u zelf. De gegevens gaan gepseudonimiseerd naar het taalmodel. Standaard is dat Mistral AI, via het EU-endpoint. Alleen als uw organisatie daar zelf voor kiest, is het Anthropic in de VS.',
     link: { label: 'Alle onderdelen van het dossier', href: '/oplossing#ecd' },
     beelden: [
       {
@@ -161,7 +161,7 @@ const voorbeelden: Voorbeeld[] = [
     id: 'planning',
     kop: 'Planning en medewerkerportaal',
     wie: 'De planner of coördinator, en de zorgmedewerker.',
-    doet: 'De planner maakt het rooster en publiceert het. De zorgmedewerker bekijkt haar diensten op de telefoon, bekijkt de open diensten, vraagt verlof aan of ruilt een dienst.',
+    doet: 'De planner maakt het rooster en publiceert het. De zorgmedewerker ziet haar eigen diensten en de open diensten op de telefoon, vraagt verlof aan of ruilt een dienst.',
     curanta: [
       'Toetst het rooster bij publiceren: is er genoeg rust, zijn diensten en werkweken niet te lang, zijn er pauzes? Bij elke melding staat het artikel uit de Arbeidstijdenwet of de cao.',
       'Laat open diensten zien in het medewerkerportaal. Wie zich aanmeldt, krijgt de dienst direct, na een controle op overlap en op de cao. Een ruil keurt de planner goed.',
@@ -233,7 +233,7 @@ const doelgroepen = [
   {
     naam: 'Gehandicaptenzorg',
     kop: 'Wonen, dagbesteding en begeleiding',
-    tekst: 'Het ondersteuningsplan met signaleringsplan, dagbesteding, verblijf en logeren onder de Wlz, de Wzd, en verwanten die het plan in het cliëntportaal lezen en akkoord geven.',
+    tekst: 'Het ondersteuningsplan met signaleringsplan, dagbesteding, verblijf en logeren onder de Wlz, en de Wzd. Verwanten lezen het plan in het cliëntportaal en geven daar hun akkoord.',
     let: 'Het halfjaarlijkse Wzd-overzicht maakt Curanta volgens het XML-schema van de IGJ.',
     href: '/voor/ghz',
     link: 'Curanta voor de gehandicaptenzorg',
@@ -256,7 +256,7 @@ const doelgroepen = [
 // (18-10-2026; daarvoor vier andere namen). Zelfde beloften, anders verdeeld.
 const fasen = [
   { titel: 'Inventariseren', tekst: 'Wij lopen drie werkstromen uit uw organisatie met u door. Daarna maken wij een migratie-inschatting: welke gegevens uit uw huidige systeem gaan mee, en hoe? Dan weet u ook wat de migratie kost.' },
-  { titel: 'Inrichten', tekst: 'Teams, rollen en rechten, en de onderdelen die u gebruikt. Wat u daarvoor in uw implementatieproject invult, nemen wij over in Curanta. Koppelingen sluiten wij aan zodra uw certificaten en contracten er zijn, bijvoorbeeld bij Vecozo of ZorgMail.' },
+  { titel: 'Inrichten', tekst: 'Teams, rollen en rechten, en de onderdelen die u gebruikt. Wat u daarvoor in uw implementatieproject invult, nemen wij over in Curanta. Koppelingen sluiten wij aan zodra uw certificaten en contracten er zijn, bijvoorbeeld bij VECOZO of ZorgMail.' },
   { titel: 'Proefdraaien', tekst: 'Eerst trainen wij uw sleutelgebruikers. Eén team werkt een tijd met Curanta naast het oude systeem.' },
   { titel: 'Overzetten', tekst: 'De migratie als project tegen de afgesproken prijs. Daarna trainen wij de andere medewerkers.' },
   { titel: 'Starten', tekst: 'Eerst één team of locatie, daarna de rest in fasen. Op een melding reageren wij binnen 1 werkdag.' },
@@ -416,7 +416,7 @@ const voordelen = [
           <p class="mt-3 flex gap-2 text-sm leading-relaxed text-ink-700">
             <Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />
             <span>
-              Een volledig pakket voor de hele organisatie, van het cliëntdossier en de planning tot declaratie, kwaliteit en HRM. U zet aan wat u gebruikt, en alleen dat ziet u in het menu. Daarbij een medewerkerportaal voor onderweg en een gratis cliëntportaal voor cliënten en mantelzorgers. <a href="#onderdelen" class="font-medium text-curanta-700 hover:underline">Wat er allemaal in zit</a>
+              Curanta is een volledig pakket voor de hele organisatie, van het cliëntdossier en de planning tot declaratie, kwaliteit en HRM. U zet aan wat u gebruikt, en alleen dat ziet u in het menu. Daarbij horen een medewerkerportaal voor onderweg en een gratis cliëntportaal voor cliënten en mantelzorgers. <a href="#onderdelen" class="font-medium text-curanta-700 hover:underline">Wat er allemaal in zit</a>
             </span>
           </p>
         </div>
@@ -510,7 +510,7 @@ const voordelen = [
           <h3 class="mt-1 font-display text-2xl font-bold text-curanta-900">Wij komen bij u langs</h3>
           <p class="mt-3 leading-relaxed text-ink-700">
             Wij laten Curanta op locatie zien, aan de hand van uw eigen zorgproces: uw rollen, uw begrippen, uw
-            werkstromen. Uw vragen beantwoorden wij ter plekke, en uw collega's schuiven gewoon aan.
+            werkstromen. Uw vragen beantwoorden wij ter plekke, en uw collega's kunnen aanschuiven.
           </p>
           <a href={DEMO_GESPREK.href} class="btn-secondary mt-auto self-start no-underline" style="margin-top:1.75rem">
             Vraag een presentatie op locatie aan
@@ -822,9 +822,9 @@ const voordelen = [
         ))}
       </ul>
       <p class="mt-6 text-ink-700">
-        Ook voor de <a href="/voor/kraamzorg" class="font-semibold text-curanta-700">kraamzorg</a> (het kraamdossier,
-        met de controles van moeder en kind en de kraambezoeken in de planning) en de <a href="/voor/jeugdzorg" class="font-semibold text-curanta-700">jeugdzorg</a>
-        (jeugddossier, hulpverleningsplan en meldcode). Fysiotherapie, ergotherapie, logopedie en diëtetiek
+        Curanta is er ook voor de <a href="/voor/kraamzorg" class="font-semibold text-curanta-700">kraamzorg</a>: het kraamdossier,
+        met de controles van moeder en kind, en de kraambezoeken in de planning. En voor de <a href="/voor/jeugdzorg" class="font-semibold text-curanta-700">jeugdzorg</a>:
+        het jeugddossier, het hulpverleningsplan en de meldcode. Fysiotherapie, ergotherapie, logopedie en diëtetiek
         werken in Curanta als behandeldienst naast de instelling.
       </p>
       <p class="mt-5 text-xs text-ink-500">
@@ -844,7 +844,7 @@ const voordelen = [
         <p class="mt-4 leading-relaxed text-ink-700">
           Cliënten en medewerkers importeert u uit een CSV- of Excelbestand, met een sjabloon uit Curanta.
           Zorgplannen en het oude dossier kunnen als pdf mee in het dossier van de cliënt. Het overzetten is
-          een project tegen een vaste prijs, die u vooraf weet. Ook de implementatie is maatwerk,
+          een project tegen een vaste prijs, die u vooraf weet. De implementatie is maatwerk,
           met een prijs die wij vooraf afspreken. Training en basisondersteuning kosten niets extra.
         </p>
         <p class="mt-4 leading-relaxed text-ink-700">
@@ -1000,7 +1000,7 @@ const voordelen = [
             <li class="flex gap-2"><Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />Implementatie: maatwerk, met een prijs die wij vooraf afspreken.</li>
             <li class="flex gap-2"><Icon naam="vink" class="mt-0.5 h-4 w-4 shrink-0 text-accent-700" />De gebouwde koppelingen zitten in het abonnement.</li>
             <li class="flex gap-2"><Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />Migratie: een project tegen een vaste prijs, na een migratie-inschatting.</li>
-            <li class="flex gap-2"><Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />Wat een externe partij rekent, zoals een Vecozo-certificaat of ZorgMail-abonnement, betaalt u zelf.</li>
+            <li class="flex gap-2"><Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />Wat een externe partij rekent, zoals een VECOZO-certificaat of ZorgMail-abonnement, betaalt u zelf.</li>
             <li class="flex gap-2 sm:hidden"><Icon naam="info" class="mt-0.5 h-4 w-4 shrink-0 text-curanta-700" />Inloggen met DigiD voor cliënten is een betaalde optie.</li>
           </ul>
         </div>

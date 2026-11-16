@@ -15,7 +15,7 @@ const formAction = 'https://demo.curanta.nl/api/lead';
 >
   <PageHero
     eyebrow="Demonstratie aanvragen"
-    title="Demo op uw eigen werkprocessen."
+    title="Een demonstratie met uw eigen werkprocessen."
     subtitle="Stuur drie typische werkstromen of casussen uit uw organisatie. Wij laten zien hoe Curanta ze ondersteunt, zonder vast verkoopverhaal."
   />
 
@@ -76,9 +76,9 @@ const formAction = 'https://demo.curanta.nl/api/lead';
             </select>
           </label>
           <label class="block">
-            <span class="text-sm font-semibold text-ink-900">Segment</span>
+            <span class="text-sm font-semibold text-ink-900">Sector</span>
             <select name="segment" class="mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-curanta-500 focus:ring-curanta-500">
-              <option value="">Kies een segment</option>
+              <option value="">Kies een sector</option>
               <option>VVT</option>
               <option>Gehandicaptenzorg</option>
               <option>GGZ</option>
@@ -108,7 +108,7 @@ const formAction = 'https://demo.curanta.nl/api/lead';
         <label class="mt-5 block">
           <span class="text-sm font-semibold text-ink-900">Drie typische werkstromen die u wilt zien</span>
           <textarea name="workflows" rows="4"
-                    placeholder="Bijv. 'opstellen zorgplan na intake', 'eOverdracht naar ziekenhuis', 'maandelijkse iWmo-declaratie'"
+                    placeholder="Bijvoorbeeld: zorgplan opstellen na de intake, eOverdracht naar het ziekenhuis, maandelijkse iWmo-declaratie"
                     class="mt-1.5 block w-full rounded-md border-ink-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-curanta-500 focus:ring-curanta-500"></textarea>
         </label>
 
@@ -116,7 +116,7 @@ const formAction = 'https://demo.curanta.nl/api/lead';
           <input required type="checkbox" name="consent" value="yes"
                  class="mt-0.5 h-4 w-4 rounded border-ink-300 text-curanta-600 focus:ring-curanta-500" />
           <span>
-            Ik ga akkoord met de verwerking van mijn gegevens conform de
+            Ik ga akkoord met de verwerking van mijn gegevens volgens de
             <a href="/privacy" class="text-curanta-700 hover:underline">privacyverklaring</a>.
             Geen marketinglijst, geen doorverkoop.
           </span>
@@ -130,7 +130,7 @@ const formAction = 'https://demo.curanta.nl/api/lead';
                  class="mt-0.5 h-4 w-4 rounded border-ink-300 text-curanta-600 focus:ring-curanta-500" />
           <span>
             Optioneel: u kwam binnen via een advertentie van ons. Mogen wij Google laten weten
-            dát deze advertentie tot een aanvraag leidde? Wij geven daarbij alleen de klik-code
+            dát deze advertentie tot een aanvraag leidde? Wij geven daarbij alleen de klikcode
             van de advertentie en het tijdstip door. Geen naam, e-mailadres of organisatie.
             <a href="/privacy#delen" class="text-curanta-700 hover:underline">Meer hierover</a>.
           </span>
@@ -153,25 +153,25 @@ const formAction = 'https://demo.curanta.nl/api/lead';
           <ol class="mt-4 space-y-3 text-sm text-ink-700">
             <li class="flex gap-3">
               <span class="font-semibold text-curanta-700">1.</span>
-              <span>Korte verkenning (30 min): uw situatie, doelen, ICT-landschap.</span>
+              <span>Korte verkenning (30 minuten): uw situatie, uw doelen en de systemen die u nu gebruikt.</span>
             </li>
             <li class="flex gap-3">
               <span class="font-semibold text-curanta-700">2.</span>
-              <span>Demo op úw werkstromen (60 min): uw rollen, uw begrippen, uw flows.</span>
+              <span>Demonstratie met úw werkstromen (60 minuten): uw rollen, uw begrippen en uw manier van werken.</span>
             </li>
             <li class="flex gap-3">
               <span class="font-semibold text-curanta-700">3.</span>
-              <span>Documenten op aanvraag: de stukken voor uw inkoop, zoals de DPA, stellen wij voor u op.</span>
+              <span>Documenten op aanvraag: de stukken voor uw inkoop, zoals de verwerkersovereenkomst (DPA), stellen wij voor u op.</span>
             </li>
           </ol>
         </div>
         <div class="rounded-2xl border border-ink-100 bg-white p-6">
           <h2 class="font-display text-lg font-semibold text-ink-900">Liever eerst zelf rondkijken?</h2>
           <ul class="mt-3 space-y-2 text-sm">
-            <li><a href="/oplossing" class="text-curanta-700 hover:underline no-underline">→ Bekijk de modulekaart</a></li>
-            <li><a href="/trust" class="text-curanta-700 hover:underline no-underline">→ Open Trust Centre</a></li>
-            <li><a href="/integraties" class="text-curanta-700 hover:underline no-underline">→ Bekijk koppelingen</a></li>
-            <li><a href="/prijzen" class="text-curanta-700 hover:underline no-underline">→ Plan-matrix</a></li>
+            <li><a href="/oplossing" class="text-curanta-700 hover:underline no-underline">→ Bekijk alle onderdelen</a></li>
+            <li><a href="/trust" class="text-curanta-700 hover:underline no-underline">→ Open het Trust Centre</a></li>
+            <li><a href="/integraties" class="text-curanta-700 hover:underline no-underline">→ Bekijk de koppelingen</a></li>
+            <li><a href="/prijzen" class="text-curanta-700 hover:underline no-underline">→ Bekijk de plannen en prijzen</a></li>
           </ul>
         </div>
       </aside>

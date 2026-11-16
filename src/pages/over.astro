@@ -38,7 +38,7 @@ const themas = [
     eyebrow: 'Gegevens',
     titel: 'Waar de gegevens van uw cliënten staan',
     tekst:
-      'Het cliëntdossier staat in Duitsland, binnen de EU, versleuteld opgeslagen. Het BSN is daarnaast op veldniveau versleuteld. Cliënten en mantelzorgers werken in een eigen cliëntportaal, los van de backoffice. De AI-functies draaien standaard bij Mistral AI, via het EU-endpoint, gepseudonimiseerd; Mistral bewaart de gegevens niet en traint er niet mee. Kiest uw organisatie zelf voor Anthropic, dan gaan ze naar de VS, onder de modelcontractbepalingen (SCC). Zet u AI uit, dan gaat er niets heen.',
+      'Het cliëntdossier staat in Duitsland, binnen de EU, versleuteld opgeslagen. Het BSN is daarnaast op veldniveau versleuteld. Cliënten en mantelzorgers werken in een eigen cliëntportaal, los van de backoffice. De AI-functies draaien standaard bij Mistral AI, via het EU-endpoint, en de gegevens gaan er gepseudonimiseerd heen. Mistral bewaart ze niet en traint er niet mee. Kiest uw organisatie zelf voor Anthropic, dan gaan ze naar de VS, onder de modelcontractbepalingen (SCC). Zet u AI uit, dan gaat er niets heen.',
   },
   {
     eyebrow: 'Overstappen',
@@ -92,7 +92,7 @@ const pijlers: { eyebrow: string; titel: string; tekst: string; link?: { href: s
     eyebrow: 'Mee met de zorg',
     titel: 'Als de regels veranderen',
     tekst:
-      'Sinds 15 augustus 2026 geldt de Cyberbeveiligingswet. Curanta helpt het bestuur die bij te houden: de maatregelen vaststellen, de leveranciers beoordelen en een incident melden binnen 24 uur, 72 uur en een maand. Bij het plannen toetst Curanta het rooster aan de Arbeidstijdenwet en de cao.',
+      'Sinds 15 augustus 2026 geldt de Cyberbeveiligingswet. Curanta helpt het bestuur die wet bij te houden: de maatregelen vaststellen, de leveranciers beoordelen en een incident melden binnen 24 uur, 72 uur en een maand. Bij het plannen toetst Curanta het rooster aan de Arbeidstijdenwet en de cao.',
   },
   {
     eyebrow: 'Ontwikkeling',
@@ -122,7 +122,7 @@ const richting: { titel: string; tekst: string; link?: { href: string; label: st
   {
     titel: 'Overdragen aan de keten',
     tekst:
-      'De Wegiz maakt elektronische uitwisseling in de zorg per onderwerp verplicht, en de eOverdracht is daar een van. Curanta stelt het overdrachtsdocument op volgens eOverdracht 4.0 en verstuurt het via het eOverdracht-netwerk. De aansluiting regelen wij bij de implementatie, met het UZI-servercertificaat van uw organisatie. Door Nictiz gekwalificeerd is het nog niet.',
+      'De Wegiz maakt elektronische uitwisseling in de zorg per onderwerp verplicht, en de eOverdracht is daar een van. Curanta stelt het overdrachtsdocument op volgens eOverdracht 4.0 en verstuurt het via het eOverdracht-netwerk. De aansluiting regelen wij bij de implementatie, met het UZI-servercertificaat van uw organisatie. Nictiz heeft het nog niet gekwalificeerd.',
     link: { href: '/integraties', label: 'Alle koppelingen' },
   },
 ];
@@ -141,7 +141,7 @@ const gesprek = [
   <PageHero
     eyebrow="Over Curanta"
     title="Wie achter Curanta staat, en waarom."
-    subtitle="Jan Maat heeft sinds 2001 een eigen softwarebedrijf. Hij nam het initiatief tot Curanta. Samen met Erwin van der Star, die bijna vijftien jaar Vitaphone Nederland leidde, en Janus Hoeks, die in 1989 Intemo oprichtte, staat hij achter Curanta."
+    subtitle="Jan Maat heeft sinds 2001 een eigen softwarebedrijf en nam het initiatief tot Curanta. Met hem staan Erwin van der Star en Janus Hoeks achter Curanta. Erwin leidde bijna vijftien jaar Vitaphone Nederland; Janus richtte in 1989 Intemo op."
   />
 
   {/* Visie en missie (29-10-2026). De zin "één systeem voor de zorg …" stond eerst in de ondertitel van de hero en
@@ -196,14 +196,13 @@ const gesprek = [
       <div class="space-y-4 text-ink-700 leading-relaxed">
           <p>
             Zorgmedewerkers besteden 34 procent van hun werktijd aan administratie, en 79 procent van hen ervaart dat
-            als belastend (Berenschot, 2025). Dat komt niet doordat zorgverleners onwillig zijn. Het komt doordat hun
-            software vaak is ontworpen voor de boekhouder, niet voor de wijkverpleegkundige om 22:00 uur. Intussen groeit
+            als belastend (Berenschot, 2025). Dat komt doordat hun software vaak is ontworpen voor de boekhouder, niet voor de wijkverpleegkundige om 22:00 uur. Intussen groeit
             het tekort aan personeel: van 89.800 mensen in 2026 naar 261.800 in 2035 (ABF Research, AZW, februari 2026).
           </p>
           <p>
             Een zorgorganisatie kiest ongeveer eens in de tien jaar een nieuw ECD (M&amp;I/Partners, januari 2026). Wie nu
-            kiest, kiest dus voor de jaren waarin er minder handen zijn voor meer cliënten. Die keuze verdient software
-            die tijd teruggeeft. En in die tien jaar verandert er meer dan het aantal collega's.
+            kiest, kiest dus voor de jaren waarin er minder handen zijn voor meer cliënten. Dan telt vooral of
+            software tijd teruggeeft. En in die tien jaar verandert er meer dan het aantal collega's.
           </p>
       </div>
     </div>
@@ -213,8 +212,8 @@ const gesprek = [
           <p>
             Zorgpartijen en het kabinet hebben afgesproken dat administratie in 2030 hooguit 20 procent van de werktijd
             kost (Aanvullend Zorg- en Welzijnsakkoord, 2025). Ze beginnen met rapporteren door in te spreken, en met het
-            plannen van personeel. Van 1 tot en met 31 januari 2027 kan een organisatie in de vvt of de ggz daar
-            voor haar Zvw-zorg geld voor aanvragen, de doorbraakmiddelen (modelplannen, september 2026). Wat die
+            plannen van personeel. Van 1 tot en met 31 januari 2027 kan een organisatie in de vvt of de ggz daarvoor
+            geld aanvragen voor haar Zvw-zorg: de doorbraakmiddelen (modelplannen, september 2026). Wat die
             aanvraag van uw software vraagt, staat in <a href="/kennisbank/doorbraakmiddelen-modelplan-software" class="font-semibold text-curanta-700 hover:underline">de kennisbank</a>.
           </p>
           <p>
