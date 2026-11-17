@@ -17,7 +17,7 @@ interface Props {
   /**
    * Alleen op de 404-pagina: 'niet-gevonden'. Beide metingen tellen de pagina dan als niet gevonden en
    * niet als gewone weergave: app.curanta.nl/bezoekmeting.js leest `curanta-pagina`,
-   * statistiek.maat-software.nl/m.js leest `bezoekmeting-pagina`. Zonder tag vallen ze terug op "404" in
+   * statistiek.curanta.nl/m.js leest `bezoekmeting-pagina`. Zonder tag vallen ze terug op "404" in
    * de titel.
    */
   paginasoort?: 'niet-gevonden';
@@ -161,7 +161,7 @@ const kruimelLd = !noindex && delen.length > 0 ? {
       wijzigingen aan de meting gaan mee met een uitrol daarvan. Alleen in productie: het endpoint neemt ook localhost aan, anders telt `npm run dev`
       mee in de echte cijfers.
 
-      2. De centrale dienst Bezoekmeting (statistiek.maat-software.nl/m.js, repo D:\Repos\Bezoekmeting; wat hij
+      2. De centrale dienst Bezoekmeting (statistiek.curanta.nl/m.js, repo D:\Repos\Bezoekmeting; wat hij
       bewaart: docs/privacy.md daar). Geen eigen gebeurtenissen op deze site, dus geen window.bm-stub.
       Beide hosts staan in de CSP (public/.htaccess en deploy/nginx-plesk.conf).
     */}
@@ -169,7 +169,7 @@ const kruimelLd = !noindex && delen.length > 0 ? {
       <script src="https://app.curanta.nl/bezoekmeting.js" defer></script>
     )}
     {import.meta.env.PROD && (
-      <script src="https://statistiek.maat-software.nl/m.js" defer></script>
+      <script src="https://statistiek.curanta.nl/m.js" defer></script>
     )}
   </head>
   <body class="min-h-screen flex flex-col">

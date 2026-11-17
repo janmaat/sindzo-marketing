@@ -109,14 +109,14 @@
   Header always set Cross-Origin-Opener-Policy "same-origin"
   # Content-Security-Policy (16-10-2026). Alleen eigen bestanden, plus demo.curanta.nl (demoformulier) en
   # app.curanta.nl (presentatieformulier, en sinds 22-10-2026 de bezoekmeting), en sinds 04-11-2026
-  # statistiek.maat-software.nl (de centrale bezoekmeting, een tijd naast die van app). Wat de policy tegenhoudt:
+  # de centrale bezoekmeting (sinds 17-11-2026 als statistiek.curanta.nl, daarvoor statistiek.maat-software.nl; een tijd naast die van app). Wat de policy tegenhoudt:
   # scripts en verbindingen naar andere domeinen, formulieren naar elders, inlijsten, <base> en plug-ins.
   # Sinds 24-10-2026 ook geïnjecteerde inline scripts: `npm run build` draait scripts/csp-hashes.mjs, dat in
   # dist/.htaccess 'unsafe-inline' bij script-src vervangt door de hashes van de inline scripts die Astro bouwde.
   # Hier blijft 'unsafe-inline' staan als ankerpunt voor dat script. Inline handlers (onclick=) kunnen niet meer;
   # de build faalt erop. style-src houdt 'unsafe-inline' (style-attributen, en de inline CSS uit astro.config).
   # Komt er een externe bron bij (een video, een kaart), dan moet die hier bij.
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://app.curanta.nl https://statistiek.maat-software.nl; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://demo.curanta.nl https://app.curanta.nl https://statistiek.maat-software.nl; form-action 'self' https://demo.curanta.nl https://app.curanta.nl; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://app.curanta.nl https://statistiek.curanta.nl; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://demo.curanta.nl https://app.curanta.nl https://statistiek.curanta.nl; form-action 'self' https://demo.curanta.nl https://app.curanta.nl; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
 </IfModule>
 
 # ----- MIME-types die Apache standaard mist -----
