@@ -82,7 +82,7 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
 
   <section class="container-prose py-12">
     <div class="grid gap-10 lg:grid-cols-[1fr_300px]">
-      <form id="check" class="space-y-10 print:hidden" novalidate>
+      <form id="check" data-bm-formulier="continuiteitscheck" class="space-y-10 print:hidden" novalidate>
         <noscript>
           <p class="rounded-md border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
             De check werkt met JavaScript. Zonder JavaScript vindt u de vragen in
@@ -136,7 +136,7 @@ const keuze = 'h-4 w-4 border-ink-300 text-curanta-600 focus:ring-curanta-500';
     </div>
   </section>
 
-  <section id="uitkomst" class="hidden border-t border-ink-200 bg-white py-12 print:border-0 print:py-0" aria-labelledby="uitkomst-kop">
+  <section id="uitkomst" data-bm-negeer class="hidden border-t border-ink-200 bg-white py-12 print:border-0 print:py-0" aria-labelledby="uitkomst-kop">
     <div class="container-prose">
       <div class="flex flex-wrap items-start justify-between gap-4">
         <h2 id="uitkomst-kop" tabindex="-1" class="font-display text-3xl font-bold text-ink-900">Doorwerken bij uitval: uw stand</h2>

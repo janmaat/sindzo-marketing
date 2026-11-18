@@ -17,7 +17,7 @@ interface Props {
   /**
    * Alleen op de 404-pagina: 'niet-gevonden'. Beide metingen tellen de pagina dan als niet gevonden en
    * niet als gewone weergave: app.curanta.nl/bezoekmeting.js leest `curanta-pagina`,
-   * statistiek.curanta.nl/m.js leest `bezoekmeting-pagina`. Zonder tag vallen ze terug op "404" in
+   * statistiek.curanta.nl/u.js leest `bezoekmeting-pagina`. Zonder tag vallen ze terug op "404" in
    * de titel.
    */
   paginasoort?: 'niet-gevonden';
@@ -161,15 +161,21 @@ const kruimelLd = !noindex && delen.length > 0 ? {
       wijzigingen aan de meting gaan mee met een uitrol daarvan. Alleen in productie: het endpoint neemt ook localhost aan, anders telt `npm run dev`
       mee in de echte cijfers.
 
-      2. De centrale dienst Bezoekmeting (statistiek.curanta.nl/m.js, repo D:\Repos\Bezoekmeting; wat hij
-      bewaart: docs/privacy.md daar). Geen eigen gebeurtenissen op deze site, dus geen window.bm-stub.
+      2. De centrale dienst Bezoekmeting (repo D:\Repos\Bezoekmeting). Sinds 18-11-2026 met u.js, de
+      uitgebreide meting (besluit Jan 17-11, V-WEBSITEBEZOEK; jurist J-29): klikken, formulieren per stap,
+      scrollen, laadtijden, fouten, kenmerken van de browser en een bezoeker van dertig dagen. Wat hij
+      bewaart en wat nooit: docs/uitgebreid.md daar; de privacyverklaring (punt 2) moet dat blijven zeggen.
+      Eén van de twee scripts laden, nooit m.js én u.js: het eerste meet. Geen integrity: u.js verandert.
+      Labels voor de cijfers: data-bm op de hoofdknoppen (Nav, Cta), data-bm-formulier op de formulieren,
+      data-bm-negeer op een blok dat invoer van de bezoeker toont (de uitkomst van de scans).
+      Geen eigen gebeurtenissen op deze site, dus geen window.bm-stub.
       Beide hosts staan in de CSP (public/.htaccess en deploy/nginx-plesk.conf).
     */}
     {import.meta.env.PROD && (
       <script src="https://app.curanta.nl/bezoekmeting.js" defer></script>
     )}
     {import.meta.env.PROD && (
-      <script src="https://statistiek.curanta.nl/m.js" defer></script>
+      <script src="https://statistiek.curanta.nl/u.js" defer></script>
     )}
   </head>
   <body class="min-h-screen flex flex-col">

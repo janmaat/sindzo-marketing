@@ -33,7 +33,7 @@ const actief = (href: string) => huidig === href || huidig.startsWith(href + '/'
       <a href="/login" class="hidden xl:inline text-sm font-medium text-ink-700 hover:text-curanta-900 no-underline">Inloggen</a>
       {/* Demo-toegang of, zolang die niet aangeboden wordt, de demonstratie. Tekst, bestemming en de
           schakelaar staan in src/config/demo.ts. */}
-      <a href={HOOFDKNOP.href} class="btn-primary no-underline hidden sm:inline-flex whitespace-nowrap">{HOOFDKNOP.label}</a>
+      <a href={HOOFDKNOP.href} data-bm="kopbalk: hoofdknop" class="btn-primary no-underline hidden sm:inline-flex whitespace-nowrap">{HOOFDKNOP.label}</a>
 
       {/* Telefoon en tablet: het menu in een <details>, zonder script. Werkt met het toetsenbord
           (Enter of spatie op "Menu") en een schermlezer leest het als uitklapbaar. */}
@@ -51,7 +51,7 @@ const actief = (href: string) => huidig === href || huidig.startsWith(href + '/'
             ))}
             <li><a href="/login" class="block rounded-lg px-3 py-2.5 text-base font-medium text-ink-700 no-underline hover:bg-curanta-50">Inloggen</a></li>
           </ul>
-          <a href={HOOFDKNOP.href} class="btn-primary mt-3 w-full no-underline sm:hidden">{HOOFDKNOP.label}</a>
+          <a href={HOOFDKNOP.href} data-bm="menu: hoofdknop" class="btn-primary mt-3 w-full no-underline sm:hidden">{HOOFDKNOP.label}</a>
         </nav>
       </details>
     </div>
