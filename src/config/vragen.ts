@@ -23,7 +23,7 @@ export const algemeneVragen: Vraag[] = [
   {
     vraag: 'Waar staan onze gegevens?',
     // Feitenblad: hosting, subverwerkers, AI-keuze per organisatie.
-    antwoord: `In Duitsland, binnen de EU, versleuteld opgeslagen. De AI-functies lopen standaard bij Mistral AI, via het EU-endpoint; Mistral bewaart de gegevens niet en traint er niet mee. Uw organisatie kan de AI-functies ook helemaal uitzetten. De subverwerkers staan in het ${link('/trust', 'Trust Centre')}.`,
+    antwoord: `In Nederland, binnen de EU, versleuteld opgeslagen. De AI-functies lopen standaard bij Mistral AI, via het EU-endpoint; Mistral bewaart de gegevens niet en traint er niet mee. Uw organisatie kan de AI-functies ook helemaal uitzetten. De subverwerkers staan in het ${link('/trust', 'Trust Centre')}.`,
   },
   {
     vraag: 'Kunnen wij onze gegevens meenemen als wij stoppen?',

@@ -32,8 +32,8 @@ const blokken: Blok[] = [
     titel: 'Waar uw gegevens staan',
     icoon: 'server',
     punten: [
-      // Feitenblad, rij Applicatie en databases: "in de EU" / "in Duitsland (EU)", geen hosternaam.
-      'Op een server in Duitsland, binnen de EU. Welke hostingpartij dat is, staat in de <a href="https://app.curanta.nl/trust/subverwerkers">subverwerkerslijst</a>.',
+      // Feitenblad, rij Applicatie en databases: "in de EU" / "in Nederland (EU)" (sinds 19-11-2026), geen hosternaam.
+      'Op een server in Nederland, binnen de EU. Welke hostingpartij dat is, staat in de <a href="https://app.curanta.nl/trust/subverwerkers">subverwerkerslijst</a>.',
       // Feitenblad, rij Hele database (volumeversleuteling; databank, bijlagen, back-ups, logs; sleutel niet op de server).
       'Versleuteld opgeslagen, met volumeversleuteling op de server. Dat geldt voor de databank, de bijlagen, de back-ups en de logs. De sleutel staat niet op die server.',
       // Code: Ponscura.Core.Infrastructure/Persistence/Tenantfilter.cs (filter op elke ITenantScoped-entiteit),
@@ -202,7 +202,7 @@ const verdeling: { onderwerp: string; curanta: string; u: string }[] = [
 
 // Besluit Jan 26-10-2026: wat Curanta bij de oplevering aan een organisatie garandeert (zie het commentaar bovenaan).
 const garanties: { titel: string; tekst: string; icoon: 'server' | 'klok' | 'download' | 'schild' }[] = [
-  { titel: 'Hosting in de EU', icoon: 'server', tekst: 'Uw gegevens staan op een server in Duitsland, binnen de EU. Dat is nu al zo.' },
+  { titel: 'Hosting in de EU', icoon: 'server', tekst: 'Uw gegevens staan op een server in Nederland, binnen de EU. Dat is nu al zo.' },
   { titel: 'Bewaking dag en nacht', icoon: 'klok', tekst: 'Van buitenaf controleren wij 24 uur per dag, 7 dagen per week of Curanta bereikbaar is.' },
   { titel: 'Een back-up buiten de server', icoon: 'download', tekst: 'Elke dag een versleutelde kopie van uw gegevens, op een andere plek in de EU. Dat is sinds 27 oktober 2026 al zo.' },
   { titel: 'Een virusscan op elke upload', icoon: 'schild', tekst: 'Elk bestand dat iemand in Curanta uploadt, scannen wij op virussen.' },
