@@ -37,7 +37,11 @@ const integrations: Integration[] = [
     body: 'Elke minuut gaan het beveiligingslogboek en de beheeraudit naar het SIEM van uw organisatie. Dat kan via een webhook (JSON of CEF), Splunk HEC, Azure Monitor (Logs Ingestion API) of syslog over TLS. Het NEN 7513-toegangslogboek gaat alleen mee als u dat aanzet, en dan gepseudonimiseerd. Getest met Splunk, Azure Monitor en een syslog-server. U richt de koppeling in op het beheerscherm, met de gegevens van uw SIEM.' },
   // Standaarden
   { name: 'FHIR R4 en de BgZ', category: 'Standaarden', status: 'inrichten', doc: '/api',
-    body: 'Een publieke FHIR R4-API, alleen om te lezen. Hij levert de Basisgegevensset Zorg (BgZ) van een cliënt als document, gevalideerd tegen de profielen van Nictiz. Beschikbaar zodra wij het systeem dat de gegevens ophaalt, hebben geregistreerd. Geen testomgeving en geen algemene lees- of schrijftoegang.' },
+    body: 'Een publieke FHIR R4-API, alleen om te lezen. Hij levert de Basisgegevensset Zorg (BgZ) van een cliënt als document, gevalideerd tegen de profielen van Nictiz. Beschikbaar zodra wij het systeem dat de gegevens ophaalt, hebben geregistreerd. Geen testomgeving, en via deze API geen algemene lees- of schrijftoegang.' },
+  { name: 'API voor uw eigen gegevens', category: 'Standaarden', status: 'inrichten', doc: '/api#eigen-gegevens',
+    body: 'Alleen in Enterprise. Een API om gegevens van uw organisatie te lezen, voor systemen naast Curanta: medewerkers, teams en locaties, het rooster, goedgekeurde uren, cliënten (alleen de basis) en bezoeken en afspraken. U maakt per leverancier een koppeling. Geen BSN, geen dossierinhoud, niet schrijven.' },
+  { name: 'Power BI en Excel (eigen rapportages)', category: 'Standaarden', status: 'inrichten',
+    body: 'Alleen in Enterprise. Elke nacht vaste tabellen, zoals diensten, uren, bezoeken, productie en declaraties, via een OData-feed. Medewerkers en cliënten staan erin als vast kenmerk, zonder naam, BSN, geboortedatum of adres, en zonder vrije tekst. Geen eigen connector in Power BI.' },
   { name: 'Wegiz / eOverdracht', category: 'Standaarden', status: 'inrichten',
     body: 'Curanta maakt het overdrachtsdocument volgens eOverdracht 4.0, met alle 14 onderdelen van de Minimale eOverdracht, voor zover ze in het dossier staan. Curanta biedt het aan via het eOverdracht-netwerk. De ontvangende organisatie haalt het op en meldt terug of zij de overdracht accepteert. Een binnengekomen overdracht beoordeelt een zorgverlener voordat er iets in het dossier komt. De aansluiting op het netwerk regelen wij bij de implementatie, met het UZI-servercertificaat van uw organisatie. De ketentest met uw ketenpartner hoort daarbij. Getest tussen twee omgevingen, niet door Nictiz gekwalificeerd. Downloaden en zelf meesturen kan ook.' },
   { name: 'MedMij', category: 'Standaarden', status: 'ontwikkeling',
@@ -47,7 +51,7 @@ const integrations: Integration[] = [
 
   // Communicatie
   { name: 'ZorgMail', category: 'Communicatie', status: 'inrichten',
-    body: 'Beveiligde berichten en bijlagen via het ZorgMail-netwerk. Hiervoor is een ZorgMail-abonnement van uw organisatie nodig.' },
+    body: 'Beveiligde berichten en bijlagen via het ZorgMail-netwerk. Een labuitslag (MEDLAB) zet Curanta bij de metingen van de cliënt; een vrij bericht (MEDVRI) toont het als brief. Getest op berichten volgens de specificatie van Nictiz, nog niet met een echt laboratorium. Hiervoor is een ZorgMail-abonnement van uw organisatie nodig.' },
   { name: 'ZorgDomein', category: 'Communicatie', status: 'inrichten',
     body: 'Inkomende verwijzingen met bijlagen via ZorgDomein. Antwoorden vanuit Curanta kan nog niet.' },
 
@@ -79,7 +83,7 @@ const integrations: Integration[] = [
   { name: 'Eigen bijdrage (CAK)', category: 'Financieel', status: 'inrichten',
     body: 'U levert niets aan het CAK. Het CAK krijgt zijn gegevens van het zorgkantoor (Wlz) en de gemeente (Wmo), op basis van uw meldingen over het begin en het einde van de zorg. Die meldingen stelt u op in Curanta.' },
   { name: 'Controle op verzekering (COV)', category: 'Financieel', status: 'inrichten',
-    body: 'Curanta legt per cliënt vast bij welke verzekeraar hij verzekerd is, en waar dat vandaan komt. U neemt het over van de zorgpas of uit de COV-controle in het VECOZO-portaal. De automatische vraag aan VECOZO ronden wij af bij uw aansluiting.' },
+    body: 'Curanta gebruikt de COV alleen voor de Zvw: de wijkverpleging, de GGZ en de kraamzorg. Dat is een voorwaarde van VECOZO. Alleen de declaratiebeheerder en de zorgadministratie zien de uitkomst. U neemt de verzekering over van de zorgpas of uit de COV-controle in het VECOZO-portaal. De automatische vraag aan VECOZO ronden wij af bij uw aansluiting.' },
   { name: 'AGB-register (Vektis)', category: 'Financieel', status: 'inrichten',
     body: 'Curanta controleert AGB-codes en synchroniseert ze dagelijks met de open dataset van Vektis. De synchronisatie richten wij per klant in.' },
   // 14-10-2026: het bericht wordt getoetst aan de officiële XSD van Vektis en de handmatige aanlevering via het
@@ -121,7 +125,7 @@ const integrations: Integration[] = [
   { name: 'Boekhoudpakketten', category: 'Backoffice', status: 'inrichten',
     body: 'Geen koppeling maar een bestand: verkoopboekingen, toegekende declaraties en kosten voor Twinfield, SnelStart, Yuki, e-Boekhouden.nl, AFAS Profit of Exact Online. Uw boekhouder leest het zelf in. Staat uw pakket er niet bij, dan voegen wij het kosteloos toe. Het bestand is nog in geen enkel pakket in een echte administratie ingelezen. Dat testen wij bij de implementatie, met uw boekhouder.' },
   { name: 'Nmbrs', category: 'Backoffice', status: 'inrichten',
-    body: 'De goedgekeurde salarisexport rechtstreeks naar Nmbrs. Hiervoor zijn een Nmbrs-partnerapp, een sleutel en toestemming van uw organisatie nodig. De test met Nmbrs doen wij bij de implementatie, met uw organisatie. Zonder Nmbrs: een CSV-export voor elke salarisadministratie.' },
+    body: 'De goedgekeurde salarisexport rechtstreeks naar Nmbrs. Hiervoor zijn een Nmbrs-partnerapp, een sleutel en toestemming van uw organisatie nodig. De test met Nmbrs doen wij bij de implementatie, met uw organisatie. Zonder Nmbrs: een CSV-bestand met kolommen die u zelf instelt, per uursoort en kostenplaats.' },
 ];
 
 const categories = Array.from(new Set(integrations.map(i => i.category)));
@@ -182,7 +186,7 @@ const gebouwd = telling('demo') + telling('inrichten');
             <p class="mt-2 text-sm text-ink-700 leading-relaxed">{i.body}</p>
             {i.doc && (
               <a href={i.doc} class="mt-3 inline-block text-xs font-medium text-curanta-700 no-underline hover:underline">
-                Over de FHIR-API →
+                Meer over de API's →
               </a>
             )}
           </article>

@@ -18,7 +18,7 @@ import { BSN_LIJST_LIVE } from '../config/product';
 const bronsystemen: { naam: string; toelichting?: string; bron?: string }[] = [
   {
     naam: 'Nedap Ons',
-    toelichting: 'Cliënten, zorgplannen, rapportages en medewerkers gaan mee. De route stellen we per organisatie samen op.',
+    toelichting: 'Cliënten, medewerkers en de inhoud van het dossier gaan mee via het importformaat van Curanta; het zorgplan komt mee als overgenomen plan, alleen te lezen. De route stellen we per organisatie samen op.',
   },
   {
     naam: 'Gerimedica Ysis',
@@ -302,8 +302,11 @@ const voorU = [
         Wij zetten de migratie per bronsysteem op. Voor elk systeem is het een migratieproject tegen een vaste
         prijs die u vooraf weet: geen open einde, geen nacalculatie. Cliënten en medewerkers gaan over met de
         import van Curanta, uit een CSV- of Excelbestand. Kolomkoppen uit een export van uw pakket herkent de
-        import als ze overeenkomen. Zorgplannen en het oude dossier kunnen als pdf mee in het dossier van de
-        cliënt.
+        import als ze overeenkomen. Daarna leest u de inhoud van het dossier in: rapportages, het zorgplan,
+        metingen, documenten en meer. Dat gaat in een vast importformaat van Curanta; u of uw vorige leverancier
+        zet de export daarin om. Curanta controleert eerst alles en schrijft pas na uw bevestiging. Elk gegeven
+        toont dat het uit het vorige systeem komt. Medicatie, gedwongen zorg en declaraties gaan niet mee. Het
+        oude zorgplan blijft alleen te lezen; het eerste eigen plan maakt een zorgverlener in Curanta.
       </p>
     </div>
 

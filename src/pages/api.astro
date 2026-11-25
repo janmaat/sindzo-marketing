@@ -8,6 +8,8 @@ import Cta from '../components/Cta.astro';
 // CapabilityStatement, SMART-discovery en client_credentials met private_key_jwt; alleen vooraf
 // geregistreerde systeemclients. Niet: "volledige FHIR-API", "SMART App Launch", "MedMij",
 // "Wegiz-gekwalificeerd" of "sandbox". Beloof hier niets wat daar niet staat.
+// Sinds 24-11-2026 ook de API voor de eigen gegevens (feitenblad, rij API voor de eigen gegevens; ADR 2026-11-18-
+// openbare-api): alleen lezen, plan Enterprise. Niet: schrijven, webhooks, BSN, dossierinhoud, testomgeving.
 
 const resources = [
   { name: 'Patient', desc: 'Cliëntdemografie en contactgegevens: Zib-profiel.', status: 'live' },
@@ -25,12 +27,12 @@ const dot = (s: string) =>
   s === 'live' ? 'bg-green-500' : s === 'wip' ? 'bg-amber-500' : 'bg-ink-300';
 ---
 <Base
-  title="API en FHIR: stand van zaken | Curanta"
-  description="Een publieke FHIR R4-API, alleen om te lezen, die de BgZ van een cliënt als document levert aan geregistreerde systemen. Wat er is en wat niet."
+  title="API's en FHIR: stand van zaken | Curanta"
+  description="Twee API's, allebei alleen om te lezen: de FHIR R4-API voor de BgZ van een cliënt, en een API voor de gegevens van uw eigen organisatie (Enterprise)."
 >
   <PageHero
     eyebrow="API en koppelen"
-    title="De FHIR-API voor de BgZ: wat er is en wat niet"
+    title="De API's van Curanta: wat er is en wat niet"
     subtitle="Voor I&A en ketenpartners. Curanta heeft een publieke FHIR R4-API die alleen leestoegang geeft. Hij levert de Basisgegevensset Zorg (BgZ) van een cliënt als één document. Een systeem van een ketenpartner kan hem gebruiken nadat wij het hebben geregistreerd."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
@@ -80,6 +82,27 @@ const dot = (s: string) =>
         </li>
       ))}
     </ul>
+  </section>
+
+  <section id="eigen-gegevens" class="container-prose py-14 border-b border-ink-100">
+    <h2 class="font-display text-2xl font-bold text-ink-900">De API voor uw eigen gegevens (plan Enterprise)</h2>
+    <div class="mt-4 max-w-3xl space-y-3 text-sm leading-relaxed text-ink-700">
+      <p>
+        Naast de FHIR-API heeft Curanta een API om gegevens van uw eigen organisatie te lezen. Die is voor systemen
+        naast Curanta, zoals telefonie of het intranet. U maakt per leverancier een koppeling, met een doel en de
+        onderdelen die hij mag lezen: medewerkers, teams en locaties, het rooster, goedgekeurde uren, cliënten (alleen
+        de basis) en bezoeken en afspraken.
+      </p>
+      <p>
+        De leverancier krijgt een client-id en een geheim (<code>client_credentials</code>); een token geldt 15 minuten.
+        De gegevens komen als JSON onder <code>/api/v1</code>, met bladeren en filteren op "gewijzigd sinds". Intrekken
+        werkt meteen, en elke vraag naar gegevens van personen komt in het logboek.
+      </p>
+      <p>
+        Niet: schrijven, webhooks, het BSN, dossierinhoud of een testomgeving. Hoogstens 120 verzoeken per minuut per
+        koppeling. Uw organisatie sluit zelf een verwerkersovereenkomst met de leverancier.
+      </p>
+    </div>
   </section>
 
   <section class="container-prose py-14 border-b border-ink-100">

@@ -33,7 +33,7 @@ export const algemeneVragen: Vraag[] = [
   {
     vraag: 'Hoe stappen wij over van ons huidige ECD?',
     // Feitenblad: Migratie, Doorlooptijd.
-    antwoord: `Als migratieproject tegen een vaste prijs, na een migratie-inschatting. Cliënten en medewerkers importeert u uit een CSV- of Excelbestand, met een sjabloon uit Curanta. Zorgplannen en het oude dossier kunnen als pdf mee in het dossier van de cliënt. De route stellen wij per organisatie samen op. Hoe lang het duurt, spreken wij na die inschatting af. Meer op ${link('/overstappen', 'Overstappen en exit')}.`,
+    antwoord: `Als migratieproject tegen een vaste prijs, na een migratie-inschatting. Cliënten en medewerkers importeert u uit een CSV- of Excelbestand, met een sjabloon uit Curanta. Daarna leest u de inhoud van het dossier in, zoals rapportages, het zorgplan, metingen en documenten, in een vast importformaat van Curanta. De route stellen wij per organisatie samen op. Hoe lang het duurt, spreken wij na die inschatting af. Meer op ${link('/overstappen', 'Overstappen en exit')}.`,
   },
   {
     vraag: 'Is Curanta gecertificeerd voor NEN 7510?',
