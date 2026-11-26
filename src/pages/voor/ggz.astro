@@ -37,14 +37,14 @@ import { CYBERBEVEILIGINGSWET, GDS801 } from '../../config/kennisbank';
     { title: 'Zorginhoud alleen voor de behandelaars', body: 'Wie de cliënt in de agenda of het rooster heeft, of regiebehandelaar is, ziet de zorginhoud. Een collega zonder behandelrelatie ziet die niet; in een noodgeval kan het wel, met een reden die in het logboek komt. De administratie ziet alleen wat zij voor de declaratie nodig heeft.' },
     { title: 'Omzetplafonds in beeld', body: 'Per zorgverzekeraar en jaar ziet u hoeveel van het plafond u al hebt gedeclareerd, en waar u volgens de prognose op 31 december uitkomt. Bij 80, 90 en 100 procent krijgt u een signaal.' },
     { title: 'Zorg zonder contract', body: 'Hebt u geen contract met de verzekeraar van een cliënt? Dan maakt Curanta een nota met de gegevens die de NZa voorschrijft, en verstuurt die per e-mail.' },
-    { title: 'Het juiste tarief op de nota', body: 'Leg per verzekeraar uw afspraak vast: een percentage van het NZa-maximum of van zijn tarieflijst. Wijkt een tarief af, dan waarschuwt Curanta vóór de nota of de declaratie, en u kiest Corrigeren of Toch versturen. Na een nieuwe NZa-tabel ziet u welke prestaties mogelijk te veel of te weinig kregen.' },
+    { title: 'Het juiste tarief op de nota', body: 'Leg per verzekeraar uw tariefafspraak vast: een percentage van het NZa-maximum of van zijn tarieflijst. Wijkt een tarief af, dan waarschuwt Curanta vóór de nota of de declaratie, en u kiest Corrigeren of Toch versturen. Na een nieuwe NZa-tabel ziet u welke prestaties mogelijk te veel of te weinig kregen.' },
   ]}
   modules={[
     { name: 'Zorgprestatiemodel', note: 'Prestaties per traject, met controle op tarief, duur en datum, en zorglabels uit de codelijst van de NZa' },
     { name: 'GDS801 en GDS802', note: 'Het declaratiebericht volgens Vektis, getoetst aan het schema; het retourbericht leest u in' },
     { name: 'Afscherming per cliënt', note: 'Op basis van de behandelrelatie, met noodtoegang' },
     { name: 'Omzetplafonds', note: 'Per verzekeraar en jaar, met signalen en een prognose' },
-    { name: 'Tarieven en tariefbewaking', note: 'Afspraak per verzekeraar of op zijn tarieflijst; een waarschuwing vóór nota en declaratie; een hercontrole na een nieuwe NZa-tabel' },
+    { name: 'Tarieven en tariefbewaking', note: 'Tariefafspraak per verzekeraar, ook op zijn tarieflijst; een waarschuwing vóór nota en declaratie; een hercontrole na een nieuwe NZa-tabel' },
     { name: 'Prijslijst en Te factureren', note: 'Eigen prijzen buiten de NZa-tarieven; afgeronde afspraken en no-shows klaar voor een nota' },
     { name: 'Financiële overzichten', note: 'Openstaand op een peildatum, ontvangsten per betaalwijze, creditfacturen en omzet per maand, ook in Excel' },
     { name: 'Mijn dag', note: 'De afspraken van vandaag met het dossier ernaast' },
