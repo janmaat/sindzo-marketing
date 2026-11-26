@@ -10,9 +10,10 @@
 // ⚠ .NET 11 is een STS-versie (twee jaar ondersteuning). Schrijf op de site dus nooit "de versie met lange
 // ondersteuning"; de jaarlijkse overstap is de hoofdzin, de huidige versie de bijzin.
 export const DOTNET = {
-  versie: '.NET 10',
-  framework: 'net10.0',
-  updatesTot: '14 november 2028',
+  versie: '.NET 11',
+  framework: 'net11.0',
+  // Microsoft noemt voor .NET 11 alleen de maand (Releases and support for .NET, 26-11-2026).
+  updatesTot: 'november 2028',
 };
 
 // Datum van de laatste meting met `dotnet list Ponscura.sln package --vulnerable --include-transitive` en
