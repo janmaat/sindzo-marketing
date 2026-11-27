@@ -194,6 +194,12 @@ const IMAGES = [
     sub: 'Hulpvragen · toewijzingen · declaratie onder de Jeugdwet · meldcode',
   },
   {
+    file: 'og/voor-wmo.png',
+    eyebrow: 'Voor aanbieders in de Wmo',
+    hero: 'Begeleiding en dagbesteding, van toewijzing tot declaratie.',
+    sub: 'iWmo 3.2 · planbord naast de toewijzing · dagbesteding · budgetsignalen',
+  },
+  {
     file: 'og/voor-kraamzorg.png',
     eyebrow: 'Voor de kraamzorg',
     hero: 'Het kraamdossier, de planning en de declaratie.',

@@ -1,0 +1,64 @@
+---
+import SegmentLayout from '../../layouts/SegmentLayout.astro';
+// Nieuw 27-11-2026 (opzet; claimtoets 27-11, nog niet op /voor en niet in het menu). Nagelopen in de code
+// (Ponscura 47f832ab3) en tegen het feitenblad (rij VECOZO):
+// - iWmo 3.2: berichten 301, 302, 305, 306, 307, 308, 315, 316, 317, 318, 319, 320, 323 en 325
+//   (Ponscura.Declaratie.Iwmo/Domain/Enums.cs, IwmoMessageType); productcategorieën volgens LDT_ProductCategorie
+//   (01 hulp bij het huishouden, 02 begeleiding, dagbesteding, kortdurend verblijf); eenheden minuut, uur,
+//   dagdeel, etmaal, stuks output en stuks inspanning. Euro (83) en traject declareert de Wmo-opsteller níét
+//   (IwmoDeclaratieOpsteller.Kandidaten: geen TariefEenheid voor euro; traject geeft een melding); iJw wel.
+// - Aanleveren: standaard maakt Curanta het bestand, toetst het aan de XSD en levert de administratie het zelf aan
+//   in het VECOZO-portaal (IwmoMessageStatus.KlaarVoorAanlevering, 15-10-2026). Rechtstreeks aanleveren is
+//   ingericht, niet beproefd: formulering uit het feitenblad, zoals op /voor/ghz.
+// - Dagbesteding: een afgeronde groepsactiviteit wordt een conceptregel, met kader en toewijzing uit de
+//   financieringsmix (ProductionRecord.UitGroepsactiviteit, OnGroepsactiviteitAfgerond); vervoer per
+//   aanwezigheidsdag (ProductionRecord.UitVervoer).
+// - Planbord: geplande uren naast de indicatie, alleen voor het geïndiceerde product, met grenzen die de
+//   organisatie zelf kiest (IndicatieAfwijkingsService, 28-09-2026).
+// - Budgetbewaking per cliënt, kader en periode met signalen bij 80, 90 en 100% (Ponscura.Declaratie.Budget,
+//   geregistreerd in Curanta.Host).
+// Bewust niet genoemd: de Wlz-raadpleegfunctie (Wmo-declaratie laat dagen met Wlz-indicatie weg); nog niet
+// uitgerold volgens het feitenblad. Nog te maken: schermafbeelding (beeld).
+---
+<SegmentLayout
+  image="/og/voor-wmo.png"
+  segmentKey="wmo"
+  segmentLabel="Wmo"
+  title="Software voor Wmo-begeleiding en dagbesteding | Curanta"
+  description="Dossier, planning en iWmo-declaratie voor begeleiding, dagbesteding en hulp bij het huishouden: van toewijzing van de gemeente tot het 323-bericht."
+  eyebrow="Voor aanbieders in de Wmo"
+  hero="Begeleiding en dagbesteding, van toewijzing tot declaratie"
+  subtitle="Voor organisaties die voor gemeenten begeleiding, dagbesteding of hulp bij het huishouden leveren. De toewijzing van de gemeente komt binnen als iWmo-bericht. De begeleider plant en rapporteert erop, en de administratie declareert per gemeente volgens iWmo 3.2."
+  triggers={[
+    { title: 'Elke gemeente, dezelfde berichten', body: 'De gemeente stuurt de toewijzing (301). U meldt de start (305) en het einde (307) en vraagt een nieuwe of gewijzigde toewijzing aan (315, 317). Curanta leest de toewijzing in en zet de berichten klaar volgens iWmo 3.2. U declareert in minuten, uren, dagdelen, etmalen of stuks.' },
+    { title: 'Niet meer leveren dan toegewezen', body: 'Op het planbord staan de geplande uren naast de uren van de toewijzing. Alleen zorg voor het product van de toewijzing telt mee. Een cliënt met hulp bij het huishouden en daarnaast wijkverpleging staat dus niet ten onrechte als "te veel gepland". De grenzen voor een signaal kiest u zelf.' },
+    { title: 'Aanwezig op de dagbesteding is een declaratieregel', body: 'Rondt de begeleider een groepsactiviteit af, dan wordt de aanwezigheid van elke deelnemer een conceptregel. Het kader en de toewijzing komen uit de financiering van de cliënt. Vervoer naar de dagbesteding wordt een regel per aanwezigheidsdag.' },
+    { title: 'Zien wanneer het budget opraakt', body: 'Per cliënt, kader en periode houdt Curanta bij hoeveel van het budget verbruikt is. Bij 80, 90 en 100 procent krijgt u een signaal, voordat u zorg levert die u niet meer kunt declareren.' },
+  ]}
+  modules={[
+    { name: 'iWmo-berichten', note: 'Toewijzing, start, stop, verzoek om toewijzing en wijziging volgens iWmo 3.2' },
+    { name: 'Wmo-declaratie (323)', note: 'Per gemeente opgesteld en getoetst aan het officiële schema; het retourbericht (325) per regel verwerkt' },
+    { name: 'Planning en planbord', note: 'Bezoeken thuis met routes; geplande uren naast de toewijzing' },
+    { name: 'Groepszorg en dagbesteding', note: 'Groepen, activiteiten en aanwezigheid; vervoer per dag' },
+    { name: 'Productie en budget', note: 'Conceptregels, accorderen en signalen bij 80, 90 en 100 procent' },
+    { name: 'Cliëntdossier en rapportage', note: 'Doelen, rapportage en evaluatie per cliënt' },
+    { name: 'Medewerkerportaal', note: 'Rooster, bezoeken en rapporteren op de telefoon' },
+    { name: 'Cliëntportaal', note: 'Afspraken en vrijgegeven verslagen voor cliënt en mantelzorger' },
+  ]}
+  vragen={[
+    { vraag: 'Hoe gaat de Wmo-declaratie naar de gemeente?', antwoord: 'Curanta stelt de declaratie (323) per gemeente op en toetst het bestand aan het officiële schema van iWmo 3.2. Het retourbericht (325) leest u in; Curanta zet per regel of hij is goedgekeurd of afgekeurd, met de reden. Rechtstreeks aanleveren via VECOZO is ingericht. Wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot dan levert u het bestand met de hand aan in het portaal van VECOZO.' },
+    { vraag: 'Werkt Curanta met resultaatgerichte en taakgerichte toewijzingen?', antwoord: 'Deels. Curanta declareert in tijd (minuten, uren, dagdelen, etmalen) en in stuks, voor output en voor inspanning. Een toewijzing in euro of per traject declareert Curanta voor de Wmo nog niet.' },
+    { vraag: 'Wij leveren ook wijkverpleging of zorg onder de Wlz. Kan dat in hetzelfde systeem?', antwoord: 'Ja. Per cliënt legt u vast welk deel onder de Wmo, de Zvw of de Wlz valt. Het planbord telt per toewijzing alleen de zorg voor dat product.' },
+  ]}
+  nogNiet={[
+    'De proef van het rechtstreeks aanleveren in de testomgeving van VECOZO: die doen wij per organisatie, vóór uw eerste declaratiemaand.',
+    'Een Wmo-declaratie in euro of per traject. Tijd en stuks gaan wel.',
+  ]}
+  regulatory={['Wmo 2015', 'iWmo 3.2', 'AVG', 'NEN 7510']}
+  proofPoints={[
+    { value: 'iWmo 3.2', label: 'Berichten van toewijzing tot retour' },
+    { value: '323', label: 'Declaratie per gemeente, getoetst aan het officiële schema' },
+    { value: '80/90/100%', label: 'Signalen bij het verbruik van de toewijzing' },
+    { value: 'NL', label: 'Hosting in Nederland, versleuteld opgeslagen' },
+  ]}
+/>
