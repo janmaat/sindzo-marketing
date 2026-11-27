@@ -1,12 +1,16 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
+import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
 // Nieuw 27-11-2026 (opzet; claimtoets 27-11, nog niet op /voor en niet in het menu). Nagelopen in de code
 // (Ponscura 47f832ab3) en tegen het feitenblad (rij VECOZO):
 // - iWmo 3.2: berichten 301, 302, 305, 306, 307, 308, 315, 316, 317, 318, 319, 320, 323 en 325
 //   (Ponscura.Declaratie.Iwmo/Domain/Enums.cs, IwmoMessageType); productcategorieën volgens LDT_ProductCategorie
 //   (01 hulp bij het huishouden, 02 begeleiding, dagbesteding, kortdurend verblijf); eenheden minuut, uur,
-//   dagdeel, etmaal, stuks output en stuks inspanning. Euro (83) en traject declareert de Wmo-opsteller níét
-//   (IwmoDeclaratieOpsteller.Kandidaten: geen TariefEenheid voor euro; traject geeft een melding); iJw wel.
+//   dagdeel, etmaal, stuks output en stuks inspanning. Sinds Ponscura 5a8de5d09 (develop 27-11-2026) ook traject
+//   en vast bedrag per periode, als stuks (82) of als bedrag (83) volgens het contract, per maand, per week of
+//   eenmalig volgens de frequentie van de toewijzing, getoetst aan TR321/TR322/TR369
+//   (IwmoDeclaratieOpsteller.WeigerPeriodetarief). Een gebroken maand bij output per maand weigert Curanta (IV078).
+//   LET OP: deze pagina pas publiceren als 5a8de5d09 (of later) op app.curanta.nl staat.
 // - Aanleveren: standaard maakt Curanta het bestand, toetst het aan de XSD en levert de administratie het zelf aan
 //   in het VECOZO-portaal (IwmoMessageStatus.KlaarVoorAanlevering, 15-10-2026). Rechtstreeks aanleveren is
 //   ingericht, niet beproefd: formulering uit het feitenblad, zoals op /voor/ghz.
@@ -18,9 +22,10 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
 // - Budgetbewaking per cliënt, kader en periode met signalen bij 80, 90 en 100% (Ponscura.Declaratie.Budget,
 //   geregistreerd in Curanta.Host).
 // Bewust niet genoemd: de Wlz-raadpleegfunctie (Wmo-declaratie laat dagen met Wlz-indicatie weg); nog niet
-// uitgerold volgens het feitenblad. Nog te maken: schermafbeelding (beeld).
+// uitgerold volgens het feitenblad. Beeld: bo-iwmo-declaraties.jpg (opname 27-11-2026, zie docs/beeldbronnen.md).
 ---
 <SegmentLayout
+  beeld={{ src: beeld, adres: 'app.curanta.nl', alt: 'Backoffice: de Wmo-declaraties van een demo-organisatie aan gemeente 0141, met per declaratie het bedrag, de status (klaar voor aanlevering, aangeleverd, goedgekeurd, afgekeurd), de datum van aanleveren en van het antwoord, en knoppen om aan te leveren, in te trekken of te crediteren.', bijschrift: 'De Wmo-declaraties per gemeente, met het antwoord van de gemeente. Opname november 2026.' }}
   image="/og/voor-wmo.png"
   segmentKey="wmo"
   segmentLabel="Wmo"
@@ -30,7 +35,7 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
   hero="Begeleiding en dagbesteding, van toewijzing tot declaratie"
   subtitle="Voor organisaties die voor gemeenten begeleiding, dagbesteding of hulp bij het huishouden leveren. De toewijzing van de gemeente komt binnen als iWmo-bericht. De begeleider plant en rapporteert erop, en de administratie declareert per gemeente volgens iWmo 3.2."
   triggers={[
-    { title: 'Elke gemeente, dezelfde berichten', body: 'De gemeente stuurt de toewijzing (301). U meldt de start (305) en het einde (307) en vraagt een nieuwe of gewijzigde toewijzing aan (315, 317). Curanta leest de toewijzing in en zet de berichten klaar volgens iWmo 3.2. U declareert in minuten, uren, dagdelen, etmalen of stuks.' },
+    { title: 'Elke gemeente, dezelfde berichten', body: 'De gemeente stuurt de toewijzing (301). U meldt de start (305) en het einde (307) en vraagt een nieuwe of gewijzigde toewijzing aan (315, 317). Curanta leest de toewijzing in en zet de berichten klaar volgens iWmo 3.2. U declareert in tijd of in stuks. Een traject of een vast bedrag per maand of per week gaat mee zoals de gemeente het toewees.' },
     { title: 'Niet meer leveren dan toegewezen', body: 'Op het planbord staan de geplande uren naast de uren van de toewijzing. Alleen zorg voor het product van de toewijzing telt mee. Een cliënt met hulp bij het huishouden en daarnaast wijkverpleging staat dus niet ten onrechte als "te veel gepland". De grenzen voor een signaal kiest u zelf.' },
     { title: 'Aanwezig op de dagbesteding is een declaratieregel', body: 'Rondt de begeleider een groepsactiviteit af, dan wordt de aanwezigheid van elke deelnemer een conceptregel. Het kader en de toewijzing komen uit de financiering van de cliënt. Vervoer naar de dagbesteding wordt een regel per aanwezigheidsdag.' },
     { title: 'Zien wanneer het budget opraakt', body: 'Per cliënt, kader en periode houdt Curanta bij hoeveel van het budget verbruikt is. Bij 80, 90 en 100 procent krijgt u een signaal, voordat u zorg levert die u niet meer kunt declareren.' },
@@ -47,12 +52,12 @@ import SegmentLayout from '../../layouts/SegmentLayout.astro';
   ]}
   vragen={[
     { vraag: 'Hoe gaat de Wmo-declaratie naar de gemeente?', antwoord: 'Curanta stelt de declaratie (323) per gemeente op en toetst het bestand aan het officiële schema van iWmo 3.2. Het retourbericht (325) leest u in; Curanta zet per regel of hij is goedgekeurd of afgekeurd, met de reden. Rechtstreeks aanleveren via VECOZO is ingericht. Wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot dan levert u het bestand met de hand aan in het portaal van VECOZO.' },
-    { vraag: 'Werkt Curanta met resultaatgerichte en taakgerichte toewijzingen?', antwoord: 'Deels. Curanta declareert in tijd (minuten, uren, dagdelen, etmalen) en in stuks, voor output en voor inspanning. Een toewijzing in euro of per traject declareert Curanta voor de Wmo nog niet.' },
+    { vraag: 'Werkt Curanta met resultaatgerichte en taakgerichte toewijzingen?', antwoord: 'Ja, op één punt na. Curanta declareert in tijd (minuten, uren, dagdelen, etmalen) en in stuks, voor output en voor inspanning. Een traject of een vast bedrag per maand of per week gaat als stuks of als bedrag mee, zoals u in het contract met de gemeente vastlegt. Curanta toetst daarbij of het binnen de toewijzing en het budget blijft, en declareert een maand niet twee keer. Een maand waarin de toewijzing begint of eindigt, declareert Curanta niet vanzelf: daarover maakt u een afspraak met de gemeente.' },
     { vraag: 'Wij leveren ook wijkverpleging of zorg onder de Wlz. Kan dat in hetzelfde systeem?', antwoord: 'Ja. Per cliënt legt u vast welk deel onder de Wmo, de Zvw of de Wlz valt. Het planbord telt per toewijzing alleen de zorg voor dat product.' },
   ]}
   nogNiet={[
     'De proef van het rechtstreeks aanleveren in de testomgeving van VECOZO: die doen wij per organisatie, vóór uw eerste declaratiemaand.',
-    'Een Wmo-declaratie in euro of per traject. Tijd en stuks gaan wel.',
+    'Een vast bedrag per maand voor een maand waarin de toewijzing begint of eindigt. Hoe die gaat, spreekt u met de gemeente af; Curanta declareert hem niet vanzelf.',
   ]}
   regulatory={['Wmo 2015', 'iWmo 3.2', 'AVG', 'NEN 7510']}
   proofPoints={[

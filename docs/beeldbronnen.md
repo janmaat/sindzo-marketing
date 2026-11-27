@@ -22,6 +22,7 @@ sessie; op verzoek naar `scripts/` te verplaatsen). Backoffice 1600 × 900, appb
 | bo-wzd.jpg | /compliance/wzd | admin@ |
 | bo-kraamzorg.jpg | /segmenten/kraamzorg, Lotte Veenstra, tab Controles | kraamzorg@ |
 | bo-jeugdzorg.jpg | /segmenten/jeugdzorg, Demi de Vries | admin@ |
+| bo-iwmo-declaraties.jpg | /declaratie/iwmo/declaraties, zijbalk ingeklapt, alleen de hoofdinhoud (1440 × 715). **Opgenomen 27-11-2026** op Ponscura `5a8de5d09` (werkmap `D:\Repos\Ponscura-iwmotraject`, eigen databank `Curanta.Kijkproef20261127`, poort 7480, gewone demoseed) | admin@ |
 | mw-rooster.jpg, mw-bezoek.jpg, mw-rapportage.jpg | medewerkerportaal: rooster, dienstdetail, rapportage | medewerker1@ |
 | pc-start.jpg, pc-zorgplan.jpg | cliëntportaal: start en Mijn zorgplan | klant1@ |
 
