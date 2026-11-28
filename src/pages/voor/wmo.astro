@@ -9,8 +9,15 @@ import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
 //   dagdeel, etmaal, stuks output en stuks inspanning. Sinds Ponscura 5a8de5d09 (develop 27-11-2026) ook traject
 //   en vast bedrag per periode, als stuks (82) of als bedrag (83) volgens het contract, per maand, per week of
 //   eenmalig volgens de frequentie van de toewijzing, getoetst aan TR321/TR322/TR369
-//   (IwmoDeclaratieOpsteller.WeigerPeriodetarief). Een gebroken maand bij output per maand weigert Curanta (IV078).
-//   Live op app.curanta.nl sinds 28-11-2026 (5a8de5d09).
+//   (IwmoDeclaratieOpsteller.WeigerPeriodetarief). Live op app.curanta.nl sinds 28-11-2026 (5a8de5d09).
+// - Gebroken maand (IV078) volgt de afspraak per productlijn in het contract: niet declareren, naar rato (alleen als
+//   bedrag) of de volle maand; zonder afspraak niet (ContractProductlijn.GebrokenMaand). Live sinds 28-11 (bfb09d8f7).
+// - Beschermd wonen en opvang (besluit Jan 28-11-2026: "zet beschermd wonen op de site, op /voor/wmo"): opname met
+//   leveringsvorm Wmo-verblijf op een toewijzing van de gemeente, met kamer en bed; elk aanwezig etmaal wordt na de
+//   maand een productieregel onder de Wmo; een afwezige dag telt alleen binnen de afspraak per contractproduct (dagen
+//   per opname elders, per jaar vakantie/logeren/detentie, per week weekend), zonder afspraak niet (Verblijf,
+//   Verblijfsdagen.WmoAfwezig, ContractProductlijn.Afwezigheid, VerblijfsproductieService). Live sinds 28-11
+//   (e367518aa). Niet: leefgeld en budgetbeheer, ZRM (wacht op versie 2027), herstelplan-sjabloon.
 // - Aanleveren: standaard maakt Curanta het bestand, toetst het aan de XSD en levert de administratie het zelf aan
 //   in het VECOZO-portaal (IwmoMessageStatus.KlaarVoorAanlevering, 15-10-2026). Rechtstreeks aanleveren is
 //   ingericht, niet beproefd: formulering uit het feitenblad, zoals op /voor/ghz.
@@ -29,15 +36,16 @@ import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
   image="/og/voor-wmo.png"
   segmentKey="wmo"
   segmentLabel="Wmo"
-  title="Software voor Wmo-begeleiding en dagbesteding | Curanta"
-  description="Dossier, planning en iWmo-declaratie voor begeleiding, dagbesteding en hulp bij het huishouden: van toewijzing van de gemeente tot het 323-bericht."
+  title="Software voor Wmo-begeleiding, dagbesteding en beschermd wonen | Curanta"
+  description="Dossier, planning en iWmo-declaratie voor begeleiding, dagbesteding, beschermd wonen en hulp bij het huishouden: van toewijzing van de gemeente tot het 323-bericht."
   eyebrow="Voor aanbieders in de Wmo"
-  hero="Begeleiding en dagbesteding, van toewijzing tot declaratie"
-  subtitle="Voor organisaties die voor gemeenten begeleiding, dagbesteding of hulp bij het huishouden leveren. De toewijzing van de gemeente komt binnen als iWmo-bericht. De begeleider plant en rapporteert erop, en de administratie declareert per gemeente volgens iWmo 3.2."
+  hero="Begeleiding, dagbesteding en beschermd wonen, van toewijzing tot declaratie"
+  subtitle="Voor organisaties die voor gemeenten begeleiding, dagbesteding, beschermd wonen, opvang of hulp bij het huishouden leveren. De toewijzing van de gemeente komt binnen als iWmo-bericht. De begeleider plant en rapporteert erop, en de administratie declareert per gemeente volgens iWmo 3.2."
   triggers={[
     { title: 'Elke gemeente, dezelfde berichten', body: 'De gemeente stuurt de toewijzing (301). U meldt de start (305) en het einde (307) en vraagt een nieuwe of gewijzigde toewijzing aan (315, 317). Curanta leest de toewijzing in en zet de berichten klaar volgens iWmo 3.2. U declareert in tijd of in stuks. Een traject of een vast bedrag per maand of per week gaat mee zoals de gemeente het toewees.' },
     { title: 'Niet meer leveren dan toegewezen', body: 'Op het planbord staan de geplande uren naast de uren van de toewijzing. Alleen zorg voor het product van de toewijzing telt mee. Een cliënt met hulp bij het huishouden en daarnaast wijkverpleging staat dus niet ten onrechte als "te veel gepland". De grenzen voor een signaal kiest u zelf.' },
     { title: 'Aanwezig op de dagbesteding is een declaratieregel', body: 'Rondt de begeleider een groepsactiviteit af, dan wordt de aanwezigheid van elke deelnemer een conceptregel. Het kader en de toewijzing komen uit de financiering van de cliënt. Vervoer naar de dagbesteding wordt een regel per aanwezigheidsdag.' },
+    { title: 'Beschermd wonen per etmaal', body: 'U neemt een bewoner op in beschermd wonen of opvang, op de toewijzing van de gemeente en met kamer en bed. Elke dag dat de bewoner er is, wordt na afloop van de maand een etmaal voor de declaratie. Voor een opname in het ziekenhuis, vakantie of weekendverlof legt u per contract vast hoeveel dagen nog meetellen, zoals u met de gemeente afsprak.' },
     { title: 'Zien wanneer het budget opraakt', body: 'Per cliënt, kader en periode houdt Curanta bij hoeveel van het budget verbruikt is. Bij 80, 90 en 100 procent krijgt u een signaal, voordat u zorg levert die u niet meer kunt declareren.' },
   ]}
   modules={[
@@ -45,6 +53,7 @@ import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
     { name: 'Wmo-declaratie (323)', note: 'Per gemeente opgesteld en getoetst aan het officiële schema; het retourbericht (325) per regel verwerkt' },
     { name: 'Planning en planbord', note: 'Bezoeken thuis met routes; geplande uren naast de toewijzing' },
     { name: 'Groepszorg en dagbesteding', note: 'Groepen, activiteiten en aanwezigheid; vervoer per dag' },
+    { name: 'Verblijf', note: 'Beschermd wonen en opvang met kamer en bed; etmalen en afwezigheid volgens het contract' },
     { name: 'Productie en budget', note: 'Conceptregels, accorderen en signalen bij 80, 90 en 100 procent' },
     { name: 'Cliëntdossier en rapportage', note: 'Doelen, rapportage en evaluatie per cliënt' },
     { name: 'Medewerkerportaal', note: 'Rooster, bezoeken en rapporteren op de telefoon' },
@@ -52,12 +61,13 @@ import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
   ]}
   vragen={[
     { vraag: 'Hoe gaat de Wmo-declaratie naar de gemeente?', antwoord: 'Curanta stelt de declaratie (323) per gemeente op en toetst het bestand aan het officiële schema van iWmo 3.2. Het retourbericht (325) leest u in; Curanta zet per regel of hij is goedgekeurd of afgekeurd, met de reden. Rechtstreeks aanleveren via VECOZO is ingericht. Wij beproeven het per organisatie in de testomgeving van VECOZO, vóór uw eerste declaratiemaand. Tot dan levert u het bestand met de hand aan in het portaal van VECOZO.' },
-    { vraag: 'Werkt Curanta met resultaatgerichte en taakgerichte toewijzingen?', antwoord: 'Ja, op één punt na. Curanta declareert in tijd (minuten, uren, dagdelen, etmalen) en in stuks, voor output en voor inspanning. Een traject of een vast bedrag per maand of per week gaat als stuks of als bedrag mee, zoals u in het contract met de gemeente vastlegt. Curanta toetst daarbij of het binnen de toewijzing en het budget blijft, en declareert een maand niet twee keer. Een maand waarin de toewijzing begint of eindigt, declareert Curanta niet vanzelf: daarover maakt u een afspraak met de gemeente.' },
+    { vraag: 'Werkt Curanta met resultaatgerichte en taakgerichte toewijzingen?', antwoord: 'Ja, op één punt na. Curanta declareert in tijd (minuten, uren, dagdelen, etmalen) en in stuks, voor output en voor inspanning. Een traject of een vast bedrag per maand of per week gaat als stuks of als bedrag mee, zoals u in het contract met de gemeente vastlegt. Curanta toetst daarbij of het binnen de toewijzing en het budget blijft, en declareert een maand niet twee keer. Voor een maand waarin de toewijzing begint of eindigt, legt u in het contract vast wat u met de gemeente afsprak: niet declareren, naar rato van de dagen of de volle maand.' },
+    { vraag: 'Hoe telt Curanta de dagen in beschermd wonen als een bewoner weg is?', antwoord: 'Een dag dat de bewoner er is, telt als etmaal. Een dag weg telt alleen binnen de afspraak die u per contract vastlegt: hoeveel dagen bij een opname elders, hoeveel dagen vakantie of logeren per jaar en hoeveel dagen weekendverlof per week. Staat er geen afspraak in het contract, dan telt de dag niet. Per maand ziet u welke dagen meetellen en waarom de andere niet.' },
     { vraag: 'Wij leveren ook wijkverpleging of zorg onder de Wlz. Kan dat in hetzelfde systeem?', antwoord: 'Ja. Per cliënt legt u vast welk deel onder de Wmo, de Zvw of de Wlz valt. Het planbord telt per toewijzing alleen de zorg voor dat product.' },
   ]}
   nogNiet={[
     'De proef van het rechtstreeks aanleveren in de testomgeving van VECOZO: die doen wij per organisatie, vóór uw eerste declaratiemaand.',
-    'Een vast bedrag per maand voor een maand waarin de toewijzing begint of eindigt. Hoe die gaat, spreekt u met de gemeente af; Curanta declareert hem niet vanzelf.',
+    'Bij beschermd wonen: het beheer van leefgeld en budget voor bewoners, en de Zelfredzaamheid-Matrix (ZRM).',
   ]}
   regulatory={['Wmo 2015', 'iWmo 3.2', 'AVG', 'NEN 7510']}
   proofPoints={[
