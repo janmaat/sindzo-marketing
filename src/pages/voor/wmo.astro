@@ -17,7 +17,11 @@ import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
 //   maand een productieregel onder de Wmo; een afwezige dag telt alleen binnen de afspraak per contractproduct (dagen
 //   per opname elders, per jaar vakantie/logeren/detentie, per week weekend), zonder afspraak niet (Verblijf,
 //   Verblijfsdagen.WmoAfwezig, ContractProductlijn.Afwezigheid, VerblijfsproductieService). Live sinds 28-11
-//   (e367518aa). Niet: leefgeld en budgetbeheer, ZRM (wacht op versie 2027), herstelplan-sjabloon.
+//   (e367518aa). Niet: leefgeld en budgetbeheer, ZRM (wacht op versie 2027).
+// - Herstelplan en crisiskaart (besluit Jan 28-11-2026: "rol het daarna uit en zet het op /voor/wmo"): module
+//   Segments.BeschermdWonen, /ecd/herstelplan (wens in eigen woorden, krachten, doelen per levensgebied, evaluatie per
+//   doel, vaststellen na bespreking met de cliënt) en /ecd/crisiskaart (wie te bellen, signalen per fase, wat helpt,
+//   afdruk als pdf voor de cliënt). Niet in het cliëntportaal of de medewerkerapp.
 // - Aanleveren: standaard maakt Curanta het bestand, toetst het aan de XSD en levert de administratie het zelf aan
 //   in het VECOZO-portaal (IwmoMessageStatus.KlaarVoorAanlevering, 15-10-2026). Rechtstreeks aanleveren is
 //   ingericht, niet beproefd: formulering uit het feitenblad, zoals op /voor/ghz.
@@ -46,6 +50,7 @@ import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
     { title: 'Niet meer leveren dan toegewezen', body: 'Op het planbord staan de geplande uren naast de uren van de toewijzing. Alleen zorg voor het product van de toewijzing telt mee. Een cliënt met hulp bij het huishouden en daarnaast wijkverpleging staat dus niet ten onrechte als "te veel gepland". De grenzen voor een signaal kiest u zelf.' },
     { title: 'Aanwezig op de dagbesteding is een declaratieregel', body: 'Rondt de begeleider een groepsactiviteit af, dan wordt de aanwezigheid van elke deelnemer een conceptregel. Het kader en de toewijzing komen uit de financiering van de cliënt. Vervoer naar de dagbesteding wordt een regel per aanwezigheidsdag.' },
     { title: 'Beschermd wonen per etmaal', body: 'U neemt een bewoner op in beschermd wonen of opvang, op de toewijzing van de gemeente en met kamer en bed. Elke dag dat de bewoner er is, wordt na afloop van de maand een etmaal voor de declaratie. Voor een opname in het ziekenhuis, vakantie of weekendverlof legt u per contract vast hoeveel dagen nog meetellen, zoals u met de gemeente afsprak.' },
+    { title: 'Een herstelplan en een crisiskaart van de cliënt', body: 'Samen met de bewoner legt u vast wat hij wil bereiken, in zijn eigen woorden, en per levensgebied wie wat doet. Bij de evaluatie geeft u per doel aan hoe het ervoor staat. Op de crisiskaart staat wie er gebeld wordt, waaraan u een crisis ziet aankomen en wat dan helpt; de bewoner krijgt hem afgedrukt mee.' },
     { title: 'Zien wanneer het budget opraakt', body: 'Per cliënt, kader en periode houdt Curanta bij hoeveel van het budget verbruikt is. Bij 80, 90 en 100 procent krijgt u een signaal, voordat u zorg levert die u niet meer kunt declareren.' },
   ]}
   modules={[
@@ -54,6 +59,7 @@ import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
     { name: 'Planning en planbord', note: 'Bezoeken thuis met routes; geplande uren naast de toewijzing' },
     { name: 'Groepszorg en dagbesteding', note: 'Groepen, activiteiten en aanwezigheid; vervoer per dag' },
     { name: 'Verblijf', note: 'Beschermd wonen en opvang met kamer en bed; etmalen en afwezigheid volgens het contract' },
+    { name: 'Herstelplan en crisiskaart', note: 'Doelen per levensgebied met evaluatie; signalen per fase en wie te bellen, als afdruk voor de bewoner' },
     { name: 'Productie en budget', note: 'Conceptregels, accorderen en signalen bij 80, 90 en 100 procent' },
     { name: 'Cliëntdossier en rapportage', note: 'Doelen, rapportage en evaluatie per cliënt' },
     { name: 'Medewerkerportaal', note: 'Rooster, bezoeken en rapporteren op de telefoon' },
@@ -67,7 +73,7 @@ import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
   ]}
   nogNiet={[
     'De proef van het rechtstreeks aanleveren in de testomgeving van VECOZO: die doen wij per organisatie, vóór uw eerste declaratiemaand.',
-    'Bij beschermd wonen: het beheer van leefgeld en budget voor bewoners, en de Zelfredzaamheid-Matrix (ZRM).',
+    'Bij beschermd wonen: het beheer van leefgeld en budget voor bewoners, en de Zelfredzaamheid-Matrix (ZRM). Het herstelplan en de crisiskaart staan nog niet in het cliëntportaal.',
   ]}
   regulatory={['Wmo 2015', 'iWmo 3.2', 'AVG', 'NEN 7510']}
   proofPoints={[
