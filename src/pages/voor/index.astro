@@ -6,8 +6,9 @@ import Cta from '../../components/Cta.astro';
 // Eigen indexpagina voor "Voor wie" — voorkomt dat de nav-link op subpagina's
 // terugspringt naar #voor-wie op de homepage (gebroken navigatiepatroon).
 
-// Volgorde: de drie hoofdsectoren (VVT, GHZ, GGZ) eerst, zoals op de homepage; kraam- en jeugdzorg
-// daarna. In het raster staan ze als 3 + 2, zodat er geen leeg vak overblijft (Taste Skill, 14-10-2026).
+// Volgorde: de drie hoofdsectoren (VVT, GHZ, GGZ) eerst, zoals op de homepage; kraamzorg, jeugdzorg en
+// Wmo daarna. In het raster staan ze als 3 + 3 (op een smal scherm 2 + 2 + 2), zodat er geen leeg vak
+// overblijft. Wmo erbij op besluit van Jan, 28-11-2026.
 const segments = [
   {
     label: 'VVT',
@@ -44,17 +45,24 @@ const segments = [
     href: '/voor/jeugdzorg',
     accent: 'from-greensoft to-cream',
   },
+  {
+    label: 'Wmo',
+    title: 'Begeleiding en dagbesteding',
+    pitch: 'De toewijzing van de gemeente als iWmo-bericht, geplande uren naast de toewijzing, aanwezigheid op de dagbesteding als declaratieregel en de declaratie per gemeente.',
+    href: '/voor/wmo',
+    accent: 'from-curanta-50 to-cream',
+  },
 ];
 ---
 <Base
   image="/og/voor.png"
-  title="Voor wie is Curanta? VVT, GHZ, GGZ, kraam- en jeugdzorg"
+  title="Voor wie is Curanta? VVT, GHZ, GGZ, kraam- en jeugdzorg en Wmo"
   description="Zorgsoftware voor VVT, gehandicaptenzorg en GGZ: één systeem voor dossier, planning, declaratie en kwaliteit. U zet alleen aan wat u nodig hebt."
 >
   <PageHero
     eyebrow="Voor wie"
     title="Voor wie is Curanta gebouwd?"
-    subtitle="Voor zorgorganisaties in de VVT, de gehandicaptenzorg, de GGZ, de kraamzorg en de jeugdzorg: één systeem voor dossier, planning, declaratie en kwaliteit. U zet alleen aan wat u nodig hebt, en later bijzetten kan zonder overstap."
+    subtitle="Voor zorgorganisaties in de VVT, de gehandicaptenzorg, de GGZ, de kraamzorg, de jeugdzorg en de Wmo: één systeem voor dossier, planning, declaratie en kwaliteit. U zet alleen aan wat u nodig hebt, en later bijzetten kan zonder overstap."
   >
     <div slot="actions" class="flex flex-wrap gap-3">
       <a href="/oplossing" class="btn-primary no-underline">Bekijk de modulekaart</a>
@@ -65,7 +73,7 @@ const segments = [
   <section class="container-prose py-16">
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
       {segments.map((s, i) => (
-        <a href={s.href} class={`${i === 0 ? 'sm:col-span-2 lg:col-span-2' : i < 3 ? 'lg:col-span-2' : 'lg:col-span-3'} spotlight group relative overflow-hidden rounded-xl border border-ink-300 bg-white p-6 no-underline transition hover:border-curanta-300 hover:shadow-md`}>
+        <a href={s.href} class={`lg:col-span-2 spotlight group relative overflow-hidden rounded-xl border border-ink-300 bg-white p-6 no-underline transition hover:border-curanta-300 hover:shadow-md`}>
           <div class={`absolute inset-x-0 top-0 h-24 -z-0 bg-gradient-to-b ${s.accent}`}></div>
           <div class="relative">
             <span class="text-xs font-semibold uppercase tracking-wider text-curanta-700">{s.label}</span>

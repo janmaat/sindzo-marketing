@@ -1,7 +1,7 @@
 ---
 import SegmentLayout from '../../layouts/SegmentLayout.astro';
 import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
-// Nieuw 27-11-2026 (opzet; claimtoets 27-11, nog niet op /voor en niet in het menu). Nagelopen in de code
+// Nieuw 27-11-2026 (claimtoets 27-11); sinds 28-11 op /voor en in de voettekst (besluit Jan). Nagelopen in de code
 // (Ponscura 47f832ab3) en tegen het feitenblad (rij VECOZO):
 // - iWmo 3.2: berichten 301, 302, 305, 306, 307, 308, 315, 316, 317, 318, 319, 320, 323 en 325
 //   (Ponscura.Declaratie.Iwmo/Domain/Enums.cs, IwmoMessageType); productcategorieën volgens LDT_ProductCategorie
@@ -10,7 +10,7 @@ import beeld from '../../assets/schermen/bo-iwmo-declaraties.jpg';
 //   en vast bedrag per periode, als stuks (82) of als bedrag (83) volgens het contract, per maand, per week of
 //   eenmalig volgens de frequentie van de toewijzing, getoetst aan TR321/TR322/TR369
 //   (IwmoDeclaratieOpsteller.WeigerPeriodetarief). Een gebroken maand bij output per maand weigert Curanta (IV078).
-//   LET OP: deze pagina pas publiceren als 5a8de5d09 (of later) op app.curanta.nl staat.
+//   Live op app.curanta.nl sinds 28-11-2026 (5a8de5d09).
 // - Aanleveren: standaard maakt Curanta het bestand, toetst het aan de XSD en levert de administratie het zelf aan
 //   in het VECOZO-portaal (IwmoMessageStatus.KlaarVoorAanlevering, 15-10-2026). Rechtstreeks aanleveren is
 //   ingericht, niet beproefd: formulering uit het feitenblad, zoals op /voor/ghz.

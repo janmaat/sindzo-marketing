@@ -239,7 +239,7 @@ const IMAGES = [
     file: 'og/voor.png',
     eyebrow: 'Voor wie',
     hero: 'Voor wie is Curanta gebouwd?',
-    sub: 'VVT · gehandicaptenzorg · GGZ · kraamzorg · jeugdzorg',
+    sub: 'VVT · gehandicaptenzorg · GGZ · kraamzorg · jeugdzorg · Wmo',
   },
   {
     file: 'og/cases.png',
